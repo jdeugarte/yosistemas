@@ -1,4 +1,8 @@
 == README
+YoSistemas - Foro estudiantil
+
+Version de ruby 1.9.3
+Version de rails 4.0
 
 This README would normally document whatever steps are necessary to get the
 application up and running.

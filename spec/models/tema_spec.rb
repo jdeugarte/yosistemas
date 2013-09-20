@@ -14,4 +14,10 @@ describe Tema do
     expect(tema).to have(1).errors_on(:titulo)
     expect(tema).to_not be_valid #redundante, pero sirve para mostrar esta opcion
   end
+
+  it "no deberia poder guardarse un titulo vacio" do
+   tema =Tema.create(titulo: "", cuerpo: "Segundo tema")
+   tema.titulo == ""
+   expect(Tema).to have(0).records
+  end
 end

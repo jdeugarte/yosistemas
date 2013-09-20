@@ -18,7 +18,7 @@ class TemasController < ApplicationController
 
   private
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # No permite parametros de internet
     def tema_params
       params.require(:tema).permit(:titulo, :cuerpo)
     end

@@ -1,0 +1,26 @@
+<h1>Lista de temas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Titulo</th>
+      <th>Cuerpo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @temas.each do |tema| %>
+      <tr>
+        <td><%= tema.titulo %></td>
+        <td><%= tema.cuerpo %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nuevo Tema', new_tema_path %>

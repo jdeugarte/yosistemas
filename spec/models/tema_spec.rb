@@ -1,11 +1,17 @@
 require 'spec_helper'
 
 describe Tema do
-  it "deberia poder guardarse un tema" do
-    Tema.create!(titulo: "titulo", cuerpo: "no importa").should be_persisted
+  it "es valido si tiene titulo" do
+    tema = Tema.new(
+      titulo: 'Hola',
+      cuerpo: 'Primer tema')
+    # tema.should be_valid
+    expect(tema).to be_valid #mismo que anterior, siguiendo la nueva notacion de rspec
   end
 
-  it "no deberia poder guardarse un tema con un titulo vacio" do
-   Tema.create!(titulo: "", cuerpo: "no importa").should not_be_persisted
+  it "no es valido si no tiene titulo" do
+    tema = Tema.new(titulo: nil)
+    expect(tema).to have(1).errors_on(:titulo)
+    expect(tema).to_not be_valid #redundante, pero sirve para mostrar esta opcion
   end
 end

@@ -219,6 +219,21 @@
 							<h4>Yo Sistemas</h4>
 							<p>Yo sistemas es un producto sin fines de lucro, dedicado al servicio de los estudiantes y los miembros
 							que quieran pertenecer y formar parte de la comunidad universitaria</p>
+
+							<div class="alert alert-success hidden" id="newsletterSuccess">
+								<strong>Success!</strong> You've been added to our email list.
+							</div>
+
+							<div class="alert alert-error hidden" id="newsletterError"></div>
+
+							<form class="form-inline" id="newsletterForm" action="http://www.crivosthemes.com/theme/porto/php/newsletter-subscribe.php" method="POST">
+								<div class="control-group">
+									<div class="input-append">
+										<input class="span2" placeholder="Email Address" name="email" id="email" type="text">
+										<button class="btn" type="submit">Go!</button>
+									</div>
+								</div>
+							</form>
 						</div>
 						<div class="span3">
 							<h4>T&eacute;rminos y condiciones</h4>

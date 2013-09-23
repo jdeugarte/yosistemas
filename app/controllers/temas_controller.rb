@@ -3,6 +3,21 @@ class TemasController < ApplicationController
   def index
     @temas = Tema.all
   end
+  
+  def search
+    @temas=Array.new 
+    aux = Tema.all
+    if params[:titulo] != ""
+      aux.each do |tema|
+        if tema.titulo.downcase.include?(params[:titulo].downcase)
+          @temas.push(tema)
+        end
+      end
+    else
+      @temas = aux
+    end
+    render 'index'
+  end
 
   # GET /temas/new
   def new

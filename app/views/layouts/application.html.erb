@@ -61,20 +61,7 @@
 </head>
 
 <body>
-	<div id="user_nav">
-  <% if current_user %>
-    Logged in as <%= current_user.correo %>.
-    <%= link_to "Salir", log_out_path %>
-  <% else %>
-    <%= link_to "Registrase", "usuarios/new" %> or
-    <%= link_to "Ingresar", log_in_path %>
-  <% end %>
-</div>
 	
-<% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, :id => "flash_#{name}" %>
-<% end %>
-
 <div class="body">
 			<header>
 				<div class="container">
@@ -225,6 +212,20 @@
 	</div>
 <br>
 <br>
+
+<div id="user_nav">
+  <% if current_user %>
+    Logged in as <%= current_user.correo %>.
+    <%= link_to "Salir", log_out_path %>
+  <% else %>
+    <%= link_to "Registrase", "usuarios/new" %> or
+    <%= link_to "Ingresar", log_in_path %>
+  <% end %>
+</div>
+	
+<% flash.each do |name, msg| %>
+  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+<% end %>
 
 <%= yield %>
 <br>

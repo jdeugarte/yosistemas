@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   helper_method :current_user
-  #before_filter :require_log_in  
+  before_filter :require_log_in  
 
   private
   

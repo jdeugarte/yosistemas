@@ -59,7 +59,22 @@
 		<script src="vendor/modernizr.js"></script>-->
 		<%= javascript_include_tag "vendor/modernizr" %>
 </head>
+
 <body>
+	<div id="user_nav">
+  <% if current_user %>
+    Logged in as <%= current_user.correo %>.
+    <%= link_to "Salir", log_out_path %>
+  <% else %>
+    <%= link_to "Registrase", "usuarios/new" %> or
+    <%= link_to "Ingresar", log_in_path %>
+  <% end %>
+</div>
+	
+<% flash.each do |name, msg| %>
+  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+<% end %>
+
 <div class="body">
 			<header>
 				<div class="container">
@@ -199,7 +214,7 @@
 								</a>
 								<ul class="dropdown-menu">
 
-									<li><a href="contact-us.html">Version 1</a></li>
+					<li><a href="contact-us.html">Version 1</a></li>
 									<li><a href="contact-us-2.html">Version 2</a></li>
 								</ul>
 							</li>
@@ -208,7 +223,8 @@
 				</div>
 			</header>
 	</div>
-<%= yield %>
+
+
 <footer id="footer">
 	<div class="container">
 					<div class="row">
@@ -274,5 +290,6 @@
 					</div>
 				</div>
 </footer>
+<%= yield %>
 </body>
 </html>

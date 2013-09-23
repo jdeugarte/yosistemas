@@ -1,4 +1,7 @@
 class UsuariosController < ApplicationController
+  
+  skip_before_filter :require_log_in , :only=>[:new,:create] 
+  
   def index
   end
 
@@ -19,6 +22,6 @@ class UsuariosController < ApplicationController
   			flash[:status] = FALSE
   			flash[:alert] = @usuario.errors.full_messages
   			end
-  		redirect_to :action => 'new', :format => 'html'
+  		redirect_to :action => 'new', :format => 'html'  		 
   end
 end

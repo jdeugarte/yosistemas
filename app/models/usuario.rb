@@ -1,4 +1,5 @@
-class Usuario < ActiveRecord::Base
+class Usuario < ActiveRecord::Base  
+
 	  has_many :usuarios
   	  accepts_nested_attributes_for :usuarios
 	validates :nombre,
@@ -22,5 +23,14 @@ class Usuario < ActiveRecord::Base
 	validates :correo,
 	:presence => TRUE,
 	:uniqueness => TRUE
+	
+	def self.autenticar(correo, contrasenia)
+    usuario = find_by_correo(correo)
+    if usuario && usuario.contrasenia==contrasenia
+      usuario
+    else
+      nil
+    end
+  end
 
 end

@@ -43,7 +43,9 @@ class TemasController < ApplicationController
     else
       render 'edit'
     end
-
+   def show
+     @tema = Tema.find(params[:id])
+   end
   end
   private
 

@@ -7,7 +7,7 @@ class TemasController < ApplicationController
   def search
     @temas=Array.new 
     aux = Tema.all
-    if params[:titulo] != ""
+    if params[:titulo] != "" && params[:titulo] != nil 
       aux.each do |tema|
         parametros = params[:titulo].split(' ')
         parametros.each do |parametro|

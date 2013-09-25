@@ -7,7 +7,7 @@ class TemasController < ApplicationController
   def search
     @temas=Array.new 
     aux = Tema.all
-    if params[:titulo] != ""
+    if params[:titulo] != "" && params[:titulo] != nil 
       aux.each do |tema|
         parametros = params[:titulo].split(' ')
         parametros.each do |parametro|
@@ -26,6 +26,10 @@ class TemasController < ApplicationController
   # GET /temas/new
   def new
     @tema = Tema.new
+  end
+
+  def show
+     @tema = Tema.find(params[:id])
   end
 
   # POST /temas
@@ -47,9 +51,7 @@ class TemasController < ApplicationController
     else
       render 'edit'
     end
-   def show
-     @tema = Tema.find(params[:id])
-   end
+   
   end
   private
 

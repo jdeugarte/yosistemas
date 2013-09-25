@@ -7,11 +7,17 @@ Yosistemas::Application.routes.draw do
   get "usuarios/new"
   get "temas/search" => "temas#search"
 
-  resources :usuarios
+  resources :usuarios do
+    resources :comments
+  end
   resources :sessions
+  resources :temas do
+    resources :comments
+  end
+  resources :comments
   #match '/register' => 'usuarios#new'
   #match '/usuarios' => 'usuarios@show'
-  resources :temas
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

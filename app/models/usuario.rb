@@ -1,5 +1,5 @@
 class Usuario < ActiveRecord::Base  
-
+	has_many :comments
 	  has_many :usuarios
   	  accepts_nested_attributes_for :usuarios
 	validates :nombre,

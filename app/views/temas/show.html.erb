@@ -20,7 +20,7 @@
     		</button>
 		</div>
 	<% end %>
-
+<div class="col-12 col-md-10 col-lg-8">
 <%for comment in @tema.comments%>
 	<%if(comment.id!=nil)%>
 	<div class="media">
@@ -34,4 +34,5 @@
 	</div>
 	<%end%>
 <%end%>
+</div>
 <%= link_to 'Atras', temas_path %>

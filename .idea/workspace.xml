@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+    <list default="true" id="afcd04b2-901c-43b5-b078-152611e8690e" name="Default" comment="" />
     <list default="true" id="afcd04b2-901c-43b5-b078-152611e8690e" name="Default" comment="">
-<<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/temas/index.html.erb" afterPath="$PROJECT_DIR$/app/views/temas/index.html.erb" />
-=======
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/temas/show.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/temas/index.html.erb" afterPath="$PROJECT_DIR$/app/views/temas/index.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/temas_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/temas_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
->>>>>>> 361669fd2408daafea36fc2ea7bb314edf4a2e53
     </list>
     <ignored path="yosistemas.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,10 +44,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="temas.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="temas.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/spec/factories/temas.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="6" column="28" selection-start="120" selection-end="120" vertical-scroll-proportion="0.15100671">
               <folding />
             </state>
           </provider>
@@ -67,11 +65,8 @@
       <file leaf-file-name="index.html.erb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/temas/index.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state line="22" column="45" selection-start="424" selection-end="424" vertical-scroll-proportion="0.4301676">
-=======
             <state line="26" column="43" selection-start="600" selection-end="600" vertical-scroll-proportion="-16.25">
->>>>>>> 361669fd2408daafea36fc2ea7bb314edf4a2e53
               <folding />
             </state>
           </provider>
@@ -80,20 +75,18 @@
       <file leaf-file-name="temas_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/temas_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state line="33" column="39" selection-start="568" selection-end="568" vertical-scroll-proportion="0.0">
-=======
             <state line="49" column="56" selection-start="855" selection-end="855" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="show.html.erb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="show.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/temas/show.html.erb">
           <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="28" selection-start="85" selection-end="85" vertical-scroll-proportion="-3.125">
             <state line="8" column="17" selection-start="109" selection-end="109" vertical-scroll-proportion="0.20979021">
->>>>>>> 361669fd2408daafea36fc2ea7bb314edf4a2e53
               <folding />
             </state>
           </provider>
@@ -125,8 +118,6 @@
             </state>
           </provider>
         </entry>
-      </file>
-<<<<<<< HEAD
       <file leaf-file-name="routes.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/routes.rb">
           <provider selected="true" editor-type-id="text-editor">
@@ -140,12 +131,10 @@
         <entry file="file://$PROJECT_DIR$/config/environment.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-=======
       <file leaf-file-name=".gitignore" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state line="17" column="6" selection-start="462" selection-end="462" vertical-scroll-proportion="0.0">
->>>>>>> 361669fd2408daafea36fc2ea7bb314edf4a2e53
               <folding />
             </state>
           </provider>
@@ -172,11 +161,8 @@
         <option value="$PROJECT_DIR$/app/views/temas/edit.html.erb" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/app/views/temas/index.html.erb" />
-<<<<<<< HEAD
-=======
         <option value="$PROJECT_DIR$/app/controllers/temas_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/temas/show.html.erb" />
->>>>>>> 361669fd2408daafea36fc2ea7bb314edf4a2e53
       </list>
     </option>
   </component>
@@ -775,10 +761,8 @@
 <<<<<<< HEAD
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="false" />
-=======
     <frame x="56" y="22" width="1224" height="744" extended-state="0" />
     <editor active="true" />
->>>>>>> 361669fd2408daafea36fc2ea7bb314edf4a2e53
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -856,8 +840,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-<<<<<<< HEAD
-=======
     <entry file="file://$PROJECT_DIR$/app/models/tema.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -865,7 +847,6 @@
         </state>
       </provider>
     </entry>
->>>>>>> 361669fd2408daafea36fc2ea7bb314edf4a2e53
     <entry file="file://$PROJECT_DIR$/spec/spec_helper.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -905,13 +886,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/factories/temas.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/tema.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="0" selection-start="75" selection-end="75" vertical-scroll-proportion="0.0">
@@ -919,17 +893,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/app/views/temas/_form.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state line="17" column="6" selection-start="462" selection-end="462" vertical-scroll-proportion="0.5133215">
-=======
         <state line="6" column="24" selection-start="146" selection-end="146" vertical-scroll-proportion="-3.75">
->>>>>>> 361669fd2408daafea36fc2ea7bb314edf4a2e53
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/temas/new.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="6" selection-start="462" selection-end="462" vertical-scroll-proportion="0.5133215">
+        <state line="6" column="24" selection-start="146" selection-end="146" vertical-scroll-proportion="-3.75">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/temas/show.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="28" selection-start="85" selection-end="85" vertical-scroll-proportion="-3.125">
     <entry file="file://$PROJECT_DIR$/config/routes.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="48" selection-start="252" selection-end="252" vertical-scroll-proportion="0.0">
@@ -939,7 +923,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/environment.rb">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
@@ -948,21 +931,19 @@
     <entry file="file://$PROJECT_DIR$/app/views/temas/new.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-=======
         <state line="26" column="43" selection-start="600" selection-end="600" vertical-scroll-proportion="-16.25">
->>>>>>> 361669fd2408daafea36fc2ea7bb314edf4a2e53
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/temas/edit.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/controllers/temas_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="38" selection-start="43" selection-end="43" vertical-scroll-proportion="-1.875">
+        <state line="49" column="56" selection-start="855" selection-end="855" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/app/views/temas/index.html.erb">
     <entry file="file://$PROJECT_DIR$/app/views/temas/_form.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="54" selection-start="217" selection-end="217" vertical-scroll-proportion="-5.8846154">
@@ -971,39 +952,35 @@
             <marker date="1379902462962" expanded="true" signature="145:216" placeholder="..." />
             <marker date="1379902462962" expanded="true" signature="240:269" placeholder="..." />
           </folding>
-=======
     <entry file="file://$PROJECT_DIR$/app/views/temas/new.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="26" column="43" selection-start="600" selection-end="600" vertical-scroll-proportion="-16.25">
           <folding />
->>>>>>> 361669fd2408daafea36fc2ea7bb314edf4a2e53
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/temas_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/temas/edit.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
+        <state line="3" column="38" selection-start="43" selection-end="43" vertical-scroll-proportion="-1.875">
         <state line="33" column="39" selection-start="568" selection-end="568" vertical-scroll-proportion="0.0">
-=======
         <state line="49" column="56" selection-start="855" selection-end="855" vertical-scroll-proportion="0.0">
->>>>>>> 361669fd2408daafea36fc2ea7bb314edf4a2e53
           <folding />
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/spec/factories/temas.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="28" selection-start="120" selection-end="120" vertical-scroll-proportion="0.15100671">
     <entry file="file://$PROJECT_DIR$/app/views/temas/index.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="45" selection-start="424" selection-end="424" vertical-scroll-proportion="0.4301676">
-=======
     <entry file="file://$PROJECT_DIR$/app/views/temas/show.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="17" selection-start="109" selection-end="109" vertical-scroll-proportion="0.20979021">
->>>>>>> 361669fd2408daafea36fc2ea7bb314edf4a2e53
           <folding />
         </state>
       </provider>
     </entry>
   </component>
-</project>
+</project >
 

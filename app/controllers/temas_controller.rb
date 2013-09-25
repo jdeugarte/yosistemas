@@ -9,7 +9,9 @@ class TemasController < ApplicationController
     aux = Tema.all
     if params[:titulo] != "" && params[:titulo] != nil
       aux.each do |tema|
-        tema.buscarTitulo(params[:titulo],@temas)
+        if (tema.correspondeATitulo(params[:titulo]))
+          @temas.push(tema)
+        end
       end
     else
       @temas = aux

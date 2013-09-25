@@ -2,13 +2,14 @@ class Tema < ActiveRecord::Base
   has_many :comments
   validates :titulo, :presence => true
   
-  def buscarTitulo(parametros, array)
-    parametros = params[:titulo].split(' ')
+  def correspondeATitulo(titulo)
+    parametros = titulo.split(' ')
+    
     parametros.each do |parametro|
-      if self.titulo.downcase.include?(parametro.downcase)
-        @temas.push(self)
-        break
-      end
+       if self.titulo.downcase.include?(parametro.downcase)
+         return true
+       end
     end
+    false
   end
 end

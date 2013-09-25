@@ -1,7 +1,7 @@
 class TemasController < ApplicationController
 # GET /temas
   def index
-    @temas = Tema.all
+    @temas = Tema.order(params[:sort])
   end
   
   def search

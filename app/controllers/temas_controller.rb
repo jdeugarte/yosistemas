@@ -9,8 +9,12 @@ class TemasController < ApplicationController
     aux = Tema.all
     if params[:titulo] != ""
       aux.each do |tema|
-        if tema.titulo.downcase.include?(params[:titulo].downcase)
-          @temas.push(tema)
+        parametros = params[:titulo].split(' ')
+        parametros.each do |parametro|
+          if tema.titulo.downcase.include?(parametro.downcase)
+            @temas.push(tema)
+            break
+          end
         end
       end
     else
@@ -43,7 +47,9 @@ class TemasController < ApplicationController
     else
       render 'edit'
     end
-
+   def show
+     @tema = Tema.find(params[:id])
+   end
   end
   private
 

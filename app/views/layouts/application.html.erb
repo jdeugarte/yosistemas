@@ -13,7 +13,7 @@
         </div>
       
       <div id="user_nav" >
-            <% if current_user %>
+            <% if current_user %> 
           Logged in as <%= current_user.correo %>.
           <%= link_to "Salir", log_out_path %>
         <% else %>
@@ -42,8 +42,18 @@
         </div>
 
         <!--Contenido Principal (Laterales y Centro).-->
-        <div class="row">
-            <%= yield %>
+        <div class="col-12 col-sm-10 col-lg-10">
+          <div class="row">
+            <!--Contenido Central-->
+            <div class="col-12 col-sm-9 col-lg-9">
+              <%= yield %>
+            </div>
+            <!--Barra Lateral Derecha.-->
+            <div class="col-12 col-sm-3 col-lg-3">
+              <%= render 'layouts/right_sidebar' %>
+            </div>
+          </div>
+
         </div>        
       </div>
       <!-- Pie de Pagina -->

@@ -21,4 +21,17 @@
 		</div>
 	<% end %>
 
+<%for comment in @tema.comments%>
+	<%if(comment.id!=nil)%>
+	<div class="media">
+	  <a class="pull-left" href="#">
+	    <img class="media-object" src="/assets/anonimo.png" alt="Anonimo" width="80px">
+	  </a>
+	  <div class="media-body">
+	    <h4 class="media-heading"><%=comment.usuario.correo%></h4>
+	    <%=comment.body%>
+	  </div>
+	</div>
+	<%end%>
+<%end%>
 <%= link_to 'Atras', temas_path %>

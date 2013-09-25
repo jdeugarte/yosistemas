@@ -2,299 +2,65 @@
 <html>
 <head>
   <title>Yosistemas</title>
-  <!-- Basic -->
-		<meta charset="utf-8">
-		<title>Yo Sistemas</title>
-		<meta name="keywords" content="YO SISTEMAS" />
-		<meta name="description" content="Esto es un yosistemas">
-		<meta name="author" content="UCB">
-
-		<!-- Mobile Metas -->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-		<!-- Web Fonts  -->
-		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
-
-		<!-- Libs CSS -->
-		<!--
-		<link rel="stylesheet" href="stylesheets/bootstrap.css">
-		<link rel="stylesheet" href="stylesheets/fonts/font-awesome/css/font-awesome.css">
-		<link rel="stylesheet" href="vendor/flexslider/flexslider.css" media="screen" />
-		<link rel="stylesheet" href="vendor/magnific-popup/magnific-popup.css" media="screen" />
-		-->
-		<%= stylesheet_link_tag "bootstrap" %>
-		<%= stylesheet_link_tag "fonts/font-awesome/css/font-awesome" %>
-		<%= stylesheet_link_tag "vendor/flexslider/flexslider" %>
-		<%= stylesheet_link_tag "vendor/magnific-popup/magnific-popup" %>
-		<!-- Theme CSS -->
-		<!--<link rel="stylesheet" href="stylesheets/theme.css">
-		<link rel="stylesheet" href="stylesheets/theme-elements.css">
-		<link rel="stylesheet" href="stylesheets/theme-animate.css">
-		-->
-		<%= stylesheet_link_tag "theme" %>
-		<%= stylesheet_link_tag "theme-elements" %>
-		<%= stylesheet_link_tag "theme-animate" %>
-
-
-		<!-- Custom CSS -->
-		<!--<link rel="stylesheet" href="stylesheets/custom.css">-->
-		<%= stylesheet_link_tag "custom" %>
-
-		<!-- Responsive CSS -->
-		<!--
-		<link rel="stylesheet" href="stylesheets/bootstrap-responsive.css" />
-		<link rel="stylesheet" href="stylesheets/theme-responsive.css" />
-		-->
-		<%= stylesheet_link_tag "bootstrap-responsive" %>
-		<%= stylesheet_link_tag "theme-responsive" %>
-
-		<!-- Favicons -->
-		<!--<link rel="shortcut icon" href="images/favicon.ico">
-		<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-		-->
-		
-
-		<!-- Head Libs -->
-		<!--
-		<script src="vendor/modernizr.js"></script>-->
-		<%= javascript_include_tag "vendor/modernizr" %>
+  	<%= stylesheet_link_tag    "application", :media => "all" %>
+  	<%= javascript_include_tag "application" %>
+	<%= csrf_meta_tags %>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
 
 <body>
+      <div class="hidden-sm col-sm-1 col-lg-1">  
+        </div>
+      
+      <div id="user_nav" >
+            <% if current_user %> 
+          Logged in as <%= current_user.correo %>.
+          <%= link_to "Salir", log_out_path %>
+        <% else %>
+      <%= link_to "Registrase", "usuarios/new" %> or
+          <%= link_to "Ingresar", log_in_path %>
+        <% end %>
+      </div>
+        
+      <div class="hidden-sm col-sm-1 col-lg-1">  
+      </div>
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+      <% end %>
 	
-<div class="body">
-			<header>
-				<div class="container">
-					<h1 class="logo">
-						<a href="index.html">
-							<img alt="Porto" src="img/logo.png">
-						</a>
-					</h1>
-					<div class="search">
-						<form class="form-search" id="searchForm" action="http://www.crivosthemes.com/theme/porto/page-search-results.html" method="get">
-							<div class="control-group">
-								<input type="text" class="input-medium search-query" name="q" id="q" placeholder="Buscar...">
-								<button class="search" type="submit"><i class="icon-search"></i></button>
-							</div>
-						</form>
-					</div>
-					<nav>
-						<ul class="nav nav-pills nav-top">
-							<li>
-								<a href="about-us.html"><i class="icon-angle-right"></i>Acerca de</a>
-							</li>
-							<li>
-								<a href="contact-us.html"><i class="icon-angle-right"></i>Cont&aacute;ctanos</a>
-							</li>
-							<li class="phone">
-								<span><i class="icon-phone"></i>(591) 4-293-100</span>
-							</li>
-						</ul>
-					</nav>
-					<div class="social-icons">
-						<ul class="social-icons">
-							<li class="facebook"><a href="http://www.facebook.com/" target="_blank" title="Facebook">Facebook</a></li>
-							<li class="twitter"><a href="http://www.twitter.com/" target="_blank" title="Twitter">Twitter</a></li>
-							<li class="linkedin"><a href="http://www.linkedin.com/" target="_blank" title="Linkedin">Linkedin</a></li>
-						</ul>
-					</div>
-					<nav>
-						<ul class="nav nav-pills nav-main" id="mainMenu">
-							<li class="dropdown active">
-								<a class="dropdown-toggle" href="index.html">
-									Home
-									<i class="icon-angle-down"></i>
-								</a>
-								<ul class="dropdown-menu">
-									<li class="dropdown-submenu">
-										<a href="#">Sliders</a>
-										<ul class="dropdown-menu">
-											<li><a href="index.html">Revolution Slider</a></li>
-											<li><a href="index-slider-2.html">Nivo Slider</a></li>
-										</ul>
-									</li>
-									<li><a href="index.html">Home Version 1</a></li>
-									<li><a href="index-2.html">Home Version 2</a></li>
-									<li><a href="index-one-page.html">One Page Website</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="about-us.html">About Us</a>
-							</li>
-							<li class="dropdown">
-								<a class="dropdown-toggle" href="#">
-									Features
-									<i class="icon-angle-down"></i>
-								</a>
-								<ul class="dropdown-menu">
-									<li class="dropdown-submenu">
-										<a href="#">Headers</a>
-										<ul class="dropdown-menu">
-											<li><a href="index.html">Header Version 1</a></li>
-											<li><a href="index-header-2.html">Header Version 2</a></li>
-											<li><a href="index-header-3.html">Header Version 3</a></li>
-											<li><a href="index-header-4.html">Header Version 4</a></li>
-											<li><a href="index-header-5.html">Header Version 5</a></li>
-											<li><a href="index-header-6.html">Header Version 6</a></li>
-										</ul>
-									</li>
-									<li class="dropdown-submenu">
-										<a href="#">Footers</a>
-										<ul class="dropdown-menu">
-											<li><a href="index.html#footer">Footer Version 1</a></li>
-											<li><a href="index-footer-2.html#footer">Footer Version 2</a></li>
-											<li><a href="index-footer-3.html#footer">Footer Version 3</a></li>
-											<li><a href="index-footer-4.html#footer">Footer Version 4</a></li>
-										</ul>
-									</li>
-									<li class="dropdown-submenu">
-										<a href="#">Blog</a>
-										<ul class="dropdown-menu">
-											<li><a href="blog-full-width.html">Blog Full Width</a></li>
-											<li><a href="blog-large-image.html">Blog Large Image</a></li>
-											<li><a href="blog-medium-image.html">Blog Medium Image</a></li>
-											<li><a href="blog-post.html">Single Post</a></li>
-										</ul>
-									</li>
-									<li><a href="feature-grid-system.html">Grid System</a></li>
-									<li><a href="feature-pricing-tables.html">Pricing Tables</a></li>
-									<li><a href="feature-icons.html">Icons</a></li>
-									<li><a href="feature-elements.html">Elements</a></li>
-									<li><a href="feature-animations.html">Animations</a></li>
-									<li><a href="feature-typograpy.html">Typograpy</a></li>
-								</ul>
-							</li>
-							<li class="dropdown">
-								<a class="dropdown-toggle" href="#">
-									Portfolio
-									<i class="icon-angle-down"></i>
-								</a>
-								<ul class="dropdown-menu">
-									<li><a href="portfolio-2-columns.html">2 Columns</a></li>
-									<li><a href="portfolio-3-columns.html">3 Columns</a></li>
-									<li><a href="portfolio-4-columns.html">4 Columns</a></li>
-									<li><a href="portfolio-single-project.html">Single Project</a></li>
-								</ul>
-							</li>
-							<li class="dropdown">
-								<a class="dropdown-toggle" href="#">
-									Pages
-									<i class="icon-angle-down"></i>
-								</a>
-								<ul class="dropdown-menu">
-									<li><a href="page-full-width.html">Full width</a></li>
-									<li><a href="page-left-sidebar.html">Left sidebar</a></li>
-									<li><a href="page-right-sidebar.html">Right sidebar</a></li>
-									<li><a href="page-custom-header.html">Custom Header</a></li>
-									<li><a href="page-404.html">404 Error</a></li>
-									<li><a href="page-team.html">Team</a></li>
-									<li><a href="page-services.html">Services</a></li>
-									<li><a href="page-careers.html">Careers</a></li>
-									<li><a href="page-faq.html">FAQ</a></li>
-									<li><a href="sitemap.html">Sitemap</a></li>
-								</ul>
-							</li>
-							<li class="dropdown">
-								<a class="dropdown-toggle" href="contact-us.html">
-									Contact Us
-									<i class="icon-angle-down"></i>
-								</a>
-								<ul class="dropdown-menu">
+	<div class="content">
+      <div class="row">
+        <div class="col-lg-12">
+          <%= render 'layouts/navigation' %>
+        </div> 
+      </div>
 
-					<li><a href="contact-us.html">Version 1</a></li>
-									<li><a href="contact-us-2.html">Version 2</a></li>
-								</ul>
-							</li>
-						</ul>
-					</nav>
-				</div>
-			</header>
-	</div>
-<br>
-<br>
+      <!-- Cuerpo de la pagina -->
+      <div class="row">
+        <!--Espacio Vacio del Lateral izquierdo.-->
+        <div class="hidden-sm col-sm-1 col-lg-1">  
+        </div>
 
-<div id="user_nav">
-  <% if current_user %>
-    Logged in as <%= current_user.correo %>.
-    <%= link_to "Salir", log_out_path %>
-  <% else %>
-    <%= link_to "Registrase", "usuarios/new" %> or
-    <%= link_to "Ingresar", log_in_path %>
-  <% end %>
-</div>
-	
-<% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, :id => "flash_#{name}" %>
-<% end %>
+        <!--Contenido Principal (Laterales y Centro).-->
+        <div class="col-12 col-sm-10 col-lg-10">
+          <div class="row">
+            <!--Contenido Central-->
+            <div class="col-12 col-sm-9 col-lg-9">
+              <%= yield %>
+            </div>
+            <!--Barra Lateral Derecha.-->
+            <div class="col-12 col-sm-3 col-lg-3">
+              <%= render 'layouts/right_sidebar' %>
+            </div>
+          </div>
 
-<%= yield %>
-<br>
-<br>
-<footer id="footer">
-	<div class="container">
-					<div class="row">
-						<div class="footer-ribon">
-							<span>Info. Yo Sistemas</span>
-						</div>
-						<div class="span3">
-							<h4>Yo Sistemas</h4>
-							<p>Yo sistemas es un producto sin fines de lucro, dedicado al servicio de los estudiantes y los miembros
-							que quieran pertenecer y formar parte de la comunidad universitaria</p>
-						</div>
-						<div class="span3">
-							<h4>T&eacute;rminos y condiciones</h4>
-							<div id="tweet" class="twitter" data-account-id="crivosthemes">
-								<p>V&eacute;a los t&eacute;rminos y clasusulas de uso de la p&aacute;gina web aqui
-								<a href="/legal.html"> T&eacute;rminos y condiciones </a></p>
-								
-							</div>
-						</div>
-						<div class="span4">
-							<div class="contact-details">
-								<h4>Cont&aacute;ctanos</h4>
-								<ul class="contact">
-									<li><p><i class="icon-map-marker"></i> <strong>Direcci&oacute;n:</strong> UCB Cochabamba</p></li>
-									<li><p><i class="icon-phone"></i> <strong>Tel&eacute;fono</strong> (591) 4-293-100</p></li>
-									<li><p><i class="icon-link"></i> <strong>Web:</strong> <a href="www.ucbcba.edu.bo"> www.ucbcba.edu.bo</a></p></li>
-								</ul>
-							</div>
-						</div>
-						<div class="span2">
-							<h4>S&iacute;guenos</h4>
-							<div class="social-icons">
-								<ul class="social-icons">
-									<li class="facebook"><a href="http://www.facebook.com/" target="_blank" data-placement="bottom" rel="tooltip" title="Facebook">Facebook</a></li>
-									<li class="twitter"><a href="http://www.twitter.com/" target="_blank" data-placement="bottom" rel="tooltip" title="Twitter">Twitter</a></li>
-									<li class="linkedin"><a href="http://www.linkedin.com/" target="_blank" data-placement="bottom" rel="tooltip" title="Linkedin">Linkedin</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="footer-copyright">
-					<div class="container">
-						<div class="row">
-							<div class="span1">
-								<a href="index.html" class="logo">
-									<img alt="Porto Website Template" src="img/logo-footer.png">
-								</a>
-							</div>
-							<div class="span7">
-								<p>&reg; Copyright 2013 by Taller de Desarrollo de Software. All Rights Reserved.</p>
-							</div>
-							<div class="span4">
-								<nav id="sub-menu">
-									<ul>
-										<li><a href="page-faq.html">FAQ's</a></li>
-										<li><a href="sitemap.html">Sitemap</a></li>
-										<li><a href="contact-us.html">Contact</a></li>
-									</ul>
-								</nav>
-							</div>
-						</div>
-					</div>
-				</div>
-</footer>
+        </div>        
+      </div>
+      <!-- Pie de Pagina -->
+      <div class="row">
+        <%= render 'layouts/bootom_bar' %>
+      </div>
+    </div>
 
 </body>
 </html>

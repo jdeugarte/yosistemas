@@ -1,16 +1,20 @@
 class TemasController < ApplicationController
 # GET /temas
   def index
-    @temas = Tema.all
+    @temas = Tema.order(params[:sort])
   end
   
   def search
     @temas=Array.new 
     aux = Tema.all
-    if params[:titulo] != ""
+    if params[:titulo] != "" && params[:titulo] != nil 
       aux.each do |tema|
-        if tema.titulo.downcase.include?(params[:titulo].downcase)
-          @temas.push(tema)
+        parametros = params[:titulo].split(' ')
+        parametros.each do |parametro|
+          if tema.titulo.downcase.include?(parametro.downcase)
+            @temas.push(tema)
+            break
+          end
         end
       end
     else
@@ -22,6 +26,10 @@ class TemasController < ApplicationController
   # GET /temas/new
   def new
     @tema = Tema.new
+  end
+
+  def show
+     @tema = Tema.find(params[:id])
   end
 
   # POST /temas
@@ -43,9 +51,7 @@ class TemasController < ApplicationController
     else
       render 'edit'
     end
-   def show
-     @tema = Tema.find(params[:id])
-   end
+   
   end
   private
 

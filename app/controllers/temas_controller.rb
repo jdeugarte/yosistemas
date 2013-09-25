@@ -28,6 +28,10 @@ class TemasController < ApplicationController
     @tema = Tema.new
   end
 
+  def show
+     @tema = Tema.find(params[:id])
+  end
+
   # POST /temas
   def create
     @tema = Tema.new(tema_params)
@@ -47,9 +51,7 @@ class TemasController < ApplicationController
     else
       render 'edit'
     end
-   def show
-     @tema = Tema.find(params[:id])
-   end
+   
   end
   private
 

@@ -1,9 +1,24 @@
 <p>
   <b>Titulo:</b>
   <%= @tema.titulo %>
+</p>
 
+<p>
   <b>Contenido:</b>
   <%= @tema.cuerpo %>
-
 </p>
+
+<%= form_for([@tema, @tema.comments.build]) do |f| %>
+		<div class = "field">
+			<h4><strong>Comentario</strong></h4>
+			<%= f.text_area :body, cols: 30, rows: 10 %>
+		</div>
+
+		<div class = "action">
+			<button class = "btn btn-inverse" type = "f.submit">
+       			Submit
+    		</button>
+		</div>
+	<% end %>
+
 <%= link_to 'Atras', temas_path %>

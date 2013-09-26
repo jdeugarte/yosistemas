@@ -16,7 +16,7 @@ feature 'Gestion de tema' do
     expect{
       fill_in 'tema_titulo', with: 'Titulo tema de prueba'
       fill_in 'tema_cuerpo', with: 'Descripcion o contenido del tema de prueba'
-      click_button 'Create Tema'
+      click_button 'Crear tema'
     }.to change(Tema, :count).by(1)
     expect(current_path).to eq temas_path  #no muy util aqui, pero sirve para mostrar esta opcion
     expect(page).to have_content 'Titulo tema de prueba'

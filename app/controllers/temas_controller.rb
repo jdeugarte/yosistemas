@@ -49,6 +49,11 @@ class TemasController < ApplicationController
     end
    
   end
+
+  def editComment
+    @comment=Comment.find(params[:idcomment])    
+  end
+
   private
 
     # No permite parametros de internet

@@ -1,0 +1,7 @@
+<%if @comment.usuario.correo == current_user.correo%>
+	<h4>Editar Comentario</h4>
+	<form method="post" action="/comments/editc/<%=@comment.id.to_s%>">	 	
+		<textarea cols="40" rows="5" name="body"><%=@comment.body%></textarea><br><br>
+		<input  class = "btn btn-inverse" type="submit" value="Editar">
+	</form>
+<%end%>

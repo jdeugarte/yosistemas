@@ -21,6 +21,7 @@
 
   <tbody>    
     <% @temas.each do |tema| %>
+      <%if tema.visible==1 %>
       <tr>
         <td><%= tema.titulo %></td>
 		<td><%= tema.created_at.strftime("%B %e, %Y") %></td>
@@ -28,6 +29,7 @@
         <td><%= link_to ' Editar',edit_tema_path(tema) %></td>
         <td><%= link_to 'Show',tema %></td>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

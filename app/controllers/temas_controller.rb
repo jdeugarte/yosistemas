@@ -31,6 +31,7 @@ class TemasController < ApplicationController
   # POST /temas
   def create
     @tema = Tema.new(tema_params)
+    @tema.visible = 1
     @tema.save
     redirect_to temas_url 
   end
@@ -52,6 +53,18 @@ class TemasController < ApplicationController
 
   def editComment
     @comment=Comment.find(params[:idcomment])    
+  end
+
+  def visible
+    @tema = Tema.find(params[:id])
+    if @tema.visible == 1
+       @tema.visible =0
+       @tema.save
+    else
+      @tema.visible=1
+      @tema.save
+    end
+    redirect_to temas_url
   end
 
   private

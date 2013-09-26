@@ -9,9 +9,9 @@
 <table>
   <thead>
     <tr>
-      <th>Titulo</th>
-      <th>Cuerpo</th>
-      <th></th>
+      <th><%=sortable "Titulo" %></th>
+	  <th><%=sortable "created_at","Fecha Publicacion"%> </th>
+	  <th><%=sortable "Cuerpo" %></th>
       <th></th>
       <th></th>
       <th></th>
@@ -22,7 +22,8 @@
     <% @temas.each do |tema| %>
       <tr>
         <td><%= tema.titulo %></td>
-        <td><%= tema.cuerpo %></td>
+		<td><%= tema.created_at.strftime("%B %e, %Y") %></td>
+		<td><%= tema.cuerpo %></td>
         <td><%= link_to ' Editar',edit_tema_path(tema) %></td>
         <td><%= link_to 'Show',tema %></td>
       </tr>

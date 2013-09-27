@@ -1,5 +1,6 @@
 Yosistemas::Application.routes.draw do
   
+
   get "welcome/index"
   get "log_in" => "sessions#new", :as => "log_in"
   get "log_out" => "sessions#destroy", :as => "log_out"
@@ -8,7 +9,9 @@ Yosistemas::Application.routes.draw do
   get "usuarios/new"
   get "usuarios/edit" => "usuarios#edit"
   get "temas/search" => "temas#search"
-
+  get "temas/editComment/:idcomment" => "temas#editComment"
+  post "comments/editc/:id" => "comments#editc"
+  get 'temas/visible/:id' => 'temas#visible', :as => 'visible_tema'
   resources :usuarios do
     resources :comments
   end

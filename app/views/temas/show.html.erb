@@ -7,7 +7,7 @@
   <b>Contenido:</b>
   <%= @tema.cuerpo %>
 </p>
-
+<td><%= link_to 'visible', visible_tema_path(@tema) %></td>
 <%= form_for([@tema, @tema.comments.build]) do |f| %>
 		<div class = "field">
 			<h4><strong>Comentario</strong></h4>
@@ -30,6 +30,10 @@
 	  <div class="media-body">
 	    <h4 class="media-heading"><%=comment.usuario.correo%></h4>
 	    <%=comment.body%>
+	    <br>
+	    <%if comment.usuario.correo == current_user.correo%>
+	    	<%= link_to 'Editar', "/temas/editComment/"+comment.id.to_s %>
+	    <%end%>
 	  </div>
 	</div>
 	<%end%>

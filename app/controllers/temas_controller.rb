@@ -7,14 +7,10 @@ class TemasController < ApplicationController
   def search
     @temas=Array.new 
     aux = Tema.all
-    if params[:titulo] != "" && params[:titulo] != nil 
+    if params[:titulo] != "" && params[:titulo] != nil
       aux.each do |tema|
-        parametros = params[:titulo].split(' ')
-        parametros.each do |parametro|
-          if tema.titulo.downcase.include?(parametro.downcase)
-            @temas.push(tema)
-            break
-          end
+        if (tema.correspondeATitulo(params[:titulo]))
+          @temas.push(tema)
         end
       end
     else
@@ -35,6 +31,7 @@ class TemasController < ApplicationController
   # POST /temas
   def create
     @tema = Tema.new(tema_params)
+    @tema.visible = 1
     @tema.save
     redirect_to temas_url 
   end
@@ -53,6 +50,23 @@ class TemasController < ApplicationController
     end
    
   end
+
+  def editComment
+    @comment=Comment.find(params[:idcomment])    
+  end
+
+  def visible
+    @tema = Tema.find(params[:id])
+    if @tema.visible == 1
+       @tema.visible =0
+       @tema.save
+    else
+      @tema.visible=1
+      @tema.save
+    end
+    redirect_to temas_url
+  end
+
   private
 
     # No permite parametros de internet

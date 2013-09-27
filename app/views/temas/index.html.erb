@@ -5,6 +5,7 @@
 	<input type="submit" value="Buscar">
 </form>
 <br>
+<a class="btn btn-primary btn-lg" href="/temas/new">Nuevo Tema</a>
 <br>
 <table>
   <thead>
@@ -20,6 +21,7 @@
 
   <tbody>    
     <% @temas.each do |tema| %>
+      <%if tema.visible==1 %>
       <tr>
         <td><%= tema.titulo %></td>
 		<td><%= tema.created_at.strftime("%B %e, %Y") %></td>
@@ -27,10 +29,9 @@
         <td><%= link_to ' Editar',edit_tema_path(tema) %></td>
         <td><%= link_to 'Show',tema %></td>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'Nuevo Tema', new_tema_path %>

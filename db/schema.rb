@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130924232023) do
+ActiveRecord::Schema.define(version: 20130926214035) do
 
   create_table "comments", force: true do |t|
     t.text     "body"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20130924232023) do
     t.text     "cuerpo"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "visible"
   end
 
   create_table "usuarios", force: true do |t|

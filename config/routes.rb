@@ -6,6 +6,7 @@ Yosistemas::Application.routes.draw do
   get "usuarios/index"
   get "usuarios/show"
   get "usuarios/new"
+  get "usuarios/edit" => "usuarios#edit"
   get "temas/search" => "temas#search"
 
   resources :usuarios do

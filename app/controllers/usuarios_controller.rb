@@ -7,6 +7,18 @@ class UsuariosController < ApplicationController
 
   def show
   end
+  
+  def edit
+	 @usuario=current_user
+  end
+  
+  def update
+    current_user.nombre=params[:usuario][:nombre]
+    current_user.apellido=params[:usuario][:apellido]
+    current_user.correo=params[:usuario][:correo]
+    current_user.save
+    redirect_to :action => 'show', :format => 'html'
+  end
 
   def new
   	@usuario = Usuario.new

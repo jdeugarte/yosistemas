@@ -4,6 +4,7 @@ class CreateUsuarios < ActiveRecord::Migration
       t.string :nombre
       t.string :apellido
       t.string :contrasenia
+      t.string :contrasenia_de_confirmacion
       t.string :correo
       
 

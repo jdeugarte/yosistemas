@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20130926214035) do
     t.string   "nombre"
     t.string   "apellido"
     t.string   "contrasenia"
+    t.string   "contrasenia_de_confirmacion"
     t.string   "correo"
     t.datetime "created_at"
     t.datetime "updated_at"

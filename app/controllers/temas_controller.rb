@@ -31,7 +31,6 @@ class TemasController < ApplicationController
   # POST /temas
   def create
     @tema = Tema.new(tema_params)
-    @tema.visible = 1
     @tema.save
     redirect_to temas_url 
   end

@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20130926214035) do
     t.text     "cuerpo"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "visible"
+    t.integer  "visible",    default: 1, null: false
   end
 
   create_table "usuarios", force: true do |t|

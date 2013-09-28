@@ -6,7 +6,7 @@ require 'digest/md5'
 	  has_many :usuarios
   	  accepts_nested_attributes_for :usuarios
 
-  	before_save :encrypt_password
+  	before_create :encrypt_password
 
 	validates :nombre,
 	:presence  => TRUE,
@@ -45,8 +45,8 @@ require 'digest/md5'
   end
 
 
-  	def encrypt_password
- 		self.contrasenia = Digest::MD5.hexdigest(contrasenia)
+  	def encrypt_password  	
+  		self.contrasenia = Digest::MD5.hexdigest(contrasenia) 		
   	end
 
 end

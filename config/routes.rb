@@ -6,7 +6,7 @@ Yosistemas::Application.routes.draw do
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "usuarios/index"
   get "usuarios/show"
-  get "usuarios/new"
+  get "usuarios/new" => "usuarios#new", :as =>"register"
   get "usuarios/edit" => "usuarios#edit"
   get "temas/search" => "temas#search"
   get "temas/editComment/:idcomment" => "temas#editComment"

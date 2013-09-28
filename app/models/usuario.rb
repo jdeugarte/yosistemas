@@ -37,7 +37,7 @@ require 'digest/md5'
 	
 	def self.autenticar(correo, contrasenia)
     	usuario = find_by_correo(correo)
-    	if usuario && usuario.contrasenia==contrasenia
+    	if usuario && usuario.contrasenia == Digest::MD5.hexdigest(contrasenia)
       	usuario
     	else
       	nil

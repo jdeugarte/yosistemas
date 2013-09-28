@@ -58,10 +58,10 @@ class TemasController < ApplicationController
   def visible
     @tema = Tema.find(params[:id])
     if @tema.visible == 1
-       @tema.visible =0
+       @tema.visible = 0
        @tema.save
     else
-      @tema.visible=1
+      @tema.visible = 1
       @tema.save
     end
     redirect_to temas_url

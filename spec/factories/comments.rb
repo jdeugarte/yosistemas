@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :comment do
-    body "MyText"
+    body "comentario, importante"
     tema nil
     usuario nil
   end

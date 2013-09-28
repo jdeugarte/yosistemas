@@ -11,8 +11,8 @@ class CommentsController < ApplicationController
   	end
 
     def editc
-        comment=Comment.find(params[:id])
-        comment.body=params[:body]
+        comment = Comment.find(params[:id])
+        comment.body = params[:body]
         comment.save
         redirect_to "/temas/"+comment.tema_id.to_s
     end

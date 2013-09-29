@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20130929185915) do
     t.string   "correo"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "activa",                      default: false
+    t.boolean  "activa",                      default: true
   end
 
 end

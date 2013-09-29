@@ -3,7 +3,7 @@ require 'spec_helper'
 feature 'Gestion de tema' do
   scenario 'Crear un nuevo tema' do
     #crear usuario que pueda crear una entrada (cuando se tenga usuarios)
-    usuario = FactoryGirl.create(:usuario)
+    usuario = FactoryGirl.build(:usuario)
     #ir a la ventana principal para iniciar la interaccion como lo haria el usuario)
     visit root_path  
     #si es necesario hacer un login, hacerlo (claro que podemos tener esto en un metodo en un helper, para no repetir en otros specs)
@@ -26,7 +26,7 @@ feature 'Gestion de tema' do
   end
   scenario 'ocultar tema' do
     #crear usuario que pueda crear una entrada (cuando se tenga usuarios)
-    usuario = FactoryGirl.create(:usuario)
+    usuario = FactoryGirl.build(:usuario)
     #ir a la ventana principal para iniciar la interaccion como lo haria el usuario)
     visit root_path  
     #si es necesario hacer un login, hacerlo (claro que podemos tener esto en un metodo en un helper, para no repetir en otros specs)

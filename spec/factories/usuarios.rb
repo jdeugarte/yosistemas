@@ -5,7 +5,6 @@ FactoryGirl.define do
     nombre "Pedro"
     apellido "Pedregal"
     contrasenia "password"
-    contrasenia_de_confirmacion "password"
     correo "email@email.com"
   end
 end

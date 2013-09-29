@@ -1,6 +1,5 @@
 class Tema < ActiveRecord::Base
   has_many :comments
-  belongs_to :usuario
   validates :titulo, :presence => true
   
   def correspondeATitulo(titulo)

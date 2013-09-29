@@ -27,13 +27,10 @@ ActiveRecord::Schema.define(version: 20130926214035) do
   create_table "temas", force: true do |t|
     t.string   "titulo"
     t.text     "cuerpo"
-    t.integer  "usuario_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "visible",    default: 1, null: false
   end
-
-  add_index "temas", ["usuario_id"], name: "index_temas_on_usuario_id"
 
   create_table "usuarios", force: true do |t|
     t.string   "nombre"

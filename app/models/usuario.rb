@@ -1,7 +1,7 @@
 class Usuario < ActiveRecord::Base  
 require 'digest/md5'
 
-	has_many :temas
+
 	has_many :comments
 	  has_many :usuarios
   	  accepts_nested_attributes_for :usuarios

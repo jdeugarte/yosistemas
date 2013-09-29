@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Yosistemas::Application.config.secret_key_base = '27a8d1f068bd76c0a993037136d4f5b3d6a6c72560158eb7d58521ba12531d7c49d8a931358d3214442878f64caa1e3d9c2aa335409af22a952ac0edacdc77c2'
+Yosistemas::Application.config.secret_key_base = '18f7a2b36141885c25c2efbddc30deeb910c27843c297b081f0751bf78507f6bfc0f8d87f3e91bee5fdfc3766ede2b3c1feb896e4d8863ef8b2ae7203e6e348b'

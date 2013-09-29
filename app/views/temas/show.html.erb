@@ -1,12 +1,23 @@
-<p>
-  <b>Titulo:</b>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="well">
+      <form class="bs-example form-horizontal">
+  <fieldset>
+  <legend>Titulo:
   <%= @tema.titulo %>
-</p>
+  </legend>
+    <div class="form-group">
 
-<p>
-  <b>Contenido:</b>
-  <%= @tema.cuerpo %>
+      <div class="col-lg-10">
+        Contenido:<%= @tema.cuerpo %>
+      </div>
+    </div>
+  </fieldset>
 </p>
+</form>
+      </div>
+    </div>
+  </div>
 <%if @tema.usuario.correo == current_user.correo%>
 <td><%= link_to 'visible', visible_tema_path(@tema) %></td>
 <%end%>

@@ -48,7 +48,7 @@ describe TemasController do
 
       it "redirecciona a vista index" do
         post :create, tema: FactoryGirl.attributes_for(:tema)   
-        expect(response).to redirect_to temas_path  
+        expec t(response).to redirect_to temas_path  
       end
     end
   end

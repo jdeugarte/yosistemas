@@ -24,7 +24,7 @@ feature 'Gestion de tema' do
     #save_and_open_page #habilitar en cualquier lugar SOLO si se quiere hacer debug de este spec
       
   end
-  scenario 'ocultar tema' do
+  scenario 'solo usuario que creo el tema puede esconder(eliminar) tema' do
     #crear usuario que pueda crear una entrada (cuando se tenga usuarios)
     usuario = FactoryGirl.create(:usuario)
     #ir a la ventana principal para iniciar la interaccion como lo haria el usuario)
@@ -47,6 +47,38 @@ feature 'Gestion de tema' do
     expect(current_path).to eq temas_path #lista de temas
     expect(page).to have_content '' #no tengo contenido en la pagina
     expect(page).to have_content ''
+    #save_and_open_page #habilitar en cualquier lugar SOLO si se quiere hacer debug de este spec
+      
+  end
+
+  scenario 'usuario que no creo el tema no puede esconderlo' do
+    #crear usuario que pueda crear una entrada (cuando se tenga usuarios)
+    usuario = FactoryGirl.create(:usuario)
+    usuario2 = FactoryGirl.create(:usuario,nombre: "Pablo",apellido: "Marmol", contrasenia: "password", contrasenia_de_confirmacion: "password", correo:"email2@email.com" )
+    #ir a la ventana principal para iniciar la interaccion como lo haria el usuario)
+    visit root_path  
+    #si es necesario hacer un login, hacerlo (claro que podemos tener esto en un metodo en un helper, para no repetir en otros specs)
+    fill_in 'correo', with: 'email@email.com'
+    fill_in 'contrasenia', with: 'password'
+    click_button 'Log in'
+    #ahora si vamos a la seccion de temas
+    visit temas_path  # para mas info ver: guides.rubyonrails.org/routing.html
+    click_link 'Nuevo Tema'
+    expect{
+      fill_in 'tema_titulo', with: 'Titulo tema de prueba'
+      fill_in 'tema_cuerpo', with: 'Descripcion o contenido del tema de prueba'
+      click_button 'Crear tema'
+    }.to change(Tema, :count).by(1)
+    expect(current_path).to eq temas_path  #secion lista de temas
+    click_link 'Show' #voy al tema
+    expect(page).to have_content 'visible' #Se puede ver el link visible
+    click_link 'Salir' #cierro sesion
+    #login con otro usuario registrado
+    fill_in 'correo', with: 'email2@email.com'
+    fill_in 'contrasenia', with: 'password'
+    click_button 'Log in'
+    click_link 'Show' #voy al tema
+    has_no_text?('visible')==true #No Se puede ver el link visible
     #save_and_open_page #habilitar en cualquier lugar SOLO si se quiere hacer debug de este spec
       
   end

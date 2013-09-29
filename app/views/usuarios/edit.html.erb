@@ -1,13 +1,5 @@
 <h1>Modificar Datos Personales</h1>
-<div>
-	<% if flash[:status] == TRUE %>
-		<P><%= flash[:alert]%></P>
-	<% elsif flash[:status] == FALSE%>
-		<% flash[:alert].each do |error|%>
-			<p><%= error %></p>
-	<% end %>
-<% end %>
-</div>
+
 <%= form_for @usuario do |usuario| %>
 <div>
 	<%= usuario.label(:nombre, "Nombre") %>

@@ -3,6 +3,7 @@ class CreateTemas < ActiveRecord::Migration
     create_table :temas do |t|
       t.string :titulo
       t.text :cuerpo
+      t.references :usuario, index: true 
 
       t.timestamps
     end

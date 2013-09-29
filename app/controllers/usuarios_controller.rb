@@ -1,6 +1,6 @@
 class UsuariosController < ApplicationController
   
-  skip_before_filter :require_log_in , :only=>[:new,:create] 
+  skip_before_filter :require_log_in , :only=>[:new,:create, :edit] 
   
   def index
   end
@@ -16,8 +16,14 @@ class UsuariosController < ApplicationController
     current_user.nombre=params[:usuario][:nombre]
     current_user.apellido=params[:usuario][:apellido]
     current_user.correo=params[:usuario][:correo]
-    current_user.save
-    redirect_to :action => 'show', :format => 'html'
+    if(current_user.save)
+      #flash[:status] = TRUE
+      flash[:alert] = 'Usuario Modificado'
+      redirect_to :action => 'show', :format => 'html'
+    else
+      flash[:alert] = current_user.errors.full_messages
+      redirect_to :action => 'edit', :format => 'html'
+    end
   end
 
   def new

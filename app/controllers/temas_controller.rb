@@ -31,6 +31,7 @@ class TemasController < ApplicationController
   # POST /temas
   def create
     @tema = Tema.new(tema_params)
+    @tema.usuario_id = current_user.id
     @tema.save
     redirect_to temas_url 
   end

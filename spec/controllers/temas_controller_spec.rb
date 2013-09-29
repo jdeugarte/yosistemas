@@ -41,9 +41,8 @@ describe TemasController do
   describe 'POST #create' do
     context 'con atributos validos' do
       it "guarda en la bd el nuevo tema" do
-        current_user = FactoryGirl.build(:usuario)
         expect{ 
-          post :create, tema: FactoryGirl.attributes_for(:tema, :usuario)
+          post :create, tema: FactoryGirl.attributes_for(:tema)
         }.to change(Tema, :count).by(1)
       end
 

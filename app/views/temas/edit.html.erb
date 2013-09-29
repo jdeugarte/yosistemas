@@ -1,5 +1,30 @@
 <h1>Editar tema</h1>
 
-<%= render 'form' %>
+<%= form_for :tema, url:tema_path(@tema.id), 
+method: :patch do |f| %>
+	<%if @tema.errors.any? %>
+		<div id="errorExplanation">
+			<h2><%= pluralize(@tema.errors.count,"error") %> Este tema no pudo ser guardado: </h2>
+			<ul>
+				<% @tema.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<%end%>
+			</ul>
+		</div>
+	<%end%>
+	<p>
+		<%= f.label :titulo %> <br>
+		<%= f.text_field :titulo %>
+	</p>
 
-<%= link_to 'Atras', temas_path %>
+	<p>
+		<%= f.label :cuerpo %> <br>
+		<%= f.text_area :cuerpo %>
+	</p>
+
+	<p>
+		<p><%= submit_tag "Guardar Tema" %></p>
+	</p>
+<%end %>
+
+<%link_to 'Atras', temas_path %>

@@ -68,5 +68,50 @@ describe TemasController do
       
       expect(response).to render_template :index
     end
+
+  end
+
+  describe "PUT update" do
+    before :each do
+      @tema = FactoryGirl.create(:tema, titulo:'Importante tema', cuerpo:'Detalle del tema importante')
+    end
+
+    context "atributos validos" do
+      it "asignar los valores encontrados a @tema" do
+        put :update, id: @tema, tema:FactoryGirl.attributes_for(:tema)
+        assigns(:tema).should eq(@tema)
+      end
+
+      it "cambiar atributos de @tema" do
+        put :update, id:@tema, tema: FactoryGirl.attributes_for(:tema, titulo:'Titulo nuevo', cuerpo:'Cuerpo nuevo')
+        @tema.reload
+        @tema.titulo.should eq('Titulo nuevo')
+        @tema.cuerpo.should eq('Cuerpo nuevo')
+      end
+      
+      it "redireccionar al tema actualizado" do
+        put :update, id:@tema, tema: FactoryGirl.attributes_for(:tema)
+        response.should redirect_to @tema
+      end
+    end
+
+    context "atributos invalidos" do
+      it "asignar los valores encontrados a @tema" do
+        put :update, id: @tema, tema:FactoryGirl.attributes_for(:tema)
+        assigns(:tema).should eq(@tema)
+      end
+      it "cambiar atributos de @tema por un titulo vacio" do
+        put :update, id:@tema, tema: FactoryGirl.attributes_for(:tema, titulo:'', cuerpo:'Cuerpo nuevo')
+        @tema.reload
+        @tema.titulo.should_not eq('')
+        @tema.cuerpo.should_not eq('Cuerpo nuevo')
+      end
+      
+      it "redireccionar al metodo de edicion" do
+        put :update, id: @tema, tema: FactoryGirl.attributes_for(:tema, titulo:'', cuerpo:'Cuerpo nuevo')
+        response.should render_template("edit")
+      end
+
+    end
   end
 end

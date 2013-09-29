@@ -43,7 +43,7 @@ class TemasController < ApplicationController
     @tema = Tema.find(params[:id])
 
     if(@tema.update(params[:tema].permit(:titulo,:cuerpo)))
-      redirect_to temas_url
+      redirect_to @tema
     else
       render 'edit'
     end

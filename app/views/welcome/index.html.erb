@@ -6,12 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
 
     <title>Carousel Template for Bootstrap</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="../../dist/css/bootstrap.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -24,61 +20,37 @@
     <style>
 
 
-		/* CUSTOMIZE THE CAROUSEL
-		-------------------------------------------------- */
 
-		/* Carousel base class */
-		.carousel {
-		  margin-bottom: 60px;
+    
 
-		  /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
-		  margin-top: 80px;
-		}
-		/* Since positioning the image, we need to help out the caption */
-		.carousel-caption {
-		  z-index: 10;
-		}
+    
+    /*FUTURETTES DIVIDE*/
+    .featurette-divider {
+        margin: 80px 0; /* Space out the Bootstrap <hr> more */
+      }
+      .featurette {
+        padding-top: 120px; /* Vertically center images part 1: add padding above and below text. */
+        overflow: hidden; /* Vertically center images part 2: clear their floats. */
+      }
+      .featurette-image {
+        margin-top: -120px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
+      }
 
-		/* Declare heights because of positioning of img element */
-		.carousel .item {
-		  height: 500px;
-		  background-color: #777;
-		}
-		.carousel-inner > .item > img {
-		  position: absolute;
-		  top: 0;
-		  left: 0;
-		  min-width: 100%;
-		  height: 500px;
-		}
+      /* Give some space on the sides of the floated elements so text doesn't run right into it. */
+      .featurette-image.pull-left {
+        margin-right: 40px;
+      }
+      .featurette-image.pull-right {
+        margin-left: 40px;
+      }
 
-		/*FUTURETTES DIVIDE*/
-		.featurette-divider {
-	      margin: 80px 0; /* Space out the Bootstrap <hr> more */
-	    }
-	    .featurette {
-	      padding-top: 120px; /* Vertically center images part 1: add padding above and below text. */
-	      overflow: hidden; /* Vertically center images part 2: clear their floats. */
-	    }
-	    .featurette-image {
-	      margin-top: -120px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
-	    }
-
-	    /* Give some space on the sides of the floated elements so text doesn't run right into it. */
-	    .featurette-image.pull-left {
-	      margin-right: 40px;
-	    }
-	    .featurette-image.pull-right {
-	      margin-left: 40px;
-	    }
-
-	    /* Thin out the marketing headings */
-	    .featurette-heading {
-	      font-size: 50px;
-	      font-weight: 300;
-	      line-height: 1;
-	      letter-spacing: -1px;
-	    }
+      /* Thin out the marketing headings */
+      .featurette-heading {
+        font-size: 50px;
+        font-weight: 300;
+        line-height: 1;
+        letter-spacing: -1px;
+      }
 
 
     </style>
@@ -88,51 +60,64 @@
 
     <!-- Carousel
     ================================================== -->
-    <div id="myCarousel" class="carousel slide">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="item active">
-          <img src="http://placehold.it/1359x800"  alt="First slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Bienvenido a Yo Sistemas</h1>
-              <p>Yo sistemas es una plataforma virtual donde puedes compartir informacion con personas de tu alrededor, interactuando mediante foros activos.</p>
-              <p><a class="btn btn-large btn-primary" href="#">Entrar ahora!</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img src="http://placehold.it/1359x800" data-src="holder.js/100%x500/auto/#777:#7a7a7a/text:Second slide" alt="Second slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Está pensada en ti</h1>
-              <p>Tu eres el actor principal, seas estudiante o seas docente o algun profesional externo. Esta plataforma podra serte muy util</p>
-              <p><a class="btn btn-large btn-primary" href="#">Leer mas</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img src="http://placehold.it/1359x800" data-src="holder.js/100%x500/auto/#777:#7a7a7a/text:Third slide" alt="Third slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Empieza ahora a disfrutar de nuestro producto</h1>
-              <p>Te esperamos para que formes parte de un mundo sin limites.</p>
-              <p><a class="btn btn-large btn-primary" href="#">Ver Galeria</a></p>
-            </div>
-          </div>
-        </div>
+    <div class=row>
+      <div class="hidden-sm col-md-1 col-lg-1">
       </div>
-      <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-      <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-    </div><!-- /.carousel -->
+      <div class="hidden-sm col-md-10 col-lg-10">
+        <div id="carousel-example-generic" class="carousel slide">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+          </ol>
 
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+            <div class="item active">
+              <img src="img/docentes.jpg" alt="...">
+              <div class="container">
+                <div class="carousel-caption">
+                  <h1>Example headline.</h1>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="item">
+              <img src="img/docentes1.jpg" alt="...">
+              <div class="container">
+                <div class="carousel-caption">
+                  <h1>Example headline.</h1>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                </div>
+              </div>
+            </div>
 
+            <div class="item">
+              <img src="img/estudiantes.jpg" alt="...">
+              <div class="container">
+                <div class="carousel-caption">
+                  <h1>Example headline.</h1>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+              <span class="icon-prev"></span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+            </a>
+        </div>
+      </div><!-- /.carousel -->
+    </div>
+  </div>
+
+    <hr class="featurette-divider">
+    <br>
     <!-- Marketing messaging and featurettes
     ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
@@ -140,26 +125,6 @@
     <div class="container marketing">
 
       <!-- Three columns of text below the carousel -->
-      <div class="row">
-        <div class="col-4">
-          <img class="img-circle" src="http://placehold.it/140x140" alt="Generic placeholder image">
-          <h2>Docente</h2>
-          <p>Con tu colaboracion podremos brindar y compartir conocimiento tanto abierto como privado. Compartir tus experiencias nos servira a todos</p>
-          <p><a class="btn btn-default" href="#">Ver Detalle &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-4">
-          <img class="img-circle" src="http://placehold.it/140x140" alt="Generic placeholder image">
-          <h2>Estudiante</h2>
-          <p>Es complicado caminar solo; pero cuando caminas en grupo es mucho mejor. Adquirir y aportar conocimiento es una parte fundamental del aprendizaje.</p>
-          <p><a class="btn btn-default" href="#">Ver Detalle &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-4">
-          <img class="img-circle" src="http://placehold.it/140x140"  alt="Generic placeholder image">
-          <h2>Profesional</h2>
-          <p>Tu experiencia laboral es de gran aporte para nosotros. Nunca se deja de aprender y no esta de más enseñar.</p>
-          <p><a class="btn btn-default" href="#">Ver Detalle &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
 
 
       <!-- START THE FEATURETTES -->
@@ -183,22 +148,42 @@
 
       <hr class="featurette-divider">
 
-      <div class="featurette">
+      <div class="featurette" style="margin-bottom:40px;">
         <img class="featurette-image pull-right" src="http://placehold.it/500x500">
         <h2 class="featurette-heading">Busqueda de contenido <span class="muted"> Chekealo.</span></h2>
         <p class="lead">Nuestro buscador de contenido ayudara a encontrar aquello que andas buscando, con una facilidad increible.</p>
       </div>
 
+      <div class="row">
+        <div class="col-lg-4 col-md-4">
+          <img class="img-circle" src="http://placehold.it/140x140" alt="Generic placeholder image">
+          <h2>Docente</h2>
+          <p>Con tu colaboracion podremos brindar y compartir conocimiento tanto abierto como privado. Compartir tus experiencias nos servira a todos</p>
+          
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4 col-md-4">
+          <img class="img-circle" src="http://placehold.it/140x140" alt="Generic placeholder image">
+          <h2>Estudiante</h2>
+          <p>Es complicado caminar solo; pero cuando caminas en grupo es mucho mejor. Adquirir y aportar conocimiento es una parte fundamental del aprendizaje.</p>
+          
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4 col-md-4">
+          <img class="img-circle" src="http://placehold.it/140x140"  alt="Generic placeholder image">
+          <h2>Profesional</h2>
+          <p>Tu experiencia laboral es de gran aporte para nosotros. Nunca se deja de aprender y no esta de más enseñar.</p>
+          
+        </div><!-- /.col-lg-4 -->
+      </div><!-- /.row -->
 
       <!-- /END THE FEATURETTES -->
 
-
+    </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../../assets/js/jquery.js"></script>
+    <!--<script src="../../assets/js/jquery.js"></script>
     <script src="../../dist/js/bootstrap.min.js"></script>
-    <script src="../../assets/js/holder.js"></script>
+    <script src="../../assets/js/holder.js"></script>-->
   </body>
 </html>

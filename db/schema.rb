@@ -27,10 +27,13 @@ ActiveRecord::Schema.define(version: 20130929185915) do
   create_table "temas", force: true do |t|
     t.string   "titulo"
     t.text     "cuerpo"
+    t.integer  "usuario_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "visible"
+    t.integer  "visible",    default: 1, null: false
   end
+
+  add_index "temas", ["usuario_id"], name: "index_temas_on_usuario_id"
 
   create_table "usuarios", force: true do |t|
     t.string   "nombre"
@@ -40,7 +43,7 @@ ActiveRecord::Schema.define(version: 20130929185915) do
     t.string   "correo"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "activa",                      default: false
+    t.boolean  "activa",                      default: true
   end
 
 end

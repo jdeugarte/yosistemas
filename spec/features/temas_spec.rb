@@ -9,7 +9,7 @@ feature 'Gestion de tema' do
     #si es necesario hacer un login, hacerlo (claro que podemos tener esto en un metodo en un helper, para no repetir en otros specs)
     fill_in 'correo', with: 'email@email.com'
     fill_in 'contrasenia', with: 'password'
-    click_button 'Log in'
+    click_button 'Ingresar'
     #ahora si vamos a la seccion de temas
     visit temas_path  # para mas info ver: guides.rubyonrails.org/routing.html
     click_link 'Nuevo Tema'
@@ -32,7 +32,7 @@ feature 'Gestion de tema' do
     #si es necesario hacer un login, hacerlo (claro que podemos tener esto en un metodo en un helper, para no repetir en otros specs)
     fill_in 'correo', with: 'email@email.com'
     fill_in 'contrasenia', with: 'password'
-    click_button 'Log in'
+    click_button 'Ingresar'
     #ahora si vamos a la seccion de temas
     visit temas_path  # para mas info ver: guides.rubyonrails.org/routing.html
     click_link 'Nuevo Tema'
@@ -60,7 +60,7 @@ feature 'Gestion de tema' do
     #si es necesario hacer un login, hacerlo (claro que podemos tener esto en un metodo en un helper, para no repetir en otros specs)
     fill_in 'correo', with: 'email@email.com'
     fill_in 'contrasenia', with: 'password'
-    click_button 'Log in'
+    click_button 'Ingresar'
     #ahora si vamos a la seccion de temas
     visit temas_path  # para mas info ver: guides.rubyonrails.org/routing.html
     click_link 'Nuevo Tema'

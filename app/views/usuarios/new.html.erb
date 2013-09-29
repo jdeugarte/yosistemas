@@ -13,31 +13,7 @@
 <% end %>
 </div>
 <%= form_for @usuario do |usuario| %>
-<div>
-	<%= usuario.label(:nombre, "Nombre") %>
-	<%= usuario.text_field :nombre %>
-</div>
-<div>
-	<%= usuario.label(:apellido, "Apellido") %>
-	<%= usuario.text_field :apellido %>
-</div>
-<div>
-	<%= usuario.label(:contrasenia, "Contraseña") %>
-	<%= usuario.password_field :contrasenia %>
-</div>
-<div>
-	<%= usuario.label(:contrasenia_de_confirmacion, "Confirmacion de contraseña") %>
-	<%= usuario.password_field :contrasenia_de_confirmacion %>
-</div>
-<div>
-	<%= usuario.label(:correo, "Correo-Electronico") %>
-	<%= usuario.text_field :correo %>
-</div>
-<div>
-	<%= submit_tag "Registrar"%>
-</div>
-
-<!--
+<% usuario.hidden_field  :activa, :value=>true %>
 <div class="row">
           <div class="col-lg-6">
             <div class="well">
@@ -48,35 +24,35 @@
                     <label for="inputEmail" class="col-lg-4 control-label">Nombre:</label>
                     <div class="col-lg-8">
                       
-                      <%= text_field_tag :nombre, params[:nombre], :class=>'form-control', :placeholder=>'Nombre' %>
+                      <%= usuario.text_field :nombre, :class=>'form-control', :placeholder=>'Nombre' %>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputPassword" class="col-lg-4 control-label">Apellido:</label>
                     <div class="col-lg-8">
                       
-                      <%= text_field_tag :apellido, params[:apellido], :class=>'form-control', :placeholder=>'Apellido'  %>
+                      <%= usuario.text_field :apellido, :class=>'form-control', :placeholder=>'Apellido'  %>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputEmail" class="col-lg-4 control-label">Contraseña:</label>
                     <div class="col-lg-8">
                       
-                      <%= password_field_tag :contrasenia, params[:contrasenia], :class=>'form-control', :placeholder=>'Contraseña' %>
+                      <%= usuario.password_field :contrasenia, :class=>'form-control', :placeholder=>'Contraseña' %>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputEmail" class="col-lg-4 control-label">Confirmar Contraseña:</label>
                     <div class="col-lg-8">
                       
-                      <%= password_field_tag :contrasenia_de_confirmacion, params[:contrasenia_de_confirmacion], :class=>'form-control', :placeholder=>'Confirmar Contraseña' %>
+                      <%= usuario.password_field :contrasenia_de_confirmacion, :class=>'form-control', :placeholder=>'Confirmar Contraseña' %>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputEmail" class="col-lg-4 control-label">Correo:</label>
                     <div class="col-lg-8">
                       
-                      <%= text_field_tag :correo, params[:correo], :class=>'form-control', :placeholder=>'Correo' %>
+                      <%= usuario.text_field :correo, :class=>'form-control', :placeholder=>'Correo' %>
                     </div>
                   </div>
                   
@@ -90,5 +66,4 @@
         </div>
     </div>  
    </div>
-   -->
 <% end %>

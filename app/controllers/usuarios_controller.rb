@@ -1,6 +1,6 @@
 class UsuariosController < ApplicationController
   
-  skip_before_filter :require_log_in , :only=>[:new,:create, :edit] 
+  skip_before_filter :require_log_in ,:only=>[:confirm,:new,:create, :edit]   
   
   def index
   end
@@ -30,10 +30,26 @@ class UsuariosController < ApplicationController
   	@usuario = Usuario.new
   end
 
+def confirm 
+    @messagge="Error, datos invalidos"
+  begin
+    usuario= Usuario.find(AESCrypt.decrypt(params[:pass],"ah2Srnbs7E4gRt0"))
+    rescue OpenSSL::Cipher::CipherError
+ end
+  if(usuario!=nil)
+    if(!usuario.activa)
+    usuario.activa=true
+    usuario.save  
+    @messagge="Su cuenta fue activada exitosamente! ya puede hacer uso de nuestro contenido";
+    end
+  end
+end
+
   def create
   	  params.permit!
   		@usuario = Usuario.new(params[:usuario])
   		if @usuario.save
+        SendMail.activate_acount(@usuario).deliver
   			flash[:status] = TRUE
   			flash[:alert] = 'Usuario Registrado Exitosamente!!!'
   			else

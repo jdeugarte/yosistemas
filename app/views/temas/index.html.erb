@@ -1,4 +1,8 @@
-<h1>Lista de temas</h1>
+
+<div class="page-header">
+     <h1 id="forms">Lista de Temas</h1>
+</div>
+
 <form method="GET" action="/temas/search">
 	<font size="3" color="maroon">Buscar Tema por Titulo:  
 	<input type="text" name="titulo">
@@ -7,31 +11,36 @@
 <br>
 <a class="btn btn-primary btn-lg" href="/temas/new">Nuevo Tema</a>
 <br>
-<table>
+
+<br>
+<div class="row">
+<div class="col-lg-10">
+<table class="table table-striped table-bordered table-hover">
   <thead>
     <tr>
+            <th>#</th>
       <th><%=sortable "Titulo" %></th>
-	  <th><%=sortable "created_at","Fecha Publicacion"%> </th>
-	  <th><%=sortable "Cuerpo" %></th>
-      <th></th>
-      <th></th>
-      <th></th>
+    <th><%=sortable "created_at","Fecha Publicacion"%> </th>
+    <th><%=sortable "Cuerpo" %></th>
+
     </tr>
   </thead>
+                <tbody>    
+    <% ind=1 %>
 
-  <tbody>    
     <% @temas.each do |tema| %>
       <%if tema.visible==1 %>
-      <tr>
+      <tr style='cursor:pointer' onclick=<%="document.location.href='/temas/"+tema.id.to_s+"'"%>>
+        <td><%= ind %></td>
         <td><%= tema.titulo %></td>
-		<td><%= tema.created_at.strftime("%B %e, %Y") %></td>
-		<td><%= tema.cuerpo %></td>
-        <td><%= link_to ' Editar',edit_tema_path(tema) %></td>
-        <td><%= link_to 'Show',tema %></td>
+
+    <td><%= tema.created_at.strftime("%B %e, %Y") %></td>
+    <td><%= tema.cuerpo %></td>     
       </tr>
+      <% ind+=1 %>
       <% end %>
     <% end %>
   </tbody>
-</table>
-
-<br>
+              </table>
+</div>
+</div>

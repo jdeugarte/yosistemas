@@ -4,6 +4,7 @@ class SendMail < ActionMailer::Base
     def activate_acount(user)
     @user = user
     @url  = 'http://localhost:3000/usuarios/confirm?pass='+AESCrypt.encrypt(@user.id.to_s,"ah2Srnbs7E4gRt0")
+    #@url  = 'http://yositemas.herokuapp.com/usuarios/confirm?pass='+AESCrypt.encrypt(@user.id.to_s,"ah2Srnbs7E4gRt0")
     mail(to: @user.correo, subject: 'YoSistemas')
   end
 

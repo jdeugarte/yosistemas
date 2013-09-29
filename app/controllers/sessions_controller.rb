@@ -5,8 +5,7 @@ class SessionsController < ApplicationController
   end
   
   def create
-    usuario = Usuario.autenticar(params[:correo], params[:contrasenia])
-    puts params.to_s
+    usuario = Usuario.autenticar(params[:correo], params[:contrasenia])    
     if usuario
       session[:usuario_id] = usuario.id
       redirect_to temas_path, :notice => "Logged in!"

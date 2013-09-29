@@ -1,15 +1,31 @@
 <%= form_for(@tema) do |f| %>
-
-  <div class="field">
-    <%= f.label :titulo %><br>
-    <%= f.text_field :titulo %>
-  </div>
-  <div class="field">
-    <%= f.label :cuerpo %><br>
-    <%= f.text_area :cuerpo %>
-  </div>
-  <br>
-  <div class="actions">
-    <%= f.submit 'Crear tema'%>
-  </div>
+  <div class="row">
+          <div class="col-lg-6">
+            <div class="well">
+              <form class="bs-example form-horizontal">
+                <fieldset>
+                  <legend>Ingrese los datos del tema </legend>
+                  <div class="form-group">
+                     <label for="inputTitle" class="col-lg-2 control-label">Titulo:</label>
+                    <div class="col-lg-10">
+                        <%= f.text_field :titulo , :class=>'form-control', :placeholder=>'Titulo'%>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputContent" class="col-lg-2 control-label">Contenido:</label>
+                    <div class="col-lg-10">
+                      <%= f.text_area :cuerpo, :class=>'form-control',:rows=>'6', :placeholder=>'Contenido' %>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                      <button type="submit" class="btn btn-primary">Crear Tema</button> 
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+        </div>
+    </div>  
+   </div>
 <% end %>

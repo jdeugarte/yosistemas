@@ -22,7 +22,7 @@ class TemasController < ApplicationController
       if params[:titulo] == "" || params[:titulo] == nil
         @temas=byDescription
       else
-        @temas = (@temas+byDescription).uniq
+        @temas = ((@temas&byDescription)+@temas+byDescription).uniq
       end
     end
     render 'index'

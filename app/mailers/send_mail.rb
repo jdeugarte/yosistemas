@@ -1,6 +1,7 @@
 require 'aescrypt'
 class SendMail < ActionMailer::Base
-      default from: 'notifications@example.com'
+	attr_accessor :url
+      default from: 'YoSistemas@gmail.com'
     def activate_acount(user)
     @user = user
     @url  = 'http://localhost:3000/usuarios/confirm?pass='+AESCrypt.encrypt(@user.id.to_s,"Taller")

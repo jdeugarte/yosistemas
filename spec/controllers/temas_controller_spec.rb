@@ -70,6 +70,7 @@ describe TemasController do
 
   end
 
+
   describe "PUT update" do
     before :each do
       @tema = FactoryGirl.create(:tema, titulo:'Importante tema', cuerpo:'Detalle del tema importante')

@@ -33,7 +33,8 @@ class UsuariosController < ApplicationController
 def confirm 
     @messagge="Error, datos invalidos"
   begin
-    usuario= Usuario.find(AESCrypt.decrypt(params[:pass],"Taller"))
+    #usuario= Usuario.find(AESCrypt.decrypt(params[:pass].to_s,"Taller"))
+    usuario= Usuario.find(params[:pass].to_s)
     rescue ActiveRecord::RecordNotFound
     rescue OpenSSL::Cipher::CipherError
  end
@@ -50,7 +51,7 @@ end
   	  params.permit!
   		@usuario = Usuario.new(params[:usuario])
   		if @usuario.save
-        #SendMail.activate_acount(@usuario).deliver
+        SendMail.activate_acount(@usuario).deliver
   			flash[:status] = TRUE
   			flash[:alert] = 'Usuario Registrado Exitosamente!!! Revise su correo electronico para activar la cuenta'
   			else

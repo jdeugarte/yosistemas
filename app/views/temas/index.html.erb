@@ -2,14 +2,25 @@
 <div class="page-header">
      <h1 id="forms">Lista de Temas</h1>
 </div>
-
 <form method="GET" action="/temas/search">
-	<font size="3" color="maroon">Buscar Tema por Titulo:  
-	<input type="text" name="titulo">
-	<input type="submit" value="Buscar">
+<div class="row">
+  <div class="col-sm-12 col-md-2 col-lg-2">
+    <a class="btn btn-primary btn-lg" href="/temas/new">Nuevo Tema</a>
+  </div> 
+  <div class="input-group col-sm-12 col-md-8 col-lg-8" >
+    <span class="input-group-addon ">Titulo:</span>
+    <input type="text" name="titulo" class="form-control">
+    <span class="input-group-addon">Descripcion:</span>
+    <input type="text" name="descripcion"  class="form-control">
+    <span class="input-group-btn">
+        <input class="btn btn-default" type="submit" value="Buscar">
+    </span>
+  </div>
+</div>
+  
 </form>
 <br>
-<a class="btn btn-primary btn-lg" href="/temas/new">Nuevo Tema</a>
+
 <br>
 
 <br>

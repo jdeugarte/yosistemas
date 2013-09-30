@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -44,8 +43,7 @@ ActiveRecord::Schema.define(version: 20130929185915) do
     t.string   "correo"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "activa",                      default: true
+    t.boolean  "activa",                      default: false
   end
 
 end
->>>>>>> b87a03ba28acb20ea0ed361395a51b24cdd9b646

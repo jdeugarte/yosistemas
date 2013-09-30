@@ -15,9 +15,8 @@ class UsuariosController < ApplicationController
   def update
     current_user.nombre=params[:usuario][:nombre]
     current_user.apellido=params[:usuario][:apellido]
-    current_user.correo=params[:usuario][:correo]
     if(current_user.save)
-      #flash[:status] = TRUE
+      flash[:status] = TRUE
       flash[:alert] = 'Usuario Modificado'
       redirect_to temas_url
     else

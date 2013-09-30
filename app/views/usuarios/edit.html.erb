@@ -31,14 +31,7 @@
                       <%= usuario.text_field :apellido, :class=>'form-control', :placeholder=>'Apellido'  %>
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label for="inputEmail" class="col-lg-4 control-label">Correo:</label>
-                    <div class="col-lg-8">
-                      
-                      <%= usuario.text_field :correo, :class=>'form-control', :placeholder=>'Correo' %>
-                    </div>
-                  </div>
-                  
+                 
                   <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-4">
                       <button type="submit" class="btn btn-primary">Guardar</button> 
@@ -50,7 +43,7 @@
                     </div>
                   </div>
                   
-                      <%= link_to "Modificar Contraseña", "usuarios/update_password" %> 
+                      <%= link_to "Modificar Contraseña", :action=> "update_password" %> 
                   
                 </fieldset>
               </form>

@@ -31,8 +31,8 @@ require 'digest/md5'
 	},
 	:confirmation => TRUE
 
-	#validates :contrasenia_de_confirmacion,
-	#          :presence => TRUE
+	validates :contrasenia_de_confirmacion,
+	          :presence => TRUE
 
 	validates_format_of :correo,
 	:presence => TRUE,

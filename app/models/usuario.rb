@@ -8,6 +8,8 @@ require 'digest/md5'
 
   	before_create :encrypt_password
 
+
+
 	validates :nombre,
 	:presence  => TRUE,
 	:length => {
@@ -24,16 +26,26 @@ require 'digest/md5'
 	:presence  => TRUE,
 	:length => {
 		:minimum => 6,
-		:allow_blank => TRUE
+		:allow_blank => TRUE,
+		:confirmation => TRUE
 	},
 	:confirmation => TRUE
 
-	validates :contrasenia_de_confirmacion,
-		:presence => TRUE
+	#validates :contrasenia_de_confirmacion,
+	#          :presence => TRUE
 
-	validates :correo,
+	validates_format_of :correo,
 	:presence => TRUE,
-	:uniqueness => TRUE
+	:uniqueness => TRUE,
+	:with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
+	:message    => 'no valido'
+
+
+
+	 #  validates :password, :presence =>true,
+  #                   :length => { :minimum => 5, :maximum => 40 },
+  #                   :confirmation =>true
+  # validates_confirmation_of :password
 	
 	def self.autenticar(correo, contrasenia)
     	usuario = find_by_correo(correo)

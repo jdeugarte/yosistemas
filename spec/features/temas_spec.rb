@@ -84,20 +84,19 @@ feature 'Gestion de tema' do
   end
 end
 
-=begin
-feature 'Buscar temas' do
-    scenario 'la busqueda por descripcion deberia mostrar resultados coherentes' do
-        usuario = FactoryGirl.create(:usuario,nombre: "Pedro",apellido: "Suarez", contrasenia: "password", contrasenia_de_confirmacion: "password", correo:"email@email.com" )
-        tema1 = FactoryGirl.create(:tema, titulo: 'Tema 1', cuerpo: 'primera descripcion')
-        tema2 = FactoryGirl.create(:tema, titulo: 'Tema 2', cuerpo: 'descripcion segunda')
-        #ir a la ventana principal para iniciar la interaccion como lo haria el usuario)
-        visit "/log_in"    
-        #si es necesario hacer un login, hacerlo (claro que podemos tener esto en un metodo en un helper, para no repetir en otros specs)
-        fill_in 'correo', with: 'email@email.com'
-        fill_in 'contrasenia', with: 'password'
-        click_button 'Ingresar'
-        fill_in 'descripcion', with: 'primera'
-        click_button 'Buscar Tema'
-        expect(page).to have_content('Tema 1')
-    end
-end=end
+# feature 'Buscar temas' do
+#     scenario 'la busqueda por descripcion deberia mostrar resultados coherentes' do
+#         usuario = FactoryGirl.create(:usuario,nombre: "Pedro",apellido: "Suarez", contrasenia: "password", contrasenia_de_confirmacion: "password", correo:"email@email.com" )
+#         tema1 = FactoryGirl.create(:tema, titulo: 'Tema 1', cuerpo: 'primera descripcion')
+#         tema2 = FactoryGirl.create(:tema, titulo: 'Tema 2', cuerpo: 'descripcion segunda')
+#         #ir a la ventana principal para iniciar la interaccion como lo haria el usuario)
+#         visit "/log_in"    
+#         #si es necesario hacer un login, hacerlo (claro que podemos tener esto en un metodo en un helper, para no repetir en otros specs)
+#         fill_in 'correo', with: 'email@email.com'
+#         fill_in 'contrasenia', with: 'password'
+#         click_button 'Ingresar'
+#         fill_in 'descripcion', with: 'primera'
+#         click_button 'Buscar Tema'
+#         expect(page).to have_content('Tema 1')
+#     end
+# end

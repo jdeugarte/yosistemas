@@ -51,7 +51,7 @@ end
   		if @usuario.save
         SendMail.activate_acount(@usuario).deliver
   			flash[:status] = TRUE
-  			flash[:alert] = 'Usuario Registrado Exitosamente!!!'
+  			flash[:alert] = 'Usuario Registrado Exitosamente!!! Revise su correo electronico para activar la cuenta'
   			else
   			flash[:status] = FALSE
   			flash[:alert] = @usuario.errors.full_messages

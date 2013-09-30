@@ -17,7 +17,7 @@
             <% if current_user %> 
           Logged in as <%= current_user.correo %>.
           <%= link_to "Salir", log_out_path %>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <%= link_to "Modificar Datos", "usuarios/edit" %>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <%= link_to "Modificar Datos", usuario_edit_path %>
         <% else %>
       <%= link_to "Registrase", register_path %> o
           <%= link_to "Ingresar", log_in_path %>

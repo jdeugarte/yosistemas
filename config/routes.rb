@@ -8,7 +8,7 @@ Yosistemas::Application.routes.draw do
   get "usuarios/index"
   get "usuarios/show"
   get "usuarios/new" => "usuarios#new", :as =>"register"
-  get "usuarios/edit" => "usuarios#edit"
+  get "usuarios/edit" => "usuarios#edit", :as=>"usuario_edit"
   get "usuarios/update_password" => "usuarios#update_password"
   get "temas/search" => "temas#search"
   get "temas/editComment/:idcomment" => "temas#editComment"

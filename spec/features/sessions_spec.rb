@@ -6,7 +6,7 @@ feature 'Gestion de Sessions' do
     visit '/sessions/new'   
     fill_in 'correo', with: 'email@email.com'
     fill_in 'contrasenia', with: 'password'
-    click_button 'Log in'
+    click_button 'Ingresar'
     #expect(page).to have_text("Logged in!")
     #expect(current_path).to eq temas_path
   end

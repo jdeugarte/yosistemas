@@ -23,7 +23,6 @@ describe TemasController do
       expect(response).to render_template :index
     end
   end
-
   describe 'GET #new' do
     it "asigna un nuevo tema a @tema" do
       get :new
@@ -113,5 +112,11 @@ describe TemasController do
       end
 
     end
+  end
+  describe "GET#show"
+  it "asigna el id solicitado a @id" do
+    tema=FactoryGirl(:tema)
+    get :show, id: tema
+    assigns(:tema).should eq tema
   end
 end

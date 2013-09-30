@@ -26,13 +26,8 @@ require 'digest/md5'
 	:presence  => TRUE,
 	:length => {
 		:minimum => 6,
-		:allow_blank => TRUE,
-		:confirmation => TRUE
 	},
 	:confirmation => TRUE
-
-	validates :contrasenia_de_confirmacion,
-	          :presence => TRUE
 
 	validates_format_of :correo,
 	:presence => { :message => " es requerido" },
@@ -40,12 +35,6 @@ require 'digest/md5'
 	:with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
 	:message    => 'no valido'
 
-
-
-	 #  validates :password, :presence =>true,
-  #                   :length => { :minimum => 5, :maximum => 40 },
-  #                   :confirmation =>true
-  # validates_confirmation_of :password
 	
 	def self.autenticar(correo, contrasenia)
     	usuario = find_by_correo(correo)

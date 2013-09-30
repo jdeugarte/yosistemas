@@ -47,7 +47,7 @@
 
     <td><%= tema.created_at.strftime("%Y-%m-%e Hora: %I:%M") %></td>
     <td><%= tema.cuerpo %></td>
-    <td><% if(tema.usuario.correo == current_user.correo)%>
+    <td><% if( tema.usuario_id == current_user.id)%>
         <%= link_to ' Editar',edit_tema_path(tema) %>
         <% end %></td>
       </tr>

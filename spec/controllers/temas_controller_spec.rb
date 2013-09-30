@@ -41,7 +41,7 @@ describe TemasController do
     context 'con atributos validos' do
       it "guarda en la bd el nuevo tema" do
         expect{ 
-          post :create, tema: FactoryGirl.attributes_for(:tema)
+          post :create, tema: FactoryGirl.attributes_for(:tema, :titulo => "titulo", :cuerpo=>"Hola")
         }.to change(Tema, :count).by(1)
       end
 
@@ -69,6 +69,7 @@ describe TemasController do
     end
 
   end
+
 
   describe "PUT update" do
     before :each do
@@ -115,7 +116,7 @@ describe TemasController do
   end
   describe "GET#show"
   it "asigna el id solicitado a @id" do
-    tema=FactoryGirl(:tema)
+    tema=FactoryGirl.create(:tema)
     get :show, id: tema
     assigns(:tema).should eq tema
   end

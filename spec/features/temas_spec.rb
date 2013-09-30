@@ -5,7 +5,7 @@ feature 'Gestion de tema' do
     #crear usuario que pueda crear una entrada (cuando se tenga usuarios)
     usuario = FactoryGirl.create(:usuario)
     #ir a la ventana principal para iniciar la interaccion como lo haria el usuario)
-    visit root_path  
+    visit "/log_in"  
     #si es necesario hacer un login, hacerlo (claro que podemos tener esto en un metodo en un helper, para no repetir en otros specs)
     fill_in 'correo', with: 'email@email.com'
     fill_in 'contrasenia', with: 'password'
@@ -28,7 +28,7 @@ feature 'Gestion de tema' do
     #crear usuario que pueda crear una entrada (cuando se tenga usuarios)
     usuario = FactoryGirl.create(:usuario)
     #ir a la ventana principal para iniciar la interaccion como lo haria el usuario)
-    visit root_path  
+    visit "/log_in"  
     #si es necesario hacer un login, hacerlo (claro que podemos tener esto en un metodo en un helper, para no repetir en otros specs)
     fill_in 'correo', with: 'email@email.com'
     fill_in 'contrasenia', with: 'password'
@@ -56,7 +56,7 @@ feature 'Gestion de tema' do
     usuario = FactoryGirl.create(:usuario)
     usuario2 = FactoryGirl.create(:usuario,nombre: "Pablo",apellido: "Marmol", contrasenia: "password", contrasenia_de_confirmacion: "password", correo:"email2@email.com" )
     #ir a la ventana principal para iniciar la interaccion como lo haria el usuario)
-    visit root_path  
+    visit "/log_in"    
     #si es necesario hacer un login, hacerlo (claro que podemos tener esto en un metodo en un helper, para no repetir en otros specs)
     fill_in 'correo', with: 'email@email.com'
     fill_in 'contrasenia', with: 'password'
@@ -76,10 +76,27 @@ feature 'Gestion de tema' do
     #login con otro usuario registrado
     fill_in 'correo', with: 'email2@email.com'
     fill_in 'contrasenia', with: 'password'
-    click_button 'Log in'
+    click_button 'Ingresar'
     click_link 'Show' #voy al tema
     has_no_text?('visible')==true #No Se puede ver el link visible
     #save_and_open_page #habilitar en cualquier lugar SOLO si se quiere hacer debug de este spec
       
   end
 end
+
+# feature 'Buscar temas' do
+#     scenario 'la busqueda por descripcion deberia mostrar resultados coherentes' do
+#         usuario = FactoryGirl.create(:usuario,nombre: "Pedro",apellido: "Suarez", contrasenia: "password", contrasenia_de_confirmacion: "password", correo:"email@email.com" )
+#         tema1 = FactoryGirl.create(:tema, titulo: 'Tema 1', cuerpo: 'primera descripcion')
+#         tema2 = FactoryGirl.create(:tema, titulo: 'Tema 2', cuerpo: 'descripcion segunda')
+#         #ir a la ventana principal para iniciar la interaccion como lo haria el usuario)
+#         visit "/log_in"    
+#         #si es necesario hacer un login, hacerlo (claro que podemos tener esto en un metodo en un helper, para no repetir en otros specs)
+#         fill_in 'correo', with: 'email@email.com'
+#         fill_in 'contrasenia', with: 'password'
+#         click_button 'Ingresar'
+#         fill_in 'descripcion', with: 'primera'
+#         click_button 'Buscar Tema'
+#         expect(page).to have_content('Tema 1')
+#     end
+# end

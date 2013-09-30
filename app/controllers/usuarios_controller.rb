@@ -33,7 +33,8 @@ class UsuariosController < ApplicationController
 def confirm 
     @messagge="Error, datos invalidos"
   begin
-    usuario= Usuario.find(AESCrypt.decrypt(params[:pass].to_s,"Taller"))
+    #usuario= Usuario.find(AESCrypt.decrypt(params[:pass].to_s,"Taller"))
+    usuario= Usuario.find(params[:pass].to_s)
     rescue ActiveRecord::RecordNotFound
     rescue OpenSSL::Cipher::CipherError
  end

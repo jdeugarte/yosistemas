@@ -19,11 +19,15 @@ class UsuariosController < ApplicationController
     if(current_user.save)
       #flash[:status] = TRUE
       flash[:alert] = 'Usuario Modificado'
-      redirect_to :action => 'show', :format => 'html'
+      redirect_to temas_url
     else
       flash[:alert] = current_user.errors.full_messages
       redirect_to :action => 'edit', :format => 'html'
     end
+  end
+  
+  def update_password
+    @usuario=current_user
   end
 
   def new

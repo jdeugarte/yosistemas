@@ -11,13 +11,13 @@ require 'digest/md5'
 
 
 	validates :nombre,
-	:presence  => TRUE,
+	:presence  => { :message => " es requerido, no puede ser nulo" },
 	:length => {
 		:minimum => 2,
 		:allow_blank => TRUE
 	}
 	validates :apellido,
-	:presence  => TRUE,
+	:presence  => { :message => " es requerido, no puede ser nulo" },
 	:length => {
 		:minimum => 2,
 		:allow_blank => TRUE
@@ -35,7 +35,7 @@ require 'digest/md5'
 	#          :presence => TRUE
 
 	validates_format_of :correo,
-	:presence => TRUE,
+	:presence => { :message => " es requerido" },
 	:uniqueness => TRUE,
 	:with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
 	:message    => 'no valido'

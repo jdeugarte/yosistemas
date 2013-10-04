@@ -1,8 +1,7 @@
-<%= form_for(@tema) do |f| %>
+<%= form_for @tema, :html => { :class => 'bs-example form-horizontal' } do |f| %>
   <div class="row">
           <div class="col-lg-6">
             <div class="well">
-              <form class="bs-example form-horizontal">
                 <fieldset>
                   <legend>Ingrese los datos del tema </legend>
                   <div class="form-group">
@@ -20,11 +19,10 @@
                   
                   <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                      <button name="Crear tema" id="Crear tema" type="submit" class="btn btn-primary">Crear tema</button> 
+                      <input type="submit" value="Crear tema" class="btn btn-primary">
                     </div>
                   </div>
                 </fieldset>
-              </form>
         </div>
     </div>  
    </div>

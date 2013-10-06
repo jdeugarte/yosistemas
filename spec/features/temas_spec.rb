@@ -1,16 +1,20 @@
 require 'spec_helper'
 
 feature 'Gestion de tema' do
-  scenario 'Crear un nuevo tema' do
-    usuario = FactoryGirl.create(:usuario)
-
-    #Tarea para uds. refactorizar esta sección a un método ingresar_sistema(usuario)
-    #para no repetir esto en todos los demás feature specs que necesiten autentificarse
+  def ingresar_sistema(usuario)
     visit root_path
     click_link "Ingresar"  
     fill_in 'correo', with: 'email@email.com'
     fill_in 'contrasenia', with: 'password'
     click_button 'Ingresar'
+  end
+
+  scenario 'Crear un nuevo tema' do
+    usuario = FactoryGirl.create(:usuario)
+
+    #Tarea para uds. refactorizar esta sección a un método ingresar_sistema(usuario)
+    #para no repetir esto en todos los demás feature specs que necesiten autentificarse
+    ingresar_sistema(usuario)
     click_link 'Nuevo Tema'
     
     expect{
@@ -22,4 +26,5 @@ feature 'Gestion de tema' do
     expect(page).to have_content 'Titulo tema de prueba'
     expect(page).to have_content 'Descripcion o contenido del tema de prueba'
   end
+
 end

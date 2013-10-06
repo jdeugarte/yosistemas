@@ -41,7 +41,7 @@ describe TemasController do
     context 'con atributos validos' do
       it "guarda en la bd el nuevo tema" do
         expect{ 
-          post :create, tema: FactoryGirl.attributes_for(:tema, :titulo => "titulo", :cuerpo=>"Hola")
+          post :create, tema: FactoryGirl.attributes_for(:tema, titulo:'titulo', cuerpo:'Hola')
         }.to change(Tema, :count).by(1)
       end
 

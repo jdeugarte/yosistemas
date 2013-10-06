@@ -1,7 +1,7 @@
 class Tema < ActiveRecord::Base
   has_many :comments
   belongs_to :usuario 
-  validates :titulo, :presence => { :message => " es requerido" }
+  validates :titulo, :cuerpo, :presence => { :message => " es requerido" }
   
   def correspondeATitulo(titulo)
     parametros = titulo.split(' ')

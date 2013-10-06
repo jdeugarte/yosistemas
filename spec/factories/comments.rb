@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :comment do
     body "comentario, importante"
-    tema nil
-    usuario nil
+    tema_id 1
+    usuario_id 1
   end
 end

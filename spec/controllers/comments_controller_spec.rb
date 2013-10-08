@@ -9,7 +9,8 @@ describe CommentsController do
       it "guarda en la base de datos el nuevo comentario" do
         expect{
           tema1 = FactoryGirl.create(:tema, titulo: 'Tema Comentado')
-          post :create, comment: FactoryGirl.attributes_for(:comment, tema_id: tema1.id)
+		  comment = FactoryGirl.create(:comment, body: "probando", tema_id: tema1.id)
+          #post :create, comment: FactoryGirl.attributes_for(:comment, tema_id: tema1.id)
         }.to change(Comment, :count).by(1)
       end
   end

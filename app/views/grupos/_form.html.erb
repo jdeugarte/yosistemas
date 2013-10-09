@@ -1,0 +1,35 @@
+<%= form_for @grupo, :html => { :class => 'bs-example form-horizontal' } do |f| %>
+  <div class="row">
+          <div class="col-lg-6">
+            <div class="well">
+                <fieldset>
+                  <legend>Ingrese los datos del grupo </legend>
+                  <div class="form-group">
+                     <label for="inputTitle" class="col-lg-2 control-label">Nombre:</label>
+                    <div class="col-lg-10">
+                        <%= f.text_field :nombre , :class=>'form-control', :placeholder=>'Nombre'%>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputContent" class="col-lg-2 control-label">Descripcion:</label>
+                    <div class="col-lg-10">
+                      <%= f.text_area :descripcion, :class=>'form-control',:rows=>'6', :placeholder=>'Descripcion' %>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputContent" class="col-lg-2 control-label">Estado:</label>
+                    <div class="col-lg-10">
+                      <%= f.select :estado, options_for_select([["Privado", true], ["Publico", false]]) %>
+                    </div>
+                  </div>
+            
+                  <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                      <input type="submit" value="Crear grupo" class="btn btn-primary">
+                    </div>
+                  </div>
+                </fieldset>
+        </div>
+    </div>  
+   </div>
+<% end %>

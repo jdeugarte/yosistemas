@@ -1,5 +1,6 @@
 Yosistemas::Application.routes.draw do
   get "temas/index"
+  post 'temas/edit/:id' => 'temas#edit', :as => 'edit_tema'
   get "usuarios/confirm" => "usuarios#confirm"
   get "log_in" => "sessions#new", :as => "log_in"
   get "log_out" => "sessions#destroy", :as => "log_out"
@@ -13,6 +14,7 @@ Yosistemas::Application.routes.draw do
   get "temas/editComment/:idcomment" => "temas#editComment"
   post "comments/editc/:id" => "comments#editc"
   get 'temas/visible/:id' => 'temas#visible', :as => 'visible_tema'
+
   resources :usuarios do
     resources :comments
   end

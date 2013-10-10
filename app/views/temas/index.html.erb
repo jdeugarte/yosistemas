@@ -4,9 +4,11 @@
 </div>
 <form method="GET" action="/temas/search">
 <div class="row">
-  <div class="col-sm-12 col-md-2 col-lg-2">
-    <a class="btn btn-primary btn-lg" href="/temas/new">Nuevo Tema</a>
-  </div> 
+  <%if current_user!=nil%>
+    <div class="col-sm-12 col-md-2 col-lg-2">
+      <a class="btn btn-primary btn-lg" href="/temas/new">Nuevo Tema</a>
+    </div> 
+    <%end%>
   <div class="input-group col-sm-12 col-md-8 col-lg-8" >
     <span class="input-group-addon ">Titulo:</span>
     <input type="text" name="titulo" class="form-control">
@@ -16,6 +18,7 @@
         <input class="btn btn-default" type="submit" value="Buscar Temas">
     </span>
   </div>
+
 </div>
   
 </form>
@@ -47,9 +50,7 @@
 
     <td><%= tema.created_at.strftime("%Y-%m-%e Hora: %I:%M") %></td>
     <td><%= tema.cuerpo %></td>
-    <td><% if( tema.usuario_id == current_user.id)%>
-        <%= link_to ' Editar',edit_tema_path(tema) %>
-        <% end %></td>
+    
       </tr>
       <% ind+=1 %>
       <% end %>

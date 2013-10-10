@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-6">
     <div class="well">
-      <form class="bs-example form-horizontal">
+      <form>
   <fieldset>
   <legend>Titulo:
   <%= @tema.titulo %>
@@ -12,26 +12,33 @@
         <b>Contenido:</b><%= @tema.cuerpo %>
       </div>
     </div>
+    <% if current_user!=nil && @tema.usuario.correo==current_user.correo%>
+	 	<div>
+	    <%= link_to "Editar", edit_tema_path(@tema), :method => :post%>
+	    </div>
+	<%end%>
   </fieldset>
 </p>
 </form>
       </div>
     </div>
   </div>
-<%if @tema.usuario.correo == current_user.correo%>
+<%if current_user!=nil && @tema.usuario.correo == current_user.correo%>
 <td><%= link_to 'Dejar de mostrar tema', visible_tema_path(@tema) %></td> 
 <%end%>
-<%= form_for([@tema, @tema.comments.build]) do |f| %>
-		<div class = "field">
-			<h4><strong>Comentario</strong></h4>
-			<%= f.text_area :body, cols: 30, rows: 10 %>
-		</div>
+<%if current_user!=nil%>
+	<%= form_for([@tema, @tema.comments.build]) do |f| %>
+			<div class = "field">
+				<h4><strong>Comentario</strong></h4>
+				<%= f.text_area :body, cols: 30, rows: 10 %>
+			</div>
 
-		<div class = "action">
-			
-    		<input type="submit" value="Comentar" class="btn btn-inverse">
-		</div>
-	<% end %>
+			<div class = "action">
+				
+	    		<input type="submit" value="Comentar" class="btn btn-inverse">
+			</div>
+		<% end %>
+<%end%>
 <div class="col-12 col-md-10 col-lg-8">
 <%for comment in @tema.comments%>
 	<%if(comment.id!=nil)%>
@@ -43,7 +50,7 @@
 	    <h4 class="media-heading"><%=comment.usuario.correo%></h4>
 	    <%=comment.body%>
 	    <br>
-	    <%if comment.usuario.correo == current_user.correo%>
+	    <%if current_user!=nil && comment.usuario.correo == current_user.correo%>
 	    	<%= link_to 'Editar', "/temas/editComment/"+comment.id.to_s %>
 	    <%end%>
 	  </div>

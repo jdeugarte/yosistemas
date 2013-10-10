@@ -44,7 +44,7 @@ feature 'Gestion de tema' do
     expect(page).to have_content 'Titulo tema de prueba'
     expect(page).to have_content 'Descripcion o contenido del tema de prueba'
     visit "temas/"+Tema.first.id.to_s
-    click_link 'visible' # ya no quiero ver el tema
+    click_link 'Dejar de mostrar tema' # ya no quiero ver el tema
     expect(current_path).to eq temas_path #lista de temas
     expect(page).to have_content '' #no tengo contenido en la pagina
     expect(page).to have_content ''

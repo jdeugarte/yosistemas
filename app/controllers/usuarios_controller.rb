@@ -1,6 +1,7 @@
 class UsuariosController < ApplicationController
   
-  skip_before_filter :require_log_in ,:only=>[:confirm,:new,:create, :edit]   
+  skip_before_filter :verify_authenticity_token
+  skip_before_filter :require_log_in ,:only=>[:confirm,:new,:create]   
   
   def index
   end
@@ -16,17 +17,27 @@ class UsuariosController < ApplicationController
     current_user.nombre=params[:usuario][:nombre]
     current_user.apellido=params[:usuario][:apellido]
     if(current_user.save)
-      flash[:status] = TRUE
       flash[:alert] = 'Usuario Modificado'
-      redirect_to temas_url
     else
       flash[:alert] = current_user.errors.full_messages
-      redirect_to :action => 'edit', :format => 'html'
+      
     end
+    redirect_to :action => 'edit', :format => 'html'
   end
   
   def update_password
     @usuario=current_user
+  end
+  
+  def edit_password
+    uno=params[:usuario][:nombre]
+    dos=params[:usuario][:apellido]
+    if uno==dos
+      redirect_to root_url :notice => "iguales"
+    else
+       redirect_to root_url :notice => "diferentes"   
+        end
+    #redirect_to root_url :notice => params[:nueva_contrasenia].to_s
   end
 
   def new

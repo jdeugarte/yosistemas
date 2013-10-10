@@ -20,19 +20,15 @@
                   <div class="form-group">
                     <label for="inputName" class="col-lg-4 control-label">Nombre:</label>
                     <div class="col-lg-8">
-                      
                       <%= usuario.text_field :nombre, :class=>'form-control', :placeholder=>'Nombre' %>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputPassword" class="col-lg-4 control-label">Apellido:</label>
                     <div class="col-lg-8">
-                      
                       <%= usuario.text_field :apellido, :class=>'form-control', :placeholder=>'Apellido'  %>
                     </div>
                   </div>
-                  
-                 
                   <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-4">
                       <button type="submit" class="btn btn-primary">Guardar</button> 
@@ -43,9 +39,7 @@
                       &nbsp; 
                     </div>
                   </div>
-                  
-                      <%= link_to "Modificar Contraseña", :action=> "update_password" %> 
-                  
+                      <%= link_to "Modificar Contraseña",  update_password_path %> 
                 </fieldset>
               </form>
         </div>

@@ -1,19 +1,20 @@
 Yosistemas::Application.routes.draw do
-  
-
-  get "welcome/index"
+  get "temas/index"
+  post 'temas/edit/:id' => 'temas#edit', :as => 'edit_tema'
   get "usuarios/confirm" => "usuarios#confirm"
   get "log_in" => "sessions#new", :as => "log_in"
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "usuarios/index"
   get "usuarios/show"
   get "usuarios/new" => "usuarios#new", :as =>"register"
+  get "usuarios/update_password" => "usuarios#update_password", :as=>"update_password"
   get "usuarios/edit" => "usuarios#edit", :as=>"usuario_edit"
-  get "usuarios/update_password" => "usuarios#update_password"
+  post "usuarios/edit_password" => "usuarios#edit_password", :as=> "edit_password"
   get "temas/search" => "temas#search"
   get "temas/editComment/:idcomment" => "temas#editComment"
   post "comments/editc/:id" => "comments#editc"
   get 'temas/visible/:id' => 'temas#visible', :as => 'visible_tema'
+
   resources :usuarios do
     resources :comments
   end
@@ -22,6 +23,7 @@ Yosistemas::Application.routes.draw do
     resources :comments
   end
   resources :comments
+  resources :grupos
   #match '/register' => 'usuarios#new'
   #match '/usuarios' => 'usuarios@show'
   
@@ -29,7 +31,7 @@ Yosistemas::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
- root :to => 'welcome#index'
+ root :to => 'temas#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

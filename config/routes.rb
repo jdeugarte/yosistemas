@@ -21,6 +21,7 @@ Yosistemas::Application.routes.draw do
     resources :comments
   end
   resources :comments
+  resources :grupos
   #match '/register' => 'usuarios#new'
   #match '/usuarios' => 'usuarios@show'
   

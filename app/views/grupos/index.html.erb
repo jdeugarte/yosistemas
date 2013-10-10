@@ -1,0 +1,20 @@
+<h1>Lista grupos (esta vista es solo para pruebas)</h1>
+
+<table class="table table-striped ">
+  <tr>
+    <thead>
+      <th>Nombre</th>
+      <th></th>
+    </thead>
+  </tr>
+
+
+<% @grupos.each do |grupo| %>
+  <tr>
+    <td><%= grupo.nombre %></td>
+    <td><%= link_to 'Mostrar', grupo %></td>
+  
+  </tr>
+<% end %>
+</table>
+<br />

@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-6">
     <div class="well">
-      <form class="bs-example form-horizontal">
+      <form class="bs-example form-horizontal">  
   <fieldset>
   <legend>Titulo:
   <%= @tema.titulo %>
@@ -37,7 +37,7 @@
 	<%if(comment.id!=nil)%>
 	<div class="media">
 	  <a class="pull-left" href="#">
-	    <img class="media-object" src="/assets/anonimo.png" alt="Anonimo" width="80px">
+	  	<%= image_tag avatar_url(comment.usuario) %>	  
 	  </a>
 	  <div class="media-body">
 	    <h4 class="media-heading"><%=comment.usuario.correo%></h4>

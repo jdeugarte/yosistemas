@@ -1,6 +1,4 @@
 Yosistemas::Application.routes.draw do
-  
-
   get "welcome/index"
   get "usuarios/confirm" => "usuarios#confirm"
   get "log_in" => "sessions#new", :as => "log_in"
@@ -8,8 +6,9 @@ Yosistemas::Application.routes.draw do
   get "usuarios/index"
   get "usuarios/show"
   get "usuarios/new" => "usuarios#new", :as =>"register"
+  get "usuarios/update_password" => "usuarios#update_password", :as=>"update_password"
   get "usuarios/edit" => "usuarios#edit", :as=>"usuario_edit"
-  get "usuarios/update_password" => "usuarios#update_password"
+  post "usuarios/edit_password" => "usuarios#edit_password", :as=> "edit_password"
   get "temas/search" => "temas#search"
   get "temas/editComment/:idcomment" => "temas#editComment"
   post "comments/editc/:id" => "comments#editc"

@@ -14,7 +14,7 @@ Yosistemas::Application.routes.draw do
   get "temas/editComment/:idcomment" => "temas#editComment"
   post "comments/editc/:id" => "comments#editc"
   get 'temas/visible/:id' => 'temas#visible', :as => 'visible_tema'
-
+  get 'temas/show_mine' => 'temas#show_mine', :as=>'show_mine'
   resources :usuarios do
     resources :comments
   end

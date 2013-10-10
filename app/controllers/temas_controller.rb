@@ -112,6 +112,18 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     redirect_to temas_url
   end
 
+  def show_mine
+    todos_temas = Tema.all
+    @temas = Array.new
+    todos_temas.each do |tema|
+      if(tema.usuario_id == current_user.id)
+        @temas.push(tema)
+      end
+    end
+    render "index"
+  end
+
+
   private
 
     # No permite parametros de internet

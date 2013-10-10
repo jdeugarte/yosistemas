@@ -1,6 +1,6 @@
 class TemasController < ApplicationController
 # GET /temas
-skip_before_filter :require_log_in
+skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:show]
   def index
     @temas = Tema.order(params[:sort])
   end

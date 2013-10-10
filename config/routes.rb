@@ -1,5 +1,5 @@
 Yosistemas::Application.routes.draw do
-  get "welcome/index"
+  get "temas/index"
   get "usuarios/confirm" => "usuarios#confirm"
   get "log_in" => "sessions#new", :as => "log_in"
   get "log_out" => "sessions#destroy", :as => "log_out"
@@ -29,7 +29,7 @@ Yosistemas::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
- root :to => 'welcome#index'
+ root :to => 'temas#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

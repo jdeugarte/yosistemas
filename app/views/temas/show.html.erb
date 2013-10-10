@@ -19,7 +19,7 @@
     </div>
   </div>
 <%if @tema.usuario.correo == current_user.correo%>
-<td><%= link_to 'visible', visible_tema_path(@tema) %></td>
+<td><%= link_to 'Dejar de mostrar tema', visible_tema_path(@tema) %></td> 
 <%end%>
 <%= form_for([@tema, @tema.comments.build]) do |f| %>
 		<div class = "field">

@@ -23,9 +23,9 @@
           <li><a href="/temas">Ver Temas</a></li>
         </ul>
       </li>
-      <li>
-        <a href="/grupos/new">Crear Grupo</a>
-      </li>
+      <%if  !current_user.nil? %>
+          <li><a href="/grupos/new">Crear Grupo</a></li>
+      <%end%>
       <li>
         <a href="/grupos">Ver Grupos</a>
       </li>

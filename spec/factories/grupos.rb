@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :grupo do
-    nombre "MyString"
-    descripcion "MyText"
+    nombre "Grupo de prueba"
+    descripcion "grupo para specs"
     estado false
-    llave "MyString"
+    llave "qwerty"
   end
 end

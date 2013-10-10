@@ -5,21 +5,21 @@
   	<%= stylesheet_link_tag    "application", :media => "all" %>
   	<%= javascript_include_tag "application" %>
 	<%= csrf_meta_tags %>
+
   <link rel="shortcut icon" href="/assets/favicon.png" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
 
 <body>
-      <div class="hidden-sm col-sm-1 col-lg-1">  
-        </div>
-      
+  <div class="row">
+    <div class="col-md-5 col-lg-3 col-sm-offset-7 col-md-offset-8 col-lg-offset-9">
       <div id="user_nav" >
-            <% if current_user %> 
-          Logged in as <%= current_user.correo %>.
+        <% if current_user %> 
+          Registrado como <a href=<%="/usuarios/"+current_user.id.to_s%>> <%= current_user.correo %></a>.
           <%= link_to "Salir", log_out_path %>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <%= link_to "Modificar Datos", usuario_edit_path %>
+          &nbsp;&nbsp; <%= link_to "Modificar Datos", usuario_edit_path %>
         <% else %>
-      <%= link_to "Registrase", register_path %> o
+          <%= link_to "Registrase", register_path %> o
           <%= link_to "Ingresar", log_in_path %>
         <% end %>
       </div>
@@ -29,31 +29,29 @@
       <% flash.each do |name, msg| %>
         <%= content_tag :div, msg, :id => "flash_#{name}" %>
       <% end %>
-    <div class="row" >
+    </div>
+  </div>
+  <div class="row" >
     <a class="navbar-brand" href="/"><img src="/assets/logo.png" /></a>
   </div>
-	<div class="content">
-      <div class="row">
-        <div class="col-lg-12">
-          <%= render 'layouts/navigation' %>
-        </div> 
-      </div>
 
-      <!-- Cuerpo de la pagina -->
-      <div class="row">
-        <!--Espacio Vacio del Lateral izquierdo.-->
-        <div class="hidden-sm col-md-2 col-lg-1">  
-        </div>
+  <div class="row">
+    <%= render 'layouts/navigation' %>
+  </div>
 
-          <div class="col-sm-12 col-md-9 col-lg-11">
-            <%= yield %>
-          </div> 
-      </div>
+  <!-- Cuerpo de la pagina -->
+  <div class="row">
+    <!--Espacio Vacio del Lateral izquierdo.-->
+  
+
+    <div class="col-sm-12 col-md-9 col-lg-11 col-md-offset-1 col-md-offset-1">
+      <%= yield %>
+    </div> 
+  </div>
       <!-- Pie de Pagina -->
-      <div class="row">
+    <div class="row">
         <%= render 'layouts/bootom_bar' %>
       </div>
-    </div>
 
 </body>
 </html>

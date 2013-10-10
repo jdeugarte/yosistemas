@@ -1,28 +1,38 @@
 <div class="row">
-  <div class="col-lg-6">
+<div class="col-lg-6 ">
     <div class="well">
-      <form class="bs-example form-horizontal">  
-  <fieldset>
-  <legend>Titulo:
-  <%= @tema.titulo %>
-  </legend>
-    <div class="form-group">
+        <form class="bs-example form-horizontal">
+          <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+              <%= image_tag avatar_url(@tema.usuario) %>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-9">
+            <div class=row>
+              <legend>
+                &nbsp;<%= @tema.titulo %></legend>
+            </div>
+            <div class=row>
 
-      <div class="col-lg-10">
-        <b>Contenido:</b><%= @tema.cuerpo %>
+              <table class="table table-bordered">
+                <tr>
+                  <td>&nbsp;<%= @tema.created_at.strftime("%Y-%m-%e Hora: %I:%M") %></td>
+                </tr>
+                <tr>
+                  <td>&nbsp;<%= @tema.cuerpo %></td>
+                </tr>
+              </table>
+            </div>
+              <div class=row>
+                <%if current_user!=nil && @tema.usuario.correo=current_user.correo%>
+                &nbsp;<%= link_to "Editar", edit_tema_path(@tema), :method => :post%>
+                    <%end%>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
-    </div>
-    <% if current_user!=nil && @tema.usuario.correo==current_user.correo%>
-	 	<div>
-	    <%= link_to "Editar", edit_tema_path(@tema), :method => :post%>
-	    </div>
-	<%end%>
-  </fieldset>
-</p>
-</form>
-      </div>
-    </div>
-  </div>
+</div>
+</div>
 <%if current_user!=nil && @tema.usuario.correo == current_user.correo%>
 <td><%= link_to 'Dejar de mostrar tema', visible_tema_path(@tema) %></td> 
 <%end%>

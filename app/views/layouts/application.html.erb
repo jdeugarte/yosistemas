@@ -12,18 +12,7 @@
 
 <body>
   <div class="row">
-    <div class="col-md-5 col-lg-3 col-sm-offset-7 col-md-offset-8 col-lg-offset-9">
-      <div id="user_nav" >
-        <% if current_user %> 
-          Registrado como <a href=<%="/usuarios/"+current_user.id.to_s%>> <%= current_user.correo %></a>.
-          <%= link_to "Salir", log_out_path %>
-          &nbsp;&nbsp; <%= link_to "Modificar Datos", usuario_edit_path %>
-        <% else %>
-          <%= link_to "Registrase", register_path %> o
-          <%= link_to "Ingresar", log_in_path %>
-        <% end %>
-      </div>
-        
+    <div class="col-md-5 col-lg-3 col-sm-offset-7 col-md-offset-8 col-lg-offset-9">          
       <div class="hidden-sm col-sm-1 col-lg-1">  
       </div>
       <% flash.each do |name, msg| %>
@@ -31,8 +20,8 @@
       <% end %>
     </div>
   </div>
-  <div class="row" >
-    <a class="navbar-brand" href="/"><img src="/assets/logo.png" /></a>
+  <div class="row" >    
+    <a class="navbar-brand" href="/"><img src="/assets/logo.png" /></a>   
   </div>
 
   <div class="row">

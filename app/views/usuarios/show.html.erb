@@ -1,2 +1,52 @@
-<h1>Usuarios#show</h1>
-<p>Find me in app/views/usuarios/show.html.erb</p>
+<div class="row">
+	<div class="col-lg-9 col-md-11 col-md-offset-1">
+	<h1><b>Perfil de usuario</b></h1>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-9 col-md-11 col-md-offset-1">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-2">
+					<%= image_tag avatar_perfil_url(current_user) %>
+				</div>
+				<div class="col-lg-8">
+				   <form class="form-horizontal" role="form">
+					  <div class="form-group">
+					    <label class="col-lg-2 control-label">Nombre: </label>
+					    <div class="col-lg-10">
+					      <input class="form-control" type="text" placeholder=<%=@usuario.nombre%> disabled>
+					    </div>
+					  </div>
+					 <div class="form-group">
+					    <label class="col-lg-2 control-label">Apellido: </label>
+					    <div class="col-lg-10">
+					      <input class="form-control" type="text" placeholder=<%=@usuario.apellido%> disabled>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label class="col-lg-2 control-label">Correo: </label>
+					    <div class="col-lg-10">
+					      <input class="form-control" type="text" placeholder=<%=@usuario.correo%> disabled>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <div class="col-lg-offset-2 col-lg-10">
+					      <div class="checkbox">
+					        <label>
+					          <input type="checkbox" checked=<%=@usuario.activa%> disabled> Activa
+					        </label>
+					      </div>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <div class="col-lg-offset-2 col-lg-10">
+					      <a class="btn btn-primary btn-md" href="#">Editar Perfil</a>
+					    </div>
+					  </div>
+					</form>
+			   </div>
+			</div>
+		 </div>
+	</div>
+</div>

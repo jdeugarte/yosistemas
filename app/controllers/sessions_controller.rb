@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_filter :require_log_in
-  
+  skip_before_filter :verify_authenticity_token  
   def new
   end
   
@@ -8,10 +8,9 @@ class SessionsController < ApplicationController
     usuario = Usuario.autenticar(params[:correo], params[:contrasenia])    
     if usuario
       session[:usuario_id] = usuario.id
-      redirect_to temas_path, :notice => "Logged in!"
+      redirect_to :back, :notice => "Logged in!"
     else
-      flash.now.alert = "Correo o Contrasenia Invalida! "
-      render "new"
+      redirect_to :back, :notice => "Correo o Contrasenia Invalida!"
     end
   end
 

@@ -7,7 +7,6 @@ class UsuariosController < ApplicationController
   end
 
   def show
-    @usuario=Usuario.find(params[:id])
   end
   
   def edit
@@ -34,16 +33,20 @@ class UsuariosController < ApplicationController
     uno=params[:contrasenia_nueva].to_s
     dos=params[:contrasenia_nueva2].to_s
     contrasenia=params[:contrasenia].to_s
-    if current_user.contrasenia==Digest::MD5.hexdigest(contrasenia)
+    contrasenia=Digest::MD5.hexdigest(contrasenia)
+    if current_user.contrasenia==contrasenia
       if uno==dos
-          redirect_to root_url :notice => 'iguales'
+        current_user.contrasenia=contrasenia
+        current_user.save
+        redirect_to root_url :notice => 'iguales'
       else
-         redirect_to root_url :notice => 'diferentes' 
+        flash[:alert] = 'Las contrasenias no coinciden'
+        redirect_to root_url :notice => 'diferentes' 
       end
     else
-        redirect_to root_url :notice => 'no entra al if'
+      flash[:alert] = 'la contrasenia no es correcta'
+      redirect_to root_url :notice => 'no entra al if'
     end
-    #redirect_to root_url :notice => params[:nueva_contrasenia].to_s
   end
 
   def new

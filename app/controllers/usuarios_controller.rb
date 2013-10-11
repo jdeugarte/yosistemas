@@ -30,13 +30,18 @@ class UsuariosController < ApplicationController
   end
   
   def edit_password
-    uno=params[:contrasenia_nueva]
-    dos=params[:contrasenia_nueva2]
-    if uno==dos
-      redirect_to root_url :notice => "iguales"
+    uno=params[:contrasenia_nueva].to_s
+    dos=params[:contrasenia_nueva2].to_s
+    contrasenia=params[:contrasenia].to_s
+    if current_user.contrasenia==Digest::MD5.hexdigest(contrasenia)
+      if uno==dos
+          redirect_to root_url :notice => 'iguales'
+      else
+         redirect_to root_url :notice => 'diferentes' 
+      end
     else
-       redirect_to root_url :notice => "diferentes"   
-        end
+        redirect_to root_url :notice => 'no entra al if'
+    end
     #redirect_to root_url :notice => params[:nueva_contrasenia].to_s
   end
 

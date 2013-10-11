@@ -7,6 +7,7 @@ class UsuariosController < ApplicationController
   end
 
   def show
+    @usuario=Usuario.find(params[:id])
   end
   
   def edit
@@ -30,8 +31,8 @@ class UsuariosController < ApplicationController
   end
   
   def edit_password
-    uno=params[:usuario][:nombre]
-    dos=params[:usuario][:apellido]
+    uno=params[:contrasenia_nueva]
+    dos=params[:contrasenia_nueva2]
     if uno==dos
       redirect_to root_url :notice => "iguales"
     else

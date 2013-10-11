@@ -10,6 +10,15 @@ class CommentsController < ApplicationController
     	redirect_to @tema
   	end
 
+    def delete
+        @comment = Comment.find(params[:id])
+        @tema = @comment.tema
+        if(@comment.usuario.correo == current_user.correo)
+            @comment.destroy
+        end
+        redirect_to @tema
+    end
+
     def editc
         comment = Comment.find(params[:id])
         comment.body = params[:body]

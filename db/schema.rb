@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131012215056) do
+ActiveRecord::Schema.define(version: 20131009214734) do
 
   create_table "comments", force: true do |t|
     t.text     "body"
@@ -45,10 +45,8 @@ ActiveRecord::Schema.define(version: 20131012215056) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "visible",    default: 1, null: false
-    t.integer  "grupo_id"
   end
 
-  add_index "temas", ["grupo_id"], name: "index_temas_on_grupo_id"
   add_index "temas", ["usuario_id"], name: "index_temas_on_usuario_id"
 
   create_table "usuarios", force: true do |t|
@@ -60,9 +58,6 @@ ActiveRecord::Schema.define(version: 20131012215056) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "activa",                      default: false
-    t.integer  "grupo_id"
   end
-
-  add_index "usuarios", ["grupo_id"], name: "index_usuarios_on_grupo_id"
 
 end

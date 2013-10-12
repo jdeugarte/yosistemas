@@ -12,12 +12,13 @@ Yosistemas::Application.routes.draw do
   get "usuarios/update_password" => "usuarios#update_password", :as=>"update_password"
   get "usuarios/edit" => "usuarios#edit", :as=>"usuario_edit"
   post "usuarios/edit_password" => "usuarios#edit_password", :as=> "edit_password"
-  get "temas/search" => "temas#search"
+  get "temas/search" => "temas#search", :as =>"search"
   get "temas/editComment/:idcomment" => "temas#editComment"
   post "comments/editc/:id" => "comments#editc"
   get "comments/delete/:id" => "comments#delete"
   get 'temas/visible/:id' => 'temas#visible', :as => 'visible_tema'
   get 'temas/show_mine' => 'temas#show_mine', :as=>'show_mine'
+  get 'temas/:grupo' => 'temas#index'
   resources :usuarios do
     resources :comments
   end

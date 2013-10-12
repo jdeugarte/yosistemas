@@ -2,7 +2,18 @@ class TemasController < ApplicationController
 # GET /temas
 skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:show]
   def index
-    @temas = Tema.order(params[:sort])
+    @temas=Array.new
+    todos = Tema.order(params[:sort])
+    if params==nil
+      grupo = "publico"
+    else
+      grupo = params[:grupo]
+    end
+    todos.each do |tema|
+      if tema.grupo.nombre == grupo
+        @temas.push(tema)
+      end
+    end
   end
   
   def search

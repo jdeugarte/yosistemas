@@ -50,5 +50,38 @@ feature 'Gestion de tema' do
     expect(page).to have_content ''
   end
 
+  scenario 'Ver mis temas' do
+    usuario = FactoryGirl.create(:usuario)
+
+    #Tarea para uds. refactorizar esta sección a un método ingresar_sistema(usuario)
+    #para no repetir esto en todos los demás feature specs que necesiten autentificarse
+    ingresar_sistema(usuario)
+    click_link 'Nuevo Tema'
+    
+    #creamos un tema para el usuario1
+    fill_in 'tema_titulo', with: 'Titulo tema de prueba'
+    fill_in 'tema_cuerpo', with: 'Descripcion o contenido del tema de prueba'
+    click_button 'Crear tema'
+
+    click_link usuario.correo
+    click_link 'Salir'
+
+    usuario2 = FactoryGirl.create(:other_user)
+
+    #Ingresamos al sistema con otro usuario
+    visit root_path 
+    fill_in 'correo', with: 'email2@email.com'
+    fill_in 'contrasenia', with: 'password2'
+    click_button 'Ingresar'
+    
+    #al entrar a 'Mis temas' no debería ver los temas creados por el primer usuario
+    click_link 'Temas'
+    click_link 'Mis Temas'
+    
+    expect(page).to have_no_content 'Titulo tema de prueba'
+    expect(page).to have_no_content 'Descripcion o contenido del tema de prueba'
+    
+  end
+  
 
 end

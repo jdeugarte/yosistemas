@@ -123,4 +123,5 @@ describe TemasController do
     get :show, id: tema
     assigns(:tema).should eq tema
   end
+
 end

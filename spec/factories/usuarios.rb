@@ -9,4 +9,12 @@ FactoryGirl.define do
     correo "email@email.com"
     activa true
   end
+
+  factory :other_user, class: Usuario do
+    nombre "Pedro"
+    apellido "Pedregal"
+    contrasenia "password2"
+    correo "email2@email.com"
+    activa true
+  end
 end

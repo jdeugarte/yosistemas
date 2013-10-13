@@ -82,7 +82,32 @@ feature 'Gestion de tema' do
     expect(page).to have_no_content 'Descripcion o contenido del tema de prueba'
     
   end
-  
+  scenario 'Ver tema' do
+    usuario=FactoryGirl.create(:usuario)
+    
+    ingresar_sistema(usuario)
+    click_link 'Nuevo Tema'
+    fill_in 'tema_titulo', with: 'Titulo tema de prueba'
+    fill_in 'tema_cuerpo', with: 'Descripcion o contenido del tema de prueba'
+    click_button 'Crear tema'
+
+    click_link usuario.correo
+    click_link 'Salir'
+
+    usuario2=FactoryGirl.create(:usuario)
+
+    visit root_path
+    fill_in 'correo', with: 'email2@email.com'
+    fill_in 'contrasenia', with: 'password2'
+    click_button 'Ingresar'
+
+    click_link 'Temas'
+    click_link 'Ver Temas'
+    #al ingresar a Ver Temas debe poder ver los temas creados por otros usuarios
+    expect(page).to have_content 'Titulo tema de prueba'
+    expect(page).to have_content 'Descripcion o contenido del tema de prueba'
+  end
+
 
 end
 

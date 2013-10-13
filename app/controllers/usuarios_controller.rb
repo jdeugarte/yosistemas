@@ -32,12 +32,17 @@ class UsuariosController < ApplicationController
   def send_password_mail
     mail=params[:mail]
     @usuario=Usuario.where(:correo=>mail,:activa=>true).first
-    if(@user!=nil)
+    if(@usuario!=nil)
+    if ( verify_recaptcha )
       p=Passwords_Request.new(:usuario_id=>@usuario.id)
       p.save
       @usuario.passwords_request_id=p.id
       @usuario.save
       SendMail.recover_password(@usuario,p.id).deliver
+    else
+        flash[:alert] = 'Ingrese las palabras correctamente'   
+      redirect_to :action => 'forgot_password', :format => 'html'
+    end
     else
       flash[:alert] = 'No existe ningun usuario con ese correo'   
       redirect_to :action => 'forgot_password', :format => 'html'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131013171709) do
+ActiveRecord::Schema.define(version: 20131013175347) do
 
   create_table "comments", force: true do |t|
     t.text     "body"
@@ -43,6 +43,17 @@ ActiveRecord::Schema.define(version: 20131013171709) do
   end
 
   add_index "passwords_requests", ["usuario_id"], name: "index_passwords_requests_on_usuario_id"
+
+  create_table "subscriptions", force: true do |t|
+    t.string   "llave"
+    t.integer  "usuario_id"
+    t.integer  "grupo_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "subscriptions", ["grupo_id"], name: "index_subscriptions_on_grupo_id"
+  add_index "subscriptions", ["usuario_id"], name: "index_subscriptions_on_usuario_id"
 
   create_table "suscripcion_temas", force: true do |t|
     t.integer  "temas_id"

@@ -21,6 +21,10 @@ class GruposController < ApplicationController
     redirect_to temas_url 
   end
 
+  def subscription_group
+    @grupo = Grupo.find(params[:id])
+  end
+
   private
     # No permite parametros de internet
     def grupo_params

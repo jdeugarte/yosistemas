@@ -23,6 +23,7 @@ Yosistemas::Application.routes.draw do
   get 'temas/visible/:id' => 'temas#visible', :as => 'visible_tema'
   get 'temas/show_mine' => 'temas#show_mine', :as=>'show_mine'
   #get 'temas/:grupo' => 'temas#index'
+  get 'grupos/subscription_group/:id' => 'grupos#subscription_group', :as=>'suscribirse'
   resources :usuarios do
     resources :comments
   end
@@ -31,7 +32,10 @@ Yosistemas::Application.routes.draw do
     resources :comments
   end
   resources :comments
-  resources :grupos
+  resources :grupos do
+    resources :subscriptions
+  end
+  resources :subscriptions
   #match '/register' => 'usuarios#new'
   #match '/usuarios' => 'usuarios@show'
   

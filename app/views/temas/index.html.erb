@@ -32,19 +32,16 @@
 <table class="table table-striped table-bordered table-hover">
   <thead>
     <tr>
-            <th>#</th>
       <th><%=sortable "Titulo" %></th>
     <th><%=sortable "Cuerpo" %></th>
 
     </tr>
   </thead>
                 <tbody>    
-    <% ind=1 %>
     <%= @mine.to_s %>
     <% @temas.each do |tema| %>
       <%if tema.visible==1 %>
       <tr style='cursor:pointer' onclick=<%="document.location.href='/temas/"+tema.id.to_s+"'"%>>
-        <td><%= ind %></td>
         <td>
           <FONT FACE="raro, courier" SIZE=5 COLOR="black"> <%= tema.titulo %><br> </FONT>
           <SUB><%= tema.created_at.strftime("%Y-%m-%e")  %></SUB>
@@ -52,7 +49,6 @@
     <td><%= tema.cuerpo %></td>
     
       </tr>
-      <% ind+=1 %>
       <% end %>
     <% end %>
   </tbody>

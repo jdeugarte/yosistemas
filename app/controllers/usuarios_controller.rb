@@ -129,6 +129,7 @@ end
   def create
   	  params.permit!
   		@usuario = Usuario.new(params[:usuario])
+      @usuario.rol=params[:rol]
   		if @usuario.save
         SendMail.activate_acount(@usuario).deliver
   			flash[:status] = TRUE

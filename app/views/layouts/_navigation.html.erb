@@ -35,6 +35,9 @@
       <form class="navbar-form navbar-right" method="get" action=<%=register_path%>  >            
         <button type="submit" class="btn btn-primary">Registrarse</button>  
       </form> 
+      <form class="navbar-form navbar-right" method="get" action=<%=forgot_password_path%>  >            
+        <button type="submit" class="btn btn-primary">Olvide mi contraseña</button>  
+      </form> 
       <form class="navbar-form navbar-right" method="Post" action=<%=sessions_path%> >
         <div class="form-group"> 
           <%= text_field_tag :correo, params[:correo], :class=>'form-control', :placeholder=>'Correo', :size => 40 %>

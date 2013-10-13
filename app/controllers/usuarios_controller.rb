@@ -1,7 +1,7 @@
 class UsuariosController < ApplicationController
   
   skip_before_filter :verify_authenticity_token
-  skip_before_filter :require_log_in ,:only=>[:confirm,:new,:create]   
+  skip_before_filter :require_log_in ,:only=>[:confirm,:new,:create,:forgot_password,:send_password_mail,:recover]   
   
   def index
   end
@@ -12,7 +12,27 @@ class UsuariosController < ApplicationController
   def edit
 	 @usuario=current_user
   end
-  
+  def forgot_password
+  end
+  def send_password_mail
+    mail=params[:mail]
+    @usuario=Usuario.where(:correo=>mail,:activa=>true).first
+    if(@usuario!=nil)
+      p=Passwords_Request.new(:usuario_id=>@usuario.id)
+      p.save
+      @usuario.passwords_request_id=p.id
+      @usuario.save
+      SendMail.recover_password(@usuario,p.id).deliver
+     
+    else
+      flash.now[:notice] = "no existe ningun usuario con ese correo"
+
+      #render 'send_password_mail'
+    end
+  end
+  def recover
+    redirect_to :action => 'new', :format => 'html'
+  end
   def update
     current_user.nombre=params[:usuario][:nombre]
     current_user.apellido=params[:usuario][:apellido]

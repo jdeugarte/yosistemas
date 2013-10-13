@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131012221531) do
+ActiveRecord::Schema.define(version: 20131013020643) do
 
   create_table "comments", force: true do |t|
     t.text     "body"
@@ -38,6 +38,14 @@ ActiveRecord::Schema.define(version: 20131012221531) do
   add_index "grupos", ["tema_id"], name: "index_grupos_on_tema_id"
   add_index "grupos", ["usuario_id"], name: "index_grupos_on_usuario_id"
 
+  create_table "passwords_requests", force: true do |t|
+    t.integer  "usuario_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "passwords_requests", ["usuario_id"], name: "index_passwords_requests_on_usuario_id"
+
   create_table "temas", force: true do |t|
     t.string   "titulo"
     t.text     "cuerpo"
@@ -61,6 +69,7 @@ ActiveRecord::Schema.define(version: 20131012221531) do
     t.datetime "updated_at"
     t.boolean  "activa",                      default: false
     t.integer  "grupo_id"
+    t.integer  "passwords_request_id"
   end
 
   add_index "usuarios", ["grupo_id"], name: "index_usuarios_on_grupo_id"

@@ -42,7 +42,7 @@ class GruposController < ApplicationController
     	if estado == true
     		llave = generar_llave
     	else
-    		llave = nil
+    		llave = "publico"
     	end
     	return llave
     end

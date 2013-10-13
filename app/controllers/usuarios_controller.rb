@@ -14,11 +14,14 @@ class UsuariosController < ApplicationController
     newPass=params[:contrasenia_nueva2].to_s
     @usuario=Usuario.find(params[:id])
       if (pass==newPass)
+
         @usuario.contrasenia=Digest::MD5.hexdigest(pass)
         @usuario.save
         redirect_to root_url 
       else
-        #flash de las contrasenias no coinciden
+        flash[:alert]= 'Las contrasenias no coinciden'   
+        redirect_to(:back)
+
       end
    end
   def edit
@@ -36,25 +39,27 @@ class UsuariosController < ApplicationController
       @usuario.save
       SendMail.recover_password(@usuario,p.id).deliver
     else
-      #no existe correo
+      flash[:alert] = 'No existe ningun usuario con ese correo'   
+      redirect_to :action => 'forgot_password', :format => 'html'
     end
   end
   def recover
 
   if(current_user!=nil)
-      #no puede recuperar loggeado
+     @errorMessagge="no puede recuperar su password si esta loggeado"
   else      
-
+  begin
     password_request=Passwords_Request.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+  end
     if(password_request!=nil)
         if(password_request.usuario.passwords_request_id==password_request.id)
            @usuario=password_request.usuario
-           
         else
-          #expiro
+          @errorMessagge="esta solicitud expiro, por favor solicite otra"
         end
     else
-      #intentan entrar por url
+        @errorMessagge="no podemos procesar esta solicitud, por favor solicite otra"
     end
   end
   end

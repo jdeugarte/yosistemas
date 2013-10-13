@@ -27,12 +27,24 @@ class UsuariosController < ApplicationController
      
     else
       flash.now[:notice] = "no existe ningun usuario con ese correo"
-
       #render 'send_password_mail'
     end
   end
   def recover
-    redirect_to :action => 'new', :format => 'html'
+  if(current_user!=nil)
+      #no puede recuperar loggeado
+  else      
+    password_request=Passwords_Request.find(params[:id])
+    if(password_request!=nil)
+        if(password_request.usuario.passwords_request_id==password_request.id)
+            @usuario=password_request.usuario
+        else
+          #expiro
+        end
+    else
+    end
+  end
+  #  redirect_to :action => 'new', :format => 'html'
   end
   def update
     current_user.nombre=params[:usuario][:nombre]

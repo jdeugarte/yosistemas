@@ -34,7 +34,6 @@
     <tr>
             <th>#</th>
       <th><%=sortable "Titulo" %></th>
-    <th><%=sortable "created_at","Fecha Publicacion"%> </th>
     <th><%=sortable "Cuerpo" %></th>
 
     </tr>
@@ -46,9 +45,10 @@
       <%if tema.visible==1 %>
       <tr style='cursor:pointer' onclick=<%="document.location.href='/temas/"+tema.id.to_s+"'"%>>
         <td><%= ind %></td>
-        <td><%= tema.titulo %></td>
-
-    <td><%= tema.created_at.strftime("%Y-%m-%e Hora: %I:%M") %></td>
+        <td>
+          <FONT FACE="raro, courier" SIZE=5 COLOR="black"> <%= tema.titulo %><br> </FONT>
+          <SUB><%= tema.created_at.strftime("%Y-%m-%e")  %></SUB>
+        </td>
     <td><%= tema.cuerpo %></td>
     
       </tr>

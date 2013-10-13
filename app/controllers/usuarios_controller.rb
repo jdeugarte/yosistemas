@@ -33,7 +33,7 @@ class UsuariosController < ApplicationController
   end
   def forgot_password
     if(current_user!=nil)
-          redirect_to :action => root_url, :format => 'html'
+          redirect_to root_url
     end
   end
   def send_password_mail
@@ -56,7 +56,7 @@ class UsuariosController < ApplicationController
       redirect_to :action => 'forgot_password', :format => 'html'
     end
   else
-    redirect_to :action => root_url, :format => 'html'
+    redirect_to root_url
   end
   end
 

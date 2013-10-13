@@ -1,4 +1,6 @@
 Yosistemas::Application.routes.draw do
+  get "tareas/new"
+  get "tarea/new"
   get "temas/index"
   post 'temas/edit/:id' => 'temas#edit', :as => 'edit_tema'
   post 'sessions/create' => 'sessions#create', :as => 'loguear'

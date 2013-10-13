@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     usuario = Usuario.autenticar(params[:correo], params[:contrasenia])    
     if usuario
       session[:usuario_id] = usuario.id
-      if (request.referrer.include? "/usuarios/new") || (request.referrer.include? "usuarios/confirm?pass" )
+      if (request.referrer.include? "/usuarios/new") || (request.referrer.include? "usuarios/confirm?pass" ) || (request.referrer.include? "/send_password_mail")        
         redirect_to root_url, :notice => "Logged in!"
       else
         redirect_to :back, :notice => "Logged in!"

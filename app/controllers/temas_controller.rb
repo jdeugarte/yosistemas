@@ -2,7 +2,7 @@ class TemasController < ApplicationController
 # GET /temas
 skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:show]
   def index
-    @temas=Tema.all
+    @temas = Tema.order(params[:sort])
     #@temas=Array.new
     #todos = Tema.order(params[:sort])
     #if params==nil

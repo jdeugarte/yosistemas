@@ -8,9 +8,14 @@ class SessionsController < ApplicationController
     usuario = Usuario.autenticar(params[:correo], params[:contrasenia])    
     if usuario
       session[:usuario_id] = usuario.id
-      redirect_to :back, :notice => "Logged in!"
+      if (request.referrer.include? "/usuarios/new") || (request.referrer.include? "usuarios/confirm?pass" )
+        redirect_to root_url, :notice => "Logged in!"
+      else
+        redirect_to :back, :notice => "Logged in!"
+      end
     else
-      redirect_to :back, :notice => "Correo o Contrasenia Invalida!"
+        
+      redirect_to :back, :notice => "Correo o Contrasenia Invalida!"      
     end
   end
 

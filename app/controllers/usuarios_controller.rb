@@ -1,7 +1,7 @@
 class UsuariosController < ApplicationController
   
   skip_before_filter :verify_authenticity_token
-  skip_before_filter :require_log_in ,:only=>[:confirm,:new,:create,:forgot_password,:send_password_mail,:recover]   
+  skip_before_filter :require_log_in ,:only=>[:confirm,:new,:create,:forgot_password,:send_password_mail,:recover,:password_recovered]   
   
   def index
   end
@@ -9,7 +9,18 @@ class UsuariosController < ApplicationController
   def show
     @usuario=Usuario.find(params[:id])
   end
-  
+  def password_recovered
+    pass=params[:contrasenia_nueva].to_s
+    newPass=params[:contrasenia_nueva2].to_s
+    @usuario=Usuario.find(params[:id])
+      if (pass==newPass)
+        @usuario.contrasenia=Digest::MD5.hexdigest(pass)
+        @usuario.save
+        redirect_to root_url 
+      else
+        #flash de las contrasenias no coinciden
+      end
+   end
   def edit
 	 @usuario=current_user
   end
@@ -18,33 +29,34 @@ class UsuariosController < ApplicationController
   def send_password_mail
     mail=params[:mail]
     @usuario=Usuario.where(:correo=>mail,:activa=>true).first
-    if(@usuario!=nil)
+    if(@user!=nil)
       p=Passwords_Request.new(:usuario_id=>@usuario.id)
       p.save
       @usuario.passwords_request_id=p.id
       @usuario.save
       SendMail.recover_password(@usuario,p.id).deliver
-     
     else
-      flash.now[:notice] = "no existe ningun usuario con ese correo"
-      #render 'send_password_mail'
+      #no existe correo
     end
   end
   def recover
+
   if(current_user!=nil)
       #no puede recuperar loggeado
   else      
+
     password_request=Passwords_Request.find(params[:id])
     if(password_request!=nil)
         if(password_request.usuario.passwords_request_id==password_request.id)
-            @usuario=password_request.usuario
+           @usuario=password_request.usuario
+           
         else
           #expiro
         end
     else
+      #intentan entrar por url
     end
   end
-  #  redirect_to :action => 'new', :format => 'html'
   end
   def update
     current_user.nombre=params[:usuario][:nombre]

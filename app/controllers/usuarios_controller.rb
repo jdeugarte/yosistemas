@@ -77,11 +77,12 @@ class UsuariosController < ApplicationController
   def edit_password
     uno=params[:contrasenia_nueva].to_s
     dos=params[:contrasenia_nueva2].to_s
+    encriptado=Digest::MD5.hexdigest(uno)
     contrasenia=params[:contrasenia].to_s
     contrasenia=Digest::MD5.hexdigest(contrasenia)
     if current_user.contrasenia==contrasenia
       if uno==dos
-        current_user.contrasenia=contrasenia
+        current_user.contrasenia=encriptado
         current_user.save
         redirect_to root_url :notice => 'iguales'
       else

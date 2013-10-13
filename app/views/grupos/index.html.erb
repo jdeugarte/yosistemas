@@ -5,6 +5,7 @@
     <thead>
       <th>Nombre</th>
       <th></th>
+      <th></th>
     </thead>
   </tr>
 
@@ -12,8 +13,10 @@
 <% @grupos.each do |grupo| %>
   <tr>
     <td><%= grupo.nombre %></td>
-    <td><%= link_to 'Mostrar', grupo %></td>
-  
+    <% if grupo.usuario_id == current_user.id %>
+      <td><%= link_to 'Mostrar', grupo %></td>
+    <% end %>
+    <td><%= link_to 'Suscribirse', suscribirse_path(grupo) %></td>
   </tr>
 <% end %>
 </table>

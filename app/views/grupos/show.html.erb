@@ -12,7 +12,7 @@
 		    </div>
 		   </div>
 		  <legend>Llave:
-		  	<% if @grupo.llave != nil %>
+		  	<% if @grupo.llave != "publico" %>
 		  		<%= @grupo.llave %>
 		  	<% else %>
 		  		sin llave
@@ -23,6 +23,7 @@
 		  (esta vista es solo para pruebas)
 		  </p>
 		</form>
+		<a class="btn btn-primary btn-lg" href="/grupos"> Home </a>
       </div>
     </div>
   </div>

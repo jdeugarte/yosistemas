@@ -11,13 +11,19 @@ Yosistemas::Application.routes.draw do
   get "usuarios/new" => "usuarios#new", :as =>"register"
   get "usuarios/update_password" => "usuarios#update_password", :as=>"update_password"
   get "usuarios/edit" => "usuarios#edit", :as=>"usuario_edit"
+  get 'usuarios/recover/:id' => 'usuarios#recover', :as => 'recover'
   post "usuarios/edit_password" => "usuarios#edit_password", :as=> "edit_password"
+  post "usuarios/password_recovered/:id" => "usuarios#password_recovered", :as=> "password_recovered"
+  get "usuarios/forgot_password" => "usuarios#forgot_password", :as => "forgot_password"
+  post "usuarios/send_password_mail" => "usuarios#send_password_mail", :as => "send_password_mail"
   get "temas/search" => "temas#search"
   get "temas/editComment/:idcomment" => "temas#editComment"
   post "comments/editc/:id" => "comments#editc"
   get "comments/delete/:id" => "comments#delete"
   get 'temas/visible/:id' => 'temas#visible', :as => 'visible_tema'
   get 'temas/show_mine' => 'temas#show_mine', :as=>'show_mine'
+  #get 'temas/:grupo' => 'temas#index'
+  get 'grupos/subscription_group/:id' => 'grupos#subscription_group', :as=>'suscribirse'
   resources :usuarios do
     resources :comments
   end
@@ -26,7 +32,10 @@ Yosistemas::Application.routes.draw do
     resources :comments
   end
   resources :comments
-  resources :grupos
+  resources :grupos do
+    resources :subscriptions
+  end
+  resources :subscriptions
   #match '/register' => 'usuarios#new'
   #match '/usuarios' => 'usuarios@show'
   

@@ -25,6 +25,10 @@ Yosistemas::Application.configure do
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
+Recaptcha.configure do |config|
+  config.public_key  = '6Lc5uOgSAAAAALDvNoF85UGXsHWdSs3qA81fSA0u'
+  config.private_key = '6Lc5uOgSAAAAAOp-AFO_s_fkyFJpAsoOyNmwW_db'
+end
   config.assets.debug = true
 
 

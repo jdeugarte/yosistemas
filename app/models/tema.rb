@@ -1,6 +1,7 @@
 class Tema < ActiveRecord::Base
   has_many :comments
-  belongs_to :usuario 
+  belongs_to :usuario
+  belongs_to :grupo
   validates :titulo, :cuerpo, :presence => { :message => " es requerido" }
   
   def correspondeATitulo(titulo)

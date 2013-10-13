@@ -18,7 +18,11 @@ class GruposController < ApplicationController
     @grupo.usuario_id = current_user.id
     @grupo.llave = verificar_grupo(@grupo.estado) 
     @grupo.save
-    redirect_to temas_url 
+    redirect_to @grupo 
+  end
+
+  def subscription_group
+    @grupo = Grupo.find(params[:id])
   end
 
   private
@@ -38,7 +42,7 @@ class GruposController < ApplicationController
     	if estado == true
     		llave = generar_llave
     	else
-    		llave = nil
+    		llave = "publico"
     	end
     	return llave
     end

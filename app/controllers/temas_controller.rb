@@ -43,7 +43,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
 
   def searchByDescription(keyWords)
     keyWords = keyWords.downcase
-      initialResult = Tema.find(:all, :conditions => ['cuerpo LIKE ?', '%'+keyWords+'%'])
+      initialResult = Tema.where('cuerpo LIKE ?', '%'+keyWords+'%')
       deepResult = deepSearchOfDescription(keyWords)
       finalRes  = (initialResult+deepResult).uniq
       finalRes
@@ -57,7 +57,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
       keyWordArray.uniq!
       results=[]
       keyWordArray.each do |word|
-        results<<Tema.find(:all, :conditions => ['cuerpo LIKE ?', '%'+word+'%'])
+        results<<Tema.where('cuerpo LIKE ?', '%'+word+'%')
       end
       finalResArray = results.flatten.uniq
       finalResArray

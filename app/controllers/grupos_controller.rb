@@ -18,7 +18,7 @@ class GruposController < ApplicationController
     @grupo.usuario_id = current_user.id
     @grupo.llave = verificar_grupo(@grupo.estado) 
     @grupo.save
-    redirect_to temas_url 
+    redirect_to @grupo 
   end
 
   def subscription_group

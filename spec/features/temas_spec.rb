@@ -110,3 +110,24 @@ feature 'Gestion de tema' do
 
 
 end
+
+feature 'Buscar temas' do
+
+  def ingresar_sistema(usuario)
+    visit root_path
+    #click_link "Ingresar"  
+    fill_in 'correo', with: 'email@email.com'
+    fill_in 'contrasenia', with: 'password'
+    click_button 'Ingresar'
+  end
+
+    scenario 'la busqueda por descripcion deberia mostrar resultados coherentes' do
+        usuario = FactoryGirl.create(:usuario,nombre: "Pedro",apellido: "Suarez", contrasenia: "password", contrasenia_de_confirmacion: "password", correo:"email@email.com" )
+        tema1 = FactoryGirl.create(:tema, titulo: 'Tema 1', cuerpo: 'primera descripcion')
+        tema2 = FactoryGirl.create(:tema, titulo: 'Tema 2', cuerpo: 'descripcion segunda')
+        ingresar_sistema(usuario)
+        fill_in 'descripcion', with: 'primera'
+        click_button 'Buscar Tema'
+        expect(page).to have_content('Tema 1')
+    end
+end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131013175347) do
+ActiveRecord::Schema.define(version: 20131013214641) do
 
   create_table "comments", force: true do |t|
     t.text     "body"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20131013175347) do
     t.boolean  "activa",                      default: false
     t.integer  "grupo_id"
     t.integer  "passwords_request_id"
+    t.string   "rol"
   end
 
   add_index "usuarios", ["grupo_id"], name: "index_usuarios_on_grupo_id"

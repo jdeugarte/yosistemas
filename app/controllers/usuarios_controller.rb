@@ -14,10 +14,14 @@ class UsuariosController < ApplicationController
     newPass=params[:contrasenia_nueva2].to_s
     @usuario=Usuario.find(params[:id])
       if (pass==newPass)
-
+        if(pass.length>5)
         @usuario.contrasenia=Digest::MD5.hexdigest(pass)
         @usuario.save
-        redirect_to root_url 
+        redirect_to root_url
+        else
+          flash[:alert]= 'la longitud minima es 6'   
+          redirect_to(:back)
+        end 
       else
         flash[:alert]= 'Las contrasenias no coinciden'   
         redirect_to(:back)
@@ -28,8 +32,12 @@ class UsuariosController < ApplicationController
 	 @usuario=current_user
   end
   def forgot_password
+    if(current_user!=nil)
+          redirect_to :action => root_url, :format => 'html'
+    end
   end
   def send_password_mail
+    if(current_user==nil)
     mail=params[:mail]
     @usuario=Usuario.where(:correo=>mail,:activa=>true).first
     if(@usuario!=nil)
@@ -47,7 +55,12 @@ class UsuariosController < ApplicationController
       flash[:alert] = 'No existe ningun usuario con ese correo'   
       redirect_to :action => 'forgot_password', :format => 'html'
     end
+  else
+    redirect_to :action => root_url, :format => 'html'
   end
+  end
+
+
   def recover
 
   if(current_user!=nil)
@@ -110,6 +123,7 @@ class UsuariosController < ApplicationController
   end
 
 def confirm 
+  if(current_user==nil)
     @messagge="Error, datos invalidos"
   begin
     #usuario= Usuario.find(AESCrypt.decrypt(params[:pass].to_s,"Taller"))
@@ -124,11 +138,15 @@ def confirm
     @messagge="Su cuenta fue activada exitosamente! ya puede hacer uso de nuestro contenido";
     end
   end
+else
+  @messagge="No puede activar su cuenta si esta loggeado";
+end
 end
 
   def create
   	  params.permit!
   		@usuario = Usuario.new(params[:usuario])
+      @usuario.rol=params[:rol]
   		if @usuario.save
         SendMail.activate_acount(@usuario).deliver
   			flash[:status] = TRUE

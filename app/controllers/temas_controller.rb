@@ -3,18 +3,6 @@ class TemasController < ApplicationController
 skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:show]
   def index
     @temas = Tema.order(params[:sort])
-    #@temas=Array.new
-    #todos = Tema.order(params[:sort])
-    #if params==nil
-    #  grupo = "publico"
-    #else
-    #  grupo = params[:grupo]
-    #end
-    #todos.each do |tema|
-    #  if tema.grupo.nombre == grupo
-    #    @temas.push(tema)
-    #  end
-    #end
   end
   
   def search
@@ -43,7 +31,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
 
   def searchByDescription(keyWords)
     keyWords = keyWords.downcase
-      initialResult = Tema.find(:all, :conditions => ['cuerpo LIKE ?', '%'+keyWords+'%'])
+      initialResult = Tema.where('cuerpo LIKE ?', '%'+keyWords+'%')
       deepResult = deepSearchOfDescription(keyWords)
       finalRes  = (initialResult+deepResult).uniq
       finalRes
@@ -57,7 +45,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
       keyWordArray.uniq!
       results=[]
       keyWordArray.each do |word|
-        results<<Tema.find(:all, :conditions => ['cuerpo LIKE ?', '%'+word+'%'])
+        results<<Tema.where('cuerpo LIKE ?', '%'+word+'%')
       end
       finalResArray = results.flatten.uniq
       finalResArray
@@ -137,7 +125,6 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
 
 
   private
-
     # No permite parametros de internet
     def tema_params
       params.require(:tema).permit(:titulo, :cuerpo)

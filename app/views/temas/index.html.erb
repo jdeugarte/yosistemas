@@ -46,7 +46,7 @@
           <FONT FACE="raro, courier" SIZE=5 COLOR="black"> <%= tema.titulo %><br> </FONT>
           <SUB><%= tema.created_at.strftime("%Y-%m-%e")  %></SUB>
         </td>
-    <td><%= tema.cuerpo %></td>
+    <td><%= tema.cuerpo[0..50]+"..." %></td>
     
       </tr>
       <% end %>

@@ -37,8 +37,11 @@ class UsuariosController < ApplicationController
     if current_user.contrasenia==contrasenia
       if uno==dos
         current_user.contrasenia=contrasenia
-        current_user.save
-        redirect_to root_url :notice => 'iguales'
+        if current_user.save
+          redirect_to root_url :notice => 'iguales y guardo'
+        else
+          redirect_to root_url :notice => 'iguales no guardo'
+        end
       else
         flash[:alert] = 'Las contrasenias no coinciden'
         redirect_to root_url :notice => 'diferentes' 

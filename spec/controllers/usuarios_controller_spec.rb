@@ -2,6 +2,17 @@ require 'spec_helper'
 
 describe UsuariosController do
   before(:each) do
-    #controller.class.skip_before_filter :require_log_in #para evitar este filtro de application_controller
+    
+    # POST /usuarios
+  def create
+    @usuario = Usuario.new(usuario_params) 
+    @usuario.save
+    redirect_to usuarios_url 
+  end
+
+  def edit
+    @usuario = Usuario.find(params[:id])
+  end
+      
   end
 end 

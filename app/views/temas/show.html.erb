@@ -36,19 +36,23 @@
 <%if current_user!=nil && @tema.usuario.correo == current_user.correo%>
 <td><%= link_to 'Dejar de mostrar tema', visible_tema_path(@tema) %></td> 
 <%end%>
+<div class="row">
+<div class="col-lg-6 ">
+    <div class="well">
 <%if current_user!=nil%>
 	<%= form_for([@tema, @tema.comments.build]) do |f| %>
-			<div class = "field">
-				<h4><strong>Comentario</strong></h4>
-				<%= f.text_area :body, cols: 30, rows: 10 %>
-			</div>
-
-			<div class = "action">
-				
-	    		<input type="submit" value="Comentar" class="btn btn-inverse">
-			</div>
+      <div class="form-group">
+        <label for="inputContent">Comentario:</label>
+            <%= f.text_area :body, :class=>'form-control',:rows=>'4', :cols =>'20', :placeholder=>'Contenido' %>
+      </div>
+      <div class="form-group">
+          <input type="submit" value="Comentar" class="btn btn-primary">
+      </div>
 		<% end %>
 <%end%>
+</div>
+</div>
+</div>
 <div class="col-12 col-md-10 col-lg-8">
 <%for comment in @tema.comments%>
 	<%if(comment.id!=nil)%>

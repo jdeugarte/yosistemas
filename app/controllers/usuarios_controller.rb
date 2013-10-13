@@ -107,7 +107,7 @@ class UsuariosController < ApplicationController
       if uno==dos
         current_user.contrasenia=encriptado
         current_user.save
-        flash[:alert] = 'Contraseña modificada'
+        flash[:alert] = 'Contrasenia modificada'
         redirect_to root_url :notice => 'iguales'
       else
         flash[:alert] = 'Las contrasenias no coinciden'

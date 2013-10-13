@@ -22,6 +22,7 @@ Yosistemas::Application.routes.draw do
   get "comments/delete/:id" => "comments#delete"
   get 'temas/visible/:id' => 'temas#visible', :as => 'visible_tema'
   get 'temas/show_mine' => 'temas#show_mine', :as=>'show_mine'
+  #get 'temas/:grupo' => 'temas#index'
   resources :usuarios do
     resources :comments
   end

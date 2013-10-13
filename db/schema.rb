@@ -29,13 +29,11 @@ ActiveRecord::Schema.define(version: 20131013171709) do
     t.text     "descripcion"
     t.boolean  "estado"
     t.string   "llave"
-    t.integer  "tema_id"
     t.integer  "usuario_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "grupos", ["tema_id"], name: "index_grupos_on_tema_id"
   add_index "grupos", ["usuario_id"], name: "index_grupos_on_usuario_id"
 
   create_table "passwords_requests", force: true do |t|

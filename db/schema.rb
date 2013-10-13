@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131013020643) do
+ActiveRecord::Schema.define(version: 20131013171709) do
 
   create_table "comments", force: true do |t|
     t.text     "body"
@@ -45,6 +45,16 @@ ActiveRecord::Schema.define(version: 20131013020643) do
   end
 
   add_index "passwords_requests", ["usuario_id"], name: "index_passwords_requests_on_usuario_id"
+
+  create_table "suscripcion_temas", force: true do |t|
+    t.integer  "temas_id"
+    t.integer  "usuarios_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "suscripcion_temas", ["temas_id"], name: "index_suscripcion_temas_on_temas_id"
+  add_index "suscripcion_temas", ["usuarios_id"], name: "index_suscripcion_temas_on_usuarios_id"
 
   create_table "temas", force: true do |t|
     t.string   "titulo"

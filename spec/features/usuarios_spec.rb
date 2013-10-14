@@ -19,4 +19,7 @@ feature 'Gestion de usuarios' do
       Usuario.first.nombre == 'otro'  #no muy util aqui, pero saber si cambio el nombre de usuario
       Usuario.first.apellido == 'otroapellido'
   end
+  
+  
+  
 end

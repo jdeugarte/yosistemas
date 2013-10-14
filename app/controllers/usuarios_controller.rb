@@ -17,7 +17,7 @@ class UsuariosController < ApplicationController
         if(pass.length>5)
         @usuario.contrasenia=Digest::MD5.hexdigest(pass)
         @usuario.save
-        flash[:alert]=@usuario.correo+" "+pass+" "+@usuario.activa
+        flash[:alert]=@usuario.correo+" "+pass+" "+@usuario.activa.to_s
         redirect_to root_url
         else
           flash[:alert]= 'la longitud minima es 6'   

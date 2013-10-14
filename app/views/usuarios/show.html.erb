@@ -41,9 +41,64 @@
 					  </div>
 					  <div class="form-group">
 					    <div class="col-lg-offset-2 col-lg-10">
-					      <a class="btn btn-primary btn-md" href="#">Editar Perfil</a>
+					      <a data-toggle="modal" href="#editUser" class="btn btn-primary btn-md">Editar Perfil</a>
+					      <!-- Modal -->
 					    </div>
 					  </div>
+					</form>
+					<form class="form-horizontal" role="form" action=<%="/usuarios/update_user/"+current_user.id.to_s%> method="post">
+						<div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+							    <div class="modal-content">
+							    	<!--CABECERA DEL MODAL ......................................................................................-->
+							        <div class="modal-header">
+							          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+							          <h4 class="modal-title">Modifiacion de Perfil de Usuario</h4>
+							        </div>
+							        <!--CUERPO DEL MODAL ........................................................................................-->
+							        <div class="modal-body">
+										<div class="form-group">
+										    <label class="col-lg-2 control-label">Nombre: </label>
+										    <div class="col-lg-10">
+										      <input class="form-control" id="usuario[nombre]" name="usuario[nombre]" type="text" value=<%=@usuario.nombre%> >
+										    </div>
+										</div>
+										<div class="form-group">
+											<label class="col-lg-2 control-label">Apellido: </label>
+										    <div class="col-lg-10">
+										      <input class="form-control" type="text" id="usuario[apellido]" name="usuario[apellido]" value=<%=@usuario.apellido%> >
+										    </div>
+										</div>
+										<div class="form-group">
+										    <label class="col-lg-2 control-label">Correo: </label>
+										    <div class="col-lg-10">
+										      <input class="form-control" type="text" id="mail" name="mail" value=<%=@usuario.correo%> >
+										    </div>
+										</div>										
+										<div class="form-group">
+										    <div class="col-lg-offset-2 col-lg-10">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" id="active" name="active" checked=<%=@usuario.activa%> > Activa
+										        </label>
+										      </div>
+										    </div>
+										</div>
+										<div class="form-group">
+										    <label class="col-lg-2 control-label">Contraseña: </label>
+										    <div class="col-lg-10">
+										      <input class="form-control" id="contrasenia" name="contrasenia" placeholder="Contraseña Actual" size="40" type="password">
+										    </div>
+										</div>	
+							        </div>
+							       	<!--FOOTER DEL MODAL ......................................................................................-->
+							        <div class="modal-footer">
+							          <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
+							          <input type="submit" value="Guardar Cambios" class="btn btn-primary">
+							        </div>
+							    </div><!-- /.modal-content -->
+							</div><!-- /.modal-dialog -->
+						</div><!-- /.modal -->
 					</form>
 			   </div>
 			</div>

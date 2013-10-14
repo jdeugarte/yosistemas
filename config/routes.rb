@@ -25,6 +25,8 @@ Yosistemas::Application.routes.draw do
   get 'temas/show_mine' => 'temas#show_mine', :as=>'show_mine'
   #get 'temas/:grupo' => 'temas#index'
   get 'grupos/subscription_group/:id' => 'grupos#subscription_group', :as=>'suscribirse'
+
+  post "usuarios/update_user/:id"=>"usuarios#update"
   resources :usuarios do
     resources :comments
   end

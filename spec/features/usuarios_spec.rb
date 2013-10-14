@@ -19,4 +19,17 @@ feature 'Gestion de usuarios' do
       Usuario.first.nombre == 'otro'  #no muy util aqui, pero saber si cambio el nombre de usuario
       Usuario.first.apellido == 'otroapellido'
   end
+  
+  scenario 'modificar un contrasenia' do
+    usuario = FactoryGirl.create(:usuario)
+    ingresar_sistema(usuario)
+    #click_link 'Modificar Contrasea' # entra al link de modificar perfil
+    visit update_password_path
+      fill_in 'contrasenia', with: 'anterior' #el texto se llena con 
+      fill_in 'contrasenia_nueva', with: 'nueva'
+      fill_in 'contrasenia_nueva2', with: 'nueva'
+      click_button 'Guardar'
+      Usuario.first.contrasenia == Digest::MD5.hexdigest('nueva')  
+  end
+  
 end

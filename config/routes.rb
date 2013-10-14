@@ -1,6 +1,5 @@
 Yosistemas::Application.routes.draw do
   get "tareas/new"
-  get "tarea/new"
   get "temas/index"
   post 'temas/edit/:id' => 'temas#edit', :as => 'edit_tema'
   post 'sessions/create' => 'sessions#create', :as => 'loguear'
@@ -38,6 +37,7 @@ Yosistemas::Application.routes.draw do
     resources :subscriptions
   end
   resources :subscriptions
+  resources :tareas
   #match '/register' => 'usuarios#new'
   #match '/usuarios' => 'usuarios@show'
   

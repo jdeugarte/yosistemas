@@ -1,4 +1,18 @@
-
+<div class='row'>
+  <div class="col-lg-3">
+    <div class="page-header">
+     <h1 id="forms">Grupos</h1>
+    </div>
+    <div class="bs-example">
+              <ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
+              <li class="active"><a href="#">Publico</a></li>
+                <% current_user.subscriptions.each do |subs| %>
+                <li><a href="#"><%= subs.grupo.nombre %></a></li>
+                <% end %>
+              </ul>
+            </div>
+  </div>
+  <div class="col-lg-8"  style="margin-top:100px; background-color:white;">
 <div class="page-header">
      <h1 id="forms">Lista de Temas</h1>
 </div>
@@ -54,4 +68,7 @@
   </tbody>
               </table>
 </div>
+</div>
+
+  </div>
 </div>

@@ -1,27 +1,71 @@
-<h1>Lista grupos (esta vista es solo para pruebas)</h1>
+<div class="row bs-example bs-example-type">
+  <div class="col-lg-1"> 
+  </div>
+  <div class="col-lg-11">
+    <h1>Lista de grupos</h1>
+  </div>
+</div>
+<br>
+<br>
 
-<table class="table table-striped ">
-  <tr>
-    <thead>
-      <th>Nombre</th>
-      <th></th>
-      <th></th>
-    </thead>
-  </tr>
+<div class="row bs-example bs-example-type">
+   <div class="col-lg-1"> 
+  </div>
+  <div class="col-lg-8">
+    <% @grupos.each do |grupo| %>    
+        <div class="well">
+          <strong><legend><%=grupo.nombre%></legend></strong>
+          <div class="row">
+              <div class="col-lg-3">                 
+                <h5>Creador:</h5>
+                 <div class="row">
+                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<%= image_tag avatar_url(grupo.usuario) %>
+                </div>
+                <sub><%= grupo.usuario.correo%></sub>                
+              </div>       
+              <div class="col-lg-6">   
+                  <br>          
+                  <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                          <tr>
+                            <th>Descripcion</th>                           
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><%=grupo.descripcion%></td>                           
+                          </tr>
+                        </tbody>
+                  </table>
+                  <%if current_user.id == grupo.usuario_id%>
+                    <table class="table table-striped table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <th>LLave</th>                           
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td><%=grupo.llave%></td>                           
+                            </tr>
+                          </tbody>
+                    </table>
+                  <%end%>
+              </div>  
+              <div class="col-lg-3"> 
+                <br>               
+                 <%if current_user.id != grupo.usuario_id%>
+                    <form class="navbar-form navbar-left" method="get" action=<%=suscribirse_path(grupo)%>  >            
+                      <button type="submit" class="btn btn-primary">Suscribirse al grupo</button>  
+                    </form>                 
+                <%end%>
+                 <form class="navbar-form navbar-left" method="get" action=<%=root_path%>  >            
+                      <button type="submit" class="btn btn-primary">Ver Temas del Grupo</button>  
+                    </form> 
 
-
-<% @grupos.each do |grupo| %>
-  <tr>
-    <td><%= grupo.nombre %></td>
-    <% if grupo.usuario_id == current_user.id %>
-      <td><%= link_to 'Mostrar', grupo %></td>
+              </div>              
+          </div>        
+        </div>        
     <% end %>
-    <% if grupo.usuario_suscrito?(current_user.id) %>
-      <td><%= link_to 'Suscribirse', suscribirse_path(grupo) %></td>
-    <% else %>
-      <td>Ya estas suscrito</td>
-    <% end %>
-  </tr>
-<% end %>
-</table>
-<br />
+  </div>    
+</div>

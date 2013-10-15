@@ -5,7 +5,7 @@ require 'digest/md5'
 	has_many :comments
 	has_many :subscriptions
 	has_many :tareas
-	
+	has_many :suscripcion_temas
 	  has_many :usuarios
   	  accepts_nested_attributes_for :usuarios
 

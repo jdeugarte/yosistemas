@@ -1,4 +1,4 @@
 class SuscripcionTema < ActiveRecord::Base
-  belongs_to :temas
-  belongs_to :usuarios
+  belongs_to :tema
+  belongs_to :usuario
 end

@@ -1,8 +1,8 @@
 class CreateSuscripcionTemas < ActiveRecord::Migration
   def change
     create_table :suscripcion_temas do |t|
-      t.references :temas, index: true
-      t.references :usuarios, index: true
+      t.references :tema, index: true
+      t.references :usuario, index: true
 
       t.timestamps
     end

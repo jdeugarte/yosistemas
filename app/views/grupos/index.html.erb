@@ -16,7 +16,11 @@
     <% if grupo.usuario_id == current_user.id %>
       <td><%= link_to 'Mostrar', grupo %></td>
     <% end %>
-    <td><%= link_to 'Suscribirse', suscribirse_path(grupo) %></td>
+    <% if grupo.usuario_suscrito?(current_user.id) %>
+      <td><%= link_to 'Suscribirse', suscribirse_path(grupo) %></td>
+    <% else %>
+      <td>Ya estas suscrito</td>
+    <% end %>
   </tr>
 <% end %>
 </table>

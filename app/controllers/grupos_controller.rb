@@ -12,13 +12,15 @@ class GruposController < ApplicationController
      @grupo = Grupo.find(params[:id])
   end
 
-  # POST /temas
   def create
     @grupo = Grupo.new(grupo_params)
     @grupo.usuario_id = current_user.id
     @grupo.llave = verificar_grupo(@grupo.estado) 
-    @grupo.save
-    redirect_to @grupo 
+    if @grupo.save
+      redirect_to @grupo, :flash => { :info => "Grupo creado exitosamente" }
+    else
+      redirect_to "/grupos/new", :flash => { :error => "Error al crear un grupo" }
+    end 
   end
 
   def subscription_group
@@ -26,7 +28,7 @@ class GruposController < ApplicationController
   end
 
   private
-    # No permite parametros de internet
+  
     def grupo_params
       params.require(:grupo).permit(:nombre, :descripcion, :estado, :llave)
     end

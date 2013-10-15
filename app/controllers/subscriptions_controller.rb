@@ -9,10 +9,10 @@ class SubscriptionsController < ApplicationController
       if verificar_llave(@subscription.llave, @grupo.llave)
     	   @subscription.usuario_id = current_user.id
     	   @subscription.save
-    	   redirect_to grupos_path
+    	   redirect_to grupos_path, :flash => { :info => "Suscrito exitosamente" }
       else
          @subscription.destroy
-         redirect_to suscribirse_path(@grupo)
+         redirect_to suscribirse_path(@grupo), :flash => { :error => "Error al ingresar la llave" }
       end
   	end
 

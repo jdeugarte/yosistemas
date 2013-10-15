@@ -14,4 +14,15 @@ class Grupo < ActiveRecord::Base
   		end
   		return resp
   	end
+
+    def correspondeAGrupo(nombre)
+      parametros = nombre.split(' ')
+      
+      parametros.each do |parametro|
+         if self.nombre.downcase.include?(parametro.downcase)
+           return true
+         end
+      end
+      false
+    end
 end

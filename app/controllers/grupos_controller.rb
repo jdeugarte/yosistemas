@@ -4,6 +4,22 @@ class GruposController < ApplicationController
     @grupos = Grupo.all
   end
 
+  def search
+    @grupos=Array.new 
+    aux = Grupo.all
+    nombre = params[:nombre]
+    if nombre != "" && nombre != nil
+      aux.each do |grupo|
+        if (grupo.correspondeAGrupo(nombre))
+          @grupos.push(grupo)
+        end
+      end
+    else
+      @grupos = aux
+    end
+    render 'index'
+  end
+
 	def new
     @grupo = Grupo.new
   end

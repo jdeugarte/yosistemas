@@ -8,6 +8,25 @@
 <br>
 <br>
 
+<form method="GET" action="/grupos/search">
+<div class="row">
+  <%if current_user!=nil%>
+    <div class="col-sm-12 col-md-2 col-lg-2">
+      <a class="btn btn-primary btn-lg" href="/grupos/new">Nuevo Grupo</a>
+    </div> 
+  <%end%>
+  <div class="input-group col-sm-12 col-md-8 col-lg-8" >
+    <span class="input-group-addon ">Nombre:</span>
+    <input type="text" name="nombre" class="form-control">
+    <span class="input-group-btn">
+        <input class="btn btn-default" type="submit" value="Buscar Grupo">
+    </span>
+  </div>
+</div>
+</form>
+<br>
+<br>
+
 <div class="row bs-example bs-example-type">
    <div class="col-lg-1"> 
   </div>

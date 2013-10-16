@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131013224210) do
+ActiveRecord::Schema.define(version: 20131016221202) do
 
   create_table "comments", force: true do |t|
     t.text     "body"
@@ -35,6 +35,17 @@ ActiveRecord::Schema.define(version: 20131013224210) do
   end
 
   add_index "grupos", ["usuario_id"], name: "index_grupos_on_usuario_id"
+
+  create_table "notificacions", force: true do |t|
+    t.boolean  "notificado"
+    t.integer  "suscripcion_temas_id"
+    t.integer  "comments_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notificacions", ["comments_id"], name: "index_notificacions_on_comments_id"
+  add_index "notificacions", ["suscripcion_temas_id"], name: "index_notificacions_on_suscripcion_temas_id"
 
   create_table "passwords_requests", force: true do |t|
     t.integer  "usuario_id"

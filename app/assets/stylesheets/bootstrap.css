@@ -7409,3 +7409,7 @@ h6 {
 .affix {
   position: fixed;
 }
+
+.alert.alert-error {
+background: #e7adad;
+}

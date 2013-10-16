@@ -155,6 +155,6 @@ end
   			flash[:alert] = 'Usuario Registrado Exitosamente!!! Revise su correo electronico para activar la cuenta'
   			else
   			end
-  		redirect_to :action => 'new', :format => 'html'  		 
+  		render :new, :format => 'html'  		 
   end
 end

@@ -154,7 +154,7 @@ end
   			flash[:status] = TRUE
   			flash[:alert] = 'Usuario Registrado Exitosamente!!! Revise su correo electronico para activar la cuenta'
   			else
-  			end 		 
-      render :new , :format => 'html'
+  			end
+  		redirect_to :action => 'new', :format => 'html'  		 
   end
 end

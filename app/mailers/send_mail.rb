@@ -18,4 +18,8 @@ class SendMail < ActionMailer::Base
     @user = user
     mail(to: @user.correo,subject: 'YoSistemas comentario tema')
   end
+  def notify_users_grupo(user)
+    @user = user
+    mail(to: @user.correo,subject: 'Te suscribiste a el grupo')
+  end
 end

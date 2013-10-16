@@ -13,13 +13,15 @@ class CommentsController < ApplicationController
   	end
 
     def notify_users(id_tema)
-        @suscripciones = SuscripcionTema.find([id_tema])
+        if SuscripcionTema.find_by_id([id_tema]) == true
+        @suscripciones = SuscripcionTema.find_by_id([id_tema])
         @suscripciones.each do |suscrito|
             @usuario = Usuario.find(suscrito.usuario_id)
             SendMail.notify_users_tema(@usuario).deliver
             flash[:alert] = 'Usuarios notificados'
             
         end
+    end
     end
 
     def delete

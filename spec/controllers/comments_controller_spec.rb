@@ -8,6 +8,7 @@ describe CommentsController do
   describe 'Crear Comentario' do
       it "guarda en la base de datos el nuevo comentario" do
         expect{
+          grupo = FactoryGirl.create(:grupo,nombre: 'Publico')
           tema1 = FactoryGirl.create(:tema, titulo: 'Tema Comentado')
 		  comment = FactoryGirl.create(:comment, body: "probando", tema_id: tema1.id)
           #post :create, comment: FactoryGirl.attributes_for(:comment, tema_id: tema1.id)

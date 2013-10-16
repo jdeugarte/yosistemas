@@ -15,4 +15,12 @@ class Tema < ActiveRecord::Base
     end
     false
   end
+
+  after_create do
+    if(self.grupo==nil)
+      grupo = Grupo.find(1)
+      self.grupo = grupo
+      self.save
+    end
+  end
 end

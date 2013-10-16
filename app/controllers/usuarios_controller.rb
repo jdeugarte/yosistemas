@@ -149,9 +149,9 @@ end
   	  params.permit!
   		@usuario = Usuario.new(params[:usuario])
       @usuario.rol=params[:rol]
+      
   		if @usuario.save
         SendMail.activate_acount(@usuario).deliver
-  			flash[:status] = TRUE
   			flash[:alert] = 'Usuario Registrado Exitosamente!!! Revise su correo electronico para activar la cuenta'
   			else
   			end

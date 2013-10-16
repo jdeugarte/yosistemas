@@ -119,6 +119,7 @@ describe TemasController do
   end
   describe "GET#show"
   it "asigna el id solicitado a @id" do
+    grupo = FactoryGirl.create(:grupo)
     tema=FactoryGirl.create(:tema)
     get :show, id: tema
     assigns(:tema).should eq tema

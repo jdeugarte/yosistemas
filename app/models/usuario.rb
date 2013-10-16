@@ -54,4 +54,11 @@ require 'digest/md5'
   		self.contrasenia = Digest::MD5.hexdigest(contrasenia) 		
   	end
 
+  	after_create do
+  		subscripcion = Subscription.new
+        subscripcion.usuario = self
+        subscripcion.grupo = Grupo.find_by_id(1)
+        subscripcion.save
+  	end
+
 end

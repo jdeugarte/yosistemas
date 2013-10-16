@@ -24,7 +24,8 @@
    <div class="col-lg-1"> 
   </div>
   <div class="col-lg-8">
-    <% @grupos.each do |grupo| %>    
+    <% @grupos.each do |grupo| %>   
+    <%if grupo.id!=1%> 
         <div class="well">
           <strong><legend><%=grupo.nombre%></legend></strong>
           <div class="row">
@@ -78,6 +79,7 @@
               </div>              
           </div>        
         </div>        
+    <% end %>
     <% end %>
   </div>    
 </div>

@@ -17,12 +17,10 @@ ActiveRecord::Schema.define(version: 20131016221202) do
     t.text     "body"
     t.integer  "tema_id"
     t.integer  "usuario_id"
-    t.integer  "notificacion_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "comments", ["notificacion_id"], name: "index_comments_on_notificacion_id"
   add_index "comments", ["tema_id"], name: "index_comments_on_tema_id"
   add_index "comments", ["usuario_id"], name: "index_comments_on_usuario_id"
 
@@ -40,9 +38,14 @@ ActiveRecord::Schema.define(version: 20131016221202) do
 
   create_table "notificacions", force: true do |t|
     t.boolean  "notificado"
+    t.integer  "suscripcion_temas_id"
+    t.integer  "comments_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "notificacions", ["comments_id"], name: "index_notificacions_on_comments_id"
+  add_index "notificacions", ["suscripcion_temas_id"], name: "index_notificacions_on_suscripcion_temas_id"
 
   create_table "passwords_requests", force: true do |t|
     t.integer  "usuario_id"
@@ -66,12 +69,10 @@ ActiveRecord::Schema.define(version: 20131016221202) do
   create_table "suscripcion_temas", force: true do |t|
     t.integer  "tema_id"
     t.integer  "usuario_id"
-    t.integer  "notificacion_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "suscripcion_temas", ["notificacion_id"], name: "index_suscripcion_temas_on_notificacion_id"
   add_index "suscripcion_temas", ["tema_id"], name: "index_suscripcion_temas_on_tema_id"
   add_index "suscripcion_temas", ["usuario_id"], name: "index_suscripcion_temas_on_usuario_id"
 

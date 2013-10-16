@@ -1,4 +1,4 @@
 class Notificacion < ActiveRecord::Base
-  has_many :comments
-  has_many :suscripcion_temas
+  belongs_to :comment
+  belongs_to :suscripcion_tema
 end

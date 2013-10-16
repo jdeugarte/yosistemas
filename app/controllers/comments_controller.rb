@@ -21,7 +21,9 @@ class CommentsController < ApplicationController
 
            if suscrito.tema_id == id_tema
                 @usuario = Usuario.find(suscrito.usuario_id)
-                SendMail.notify_users_tema(@usuario).deliver    
+                @tema=Tema.find(id_tema)
+                flash[:alert] = 'llwgaa' 
+                SendMail.notify_users_tema(@usuario, @tema).deliver    
             end 
         end
     end

@@ -19,6 +19,7 @@ require 'digest/md5'
 		:minimum => 2,
 		:allow_blank => TRUE
 	}
+
 	validates :apellido,
 	:presence  => { :message => " es requerido, no puede ser nulo" },
 	:length => {

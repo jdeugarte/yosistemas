@@ -7,8 +7,20 @@ class CommentsController < ApplicationController
     	@comment = @tema.comments.create(comment_params)
     	@comment.usuario_id = current_user.id
     	@comment.save
+
+        notify_users(params[:tema_id])
     	redirect_to @tema
   	end
+
+    def notify_users(id_tema)
+        @suscripciones = SuscripcionTema.find([id_tema])
+        @suscripciones.each do |suscrito|
+            @usuario = Usuario.find(suscrito.usuario_id)
+            SendMail.notify_users_tema(@usuario).deliver
+            flash[:alert] = 'Usuarios notificados'
+            
+        end
+    end
 
     def delete
         @comment = Comment.find(params[:id])

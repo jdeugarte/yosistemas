@@ -21,6 +21,9 @@ Yosistemas::Application.routes.draw do
   get "temas/editComment/:idcomment" => "temas#editComment"
   post "comments/editc/:id" => "comments#editc"
   get "comments/delete/:id" => "comments#delete"
+
+  get "suscripcion_temas/create/:id" => 'suscripcion_temas#create', :as => 'suscribirse_tema'
+
   get 'temas/visible/:id' => 'temas#visible', :as => 'visible_tema'
   get 'temas/show_mine' => 'temas#show_mine', :as=>'show_mine'
   #get 'temas/:grupo' => 'temas#index'

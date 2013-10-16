@@ -14,4 +14,8 @@ class SendMail < ActionMailer::Base
     #@url  = 'http://yosistemas.herokuapp.com/usuarios/confirm?pass='+@user.id.to_s #AESCrypt.encrypt(@user.id.to_s,"Taller")
     mail(to: @user.correo, subject: 'Password YoSistemas')
   end
+  def notify_users_tema(user)
+    @user = user
+    mail(to: @user.correo,subject: 'YoSistemas comentario tema')
+  end
 end

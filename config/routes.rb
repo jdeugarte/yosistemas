@@ -32,6 +32,9 @@ Yosistemas::Application.routes.draw do
   get "grupos/search" => "grupos#search", :as=>'search_grupo'
 
   get "grupos/:id/temas"  => "temas#index", :as=> 'filtrar_temas'
+
+  get 'temas/new/:id' => 'temas#new', :as => 'tema_para_grupo'
+
   post "usuarios/update_user/:id"=>"usuarios#update"
   resources :usuarios do
     resources :comments

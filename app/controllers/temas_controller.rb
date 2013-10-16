@@ -1,5 +1,7 @@
 class TemasController < ApplicationController
 # GET /temas
+
+
 skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:show]
   def index
     if(params[:id] != nil)
@@ -75,6 +77,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
   # GET /temas/new
   def new
     @tema = Tema.new
+    @grupo = Grupo.find(params[:id])
   end
 
   def show

@@ -6,8 +6,10 @@
     <div class="bs-example">
               <ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
               <li class="active"><a href="#">Publico</a></li>
+              	<%if  current_user!=nil%>
                 <% current_user.subscriptions.each do |subs| %>
                 <li><a href="#"><%= subs.grupo.nombre %></a></li>
+                <% end %>
                 <% end %>
               </ul>
             </div>

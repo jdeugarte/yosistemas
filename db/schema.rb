@@ -56,14 +56,14 @@ ActiveRecord::Schema.define(version: 20131013224210) do
   add_index "subscriptions", ["usuario_id"], name: "index_subscriptions_on_usuario_id"
 
   create_table "suscripcion_temas", force: true do |t|
-    t.integer  "tema_id"
-    t.integer  "usuario_id"
+    t.integer  "temas_id"
+    t.integer  "usuarios_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "suscripcion_temas", ["tema_id"], name: "index_suscripcion_temas_on_tema_id"
-  add_index "suscripcion_temas", ["usuario_id"], name: "index_suscripcion_temas_on_usuario_id"
+  add_index "suscripcion_temas", ["temas_id"], name: "index_suscripcion_temas_on_temas_id"
+  add_index "suscripcion_temas", ["usuarios_id"], name: "index_suscripcion_temas_on_usuarios_id"
 
   create_table "tareas", force: true do |t|
     t.string   "titulo"

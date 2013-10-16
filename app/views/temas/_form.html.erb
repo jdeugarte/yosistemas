@@ -16,7 +16,10 @@
                       <%= f.text_area :cuerpo, :class=>'form-control',:rows=>'6', :placeholder=>'Contenido' %>
                     </div>
                   </div>
-                  
+                  <div class="field">
+                    <%=f.label :grupo_id %><br />
+                    <%=f.collection_select(:grupo_id, @grupos, :id, :nombre)%>
+                  </div>
                   <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
                       <input type="submit" value="Crear tema" class="btn btn-primary">

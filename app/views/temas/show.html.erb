@@ -12,7 +12,6 @@
                 &nbsp;<%= @tema.titulo %></legend>
             </div>
             <div class=row>
-
               <table class="table table-bordered">
                 <tr>
                   <td>&nbsp;<%= @tema.created_at.strftime("%Y-%m-%e Hora: %I:%M") %></td>
@@ -37,8 +36,6 @@
                       <%= link_to "Me Interesa", suscribirse_tema_path(@tema.id)%>  
                   <%end%>   
                 <%end%>
-                
-
               </div>
             </div>
           </div>

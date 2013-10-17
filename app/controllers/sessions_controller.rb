@@ -27,7 +27,11 @@ class SessionsController < ApplicationController
     @suscripciones.each do |suscripcion|
       @notificaciones = Notificacion.where(suscripcion_temas_id: suscripcion.id , notificado: false)
       @notificaciones.each do |notificacion|
-        @var = @var+1
+        if notificacion.notificado==false
+          @var = @var+1
+          notificacion.notificado=true
+          notificacion.save
+        end
       end
     end
     return @var

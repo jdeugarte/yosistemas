@@ -16,8 +16,9 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
   end
   
   def search
-    @temas=Array.new 
-    aux = Tema.all
+    @temas=Array.new
+    @grupo=Grupo.find(params[:grupo])
+    aux = Tema.where(:grupo_id=>params[:grupo])
     if params[:titulo] != "" && params[:titulo] != nil
       aux.each do |tema|
         if (tema.correspondeATitulo(params[:titulo]))

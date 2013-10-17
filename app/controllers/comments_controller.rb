@@ -16,19 +16,17 @@ class CommentsController < ApplicationController
         @commentt = comment
         suscripciones = SuscripcionTema.all
         suscripciones.each do |suscrito|
-
            if suscrito.tema_id == id_tema 
-                flash[:alert] = 'llegaaaaa'
+            if suscrito.usuario_id != current_user.id
                 @usuario = Usuario.find(suscrito.usuario_id)
                 @tema=Tema.find(id_tema)
-
                 @notificacion = Notificacion.new
                 @notificacion.notificado = false
                 @notificacion.suscripcion_temas_id = suscrito.id
                 @notificacion.comments_id = @commentt.id
                 @notificacion.save    
-
                 SendMail.notify_users_tema(@usuario, @tema).deliver    
+            end
             end 
         end
     end

@@ -1,5 +1,4 @@
 Yosistemas::Application.routes.draw do
-  get "tareas/new"
   get "temas/index"
   post 'temas/edit/:id' => 'temas#edit', :as => 'edit_tema'
   post 'sessions/create' => 'sessions#create', :as => 'loguear'
@@ -34,6 +33,7 @@ Yosistemas::Application.routes.draw do
   get "grupos/:id/temas"  => "temas#index", :as=> 'filtrar_temas'
 
   get 'temas/new/:id' => 'temas#new', :as => 'tema_para_grupo'
+  get 'tareas/new/:id' => 'tareas#new', :as => 'tarea_para_grupo'
 
   post "usuarios/update_user/:id"=>"usuarios#update"
   resources :usuarios do

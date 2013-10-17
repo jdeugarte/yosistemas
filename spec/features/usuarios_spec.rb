@@ -32,6 +32,18 @@ feature 'Gestion de usuarios' do
       Usuario.first.contrasenia == Digest::MD5.hexdigest('nueva')  
   end
 
-
+    scenario 'recuperar mi contrasenia' do
+    usuario = FactoryGirl.create(:usuario)
+    request=FactoryGirl.create(:passwords_request)
+    usuario.passwords_request_id=request.id
+    request.usuario=usuario
+    usuario.save
+    request.save
+    visit recover_path(request.id)
+      fill_in 'contrasenia_nueva', with: 'nuevoPass'
+      fill_in 'contrasenia_nueva2', with: 'nuevoPass'
+      click_button 'Confirmar'
+     expect(current_path).to eq root_path
+  end
   
 end

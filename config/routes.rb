@@ -17,7 +17,7 @@ Yosistemas::Application.routes.draw do
   post "usuarios/password_recovered/:id" => "usuarios#password_recovered", :as=> "password_recovered"
   get "usuarios/forgot_password" => "usuarios#forgot_password", :as => "forgot_password"
   post "usuarios/send_password_mail" => "usuarios#send_password_mail", :as => "send_password_mail"
-  get "temas/search" => "temas#search"
+  get "temas/search/:grupo" => "temas#search"
   get "temas/editComment/:idcomment" => "temas#editComment"
   post "comments/editc/:id" => "comments#editc"
   get "comments/delete/:id" => "comments#delete"

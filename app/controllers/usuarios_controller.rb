@@ -43,7 +43,7 @@ class UsuariosController < ApplicationController
     @usuario=Usuario.where(:correo=>mail,:activa=>true).first
     if(@usuario!=nil)
     if ( verify_recaptcha )
-      p=Passwords_Request.new(:usuario_id=>@usuario.id)
+      p=PasswordsRequest.new(:usuario_id=>@usuario.id)
       p.save
       @usuario.passwords_request_id=p.id
       @usuario.save
@@ -68,7 +68,7 @@ class UsuariosController < ApplicationController
      @errorMessagge="no puede recuperar su password si esta loggeado"
   else      
   begin
-    password_request=Passwords_Request.find(params[:id])
+    password_request=PasswordsRequest.find(params[:id])
     rescue ActiveRecord::RecordNotFound
   end
     if(password_request!=nil)

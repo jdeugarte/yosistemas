@@ -3,7 +3,7 @@
 <div class="page-header">
      <h1 id="forms">Lista de Temas</h1>
 </div>
-<form method="GET" action="/temas/search">
+<form method="GET" action="/temas/search/<%=@grupo.id%>">
 <div class="row">
   <%if current_user!=nil%>
     <div class="col-sm-12 col-md-2 col-lg-2">

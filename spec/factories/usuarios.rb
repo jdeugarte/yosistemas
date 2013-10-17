@@ -7,6 +7,7 @@ FactoryGirl.define do
     apellido "Pedregal"
     contrasenia "password"
     correo "email@email.com"
+    rol "Docente"
     activa true
   end
 
@@ -15,6 +16,7 @@ FactoryGirl.define do
     apellido "Pedregal"
     contrasenia "password2"
     correo "email2@email.com"
+    rol "Docente"
     activa true
   end
 end

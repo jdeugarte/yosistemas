@@ -77,6 +77,10 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
   # GET /temas/new
   def new
     @tema = Tema.new
+    @grupos = Array.new
+    current_user.subscriptions.each do |subs|
+      @grupos.push(subs.grupo)
+    end
     @grupo = Grupo.find(params[:id])
   end
 
@@ -87,6 +91,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
   # POST /temas
   def create
     @tema = Tema.new(tema_params)
+    @tema.grupo_id=params[:tema][:grupo_id]
     @tema.usuario_id = current_user.id 
     @tema.save
     redirect_to temas_url 

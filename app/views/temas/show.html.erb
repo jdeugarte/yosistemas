@@ -33,7 +33,7 @@
                       <%= link_to "Ya no me Interesa", rechazar_tema_path(@tema.id)%>  
                     <%end%>
                   <%end%>    
-                  <% if current_user.suscripcion_temas.count == 0 %>
+                  <% if current_user.suscripcion_temas.count == 1 %>
                       <%= link_to "Me Interesa", suscribirse_tema_path(@tema.id)%>  
                   <%end%>   
                 <%end%>

@@ -11,7 +11,6 @@ feature 'Gestion de tema' do
 
   scenario 'Crear un nuevo tema' do
     usuario = FactoryGirl.create(:usuario)
-
     #Tarea para uds. refactorizar esta sección a un método ingresar_sistema(usuario)
     #para no repetir esto en todos los demás feature specs que necesiten autentificarse
     ingresar_sistema(usuario)

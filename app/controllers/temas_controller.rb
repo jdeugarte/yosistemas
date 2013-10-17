@@ -88,6 +88,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
   # POST /temas
   def create
     @tema = Tema.new(tema_params)
+    @tema.grupo_id=params[:tema][:grupo_id]
     @tema.usuario_id = current_user.id 
     @tema.save
     redirect_to temas_url 

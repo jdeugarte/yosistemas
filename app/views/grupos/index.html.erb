@@ -5,7 +5,9 @@
 <div class="row">
   <%if current_user!=nil%>
     <div class="col-sm-12 col-md-2 col-lg-2">
-      <a class="btn btn-primary btn-lg" href="/grupos/new">Nuevo Grupo</a>
+      <%if current_user!=nil && current_user.rol=="Docente"%>
+        <a class="btn btn-primary btn-lg" href="/grupos/new">Nuevo Grupo</a>
+      <%end%>
     </div> 
   <%end%>
   <div class="input-group col-sm-12 col-md-8 col-lg-8" >

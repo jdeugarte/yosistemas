@@ -21,7 +21,12 @@ class GruposController < ApplicationController
   end
 
 	def new
-    @grupo = Grupo.new
+
+    if (current_user!=nil && current_user.rol=="Estudiante")
+      redirect_to root_path
+    else
+      @grupo = Grupo.new
+    end
   end
 
   def show
@@ -29,6 +34,7 @@ class GruposController < ApplicationController
   end
 
   def create
+
     @grupo = Grupo.new(grupo_params)
 
     @grupo.usuario_id = current_user.id

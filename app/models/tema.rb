@@ -21,6 +21,8 @@ class Tema < ActiveRecord::Base
       grupo = Grupo.find(1)
       self.grupo = grupo
       self.save
+    
     end
+
   end
 end

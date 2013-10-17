@@ -1,5 +1,7 @@
 class TemasController < ApplicationController
 # GET /temas
+
+
 skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:show]
   def index
     if(params[:id] != nil)
@@ -79,6 +81,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     current_user.subscriptions.each do |subs|
       @grupos.push(subs.grupo)
     end
+    @grupo = Grupo.find(params[:id])
   end
 
   def show

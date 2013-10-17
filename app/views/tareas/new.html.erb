@@ -1,9 +1,10 @@
+<%= render :layout => 'layouts/groups_layout' do%>
 <div class="page-header">
      <h1 id="forms">Nueva Tarea (Interfaz de Prueba)</h1>
 </div>
 <%= form_for @tarea, :html => { :class => 'bs-example form-horizontal' } do |t| %>
   <div class="row">
-          <div class="col-lg-6">
+          <div class="col-lg-10">
             <div class="well">
                 <fieldset>
                   <legend></legend>
@@ -52,3 +53,4 @@
     </div>  
    </div>
 <% end %>
+<%end%>

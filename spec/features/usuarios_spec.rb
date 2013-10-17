@@ -31,5 +31,7 @@ feature 'Gestion de usuarios' do
       click_button 'Guardar'
       Usuario.first.contrasenia == Digest::MD5.hexdigest('nueva')  
   end
+
+
   
 end

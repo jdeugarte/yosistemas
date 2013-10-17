@@ -7,22 +7,27 @@ class CommentsController < ApplicationController
     	@comment = @tema.comments.create(comment_params)
     	@comment.usuario_id = current_user.id
     	@comment.save
-
-        notify_users(@tema.id)
-        
-    	redirect_to @tema
+        notify_users(@tema.id,@comment)
+        redirect_to @tema
   	end
 
-    def notify_users(id_tema)
-        
+    def notify_users(id_tema,comment)
+
+        @commentt = comment
         suscripciones = SuscripcionTema.all
-        
         suscripciones.each do |suscrito|
 
-           if suscrito.tema_id == id_tema
+           if suscrito.tema_id == id_tema 
+                flash[:alert] = 'llegaaaaa'
                 @usuario = Usuario.find(suscrito.usuario_id)
                 @tema=Tema.find(id_tema)
-                flash[:alert] = 'llwgaa' 
+
+                @notificacion = Notificacion.new
+                @notificacion.notificado = false
+                @notificacion.suscripcion_temas_id = suscrito.id
+                @notificacion.comments_id = @commentt.id
+                @notificacion.save    
+
                 SendMail.notify_users_tema(@usuario, @tema).deliver    
             end 
         end

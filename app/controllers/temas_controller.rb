@@ -11,7 +11,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     end
    
     #@temas = Tema.order(params[:sort)]
-    @temas = @grupo.temas#.sort(params[:sort])
+    @temas = @grupo.temas.order(params[:sort])#.sort(params[:sort])
 
   end
   

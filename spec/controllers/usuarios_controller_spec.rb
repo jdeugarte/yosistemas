@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe UsuariosController do
   before(:each) do
+  grupo = FactoryGirl.build(:grupo)
     
     # POST /usuarios
   def create

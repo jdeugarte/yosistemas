@@ -3,6 +3,7 @@ require 'spec_helper'
   describe TemasController do
   before(:each) do
     controller.class.skip_before_filter :require_log_in #para evitar este filtro de application_controller
+    grupo = FactoryGirl.build(:grupo)
   end
   describe 'GET #new' do
     it "muestra la vista new" do

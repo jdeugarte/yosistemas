@@ -3,12 +3,14 @@ require 'spec_helper'
 describe TemasController do
   before(:each) do
     controller.class.skip_before_filter :require_log_in #para evitar este filtro de application_controller
+    grupo = FactoryGirl.build(:grupo)
   end
 
   #ATENCION: El uso de factory girl ayuda a hacer los specs m'as simples. Sin embargo, tambi'en m'as lentos ya 
   # que acceden a la BD en lugar de mocks o stubs
   describe 'GET #index' do
     it "obtiene todos los temas en un arreglo" do  
+      
       tema1 = FactoryGirl.create(:tema, titulo: 'Tema 1')
       tema2 = FactoryGirl.create(:tema, titulo: 'Tema 2')
       
@@ -41,6 +43,7 @@ describe TemasController do
     context 'con atributos validos' do
       it "guarda en la bd el nuevo tema" do
         expect{ 
+
           tema = FactoryGirl.create(:tema)
           #post :create, tema: FactoryGirl.attributes_for(:tema, titulo:'titulo', cuerpo:'Hola')
         }.to change(Tema, :count).by(1)

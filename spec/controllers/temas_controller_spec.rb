@@ -3,12 +3,13 @@ require 'spec_helper'
 describe TemasController do
   before(:each) do
     controller.class.skip_before_filter :require_log_in #para evitar este filtro de application_controller
-    grupo = FactoryGirl.build(:grupo)
+
   end
 
   #ATENCION: El uso de factory girl ayuda a hacer los specs m'as simples. Sin embargo, tambi'en m'as lentos ya 
   # que acceden a la BD en lugar de mocks o stubs
   describe 'GET #index' do
+    grupo = FactoryGirl.build(:grupo)
     it "obtiene todos los temas en un arreglo" do  
       
       tema1 = FactoryGirl.create(:tema, titulo: 'Tema 1')
@@ -28,18 +29,18 @@ describe TemasController do
   describe 'GET #new' do
     it "asigna un nuevo tema a @tema" do
       get :new
-
       expect(assigns(:tema)).to be_a_new(Tema)
     end
 
     it "muestra la vista new" do
+      
       get :new
-
       expect(response).to render_template :new
     end
   end
 
   describe 'POST #create' do
+    grupo = FactoryGirl.build(:grupo)
     context 'con atributos validos' do
       it "guarda en la bd el nuevo tema" do
         expect{ 
@@ -59,6 +60,7 @@ describe TemasController do
   end
   
   describe 'GET #search' do
+    grupo = FactoryGirl.build(:grupo)
     it "obtiene todos los temas al no haber filtro" do  
       tema1 = FactoryGirl.create(:tema, titulo: 'Prueba 1')
       tema2 = FactoryGirl.create(:tema, titulo: 'Test 2')
@@ -78,6 +80,7 @@ describe TemasController do
 
 
   describe "PUT update" do
+    grupo = FactoryGirl.build(:grupo)
     before :each do
       @tema = FactoryGirl.create(:tema, titulo:'Importante tema', cuerpo:'Detalle del tema importante')
     end
@@ -121,6 +124,7 @@ describe TemasController do
     end
   end
   describe "GET#show"
+  grupo = FactoryGirl.build(:grupo)
   it "asigna el id solicitado a @id" do
     grupo = FactoryGirl.create(:grupo)
     tema=FactoryGirl.create(:tema)

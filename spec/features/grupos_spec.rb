@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature 'Gestion de Grupo' do
   def ingresar_sistema(usuario)
-    FactoryGirl.create(:grupo)
+    FactoryGirl.build(:grupo)
     visit root_path
     #click_link "Ingresar"
     fill_in 'correo', with: 'email@email.com'
@@ -22,7 +22,7 @@ feature 'Gestion de Grupo' do
       page.select("Privado", :from => "grupo_estado")
       click_button 'Crear grupo'
     }.to change(Grupo, :count).by(1)
-    expect(current_path).to eq "/grupos/1"  #no muy util aqui, pero sirve para mostrar esta opcion
+    expect(current_path).to eq "/grupos/2"  #no muy util aqui, pero sirve para mostrar esta opcion
     
   end
 
@@ -38,7 +38,7 @@ feature 'Gestion de Grupo' do
       page.select("Publico", :from => "grupo_estado")
       click_button 'Crear grupo'
     }.to change(Grupo, :count).by(1)
-    expect(current_path).to eq "/grupos/1"  #no muy util aqui, pero sirve para mostrar esta opcion
+    expect(current_path).to eq "/grupos/2"  #no muy util aqui, pero sirve para mostrar esta opcion
     
   end
 

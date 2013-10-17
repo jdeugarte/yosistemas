@@ -78,10 +78,12 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
   def new
     @tema = Tema.new
     @grupos = Array.new
-    current_user.subscriptions.each do |subs|
-      @grupos.push(subs.grupo)
+    if(current_user!=nil)
+      current_user.subscriptions.each do |subs|
+        @grupos.push(subs.grupo)
+      end
+      @grupo = Grupo.find(params[:id])
     end
-    @grupo = Grupo.find(params[:id])
   end
 
   def show

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+<body>
+  <div class='row'>
+  <div class="col-lg-3">
+    <div class="page-header">
+     <h1 id="forms">Grupos</h1>
+    </div>
+    <div class="bs-example">
+              <ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
+
+                
+                <%if  current_user!=nil%>
+                  <% current_user.subscriptions.each do |subs| %>
+                      <%if subs.grupo.id == @grupo.id%>
+                        <li class="active"><a href="#"><%= subs.grupo.nombre %></a></li>
+                      <%else%>
+                        <li><a href="/grupos/<%=subs.grupo.id%>/temas"><%= subs.grupo.nombre %></a></li>
+                      <% end %>
+                  <% end %>
+                <%else%>
+                   <li class="active"><a href="/grupos/1/temas">Publico</a></li>
+                <% end %>
+              </ul>
+            </div>
+  </div>
+  <div class="col-lg-8"  style="margin-top:100px; background-color:white;">
+      <%=yield%>
+  </div>
+</div>
+</body>
+</html>

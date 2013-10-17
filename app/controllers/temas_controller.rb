@@ -131,7 +131,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
         @temas.push(tema)
       end
     end
-    render "index"
+    render "show_mine"
   end
 
 

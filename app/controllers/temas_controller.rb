@@ -97,6 +97,10 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     @tema.grupo_id=params[:tema][:grupo_id]
     @tema.usuario_id = current_user.id 
     @tema.save
+    @suscripcion=SuscripcionTema.new
+    @suscripcion.usuario_id=current_user.id
+    @suscripcion.tema_id=@tema.id
+    @suscripcion.save
     redirect_to temas_url 
   end
 

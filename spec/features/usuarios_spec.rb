@@ -25,7 +25,7 @@ feature 'Gestion de usuarios' do
     ingresar_sistema(usuario)
     #click_link 'Modificar Contrasea' # entra al link de modificar perfil
     visit update_password_path
-      fill_in 'contrasenia', with: 'anterior' #el texto se llena con 
+      fill_in 'contrasenia', with: 'password' #el texto se llena con 
       fill_in 'contrasenia_nueva', with: 'nueva'
       fill_in 'contrasenia_nueva2', with: 'nueva'
       click_button 'Guardar'

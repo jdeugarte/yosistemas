@@ -16,9 +16,7 @@ class TareasController < ApplicationController
     @tarea.grupo_id=params[:tarea][:grupo_id]
     @tarea.usuario_id = current_user.id 
     @tarea.save
-    @archivo = ArchivoAdjunto.new(:archivo=>params[:tarea][:archivo])
-    @archivo.tarea_id = @tarea.id 
-    @archivo.save
+    add_attached_files(@tarea.id)
     redirect_to temas_url 
   end
 
@@ -26,6 +24,15 @@ class TareasController < ApplicationController
     # No permite parametros de internet
     def tarea_params
       params.require(:tarea).permit(:titulo, :descripcion, :fecha_entrega)
+    end
+
+    def add_attached_files(tarea_id)
+      params[:tarea][:archivo].each do |arch|
+      @archivo = ArchivoAdjunto.new(:archivo=>arch)
+      @archivo.tarea_id = tarea_id 
+      @archivo.save
+      end
+
     end
 
 end

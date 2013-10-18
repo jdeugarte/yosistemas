@@ -6,7 +6,7 @@
 <form method="GET" action="/temas/search/<%=@grupo.id%>">
 <div class="row" style="margin-bottom:50px;">
   <%if current_user!=nil%>
-    <div class="col-sm-3 col-md-3 col-lg-3">
+    <div class="col-sm-3 col-md-3 col-lg-3"  style="padding-right: 50px; margin-right:-50px;">
       <a class="btn btn-primary btn-lg"  href="/temas/new/<%=@grupo.id%>"><span class="icon-list icon-white" style="vertical-align:-1px;  margin-right:7px; "></span>Nuevo Tema</a>
     </div> 
   <%end%>
@@ -17,7 +17,7 @@
   <%end%>
 </div>
 <div class="row">
-  <div class="input-group col-sm-12 col-md-8 col-lg-8" >
+  <div class="input-group col-sm-12 col-md-10 col-lg-10" >
     <span class="input-group-addon ">Titulo:</span>
     <input type="text" name="titulo" class="form-control">
     <span class="input-group-addon">Descripcion:</span>

@@ -10,6 +10,7 @@ feature 'Gestion de tema' do
   end
 
   scenario 'Crear un nuevo tema' do
+    grupo = FactoryGirl.create(:grupo)
     usuario = FactoryGirl.create(:usuario)
     #Tarea para uds. refactorizar esta sección a un método ingresar_sistema(usuario)
     #para no repetir esto en todos los demás feature specs que necesiten autentificarse
@@ -27,6 +28,7 @@ feature 'Gestion de tema' do
   end
 
    scenario 'Eliminar(dejar de mostrar) un tema' do
+    grupo = FactoryGirl.create(:grupo)
     usuario = FactoryGirl.create(:usuario)
 
     #Tarea para uds. refactorizar esta sección a un método ingresar_sistema(usuario)
@@ -50,6 +52,7 @@ feature 'Gestion de tema' do
   end
 
   scenario 'Ver mis temas' do
+    grupo = FactoryGirl.create(:grupo)
     usuario = FactoryGirl.create(:usuario)
 
     #Tarea para uds. refactorizar esta sección a un método ingresar_sistema(usuario)
@@ -82,6 +85,7 @@ feature 'Gestion de tema' do
     
   end
   scenario 'Ver tema' do
+    grupo = FactoryGirl.create(:grupo)
     usuario=FactoryGirl.create(:usuario)
     
     ingresar_sistema(usuario)

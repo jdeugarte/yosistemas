@@ -11,6 +11,7 @@ feature 'Gestion de Grupo' do
   end
 
   scenario 'Crear un nuevo grupo privado' do
+    grupo = FactoryGirl.create(:grupo)
     usuario = FactoryGirl.create(:usuario)
 
     ingresar_sistema(usuario)
@@ -27,6 +28,7 @@ feature 'Gestion de Grupo' do
   end
 
   scenario 'Crear un nuevo grupo publico' do
+    grupo = FactoryGirl.create(:grupo)
     usuario = FactoryGirl.create(:usuario)
 
     ingresar_sistema(usuario)

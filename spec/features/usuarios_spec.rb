@@ -70,6 +70,16 @@ feature 'Gestion de usuarios' do
     expect(page).to have_content 'no podemos procesar esta solicitud, por favor solicite otra'
   end
 
+  scenario 'Ver perfil de usuario' do
+    usuario=FactoryGirl.create(:usuario)
+    ingresar_sistema(usuario)
+    click_link 'Ver Perfil'
+    expect(current_path).to eq ("/usuarios/"+usuario.id.to_s)
+    expect(page).to have_field("usuario_nombre", :with=>"Pedro", :disabled => true) 
+    expect(page).to have_field("usuario_apellido", :with=>"Pedregal", :disabled => true)
+    expect(page).to have_field("usuario_correo", :with=>"email2@email.com", :disabled => true)
+  end
+
   scenario 'recuperar mi contrasenia, no puede recuperar si esta loggeado' do
      usuario = FactoryGirl.create(:usuario)
     request=FactoryGirl.create(:passwords_request)

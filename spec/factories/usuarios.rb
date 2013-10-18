@@ -19,4 +19,22 @@ FactoryGirl.define do
     rol "Docente"
     activa true
   end
+
+  factory :other_user_estudiante, class: Usuario do
+    nombre "Pedro"
+    apellido "Pedregal"
+    contrasenia "password2"
+    correo "email2@email.com"
+    rol "Estudiante"
+    activa true
+    end
+
+    factory :other_diferent_user, class: Usuario do
+    nombre "Jarry"
+    apellido "ConJ"
+    contrasenia "password2"
+    correo "email2@email.com"
+    rol "Docente"
+    activa false
+  end
 end

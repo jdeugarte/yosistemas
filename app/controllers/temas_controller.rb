@@ -11,13 +11,14 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     end
    
     #@temas = Tema.order(params[:sort)]
-    @temas = @grupo.temas#.sort(params[:sort])
+    @temas = @grupo.temas.order(params[:sort])#.sort(params[:sort])
 
   end
   
   def search
-    @temas=Array.new 
-    aux = Tema.all
+    @temas=Array.new
+    @grupo=Grupo.find(params[:grupo])
+    aux = Tema.where(:grupo_id=>params[:grupo])
     if params[:titulo] != "" && params[:titulo] != nil
       aux.each do |tema|
         if (tema.correspondeATitulo(params[:titulo]))
@@ -96,6 +97,10 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     @tema.grupo_id=params[:tema][:grupo_id]
     @tema.usuario_id = current_user.id 
     @tema.save
+    @suscripcion=SuscripcionTema.new
+    @suscripcion.usuario_id=current_user.id
+    @suscripcion.tema_id=@tema.id
+    @suscripcion.save
     redirect_to temas_url 
   end
 

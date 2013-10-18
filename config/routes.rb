@@ -1,10 +1,9 @@
 Yosistemas::Application.routes.draw do
-  get "tareas/new"
   get "temas/index"
   post 'temas/edit/:id' => 'temas#edit', :as => 'edit_tema'
   post 'sessions/create' => 'sessions#create', :as => 'loguear'
   get 'sessions/destroy' => 'sessions#destroy', :as => 'desloguear'
-  get "usuarios/confirm" => "usuarios#confirm"
+  get "usuarios/confirm/:pass" => "usuarios#confirm", :as => 'confirm'
   get "log_in" => "sessions#new", :as => "log_in"
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "usuarios/index"
@@ -17,7 +16,7 @@ Yosistemas::Application.routes.draw do
   post "usuarios/password_recovered/:id" => "usuarios#password_recovered", :as=> "password_recovered"
   get "usuarios/forgot_password" => "usuarios#forgot_password", :as => "forgot_password"
   post "usuarios/send_password_mail" => "usuarios#send_password_mail", :as => "send_password_mail"
-  get "temas/search" => "temas#search"
+  get "temas/search/:grupo" => "temas#search"
   get "temas/editComment/:idcomment" => "temas#editComment"
   post "comments/editc/:id" => "comments#editc"
   get "comments/delete/:id" => "comments#delete"
@@ -34,6 +33,7 @@ Yosistemas::Application.routes.draw do
   get "grupos/:id/temas"  => "temas#index", :as=> 'filtrar_temas'
 
   get 'temas/new/:id' => 'temas#new', :as => 'tema_para_grupo'
+  get 'tareas/new/:id' => 'tareas#new', :as => 'tarea_para_grupo'
 
   post "usuarios/update_user/:id"=>"usuarios#update"
   resources :usuarios do

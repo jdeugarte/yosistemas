@@ -1,4 +1,4 @@
-class Passwords_Request < ActiveRecord::Base
+class PasswordsRequest < ActiveRecord::Base
   belongs_to :usuario
     
 end

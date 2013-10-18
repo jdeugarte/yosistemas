@@ -1,9 +1,10 @@
+<%= render :layout => 'layouts/groups_layout' do%>
 <div class="page-header">
-     <h1 id="forms">Nueva Tarea (Interfaz de Prueba)</h1>
+     <h1 id="forms">Nueva Tarea</h1>
 </div>
 <%= form_for @tarea, :html => { :class => 'bs-example form-horizontal' } do |t| %>
   <div class="row">
-          <div class="col-lg-6">
+          <div class="col-lg-10">
             <div class="well">
                 <fieldset>
                   <legend></legend>
@@ -32,6 +33,12 @@
 					  </div>
 					 </div>
 					</div>
+          <div class="form-group">
+                    <label for="inputDescription" class="col-lg-2 control-label">Grupo:</label>
+                    <div class="col-lg-6">
+                    <%=t.collection_select(:grupo_id, @grupos.select { |g| g.usuario_id ==current_user.id } , :id, :nombre,{:selected => @grupo.id},{:class=>'form-control'})%>
+                    </div>
+                  </div>
 					<script type="text/javascript">
 					  $(function() {
 					    $('#datetimepicker2').datetimepicker({
@@ -52,3 +59,4 @@
     </div>  
    </div>
 <% end %>
+<%end%>

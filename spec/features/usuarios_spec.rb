@@ -69,7 +69,10 @@ feature 'Gestion de usuarios' do
     visit recover_path("imposible")
     expect(page).to have_content 'no podemos procesar esta solicitud, por favor solicite otra'
   end
+<<<<<<< HEAD
 
+=======
+>>>>>>> 90e93bee687aea736b3baddde7b8631a8d8cfae3
   scenario 'Ver perfil de usuario' do
     usuario=FactoryGirl.create(:usuario)
     ingresar_sistema(usuario)
@@ -79,6 +82,7 @@ feature 'Gestion de usuarios' do
     expect(page).to have_field("usuario_apellido", :with=>"Pedregal", :disabled => true)
     expect(page).to have_field("usuario_correo", :with=>"email2@email.com", :disabled => true)
   end
+<<<<<<< HEAD
 
   scenario 'recuperar mi contrasenia, no puede recuperar si esta loggeado' do
      usuario = FactoryGirl.create(:usuario)
@@ -116,5 +120,7 @@ feature 'Gestion de usuarios' do
      expect(current_path).to eq root_path
 
     end
+=======
+>>>>>>> 90e93bee687aea736b3baddde7b8631a8d8cfae3
   
 end

@@ -27,12 +27,14 @@
                     <%end%>
                  &nbsp;&nbsp;&nbsp;   
                 <%if current_user!=nil%> 
+                <%cont=0%>
                   <% current_user.suscripcion_temas.each do |subs| %>
                     <% if subs.tema_id == @tema.id%>
-                      <%= link_to "Ya no me Interesa", rechazar_tema_path(@tema.id)%>  
+                      <% cont=cont+1%>
+                      <%= link_to "Ya no me Interesa", rechazar_tema_path(@tema.id)%> 
                     <%end%>
                   <%end%>    
-                  <% if current_user.suscripcion_temas.count == 1 %>
+                  <% if cont <= 0 %>
                       <%= link_to "Me Interesa", suscribirse_tema_path(@tema.id)%>  
                   <%end%>   
                 <%end%>

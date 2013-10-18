@@ -70,5 +70,41 @@ feature 'Gestion de usuarios' do
     expect(page).to have_content 'no podemos procesar esta solicitud, por favor solicite otra'
   end
 
+  scenario 'recuperar mi contrasenia, no puede recuperar si esta loggeado' do
+     usuario = FactoryGirl.create(:usuario)
+    request=FactoryGirl.create(:passwords_request)
+    usuario.passwords_request_id=request.id
+    request.usuario=usuario
+    usuario.save
+    request.save
+    ingresar_sistema(usuario)
+    visit recover_path(request.id)
+    expect(page).to have_content 'no puede recuperar su password si esta loggeado'
+  end
+  scenario 'Activar cuenta' do
+     usuario = FactoryGirl.create(:other_diferent_user)
+    visit confirm_path(usuario.id)
+    expect(page).to have_content 'Su cuenta fue activada exitosamente! ya puede hacer uso de nuestro contenido'
+  end
+
+  scenario 'Activar cuenta, no puede activar si esta loggeado' do
+    usuario = FactoryGirl.create(:usuario)
+    ingresar_sistema(usuario)
+    visit confirm_path(usuario.id)
+    expect(page).to have_content "No puede activar su cuenta si esta loggeado"
+    end
+
+
+  scenario 'Activar cuenta, usuario incorrecto' do
+    visit confirm_path("imposible")
+    expect(page).to have_content 'Error, datos invalidos'
+    end
+    scenario 'No deberia poder acceder a forgot password loggeado' do
+     usuario = FactoryGirl.create(:usuario)
+     ingresar_sistema(usuario)
+     visit forgot_password_path
+     expect(current_path).to eq root_path
+
+    end
   
 end

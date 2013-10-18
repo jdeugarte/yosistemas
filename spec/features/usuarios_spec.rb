@@ -69,6 +69,7 @@ feature 'Gestion de usuarios' do
     visit recover_path("imposible")
     expect(page).to have_content 'no podemos procesar esta solicitud, por favor solicite otra'
   end
+
   scenario 'Ver perfil de usuario' do
     usuario=FactoryGirl.create(:usuario)
     ingresar_sistema(usuario)
@@ -116,4 +117,13 @@ feature 'Gestion de usuarios' do
 
     end
   
+  scenario 'Crear un usuario de rol docente' do
+    usuario = FactoryGirl.create(:usuario)    
+    expect(usuario.rol).to eq 'Docente'  
+  end
+
+  scenario 'Crear un usuario de rol estudiante' do
+    usuario = FactoryGirl.create(:other_user_estudiante)    
+    usuario.rol == 'Estudiante'  
+  end
 end

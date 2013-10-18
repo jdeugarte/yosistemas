@@ -10,9 +10,11 @@ feature 'Comentario' do
   end
   scenario 'Comentar tema' do
     #crear usuario que pueda crear una entrada (cuando se tenga usuarios)
+    grupo = FactoryGirl.create(:grupo)
     usuario = FactoryGirl.create(:usuario)
     ingresar_sistema(usuario)
     click_link 'Nuevo Tema'
+
     expect{
       fill_in 'tema_titulo', with: 'Titulo tema de prueba'
       fill_in 'tema_cuerpo', with: 'Descripcion o contenido del tema de prueba'

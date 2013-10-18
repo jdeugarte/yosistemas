@@ -46,4 +46,13 @@ feature 'Gestion de usuarios' do
      expect(current_path).to eq root_path
   end
   
+  scenario 'Crear un usuario de rol docente' do
+    usuario = FactoryGirl.create(:usuario)    
+    expect(usuario.rol).to eq 'Docente'  
+  end
+
+  scenario 'Crear un usuario de rol estudiante' do
+    usuario = FactoryGirl.create(:other_user_estudiante)    
+    usuario.rol == 'Estudiante'  
+  end
 end

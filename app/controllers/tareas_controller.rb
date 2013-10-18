@@ -13,9 +13,12 @@ class TareasController < ApplicationController
   #POST tareas/create
   def create
     @tarea = Tarea.new(tarea_params)
-    @tarea.grupo_id=params[:tema][:grupo_id]
+    @tarea.grupo_id=params[:tarea][:grupo_id]
     @tarea.usuario_id = current_user.id 
     @tarea.save
+    @archivo = ArchivoAdjunto.new(:archivo=>params[:tarea][:archivo])
+    @archivo.tarea_id = @tarea.id 
+    @archivo.save
     redirect_to temas_url 
   end
 

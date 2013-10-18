@@ -97,5 +97,6 @@ end
     :user_name            => 'yosistemasucb@gmail.com',
     :password             => 'tddds2013',
     :authentication       => 'plain',
-    :enable_starttls_auto => true  }                 
+    :enable_starttls_auto => true  }         
+
 end

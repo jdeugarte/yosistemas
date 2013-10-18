@@ -25,7 +25,10 @@ gem 'jquery-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 
-
+#gems for files upload
+gem 'paperclip'
+gem 'paperclip-dropbox'
+gem 'dropbox'
 
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

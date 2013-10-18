@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131016221202) do
+ActiveRecord::Schema.define(version: 20131018050325) do
+
+  create_table "archivo_adjuntos", force: true do |t|
+    t.integer  "tarea_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "archivo_file_name"
+    t.string   "archivo_content_type"
+    t.integer  "archivo_file_size"
+    t.datetime "archivo_updated_at"
+  end
+
+  add_index "archivo_adjuntos", ["tarea_id"], name: "index_archivo_adjuntos_on_tarea_id"
 
   create_table "comments", force: true do |t|
     t.text     "body"

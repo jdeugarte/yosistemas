@@ -1,4 +1,4 @@
-equire 'spec_helper'
+require 'spec_helper'
 
 describe ArchivoAdjunto do
   pending "add some examples to (or delete) #{__FILE__}"

@@ -10,6 +10,7 @@ feature 'Gestion de usuarios' do
   end
 
   scenario 'modificar un usuario' do
+    grupo = FactoryGirl.create(:grupo)
     usuario = FactoryGirl.create(:usuario)
     ingresar_sistema(usuario)
     click_link 'Modificar Perfil' # entra al link de modificar perfil
@@ -21,6 +22,7 @@ feature 'Gestion de usuarios' do
   end
   
   scenario 'modificar un contrasenia' do
+    grupo = FactoryGirl.create(:grupo)
     usuario = FactoryGirl.create(:usuario)
     ingresar_sistema(usuario)
     #click_link 'Modificar Contrasea' # entra al link de modificar perfil
@@ -33,6 +35,7 @@ feature 'Gestion de usuarios' do
   end
 
   scenario 'recuperar mi contrasenia' do
+    grupo = FactoryGirl.create(:grupo)
     usuario = FactoryGirl.create(:usuario)
     request=FactoryGirl.create(:passwords_request)
     usuario.passwords_request_id=request.id
@@ -47,6 +50,7 @@ feature 'Gestion de usuarios' do
   end
 
   scenario 'recuperar mi contrasenia, solicitud expiro' do
+    grupo = FactoryGirl.create(:grupo)
     usuario = FactoryGirl.create(:usuario)
     request=FactoryGirl.create(:passwords_request)
     request2=FactoryGirl.create(:passwords_request)
@@ -60,6 +64,7 @@ feature 'Gestion de usuarios' do
   end
 
   scenario 'recuperar mi contrasenia, imposible procesar solicitud' do
+    grupo = FactoryGirl.create(:grupo)
      usuario = FactoryGirl.create(:usuario)
     request=FactoryGirl.create(:passwords_request)
     usuario.passwords_request_id=request.id
@@ -71,6 +76,7 @@ feature 'Gestion de usuarios' do
   end
 
   scenario 'Ver perfil de usuario' do
+    grupo = FactoryGirl.create(:grupo)
     usuario=FactoryGirl.create(:usuario)
     ingresar_sistema(usuario)
     click_link 'Ver Perfil'
@@ -81,6 +87,7 @@ feature 'Gestion de usuarios' do
   end
 
   scenario 'recuperar mi contrasenia, no puede recuperar si esta loggeado' do
+    grupo = FactoryGirl.create(:grupo)
      usuario = FactoryGirl.create(:usuario)
     request=FactoryGirl.create(:passwords_request)
     usuario.passwords_request_id=request.id
@@ -92,12 +99,14 @@ feature 'Gestion de usuarios' do
     expect(page).to have_content 'no puede recuperar su password si esta loggeado'
   end
   scenario 'Activar cuenta' do
+    grupo = FactoryGirl.create(:grupo)
      usuario = FactoryGirl.create(:other_diferent_user)
     visit confirm_path(usuario.id)
     expect(page).to have_content 'Su cuenta fue activada exitosamente! ya puede hacer uso de nuestro contenido'
   end
 
   scenario 'Activar cuenta, no puede activar si esta loggeado' do
+    grupo = FactoryGirl.create(:grupo)
     usuario = FactoryGirl.create(:usuario)
     ingresar_sistema(usuario)
     visit confirm_path(usuario.id)
@@ -110,6 +119,7 @@ feature 'Gestion de usuarios' do
     expect(page).to have_content 'Error, datos invalidos'
     end
     scenario 'No deberia poder acceder a forgot password loggeado' do
+      grupo = FactoryGirl.create(:grupo)
      usuario = FactoryGirl.create(:usuario)
      ingresar_sistema(usuario)
      visit forgot_password_path
@@ -118,11 +128,13 @@ feature 'Gestion de usuarios' do
     end
   
   scenario 'Crear un usuario de rol docente' do
+    grupo = FactoryGirl.create(:grupo)
     usuario = FactoryGirl.create(:usuario)    
     expect(usuario.rol).to eq 'Docente'  
   end
 
   scenario 'Crear un usuario de rol estudiante' do
+    grupo = FactoryGirl.create(:grupo)
     usuario = FactoryGirl.create(:other_user_estudiante)    
     usuario.rol == 'Estudiante'  
   end

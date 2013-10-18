@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 feature 'Gestion de Sessions' do
+	grupo = FactoryGirl.create(:grupo)
 	grupo = FactoryGirl.build(:grupo)
   scenario 'Log in de un usuario' do    
     usuario = FactoryGirl.build(:usuario)      

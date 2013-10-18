@@ -1,3 +1,4 @@
+require 'date'
 class UsuariosController < ApplicationController
   
   skip_before_filter :verify_authenticity_token
@@ -16,8 +17,9 @@ class UsuariosController < ApplicationController
       if (pass==newPass)
         if(pass.length>5)
         @usuario.contrasenia=Digest::MD5.hexdigest(pass)
+        @usuario.passwords_request_id=-1
         @usuario.save
-        flash[:alert]=@usuario.correo+" "+pass+" "+@usuario.activa.to_s
+        #flash[:alert]=@usuario.correo+" "+pass+" "+@usuario.activa.to_s
         redirect_to root_url
         else
           flash[:alert]= 'la longitud minima es 6'   
@@ -72,10 +74,11 @@ class UsuariosController < ApplicationController
     rescue ActiveRecord::RecordNotFound
   end
     if(password_request!=nil)
-        if(password_request.usuario.passwords_request_id==password_request.id)
+        if(password_request.usuario.passwords_request_id==password_request.id && DateTime.now<=(password_request.created_at+(86400)))
            @usuario=password_request.usuario
         else
           @errorMessagge="esta solicitud expiro, por favor solicite otra"
+
         end
     else
         @errorMessagge="no podemos procesar esta solicitud, por favor solicite otra"

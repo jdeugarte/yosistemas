@@ -1,4 +1,5 @@
 Yosistemas::Application.routes.draw do
+
   get "temas/index"
   post 'temas/edit/:id' => 'temas#edit', :as => 'edit_tema'
   post 'sessions/create' => 'sessions#create', :as => 'loguear'
@@ -20,7 +21,7 @@ Yosistemas::Application.routes.draw do
   get "temas/editComment/:idcomment" => "temas#editComment"
   post "comments/editc/:id" => "comments#editc"
   get "comments/delete/:id" => "comments#delete"
-
+  get "temas/searchtitulo/:themes/:id" => 'temas#searchtitulo', :as  => 'searchtitulo'
   get "suscripcion_temas/create/:id" => 'suscripcion_temas#create', :as => 'suscribirse_tema'
   get "suscripcion_temas/delete/:id" => 'suscripcion_temas#delete', :as => 'rechazar_tema'
 

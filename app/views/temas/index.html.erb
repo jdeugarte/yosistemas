@@ -33,15 +33,22 @@
 <br>
 
 <br>
-
+  <% @cadena=""%>
+    <% @temas.each do |tema| %>
+    <% @cadena = @cadena +"-"+ tema.id.to_s %>
+  <%end%>
 <br>
 <div class="row">
 <div class="col-lg-10">
 <table class="table table-striped table-bordered table-hover">
   <thead>
     <tr>
-      <th><%=sortable "Titulo" %></th>
-    <th><%=sortable "Cuerpo" %></th>
+      <%if @temas.size != 0%>
+        <th><%=link_to "Titulo", searchtitulo_path(@cadena,@grupo.id)%>  </th>
+      <%else%>
+        <th>Titulo </th>
+      <%end%>  
+      <th><%=sortable "Cuerpo" %></th>
 
     </tr>
   </thead>

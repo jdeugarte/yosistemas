@@ -32,7 +32,7 @@ feature 'Gestion de usuarios' do
       Usuario.first.contrasenia == Digest::MD5.hexdigest('nueva')  
   end
 
-    scenario 'recuperar mi contrasenia' do
+  scenario 'recuperar mi contrasenia' do
     usuario = FactoryGirl.create(:usuario)
     request=FactoryGirl.create(:passwords_request)
     usuario.passwords_request_id=request.id
@@ -45,5 +45,30 @@ feature 'Gestion de usuarios' do
       click_button 'Confirmar'
      expect(current_path).to eq root_path
   end
+
+  scenario 'recuperar mi contrasenia, solicitud expiro' do
+    usuario = FactoryGirl.create(:usuario)
+    request=FactoryGirl.create(:passwords_request)
+    request2=FactoryGirl.create(:passwords_request)
+    usuario.passwords_request_id=request2.id
+    request.usuario=usuario
+    request2.usuario=usuario
+    usuario.save
+    request.save
+    visit recover_path(request.id)
+    expect(page).to have_content 'esta solicitud expiro, por favor solicite otra'
+  end
+
+  scenario 'recuperar mi contrasenia, imposible procesar solicitud' do
+     usuario = FactoryGirl.create(:usuario)
+    request=FactoryGirl.create(:passwords_request)
+    usuario.passwords_request_id=request.id
+    request.usuario=usuario
+    usuario.save
+    request.save
+    visit recover_path("imposible")
+    expect(page).to have_content 'no podemos procesar esta solicitud, por favor solicite otra'
+  end
+
   
 end

@@ -58,6 +58,25 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
      end
     render 'index'
   end
+  def searchdetalle
+    @temas = Array.new
+      if(params[:id] != nil)
+       @grupo = Grupo.find(params[:id])
+     else
+       @grupo = Grupo.find(1)
+    end
+    if params[:themes] != nil && params[:themes] != "" 
+      @ids = params[:themes]
+      @ids.slice!(0)
+      @ids=@ids.split("-")
+    
+      @ids.each do |id|
+          @temas.push(Tema.find(id))
+      end
+      @temas.sort! { |a,b| a.cuerpo.downcase <=> b.cuerpo.downcase }
+     end
+    render 'index'
+  end
   def searchByDescription(keyWords)
     keyWords = keyWords.downcase
       initialResult = Tema.where('cuerpo LIKE ?', '%'+keyWords+'%')

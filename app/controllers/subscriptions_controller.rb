@@ -9,7 +9,7 @@ class SubscriptionsController < ApplicationController
       if verificar_llave(@subscription.llave, @grupo.llave)
     	   @subscription.usuario_id = current_user.id
     	   @subscription.save
-         SendMail.notify_users_grupo(current_user).deliver #con sto envio el correo
+         SendMail.notify_users_grupo(current_user, @grupo.nombre).deliver #con sto envio el correo
     	   redirect_to grupos_path, :flash => { :info => "Suscrito exitosamente" }
       else
          @subscription.destroy

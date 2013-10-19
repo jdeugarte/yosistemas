@@ -20,8 +20,8 @@ class SendMail < ActionMailer::Base
     @url  = 'http://yosistemas.herokuapp.com/temas/'+tema.id.to_s
     mail(to: @user.correo,subject: 'YoSistemas comentario tema')
   end
-  def notify_users_grupo(user)
+  def notify_users_grupo(user,grupo_nombre)
     @user = user
-    mail(to: @user.correo,subject: 'Te suscribiste a el grupo')
+    mail(to: @user.correo,subject: 'Te suscribiste a el grupo: '+grupo_nombre.to_s)
   end
 end

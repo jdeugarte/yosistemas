@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     if usuario
       session[:usuario_id] = usuario.id
       @cont = check_notifications(usuario)
-      if (request.referrer.include? "/usuarios/new") || (request.referrer.include? "usuarios/confirm" ) || (request.referrer.include? "/send_password_mail")        
+      if (request.referrer.include? "/usuarios") || (request.referrer.include? "usuarios/confirm" ) || (request.referrer.include? "/send_password_mail")        
 
         redirect_to root_url, :notice => "Logged in!  "+@cont.to_s+"  notifications: "
       else

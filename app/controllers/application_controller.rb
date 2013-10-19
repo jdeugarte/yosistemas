@@ -24,16 +24,11 @@ class ApplicationController < ActionController::Base
       suscripciones = SuscripcionTema.where(:usuario_id=>current_user.id)
       suscripciones.each do |suscripcion| 
         notificaciones = Notificacion.where(:suscripcion_temas_id=>suscripcion.id,:notificado=>false)
-        so=""
         notificaciones.each do |notificacion|
           @notifications.push (notificacion)
-          #notificacion.notificado = true
-          #notificacion.save    
-          so=so+"b"
-          flash[:alert]="s"+so
         end
       end
-    end
+    end  
     @notifications
   end
 

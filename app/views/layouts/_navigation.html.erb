@@ -43,10 +43,10 @@
         <ul class="dropdown-menu">    
           <%if notifications != nil %>
             <% notifications.each do |notificacion| %>  
-              <li><a href="/temas"><%= notificacion.id %> </a></li>
+              <li><a href=<%="/temas/"+ notificacion.suscripcion_temas_id.to_s%>  > <%= notificacion.id %> </a></li>
             <% end %>
           <%else%>  
-            <a href="/temas" >asdf</a>
+            <a>Vacia</a>
           <%end%>
         </ul>
       </li>

@@ -22,6 +22,10 @@ class SessionsController < ApplicationController
 
   
   def destroy
+    notifications.each do |notificacion|
+      notificacion.notificado = true
+      notificacion.save
+    end
     session[:usuario_id] = nil
     redirect_to root_url, :notice => "Logged out!"
   end

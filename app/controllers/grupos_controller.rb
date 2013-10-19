@@ -44,7 +44,7 @@ class GruposController < ApplicationController
     subs.usuario = current_user
     subs.save
     if @grupo.save
-      redirect_to @grupo, :flash => { :info => "Grupo creado exitosamente" }
+      redirect_to '/grupos', :flash => { :info => "Grupo creado exitosamente" }
     else
       redirect_to "/grupos/new", :flash => { :error => "Error al crear un grupo" }
     end 

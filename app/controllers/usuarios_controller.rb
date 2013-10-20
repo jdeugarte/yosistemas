@@ -23,11 +23,11 @@ class UsuariosController < ApplicationController
         redirect_to root_url
         else
           flash[:alert]= 'la longitud minima es 6'   
-          redirect_to(:back)
+          render :action => 'recover', :format => 'html'
         end 
       else
         flash[:alert]= 'Las contrasenias no coinciden'   
-        redirect_to(:back)
+        render :action => 'recover', :format => 'html'
 
       end
    end
@@ -51,12 +51,12 @@ class UsuariosController < ApplicationController
       @usuario.save
       SendMail.recover_password(@usuario,p.id).deliver
     else
-        flash[:alert] = 'Ingrese las palabras correctamente'   
-      redirect_to :action => 'forgot_password', :format => 'html'
+        @pass_error = 'Ingrese las palabras correctamente'   
+      render :action => 'forgot_password', :format => 'html'
     end
     else
-      flash[:alert] = 'No existe ningun usuario con ese correo'   
-      redirect_to :action => 'forgot_password', :format => 'html'
+      @pass_error = 'No existe ningun usuario con ese correo'   
+      render :action => 'forgot_password', :format => 'html'
     end
   else
     redirect_to root_url

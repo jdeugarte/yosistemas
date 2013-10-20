@@ -16,7 +16,7 @@
                 <%if  current_user!=nil%>
                   <% current_user.subscriptions.each do |subs| %>
                       <%if subs.grupo.id == @grupo.id%>
-                        <li class="active"><a href="#"><%= subs.grupo.nombre %></a></li>
+                        <li class="active"><a name="currentSelected" href="#"><%= subs.grupo.nombre %></a></li>
                       <%else%>
                         <li><a name="itemMenu" href="/grupos/<%=subs.grupo.id%>/temas"><%= subs.grupo.nombre %></a></li>
                       <% end %>
@@ -48,6 +48,9 @@
   {
     links[i].onclick  = throwFade;
   }
+  var backvar = -1;
+  var active = document.getElementsByName('currentSelected')[0];
+  active.onclick = function(){backvar=-2;}
 </script>
 
 </body>

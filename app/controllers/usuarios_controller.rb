@@ -114,14 +114,14 @@ class UsuariosController < ApplicationController
         current_user.contrasenia=encriptado
         current_user.save
         flash[:alert] = 'Contrasenia modificada'
-        redirect_to root_url :notice => 'iguales'
+        redirect_to root_url
       else
         flash[:alert] = 'Las contrasenias no coinciden'
-        redirect_to root_url :notice => 'diferentes' 
+        redirect_to :back 
       end
     else
       flash[:alert] = 'la contrasenia no es correcta'
-      redirect_to root_url :notice => 'incorrecta'
+      redirect_to :back
     end
   end
 

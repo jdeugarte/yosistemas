@@ -17,6 +17,7 @@ class TareasController < ApplicationController
     @tarea.usuario_id = current_user.id 
     if(@tarea.save)
       add_attached_files(@tarea.id)
+      flash[:alert] = 'Tarea creada Exitosamente!'
       redirect_to temas_url 
     else
        @grupos = Array.new
@@ -37,10 +38,12 @@ class TareasController < ApplicationController
     end
 
     def add_attached_files(tarea_id)
-      params[:tarea][:archivo].each do |arch|
-      @archivo = ArchivoAdjunto.new(:archivo=>arch)
-      @archivo.tarea_id = tarea_id 
-      @archivo.save
+      if(!params[:tarea][:archivo].nil?)
+        params[:tarea][:archivo].each do |arch|
+        @archivo = ArchivoAdjunto.new(:archivo=>arch)
+        @archivo.tarea_id = tarea_id 
+        @archivo.save
+        end
       end
 
     end

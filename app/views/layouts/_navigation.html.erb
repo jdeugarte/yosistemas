@@ -41,10 +41,10 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notificaiones <b class="caret"></b></a>
         <ul class="dropdown-menu">    
-          <%if notifications != nil && notifications.size > 0%>
+          <% if notifications != nil && notifications.size > 0%>
             <% notifications.each do |notificacion| %>  
               <li>
-                <a href=<%="/temas/"+ notificacion.suscripcion_temas_id.to_s %>  > 
+                <a href=<%="/temas/"+ Comment.find(notificacion.comments_id).tema_id.to_s %>  > 
                   <h4>  
                     <%= "tema: "+Tema.find(Comment.find(notificacion.comments_id).tema_id).titulo+": " %>
                   </h4>

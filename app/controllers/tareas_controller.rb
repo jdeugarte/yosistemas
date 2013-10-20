@@ -8,6 +8,7 @@ class TareasController < ApplicationController
         @grupos.push(subs.grupo)
       end
       @grupo = Grupo.find(params[:id])
+      @id = params[:id]
     end
   end
   #POST tareas/create

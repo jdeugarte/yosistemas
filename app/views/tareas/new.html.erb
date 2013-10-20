@@ -1,7 +1,7 @@
 <%= render :layout => 'layouts/groups_layout' do%>
 
 <div class="page-header">
-<div class="btn-back" title="Atras" onclick="throwFade(); history.go(backvar);" ></div>
+<div class="btn-back" title="Atras" onclick="throwFade(); window.location='/grupos/<%=@id %>/temas'; return false;" ></div>
      <h1 id="forms">Nueva Tarea</h1>
 </div>
 <% if @tarea.errors.any? %>

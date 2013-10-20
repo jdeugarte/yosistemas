@@ -9,10 +9,27 @@ class SessionsController < ApplicationController
     if usuario
       session[:usuario_id] = usuario.id
       if (request.referrer.include? "/usuarios") || (request.referrer.include? "usuarios/confirm" ) || (request.referrer.include? "/send_password_mail")        
-
-        redirect_to root_url, :notice => "Logged in!  "
+       
+        if notifications == nil || notifications.size < 1
+         redirect_to root_url, :notice => "Logged in!"
+        else
+          if notifications.size == 1
+            redirect_to root_url, :notice => "Logged in!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notifications.size.to_s+" notificacion"   
+          else
+            redirect_to root_url, :notice => "Logged in!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notifications.size.to_s+" notificaciones"   
+          end
+        end
       else
-        redirect_to :back, :notice => "Logged in!  "
+
+        if notifications == nil || notifications.size < 1
+         redirect_to :back, :notice => "Logged in!"
+        else
+          if notifications.size == 1
+            redirect_to :back, :notice => "Logged in!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notifications.size.to_s+" notificacion"   
+          else
+            redirect_to :back, :notice => "Logged in!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notifications.size.to_s+" notificaciones"   
+          end
+        end
       end
     else
         
@@ -24,7 +41,7 @@ class SessionsController < ApplicationController
   def destroy
     notifications.each do |notificacion|
       notificacion.notificado = true
-      notificacion.save
+      notificacion.save 
     end
     session[:usuario_id] = nil
     redirect_to root_url, :notice => "Logged out!"

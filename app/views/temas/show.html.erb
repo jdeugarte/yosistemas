@@ -78,7 +78,7 @@
 	    <br>
 	    <%if current_user!=nil && comment.usuario.correo == current_user.correo%>
 	    	<%= link_to 'Editar', "/temas/editComment/"+comment.id.to_s %>
-        <%= link_to 'Eliminar', "/comments/delete/"+comment.id.to_s %>
+        <%= link_to 'Eliminar', "/comments/delete/"+comment.id.to_s, data: { confirm: 'Se eliminara el tema, ¿está seguro?' } %>
 	    <%end%>
 	  </div>
 	</div>

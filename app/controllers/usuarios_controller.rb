@@ -154,10 +154,11 @@ end
       @usuario.rol=params[:rol]
       
   		if @usuario.save
+        redirect_to root_url
         SendMail.activate_acount(@usuario).deliver
   			flash[:alert] = 'Usuario Registrado Exitosamente!!! Revise su correo electronico para activar la cuenta'
   			else
+        render :new, :format => 'html' 
   			end
-  		render :new, :format => 'html'  		 
   end
 end

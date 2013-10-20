@@ -1,7 +1,7 @@
 <%= render :layout => 'layouts/groups_layout' do%>
 
 <div class="page-header">
-<div class="btn-back" title="Atras" onclick="history.go(-1)"></div>
+<div class="btn-back" title="Atras" onclick="throwFade(); history.go(-1);" ></div>
      <h1 id="forms">Nueva Tarea</h1>
 </div>
 <%= form_for @tarea, :html => { :class => 'bs-example form-horizontal', :multipart => true} do |t| %>

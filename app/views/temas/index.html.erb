@@ -1,5 +1,4 @@
 <%= render :layout => 'layouts/groups_layout' do%>
-<div >
 <div class="page-header">
      <h1 id="forms">Lista de Temas</h1>
 </div>
@@ -7,12 +6,12 @@
 <div class="row" style="margin-bottom:50px;">
   <%if current_user!=nil%>
     <div class="col-sm-3 col-md-3 col-lg-3"  style="padding-right: 50px; margin-right:-50px;">
-      <a class="btn btn-primary btn-lg"  href="/temas/new/<%=@grupo.id%>"><span class="icon-list icon-white" style="vertical-align:-1px;  margin-right:7px; "></span>Nuevo Tema</a>
+      <a class="btn btn-primary btn-lg" onclick="throwFade()" href="/temas/new/<%=@grupo.id%>"><span class="icon-list icon-white" style="vertical-align:-1px;  margin-right:7px; "></span>Nuevo Tema</a>
     </div> 
   <%end%>
   <%if current_user!=nil && current_user.id==@grupo.usuario_id%>
     <div class="col-sm-9 col-md-9 col-lg-9">
-      <a class="btn btn-primary btn-lg" href="/tareas/new/<%=@grupo.id%>"><span class="icon-pencil icon-white" style="vertical-align:-1px;  margin-right:7px; "></span>Nueva Tarea</a>
+      <a class="btn btn-primary btn-lg" onclick="throwFade()" href="/tareas/new/<%=@grupo.id%>"><span class="icon-pencil icon-white" style="vertical-align:-1px;  margin-right:7px; "></span>Nueva Tarea</a>
     </div> 
   <%end%>
 </div>
@@ -70,8 +69,5 @@
               </table>
 </div>
 </div>
-
-  </div>
 </div>
-
 <%end%>

@@ -4,31 +4,42 @@
 <div class="btn-back" title="Atras" onclick="throwFade(); history.go(-1);" ></div>
      <h1 id="forms">Nueva Tarea</h1>
 </div>
+<% if @tarea.errors.any? %>
+   <div id ="errorRegistroUsuario" class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <ul>
+         <% @tarea.errors.full_messages.each do |msg| %>
+         <li><%= msg %></li>
+         <% end %>
+      </ul>
+   </div>
+<% end %>
 <%= form_for @tarea, :html => { :class => 'bs-example form-horizontal', :multipart => true} do |t| %>
+<%= t.hidden_field :grupo_id%>
   <div class="row">
           <div class="col-lg-10">
             <div class="well">
                 <fieldset>
                   <legend></legend>
-                  <div class="form-group">
+                  <div class="form-group <%=((@tarea.errors.get(:titulo).nil?) ? '' : ' has-error')%>">
                      <label for="inputTitle" class="col-lg-2 control-label">Titulo:</label>
                     <div class="col-lg-10">
                         <%= t.text_field :titulo , :class=>'form-control', :placeholder=>'Titulo'%>
                     </div>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group <%=((@tarea.errors.get(:descripcion).nil?) ? '' : ' has-error')%>">
                     <label for="inputDescription" class="col-lg-2 control-label">Descripcion:</label>
                     <div class="col-lg-10">
                       <%= t.text_area :descripcion, :class=>'form-control',:rows=>'6', :placeholder=>'Descripcion' %>
                     </div>
                   </div>
 
-                  	<div class="form-group">
+                  	<div class="form-group <%=((@tarea.errors.get(:fecha_entrega).nil?) ? '' : ' has-error')%>">
                   	<label for="inputDate" class="col-lg-2 control-label">Fecha de Entrega:</label>
-                  	<div class="col-lg-10">
-					  <div id="datetimepicker2" class="input-append input-group">
-					    <%= t.text_field :fecha_entrega, :class=>'form-control',:"data-format"=>'dd/MM/yyyy', :placeholder=>'Fecha de Entrega' %>
-					    <span class="add-on">
+                  	<div class="col-lg-6">
+					  <div id="datetimepicker2" class="input-group">
+					    <%= t.text_field :fecha_entrega, :class=>'form-control',:"data-format"=>'dd/MM/yyyy', :placeholder=>'Fecha de Entrega',:onfocus=>"this.blur();", :style=>"border-bottom-left-radius: 4px;  border-top-left-radius: 4px;"%>
+					    <span class="input-group-addon add-on" style="background-color: #D5230F;">
 					      <i data-time-icon="icon-time" data-date-icon="icon-calendar icon-white">
 					      </i>
 					    </span>

@@ -15,9 +15,19 @@ class TareasController < ApplicationController
     @tarea = Tarea.new(tarea_params)
     @tarea.grupo_id=params[:tarea][:grupo_id]
     @tarea.usuario_id = current_user.id 
-    @tarea.save
-    add_attached_files(@tarea.id)
-    redirect_to temas_url 
+    if(@tarea.save)
+      add_attached_files(@tarea.id)
+      redirect_to temas_url 
+    else
+       @grupos = Array.new
+      if(current_user!=nil)
+      current_user.subscriptions.each do |subs|
+        @grupos.push(subs.grupo)
+      end
+      @grupo = Grupo.find(params[:tarea][:grupo_id])
+    end
+      render :new;
+    end
   end
 
   private

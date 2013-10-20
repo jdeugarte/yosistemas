@@ -1,9 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript">
+  function throwFade() {
+    $('#principal').css('left','-150px');
+    $('#principal').css('opacity','0.0');
+  }
+</script>
+
+<script type="text/javascript">
+  function throwShow() {
+    $('#principal').addClass('in-left');
+    $('#principal').css('left','0x');
+    $('#principal').css('opacity','1.0');
+  }
+</script>
 </head>
 
-<body>
+<body >
   <div class='row'>
   <div class="col-lg-3">
     <div class="page-header">
@@ -34,13 +48,7 @@
   </div>
 </div>
 <script type="text/javascript">
-   $('#principal').addClass('in-left');
-</script>
-<script type="text/javascript">
-  function throwFade() {
-    $('#principal').css('left','-150px');
-    $('#principal').css('opacity','0.0');
-  }
+   $( document ).ready( throwShow );
 </script>
 <script type="text/javascript">
   var links = document.getElementsByName('itemMenu');

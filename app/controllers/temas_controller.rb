@@ -121,6 +121,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
         @grupos.push(subs.grupo)
       end
       @grupo = Grupo.find(params[:id])
+      @id = params[:id]
     end
   end
 

@@ -19,7 +19,7 @@
                   <div class="form-group">
                     <label for="inputGroup" class="col-lg-2 control-label">Grupo:</label>
                     <div class="col-lg-10">
-                      <%=f.collection_select(:grupo_id, @grupos, :id, :nombre, {:selected => @grupo.id})%>
+                      <%=f.collection_select(:grupo_id, @grupos, :id, :nombre, {:selected => @grupo.id}, :class=>'form-control')%>
                     </div>
                   </div>
                   <div class="form-group">

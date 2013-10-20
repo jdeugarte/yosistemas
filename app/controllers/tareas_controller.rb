@@ -17,6 +17,7 @@ class TareasController < ApplicationController
     @tarea.usuario_id = current_user.id 
     if(@tarea.save)
       add_attached_files(@tarea.id)
+      flash[:alert] = 'Tarea creada Exitosamente!'
       redirect_to temas_url 
     else
        @grupos = Array.new

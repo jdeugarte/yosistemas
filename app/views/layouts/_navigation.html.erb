@@ -41,10 +41,10 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notificaiones <b class="caret"></b></a>
         <ul class="dropdown-menu">    
-          <%if notifications != nil && notifications.size > 0%>
+          <% if notifications != nil && notifications.size > 0%>
             <% notifications.each do |notificacion| %>  
               <li>
-                <a href=<%="/temas/"+ notificacion.suscripcion_temas_id.to_s %>  > 
+                <a href=<%="/temas/"+ Comment.find(notificacion.comments_id).tema_id.to_s %>  > 
                   <h4>  
                     <%= "tema: "+Tema.find(Comment.find(notificacion.comments_id).tema_id).titulo+": " %>
                   </h4>
@@ -81,7 +81,7 @@
        <ul class="nav navbar-nav pull-right" >        
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <%= image_tag avatar_tam_url(current_user,25) %><%=" "+current_user.correo%><b class="caret"></b></a>    
+            <%= image_tag avatar_tam_url(current_user,20) %><%=" "+current_user.correo%><b class="caret"></b></a>    
             <ul class="dropdown-menu">        
               <li><a href=<%="/usuarios/"+current_user.id.to_s%>>Ver Perfil</a></li>
               <li><a href=<%=usuario_edit_path%> >Modificar Perfil</a></li>

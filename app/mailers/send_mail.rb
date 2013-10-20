@@ -14,10 +14,15 @@ class SendMail < ActionMailer::Base
     #@url  = 'http://yosistemas.herokuapp.com/usuarios/confirm?pass='+@user.id.to_s #AESCrypt.encrypt(@user.id.to_s,"Taller")
     mail(to: @user.correo, subject: 'Password YoSistemas')
   end
-  def notify_users_tema(user, tema)
+  def notify_users_tema(user, tema, grupo)
     @user = user
     @tema=tema
-    @url  = 'http://yosistemas.herokuapp.com/temas/'+tema.id.to_s
+    @grupo=grupo
+    if @grupo.llave!= nil
+      @url  = 'http://yosistemas.herokuapp.com'
+    else
+      @url  = 'http://yosistemas.herokuapp.com/temas/'+tema.id.to_s
+    end
     mail(to: @user.correo,subject: 'YoSistemas comentario tema')
   end
   def notify_users_grupo(user,grupo_nombre)

@@ -184,6 +184,30 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     render "show_mine"
   end
 
+  def searchmine
+    @temas=Array.new 
+    aux = Tema.all
+    if params[:titulo] != "" && params[:titulo] != nil
+      aux.each do |tema|
+        if (tema.correspondeATitulo(params[:titulo]))
+          @temas.push(tema)
+        end
+      end
+    else
+      @temas = aux
+    end
+    /codigo agregado para busqueda por descripcion/
+    if params[:descripcion] != "" && params[:descripcion] != nil
+      byDescription = searchByDescription(params[:descripcion])
+      if params[:titulo] == "" || params[:titulo] == nil
+        @temas=byDescription
+      else
+        @temas = ((@temas&byDescription)+@temas+byDescription).uniq
+      end
+    end
+    render "show_mine"
+  end
+
 
   private
     # No permite parametros de internet

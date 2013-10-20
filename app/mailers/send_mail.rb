@@ -21,7 +21,7 @@ class SendMail < ActionMailer::Base
     if @grupo.llave!= nil
       @url  = 'http://yosistemas.herokuapp.com'
     else
-      @url  = 'http://yosistemas.herokuapp.com/temas/'+tema.id.to_s
+        @url  = 'http://yosistemas.herokuapp.com/temas/'+tema.id.to_s
     end
     mail(to: @user.correo,subject: 'YoSistemas comentario tema')
   end

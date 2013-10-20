@@ -37,10 +37,12 @@ class TareasController < ApplicationController
     end
 
     def add_attached_files(tarea_id)
-      params[:tarea][:archivo].each do |arch|
-      @archivo = ArchivoAdjunto.new(:archivo=>arch)
-      @archivo.tarea_id = tarea_id 
-      @archivo.save
+      if(!params[:tarea][:archivo].nil?)
+        params[:tarea][:archivo].each do |arch|
+        @archivo = ArchivoAdjunto.new(:archivo=>arch)
+        @archivo.tarea_id = tarea_id 
+        @archivo.save
+        end
       end
 
     end

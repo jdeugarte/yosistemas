@@ -3,7 +3,15 @@
   <div class="row">
     <div class="col-lg-6">
     <div class="well">
-<%= flash[:alert] %>
+<% if @pass_error!=nil %>
+   <div id ="errorRecuperarCambiarPass" class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <ul>
+         <li><%= @pass_error %></li>
+        </ul>
+   </div>
+<% end %>
+
      <fieldset>
 
     <legend>Nueva contraseña</legend>

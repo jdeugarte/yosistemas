@@ -22,12 +22,12 @@ class UsuariosController < ApplicationController
         #flash[:alert]=@usuario.correo+" "+pass+" "+@usuario.activa.to_s
         redirect_to root_url
         else
-          flash[:alert]= 'la longitud minima es 6'   
-          render :action => 'recover', :format => 'html'
+          @pass_error= 'la longitud minima es 6'   
+          render :action => 'recover'
         end 
       else
-        flash[:alert]= 'Las contrasenias no coinciden'   
-        render :action => 'recover', :format => 'html'
+        @pass_error= 'Las contrasenias no coinciden'   
+        render :action => 'recover'
 
       end
    end

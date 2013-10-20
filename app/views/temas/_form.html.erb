@@ -16,9 +16,11 @@
                       <%= f.text_area :cuerpo, :class=>'form-control',:rows=>'6', :placeholder=>'Contenido' %>
                     </div>
                   </div>
-                  <div class="field">
-                    <%=f.label :grupo_id %><br />
-                    <%=f.collection_select(:grupo_id, @grupos, :id, :nombre,{:selected => @grupo.id})%>
+                  <div class="form-group">
+                    <label for="inputGroup" class="col-lg-2 control-label">Grupo:</label>
+                    <div class="col-lg-10">
+                      <%=f.collection_select(:grupo_id, @grupos, :id, :nombre, {:selected => @grupo.id})%>
+                    </div>
                   </div>
                   <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">

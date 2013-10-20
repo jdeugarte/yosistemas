@@ -19,7 +19,7 @@
                   <div class="form-group">
                     <label for="inputContent" class="col-lg-2 control-label">Estado:</label>
                     <div class="col-lg-10">
-                      <%= f.select :estado, options_for_select([["Privado", true], ["Publico", false]]) %>
+                      <%= f.select :estado, options_for_select([["Privado", true], ["Publico", false]], :class=>'form-control') %>
                     </div>
                   </div>            
                   <div class="form-group">

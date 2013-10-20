@@ -6,3 +6,4 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 publico = Grupo.create(nombre: 'Publico', descripcion: 'todos deben tener ingreso a temas publicos')
+#usuario_defecto = Usuario.create(nombre: "usuario", apellido: "seed", contrasenia: Digest::MD5.hexdigest("123456"), correo: "seed@gmail.com", activa: true, rol: "Docente")

@@ -10,7 +10,7 @@ describe TemasController do
   # que acceden a la BD en lugar de mocks o stubs
   describe 'GET #index' do
     grupo = FactoryGirl.build(:grupo)
-    it "obtiene todos los temas en un arreglo" do  
+    it "obtiene todos los temas de grupo publico en un arreglo" do  
       
       tema1 = FactoryGirl.create(:tema, titulo: 'Tema 1')
       tema2 = FactoryGirl.create(:tema, titulo: 'Tema 2')
@@ -61,13 +61,22 @@ describe TemasController do
   
   describe 'GET #search' do
     grupo = FactoryGirl.build(:grupo)
-    it "obtiene todos los temas al no haber filtro" do  
+    it "obtiene todos los temas publicos al no haber filtro" do  
       tema1 = FactoryGirl.create(:tema, titulo: 'Prueba 1')
       tema2 = FactoryGirl.create(:tema, titulo: 'Test 2')
       
       get :search, {:grupo=>"1"}
       
       expect(assigns(:temas)).to match_array([tema1,tema2])
+    end
+
+    it "obtiene el tema que coincide con el titulo" do  
+      tema1 = FactoryGirl.create(:tema, titulo: 'Prueba 1')
+      tema2 = FactoryGirl.create(:tema, titulo: 'Test 2')
+      
+      get :search, {:grupo=>"1", :titulo=>"1"}
+      
+      expect(assigns(:temas)).to match_array([tema1])
     end
 
     it "renderiza a la vista index" do

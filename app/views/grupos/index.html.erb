@@ -27,7 +27,7 @@
   </div>
   <div class="col-lg-8">
     <% @grupos.each do |grupo| %>   
-    <%if grupo.id!=1%> 
+    <%if grupo.nombre!="Publico"%> 
         <div class="well">
           <strong><legend><%=grupo.nombre%></legend></strong>
           <div class="row">
@@ -74,7 +74,7 @@
                       <button type="submit" class="btn btn-primary">Suscribirse al grupo</button>  
                     </form>                 
                 <%end%>
-                 <form class="navbar-form navbar-left" method="get" action=<%=root_path%>  >            
+                 <form class="navbar-form navbar-left" method="get" action="/grupos/<%=grupo.id%>/temas/" >            
                       <button type="submit" class="btn btn-primary">Ver Temas del Grupo</button>  
                     </form> 
 

@@ -15,4 +15,16 @@ describe CommentsController do
         }.to change(Comment, :count).by(1)
       end
   end
+
+  describe 'Elminar Comentario' do
+      it "elimina un comentario de la base de datos" do
+        expect{
+          grupo = FactoryGirl.create(:grupo,nombre: 'Publico')
+          tema1 = FactoryGirl.create(:tema, titulo: 'Tema Comentado')
+		  comment1 = FactoryGirl.create(:comment, body: "probando", tema_id: tema1.id)
+          comment2 = FactoryGirl.create(:comment, body: "sera eliminado", tema_id: tema1.id)
+          comment2.destroy
+        }.to change(Comment, :count).by(1)
+      end
+  end
 end

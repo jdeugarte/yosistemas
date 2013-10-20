@@ -38,9 +38,28 @@ feature 'Gestion de Grupo' do
       page.select("Publico", :from => "grupo_estado")
       click_button 'Crear grupo'
     }.to change(Grupo, :count).by(1)
-    #expect(current_path).to eq grupos_path
-    expect(current_path).to eq "/grupos/"+ Grupo.last.id.to_s  #no muy util aqui, pero sirve para mostrar esta opcion
+    expect(current_path).to eq root_path
     
+  end
+
+  scenario 'Suscribirse a un grupo privado' do
+    docente = FactoryGirl.create(:usuario)
+    estudiante = FactoryGirl.create(:other_user_estudiante)
+
+    ingresar_sistema(docente)
+    click_link 'Crear Grupo'  #lleva al formulario para crear un grupo
+    
+    expect{
+      fill_in 'grupo_nombre', with: 'Titulo tema de prueba'
+      fill_in 'grupo_descripcion', with: 'Descripcion o contenido del tema de prueba'
+      page.select("Privado", :from => "grupo_estado")
+      click_button 'Crear grupo'
+    }.to change(Grupo, :count).by(1)
+    expect(current_path).to eq '/grupos/'+ Grupo.last.id.to_s
+    click_link 'Salir'
+    ingresar_sistema(estudiante)
+    #click_link 'Ver grupos'
+
   end
 
 end

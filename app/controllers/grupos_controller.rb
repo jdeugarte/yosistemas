@@ -44,7 +44,8 @@ class GruposController < ApplicationController
       subs.grupo = @grupo
       subs.usuario = current_user
       subs.save
-      redirect_to @grupo, :flash => { :info => "Grupo creado exitosamente" }
+      redirigir_a(@grupo)
+      
     else
       redirect_to "/grupos/new", :flash => { :error => "Error al crear un grupo" }
     end 
@@ -74,5 +75,13 @@ class GruposController < ApplicationController
     		llave = "publico"
     	end
     	return llave
+    end
+
+    def redirigir_a(grupo)
+      if grupo.estado==true
+         redirect_to grupo, :flash => { :info => "Grupo creado exitosamente" }
+      else
+        redirect_to root_path, :flash => { :info => "Grupo creado exitosamente" }
+      end
     end
 end

@@ -6,5 +6,6 @@ FactoryGirl.define do
     descripcion "grupo para specs"
     estado false
     llave "qwerty"
+    usuario_id nil
   end
 end

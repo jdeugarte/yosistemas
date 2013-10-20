@@ -7,13 +7,13 @@
                   <div class="form-group">
                      <label for="inputTitle" class="col-lg-2 control-label">Titulo:</label>
                     <div class="col-lg-10">
-                        <%= f.text_field :titulo , :class=>'form-control', :placeholder=>'Titulo'%>
+                        <%= f.text_field :titulo , :class=>'form-control', :placeholder=>'Titulo', :maxlength => 50%>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputContent" class="col-lg-2 control-label">Contenido:</label>
                     <div class="col-lg-10">
-                      <%= f.text_area :cuerpo, :class=>'form-control',:rows=>'6', :placeholder=>'Contenido' %>
+                      <%= f.text_area :cuerpo, :class=>'form-control',:rows=>'6', :placeholder=>'Contenido', :maxlength => 500 %>
                     </div>
                   </div>
                   <div class="form-group">

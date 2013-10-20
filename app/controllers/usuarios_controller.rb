@@ -11,9 +11,10 @@ class UsuariosController < ApplicationController
     @usuario=Usuario.find(params[:id])
   end
   def password_recovered
+    @request_id=params[:id_request]
     pass=params[:contrasenia_nueva].to_s
     newPass=params[:contrasenia_nueva2].to_s
-    @usuario=Usuario.find(params[:id])
+    @usuario=Usuario.find(params[:id_user])
       if (pass==newPass)
         if(pass.length>5)
         @usuario.contrasenia=Digest::MD5.hexdigest(pass)
@@ -22,8 +23,8 @@ class UsuariosController < ApplicationController
         #flash[:alert]=@usuario.correo+" "+pass+" "+@usuario.activa.to_s
         redirect_to root_url
         else
-          @pass_error= 'la longitud minima es 6'   
-          render :action => 'recover'
+          @pass_error= 'la longitud minima es 6'
+          render :action => 'recover',:format=>'html'
         end 
       else
         @pass_error= 'Las contrasenias no coinciden'   
@@ -70,11 +71,12 @@ class UsuariosController < ApplicationController
      @errorMessagge="no puede recuperar su password si esta loggeado"
   else      
   begin
-    password_request=PasswordsRequest.find(params[:id])
+    password_request=PasswordsRequest.find(params[:id_request])
     rescue ActiveRecord::RecordNotFound
   end
-    if(password_request!=nil)
+    if(password_request!=nil && password_request.usuario.id.to_s==params[:id_user])
         if(password_request.usuario.passwords_request_id==password_request.id && DateTime.now<=(password_request.created_at+(86400)))
+          @request_id=password_request.id
            @usuario=password_request.usuario
         else
           @errorMessagge="esta solicitud expiro, por favor solicite otra"

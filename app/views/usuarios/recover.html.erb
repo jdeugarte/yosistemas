@@ -16,8 +16,7 @@
 
     <legend>Nueva contraseña</legend>
 
-    <form method="post" action="/usuarios/password_recovered/<%=@usuario.id.to_s%>">   
-      <div class="form-group">
+   <form method="post" action="/usuarios/password_recovered/<%=@usuario.id.to_s%>/<%=@request_id.to_s%>">    <div class="form-group">
            <label for="inputTitle" class="col-lg-2 control-label">Contraseña: </label>
           <%= password_field_tag :contrasenia_nueva, params[:contrasenia_nueva], :class=>'form-control'  %>
           <br><br>

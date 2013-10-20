@@ -42,7 +42,7 @@ feature 'Gestion de usuarios' do
     request.usuario=usuario
     usuario.save
     request.save
-    visit recover_path(request.id)
+    visit recover_path(usuario.id, request.id)
       fill_in 'contrasenia_nueva', with: 'nuevoPass'
       fill_in 'contrasenia_nueva2', with: 'nuevoPass'
       click_button 'Confirmar'
@@ -59,7 +59,7 @@ feature 'Gestion de usuarios' do
     request2.usuario=usuario
     usuario.save
     request.save
-    visit recover_path(request.id)
+    visit recover_path(usuario.id,request.id)
     expect(page).to have_content 'esta solicitud expiro, por favor solicite otra'
   end
 
@@ -71,7 +71,7 @@ feature 'Gestion de usuarios' do
     request.usuario=usuario
     usuario.save
     request.save
-    visit recover_path("imposible")
+    visit recover_path("imposible","imposible")
     expect(page).to have_content 'no podemos procesar esta solicitud, por favor solicite otra'
   end
 
@@ -96,7 +96,7 @@ feature 'Gestion de usuarios' do
     usuario.save
     request.save
     ingresar_sistema(usuario)
-    visit recover_path(request.id)
+    visit recover_path(usuario.id,request.id)
     expect(page).to have_content 'no puede recuperar su password si esta loggeado'
   end
   scenario 'Activar cuenta' do

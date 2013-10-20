@@ -20,12 +20,13 @@ class CommentsController < ApplicationController
             if suscrito.usuario_id != current_user.id
                 @usuario = Usuario.find(suscrito.usuario_id)
                 @tema=Tema.find(id_tema)
+                @grupo=Grupo.find(@tema.grupo_id)
                 @notificacion = Notificacion.new
                 @notificacion.notificado = false
                 @notificacion.suscripcion_temas_id = suscrito.id
                 @notificacion.comments_id = @commentt.id
                 @notificacion.save    
-                SendMail.notify_users_tema(@usuario, @tema).deliver    
+                SendMail.notify_users_tema(@usuario, @tema, @grupo).deliver    
             end
             end 
         end

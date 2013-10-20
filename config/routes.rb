@@ -5,7 +5,7 @@ Yosistemas::Application.routes.draw do
   post 'sessions/create' => 'sessions#create', :as => 'loguear'
   get 'sessions/destroy' => 'sessions#destroy', :as => 'desloguear'
   get "usuarios/confirm/:pass" => "usuarios#confirm", :as => 'confirm'
-  get "log_in" => "sessions#new", :as => "log_in"
+  #get "log_in" => "sessions#new", :as => "log_in"
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "usuarios/index"
   get "usuarios/show"

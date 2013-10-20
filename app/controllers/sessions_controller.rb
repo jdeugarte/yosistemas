@@ -8,12 +8,28 @@ class SessionsController < ApplicationController
     usuario = Usuario.autenticar(params[:correo], params[:contrasenia])    
     if usuario
       session[:usuario_id] = usuario.id
-      @cont = check_notifications(usuario)
       if (request.referrer.include? "/usuarios") || (request.referrer.include? "usuarios/confirm" ) || (request.referrer.include? "/send_password_mail")        
-
-        redirect_to root_url, :notice => "Logged in!  "+@cont.to_s+"  notifications: "
+       
+        if notifications == nil || notifications.size < 1
+         redirect_to root_url, :notice => "Logged in!"
+        else
+          if notifications.size == 1
+            redirect_to root_url, :notice => "Logged in!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notifications.size.to_s+" notificacion"   
+          else
+            redirect_to root_url, :notice => "Logged in!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notifications.size.to_s+" notificaciones"   
+          end
+        end
       else
-        redirect_to :back, :notice => "Logged in!  "+@cont.to_s+"  notifications: "
+
+        if notifications == nil || notifications.size < 1
+         redirect_to :back, :notice => "Logged in!"
+        else
+          if notifications.size == 1
+            redirect_to :back, :notice => "Logged in!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notifications.size.to_s+" notificacion"   
+          else
+            redirect_to :back, :notice => "Logged in!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notifications.size.to_s+" notificaciones"   
+          end
+        end
       end
     else
         
@@ -21,24 +37,12 @@ class SessionsController < ApplicationController
     end
   end
 
-  def check_notifications(user)
-    @var = 0
-    @suscripciones = SuscripcionTema.where(usuario_id: user.id)
-    @suscripciones.each do |suscripcion|
-      @notificaciones = Notificacion.where(suscripcion_temas_id: suscripcion.id , notificado: false)
-      @notificaciones.each do |notificacion|
-        if notificacion.notificado==false
-          @var = @var+1
-          notificacion.notificado=true
-          notificacion.save
-        end
-      end
-    end
-    return @var
-  end
-
-
+  
   def destroy
+    notifications.each do |notificacion|
+      notificacion.notificado = true
+      notificacion.save 
+    end
     session[:usuario_id] = nil
     redirect_to root_url, :notice => "Logged out!"
   end

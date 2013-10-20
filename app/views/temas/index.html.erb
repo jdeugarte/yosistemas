@@ -47,9 +47,13 @@
         <th><%=link_to "Titulo", searchtitulo_path(@cadena,@grupo.id)%>  </th>
       <%else%>
         <th>Titulo </th>
-      <%end%>  
-      <th><%=sortable "Cuerpo" %></th>
-
+      <%end%>
+      <%if @temas.size != 0%>  
+        <th><%=link_to "Detalle", searchdetalle_path(@cadena,@grupo.id)%>  </th>
+      <%else%>
+        <th>Detalle </th>
+      <%end%>
+      
     </tr>
   </thead>
                 <tbody>    

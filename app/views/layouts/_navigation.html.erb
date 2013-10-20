@@ -43,8 +43,15 @@
         <ul class="dropdown-menu">    
           <%if notifications != nil && notifications.size > 0%>
             <% notifications.each do |notificacion| %>  
-              <li><a href=<%="/temas/"+ notificacion.suscripcion_temas_id.to_s%>  > <%= notificacion.id %> </a></li>
-            <% end %>
+              <li>
+                <a href=<%="/temas/"+ notificacion.suscripcion_temas_id.to_s %>  > 
+                  <h4>  
+                    <%= "tema: "+Tema.find(Comment.find(notificacion.comments_id).tema_id).titulo+": " %>
+                  </h4>
+                  &nbsp;&nbsp;&nbsp;<%= Comment.find(notificacion.comments_id).body[0,20]+"..."%> 
+                </a>
+              </li>
+            <%end%>
           <%else%>  
             <li><a>Vacio </a> </li>
           <%end%>

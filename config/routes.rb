@@ -30,6 +30,7 @@ Yosistemas::Application.routes.draw do
 
   get 'temas/visible/:id' => 'temas#visible', :as => 'visible_tema'
   get 'temas/show_mine' => 'temas#show_mine', :as=>'show_mine'
+  get 'temas/searchmine' => 'temas#searchmine', :as=>'searchmine'
   #get 'temas/:grupo' => 'temas#index'
   get 'grupos/subscription_group/:id' => 'grupos#subscription_group', :as=>'suscribirse'
   get "grupos/search" => "grupos#search", :as=>'search_grupo'
@@ -38,6 +39,7 @@ Yosistemas::Application.routes.draw do
 
   get 'temas/new/:id' => 'temas#new', :as => 'tema_para_grupo'
   get 'tareas/new/:id' => 'tareas#new', :as => 'tarea_para_grupo'
+
 
   post "usuarios/update_user/:id"=>"usuarios#update"
   resources :usuarios do

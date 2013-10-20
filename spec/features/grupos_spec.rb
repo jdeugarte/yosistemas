@@ -38,8 +38,7 @@ feature 'Gestion de Grupo' do
       page.select("Publico", :from => "grupo_estado")
       click_button 'Crear grupo'
     }.to change(Grupo, :count).by(1)
-    #expect(current_path).to eq grupos_path
-    expect(current_path).to eq "/grupos/"+ Grupo.last.id.to_s  #no muy util aqui, pero sirve para mostrar esta opcion
+    expect(current_path).to eq root_path
     
   end
 

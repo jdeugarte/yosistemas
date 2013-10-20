@@ -38,12 +38,12 @@ class GruposController < ApplicationController
     @grupo = Grupo.new(grupo_params)
 
     @grupo.usuario_id = current_user.id
-    @grupo.llave = verificar_grupo(@grupo.estado) 
-    subs = Subscription.new
-    subs.grupo = @grupo
-    subs.usuario = current_user
-    subs.save
-    if @grupo.save
+    @grupo.llave = verificar_grupo(@grupo.estado)         
+    if @grupo.save     
+      subs = Subscription.new
+      subs.grupo = @grupo
+      subs.usuario = current_user
+      subs.save
       redirect_to @grupo, :flash => { :info => "Grupo creado exitosamente" }
     else
       redirect_to "/grupos/new", :flash => { :error => "Error al crear un grupo" }

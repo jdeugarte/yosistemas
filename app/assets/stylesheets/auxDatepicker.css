@@ -1027,7 +1027,7 @@ input[type="checkbox"][readonly] {
 .btn-back{
 margin-top:15px;
 cursor:pointer;
-border:2px solid #bababa;
+border:2px solid #787878;
 background:#ffffff;
 width:40px;
 height:40px;
@@ -1038,7 +1038,7 @@ background-position: center right;
 background-repeat: no-repeat;
 }
 .btn-back:hover{
-border:2px solid #787878;
+border:2px solid #000;
 }
 .btn-back:focus{
 border:2px solid #000;

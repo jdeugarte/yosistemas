@@ -26,6 +26,17 @@ feature 'Gestion de Grupo' do
     
   end
 
+scenario 'Usuario con rol de estudiante no deberia crear temas' do
+    usuario = FactoryGirl.create(:other_student)
+    ingresar_sistema(usuario)
+    visit '/grupos/new'
+    expect(current_path).to eq root_path
+ 
+        
+  end
+
+
+
   scenario 'Crear un nuevo grupo publico' do
     usuario = FactoryGirl.create(:usuario)
 

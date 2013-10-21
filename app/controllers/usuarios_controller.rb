@@ -11,6 +11,9 @@ class UsuariosController < ApplicationController
     @usuario=Usuario.find(params[:id])
   end
   def password_recovered
+      if(current_user!=nil)
+          redirect_to root_url
+  else
     @request_id=params[:id_request]
     pass=params[:contrasenia_nueva].to_s
     newPass=params[:contrasenia_nueva2].to_s
@@ -31,6 +34,7 @@ class UsuariosController < ApplicationController
         render :action => 'recover'
 
       end
+    end
    end
   def edit
 	 @usuario=current_user

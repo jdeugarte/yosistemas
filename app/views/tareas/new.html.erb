@@ -15,7 +15,7 @@
    </div>
 <% end %>
 <%= form_for @tarea, :html => { :class => 'bs-example form-horizontal', :multipart => true} do |t| %>
-<%= t.hidden_field :grupo_id%>
+<%= t.hidden_field :id,:value => @id%>
   <div class="row">
           <div class="col-lg-10">
             <div class="well">

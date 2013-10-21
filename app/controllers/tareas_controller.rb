@@ -25,9 +25,10 @@ class TareasController < ApplicationController
       if(current_user!=nil)
       current_user.subscriptions.each do |subs|
         @grupos.push(subs.grupo)
+        end
+        @grupo = Grupo.find(params[:tarea][:grupo_id])
+        @id = params[:tarea][:grupo_id]
       end
-      @grupo = Grupo.find(params[:tarea][:grupo_id])
-    end
       render :new;
     end
   end

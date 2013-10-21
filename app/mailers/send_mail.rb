@@ -18,11 +18,7 @@ class SendMail < ActionMailer::Base
     @user = user
     @tema=tema
     @grupo=grupo
-    if @grupo.llave!= nil
-      @url  = 'http://yosistemas.herokuapp.com'
-    else
-        @url  = 'http://yosistemas.herokuapp.com/temas/'+tema.id.to_s
-    end
+    @url  = 'http://yosistemas.herokuapp.com/temas/'+tema.id.to_s
     mail(to: @user.correo,subject: 'YoSistemas comentario tema')
   end
   def notify_users_grupo(user,grupo_nombre)

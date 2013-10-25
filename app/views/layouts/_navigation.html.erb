@@ -39,7 +39,15 @@
 
       <%if  !current_user.nil? %>
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notificaiones <b class="caret"></b></a>
+        <%if notifications!= nil && notifications.size >0%>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+            <img src="/assets/not2.jpg" height="25" width="30"> Notificaciones <b class="caret"></b>
+          </a>
+        <%else%>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+            <img src="/assets/not3.jpg" height="25" width="30"> Notificaciones <b class="caret"></b>
+          </a>
+        <%end%>
         <ul class="dropdown-menu">    
           <% if notifications != nil && notifications.size > 0%>
             <% notifications.each do |notificacion| %>  

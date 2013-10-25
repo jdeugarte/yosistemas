@@ -39,12 +39,13 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     end
     render 'index'
   end
-  def searchtitulo
+  
+  def ordertable
     @temas = Array.new
-      if(params[:id] != nil)
-       @grupo = Grupo.find(params[:id])
-     else
-       @grupo = Grupo.find(1)
+    if(params[:id] != nil)
+      @grupo = Grupo.find(params[:id])
+    else
+      @grupo = Grupo.find(1)
     end
     if params[:themes] != nil && params[:themes] != "" 
       @ids = params[:themes]
@@ -54,29 +55,16 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
       @ids.each do |id|
           @temas.push(Tema.find(id))
       end
-      @temas.sort! { |a,b| a.titulo.downcase <=> b.titulo.downcase }
-     end
-    render 'index'
-  end
-  def searchdetalle
-    @temas = Array.new
-      if(params[:id] != nil)
-       @grupo = Grupo.find(params[:id])
-     else
-       @grupo = Grupo.find(1)
-    end
-    if params[:themes] != nil && params[:themes] != "" 
-      @ids = params[:themes]
-      @ids.slice!(0)
-      @ids=@ids.split("-")
-    
-      @ids.each do |id|
-          @temas.push(Tema.find(id))
+      if params[:var] == "titulo"
+        @temas.sort! { |a,b| a.titulo.downcase <=> b.titulo.downcase }
+      else
+        @temas.sort! { |a,b| a.cuerpo.downcase <=> b.cuerpo.downcase }
       end
-      @temas.sort! { |a,b| a.cuerpo.downcase <=> b.cuerpo.downcase }
-     end
+    end
     render 'index'
   end
+
+  
   def searchByDescription(keyWords)
     keyWords = keyWords.downcase
       initialResult = Tema.where('cuerpo LIKE ?', '%'+keyWords+'%')

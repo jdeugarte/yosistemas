@@ -43,12 +43,14 @@
   <thead>
     <tr>
       <%if @temas.size != 0%>
-        <th><%=link_to "Titulo", searchtitulo_path(@cadena,@grupo.id)%>  </th>
+        <% @var = "titulo" %>
+        <th><%=link_to "Titulo", ordertable_path(@cadena,@grupo.id,@var)%>  </th>
       <%else%>
-        <th>Titulo </th>
+        <th> Titulo </th>
       <%end%>
-      <%if @temas.size != 0%>  
-        <th><%=link_to "Detalle", searchdetalle_path(@cadena,@grupo.id)%>  </th>
+      <%if @temas.size != 0%>
+        <% @var2 = "detalle" %>  
+        <th><%=link_to "Detalle", ordertable_path(@cadena,@grupo.id,@var2)%>  </th>
       <%else%>
         <th>Detalle </th>
       <%end%>

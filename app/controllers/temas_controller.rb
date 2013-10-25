@@ -49,9 +49,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     end
     if params[:themes] != nil && params[:themes] != "" 
       @ids = params[:themes]
-      @ids.slice!(0)
-      @ids=@ids.split("-")
-    
+      @ids=@ids.split("")
       @ids.each do |id|
           @temas.push(Tema.find(id))
       end
@@ -64,6 +62,27 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     render 'index'
   end
 
+  def ordertablemine
+    @temas = Array.new
+    if params[:themes] != nil && params[:themes] != "" 
+      @ids = params[:themes]
+      @ids=@ids.split("")
+      @ids.each do |id|
+          @temas.push(Tema.find(id))
+      end
+      if params[:var] == "titulo"
+        @temas.sort! { |a,b| a.titulo.downcase <=> b.titulo.downcase }
+      else
+        if params[:var] == "detalle"
+          @temas.sort! { |a,b| a.cuerpo.downcase <=> b.cuerpo.downcase }  
+        else
+          @temas.sort! { |a,b| a.grupo.nombre.downcase <=> b.grupo.nombre.downcase }
+        end
+        
+      end
+    end
+    render "show_mine"
+  end
   
   def searchByDescription(keyWords)
     keyWords = keyWords.downcase

@@ -23,7 +23,8 @@ Yosistemas::Application.routes.draw do
   post "comments/editc/:id" => "comments#editc"
   get "comments/delete/:id" => "comments#delete"
   get "temas/ordertable/:themes/:id/:var" => 'temas#ordertable', :as  => 'ordertable'
-  
+  get "temas/ordertablemine/:themes/:var" => 'temas#ordertablemine' , :as => 'ordertablemine'
+
   get "suscripcion_temas/create/:id" => 'suscripcion_temas#create', :as => 'suscribirse_tema'
   get "suscripcion_temas/delete/:id" => 'suscripcion_temas#delete', :as => 'rechazar_tema'
 

@@ -66,7 +66,8 @@
 </div>
 </div>
 <div class="col-12 col-md-10 col-lg-8">
-<%for comment in @tema.comments%>
+<center><%= paginate @comments %></center>
+<%for comment in @comments%>
 	<%if(comment.id!=nil)%>
 	<div class="media">
 	  <a class="pull-left" href="#">
@@ -85,4 +86,3 @@
 	<%end%>
 <%end%>
 </div>
-<%= link_to 'Atras', temas_path %>

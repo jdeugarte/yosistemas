@@ -134,6 +134,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
 
   def show
      @tema = Tema.find(params[:id])
+     @comments= Kaminari.paginate_array(@tema.comments).page(params[:page]).per(10)  
   end
 
   # POST /temas

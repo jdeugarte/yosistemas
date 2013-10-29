@@ -30,6 +30,7 @@ gem 'paperclip'
 gem 'paperclip-dropbox'
 gem 'dropbox'
 gem "metric_fu", "~> 4.4.4"
+gem 'kaminari'
 
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

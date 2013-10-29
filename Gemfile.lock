@@ -106,6 +106,9 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.1)
     json_pure (1.8.1)
+    kaminari (0.14.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     launchy (2.3.0)
       addressable (~> 2.3)
     mail (2.5.4)
@@ -264,6 +267,7 @@ DEPENDENCIES
   faker (~> 1.1.2)
   jbuilder (~> 1.2)
   jquery-rails
+  kaminari
   launchy (~> 2.3.0)
   metric_fu (~> 4.4.4)
   paperclip

@@ -1,7 +1,7 @@
 class GruposController < ApplicationController
 
   def index
-    @grupos = Grupo.all
+    @grupos = Grupo.all.page(params[:page]).per(5)
   end
 
   def search
@@ -17,6 +17,7 @@ class GruposController < ApplicationController
     else
       @grupos = aux
     end
+    @grupos=Kaminari.paginate_array(@grupos).page(params[:page]).per(5)
     render 'index'
   end
 

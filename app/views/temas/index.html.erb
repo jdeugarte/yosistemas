@@ -1,6 +1,6 @@
 <%= render :layout => 'layouts/groups_layout' do%>
 <div class="page-header">
-     <h1 id="forms">Lista de Temas</h1>
+     <h1 id="forms">Lista de Temas</h1>     
 </div>
 <form method="GET" action="/temas/search/<%=@grupo.id%>">
 <div class="row" style="margin-bottom:50px;">
@@ -31,11 +31,7 @@
 </form>
 <br>
 
-<br>
-  <% @cadena=""%>
-    <% @temas.each do |tema| %>
-    <% @cadena = @cadena +""+ tema.id.to_s %>
-  <%end%>
+<br> 
 <br>
 <div class="row">
 <div class="col-lg-10">
@@ -44,21 +40,17 @@
     <tr>
       <%if @temas.size != 0%>
         <% @var = "titulo" %>
-        <th><%=link_to "Titulo", ordertable_path(@cadena,@grupo.id,@var)%>  </th>
+        <th><%=link_to "Titulo", ordertable_path(@ides,@grupo.id,@var)%>  </th>      
+        <% @var2 = "detalle" %>  
+        <th><%=link_to "Detalle", ordertable_path(@ides,@grupo.id,@var2)%>  </th>
       <%else%>
         <th> Titulo </th>
-      <%end%>
-      <%if @temas.size != 0%>
-        <% @var2 = "detalle" %>  
-        <th><%=link_to "Detalle", ordertable_path(@cadena,@grupo.id,@var2)%>  </th>
-      <%else%>
         <th>Detalle </th>
       <%end%>
       
     </tr>
   </thead>
-                <tbody>    
-    <%= @mine.to_s %>
+                <tbody>        
     <% @temas.each do |tema| %>
       <%if tema.visible==1 %>
       <tr style='cursor:pointer' onclick=<%="document.location.href='/temas/"+tema.id.to_s+"'"%>>
@@ -70,9 +62,11 @@
     
       </tr>
       <% end %>
-    <% end %>
+    <% end %>    
+
   </tbody>
               </table>
+  <center><%= paginate @temas %></center>
 </div>
 </div>
 </div>

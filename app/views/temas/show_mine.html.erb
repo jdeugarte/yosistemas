@@ -25,10 +25,6 @@
 <br>
 
 <br>
-<% @cadena=""%>
-    <% @temas.each do |tema| %>
-    <% @cadena = @cadena +""+ tema.id.to_s %>
-<%end%>
 <br>
 <div class="row">
 <div class="col-lg-10">
@@ -39,21 +35,21 @@
 
       <%if @temas.size != 0%>
         <% @var = "titulo" %>
-        <th><%=link_to "Titulo", ordertablemine_path(@cadena,@var)%>  </th>
+        <th><%=link_to "Titulo", ordertablemine_path(@ides,@var)%>  </th>
       <%else%>
         <th> Titulo </th>
       <%end%>
 
       <%if @temas.size != 0%>
         <% @var2 = "detalle" %>  
-        <th><%=link_to "Detalle", ordertablemine_path(@cadena,@var2)%>  </th>
+        <th><%=link_to "Detalle", ordertablemine_path(@ides,@var2)%>  </th>
       <%else%>
         <th>Detalle </th>
       <%end%>
 
       <%if @temas.size != 0%>
         <% @var3 = "grupo" %>  
-        <th><%=link_to "Grupo", ordertablemine_path(@cadena,@var3)%>  </th>
+        <th><%=link_to "Grupo", ordertablemine_path(@ides,@var3)%>  </th>
       <%else%>
         <th>Detalle </th>
       <%end%>

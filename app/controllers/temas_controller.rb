@@ -3,6 +3,7 @@ class TemasController < ApplicationController
 
 
 skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:show,:searchtitulo]
+
   def index
     if(params[:id] != nil)
        @grupo = Grupo.find(params[:id])
@@ -11,8 +12,8 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     end
    
     #@temas = Tema.order(params[:sort)]
-    @temas = @grupo.temas.order(params[:sort])#.sort(params[:sort])
-
+    @temas = @grupo.temas.order(params[:sort]).page(params[:page]).per(5)
+    @ides=sacarIds(@grupo.temas)
   end
   
   def search
@@ -36,7 +37,9 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
       else
         @temas = ((@temas&byDescription)+@temas+byDescription).uniq
       end
-    end
+    end   
+    @ides=sacarIds(@temas)
+    @temas= Kaminari.paginate_array(@temas).page(params[:page]).per(5)    
     render 'index'
   end
   
@@ -49,7 +52,8 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     end
     if params[:themes] != nil && params[:themes] != "" 
       @ids = params[:themes]
-      @ids=@ids.split("")
+      @ids.slice!(0)
+      @ids=@ids.split("-")
       @ids.each do |id|
           @temas.push(Tema.find(id))
       end
@@ -59,6 +63,8 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
         @temas.sort! { |a,b| a.cuerpo.downcase <=> b.cuerpo.downcase }
       end
     end
+    @ides=sacarIds(@temas)
+    @temas= Kaminari.paginate_array(@temas).page(params[:page]).per(5)
     render 'index'
   end
 
@@ -66,7 +72,8 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     @temas = Array.new
     if params[:themes] != nil && params[:themes] != "" 
       @ids = params[:themes]
-      @ids=@ids.split("")
+      @ids.slice!(0)
+      @ids=@ids.split("-")
       @ids.each do |id|
           @temas.push(Tema.find(id))
       end
@@ -133,7 +140,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
   end
 
   def show
-     @tema = Tema.find(params[:id])
+     @tema = Tema.find(params[:id])  
      @comments= Kaminari.paginate_array(@tema.comments).page(params[:page]).per(10)  
   end
 
@@ -189,6 +196,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
         @temas.push(tema)
       end
     end
+    @ides=sacarIds(@temas)
     render "show_mine"
   end
 
@@ -221,7 +229,14 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     # No permite parametros de internet
     def tema_params
       params.require(:tema).permit(:titulo, :cuerpo)
-    end
+    end 
 
+    def sacarIds(temas)
+      concatenacion=""
+      temas.each do |tema|
+        concatenacion=concatenacion+"-"+tema.id.to_s
+      end
+      return concatenacion
+    end
 
 end

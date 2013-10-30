@@ -27,7 +27,7 @@ gem 'jquery-rails'
 
 #gems for files upload
 gem 'paperclip'
-gem 'paperclip-dropbox'
+gem 'paperclip-dropbox', '~> 1.1.7'
 gem 'dropbox'
 gem "metric_fu", "~> 4.4.4"
 gem 'kaminari'

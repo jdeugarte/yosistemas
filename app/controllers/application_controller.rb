@@ -7,7 +7,11 @@ class ApplicationController < ActionController::Base
   before_filter :require_log_in  
   helper_method :notifications
   private
-  
+  def asdf
+    flash[:alert] = "hijo puta"
+    render 'index'
+  end
+
   def current_user
     @current_user ||= Usuario.find(session[:usuario_id]) if session[:usuario_id]    
   end

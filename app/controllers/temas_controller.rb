@@ -140,7 +140,13 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
   end
 
   def show
-     @tema = Tema.find(params[:id])  
+    @tema = Tema.find(params[:id])  
+     notifications.each do |notificacion|
+      if ( Comment.find(notificacion.comments_id).tema_id == @tema.id )
+        notificacion.notificado = true
+        notificacion.save 
+      end
+    end
      @comments= Kaminari.paginate_array(@tema.comments).page(params[:page]).per(10)  
   end
 

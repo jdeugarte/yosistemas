@@ -2,10 +2,33 @@
 <html>
 <head>
 <script>
+  var runCount = 0;    
+  function timerMethod() {
+    runCount++;
+    if(runCount > 15) 
+    {
+      clearInterval(timerId);
+    }
+    if(notifications.size >0)
+    {
+
+      s=document.getElementById("demo");
+      s.src="/assets/not2.jpg";   
+      alert("I am an alert box!");
+    }
+  }
+  var timerId = setInterval(timerMethod, 3000);
+</script>
+
+<script>
 function changeSrc()
 {
-  s=document.getElementById("demo");
-  s.src="/assets/not3.jpg";
+    if (notifications.size == 0 || notifications == nil)
+    {
+      s=document.getElementById("demo");
+      s.src="/assets/not3.jpg";
+    }
+  
 }
 </script>
 </head>
@@ -49,6 +72,7 @@ function changeSrc()
       <%end%>
 
 
+  
       <%if  !current_user.nil? %>
       <li class="dropdown" onclick="changeSrc()">
         <%if notifications!= nil && notifications.size >0%>
@@ -68,7 +92,7 @@ function changeSrc()
               <li>
                 <a href=<%="/temas/"+ Comment.find(notificacion.comments_id).tema_id.to_s %>  > 
                   <h4>  
-                    <%= "tema: "+Tema.find(Comment.find(notificacion.comments_id).tema_id).titulo+": " %>
+                    <%= "tema: "+Tema.find(Comment.find(notificacion.comments_id).tema_id).titulo+" " %>
                   </h4>
                   &nbsp;&nbsp;&nbsp;<%= Comment.find(notificacion.comments_id).body[0,20]+"..."%> 
                 </a>

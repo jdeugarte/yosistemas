@@ -271,7 +271,7 @@ DEPENDENCIES
   launchy (~> 2.3.0)
   metric_fu (~> 4.4.4)
   paperclip
-  paperclip-dropbox
+  paperclip-dropbox (~> 1.1.7)
   pg
   rails (= 4.0.0)
   recaptcha

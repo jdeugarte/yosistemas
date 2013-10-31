@@ -35,9 +35,13 @@ require 'digest/md5'
 
 	validates_format_of :correo,
 	:presence => { :message => " es requerido" },
-	:uniqueness => TRUE,
 	:with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
 	:message    => 'no valido'
+
+	validates :correo,
+	:uniqueness =>{
+		:message=> " ya existente"
+	}
 
 	
 	def self.autenticar(correo, contrasenia)

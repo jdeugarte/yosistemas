@@ -114,7 +114,16 @@ feature 'Gestion de usuarios' do
     expect(page).to have_content "No puede activar su cuenta si esta loggeado"
     end
 
+  #scenario 'No deberia registrar un usuario con un email repetido' do
+    #grupo = FactoryGirl.create(:grupo)
+    #usuario = FactoryGirl.create(:usuario)
+    #visit root_path
+    #click_button 'Registrarse'
+    #fill_in 'usuario[correo]', with: 'email@email.com'
+    #click_button "Registrar"
+    #expect(page).to have_content "Correo ya existente"
 
+  #end
   scenario 'Activar cuenta, usuario incorrecto' do
     visit confirm_path("imposible")
     expect(page).to have_content 'Error, datos invalidos'

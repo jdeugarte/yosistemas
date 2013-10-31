@@ -109,7 +109,7 @@ function changeSrc()
     </ul>
     <%if current_user.nil?%>
       <form class="navbar-form navbar-right" method="get" action=<%=register_path%>  >            
-        <button type="submit" class="btn btn-primary">Registrarse</button>  
+        <button type="submit" id="Registrarse" class="btn btn-primary" name="Registrarse">Registrarse</button>  
       </form> 
       <form class="navbar-form navbar-right" method="get" action=<%=forgot_password_path%>  >            
         <button type="submit" class="btn btn-primary">Olvide mi contraseña</button>  

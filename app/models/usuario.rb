@@ -27,7 +27,7 @@ require 'digest/md5'
 		:allow_blank => TRUE
 	}
 	validates :contrasenia,
-	:presence  => TRUE,
+	:presence  =>  { :message => " es requerido, no puede ser nulo" },
 	:length => {
 		:minimum => 6,
 	},
@@ -39,7 +39,11 @@ require 'digest/md5'
 	:with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
 	:message    => 'no valido'
 
-	
+	validates :nombre_usuario,
+	:presence  =>  { :message => " es requerido" },
+	:uniqueness => { :message => " ya esta siendo utilizado" }		
+
+
 	def self.autenticar(correo, contrasenia)
     	usuario = find_by_correo(correo)
     	if usuario && usuario.contrasenia == Digest::MD5.hexdigest(contrasenia) && usuario.activa==true

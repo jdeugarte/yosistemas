@@ -89,7 +89,7 @@ feature 'Gestion de tema' do
     click_link usuario.correo
     click_link 'Salir'
 
-    usuario2=FactoryGirl.create(:usuario)
+    usuario2=FactoryGirl.create(:other_user)
 
     visit root_path
     fill_in 'correo', with: 'email2@email.com'

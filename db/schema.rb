@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131031134228) do
+ActiveRecord::Schema.define(version: 20131031200015) do
 
   create_table "archivo_adjuntos", force: true do |t|
     t.integer  "tarea_id"
@@ -96,7 +96,6 @@ ActiveRecord::Schema.define(version: 20131031134228) do
     t.integer  "usuario_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.time     "hora_entrega"
   end
 
   add_index "tareas", ["grupo_id"], name: "index_tareas_on_grupo_id"
@@ -127,6 +126,7 @@ ActiveRecord::Schema.define(version: 20131031134228) do
     t.integer  "grupo_id"
     t.integer  "passwords_request_id"
     t.string   "rol"
+    t.string   "nombre_usuario"
   end
 
   add_index "usuarios", ["grupo_id"], name: "index_usuarios_on_grupo_id"

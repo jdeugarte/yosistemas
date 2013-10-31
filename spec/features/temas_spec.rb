@@ -78,8 +78,8 @@ feature 'Gestion de tema' do
   end
   scenario 'Ver tema' do
     grupo = FactoryGirl.create(:grupo)
-    usuario=FactoryGirl.create(:usuario)
-    
+    usuario = FactoryGirl.create(:usuario)
+
     ingresar_sistema(usuario)
     click_link 'Nuevo Tema'
     fill_in 'tema_titulo', with: 'Titulo tema de prueba'
@@ -88,7 +88,7 @@ feature 'Gestion de tema' do
 
     click_link usuario.correo
     click_link 'Salir'
-
+    
     usuario2=FactoryGirl.create(:other_user)
 
     visit root_path

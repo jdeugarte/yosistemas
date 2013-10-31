@@ -30,24 +30,12 @@ feature 'Gestion de tema' do
    scenario 'Eliminar(dejar de mostrar) un tema' do
     grupo = FactoryGirl.create(:grupo)
     usuario = FactoryGirl.create(:usuario)
-
+    tema = FactoryGirl.create(:tema)
     #TODO: Tarea para uds. refactorizar esta sección a un método ingresar_sistema(usuario)
     #para no repetir esto en todos los demás feature specs que necesiten autentificarse
     ingresar_sistema(usuario)
-    click_link 'Nuevo Tema'
-    
-    #TODO: crear el tema con factory girl para eliminar este bloque 
-    expect{
-      fill_in 'tema_titulo', with: 'Titulo tema de prueba'
-      fill_in 'tema_cuerpo', with: 'Descripcion o contenido del tema de prueba'
-      click_button 'Crear tema'
-    }.to change(Tema, :count).by(1)
-    expect(current_path).to eq temas_path  #no muy util aqui, pero sirve para mostrar esta opcion
-    expect(page).to have_content 'Titulo tema de prueba'
-    expect(page).to have_content 'Descripcion o contenido del tema de prueba'
-    #fin bloque 
-    visit "temas/"+Tema.first.id.to_s  #usar el id, titulo del tema con creado con factory girl
-    click_link 'Dejar de mostrar tema' # ya no quiero ver el tema
+    visit "temas/1"  #usar el id, titulo del tema con creado con factory girl
+    click_link 'Eliminar Tema' # ya no quiero ver el tema
     expect(current_path).to eq temas_path #lista de temas
     expect(page).to have_content '' #no tengo contenido en la pagina
     expect(page).to have_content ''

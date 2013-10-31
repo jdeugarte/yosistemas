@@ -7,4 +7,5 @@ class Tarea < ActiveRecord::Base
   validates :titulo, :presence => { :message => " es requerido" }
   validates :descripcion, :presence => { :message => " es requerida" }
   validates :fecha_entrega, :presence => { :message => " es requerida" }
+  validates :hora_entrega, :presence => { :message => " es requerida" }
 end

@@ -19,7 +19,7 @@ class TareasController < ApplicationController
     if(@tarea.save)
       add_attached_files(@tarea.id)
       flash[:alert] = 'Tarea creada Exitosamente!'
-      redirect_to temas_url 
+      redirect_to '/grupos/'+params[:tarea][:grupo_id]+'/temas' 
     else
        @grupos = Array.new
       if(current_user!=nil)
@@ -36,7 +36,7 @@ class TareasController < ApplicationController
   private
     # No permite parametros de internet
     def tarea_params
-      params.require(:tarea).permit(:titulo, :descripcion, :fecha_entrega)
+      params.require(:tarea).permit(:titulo, :descripcion, :fecha_entrega, :hora_entrega)
     end
 
     def add_attached_files(tarea_id)

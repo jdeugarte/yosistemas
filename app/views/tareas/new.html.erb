@@ -38,35 +38,37 @@
                   	<label for="inputDate" class="col-lg-2 control-label">Fecha de entrega:</label>
                   	<div class="col-lg-6">
           					  <div id="datetimepicker2" class="input-group">
-          					    <%= t.text_field :fecha_entrega, :class=>'form-control',:"data-format"=>'dd/MM/yyyy', :placeholder=>'Fecha de Entrega',:onfocus=>"this.blur();", :style=>"border-bottom-left-radius: 4px;  border-top-left-radius: 4px;"%>
-          					    <span class="input-group-addon add-on" style="background-color: #D5230F;">
+          					    <%= t.text_field :fecha_entrega, :class=>'form-control input-append',:"data-format"=>'dd/MM/yyyy', :placeholder=>'Fecha de Entrega', :style=>"border-bottom-left-radius: 4px;  border-top-left-radius: 4px;"%>
+          					    <span id="dateButton" class="input-group-addon add-on" style="background-color: #D5230F; cursor:pointer;">
           					      <i data-time-icon="icon-time" data-date-icon="icon-calendar icon-white">
           					      </i>
           					    </span>
           					  </div>
 					 </div>
 					</div>
+          <div class="form-group  <%=((@tarea.errors.get(:hora_entrega).nil?) ? '' : ' has-error')%>">
+            <label for="inputTime" class="col-lg-2 control-label">Hora de entrega:</label>
+            <div class="col-lg-6">
+              <div class="input-group bootstrap-timepicker-component">
+                  <%= t.text_field :hora_entrega, :class=>'form-control timepicker-default', :placeholder=>'Hora de Entrega', :style=>"border-bottom-left-radius: 4px;  border-top-left-radius: 4px;"%>
+                  <span id="timeButton" class="input-group-addon add-on " style="background-color: #D5230F;" >
+                    <i class="icon-time icon-white"></i>
+                  </span>
+              </div>
+            </div>
+          </div>
           <div class="form-group">
                     <label for="inputDescription" class="col-lg-2 control-label">Grupo:</label>
                     <div class="col-lg-6">
                     <%=t.collection_select(:grupo_id, @grupos.select { |g| g.usuario_id ==current_user.id } , :id, :nombre,{:selected => @grupo.id},{:class=>'form-control'})%>
                     </div>
                   </div>
-					<script type="text/javascript">
-					  $(function() {
-					    $('#datetimepicker2').datetimepicker({
-					      language: 'es',
-					      pickTime: false,
-					      startDate: new Date(),      // set a minimum date
-					    });
-					  });
-					</script>
           <div class="form-group">
            <label for="inputDate" class="col-lg-2 control-label">Adjuntar archivos:</label>
             <div class="col-lg-10 input-group">
             <input id="showFiles" class="form-control" type="text" placeholder="Seleccione archivos..." onclick="document.getElementById('tarea_archivo').click();" onfocus="this.blur();">
             <%= t.file_field :archivo , :class=>'form-control',:multiple => true, :style=>"display:none;", :onchange=>"document.getElementById('showFiles').value = (this.files.length>1)?''+this.files.length+' Archivos seleccionados.':this.files[0].name;" %>
-            <span class="input-group-addon" style="background-color: #D5230F;" onclick="document.getElementById('tarea_archivo').click();"> 
+            <span class="input-group-addon" style="background-color: #D5230F; cursor:pointer;" onclick="document.getElementById('tarea_archivo').click();"> 
               <i class="icon-file icon-white"></i>
             </span>
             </div>
@@ -83,3 +85,15 @@
    </div>
 <% end %>
 <%end%>
+<script>
+  $('.timepicker-default').timepicker();
+   $(function() {
+              $('#datetimepicker2').datetimepicker({
+                language: 'es',
+                pickTime: false,
+                maskInput: true,
+                startDate: new Date(),      // set a minimum date
+              });
+            });
+</script>
+</script>

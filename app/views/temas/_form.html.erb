@@ -8,13 +8,13 @@
                   <div class="form-group">
                      <label for="inputTitle" class="col-lg-2 control-label">Titulo:</label>
                     <div class="col-lg-10">
-                        <%= f.text_field :titulo , :class=>'form-control', :placeholder=>'Titulo', :maxlength => 50%>
+                        <%= f.text_field :titulo , :class=>'form-control', :placeholder=>'Titulo', :maxlength => 50 ,:required => true, :title => "El titulo del tema es obligatorio, Por favor rellene este campo" %>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputContent" class="col-lg-2 control-label">Contenido:</label>
                     <div class="col-lg-10">
-                      <%= f.text_area :cuerpo, :class=>'form-control',:rows=>'6', :placeholder=>'Contenido', :maxlength => 500 %>
+                      <%= f.text_area :cuerpo, :class=>'form-control',:rows=>'6', :placeholder=>'Contenido', :maxlength => 500, :required => true %>
                     </div>
                   </div>
                   <div class="form-group">

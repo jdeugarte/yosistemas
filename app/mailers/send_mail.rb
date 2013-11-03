@@ -25,4 +25,13 @@ class SendMail < ActionMailer::Base
     @user = user
     mail(to: @user.correo,subject: 'Te suscribiste a el grupo: '+grupo_nombre.to_s)
   end
+
+  def notify_users_task_create(user, tarea, grupo)
+    @user=user
+    @tarea =tarea
+    @grupo=grupo
+    #@url = 'http://yosistemas.herokuapp.com'
+    @url  = 'http://localhost:3000'
+    mail(to: @user.correo, subject: 'Se creo una nueva tarea ')
+  end
 end

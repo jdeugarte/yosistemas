@@ -3,6 +3,7 @@ class Tarea < ActiveRecord::Base
   belongs_to :grupo
 
   has_many :archivo_adjuntos
+  has_many :notificacion_grupos
 
   validates :titulo, :presence => { :message => " es requerido" }
   validates :descripcion, :presence => { :message => " es requerida" }

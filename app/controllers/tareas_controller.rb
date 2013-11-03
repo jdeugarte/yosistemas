@@ -75,6 +75,7 @@ class TareasController < ApplicationController
     if(@tarea.save)
       add_attached_files(@tarea.id)
       flash[:alert] = 'Tarea creada Exitosamente!'
+      notify_users(@tarea.grupo_id, @tarea)
       redirect_to '/grupos/'+params[:tarea][:grupo_id]+'/temas' 
     else
        @grupos = Array.new
@@ -119,6 +120,27 @@ class TareasController < ApplicationController
         end
       end
 
+    end
+
+    def notify_users(id_grupo,tarea)
+        
+        suscripciones = Subscription.all
+        suscripciones.each do |suscrito|
+          if suscrito.grupo_id == id_grupo 
+            if suscrito.usuario_id != current_user.id
+                @usuario = suscrito.usuario
+                @grupo=Grupo.find(id_grupo)
+
+
+                @notificacion = NotificacionGrupo.new
+                @notificacion.notificado = false
+                @notificacion.subscription_id = suscrito.id
+                @notificacion.tarea = tarea
+                @notificacion.save    
+                SendMail.notify_users_task_create(@usuario, tarea, @grupo).deliver    
+            end
+          end 
+        end
     end
 
 

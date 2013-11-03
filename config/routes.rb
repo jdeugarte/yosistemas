@@ -1,5 +1,8 @@
 Yosistemas::Application.routes.draw do
 
+  get "comment_tasks/create"
+  get "comment_tasks/delete"
+  get "comment_tasks/edit"
   get "temas/index"
   post 'temas/edit/:id' => 'temas#edit', :as => 'edit_tema'
   post 'sessions/create' => 'sessions#create', :as => 'loguear'

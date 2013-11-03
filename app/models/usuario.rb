@@ -3,6 +3,7 @@ require 'digest/md5'
 
 	has_many :temas
 	has_many :comments
+	has_many :comment_tasks
 	has_many :subscriptions
 	has_many :tareas
 	has_many :suscripcion_temas

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131103073906) do
+ActiveRecord::Schema.define(version: 20131103212037) do
 
   create_table "archivo_adjunto_respuestas", force: true do |t|
     t.integer  "responder_tarea_id"
@@ -37,6 +37,17 @@ ActiveRecord::Schema.define(version: 20131103073906) do
 
   add_index "archivo_adjuntos", ["tarea_id"], name: "index_archivo_adjuntos_on_tarea_id"
 
+  create_table "comment_tasks", force: true do |t|
+    t.integer  "tarea_id"
+    t.integer  "usuario_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comment_tasks", ["tarea_id"], name: "index_comment_tasks_on_tarea_id"
+  add_index "comment_tasks", ["usuario_id"], name: "index_comment_tasks_on_usuario_id"
+
   create_table "comments", force: true do |t|
     t.text     "body"
     t.integer  "tema_id"
@@ -59,6 +70,17 @@ ActiveRecord::Schema.define(version: 20131103073906) do
   end
 
   add_index "grupos", ["usuario_id"], name: "index_grupos_on_usuario_id"
+
+  create_table "notificacion_grupos", force: true do |t|
+    t.boolean  "notificado"
+    t.integer  "subscription_id"
+    t.integer  "tarea_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notificacion_grupos", ["subscription_id"], name: "index_notificacion_grupos_on_subscription_id"
+  add_index "notificacion_grupos", ["tarea_id"], name: "index_notificacion_grupos_on_tarea_id"
 
   create_table "notificacions", force: true do |t|
     t.boolean  "notificado"

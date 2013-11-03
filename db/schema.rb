@@ -1,4 +1,3 @@
-
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -82,14 +81,12 @@ ActiveRecord::Schema.define(version: 20131103073906) do
 
   create_table "responder_tareas", force: true do |t|
     t.string   "descripcion"
-    t.integer  "grupo_id"
     t.integer  "usuario_id"
     t.integer  "tarea_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "responder_tareas", ["grupo_id"], name: "index_responder_tareas_on_grupo_id"
   add_index "responder_tareas", ["tarea_id"], name: "index_responder_tareas_on_tarea_id"
   add_index "responder_tareas", ["usuario_id"], name: "index_responder_tareas_on_usuario_id"
 

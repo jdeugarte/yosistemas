@@ -2,46 +2,57 @@ class TareasController < ApplicationController
   #GET tareas/new	
 
   def responder_tarea
-    @responder_tarea = ResponderTarea.new
-    @tarea = Tarea.find(params[:id])
-    @grupo = @tarea.grupo
-    @grupos = Array.new
-    if(current_user!=nil)
-      current_user.subscriptions.each do |subs|
-        @grupos.push(subs.grupo)
+    if(current_user.rol == "Estudiante" )
+
+      @responder_tarea = ResponderTarea.new
+      
+      begin
+        @tarea = Tarea.find(params[:id])
+        rescue ActiveRecord::RecordNotFound
+        redirect_to root_path
       end
-    end
-    @usuarios = Subscription.where(:usuario_id => current_user.id,:id => @grupo.id)
-    if(@usuarios.nil?)
+      if(!@tarea.nil?)
+
+        @grupo = @tarea.grupo
+        @suscrito = Subscription.where(:grupo_id => @grupo.id, :usuario_id => current_user.id)
+        if(!@suscrito.first.nil?)
+
+          @grupos = Array.new
+          if(current_user!=nil)
+            current_user.subscriptions.each do |subs|
+              @grupos.push(subs.grupo)
+
+            end
+          end
+        else
+          redirect_to root_path
+        end
+      end
+    else
       redirect_to root_path
     end
 
   end
 
   def responder_tarea_crear
-    @responder_tarea = ResponderTarea.new(params[:t])
+    @responder_tarea = ResponderTarea.new(tarea_respuesta_params)
     @tarea = Tarea.find(params[:id])
     @responder_tarea.tarea_id = @tarea.id
-    @responder_tarea.usuario_id = current_user.id 
+    @responder_tarea.usuario_id = current_user.id
     if(@responder_tarea.save)
       add_attached_files_respuesta(@responder_tarea.id)
       flash[:alert] = 'Tarea enviada Exitosamente!'
-      redirect_to '/grupos/'+@tarea.grupo.id+'/temas' 
+      redirect_to '/grupos/'+@tarea.grupo.id.to_s+'/temas' 
     else
-      # @grupos = Array.new
-      #if(current_user!=nil)
-      #current_user.subscriptions.each do |subs|
-      #  @grupos.push(subs.grupo)
-      #  end
-      #  @grupo = Grupo.find(params[:responder_tarea][:grupo_id])
-      #  @id = params[:responder_tarea][:grupo_id]
-      #end
-      #render :new;
-
-      @responder_tarea.errors.each do |err|
-         flash[:alert] = err
+      @grupos = Array.new
+      if(current_user!=nil)
+      current_user.subscriptions.each do |subs|
+        @grupos.push(subs.grupo)
+        end
+        @grupo = Grupo.find(@tarea.grupo.id.to_s)
+        @id = @tarea.grupo.id.to_s
       end
-      redirect_to root_path
+      render :responder_tarea;
     end
   end
 
@@ -93,6 +104,10 @@ class TareasController < ApplicationController
         end
       end
 
+    end
+
+    def tarea_respuesta_params
+      params.require(:responder_tarea).permit(:descripcion)
     end
 
     def add_attached_files_respuesta(responder_tarea_id)

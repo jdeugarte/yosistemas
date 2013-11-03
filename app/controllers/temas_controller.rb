@@ -155,15 +155,12 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     @tema = Tema.new(tema_params)
     @tema.grupo_id=params[:tema][:grupo_id]
     @tema.usuario_id = current_user.id 
-    
-    if(@tema.save)
-      flash[:alert] = 'Tema creado Exitosamente!'
-      redirect_to '/grupos/'+params[:tema][:grupo_id]+'/temas'
-    end
+    @tema.save
     @suscripcion=SuscripcionTema.new
     @suscripcion.usuario_id=current_user.id
     @suscripcion.tema_id=@tema.id
     @suscripcion.save
+    redirect_to '/grupos/'+params[:tema][:grupo_id]+'/temas'
   end
 
   def edit

@@ -4,8 +4,14 @@
         <form class="bs-example form-horizontal">
           <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-3">
-              <%= image_tag avatar_tam_url(@tema.usuario,110) %>
+                <div>
+                  <%= image_tag avatar_tam_url(@tema.usuario,110) %>
+                </div>
+                <div>
+                  <sub><%= @tema.usuario.nombre_usuario%></sub>
+                </div>
             </div>
+            
             <div class="col-lg-9 col-md-9 col-sm-9">
             <div class=row>
               <legend>
@@ -72,7 +78,7 @@
 	  	<%= image_tag avatar_tam_url(comment.usuario,70) %>	  
 	  </a>
 	  <div class="media-body">
-	    <h4 class="media-heading"><%=comment.usuario.correo%></h4>
+	    <h4 class="media-heading"><%=comment.usuario.nombre_usuario%></h4>
 	    <%=comment.body%>
 	    <br>
 	    <%if current_user!=nil && comment.usuario.correo == current_user.correo%>

@@ -41,6 +41,9 @@ Yosistemas::Application.routes.draw do
   get 'tareas/new/:id' => 'tareas#new', :as => 'tarea_para_grupo'
 
 
+  get 'tareas/responder_tarea/:id' => 'tareas#responder_tarea', :as =>'responder_tareas'
+  post 'tareas/responder_tarea/:id' => 'tareas#responder_tarea_crear', :as =>'responder_tarea_crear'
+
   post "usuarios/update_user/:id"=>"usuarios#update"
   resources :usuarios do
     resources :comments

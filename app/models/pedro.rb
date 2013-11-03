@@ -1,0 +1,3 @@
+class Pedro
+
+end

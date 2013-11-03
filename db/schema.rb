@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131103051621) do
+ActiveRecord::Schema.define(version: 20131103073906) do
+
+  create_table "archivo_adjunto_respuestas", force: true do |t|
+    t.integer  "responder_tarea_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "archivo_file_name"
+    t.string   "archivo_content_type"
+    t.integer  "archivo_file_size"
+    t.datetime "archivo_updated_at"
+  end
+
+  add_index "archivo_adjunto_respuestas", ["responder_tarea_id"], name: "index_archivo_adjunto_respuestas_on_responder_tarea_id"
 
   create_table "archivo_adjuntos", force: true do |t|
     t.integer  "tarea_id"
@@ -66,6 +78,19 @@ ActiveRecord::Schema.define(version: 20131103051621) do
   end
 
   add_index "passwords_requests", ["usuario_id"], name: "index_passwords_requests_on_usuario_id"
+
+  create_table "responder_tareas", force: true do |t|
+    t.string   "descripcion"
+    t.integer  "grupo_id"
+    t.integer  "usuario_id"
+    t.integer  "tarea_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "responder_tareas", ["grupo_id"], name: "index_responder_tareas_on_grupo_id"
+  add_index "responder_tareas", ["tarea_id"], name: "index_responder_tareas_on_tarea_id"
+  add_index "responder_tareas", ["usuario_id"], name: "index_responder_tareas_on_usuario_id"
 
   create_table "subscriptions", force: true do |t|
     t.string   "llave"

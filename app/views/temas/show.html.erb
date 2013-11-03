@@ -24,6 +24,7 @@
               <div class=row>
                 <%if current_user!=nil && @tema.usuario.correo==current_user.correo%>
                 &nbsp;<%= link_to "Editar", edit_tema_path(@tema), :method => :post%>
+                &nbsp;&nbsp;&nbsp;<%= link_to 'Eliminar Tema', visible_tema_path(@tema) %>
                     <%end%>
                  &nbsp;&nbsp;&nbsp;   
                 <%if current_user!=nil%> 
@@ -45,9 +46,6 @@
       </div>
 </div>
 </div>
-<%if current_user!=nil && @tema.usuario.correo == current_user.correo%>
-<td><%= link_to 'Eliminar Tema', visible_tema_path(@tema) %></td> 
-<%end%>
 <div class="row">
 <div class="col-lg-6 ">
     <div class="well">

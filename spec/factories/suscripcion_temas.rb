@@ -5,4 +5,8 @@ FactoryGirl.define do
     temas nil
     usuarios nil
   end
+  factory :suscripcion_otro_tema do
+  	tema_id 1
+  	usuario_id 1
+  end
 end

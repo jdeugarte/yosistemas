@@ -22,7 +22,7 @@ feature 'Gestion de tema' do
       fill_in 'tema_cuerpo', with: 'Descripcion o contenido del tema de prueba'
       click_button 'Crear tema'
     }.to change(Tema, :count).by(1)
-    expect(current_path).to eq temas_path  #no muy util aqui, pero sirve para mostrar esta opcion
+    expect(current_path).to eq "/grupos/1/temas"  #no muy util aqui, pero sirve para mostrar esta opcion
     expect(page).to have_content 'Titulo tema de prueba'
     expect(page).to have_content 'Descripcion o contenido del tema de prueba'
   end
@@ -36,7 +36,7 @@ feature 'Gestion de tema' do
     ingresar_sistema(usuario)
     visit "temas/1"  #usar el id, titulo del tema con creado con factory girl
     click_link 'Eliminar Tema' # ya no quiero ver el tema
-    expect(current_path).to eq temas_path #lista de temas
+    expect(current_path).to eq "/temas" #lista de temas
     expect(page).to have_content '' #no tengo contenido en la pagina
     expect(page).to have_content ''
     #TODO: to change(Tema, :count).by(1)  SE puede investigar si hay algo similar para reducir la cantidad en 1

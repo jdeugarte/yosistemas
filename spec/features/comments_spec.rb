@@ -12,16 +12,9 @@ feature 'Comentario' do
     #crear usuario que pueda crear una entrada (cuando se tenga usuarios)
     grupo = FactoryGirl.create(:grupo)
     usuario = FactoryGirl.create(:usuario)
+    tema=FactoryGirl.create(:tema)
     ingresar_sistema(usuario)
-    click_link 'Nuevo Tema'
-
-    expect{
-      fill_in 'tema_titulo', with: 'Titulo tema de prueba'
-      fill_in 'tema_cuerpo', with: 'Descripcion o contenido del tema de prueba'
-      click_button 'Crear tema'
-    }.to change(Tema, :count).by(1)
-    expect(current_path).to eq temas_path  #secion lista de temas
-    visit "temas/"+Tema.first.id.to_s #voy al tema (esta parte necesita ser refactorizada)
+    visit "temas/"+tema.id.to_s #voy al tema (esta parte necesita ser refactorizada)
     expect{
       fill_in 'comment_body', with: 'contenido del comentario'
       click_button 'Comentar'

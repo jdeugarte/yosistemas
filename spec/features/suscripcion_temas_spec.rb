@@ -24,12 +24,12 @@ feature 'Gestion de SuscripcionTemas' do
   	scenario 'quitar suscripcion a un tema' do
   		grupo = FactoryGirl.create(:grupo)
 	    usuario = FactoryGirl.create(:usuario)
-	    ingresar_sistema(usuario)
 	    tema=FactoryGirl.create(:tema)
-	    #suscripcion=FactoryGirl.create(:suscripcion_otro_tema)
-	    #visit "temas/"+tema.id.to_s
-	    #expect(page).to have_content 'Ya no me Interesa'
-	    #click_link 'Ya no me Interesa'
-	    #expect(page).to have_content 'Me Interesa'
+	    suscribirse = FactoryGirl.create(:suscripcion_tema)
+    	ingresar_sistema(usuario)
+    	visit "temas/1" 
+	    expect(page).to have_content 'Ya no me Interesa'
+	    click_link 'Ya no me Interesa'
+	    expect(page).to have_content 'Me Interesa'
   	end
 end

@@ -14,7 +14,7 @@
       <a class="btn btn-primary btn-lg" onclick="throwFade()" href="/tareas/new/<%=@grupo.id%>"><span class="icon-pencil icon-white" style="vertical-align:-1px;  margin-right:7px; "></span>Nueva Tarea</a>
     </div> 
   <%end%>
-  <%if current_user!=nil%>
+  <%if current_user!=nil && @grupo.id != 1%>
     <div class="col-sm-3 col-md-3 col-lg-3">
       <a class="btn btn-primary btn-lg" onclick="throwFade()" href="/grupos/<%=@grupo.id%>/tareas"><span class="icon-list icon-white" style="vertical-align:-1px;  margin-right:7px; "></span>Ver Tareas</a>
     </div> 

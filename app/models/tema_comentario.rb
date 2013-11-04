@@ -1,4 +1,4 @@
-class Comment < ActiveRecord::Base
+class TemaComentario < ActiveRecord::Base
   belongs_to :tema
   belongs_to :usuario
   has_many :notificacions

@@ -56,7 +56,7 @@
 <div class="col-lg-6 ">
     <div class="well">
 <%if current_user!=nil%>
-	<%= form_for([@tema, @tema.comments.build])  do |f| %>
+	<%= form_for([@tema, @tema.tema_comentarios.build]) do |f| %>
       <div class="form-group">
         <label for="inputContent">Comentario:</label>
             <%= f.text_area :body, :class=>'form-control',:rows=>'4', :cols =>'20', :placeholder=>'Contenido' %>
@@ -83,20 +83,20 @@
 </div>
 </div>
 <div class="col-12 col-md-10 col-lg-8">
-<center><%= paginate @comments %></center>
-<%for comment in @comments%>
-	<%if(comment.id!=nil)%>
+<center><%= paginate @comentarios %></center>
+<%for comentario in @comentarios%>
+	<%if(comentario.id!=nil)%>
 	<div class="media">
 	  <a class="pull-left" href="#">
-	  	<%= image_tag avatar_tam_url(comment.usuario,70) %>	  
+	  	<%= image_tag avatar_tam_url(comentario.usuario,70) %>	  
 	  </a>
 	  <div class="media-body">
-	    <h4 class="media-heading"><%=comment.usuario.nombre_usuario%></h4>
-	    <%=comment.body%>
+	    <h4 class="media-heading"><%=comentario.usuario.nombre_usuario%></h4>
+	    <%=comentario.body%>
 	    <br>
-	    <%if current_user!=nil && comment.usuario.correo == current_user.correo%>
-	    	<%= link_to 'Editar', "/temas/editComment/"+comment.id.to_s %>
-        <%= link_to 'Eliminar', "/comments/delete/"+comment.id.to_s, data: { confirm: 'Se eliminara el tema, ¿está seguro?' } %>
+	    <%if current_user!=nil && comentario.usuario.correo == current_user.correo%>
+	    	<%= link_to 'Editar', "/temas/editcomentario/"+comentario.id.to_s %>
+        <%= link_to 'Eliminar', "/comentarios/delete/"+comentario.id.to_s, data: { confirm: 'Se eliminara el tema, ¿está seguro?' } %>
 	    <%end%>
 	  </div>
 	</div>

@@ -142,12 +142,12 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
   def show
     @tema = Tema.find(params[:id])  
      notifications.each do |notificacion|
-      if ( Comment.find(notificacion.comments_id).tema_id == @tema.id )
+      if ( TemaComentario.find(notificacion.tema_comentario_id).tema_id == @tema.id )
         notificacion.notificado = true
         notificacion.save 
       end
     end
-     @comments= Kaminari.paginate_array(@tema.comments).page(params[:page]).per(10)  
+     @comentarios= Kaminari.paginate_array(@tema.tema_comentarios).page(params[:page]).per(10)  
   end
 
   # POST /temas
@@ -178,8 +178,8 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
    
   end
 
-  def editComment
-    @comment=Comment.find(params[:idcomment])    
+  def editar_comentario
+    @comentario=TemaComentario.find(params[:id_comentario])    
   end
 
   def visible

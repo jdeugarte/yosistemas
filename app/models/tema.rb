@@ -1,5 +1,5 @@
 class Tema < ActiveRecord::Base
-  has_many :comments
+  has_many :tema_comentarios
   has_many :suscripcion_temas
   belongs_to :usuario
   belongs_to :grupo

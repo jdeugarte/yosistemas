@@ -2,7 +2,7 @@ class Usuario < ActiveRecord::Base
 require 'digest/md5'
 
 	has_many :temas
-	has_many :comments
+	has_many :tema_comentarios
 	has_many :comment_tasks
 	has_many :subscriptions
 	has_many :tareas

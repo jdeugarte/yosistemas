@@ -73,6 +73,10 @@ class TareasController < ApplicationController
       @id = params[:id]
     end
   end
+
+  def show
+    @tarea = Tarea.find(params[:id])  
+  end
   #POST tareas/create
   def create
     @tarea = Tarea.new(tarea_params)

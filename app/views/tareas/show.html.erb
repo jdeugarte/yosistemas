@@ -1,0 +1,38 @@
+<div class="row">
+<div class="col-lg-6 ">
+    <div class="well">
+        <form class="bs-example form-horizontal">
+          <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <div>
+                  <h2 style="margin-top:0px;"><%= @tarea.usuario.nombre_usuario%></h2>
+                </div>
+                <div>
+                  <%= image_tag avatar_tam_url(@tarea.usuario,80) %>
+                </div>
+            </div>
+            
+            <div class="col-lg-9 col-md-9 col-sm-9">
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                    <%= @tarea.titulo %>
+                  </h3>
+                </div>
+                <div class="panel-body">
+                <blockquote style="margin-bottom:8px;">
+                  <p><%= @tarea.descripcion %></p>
+                  <small>tarea creada el <%= @tarea.created_at.strftime("%d/%m/%Y a las: %I:%M  %p") %></small>
+                </blockquote>
+                <div>Entrega:&nbsp;
+                    <label><i class="icon-calendar"></i> <%= @tarea.fecha_entrega.strftime("%d/%b/%Y")%></label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><i class="icon-time"></i> <%= @tarea.hora_entrega.strftime("%I:%M %p") %></label>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+</div>
+</div>

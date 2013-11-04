@@ -14,7 +14,7 @@
     </thead>
     <tbody>        
       <% @tareas.each do |tarea| %>
-          <tr style='cursor:pointer'>
+          <tr style='cursor:pointer' onclick=<%="document.location.href='/tareas/"+tarea.id.to_s+"'"%> >
             <td>
               <FONT FACE="raro, courier" SIZE=5 COLOR="black"> <%= tarea.titulo %><br> </FONT>
               <SUB><%= tarea.created_at.strftime("%e-%m-%Y")  %></SUB>

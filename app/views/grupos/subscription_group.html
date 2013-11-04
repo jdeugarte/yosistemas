@@ -11,13 +11,6 @@
 		     <b>Descripcion:</b><%= @grupo.descripcion %>
 		    </div>
 		   </div>
-		  <legend>Llave:
-		  	<% if @grupo.llave != "publico" %>
-		  		<%= @grupo.llave %>
-		  	<% else %>
-		  		sin llave
-		  	<% end %>
-		  </legend>
   		  </fieldset>
 		</form>
 		<%if current_user!=nil%>

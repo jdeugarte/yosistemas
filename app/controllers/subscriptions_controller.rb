@@ -17,6 +17,13 @@ class SubscriptionsController < ApplicationController
       end
   	end
 
+    def delete
+        @suscripcion = Subscription.find(params[:id])
+        @grupo = @suscripcion.grupo
+        @suscripcion.destroy
+        redirect_to suscriptores_path(@grupo)
+    end
+
 private 
 
 	def subscriptions_params

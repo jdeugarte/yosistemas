@@ -4,7 +4,7 @@
 <div class="row bs-example bs-example-type">
    <div class="col-lg-1"> 
   </div>
-  <div class="col-lg-9">
+  <div class="col-lg-8">
     <% @suscriptores.each do |suscriptor| %>
     <% if suscriptor.usuario_id != current_user.id %>   
         <div class="well">
@@ -25,10 +25,16 @@
                         </tbody>
                   </table>       
         </div>
-        <div class="col-lg-3"> 
-                <br>               
+        <div class="col-lg-2"> 
+                              
                     <form class="navbar-form navbar-left" method="get" action=<%=detalle_usuario_path(suscriptor.usuario)%>  >            
                       <button type="submit" class="btn btn-primary">Ver Informacion</button>  
+                    </form>                 
+        </div>
+        <div class="col-lg-2"> 
+                              
+                    <form class="navbar-form navbar-left" method="get" action=<%=borrar_suscripcion_path(suscriptor.id)%>  >            
+                      <button type="submit" class="btn btn-primary">Eliminar</button>  
                     </form>                 
         </div>
          </div>        
@@ -37,3 +43,4 @@
     <% end %>
   </div>    
 </div>
+<%= link_to "Atras", mis_grupos_path %>

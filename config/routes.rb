@@ -43,6 +43,7 @@ Yosistemas::Application.routes.draw do
   get 'temas/new/:id' => 'temas#new', :as => 'tema_para_grupo'
   get 'tareas/new/:id' => 'tareas#new', :as => 'tarea_para_grupo'
 
+  get 'grupos/:grupo/tareas' => 'tareas#index', :as => 'tareas_index'
 
   get 'tareas/responder_tarea/:id' => 'tareas#responder_tarea', :as =>'responder_tareas'
   post 'tareas/responder_tarea/:id' => 'tareas#responder_tarea_crear', :as =>'responder_tarea_crear'

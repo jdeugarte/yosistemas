@@ -1,6 +1,12 @@
 class TareasController < ApplicationController
-  #GET tareas/new	
 
+  #GET tareas
+  def index
+    @tareas = Tarea.where(:grupo_id => params[:grupo]).reverse
+    @grupo = Grupo.find(params[:grupo])
+  end
+
+  #GET tareas/new	
   def responder_tarea
     if(current_user.rol == "Estudiante" )
 

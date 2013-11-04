@@ -4,6 +4,11 @@ class GruposController < ApplicationController
     @grupos = Grupo.all.page(params[:page]).per(5)
   end
 
+  def mis_grupos
+    @grupos = Grupo.find(:all, :conditions => { :usuario_id => current_user.id })
+    @grupos = Kaminari.paginate_array(@grupos).page(params[:page]).per(5)
+  end
+
   def search
     @grupos=Array.new 
     aux = Grupo.all
@@ -54,6 +59,15 @@ class GruposController < ApplicationController
 
   def subscription_group
     @grupo = Grupo.find(params[:id])
+  end
+
+  def suscriptores
+    @grupo = Grupo.find(params[:id])
+    @suscriptores = @grupo.subscriptions
+  end
+
+  def detalle_usuario
+    @usuario = Usuario.find(params[:id])
   end
 
   private

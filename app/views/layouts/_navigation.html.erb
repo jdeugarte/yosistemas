@@ -66,7 +66,10 @@ function changeSrc()
           <%if current_user!=nil && current_user.rol == "Docente"%>  
             <li><a href="/grupos/new">Crear Grupo</a></li>
           <%end%>
-          <li><a href="/grupos">Ver grupos</a></li>        
+          <li><a href="/grupos">Ver grupos</a></li>
+          <%if current_user!=nil && current_user.rol == "Docente"%>
+            <li><a href="/grupos/mis_grupos">Mis grupos</a></li>
+          <% end %>        
         </ul>
       </li>
       <%end%>

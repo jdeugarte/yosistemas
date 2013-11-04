@@ -37,6 +37,9 @@ Yosistemas::Application.routes.draw do
   #get 'temas/:grupo' => 'temas#index'
   get 'grupos/subscription_group/:id' => 'grupos#subscription_group', :as=>'suscribirse'
   get "grupos/search" => "grupos#search", :as=>'search_grupo'
+  get 'grupos/mis_grupos' => 'grupos#mis_grupos', :as => 'mis_grupos'
+  get 'grupos/suscriptores/:id' => 'grupos#suscriptores', :as => 'suscriptores'
+  get 'gruopos/detalle_usuario/:id' => 'grupos#detalle_usuario', :as => 'detalle_usuario'
 
   get "grupos/:id/temas"  => "temas#index", :as=> 'filtrar_temas'
 

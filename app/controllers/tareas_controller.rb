@@ -155,11 +155,11 @@ class TareasController < ApplicationController
 
     def eliminar
       @tarea = Tarea.find(params[:id])
-        @grupo = @tarea.grupo
-        if(@tarea.usuario_id == current_user.id)
-            @tarea.destroy
-        end
-        redirect_to @grupo
+      @grupo = @tarea.grupo
+      if(@tarea.usuario_id == current_user.id)
+        @tarea.destroy
+      end
+      redirect_to @grupo
     end
 
 

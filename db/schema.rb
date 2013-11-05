@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131103212037) do
+ActiveRecord::Schema.define(version: 20131105221337) do
 
   create_table "archivo_adjunto_respuestas", force: true do |t|
     t.integer  "responder_tarea_id"
@@ -164,11 +164,10 @@ ActiveRecord::Schema.define(version: 20131103212037) do
     t.string   "nombre"
     t.string   "apellido"
     t.string   "contrasenia"
-    t.string   "contrasenia_de_confirmacion"
     t.string   "correo"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "activa",                      default: false
+    t.boolean  "activa",               default: false
     t.integer  "grupo_id"
     t.integer  "passwords_request_id"
     t.string   "rol"

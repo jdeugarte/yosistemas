@@ -32,6 +32,8 @@
                 <div>
                 <% if @tarea.usuario_id==current_user.id %>
                   <%= link_to 'Eliminar', "/tareas/eliminar/"+@tarea.id.to_s, data: { confirm: 'Se eliminara la tarea, ¿Está seguro?' } %>
+                  &nbsp&nbsp&nbsp&nbsp
+                  <%= link_to 'Editar', "/tareas/edit/"+@tarea.id.to_s %>
                 <% end %>
                 </div>
 

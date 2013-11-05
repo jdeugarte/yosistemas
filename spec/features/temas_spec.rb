@@ -69,7 +69,7 @@ feature 'Gestion de tema' do
     click_button 'Ingresar'
     
     #al entrar a 'Mis temas' no debería ver los temas creados por el primer usuario
-    click_link 'Temas'
+    #click_link 'Temas'
     click_link 'Mis Temas'
     
     expect(page).to have_no_content 'Titulo tema de prueba'
@@ -96,7 +96,7 @@ feature 'Gestion de tema' do
     fill_in 'contrasenia', with: 'password2'
     click_button 'Ingresar'
 
-    click_link 'Temas'
+    #click_link 'Temas'
     click_link 'Ver Temas'
     #al ingresar a Ver Temas debe poder ver los temas creados por otros usuarios
     expect(page).to have_content 'Titulo tema de prueba'

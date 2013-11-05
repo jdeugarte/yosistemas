@@ -1,7 +1,7 @@
 <%= render :layout => 'layouts/groups_layout' do%>
 
 <div class="page-header">
-<div class="btn-back" title="Atras" onclick="throwFade(); window.location='/grupos/<%=@id %>/temas'; return false;" ></div>
+<div class="btn-back" title="Atras" onclick="throwFade(); window.location='/grupos/<%=@id %>/tareas'; return false;" ></div>
      <h1 id="forms">Nueva Tarea</h1>
 </div>
 <% if @tarea.errors.any? %>
@@ -24,13 +24,13 @@
                   <div class="form-group <%=((@tarea.errors.get(:titulo).nil?) ? '' : ' has-error')%>">
                      <label for="inputTitle" class="col-lg-2 control-label">Titulo:</label>
                     <div class="col-lg-10">
-                        <%= t.text_field :titulo , :class=>'form-control', :placeholder=>'Titulo'%>
+                        <%= t.text_field :titulo , :class=>'form-control', :placeholder=>'Titulo', :maxlength => 50 %>
                     </div>
                   </div>
                   <div class="form-group <%=((@tarea.errors.get(:descripcion).nil?) ? '' : ' has-error')%>">
                     <label for="inputDescription" class="col-lg-2 control-label">Descripcion:</label>
                     <div class="col-lg-10">
-                      <%= t.text_area :descripcion, :class=>'form-control',:rows=>'6', :placeholder=>'Descripcion' %>
+                      <%= t.text_area :descripcion, :class=>'form-control',:rows=>'6', :placeholder=>'Descripcion' ,  :maxlength=>500%>
                     </div>
                   </div>
 

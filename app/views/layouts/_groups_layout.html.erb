@@ -42,8 +42,28 @@
             </div>
   </div>
   <div class="col-lg-8"  style="background-color:white;">
-    <div class="go-left" id="principal">
-        <%=yield%>
+    <div>
+        <% esTema = (!@temas.nil?||!@tema.nil?) %>
+            <div>
+              <ul class="nav nav-tabs" style="margin-bottom: 15px;">
+                <li class="<%=esTema ? 'active' : ''%>" onclick="<%= (!esTema) ? "throwFade(); window.location='/grupos/"+@grupo.id.to_s+"/temas'; return false;" : "" %>" ><a href="#temas" data-toggle="tab"><h2 style="margin-top:5px;">Temas</h2></a></li>
+                <%if(@grupo.id!=1)%>
+                <li class="<%=esTema ? '' : 'active'%>" onclick="<%= (!esTema) ? "" : "throwFade(); window.location='/grupos/"+@grupo.id.to_s+"/tareas'; return false;" %>" ><a href="#tareas" data-toggle="tab"><h2 style="margin-top:5px;">Tareas</h2></a></li>
+                <%end%>
+              </ul>
+              <div class="go-left tab-content" id="principal">
+                <div class="tab-pane fade <%= esTema ? 'active in' : ''%>" id="temas">
+                <%if esTema %>
+                  <%=yield%>
+                <%end%>
+                </div>
+                <div class="tab-pane fade <%= esTema ? '' : 'active in'%>" id="tareas">
+                  <%if (!esTema) %>
+                    <%=yield%>
+                  <%end%>
+                </div>
+              </div>
+            </div>
     </div>
   </div>
 </div>

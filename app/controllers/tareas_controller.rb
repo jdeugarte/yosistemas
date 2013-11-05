@@ -2,8 +2,12 @@ class TareasController < ApplicationController
 
   #GET tareas
   def index
-    @tareas = Tarea.where(:grupo_id => params[:grupo]).reverse
-    @grupo = Grupo.find(params[:grupo])
+    if(params[:grupo]!="1")
+      @tareas = Tarea.where(:grupo_id => params[:grupo]).reverse
+      @grupo = Grupo.find(params[:grupo])
+    else
+      redirect_to temas_path
+    end
   end
 
   #GET tareas/new	
@@ -63,19 +67,56 @@ class TareasController < ApplicationController
   end
 
   def new
-  	@tarea = Tarea.new
-    @grupos = Array.new
-    if(current_user!=nil)
-      current_user.subscriptions.each do |subs|
-        @grupos.push(subs.grupo)
+    if(params[:id]!="1")
+    	@tarea = Tarea.new
+      @grupos = Array.new
+      if(current_user!=nil)
+        current_user.subscriptions.each do |subs|
+          @grupos.push(subs.grupo)
+        end
+        @grupo = Grupo.find(params[:id])
+        @id = params[:id]
       end
-      @grupo = Grupo.find(params[:id])
-      @id = params[:id]
+    else
+      redirect_to temas_path
     end
   end
 
+  def eliminar
+      @tarea = Tarea.find(params[:id])
+      @grupo = @tarea.grupo
+      if(@tarea.usuario_id == current_user.id)
+        @tarea.destroy
+      end
+      redirect_to '/grupos/'+@grupo.id.to_s+'/tareas'
+    end
+
   def show
     @tarea = Tarea.find(params[:id])  
+  end
+  def edit #id tarea
+    if(params[:id]!="1")
+      @tarea = Tarea.find(params[:id])
+      @grupos = Array.new
+      if(current_user!=nil)
+        current_user.subscriptions.each do |subs|
+          @grupos.push(subs.grupo)
+        end
+        @grupo = Grupo.find(@tarea.grupo_id)
+        @id = params[:id]
+      end
+    else
+      redirect_to temas_path
+    end
+  end
+  def update
+    @tarea = Tarea.find(params[:id])
+
+    if(@tarea.update(params[:tarea].permit(:titulo,:descripcion,:fecha_entrega,:grupo_id,:hora_entrega)))
+      redirect_to @tarea
+    else
+      render 'edit'
+    end
   end
   #POST tareas/create
   def create
@@ -153,14 +194,7 @@ class TareasController < ApplicationController
         end
     end
 
-    def eliminar
-      @tarea = Tarea.find(params[:id])
-      @grupo = @tarea.grupo
-      if(@tarea.usuario_id == current_user.id)
-        @tarea.destroy
-      end
-      redirect_to @grupo
-    end
+    
 
 
 end

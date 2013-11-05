@@ -28,6 +28,13 @@
                     <label><i class="icon-calendar"></i> <%= @tarea.fecha_entrega.strftime("%d/%b/%Y")%></label>&nbsp;&nbsp;
                     <label><i class="icon-time"></i> <%= @tarea.hora_entrega.strftime("%I:%M %p") %></label>
                 </div>
+
+                <div>
+                <% if @tarea.usuario_id==current_user.id %>
+                  <%= link_to 'Eliminar', "/tareas/eliminar/"+@tarea.id.to_s, data: { confirm: 'Se eliminara la tarea, ¿Está seguro?' } %>
+                <% end %>
+                </div>
+
                 </div>
               </div>
             </div>

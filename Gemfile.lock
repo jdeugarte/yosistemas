@@ -250,7 +250,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  aescrypt
+  aescrypt (>= 1.0.0)
   bcrypt-ruby
   capybara (~> 2.1.0)
   coffee-rails (~> 4.0.0)
@@ -258,8 +258,8 @@ DEPENDENCIES
   factory_girl_rails (~> 4.2.1)
   faker (~> 1.1.2)
   jbuilder (~> 1.2)
-  jquery-rails
-  kaminari
+  jquery-rails (>= 3.0.4)
+  kaminari (>= 0.14.1)
   launchy (~> 2.3.0)
   metric_fu (~> 4.4.4)
   paperclip (~> 3.0)

@@ -21,7 +21,7 @@ class UsuariosController < ApplicationController
       if (pass==newPass)
         if(pass.length>5)
         @usuario.contrasenia=Digest::MD5.hexdigest(pass)
-        @usuario.passwords_request_id=-1
+        @usuario.solicitud_contrasenia_id=-1
         @usuario.save
         #flash[:alert]=@usuario.correo+" "+pass+" "+@usuario.activa.to_s
         redirect_to root_url
@@ -50,9 +50,9 @@ class UsuariosController < ApplicationController
     @usuario=Usuario.where(:correo=>mail,:activa=>true).first
     if(@usuario!=nil)
     if ( verify_recaptcha )
-      p=PasswordsRequest.new(:usuario_id=>@usuario.id)
+      p=SolicitudContrasenia.new(:usuario_id=>@usuario.id)
       p.save
-      @usuario.passwords_request_id=p.id
+      @usuario.solicitud_contrasenia_id=p.id
       @usuario.save
       SendMail.recover_password(@usuario,p.id).deliver
     else
@@ -75,11 +75,11 @@ class UsuariosController < ApplicationController
      @errorMessagge="no puede recuperar su password si esta loggeado"
   else      
   begin
-    password_request=PasswordsRequest.find(params[:id_request])
+    password_request=SolicitudContrasenia.find(params[:id_request])
     rescue ActiveRecord::RecordNotFound
   end
     if(password_request!=nil && password_request.usuario.id.to_s==params[:id_user])
-        if(password_request.usuario.passwords_request_id==password_request.id && DateTime.now<=(password_request.created_at+(86400)))
+        if(password_request.usuario.solicitud_contrasenia_id==password_request.id && DateTime.now<=(password_request.created_at+(86400)))
           @request_id=password_request.id
            @usuario=password_request.usuario
         else

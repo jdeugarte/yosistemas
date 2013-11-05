@@ -99,14 +99,6 @@ ActiveRecord::Schema.define(version: 20131106001615) do
   add_index "notificacions", ["suscripcion_tema_id"], name: "index_notificacions_on_suscripcion_tema_id"
   add_index "notificacions", ["tema_comentario_id"], name: "index_notificacions_on_tema_comentario_id"
 
-  create_table "passwords_requests", force: true do |t|
-    t.integer  "usuario_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "passwords_requests", ["usuario_id"], name: "index_passwords_requests_on_usuario_id"
-
   create_table "responder_tareas", force: true do |t|
     t.string   "descripcion"
     t.integer  "usuario_id"
@@ -117,6 +109,14 @@ ActiveRecord::Schema.define(version: 20131106001615) do
 
   add_index "responder_tareas", ["tarea_id"], name: "index_responder_tareas_on_tarea_id"
   add_index "responder_tareas", ["usuario_id"], name: "index_responder_tareas_on_usuario_id"
+
+  create_table "solicitud_contrasenia", force: true do |t|
+    t.integer  "usuario_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "solicitud_contrasenia", ["usuario_id"], name: "index_solicitud_contrasenia_on_usuario_id"
 
   create_table "subscripcions", force: true do |t|
     t.string   "llave"
@@ -184,9 +184,9 @@ ActiveRecord::Schema.define(version: 20131106001615) do
     t.string   "correo"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "activa",               default: false
+    t.boolean  "activa",                   default: false
     t.integer  "grupo_id"
-    t.integer  "passwords_request_id"
+    t.integer  "solicitud_contrasenia_id"
     t.string   "rol"
     t.string   "nombre_usuario"
   end

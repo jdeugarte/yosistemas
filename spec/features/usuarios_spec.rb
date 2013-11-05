@@ -37,8 +37,8 @@ feature 'Gestion de usuarios' do
   scenario 'recuperar mi contrasenia' do
     grupo = FactoryGirl.create(:grupo)
     usuario = FactoryGirl.create(:usuario)
-    request=FactoryGirl.create(:passwords_request)
-    usuario.passwords_request_id=request.id
+    request=FactoryGirl.create(:solicitud_contrasenium)
+    usuario.solicitud_contrasenia_id=request.id
     request.usuario=usuario
     usuario.save
     request.save
@@ -52,9 +52,9 @@ feature 'Gestion de usuarios' do
   scenario 'recuperar mi contrasenia, solicitud expiro' do
     grupo = FactoryGirl.create(:grupo)
     usuario = FactoryGirl.create(:usuario)
-    request=FactoryGirl.create(:passwords_request)
-    request2=FactoryGirl.create(:passwords_request)
-    usuario.passwords_request_id=request2.id
+    request=FactoryGirl.create(:solicitud_contrasenium)
+    request2=FactoryGirl.create(:solicitud_contrasenium)
+    usuario.solicitud_contrasenia_id=request2.id
     request.usuario=usuario
     request2.usuario=usuario
     usuario.save
@@ -66,8 +66,8 @@ feature 'Gestion de usuarios' do
   scenario 'recuperar mi contrasenia, imposible procesar solicitud' do
     grupo = FactoryGirl.create(:grupo)
      usuario = FactoryGirl.create(:usuario)
-    request=FactoryGirl.create(:passwords_request)
-    usuario.passwords_request_id=request.id
+    request=FactoryGirl.create(:solicitud_contrasenium)
+    usuario.solicitud_contrasenia_id=request.id
     request.usuario=usuario
     usuario.save
     request.save
@@ -90,8 +90,8 @@ feature 'Gestion de usuarios' do
   scenario 'recuperar mi contrasenia, no puede recuperar si esta loggeado' do
     grupo = FactoryGirl.create(:grupo)
      usuario = FactoryGirl.create(:usuario)
-    request=FactoryGirl.create(:passwords_request)
-    usuario.passwords_request_id=request.id
+    request=FactoryGirl.create(:solicitud_contrasenium)
+    usuario.solicitud_contrasenia_id=request.id
     request.usuario=usuario
     usuario.save
     request.save

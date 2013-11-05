@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   before_filter :require_log_in  
   helper_method :notifications
   private
+  #prueba de push en la rama migracion
   def asdf
     flash[:alert] = "hijo puta"
     render 'index'

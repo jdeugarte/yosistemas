@@ -26,9 +26,8 @@ gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 
 #gems for files upload
-gem 'paperclip'
+gem 'paperclip','~> 3.0'
 gem 'paperclip-dropbox', '~> 1.1.7'
-gem 'dropbox'
 gem "metric_fu", "~> 4.4.4"
 gem 'kaminari'
 

@@ -13,9 +13,9 @@
             </div>
             
             <div class="col-lg-9 col-md-9 col-sm-9">
-              <div class="panel panel-primary">
+              <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">
+                  <h3 class="panel-title" style="font-size:20px;">
                     <%= @tarea.titulo %>
                   </h3>
                 </div>
@@ -25,14 +25,34 @@
                   <small>tarea creada el <%= @tarea.created_at.strftime("%d/%m/%Y a las: %I:%M  %p") %></small>
                 </blockquote>
                 <div>Entrega:&nbsp;
-                    <label><i class="icon-calendar"></i> <%= @tarea.fecha_entrega.strftime("%d/%b/%Y")%></label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><i class="icon-calendar"></i> <%= @tarea.fecha_entrega.strftime("%d/%b/%Y")%></label>&nbsp;&nbsp;
                     <label><i class="icon-time"></i> <%= @tarea.hora_entrega.strftime("%I:%M %p") %></label>
                 </div>
                 </div>
               </div>
             </div>
           </div>
+          <% if(@tarea.archivo_adjuntos.size>0) %>
+          <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                  <label><i class="icon-download"></i> Adjuntos</label>
+                  <hr style="margin-top:0px;" />
+                  <ul>
+                  <% @tarea.archivo_adjuntos.each do |arch| %>
+                    <li class="attachment-link" title="Archivo tipo .<%=arch.archivo_file_name.split('.').last%>">
+                      <a href="<%=arch.archivo.url(download: true)%>"><img class="attachment-img" src="/assets/filetypes/default.png" file-type="<%=arch.archivo_file_name.split('.').last%>" ><%=arch.archivo_file_name[0,arch.archivo_file_name.rindex('.')]%></a>
+                    </li>
+                  <%end%>
+                  </ul>
+                </div>
+              </div>
+          </div>
+          <% end %>
         </form>
       </div>
 </div>
 </div>
+<script type="text/javascript">
+  getImagesForAttachedFiles();
+</script>

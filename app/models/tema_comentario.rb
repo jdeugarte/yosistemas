@@ -3,5 +3,5 @@ class TemaComentario < ActiveRecord::Base
   belongs_to :usuario
   has_many :notificacions
   has_many :archivo_adjunto_comentario
-  validates :body, :presence => true 
+  validates :cuerpo, :presence => true 
 end

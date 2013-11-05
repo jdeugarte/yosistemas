@@ -43,13 +43,13 @@ class TemaComentariosController < ApplicationController
 
     def editar
         comentario = TemaComentario.find(params[:id])
-        comentario.body = params[:body]
+        comentario.cuerpo = params[:cuerpo]
         comentario.save
         redirect_to "/temas/"+comentario.tema_id.to_s
     end
 
 	private 
 	def comentario_params
-		params.require(:comentario).permit(:body)
+		params.require(:tema_comentario).permit(:cuerpo)
 	end
 end

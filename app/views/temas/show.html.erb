@@ -59,7 +59,7 @@
 	<%= form_for([@tema, @tema.tema_comentarios.build]) do |f| %>
       <div class="form-group">
         <label for="inputContent">Comentario:</label>
-            <%= f.text_area :body, :class=>'form-control',:rows=>'4', :cols =>'20', :placeholder=>'Contenido' %>
+            <%= f.text_area :cuerpo, :class=>'form-control',:rows=>'4', :cols =>'20', :placeholder=>'Contenido' %>
       </div>
       <div class="form-group">
            <label for="inputDate" class="col-lg-2 control-label">Adjuntar archivos:</label>
@@ -92,11 +92,11 @@
 	  </a>
 	  <div class="media-body">
 	    <h4 class="media-heading"><%=comentario.usuario.nombre_usuario%></h4>
-	    <%=comentario.body%>
+	    <%=comentario.cuerpo%>
 	    <br>
 	    <%if current_user!=nil && comentario.usuario.correo == current_user.correo%>
-	    	<%= link_to 'Editar', "/temas/editcomentario/"+comentario.id.to_s %>
-        <%= link_to 'Eliminar', "/comentarios/delete/"+comentario.id.to_s, data: { confirm: 'Se eliminara el tema, ¿está seguro?' } %>
+	    	<%= link_to 'Editar', "/temas/editar_comentario/"+comentario.id.to_s %>
+        <%= link_to 'Eliminar', "/tema_comentarios/delete/"+comentario.id.to_s, data: { confirm: 'Se eliminara el tema, ¿está seguro?' } %>
 	    <%end%>
 	  </div>
 	</div>

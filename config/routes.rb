@@ -22,9 +22,9 @@ Yosistemas::Application.routes.draw do
   get "usuarios/send_password_mail" => "usuarios#forgot_password", :as => "forgot_password"
   
   get "temas/search/:grupo" => "temas#search"
-  get "temas/editComment/:idcomment" => "temas#editComment"
-  post "comments/editc/:id" => "comments#editc"
-  get "comments/delete/:id" => "comments#delete"
+  get "temas/editar_comentario/:id_comentario" => "temas#editar_comentario"
+  post "tema_comentarios/editar/:id" => "tema_comentarios#editar"
+  get "tema_comentarios/delete/:id" => "tema_comentarios#delete"
   get "temas/ordertable/:themes/:id/:var" => 'temas#ordertable', :as  => 'ordertable'
   get "temas/ordertablemine/:themes/:var" => 'temas#ordertablemine' , :as => 'ordertablemine'
 
@@ -56,13 +56,13 @@ Yosistemas::Application.routes.draw do
 
   post "usuarios/update_user/:id"=>"usuarios#update"
   resources :usuarios do
-    resources :comments
+    resources :tema_comentarios
   end
   resources :sessions
   resources :temas do
-    resources :comments
+    resources :tema_comentarios
   end
-  resources :comments
+  resources :tema_comentarios
   resources :grupos do
     resources :subscriptions
   end

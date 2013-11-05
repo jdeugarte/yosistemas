@@ -65,17 +65,6 @@ ActiveRecord::Schema.define(version: 20131106001615) do
   add_index "comment_tasks", ["tarea_id"], name: "index_comment_tasks_on_tarea_id"
   add_index "comment_tasks", ["usuario_id"], name: "index_comment_tasks_on_usuario_id"
 
-  create_table "comments", force: true do |t|
-    t.text     "body"
-    t.integer  "tema_id"
-    t.integer  "usuario_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "comments", ["tema_id"], name: "index_comments_on_tema_id"
-  add_index "comments", ["usuario_id"], name: "index_comments_on_usuario_id"
-
   create_table "grupos", force: true do |t|
     t.string   "nombre"
     t.text     "descripcion"
@@ -163,6 +152,17 @@ ActiveRecord::Schema.define(version: 20131106001615) do
 
   add_index "tareas", ["grupo_id"], name: "index_tareas_on_grupo_id"
   add_index "tareas", ["usuario_id"], name: "index_tareas_on_usuario_id"
+
+  create_table "tema_comentarios", force: true do |t|
+    t.text     "cuerpo"
+    t.integer  "tema_id"
+    t.integer  "usuario_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tema_comentarios", ["tema_id"], name: "index_tema_comentarios_on_tema_id"
+  add_index "tema_comentarios", ["usuario_id"], name: "index_tema_comentarios_on_usuario_id"
 
   create_table "temas", force: true do |t|
     t.string   "titulo"

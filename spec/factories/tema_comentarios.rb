@@ -1,8 +1,8 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :comment do
-    body "comentario, importante"
+  factory :tema_comentario do
+    cuerpo "comentario, importante"
     tema_id 1
     usuario_id 1
   end

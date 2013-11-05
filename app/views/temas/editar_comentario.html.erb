@@ -4,11 +4,11 @@
 		<div class="well">
 		 <fieldset>
 		<legend>Editar Comentario</legend>
-		<form method="post" action="/tema_comentarios/editc/<%=@comentario.id.to_s%>">	 	
+		<form method="post" action="/tema_comentarios/editar/<%=@comentario.id.to_s%>">	 	
 			<div class="form-group">
 		    	 <label for="inputTitle" class="col-lg-2 control-label">Contenido:</label>
 				<div class="col-lg-10">
-					<textarea cols="60" rows="15" name="body"><%=@comentario.body%></textarea><br><br>
+					<textarea cols="60" rows="15" name="cuerpo"><%=@comentario.cuerpo%></textarea><br><br>
 				</div>
 			</div>
 			<div class="col-lg-10 col-lg-offset-2">

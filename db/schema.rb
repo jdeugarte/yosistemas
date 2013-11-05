@@ -79,25 +79,25 @@ ActiveRecord::Schema.define(version: 20131106001615) do
 
   create_table "notificacion_grupos", force: true do |t|
     t.boolean  "notificado"
-    t.integer  "subscription_id"
+    t.integer  "subscripcion_id"
     t.integer  "tarea_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "notificacion_grupos", ["subscription_id"], name: "index_notificacion_grupos_on_subscription_id"
+  add_index "notificacion_grupos", ["subscripcion_id"], name: "index_notificacion_grupos_on_subscripcion_id"
   add_index "notificacion_grupos", ["tarea_id"], name: "index_notificacion_grupos_on_tarea_id"
 
   create_table "notificacions", force: true do |t|
     t.boolean  "notificado"
-    t.integer  "suscripcion_temas_id"
-    t.integer  "comments_id"
+    t.integer  "suscripcion_tema_id"
+    t.integer  "tema_comentario_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "notificacions", ["comments_id"], name: "index_notificacions_on_comments_id"
-  add_index "notificacions", ["suscripcion_temas_id"], name: "index_notificacions_on_suscripcion_temas_id"
+  add_index "notificacions", ["suscripcion_tema_id"], name: "index_notificacions_on_suscripcion_tema_id"
+  add_index "notificacions", ["tema_comentario_id"], name: "index_notificacions_on_tema_comentario_id"
 
   create_table "passwords_requests", force: true do |t|
     t.integer  "usuario_id"
@@ -118,7 +118,7 @@ ActiveRecord::Schema.define(version: 20131106001615) do
   add_index "responder_tareas", ["tarea_id"], name: "index_responder_tareas_on_tarea_id"
   add_index "responder_tareas", ["usuario_id"], name: "index_responder_tareas_on_usuario_id"
 
-  create_table "subscriptions", force: true do |t|
+  create_table "subscripcions", force: true do |t|
     t.string   "llave"
     t.integer  "usuario_id"
     t.integer  "grupo_id"
@@ -126,8 +126,8 @@ ActiveRecord::Schema.define(version: 20131106001615) do
     t.datetime "updated_at"
   end
 
-  add_index "subscriptions", ["grupo_id"], name: "index_subscriptions_on_grupo_id"
-  add_index "subscriptions", ["usuario_id"], name: "index_subscriptions_on_usuario_id"
+  add_index "subscripcions", ["grupo_id"], name: "index_subscripcions_on_grupo_id"
+  add_index "subscripcions", ["usuario_id"], name: "index_subscripcions_on_usuario_id"
 
   create_table "suscripcion_temas", force: true do |t|
     t.integer  "tema_id"

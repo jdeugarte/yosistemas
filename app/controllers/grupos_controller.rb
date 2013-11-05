@@ -46,7 +46,7 @@ class GruposController < ApplicationController
     @grupo.usuario_id = current_user.id
     @grupo.llave = verificar_grupo(@grupo.estado)         
     if @grupo.save     
-      subs = Subscription.new
+      subs = Subscripcion.new
       subs.grupo = @grupo
       subs.usuario = current_user
       subs.save
@@ -57,13 +57,13 @@ class GruposController < ApplicationController
     end 
   end
 
-  def subscription_group
+  def subscripcion_grupo
     @grupo = Grupo.find(params[:id])
   end
 
   def suscriptores
     @grupo = Grupo.find(params[:id])
-    @suscriptores = @grupo.subscriptions
+    @suscriptores = @grupo.subscripcions
   end
 
   def detalle_usuario

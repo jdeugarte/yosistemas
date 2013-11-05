@@ -22,12 +22,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def notifications
+  def notificaciones
     @notifications = Array.new
     if current_user!=nil
       suscripciones = SuscripcionTema.where(:usuario_id=>current_user.id)
       suscripciones.each do |suscripcion| 
-        notificaciones = Notificacion.where(:suscripcion_temas_id=>suscripcion.id,:notificado=>false)
+        notificaciones = Notificacion.where(:suscripcion_tema_id=>suscripcion.id,:notificado=>false)
         notificaciones.each do |notificacion|
           @notifications.push (notificacion)
         end

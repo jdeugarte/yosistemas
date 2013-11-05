@@ -24,12 +24,12 @@ class TareasController < ApplicationController
       if(!@tarea.nil?)
 
         @grupo = @tarea.grupo
-        @suscrito = Subscription.where(:grupo_id => @grupo.id, :usuario_id => current_user.id)
+        @suscrito = Subscripcion.where(:grupo_id => @grupo.id, :usuario_id => current_user.id)
         if(!@suscrito.first.nil?)
 
           @grupos = Array.new
           if(current_user!=nil)
-            current_user.subscriptions.each do |subs|
+            current_user.subscripcions.each do |subs|
               @grupos.push(subs.grupo)
 
             end
@@ -56,7 +56,7 @@ class TareasController < ApplicationController
     else
       @grupos = Array.new
       if(current_user!=nil)
-      current_user.subscriptions.each do |subs|
+      current_user.subscripcions.each do |subs|
         @grupos.push(subs.grupo)
         end
         @grupo = Grupo.find(@tarea.grupo.id.to_s)
@@ -71,7 +71,7 @@ class TareasController < ApplicationController
     	@tarea = Tarea.new
       @grupos = Array.new
       if(current_user!=nil)
-        current_user.subscriptions.each do |subs|
+        current_user.subscripcions.each do |subs|
           @grupos.push(subs.grupo)
         end
         @grupo = Grupo.find(params[:id])
@@ -131,7 +131,7 @@ class TareasController < ApplicationController
     else
        @grupos = Array.new
       if(current_user!=nil)
-      current_user.subscriptions.each do |subs|
+      current_user.subscripcions.each do |subs|
         @grupos.push(subs.grupo)
         end
         @grupo = Grupo.find(params[:tarea][:grupo_id])
@@ -175,7 +175,7 @@ class TareasController < ApplicationController
 
     def notify_users(id_grupo,tarea)
         
-        suscripciones = Subscription.all
+        suscripciones = Subscripcion.all
         suscripciones.each do |suscrito|
           if suscrito.grupo_id == id_grupo 
             if suscrito.usuario_id != current_user.id
@@ -185,7 +185,7 @@ class TareasController < ApplicationController
 
                 @notificacion = NotificacionGrupo.new
                 @notificacion.notificado = false
-                @notificacion.subscription_id = suscrito.id
+                @notificacion.subscripcion_id = suscrito.id
                 @notificacion.tarea = tarea
                 @notificacion.save    
                 SendMail.notify_users_task_create(@usuario, tarea, @grupo).deliver    

@@ -14,7 +14,7 @@
   		  </fieldset>
 		</form>
 		<%if current_user!=nil%>
-		<%= form_for([@grupo, @grupo.subscriptions.build]) do |f| %>
+		<%= form_for([@grupo, @grupo.subscripcions.build]) do |f| %>
 			<%if @grupo.estado == true %>
 			<div class="form-group">
                 <label for="inputTitle" class="col-lg-2 control-label">Ingresar Llave:</label>

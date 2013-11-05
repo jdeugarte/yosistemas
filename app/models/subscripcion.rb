@@ -1,4 +1,4 @@
-class Subscription < ActiveRecord::Base
+class Subscripcion < ActiveRecord::Base
   belongs_to :usuario
   belongs_to :grupo
   has_many :notificacion_grupos

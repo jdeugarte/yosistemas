@@ -1,6 +1,6 @@
-class CreateSubscriptions < ActiveRecord::Migration
+class CreateSubscripcions < ActiveRecord::Migration
   def change
-    create_table :subscriptions do |t|
+    create_table :subscripcions do |t|
       t.string :llave
       t.references :usuario, index: true
       t.references :grupo, index: true

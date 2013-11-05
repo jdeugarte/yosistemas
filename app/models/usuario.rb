@@ -4,7 +4,7 @@ require 'digest/md5'
 	has_many :temas
 	has_many :tema_comentarios
 	has_many :comment_tasks
-	has_many :subscriptions
+	has_many :subscripcions
 	has_many :tareas
 	has_many :suscripcion_temas
 	  has_many :usuarios
@@ -68,7 +68,7 @@ require 'digest/md5'
   	end
 
   	after_create do
-  		subscripcion = Subscription.new
+  		subscripcion = Subscripcion.new
         subscripcion.usuario = self
         subscripcion.grupo = Grupo.find_by_id(1)
         subscripcion.save

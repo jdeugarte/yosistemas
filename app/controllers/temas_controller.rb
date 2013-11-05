@@ -131,7 +131,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     @tema = Tema.new
     @grupos = Array.new
     if(current_user!=nil)
-      current_user.subscriptions.each do |subs|
+      current_user.subscripcions.each do |subs|
         @grupos.push(subs.grupo)
       end
       @grupo = Grupo.find(params[:id])
@@ -141,7 +141,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
 
   def show
     @tema = Tema.find(params[:id])  
-     notifications.each do |notificacion|
+     notificaciones.each do |notificacion|
       if ( TemaComentario.find(notificacion.tema_comentario_id).tema_id == @tema.id )
         notificacion.notificado = true
         notificacion.save 

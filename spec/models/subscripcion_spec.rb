@@ -1,4 +1,4 @@
 require 'spec_helper'
 
-describe Subscription do
+describe Subscripcion do
 end

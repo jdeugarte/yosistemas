@@ -1,13 +1,13 @@
 class Grupo < ActiveRecord::Base
   	belongs_to :usuario
   	has_many :temas
-  	has_many :subscriptions
+  	has_many :subscripcions
   	has_many :tareas
   	validates :nombre, :presence => true
 
   	def usuario_suscrito?(id)
   		resp = true
-  		for suscripcion in self.subscriptions
+  		for suscripcion in self.subscripcions
   			if suscripcion.usuario_id == id
   				return resp = false
   			end

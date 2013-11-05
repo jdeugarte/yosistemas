@@ -9,7 +9,7 @@
     {
       clearInterval(timerId);
     }
-    if(notifications.size >0)
+    if(@notificaciones.size >0)
     {
 
       s=document.getElementById("demo");
@@ -23,7 +23,7 @@
 <script>
 function changeSrc()
 {
-    if (notifications.size == 0 || notifications == nil)
+    if (@notificaciones.size == 0 || @notificaciones == nil)
     {
       s=document.getElementById("demo");
       s.src="/assets/not3.jpg";
@@ -78,7 +78,7 @@ function changeSrc()
   
       <%if  !current_user.nil? %>
       <li class="dropdown" onclick="changeSrc()">
-        <%if notifications!= nil && notifications.size >0%>
+        <%if @notificaciones!= nil && @notificaciones.size >0%>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
             <img src="/assets/not2.jpg" height="25" width="30" id="demo">Notificaciones 
             <b class="caret"></b>
@@ -90,14 +90,14 @@ function changeSrc()
           </a>
         <%end%>
         <ul class="dropdown-menu">    
-          <% if notifications != nil && notifications.size > 0%>
-            <% notifications.each do |notificacion| %>  
+          <% if @notificaciones != nil && @notificaciones.size > 0%>
+            <% @notificaciones.each do |notificacion| %>  
               <li>
-                <a href=<%="/temas/"+ Comment.find(notificacion.comments_id).tema_id.to_s %>  > 
+                <a href=<%="/temas/"+ Comment.find(notificacion.tema_comentarios_id).tema_id.to_s %>  > 
                   <h4>  
-                    <%= "tema: "+Tema.find(Comment.find(notificacion.comments_id).tema_id).titulo+" " %>
+                    <%= "tema: "+Tema.find(Comment.find(notificacion.tema_comentarios_id).tema_id).titulo+" " %>
                   </h4>
-                  &nbsp;&nbsp;&nbsp;<%= Comment.find(notificacion.comments_id).body[0,20]+"..."%> 
+                  &nbsp;&nbsp;&nbsp;<%= Comment.find(notificacion.tema_comentarios_id).cuerpo[0,20]+"..."%> 
                 </a>
               </li>
             <%end%>

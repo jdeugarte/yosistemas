@@ -35,7 +35,7 @@ Yosistemas::Application.routes.draw do
   get 'temas/show_mine' => 'temas#show_mine', :as=>'show_mine'
   get 'temas/searchmine' => 'temas#searchmine', :as=>'searchmine'
   #get 'temas/:grupo' => 'temas#index'
-  get 'grupos/subscription_group/:id' => 'grupos#subscription_group', :as=>'suscribirse'
+  get 'grupos/subscripcion_grupo/:id' => 'grupos#subscripcion_grupo', :as=>'suscribirse'
   get "grupos/search" => "grupos#search", :as=>'search_grupo'
   get 'grupos/mis_grupos' => 'grupos#mis_grupos', :as => 'mis_grupos'
   get 'grupos/suscriptores/:id' => 'grupos#suscriptores', :as => 'suscriptores'
@@ -64,12 +64,10 @@ Yosistemas::Application.routes.draw do
   end
   resources :tema_comentarios
   resources :grupos do
-    resources :subscriptions
+    resources :subscripcions
   end
-  resources :subscriptions
+  resources :subscripcions
   resources :tareas
-  #match '/register' => 'usuarios#new'
-  #match '/usuarios' => 'usuarios@show'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

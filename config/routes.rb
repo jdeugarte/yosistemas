@@ -40,7 +40,7 @@ Yosistemas::Application.routes.draw do
   get 'grupos/mis_grupos' => 'grupos#mis_grupos', :as => 'mis_grupos'
   get 'grupos/suscriptores/:id' => 'grupos#suscriptores', :as => 'suscriptores'
   get 'gruopos/detalle_usuario/:id' => 'grupos#detalle_usuario', :as => 'detalle_usuario'
-  get "subscriptions/delete/:id" => "subscriptions#delete", :as => 'borrar_suscripcion'
+  get "subscripcion/delete/:id" => "subscripcions#delete", :as => 'borrar_suscripcion'
 
   get "grupos/:id/temas"  => "temas#index", :as=> 'filtrar_temas'
 

@@ -18,7 +18,7 @@ class SubscripcionsController < ApplicationController
   	end
 
     def delete
-        @suscripcion = Subscription.find(params[:id])
+        @suscripcion = Subscripcion.find(params[:id])
         @grupo = @suscripcion.grupo
         @suscripcion.destroy
         redirect_to suscriptores_path(@grupo)

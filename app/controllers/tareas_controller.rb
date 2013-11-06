@@ -94,6 +94,30 @@ class TareasController < ApplicationController
   def show
     @tarea = Tarea.find(params[:id])  
   end
+  def edit #id tarea
+    if(params[:id]!="1")
+      @tarea = Tarea.find(params[:id])
+      @grupos = Array.new
+      if(current_user!=nil)
+        current_user.subscriptions.each do |subs|
+          @grupos.push(subs.grupo)
+        end
+        @grupo = Grupo.find(@tarea.grupo_id)
+        @id = params[:id]
+      end
+    else
+      redirect_to temas_path
+    end
+  end
+  def update
+    @tarea = Tarea.find(params[:id])
+
+    if(@tarea.update(params[:tarea].permit(:titulo,:descripcion,:fecha_entrega,:grupo_id,:hora_entrega)))
+      redirect_to @tarea
+    else
+      render 'edit'
+    end
+  end
   #POST tareas/create
   def create
     @tarea = Tarea.new(tarea_params)

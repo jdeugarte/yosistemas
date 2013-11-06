@@ -47,6 +47,7 @@ Yosistemas::Application.routes.draw do
   get 'temas/new/:id' => 'temas#new', :as => 'tema_para_grupo'
   get 'tareas/new/:id' => 'tareas#new', :as => 'tarea_para_grupo'
   get 'tareas/eliminar/:id' => 'tareas#eliminar'
+  get 'tareas/edit/:id' => 'tareas#edit'
 
   get 'grupos/:grupo/tareas' => 'tareas#index', :as => 'tareas_index'
 

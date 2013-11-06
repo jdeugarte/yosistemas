@@ -102,7 +102,7 @@ class TareasController < ApplicationController
       @tarea = Tarea.find(params[:id])
       @grupos = Array.new
       if(current_user!=nil)
-        current_user.subscriptions.each do |subs|
+        current_user.subscripcions.each do |subs|
           @grupos.push(subs.grupo)
         end
         @grupo = Grupo.find(@tarea.grupo_id)

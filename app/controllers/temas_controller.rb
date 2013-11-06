@@ -99,7 +99,6 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
       finalRes
   end
 
-  private
   /methods for deepSeach/
     def deepSearchOfDescription(keyWords)
       keyWordArray = keyWords.split
@@ -161,6 +160,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     @suscripcion.tema_id=@tema.id
     @suscripcion.save
     redirect_to '/grupos/'+params[:tema][:grupo_id]+'/temas'
+
   end
 
   def edit

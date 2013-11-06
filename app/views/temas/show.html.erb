@@ -56,7 +56,7 @@
 <div class="col-lg-6 ">
     <div class="well">
 <%if current_user!=nil%>
-	<%= form_for([@tema, @tema.comments.build]) do |f| %>
+	<%= form_for([@tema, @tema.comments.build])  do |f| %>
       <div class="form-group">
         <label for="inputContent">Comentario:</label>
             <%= f.text_area :body, :class=>'form-control',:rows=>'4', :cols =>'20', :placeholder=>'Contenido' %>
@@ -65,6 +65,9 @@
            <label for="inputDate" class="col-lg-2 control-label">Adjuntar archivos:</label>
             <div class="col-lg-10 input-group">
             <input id="showFiles" class="form-control" type="text" placeholder="Seleccione archivos..." onclick="document.getElementById('tarea_archivo').click();" onfocus="this.blur();">
+
+             
+
           
             <span class="input-group-addon" style="background-color: #D5230F; cursor:pointer;" onclick="document.getElementById('tarea_archivo').click();"> 
               <i class="icon-file icon-white"></i>

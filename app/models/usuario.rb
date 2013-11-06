@@ -59,7 +59,17 @@ require 'digest/md5'
       	else
       	return nil
     	end
-  end
+    end
+    
+    def esta_subscrito?(grupo_id)
+    	self.subscripcions.each do |subs|
+    		if(subs.grupo_id==grupo_id.to_i)
+    			return true
+    		end
+		end
+		return false
+    end
+
 
 
   	def encrypt_password  	

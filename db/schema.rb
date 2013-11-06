@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20131106001615) do
 
   create_table "adjuntos_comentarios", force: true do |t|
-    t.integer  "comments_id"
+    t.integer  "tema_comentario_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "archivo_file_name"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20131106001615) do
     t.datetime "archivo_updated_at"
   end
 
-  add_index "adjuntos_comentarios", ["comments_id"], name: "index_adjuntos_comentarios_on_comments_id"
+  add_index "adjuntos_comentarios", ["tema_comentario_id"], name: "index_adjuntos_comentarios_on_tema_comentario_id"
 
   create_table "archivo_adjunto_comentarios", force: true do |t|
     t.datetime "created_at"
@@ -53,17 +53,6 @@ ActiveRecord::Schema.define(version: 20131106001615) do
   end
 
   add_index "archivo_adjuntos", ["tarea_id"], name: "index_archivo_adjuntos_on_tarea_id"
-
-  create_table "comment_tasks", force: true do |t|
-    t.integer  "tarea_id"
-    t.integer  "usuario_id"
-    t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "comment_tasks", ["tarea_id"], name: "index_comment_tasks_on_tarea_id"
-  add_index "comment_tasks", ["usuario_id"], name: "index_comment_tasks_on_usuario_id"
 
   create_table "grupos", force: true do |t|
     t.string   "nombre"

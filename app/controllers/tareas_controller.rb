@@ -2,7 +2,7 @@ class TareasController < ApplicationController
 
   #GET tareas
   def index
-    if(params[:grupo]!="1")
+    if(params[:grupo]!="1" && current_user.esta_subscrito?((params[:grupo])))
       @tareas = Tarea.where(:grupo_id => params[:grupo]).reverse
       @grupo = Grupo.find(params[:grupo])
     else
@@ -67,7 +67,7 @@ class TareasController < ApplicationController
   end
 
   def new
-    if(params[:id]!="1")
+    if(params[:id]!="1" && Grupo.find(params[:id]).usuario==current_user)
     	@tarea = Tarea.new
       @grupos = Array.new
       if(current_user!=nil)
@@ -93,6 +93,9 @@ class TareasController < ApplicationController
 
   def show
     @tarea = Tarea.find(params[:id])  
+    if(!current_user.esta_subscrito?(@tarea.grupo.id))
+      redirect_to temas_path
+    end
   end
   def edit #id tarea
     if(params[:id]!="1")

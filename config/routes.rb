@@ -57,19 +57,19 @@ Yosistemas::Application.routes.draw do
   post 'tareas/responder_tarea/:id' => 'tareas#responder_tarea_crear', :as =>'responder_tarea_crear'
 
   post "usuarios/update_user/:id"=>"usuarios#update"
-  resources :usuarios do
-    resources :tema_comentarios
+  resources :usuarios , except: [:destroy] do
+    resources :tema_comentarios, only: [:create]
   end
-  resources :sessions
-  resources :temas do
-    resources :tema_comentarios
+  resources :sessions, only: [:new, :create, :destroy]
+  resources :temas, except: [:destroy] do
+    resources :tema_comentarios, only: [:create]
   end
-  resources :tema_comentarios
-  resources :grupos do
-    resources :subscripcions
+  resources :tema_comentarios, only: [:create]
+  resources :grupos, except: [:edit, :update, :destroy]  do
+    resources :subscripcions, only: [:create]
   end
-  resources :subscripcions
-  resources :tareas
+  resources :subscripcions, only: [:create]
+  resources :tareas, except: [:destroy]
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

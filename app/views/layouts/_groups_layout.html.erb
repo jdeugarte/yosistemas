@@ -43,25 +43,33 @@
   </div>
   <div class="col-lg-8"  style="background-color:white;">
     <div>
-        <% esTema = (!@temas.nil?||!@tema.nil?) %>
+        <% tab_selec = ((!@temas.nil?||!@tema.nil?) ? 1 : ((!@tareas.nil?||!@tarea.nil?) ? 2 : 0))%>
             <div>
               <ul class="nav nav-tabs" style="margin-bottom: 15px;">
-                <li class="<%=esTema ? 'active' : ''%>" onclick="<%= (!esTema) ? "throwFade(); window.location='/grupos/"+@grupo.id.to_s+"/temas'; return false;" : "" %>" ><a href="#temas" data-toggle="tab"><h2 style="margin-top:5px;">Temas</h2></a></li>
+              <%if(@grupo.id!=1)%>
+                <li class="<%=tab_selec==0 ? 'active' : ''%>" onclick="<%= (tab_selec!=0) ? "throwFade(); window.location='/grupos/"+@grupo.id.to_s+"/temas-y-tareas'; return false;" : "" %>" ><a href="#temas-y-tareas" data-toggle="tab"><h3 style="margin-top:5px;">Temas y Tareas</h3></a></li>
+              <%end%>
+                <li class="<%=tab_selec==1 ? 'active' : ''%>" onclick="<%= (tab_selec!=1) ? "throwFade(); window.location='/grupos/"+@grupo.id.to_s+"/temas'; return false;" : "" %>" ><a href="#temas" data-toggle="tab"><h3 style="margin-top:5px;">Temas</h3></a></li>
                 <%if(@grupo.id!=1)%>
-                <li class="<%=esTema ? '' : 'active'%>" onclick="<%= (!esTema) ? "" : "throwFade(); window.location='/grupos/"+@grupo.id.to_s+"/tareas'; return false;" %>" ><a href="#tareas" data-toggle="tab"><h2 style="margin-top:5px;">Tareas</h2></a></li>
+                <li class="<%=tab_selec==2 ? 'active' : ''%>" onclick="<%= (tab_selec!=2) ? "throwFade(); window.location='/grupos/"+@grupo.id.to_s+"/tareas'; return false;" : "" %>" ><a href="#tareas" data-toggle="tab"><h3 style="margin-top:5px;">Tareas</h3></a></li>
                 <%end%>
               </ul>
               <div class="go-left tab-content" id="principal">
-                <div class="tab-pane fade <%= esTema ? 'active in' : ''%>" id="temas">
-                <%if esTema %>
-                  <%=yield%>
-                <%end%>
-                </div>
-                <div class="tab-pane fade <%= esTema ? '' : 'active in'%>" id="tareas">
-                  <%if (!esTema) %>
+              <%if tab_selec==0 %>
+                <div class="tab-pane fade active in" id="temas-y-tareas">
                     <%=yield%>
-                  <%end%>
                 </div>
+              <%end%>
+              <%if tab_selec==1 %>
+                <div class="tab-pane fade active in" id="temas">
+                    <%=yield%>
+                </div>
+              <%end%>
+              <%if tab_selec==2 %>
+                <div class="tab-pane fade active in" id="tareas">
+                    <%=yield%>
+                </div>
+              <%end%>
               </div>
             </div>
     </div>

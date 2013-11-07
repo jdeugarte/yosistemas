@@ -9,4 +9,6 @@ class Tarea < ActiveRecord::Base
   validates :descripcion, :presence => { :message => " es requerida" }
   validates :fecha_entrega, :presence => { :message => " es requerida" }
   validates :hora_entrega, :presence => { :message => " es requerida" }
+  
+  delegate :nombre_usuario, :to => :usuario, :prefix => true
 end

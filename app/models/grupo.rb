@@ -4,7 +4,7 @@ class Grupo < ActiveRecord::Base
   	has_many :subscripcions
   	has_many :tareas
   	validates :nombre, :presence => true
-
+    delegate :nombre_usuario, :to => :usuario, :prefix => true
   	def usuario_suscrito?(id)
   		resp = true
   		for suscripcion in self.subscripcions

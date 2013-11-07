@@ -4,7 +4,9 @@ class Tema < ActiveRecord::Base
   belongs_to :usuario
   belongs_to :grupo
   validates :titulo, :cuerpo, :presence => { :message => " es requerido" }
-  
+  delegate :nombre_usuario, :correo, :to => :usuario, :prefix => true
+  delegate :nombre, :to => :grupo, :prefix => true
+
   def correspondeATitulo(titulo)
     parametros = titulo.split(' ')
     

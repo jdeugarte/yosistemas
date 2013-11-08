@@ -9,7 +9,7 @@ class GruposController < ApplicationController
     @grupos = Kaminari.paginate_array(@grupos).page(params[:page]).per(5)
   end
 
-  def search
+  def buscar
     @grupos=Array.new 
     aux = Grupo.all
     nombre = params[:nombre]

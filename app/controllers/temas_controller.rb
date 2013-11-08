@@ -16,7 +16,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     @ides=sacarIds(@grupo.temas)
   end
   
-  def search
+  def buscar
     @temas=Array.new
     @grupo=Grupo.find(params[:grupo])
     aux = Tema.where(:grupo_id=>params[:grupo])

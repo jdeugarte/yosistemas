@@ -59,13 +59,13 @@ describe TemasController do
     end
   end
   
-  describe 'GET #search' do
+  describe 'GET #buscar' do
     grupo = FactoryGirl.build(:grupo)
     it "obtiene todos los temas publicos al no haber filtro" do  
       tema1 = FactoryGirl.create(:tema, titulo: 'Prueba 1')
       tema2 = FactoryGirl.create(:tema, titulo: 'Test 2')
       
-      get :search, {:grupo=>"1"}
+      get :buscar, {:grupo=>"1"}
       
       expect(assigns(:temas)).to match_array([tema1,tema2])
     end
@@ -74,13 +74,13 @@ describe TemasController do
       tema1 = FactoryGirl.create(:tema, titulo: 'Prueba 1')
       tema2 = FactoryGirl.create(:tema, titulo: 'Test 2')
       
-      get :search, {:grupo=>"1", :titulo=>"1"}
+      get :buscar, {:grupo=>"1", :titulo=>"1"}
       
       expect(assigns(:temas)).to match_array([tema1])
     end
 
     it "renderiza a la vista index" do
-      get :search, {:grupo=>"1"}
+      get :buscar, {:grupo=>"1"}
       
       expect(response).to render_template :index
     end

@@ -21,7 +21,7 @@ Yosistemas::Application.routes.draw do
   post "usuarios/send_password_mail" => "usuarios#send_password_mail", :as => "send_password_mail"
   get "usuarios/send_password_mail" => "usuarios#forgot_password", :as => "forgot_password"
   
-  get "temas/search/:grupo" => "temas#search"
+  get "temas/buscar/:grupo" => "temas#buscar", :as=>'buscar_tema'
   get "temas/editar_comentario/:id_comentario" => "temas#editar_comentario"
   post "tema_comentarios/editar/:id" => "tema_comentarios#editar"
   get "tema_comentarios/delete/:id" => "tema_comentarios#delete"
@@ -36,7 +36,7 @@ Yosistemas::Application.routes.draw do
   get 'temas/searchmine' => 'temas#searchmine', :as=>'searchmine'
   #get 'temas/:grupo' => 'temas#index'
   get 'grupos/subscripcion_grupo/:id' => 'grupos#subscripcion_grupo', :as=>'suscribirse'
-  get "grupos/search" => "grupos#search", :as=>'search_grupo'
+  get "grupos/buscar" => "grupos#buscar", :as=>'buscar_grupo'
   get 'grupos/mis_grupos' => 'grupos#mis_grupos', :as => 'mis_grupos'
   get 'grupos/suscriptores/:id' => 'grupos#suscriptores', :as => 'suscriptores'
   get 'gruopos/detalle_usuario/:id' => 'grupos#detalle_usuario', :as => 'detalle_usuario'

@@ -44,6 +44,10 @@ class TareasController < ApplicationController
 
   end
 
+  def mostrar_respuesta_tarea
+    @respuesta_tarea=ResponderTarea.find(params[:id])
+  end
+
   def responder_tarea_crear
     @responder_tarea = ResponderTarea.new(tarea_respuesta_params)
     @tarea = Tarea.find(params[:id])
@@ -92,7 +96,11 @@ class TareasController < ApplicationController
     end
 
   def show
+    
     @tarea = Tarea.find(params[:id])  
+    if(current_user==@tarea.usuario)
+        @tareas_enviadas=ResponderTarea.where(:tarea_id => @tarea.id)
+    end
     if(!current_user.esta_subscrito?(@tarea.grupo.id))
       redirect_to temas_path
     end
@@ -168,7 +176,7 @@ class TareasController < ApplicationController
     def add_attached_files_respuesta(responder_tarea_id)
       if(!params[:responder_tarea][:archivo].nil?)
         params[:responder_tarea][:archivo].each do |arch|
-        @archivo = ArchivoAdjuntoRespuestas.new(:archivo=>arch)
+        @archivo = ArchivoAdjuntoRespuesta.new(:archivo=>arch)
         @archivo.responder_tarea_id = responder_tarea_id 
         @archivo.save
         end

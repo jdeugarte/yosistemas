@@ -1,4 +1,7 @@
 <%= render :layout => 'layouts/groups_layout' do%>
+<div class="page-header">
+    <h1><%=@tarea.titulo%></h1>
+</div>
 <% if @responder_tarea.errors.any? %>
    <div id ="errorRegistroUsuario" class="alert alert-error">
       <button type="button" class="close" data-dismiss="alert">&times;</button>

@@ -56,6 +56,10 @@ Yosistemas::Application.routes.draw do
   get 'tareas/responder_tarea/:id' => 'tareas#responder_tarea', :as =>'responder_tareas'
   post 'tareas/responder_tarea/:id' => 'tareas#responder_tarea_crear', :as =>'responder_tarea_crear'
 
+  get 'tareas/mostrar_respuesta_tarea/:id' => 'tareas#mostrar_respuesta_tarea', :as =>'mostrar_respuesta_tarea'
+  post 'tareas/mostrar_respuesta_tarea/:id' => 'tareas#mostrar_respuesta_tarea_crear', :as =>'mostrar_respuesta_tarea_crear'
+
+
   post "usuarios/update_user/:id"=>"usuarios#update"
   resources :usuarios , except: [:destroy] do
     resources :tema_comentarios, only: [:create]

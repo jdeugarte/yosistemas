@@ -65,7 +65,9 @@ Yosistemas::Application.routes.draw do
     resources :subscripcions, only: [:create]
   end
   resources :subscripcions, only: [:create]
-  resources :tareas, except: [:destroy]
+  resources :tareas, except: [:destroy] do
+    resources :tarea_comentarios
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   # You can have the root of your site routed with "root"

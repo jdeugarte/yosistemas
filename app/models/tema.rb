@@ -9,7 +9,6 @@ class Tema < ActiveRecord::Base
 
   def correspondeATitulo(titulo)
     parametros = titulo.split(' ')
-    
     parametros.each do |parametro|
        if self.titulo.downcase.include?(parametro.downcase)
          return true
@@ -23,8 +22,6 @@ class Tema < ActiveRecord::Base
       grupo = Grupo.find(1)
       self.grupo = grupo
       self.save
-    
     end
-
   end
 end

@@ -10,7 +10,7 @@ class GruposController < ApplicationController
   end
 
   def buscar
-    @grupos=Array.new 
+    @grupos=Array.new
     aux = Grupo.all
     nombre = params[:nombre]
     if nombre != "" && nombre != nil
@@ -27,7 +27,6 @@ class GruposController < ApplicationController
   end
 
 	def new
-
     if (current_user!=nil && current_user.rol=="Estudiante")
       redirect_to root_path
     else
@@ -40,21 +39,18 @@ class GruposController < ApplicationController
   end
 
   def create
-
     @grupo = Grupo.new(grupo_params)
-
     @grupo.usuario_id = current_user.id
-    @grupo.llave = verificar_grupo(@grupo.estado)         
-    if @grupo.save     
+    @grupo.llave = verificar_grupo(@grupo.estado)
+    if @grupo.save
       subs = Subscripcion.new
       subs.grupo = @grupo
       subs.usuario = current_user
       subs.save
       redirigir_a(@grupo)
-      
     else
       redirect_to "/grupos/new", :flash => { :error => "Error al crear un grupo" }
-    end 
+    end
   end
 
   def subscripcion_grupo
@@ -71,7 +67,6 @@ class GruposController < ApplicationController
   end
 
   private
-  
     def grupo_params
       params.require(:grupo).permit(:nombre, :descripcion, :estado, :llave)
     end

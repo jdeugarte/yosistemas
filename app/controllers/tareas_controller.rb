@@ -10,28 +10,23 @@ class TareasController < ApplicationController
     end
   end
 
-  #GET tareas/new	
+  #GET tareas/new
   def responder_tarea
     if(current_user.rol == "Estudiante" )
-
       @responder_tarea = ResponderTarea.new
-      
       begin
         @tarea = Tarea.find(params[:id])
         rescue ActiveRecord::RecordNotFound
         redirect_to root_path
       end
       if(!@tarea.nil?)
-
         @grupo = @tarea.grupo
         @suscrito = Subscripcion.where(:grupo_id => @grupo.id, :usuario_id => current_user.id)
         if(!@suscrito.first.nil?)
-
           @grupos = Array.new
           if(current_user!=nil)
             current_user.subscripcions.each do |subs|
               @grupos.push(subs.grupo)
-
             end
           end
         else
@@ -41,7 +36,6 @@ class TareasController < ApplicationController
     else
       redirect_to root_path
     end
-
   end
 
   def responder_tarea_crear
@@ -52,7 +46,7 @@ class TareasController < ApplicationController
     if(@responder_tarea.save)
       add_attached_files_respuesta(@responder_tarea.id)
       flash[:alert] = 'Tarea enviada Exitosamente!'
-      redirect_to '/grupos/'+@tarea.grupo.id.to_s+'/temas' 
+      redirect_to '/grupos/'+@tarea.grupo.id.to_s+'/temas'
     else
       @grupos = Array.new
       if(current_user!=nil)
@@ -92,7 +86,7 @@ class TareasController < ApplicationController
     end
 
   def show
-    @tarea = Tarea.find(params[:id])  
+    @tarea = Tarea.find(params[:id])
     if(!current_user.esta_subscrito?(@tarea.grupo.id))
       redirect_to temas_path
     end
@@ -114,7 +108,6 @@ class TareasController < ApplicationController
   end
   def update
     @tarea = Tarea.find(params[:id])
-
     if(@tarea.update(params[:tarea].permit(:titulo,:descripcion,:fecha_entrega,:grupo_id,:hora_entrega)))
       redirect_to @tarea
     else
@@ -125,12 +118,12 @@ class TareasController < ApplicationController
   def create
     @tarea = Tarea.new(tarea_params)
     @tarea.grupo_id=params[:tarea][:grupo_id]
-    @tarea.usuario_id = current_user.id 
+    @tarea.usuario_id = current_user.id
     if(@tarea.save)
       add_attached_files(@tarea.id)
       flash[:alert] = 'Tarea creada Exitosamente!'
       notify_users(@tarea.grupo_id, @tarea)
-      redirect_to '/grupos/'+params[:tarea][:grupo_id]+'/temas' 
+      redirect_to '/grupos/'+params[:tarea][:grupo_id]+'/temas'
     else
        @grupos = Array.new
       if(current_user!=nil)
@@ -154,11 +147,10 @@ class TareasController < ApplicationController
       if(!params[:tarea][:archivo].nil?)
         params[:tarea][:archivo].each do |arch|
         @archivo = ArchivoAdjunto.new(:archivo=>arch)
-        @archivo.tarea_id = tarea_id 
+        @archivo.tarea_id = tarea_id
         @archivo.save
         end
       end
-
     end
 
     def tarea_respuesta_params
@@ -169,35 +161,27 @@ class TareasController < ApplicationController
       if(!params[:responder_tarea][:archivo].nil?)
         params[:responder_tarea][:archivo].each do |arch|
         @archivo = ArchivoAdjuntoRespuestas.new(:archivo=>arch)
-        @archivo.responder_tarea_id = responder_tarea_id 
+        @archivo.responder_tarea_id = responder_tarea_id
         @archivo.save
         end
       end
-
     end
 
     def notify_users(id_grupo,tarea)
-        
         suscripciones = Subscripcion.all
         suscripciones.each do |suscrito|
-          if suscrito.grupo_id == id_grupo 
+          if suscrito.grupo_id == id_grupo
             if suscrito.usuario_id != current_user.id
                 @usuario = suscrito.usuario
                 @grupo=Grupo.find(id_grupo)
-
-
                 @notificacion = NotificacionGrupo.new
                 @notificacion.notificado = false
                 @notificacion.subscripcion_id = suscrito.id
                 @notificacion.tarea = tarea
-                @notificacion.save    
-                SendMail.notify_users_task_create(@usuario, tarea, @grupo).deliver    
+                @notificacion.save
+                SendMail.notify_users_task_create(@usuario, tarea, @grupo).deliver
             end
-          end 
+          end
         end
     end
-
-    
-
-
 end

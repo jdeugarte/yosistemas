@@ -1,7 +1,4 @@
 class TemasController < ApplicationController
-# GET /temas
-
-
 skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:show,:searchtitulo]
 
   def index
@@ -10,12 +7,11 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
      else
        @grupo = Grupo.find(1)
     end
-   
     #@temas = Tema.order(params[:sort)]
     @temas = @grupo.temas.order(params[:sort]).page(params[:page]).per(5)
     @ides=sacarIds(@grupo.temas)
   end
-  
+
   def buscar
     @temas=Array.new
     @grupo=Grupo.find(params[:grupo])
@@ -37,12 +33,12 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
       else
         @temas = ((@temas&byDescription)+@temas+byDescription).uniq
       end
-    end   
+    end
     @ides=sacarIds(@temas)
-    @temas= Kaminari.paginate_array(@temas).page(params[:page]).per(5)    
+    @temas= Kaminari.paginate_array(@temas).page(params[:page]).per(5)
     render 'index'
   end
-  
+
   def ordertable
     @temas = Array.new
     if(params[:id] != nil)
@@ -50,7 +46,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     else
       @grupo = Grupo.find(1)
     end
-    if params[:themes] != nil && params[:themes] != "" 
+    if params[:themes] != nil && params[:themes] != ""
       @ids = params[:themes]
       @ids.slice!(0)
       @ids=@ids.split("-")
@@ -70,7 +66,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
 
   def ordertablemine
     @temas = Array.new
-    if params[:themes] != nil && params[:themes] != "" 
+    if params[:themes] != nil && params[:themes] != ""
       @ids = params[:themes]
       @ids.slice!(0)
       @ids=@ids.split("-")
@@ -81,16 +77,15 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
         @temas.sort! { |a,b| a.titulo.downcase <=> b.titulo.downcase }
       else
         if params[:var] == "detalle"
-          @temas.sort! { |a,b| a.cuerpo.downcase <=> b.cuerpo.downcase }  
+          @temas.sort! { |a,b| a.cuerpo.downcase <=> b.cuerpo.downcase }
         else
           @temas.sort! { |a,b| a.grupo.nombre.downcase <=> b.grupo.nombre.downcase }
         end
-        
       end
     end
     render "show_mine"
   end
-  
+
   def searchByDescription(keyWords)
     keyWords = keyWords.downcase
       initialResult = Tema.where('cuerpo LIKE ?', '%'+keyWords+'%')
@@ -124,7 +119,6 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
       res
     end
   public
-
   # GET /temas/new
   def new
     @tema = Tema.new
@@ -139,28 +133,27 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
   end
 
   def show
-    @tema = Tema.find(params[:id])  
+    @tema = Tema.find(params[:id])
      notificaciones.each do |notificacion|
       if ( TemaComentario.find(notificacion.tema_comentario_id).tema_id == @tema.id )
         notificacion.notificado = true
-        notificacion.save 
+        notificacion.save
       end
     end
-     @comentarios= Kaminari.paginate_array(@tema.tema_comentarios).page(params[:page]).per(10)  
+     @comentarios= Kaminari.paginate_array(@tema.tema_comentarios).page(params[:page]).per(10)
   end
 
   # POST /temas
   def create
     @tema = Tema.new(tema_params)
     @tema.grupo_id=params[:tema][:grupo_id]
-    @tema.usuario_id = current_user.id 
+    @tema.usuario_id = current_user.id
     @tema.save
     @suscripcion=SuscripcionTema.new
     @suscripcion.usuario_id=current_user.id
     @suscripcion.tema_id=@tema.id
     @suscripcion.save
     redirect_to '/grupos/'+params[:tema][:grupo_id]+'/temas'
-
   end
 
   def edit
@@ -169,17 +162,15 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
 
   def update
     @tema = Tema.find(params[:id])
-
     if(@tema.update(params[:tema].permit(:titulo,:cuerpo)))
       redirect_to @tema
     else
       render 'edit'
     end
-   
   end
 
   def editar_comentario
-    @comentario=TemaComentario.find(params[:id_comentario])    
+    @comentario=TemaComentario.find(params[:id_comentario])
   end
 
   def visible
@@ -229,8 +220,6 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     end
     render "show_mine"
   end
-
-
   private
     # No permite parametros de internet
     def tema_params
@@ -244,5 +233,4 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
       end
       return concatenacion
     end
-
 end

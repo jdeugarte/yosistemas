@@ -153,6 +153,10 @@ class TareasController < ApplicationController
     end
   end
 
+  def editar_comentario
+    @comentario=TareaComentario.find(params[:id_comentario])
+  end
+
   private
     # No permite parametros de internet
     def tarea_params

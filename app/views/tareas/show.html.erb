@@ -115,6 +115,9 @@
       <%=comentario.cuerpo%>
       <br>
       <small><%= comentario.created_at.strftime("%d-%m-%Y %H:%M:%S")%></small></h5>
+      <%if current_user!=nil && comentario.usuario.correo == current_user.correo%>
+        <%= link_to 'Editar', "/tareas/editar_comentario/"+comentario.id.to_s %>
+      <%end%>
     </div>
   </div>
   <%end%>

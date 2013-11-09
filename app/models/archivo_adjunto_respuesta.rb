@@ -1,4 +1,4 @@
-class ArchivoAdjuntoRespuestas < ActiveRecord::Base
+class ArchivoAdjuntoRespuesta < ActiveRecord::Base
 	belongs_to :responder_tarea
 	attr_accessor :archivo
 	has_attached_file :archivo,

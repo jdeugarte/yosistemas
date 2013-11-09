@@ -1,6 +1,7 @@
 <%= render :layout => 'layouts/groups_layout' do%>
-
-
+<div class="page-header">
+    <h1><%=@tarea.titulo%></h1>
+</div>
 <% if @responder_tarea.errors.any? %>
    <div id ="errorRegistroUsuario" class="alert alert-error">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -17,7 +18,6 @@
           <div class="col-lg-10">
             <div class="well">
                 <fieldset>
-                  
                   <div class="form-group <%=((@responder_tarea.errors.get(:descripcion).nil?) ? '' : ' has-error')%>">
                     <label for="inputDescription" class="col-lg-2 control-label">Descripcion:</label>
                     <div class="col-lg-10">
@@ -29,12 +29,11 @@
             <div class="col-lg-10 input-group">
             <input id="showFiles" class="form-control" type="text" placeholder="Seleccione archivos..." onclick="document.getElementById('responder_tarea_archivo').click();" onfocus="this.blur();">
             <%= t.file_field :archivo , :class=>'form-control',:multiple => true, :style=>"display:none;", :onchange=>"document.getElementById('showFiles').value = (this.files.length>1)?''+this.files.length+' Archivos seleccionados.':this.files[0].name;" %>
-            <span class="input-group-addon" style="background-color: #D5230F; cursor:pointer;" onclick="document.getElementById('responder_tarea_archivo').click();"> 
+            <span class="input-group-addon" style="background-color: #D5230F; cursor:pointer;" onclick="document.getElementById('responder_tarea_archivo').click();">
               <i class="icon-file icon-white"></i>
             </span>
             </div>
           </div>
-                  
                   <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
                       <input type="submit" value="Crear tarea" class="btn btn-primary">
@@ -42,7 +41,7 @@
                   </div>
                 </fieldset>
         </div>
-    </div>  
+    </div>
    </div>
 <% end %>
 <%end%>
@@ -53,7 +52,7 @@
                 language: 'es',
                 pickTime: false,
                 maskInput: true,
-                startDate: new Date(),      // set a minimum date
+                startDate: new Date(), // set a minimum date
               });
             });
 </script>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131106001615) do
+ActiveRecord::Schema.define(version: 20131108223010) do
 
   create_table "adjuntos_comentarios", force: true do |t|
     t.integer  "tema_comentario_id"
@@ -29,6 +29,18 @@ ActiveRecord::Schema.define(version: 20131106001615) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "archivo_adjunto_respuesta", force: true do |t|
+    t.integer  "responder_tarea_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "archivo_file_name"
+    t.string   "archivo_content_type"
+    t.integer  "archivo_file_size"
+    t.datetime "archivo_updated_at"
+  end
+
+  add_index "archivo_adjunto_respuesta", ["responder_tarea_id"], name: "index_archivo_adjunto_respuesta_on_responder_tarea_id"
 
   create_table "archivo_adjunto_respuestas", force: true do |t|
     t.integer  "responder_tarea_id"

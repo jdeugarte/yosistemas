@@ -95,6 +95,16 @@ class TareasController < ApplicationController
     @tarea = Tarea.find(params[:id])  
     if(!current_user.esta_subscrito?(@tarea.grupo.id))
       redirect_to temas_path
+    else
+      suscripcion=Subscripcion.where(:usuario_id=>current_user.id, :grupo_id=>@tarea.grupo.id)
+      suscripcion.first.notificacion_grupos.where(:notificado=>false).each do |notificacion|
+        puts notificacion.tarea_id.to_s
+        puts params[:id].to_s
+        if notificacion.tarea_id.to_s==params[:id].to_s
+          notificacion.notificado=true
+          notificacion.save
+        end
+      end
     end
   end
   def edit #id tarea

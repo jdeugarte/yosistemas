@@ -187,13 +187,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
 
   def visible
     @tema = Tema.find(params[:id])
-    if @tema.visible == 1
-       @tema.visible = 0
-       @tema.save
-    else
-      @tema.visible = 1
-      @tema.save
-    end
+    @tema.destroy
     redirect_to temas_url
   end
 

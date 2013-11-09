@@ -11,7 +11,6 @@
                   <%= image_tag avatar_tam_url(@respuesta_tarea.usuario,80) %>
                 </div>
             </div>
-            
             <div class="col-lg-9 col-md-9 col-sm-9">
               <div class="panel panel-default">
                 <div class="panel-heading">
@@ -28,10 +27,8 @@
                     <label><i class="icon-calendar"></i> <%= @respuesta_tarea.tarea.fecha_entrega.strftime("%d/%b/%Y")%></label>&nbsp;&nbsp;
                     <label><i class="icon-time"></i> <%= @respuesta_tarea.tarea.hora_entrega.strftime("%I:%M %p") %></label>
                 </div>
-
                 <div>
                 </div>
-
                 </div>
               </div>
             </div>
@@ -58,22 +55,10 @@
 </div>
 </div>
 <script>
-
   $(document).ready(function() {
      $('#top').find('a').trigger('click');
-
     });
  </script>
 <script type="text/javascript">
   getImagesForAttachedFiles();
 </script>
-
-
-
-
-
-
-
-
-
-

@@ -90,7 +90,7 @@ class TareasController < ApplicationController
     end
 
   def show
-    @tarea = Tarea.find(params[:id])  
+    @tarea = Tarea.find(params[:id])
     if(current_user==@tarea.usuario)
         @tareas_enviadas=ResponderTarea.where(:tarea_id => @tarea.id)
     end
@@ -168,7 +168,7 @@ class TareasController < ApplicationController
       if(!params[:responder_tarea][:archivo].nil?)
         params[:responder_tarea][:archivo].each do |arch|
         @archivo = ArchivoAdjuntoRespuesta.new(:archivo=>arch)
-        @archivo.responder_tarea_id = responder_tarea_id 
+        @archivo.responder_tarea_id = responder_tarea_id
         @archivo.save
         end
       end

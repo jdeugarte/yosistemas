@@ -16,7 +16,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     @temas=Array.new
     @grupo=Grupo.find(params[:grupo])
     aux = Tema.where(:grupo_id=>params[:grupo])
-    if params[:titulo] != "" && params[:titulo] != nil
+    if params[:titulo] != "" && params[:titulo]!=nil
       aux.each do |tema|
         if (tema.correspondeATitulo(params[:titulo]))
           @temas.push(tema)
@@ -198,7 +198,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
   end
 
   def searchmine
-    @temas=Array.new 
+    @temas=Array.new
     aux = Tema.all
     if params[:titulo] != "" && params[:titulo] != nil
       aux.each do |tema|
@@ -224,7 +224,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     # No permite parametros de internet
     def tema_params
       params.require(:tema).permit(:titulo, :cuerpo)
-    end 
+    end
 
     def sacarIds(temas)
       concatenacion=""

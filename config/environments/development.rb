@@ -30,11 +30,8 @@ Recaptcha.configure do |config|
   config.private_key = '6Lc5uOgSAAAAAOp-AFO_s_fkyFJpAsoOyNmwW_db'
 end
   config.assets.debug = true
-
-
      config.action_mailer.delivery_method = :sendmail
   config.action_mailer.perform_deliveries = true
-  
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :enable_starttls_auto => true,
@@ -45,9 +42,4 @@ end
     :user_name => 'yosistemasucb@gmail.com',
     :password => 'tddds2013',
 }
-
-
-
 end
-
-

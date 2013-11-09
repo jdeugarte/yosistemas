@@ -1,5 +1,4 @@
 Yosistemas::Application.routes.draw do
-
   get "comment_tasks/create"
   get "comment_tasks/delete"
   get "comment_tasks/edit"
@@ -20,42 +19,39 @@ Yosistemas::Application.routes.draw do
   post "usuarios/password_recovered/:id_user/:id_request" => "usuarios#password_recovered", :as=> "password_recovered"
   post "usuarios/send_password_mail" => "usuarios#send_password_mail", :as => "send_password_mail"
   get "usuarios/send_password_mail" => "usuarios#forgot_password", :as => "forgot_password"
-  
+  #rutas de temas
   get "temas/buscar/:grupo" => "temas#buscar", :as=>'buscar_tema'
   get "temas/editar_comentario/:id_comentario" => "temas#editar_comentario"
   post "tema_comentarios/editar/:id" => "tema_comentarios#editar"
   get "tema_comentarios/delete/:id" => "tema_comentarios#delete"
   get "temas/ordertable/:themes/:id/:var" => 'temas#ordertable', :as  => 'ordertable'
   get "temas/ordertablemine/:themes/:var" => 'temas#ordertablemine' , :as => 'ordertablemine'
-
-  get "suscripcion_temas/create/:id" => 'suscripcion_temas#create', :as => 'suscribirse_tema'
-  get "suscripcion_temas/delete/:id" => 'suscripcion_temas#delete', :as => 'rechazar_tema'
-
   get 'temas/visible/:id' => 'temas#visible', :as => 'visible_tema'
   get 'temas/show_mine' => 'temas#show_mine', :as=>'show_mine'
   get 'temas/searchmine' => 'temas#searchmine', :as=>'searchmine'
+  get 'temas/new/:id' => 'temas#new', :as => 'tema_para_grupo'
   #get 'temas/:grupo' => 'temas#index'
+  #rutas de suscripciones
+  get "suscripcion_temas/create/:id" => 'suscripcion_temas#create', :as => 'suscribirse_tema'
+  get "suscripcion_temas/delete/:id" => 'suscripcion_temas#delete', :as => 'rechazar_tema'
+  get "subscripcion/delete/:id" => "subscripcions#delete", :as => 'borrar_suscripcion'
+  #rutas de grupos
   get 'grupos/subscripcion_grupo/:id' => 'grupos#subscripcion_grupo', :as=>'suscribirse'
   get "grupos/buscar" => "grupos#buscar", :as=>'buscar_grupo'
   get 'grupos/mis_grupos' => 'grupos#mis_grupos', :as => 'mis_grupos'
   get 'grupos/suscriptores/:id' => 'grupos#suscriptores', :as => 'suscriptores'
   get 'gruopos/detalle_usuario/:id' => 'grupos#detalle_usuario', :as => 'detalle_usuario'
-  get "subscripcion/delete/:id" => "subscripcions#delete", :as => 'borrar_suscripcion'
-
   get "grupos/:id/temas"  => "temas#index", :as=> 'filtrar_temas'
-
   get "grupos/:id/temas-y-tareas"  => "temas_y_tareas#index", :as=> 'temas_y_tareas'
-
-  get 'temas/new/:id' => 'temas#new', :as => 'tema_para_grupo'
+  #rutas de tareas
   get 'tareas/new/:id' => 'tareas#new', :as => 'tarea_para_grupo'
   get 'tareas/eliminar/:id' => 'tareas#eliminar'
   get 'tareas/edit/:id' => 'tareas#edit'
-
   get 'grupos/:grupo/tareas' => 'tareas#index', :as => 'tareas_index'
-
   get 'tareas/responder_tarea/:id' => 'tareas#responder_tarea', :as =>'responder_tareas'
   post 'tareas/responder_tarea/:id' => 'tareas#responder_tarea_crear', :as =>'responder_tarea_crear'
-
+  get 'tareas/mostrar_respuesta_tarea/:id' => 'tareas#mostrar_respuesta_tarea', :as =>'mostrar_respuesta_tarea'
+  post 'tareas/mostrar_respuesta_tarea/:id' => 'tareas#mostrar_respuesta_tarea_crear', :as =>'mostrar_respuesta_tarea_crear'
   post "usuarios/update_user/:id"=>"usuarios#update"
   resources :usuarios , except: [:destroy] do
     resources :tema_comentarios, only: [:create]
@@ -70,22 +66,16 @@ Yosistemas::Application.routes.draw do
   end
   resources :subscripcions, only: [:create]
   resources :tareas, except: [:destroy]
-  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
   # You can have the root of your site routed with "root"
  root :to => 'temas#index'
-
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
-
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-
   # Example resource route with options:
   #   resources :products do
   #     member do
@@ -97,13 +87,11 @@ Yosistemas::Application.routes.draw do
   #       get 'sold'
   #     end
   #   end
-
   # Example resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales
   #     resource :seller
   #   end
-
   # Example resource route with more complex sub-resources:
   #   resources :products do
   #     resources :comments
@@ -111,14 +99,12 @@ Yosistemas::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
   #   end
   #   resources :posts, concerns: :toggleable
   #   resources :photos, concerns: :toggleable
-
   # Example resource route within a namespace:
   #   namespace :admin do
   #     # Directs /admin/products/* to Admin::ProductsController

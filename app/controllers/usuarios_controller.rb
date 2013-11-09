@@ -1,9 +1,7 @@
 require 'date'
 class UsuariosController < ApplicationController
-  
   skip_before_filter :verify_authenticity_token
-  skip_before_filter :require_log_in ,:only=>[:confirm,:new,:create,:forgot_password,:send_password_mail,:recover,:password_recovered]   
-  
+  skip_before_filter :require_log_in ,:only=>[:confirm,:new,:create,:forgot_password,:send_password_mail,:recover,:password_recovered]
   def index
   end
 
@@ -28,11 +26,10 @@ class UsuariosController < ApplicationController
         else
           @pass_error= 'la longitud minima es 6'
           render :action => 'recover',:format=>'html'
-        end 
+        end
       else
-        @pass_error= 'Las contrasenias no coinciden'   
+        @pass_error= 'Las contrasenias no coinciden'
         render :action => 'recover'
-
       end
     end
    end
@@ -49,18 +46,18 @@ class UsuariosController < ApplicationController
     mail=params[:mail]
     @usuario=Usuario.where(:correo=>mail,:activa=>true).first
     if(@usuario!=nil)
-    if ( verify_recaptcha )
+    if ( verify_recaptcha)
       p=SolicitudContrasenia.new(:usuario_id=>@usuario.id)
       p.save
       @usuario.solicitud_contrasenia_id=p.id
       @usuario.save
       SendMail.recover_password(@usuario,p.id).deliver
     else
-        @pass_error = 'Ingrese las palabras correctamente'   
+        @pass_error = 'Ingrese las palabras correctamente'
       render :action => 'forgot_password', :format => 'html'
     end
     else
-      @pass_error = 'No existe ningun usuario con ese correo'   
+      @pass_error = 'No existe ningun usuario con ese correo'
       render :action => 'forgot_password', :format => 'html'
     end
   else
@@ -68,12 +65,10 @@ class UsuariosController < ApplicationController
   end
   end
 
-
   def recover
-
   if(current_user!=nil)
      @errorMessagge="no puede recuperar su password si esta loggeado"
-  else      
+  else
   begin
     password_request=SolicitudContrasenia.find(params[:id_request])
     rescue ActiveRecord::RecordNotFound
@@ -84,7 +79,6 @@ class UsuariosController < ApplicationController
            @usuario=password_request.usuario
         else
           @errorMessagge="esta solicitud expiro, por favor solicite otra"
-
         end
     else
         @errorMessagge="no podemos procesar esta solicitud, por favor solicite otra"
@@ -98,15 +92,14 @@ class UsuariosController < ApplicationController
       flash[:alert] = 'Usuario Modificado'
     else
       flash[:alert] = current_user.errors.full_messages
-      
     end
     redirect_to :action => 'edit', :format => 'html'
   end
-  
+
   def update_password
     @usuario=current_user
   end
-  
+
   def edit_password
     uno=params[:contrasenia_nueva].to_s
     dos=params[:contrasenia_nueva2].to_s
@@ -121,7 +114,7 @@ class UsuariosController < ApplicationController
         redirect_to root_url
       else
         flash[:alert] = 'Las contrasenias no coinciden'
-        redirect_to :back 
+        redirect_to :back
       end
     else
       flash[:alert] = 'la contrasenia no es correcta'
@@ -133,7 +126,7 @@ class UsuariosController < ApplicationController
   	@usuario = Usuario.new
   end
 
-def confirm 
+def confirm
   if(current_user==nil)
     @messagge="Error, datos invalidos"
   begin
@@ -145,7 +138,7 @@ def confirm
   if(usuario!=nil)
     if(!usuario.activa)
     usuario.activa=true
-    usuario.save  
+    usuario.save
     @messagge="Su cuenta fue activada exitosamente! ya puede hacer uso de nuestro contenido";
     end
   end
@@ -154,17 +147,16 @@ else
 end
 end
 
-  def create
+def create
   	  params.permit!
   		@usuario = Usuario.new(params[:usuario])
       @usuario.rol=params[:rol]
-      
   		if @usuario.save
         redirect_to root_url
         SendMail.activate_acount(@usuario).deliver
   			flash[:alert] = 'Usuario Registrado Exitosamente!!! Revise su correo electronico para activar la cuenta'
   			else
-        render :new, :format => 'html' 
-  			end
+        render :new, :format => 'html'
+  		end
   end
 end

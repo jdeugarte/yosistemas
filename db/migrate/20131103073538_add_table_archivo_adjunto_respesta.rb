@@ -4,6 +4,6 @@ class AddTableArchivoAdjuntoRespesta < ActiveRecord::Migration
       t.references :responder_tarea, index: true
       t.timestamps
     end
-    add_attachment :archivo_adjunto_respuestas, :archivo 
+    add_attachment :archivo_adjunto_respuestas, :archivo
   end
 end

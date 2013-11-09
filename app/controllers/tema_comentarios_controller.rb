@@ -1,7 +1,5 @@
-class TemaComentariosController < ApplicationController
-	
+class TemaComentariosController < ApplicationController	
     skip_before_filter :verify_authenticity_token
-
     def create
     	@tema = Tema.find(params[:tema_id])
     	@comentario = @tema.tema_comentarios.create(comentario_params)
@@ -12,11 +10,10 @@ class TemaComentariosController < ApplicationController
   	end
 
     def notify_users(id_tema,comentario)
-
         @comentario = comentario
         suscripciones = SuscripcionTema.all
         suscripciones.each do |suscrito|
-           if suscrito.tema_id == id_tema 
+           if suscrito.tema_id == id_tema
             if suscrito.usuario_id != current_user.id
                 @usuario = Usuario.find(suscrito.usuario_id)
                 @tema=Tema.find(id_tema)
@@ -25,10 +22,10 @@ class TemaComentariosController < ApplicationController
                 @notificacion.notificado = false
                 @notificacion.suscripcion_tema_id = suscrito.id
                 @notificacion.tema_comentario_id = @comentario.id
-                @notificacion.save    
-                SendMail.notify_users_tema(@usuario, @tema, @grupo).deliver    
+                @notificacion.save
+                SendMail.notify_users_tema(@usuario, @tema, @grupo).deliver
             end
-            end 
+            end
         end
     end
 
@@ -48,7 +45,7 @@ class TemaComentariosController < ApplicationController
         redirect_to "/temas/"+comentario.tema_id.to_s
     end
 
-	private 
+	private
 	def comentario_params
 		params.require(:tema_comentario).permit(:cuerpo)
 	end

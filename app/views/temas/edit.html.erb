@@ -1,11 +1,7 @@
 <%if @tema.usuario_id == current_user.id%>
 <h1>Editar tema</h1>
-
-<%= form_for :tema, url:tema_path(@tema.id), 
-method: :patch do |f| %>
-
-	<div class="row">
-
+<%= form_for :tema, url:tema_path(@tema.id), method: :patch do |f| %>
+<div class="row">
         <div class="col-lg-6">
             <div class="well">
               <form class="bs-example form-horizontal">
@@ -35,26 +31,18 @@ method: :patch do |f| %>
                       <%= f.text_area :cuerpo, :class=>'form-control',:rows=>'6', :placeholder=>'Contenido' %>
                     </div>
                   </div>
-                  
                   <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                      <button name="Guardar tema" id="Guardar tema" type="submit" class="btn btn-primary">Guardar tema</button> 
+                      <button name="Guardar tema" id="Guardar tema" type="submit" class="btn btn-primary">Guardar tema</button>
                     </div>
                   </div>
                 </fieldset>
               </form>
         	</div>
-    	</div>  
+    	</div>
    </div>
-
-
 <%end %>
-
-
-	
-
 <%link_to 'Atras', temas_path %>
-
 <%else %>
 	<h1>No puedes editar este tema!</h1>
 <%end%>

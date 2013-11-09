@@ -81,9 +81,7 @@ Recaptcha.configure do |config|
   config.public_key  = '6Lc5uOgSAAAAALDvNoF85UGXsHWdSs3qA81fSA0u'
   config.private_key = '6Lc5uOgSAAAAAOp-AFO_s_fkyFJpAsoOyNmwW_db'
 end
-
   config.action_mailer.raise_delivery_errors = true
-
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => 'yosistemas.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
@@ -97,6 +95,5 @@ end
     :user_name            => 'yosistemasucb@gmail.com',
     :password             => 'tddds2013',
     :authentication       => 'plain',
-    :enable_starttls_auto => true  }         
-
+    :enable_starttls_auto => true  }
 end

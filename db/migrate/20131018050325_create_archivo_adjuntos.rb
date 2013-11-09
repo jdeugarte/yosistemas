@@ -4,6 +4,6 @@ class CreateArchivoAdjuntos < ActiveRecord::Migration
       t.references :tarea, index: true
       t.timestamps
     end
-    add_attachment :archivo_adjuntos, :archivo 
+    add_attachment :archivo_adjuntos, :archivo
   end
 end

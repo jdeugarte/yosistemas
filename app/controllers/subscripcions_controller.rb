@@ -24,8 +24,7 @@ class SubscripcionsController < ApplicationController
         redirect_to suscriptores_path(@grupo)
     end
 
-private 
-
+private
 	def subscripcions_params
 		params.require(:subscripcion).permit(:llave)
 	end

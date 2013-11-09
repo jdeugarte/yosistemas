@@ -4,6 +4,6 @@ class AdjuntosComentarios < ActiveRecord::Migration
       t.references :tema_comentario, index: true
       t.timestamps
     end
-    add_attachment :adjuntos_comentarios, :archivo 
+    add_attachment :adjuntos_comentarios, :archivo
   end
 end

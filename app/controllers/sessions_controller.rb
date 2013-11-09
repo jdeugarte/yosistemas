@@ -1,43 +1,39 @@
 class SessionsController < ApplicationController
   skip_before_filter :require_log_in
-  skip_before_filter :verify_authenticity_token  
+  skip_before_filter :verify_authenticity_token
   def new
   end
-  
+
   def create
-    usuario = Usuario.autenticar(params[:correo], params[:contrasenia])    
+    usuario = Usuario.autenticar(params[:correo], params[:contrasenia])
     if usuario
       session[:usuario_id] = usuario.id
-      if (request.referrer.include? "/usuarios") || (request.referrer.include? "usuarios/confirm" ) || (request.referrer.include? "/send_password_mail")        
-       
+      if (request.referrer.include? "/usuarios") || (request.referrer.include? "usuarios/confirm" ) || (request.referrer.include? "/send_password_mail")
         if notificaciones == nil || notificaciones.size < 1
-         redirect_to root_url, :notice => "Logged in!"
+          redirect_to root_url, :notice => "Logged in!"
         else
           if notificaciones.size == 1
-            redirect_to root_url, :notice => "Logged in!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificacion"   
+            redirect_to root_url, :notice => "Logged in!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificacion"
           else
-            redirect_to root_url, :notice => "Logged in!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificaciones"   
+            redirect_to root_url, :notice => "Logged in!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificaciones"
           end
         end
       else
-
-        if notificaciones == nil || notificaciones.size < 1
-         redirect_to :back, :notice => "Logged in!"
+      if notificaciones == nil || notificaciones.size < 1
+        redirect_to :back, :notice => "Logged in!"
+      else
+        if notificaciones.size == 1
+          redirect_to :back, :notice => "Logged in!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificacion"
         else
-          if notificaciones.size == 1
-            redirect_to :back, :notice => "Logged in!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificacion"   
-          else
-            redirect_to :back, :notice => "Logged in!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificaciones"   
-          end
+          redirect_to :back, :notice => "Logged in!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificaciones"
         end
       end
+    end
     else
-        
-      redirect_to :back, :notice => "Correo o Contrasenia Invalida!"      
+      redirect_to :back, :notice => "Correo o Contrasenia Invalida!"
     end
   end
 
-  
   def destroy
     session[:usuario_id] = nil
     redirect_to root_url, :notice => "Logged out!"

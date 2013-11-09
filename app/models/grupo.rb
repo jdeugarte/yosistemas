@@ -17,7 +17,6 @@ class Grupo < ActiveRecord::Base
 
     def correspondeAGrupo(nombre)
       parametros = nombre.split(' ')
-      
       parametros.each do |parametro|
          if self.nombre.downcase.include?(parametro.downcase)
            return true

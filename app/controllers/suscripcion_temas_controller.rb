@@ -10,10 +10,10 @@ class SuscripcionTemasController < ApplicationController
 	    redirect_to :back
   end
   def delete
-        @suscripcion = SuscripcionTema.where(usuario_id: current_user.id,tema_id: params[:id])
-        if @suscripcion!=nil
-          @suscripcion.destroy_all  
-        end
-        redirect_to :back
+    @suscripcion = SuscripcionTema.where(usuario_id: current_user.id,tema_id: params[:id])
+    if @suscripcion!=nil
+      @suscripcion.destroy_all
+    end
+      redirect_to :back
     end
 end

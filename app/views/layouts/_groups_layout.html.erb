@@ -7,7 +7,6 @@
     $('#principal').css('opacity','0.0');
   }
 </script>
-
 <script type="text/javascript">
   function throwShow() {
     $('#principal').addClass('in-left');
@@ -16,7 +15,6 @@
   }
 </script>
 </head>
-
 <body >
   <div class='row'>
   <div class="col-lg-3">
@@ -25,8 +23,6 @@
     </div>
     <div class="bs-example">
               <ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
-
-                
                 <%if  current_user!=nil%>
                   <% current_user.subscripcions.sort{|x,y| x.created_at <=> y.created_at}.each do |subs| %>
                       <%if subs.grupo.id == @grupo.id%>
@@ -88,6 +84,5 @@
   var active = document.getElementsByName('currentSelected')[0];
   active.onclick = function(){backvar=-2;}
 </script>
-
 </body>
 </html>

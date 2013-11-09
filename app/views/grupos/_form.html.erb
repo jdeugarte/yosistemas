@@ -16,19 +16,15 @@
                       <%= f.text_area :descripcion, :class=>'form-control',:rows=>'6', :placeholder=>'Descripcion', :maxlength => 500 %>
                     </div>
                   </div>
-                
-
                   <div class="form-group">
                     <label for="inputEmail" class="col-lg-2 control-label">Estado</label>
                     <div class="col-lg-10">
                       <select class="form-control" id="grupo_estado" name="grupo[estado]">
-                            <option value= "true">Privado</option>      
-                            <option value = "false">Publico</option>      
-                      </select>          
-
+                            <option value= "true">Privado</option>
+                            <option value = "false">Publico</option>
+                      </select>
                     </div>
                   </div>
-
                   <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
                       <input type="submit" value="Crear grupo" class="btn btn-primary">
@@ -36,6 +32,6 @@
                   </div>
                 </fieldset>
         </div>
-    </div>  
+    </div>
    </div>
 <% end %>

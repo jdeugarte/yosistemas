@@ -11,12 +11,10 @@
         </ul>
    </div>
 <% end %>
-
      <fieldset>
-
     <legend>Nueva contraseña</legend>
-
-   <form method="post" action="/usuarios/password_recovered/<%=@usuario.id.to_s%>/<%=@request_id.to_s%>">    <div class="form-group">
+   <form method="post" action="/usuarios/password_recovered/<%=@usuario.id.to_s%>/<%=@request_id.to_s%>">
+    <div class="form-group">
            <label for="inputTitle" class="col-lg-2 control-label">Contraseña: </label>
           <%= password_field_tag :contrasenia_nueva, params[:contrasenia_nueva], :class=>'form-control'  %>
           <br><br>
@@ -24,12 +22,10 @@
           <%= password_field_tag :contrasenia_nueva2, params[:contrasenia_nueva2], :class=>'form-control'  %>
           <br><br>
            <div class="col-lg-10 col-lg-offset-2">
-          <button type="submit" class="btn btn-primary" >Confirmar</button>       
+          <button type="submit" class="btn btn-primary" >Confirmar</button>
           </div>
-          
         </div>
       </div>
-     
     </form>
     </div>
     </fieldset>

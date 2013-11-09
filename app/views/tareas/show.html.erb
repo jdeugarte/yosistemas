@@ -94,3 +94,23 @@
 <script type="text/javascript">
   getImagesForAttachedFiles();
 </script>
+<div class="row">
+<div class="col-lg-6 ">
+    <div class="well">
+<%if current_user!=nil%>
+  <form name="tarea_comentario">
+      <div class="form-group">
+        <label for="inputContent">Comentario:</label>
+            <%= text_area_tag :cuerpo, params[:cuerpo], :class=>'form-control' %>
+      </div>
+      <div class="form-group">
+           
+      </div>
+      <div class="form-group">
+          <input type="submit" value="Comentar" class="btn btn-primary">
+      </div>
+    <% end %>
+</form>
+</div>
+</div>
+</div>

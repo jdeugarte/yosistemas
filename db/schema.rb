@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131108223010) do
+ActiveRecord::Schema.define(version: 20131109174210) do
 
   create_table "adjuntos_comentarios", force: true do |t|
     t.integer  "tema_comentario_id"
@@ -139,6 +139,17 @@ ActiveRecord::Schema.define(version: 20131108223010) do
 
   add_index "suscripcion_temas", ["tema_id"], name: "index_suscripcion_temas_on_tema_id"
   add_index "suscripcion_temas", ["usuario_id"], name: "index_suscripcion_temas_on_usuario_id"
+
+  create_table "tarea_comentarios", force: true do |t|
+    t.text     "cuerpo"
+    t.integer  "tarea_id"
+    t.integer  "usuario_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tarea_comentarios", ["tarea_id"], name: "index_tarea_comentarios_on_tarea_id"
+  add_index "tarea_comentarios", ["usuario_id"], name: "index_tarea_comentarios_on_usuario_id"
 
   create_table "tareas", force: true do |t|
     t.string   "titulo"

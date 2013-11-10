@@ -1,5 +1,4 @@
 class TareasController < ApplicationController
-
   #GET tareas
   def index
     if(params[:grupo]!="1" && current_user.esta_subscrito?((params[:grupo])))
@@ -9,7 +8,6 @@ class TareasController < ApplicationController
       redirect_to temas_path
     end
   end
-
   #GET tareas/new
   def responder_tarea
     if(current_user.rol == "Estudiante" )
@@ -112,9 +110,9 @@ class TareasController < ApplicationController
       end
     end
   end
-  def edit #id tarea        
+  def edit #id tarea
     if(Tarea.find(params[:id]).usuario==current_user)
-      @tarea = Tarea.find(params[:id])      
+      @tarea = Tarea.find(params[:id])
       @grupos = Array.new
       if(current_user!=nil)
         current_user.subscripcions.each do |subs|
@@ -147,7 +145,6 @@ class TareasController < ApplicationController
        end
     end
   end
-
   #POST tareas/create
   def create
     @tarea = Tarea.new(tarea_params)

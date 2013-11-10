@@ -86,6 +86,43 @@
 </div>
 <%end%>
 </div>
+<div class="row">
+<div class="col-lg-6 ">
+    <div class="well">
+<%if current_user!=nil%>
+  <%= form_for([@tarea, @tarea.tarea_comentarios.build]) do |f| %>
+      <div class="form-group">
+        <label for="inputContent">Comentario:</label>
+            <%= f.text_area :cuerpo, :class=>'form-control',:rows=>'4', :cols =>'20', :placeholder=>'Contenido' %>
+      </div>
+      <div class="form-group">
+          <input type="submit" value="Comentar" class="btn btn-primary">
+      </div>
+    <% end %>
+<%end%>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-10 col-lg-8">
+<% @todos_los_comentarios.each do |comentario| %>
+  <%if(comentario.id!=nil)%>
+  <div class="media">
+    <a class="pull-left" href="#">
+      <%= image_tag avatar_tam_url(comentario.usuario,70) %>
+    </a>
+    <div class="media-body">
+      <h4 class="media-heading"><%=comentario.usuario.nombre_usuario%></h4>
+      <%=comentario.cuerpo%>
+      <br>
+      <small><%= comentario.created_at.strftime("%d-%m-%Y %H:%M:%S")%></small></h5>
+      <%if current_user!=nil && comentario.usuario.correo == current_user.correo%>
+        <%= link_to 'Editar', "/tareas/editar_comentario/"+comentario.id.to_s %>
+      <%end%>
+    </div>
+  </div>
+  <%end%>
+<%end%>
+</div>
 <script>
   $(document).ready(function() {
      $('#top').find('a').trigger('click');
@@ -94,23 +131,3 @@
 <script type="text/javascript">
   getImagesForAttachedFiles();
 </script>
-<div class="row">
-<div class="col-lg-6 ">
-    <div class="well">
-<%if current_user!=nil%>
-  <form name="tarea_comentario">
-      <div class="form-group">
-        <label for="inputContent">Comentario:</label>
-            <%= text_area_tag :cuerpo, params[:cuerpo], :class=>'form-control' %>
-      </div>
-      <div class="form-group">
-           
-      </div>
-      <div class="form-group">
-          <input type="submit" value="Comentar" class="btn btn-primary">
-      </div>
-    <% end %>
-</form>
-</div>
-</div>
-</div>

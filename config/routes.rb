@@ -55,6 +55,7 @@ Yosistemas::Application.routes.draw do
   post "usuarios/update_user/:id"=>"usuarios#update"
   get "tareas/editar_comentario/:id_comentario" => "tareas#editar_comentario"
   post "tarea_comentarios/editar/:id" => "tarea_comentarios#editar"
+  get "tarea_comentarios/delete/:id" => "tarea_comentarios#delete"
   resources :usuarios , except: [:destroy] do
     resources :tema_comentarios, only: [:create]
   end

@@ -12,6 +12,13 @@ class TareaComentariosController < ApplicationController
         @comentario.update(:cuerpo=>params[:cuerpo])
         redirect_to @comentario.tarea
    end
+   def delete
+        @comentario = TareaComentario.find(params[:id])
+        if(@comentario.usuario.correo == current_user.correo)
+            @comentario.destroy
+        end
+        redirect_to @comentario.tarea
+    end
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def comentario_params

@@ -75,7 +75,7 @@
       <% @tareas_enviadas.each do |tarea_enviada| %>
           <tr style='cursor:pointer' onclick=<%="document.location.href='/tareas/mostrar_respuesta_tarea/"+tarea_enviada.id.to_s+"'"%>>
             <td>
-              <FONT FACE="raro, courier" SIZE=3 COLOR="black"> <%= tarea_enviada.usuario.nombre_usuario %> </FONT>
+              <FONT FACE="raro, courier" SIZE=3 COLOR="black"> <%= tarea_enviada.usuario.nombre_usuario[0..10]+"..." %> </FONT>
             </td>
             <td><%= tarea_enviada.descripcion[0..10]+"..." %></td>
             <td><%= tarea_enviada.created_at.strftime("%e-%m-%Y") %></td>

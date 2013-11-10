@@ -20,7 +20,7 @@
                 </div>
                 <div class="panel-body">
                 <blockquote style="margin-bottom:8px;">
-                  <p><%= @respuesta_tarea.descripcion %></p>
+                  <p><textarea disabled="true" rows="4" cols="45" ><%= @respuesta_tarea.descripcion %></textarea></p>
                   <small>tarea enviada el <%= @respuesta_tarea.created_at.strftime("%d/%m/%Y a las: %I:%M  %p") %></small>
                 </blockquote>
                 <div>Entrega:&nbsp;

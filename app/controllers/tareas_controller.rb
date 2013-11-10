@@ -3,7 +3,7 @@ class TareasController < ApplicationController
   #GET tareas
   def index
     if(params[:grupo]!="1" && current_user.esta_subscrito?((params[:grupo])))
-      @tareas = Tarea.where(:grupo_id => params[:grupo]).reverse
+      @tareas = Tarea.where(:grupo_id => params[:grupo]).order("updated_at DESC")
       @grupo = Grupo.find(params[:grupo])
     else
       redirect_to temas_path

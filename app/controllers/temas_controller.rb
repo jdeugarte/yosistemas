@@ -8,7 +8,8 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
        @grupo = Grupo.find(1)
     end
     #@temas = Tema.order(params[:sort)]
-    @temas = @grupo.temas.order(params[:sort]).page(params[:page]).per(5)
+     #@temas = @grupo.temas.order(params[:sort]).page(params[:page]).per(5)
+     @temas = @grupo.temas.order("updated_at DESC").page(params[:page]).per(5)
     @ides=sacarIds(@grupo.temas)
   end
 

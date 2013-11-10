@@ -47,6 +47,24 @@
               </div>
             </div>
           </div>
+          <% if(@tema.archivo_adjunto_temas.size>0) %>
+          <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                  <label><i class="icon-download"></i> Adjuntos</label>
+                  <hr style="margin-top:0px;" />
+                  <ul>
+                  <% @tema.archivo_adjunto_temas.each do |arch| %>
+                    <li class="attachment-link" title="Archivo tipo .<%=arch.archivo_file_name.split('.').last%>">
+                      <a href="<%=arch.archivo.url(download: true)%>"><img class="attachment-img" src="/assets/filetypes/default.png" file-type="<%=arch.archivo_file_name.split('.').last%>" ><%=arch.archivo_file_name[0,arch.archivo_file_name.rindex('.')]%></a>
+                    </li>
+                  <%end%>
+                  </ul>
+                </div>
+              </div>
+          </div>
+        <% end %>
+
         </form>
       </div>
 </div>

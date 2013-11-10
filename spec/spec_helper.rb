@@ -44,3 +44,9 @@ RSpec.configure do |config|
   config.order = "random"
 end
 
+def ingresar_sistema(usuario)
+ visit root_path
+ fill_in 'correo', with: usuario.correo
+ fill_in 'contrasenia', with: usuario.contrasenia
+ click_button 'Ingresar'
+end

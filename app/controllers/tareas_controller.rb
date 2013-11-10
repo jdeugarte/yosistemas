@@ -131,6 +131,7 @@ class TareasController < ApplicationController
     @tarea = Tarea.find(params[:id])
     if(@tarea.update(params[:tarea].permit(:titulo,:descripcion,:fecha_entrega,:grupo_id,:hora_entrega)))
       eliminar_archivos_adjuntos(params[:elemsParaElim])
+       add_attached_files(@tarea.id)
       redirect_to @tarea
     else
       render 'edit'

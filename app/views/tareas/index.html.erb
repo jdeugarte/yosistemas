@@ -11,27 +11,33 @@
 </div>
 <div class="row">
   <div class="col-lg-10">
-  <table class="table table-striped table-bordered table-hover">
-    <thead>
-      <tr>
-          <th> Titulo </th>
-          <th> Detalle </th>
-          <th> Fecha de entrega </th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @tareas.each do |tarea| %>
-          <tr style='cursor:pointer' onclick=<%="document.location.href='/tareas/"+tarea.id.to_s+"'"%> >
-            <td>
-              <FONT FACE="raro, courier" SIZE=5 COLOR="black"><%= tarea.titulo %><br></FONT>
-              <SUB><%= tarea.created_at.strftime("%e-%m-%Y")%></SUB>
-            </td>
-            <td><%= tarea.descripcion[0..40]+"..." %></td>
-            <td><%= tarea.fecha_entrega.strftime("%e-%m-%Y") + " " + tarea.hora_entrega.strftime("%I:%M %p") %></td>
-          </tr>
-      <% end %>
-    </tbody>
-  </table>
-  </div>
+    <% @tareas.each do |tarea| %>
+    <div class="panel panel-default" style='cursor:pointer' onclick=<%="document.location.href='/tareas/"+tarea.id.to_s+"'"%>>
+      <div class="panel-heading" title="Titulo">
+        <h3 style="margin-top:0px; margin-bottom:0px;"><%= tarea.titulo %></h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+           <div class="col-sm-2 col-md-2 col-lg-2">
+           <img title="Tarea" src="/assets/tarea.png" class="square-color-tarea visible-phone" width="32" />
+            <img title="Tarea" src="/assets/tarea.png" class="square-color-tarea hidden-phone" />&nbsp;
+           </div>
+           <div class="col-sm-9 col-md-9 col-lg-9" title="Descripcion">
+            <span><%= tarea.descripcion[0,315]+(tarea.descripcion.length>315 ? "..." : "") %></span>
+           </div>
+        </div>
+         <div class="row ">
+            <div class="col-sm-8 col-md-8 col-lg-8">
+              <small style="color: gray;">Tarea creada el <%= tarea.created_at.localtime.strftime("%d/%m/%Y a las: %I:%M  %p") %>
+              <span style="margin-left: 12px;"><i class="icon-calendar" style="margin-top: 0px;"></i>Fecha de entrega: <%= tarea.fecha_entrega.strftime("%d/%b/%Y")%></span></small>
+            </div>
+         </div>
+      </div>
+    </div>
+    <%end%>
 </div>
+</div>
+<script type="text/javascript">
+   $(".square-color-tarea").css("background-color",get_random_color());
+</script>
 <%end%>

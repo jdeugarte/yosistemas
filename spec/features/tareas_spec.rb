@@ -20,7 +20,7 @@ feature 'Gestion de tareas' do
      fill_in 'tarea_hora_entrega', with: '05:00 PM'
      click_button 'Crear tarea'
      expect(page).to have_content 'Titulo tarea de prueba'
-     expect(page).to have_content 'Descripcion o contenido de tarea de prueb...'
+     expect(page).to have_content 'Descripcion o contenido de tarea de prueba'
    end
 
    scenario 'Ver detalle de una tarea' do

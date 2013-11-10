@@ -3,7 +3,7 @@
     <div class="well">
         <form class="bs-example form-horizontal">
           <div class="row">
-            <div class="col-lg-2 col-md-2 col-sm-2">
+            <div class="col-lg-2 col-md-2 col-sm-2" style="margin-right: 25px;">
                 <div>
                   <h2 style="margin-top:0px;"><%= @tarea.usuario_nombre_usuario%></h2>
                 </div>
@@ -21,7 +21,7 @@
                 <div class="panel-body">
                 <blockquote style="margin-bottom:8px;">
                   <p><%= @tarea.descripcion %></p>
-                  <small>tarea creada el <%= @tarea.created_at.strftime("%d/%m/%Y a las: %I:%M  %p") %></small>
+                  <small>tarea creada el <%= @tarea.created_at.localtime.strftime("%d/%m/%Y a las: %I:%M  %p") %></small>
                 </blockquote>
                 <div>Entrega:&nbsp;
                     <label><i class="icon-calendar"></i> <%= @tarea.fecha_entrega.strftime("%d/%b/%Y")%></label>&nbsp;&nbsp;
@@ -32,7 +32,7 @@
                   <%= link_to 'Eliminar', "/tareas/eliminar/"+@tarea.id.to_s, data: { confirm: 'Se eliminara la tarea, ¿Está seguro?' } %>
                   &nbsp&nbsp&nbsp&nbsp
                   <%= link_to 'Editar', "/tareas/edit/"+@tarea.id.to_s %>
-                  <%else%>
+                  <%elsif(@enviado)%>
                   <br>
                   <%= link_to 'Responder', "/tareas/responder_tarea/"+@tarea.id.to_s%>
                 <% end %>

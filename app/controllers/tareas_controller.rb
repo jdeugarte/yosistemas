@@ -87,7 +87,9 @@ class TareasController < ApplicationController
       @grupo = @tarea.grupo
       if(@tarea.usuario_id == current_user.id)
         @tarea.destroy
+        flash[:alert] = 'Tarea eliminada'
       end
+
       redirect_to '/grupos/'+@grupo.id.to_s+'/tareas'
     end
 

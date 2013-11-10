@@ -36,11 +36,23 @@ feature 'Gestion de tareas' do
      expect(page).to have_content '13/Oct/2013' #deberia tener, la fecha de entrega
      expect(page).to have_content '10:00 PM' #deberia tener, la hora de entrega
   end
+
+  scenario 'Eliminar una tarea' do
+     usuario = FactoryGirl.create(:usuario)
+     grupo = FactoryGirl.create(:grupo, usuario_id: usuario.id)
+     subscripcion = FactoryGirl.create(:subscripcion, llave: "qwerty", usuario_id: usuario.id, grupo_id: grupo.id)
+     tarea = FactoryGirl.create(:tarea, usuario_id: usuario.id, grupo_id: grupo.id)
+     ingresar_sistema(usuario)
+     visit "/tareas/"+tarea.id.to_s
+     click_link 'Eliminar'
+     #click_button 'Aceptar'
+     expect(page).to have_content 'Tarea eliminada' #deberia tener, la hora de entrega
+   end
  
   # scenario 'Ver index de tareas de un grupo' do
   #   usuario = FactoryGirl.create(:usuario)
   #   publico = FactoryGirl.create(:grupo)
-  #   grupo = FactoryGirl.build(:grupo, nombre: 'Prueba', usuario_id: usuario.id)
+  #   grupo = FactoryGirl.create(:grupo, nombre: 'Prueba', usuario_id: usuario.id)
   #   tarea1 = FactoryGirl.create(:tarea, titulo: 'Tarea 1', grupo_id: "2", fecha_entrega: "2013-10-13", hora_entrega: "00:00 AM")
   #   tarea2 = FactoryGirl.create(:tarea, titulo: 'Tarea 2', grupo_id: "2", fecha_entrega: "2013-10-13", hora_entrega: "00:00 AM")
   #   ingresar_sistema(usuario)

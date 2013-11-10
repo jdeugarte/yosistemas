@@ -21,8 +21,10 @@ class TareasController < ApplicationController
       end
       if(!@tarea.nil?)
         @grupo = @tarea.grupo
+        @id=@grupo.id
+        enviado=ResponderTarea.where(:usuario_id => current_user.id,:tarea_id => @tarea.id)
         @suscrito = Subscripcion.where(:grupo_id => @grupo.id, :usuario_id => current_user.id)
-        if(!@suscrito.first.nil?)
+        if(!@suscrito.first.nil? && enviado.first.nil?)
           @grupos = Array.new
           if(current_user!=nil)
             current_user.subscripcions.each do |subs|
@@ -85,7 +87,9 @@ class TareasController < ApplicationController
       @grupo = @tarea.grupo
       if(@tarea.usuario_id == current_user.id)
         @tarea.destroy
+        flash[:alert] = 'Tarea eliminada'
       end
+
       redirect_to '/grupos/'+@grupo.id.to_s+'/tareas'
     end
 
@@ -98,6 +102,7 @@ class TareasController < ApplicationController
     if(!current_user.esta_subscrito?(@tarea.grupo.id))
       redirect_to temas_path
     else
+      @enviado=ResponderTarea.where(:usuario_id => current_user.id,:tarea_id => @tarea.id).first.nil?
       suscripcion=Subscripcion.where(:usuario_id=>current_user.id, :grupo_id=>@tarea.grupo.id)
       suscripcion.first.notificacion_grupos.where(:notificado=>false).each do |notificacion|
         if notificacion.tarea_id.to_s==params[:id].to_s

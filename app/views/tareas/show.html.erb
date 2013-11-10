@@ -32,9 +32,11 @@
                   <%= link_to 'Eliminar', "/tareas/eliminar/"+@tarea.id.to_s, data: { confirm: 'Se eliminara la tarea, ¿Está seguro?' } %>
                   &nbsp&nbsp&nbsp&nbsp
                   <%= link_to 'Editar', "/tareas/edit/"+@tarea.id.to_s %>
-                  <%elsif(@enviado)%>
+                  <%elsif(!@enviado)%>
                   <br>
                   <%= link_to 'Responder', "/tareas/responder_tarea/"+@tarea.id.to_s%>
+                  <%else%>
+                  <h4>Ya respondio esta tarea<h4>
                 <% end %>
                 </div>
                 </div>

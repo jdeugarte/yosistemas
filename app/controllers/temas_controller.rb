@@ -189,10 +189,19 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
   def update
     @tema = Tema.find(params[:id])
     if(@tema.update(params[:tema].permit(:titulo,:cuerpo)))
+      eliminar_archivos_adjuntos(params[:elemsParaElim])
       redirect_to @tema
     else
       render 'edit'
     end
+  end
+
+  def eliminar_archivos_adjuntos(idsParaBorrar)
+    idsParaBorrar.slice!(0)
+     idsParaBorrar=idsParaBorrar.split("-")
+     idsParaBorrar.each do |id|
+         ArchivoAdjuntoTema.destroy(id)
+     end
   end
 
   def editar_comentario

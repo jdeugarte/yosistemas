@@ -197,11 +197,13 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
   end
 
   def eliminar_archivos_adjuntos(idsParaBorrar)
-    idsParaBorrar.slice!(0)
-     idsParaBorrar=idsParaBorrar.split("-")
-     idsParaBorrar.each do |id|
-         ArchivoAdjuntoTema.destroy(id)
-     end
+    if (!idsParaBorrar.nil?)
+      idsParaBorrar.slice!(0)
+       idsParaBorrar=idsParaBorrar.split("-")
+       idsParaBorrar.each do |id|
+           ArchivoAdjuntoTema.destroy(id)
+       end
+    end
   end
 
   def editar_comentario

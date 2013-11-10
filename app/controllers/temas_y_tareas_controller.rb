@@ -7,11 +7,11 @@ class TemasYTareasController < ApplicationController
        @grupo = Grupo.find(1)
        redirect_to temas_path
     end
-   if(params[:id]==1)
+   if(params[:id]=="1")
     redirect_to temas_path
    else
     @temas_y_tareas = @grupo.temas.where("visible = ?", 1) + @grupo.tareas
-    @temas_y_tareas.sort{|x,y| x.created_at <=> y.created_at}
+    @temas_y_tareas.sort!{|x,y|  y.created_at <=> x.created_at}
    end
   end
 end

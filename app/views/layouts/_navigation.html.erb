@@ -82,26 +82,25 @@ function changeSrc()
         <%end%>
         <ul class="dropdown-menu">
           <%if((@notificaciones == nil || @notificaciones.size <= 0)&&( notificaciones_nueva_tarea == nil || notificaciones_nueva_tarea.size <= 0)) %>
-            <li><a>Vacio </a> </li> 
+            <li><a>Vacio </a> </li>
           <%else%>
             <% if @notificaciones != nil && @notificaciones.size > 0%>
-              <% @notificaciones.each do |notificacion| %>  
+              <% @notificaciones.each do |notificacion| %>
                 <li>
-                  <a href=<%="/temas/"+ TemaComentario.find(notificacion.tema_comentario_id).tema_id.to_s %>  > 
-                    <h4>  
+                  <a href=<%="/temas/"+ TemaComentario.find(notificacion.tema_comentario_id).tema_id.to_s %>  >
+                    <h4>
                       <%= "tema: "+Tema.find(TemaComentario.find(notificacion.tema_comentario_id).tema_id).titulo+" " %>
                     </h4>
-                    &nbsp;&nbsp;&nbsp;<%= TemaComentario.find(notificacion.tema_comentario_id).cuerpo[0,20]+"..."%> 
+                    &nbsp;&nbsp;&nbsp;<%= TemaComentario.find(notificacion.tema_comentario_id).cuerpo[0,20]+"..."%>
                   </a>
                 </li>
               <%end%>
-            
             <%end%>
             <% if notificaciones_nueva_tarea != nil && notificaciones_nueva_tarea.size > 0%>
-              <% notificaciones_nueva_tarea.each do |notificacion2| %>  
+              <% notificaciones_nueva_tarea.each do |notificacion2| %>
                 <li>
-                  <a href=<%="/tareas/"+ notificacion2.tarea_id.to_s %>  > 
-                    <h4>  
+                  <a href=<%="/tareas/"+ notificacion2.tarea_id.to_s %>  >
+                    <h4>
                       <%= "Tarea: "+notificacion2.tarea.titulo %>
                     </h4>
                   </a>

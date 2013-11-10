@@ -9,3 +9,12 @@ FactoryGirl.define do
     usuario_id nil
   end
 end
+
+FactoryGirl.define do
+  factory :grupo_publico, class: Grupo do
+  nombre "Publico" 
+  descripcion "todos deben tener ingreso a temas publicos"
+  estado false
+  llave "publico"
+  end
+end

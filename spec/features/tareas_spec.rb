@@ -3,13 +3,25 @@ require 'spec_helper'
 feature 'Gestion de tareas' do
   #TODO: Llevar este método a un spec_helper para que sea usado por todos los feature specs
   #TODO: Usar el parametro usuario en este método
-  # def ingresar_sistema(usuario)
-  #   visit root_path
-  #   #click_link "Ingresar"
-  #   fill_in 'correo', with: 'email@email.com'
-  #   fill_in 'contrasenia', with: 'password'
-  #   click_button 'Ingresar'
-  # end
+  before(:all) do
+     @grupo_publico = FactoryGirl.create(:grupo_publico)
+  end
+
+  scenario 'Crear una tarea' do
+     usuario = FactoryGirl.create(:usuario)
+     grupo = FactoryGirl.create(:grupo, usuario_id: usuario.id)
+     subscripcion = FactoryGirl.create(:subscripcion, llave: "qwerty", usuario_id: usuario.id, grupo_id: grupo.id)
+     ingresar_sistema(usuario)
+     visit "/grupos/"+grupo.id.to_s+"/tareas"
+     click_link 'Nueva Tarea'
+     fill_in 'tarea_titulo', with: 'Titulo tarea de prueba'
+     fill_in 'tarea_descripcion', with: 'Descripcion o contenido de tarea de prueba'
+     fill_in 'tarea_fecha_entrega', with: '12/12/2013'
+     fill_in 'tarea_hora_entrega', with: '05:00 PM'
+     click_button 'Crear tarea'
+     expect(page).to have_content 'Titulo tarea de prueba'
+     expect(page).to have_content 'Descripcion o contenido de tarea de prueb...'
+   end
  
   # scenario 'Ver index de tareas de un grupo' do
   #   usuario = FactoryGirl.create(:usuario)

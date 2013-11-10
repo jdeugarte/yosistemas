@@ -76,7 +76,7 @@ class TareasController < ApplicationController
         @id = params[:id]
       end
     else
-      redirect_to temas_path
+      redirect_to tareas_path
     end
   end
 
@@ -138,7 +138,7 @@ class TareasController < ApplicationController
       add_attached_files(@tarea.id)
       flash[:alert] = 'Tarea creada Exitosamente!'
       notify_users(@tarea.grupo_id, @tarea)
-      redirect_to '/grupos/'+params[:tarea][:grupo_id]+'/temas'
+      redirect_to '/grupos/'+params[:tarea][:grupo_id]+'/tareas'
     else
        @grupos = Array.new
       if(current_user!=nil)

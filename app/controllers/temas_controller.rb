@@ -149,6 +149,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     @tema.grupo_id=params[:tema][:grupo_id]
     @tema.usuario_id = current_user.id
     if @tema.save
+      add_attached_files(@tema.id)
       flash[:alert] = 'Tema creado Exitosamente!'
       @suscripcion=SuscripcionTema.new
       @suscripcion.usuario_id=current_user.id
@@ -167,6 +168,19 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
       render 'new'
     end
   end
+
+  private
+    def add_attached_files(tema_id)
+      if(!params[:tema][:archivo].nil?)
+        params[:tema][:archivo].each do |arch|
+        @archivo = ArchivoAdjuntoTema.new(:archivo=>arch)
+        @archivo.tema_id = tema_id
+        @archivo.save
+        end
+      end
+    end
+
+  public
 
   def edit
     @tema = Tema.find(params[:id])

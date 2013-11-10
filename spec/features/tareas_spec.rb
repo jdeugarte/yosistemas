@@ -40,7 +40,7 @@ feature 'Gestion de tareas' do
   # scenario 'Ver index de tareas de un grupo' do
   #   usuario = FactoryGirl.create(:usuario)
   #   publico = FactoryGirl.create(:grupo)
-  #   grupo = FactoryGirl.build(:grupo, nombre: 'Prueba', usuario_id: usuario.id)
+  #   grupo = FactoryGirl.create(:grupo, nombre: 'Prueba', usuario_id: usuario.id)
   #   tarea1 = FactoryGirl.create(:tarea, titulo: 'Tarea 1', grupo_id: "2", fecha_entrega: "2013-10-13", hora_entrega: "00:00 AM")
   #   tarea2 = FactoryGirl.create(:tarea, titulo: 'Tarea 2', grupo_id: "2", fecha_entrega: "2013-10-13", hora_entrega: "00:00 AM")
   #   ingresar_sistema(usuario)

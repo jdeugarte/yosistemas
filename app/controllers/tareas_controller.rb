@@ -18,7 +18,7 @@ class TareasController < ApplicationController
         @grupo = @tarea.grupo
         @id=@grupo.id
         @suscrito = Subscripcion.where(:grupo_id => @grupo.id, :usuario_id => current_user.id)
-        if((@tarea.usuario_id!=current_user.id) && !@suscrito.first.nil? && ResponderTarea.ya_envio_tarea(current_user.id,@tarea.id)  )
+        if((@tarea.usuario_id!=current_user.id) && !@suscrito.first.nil? && !ResponderTarea.ya_envio_tarea(current_user.id,@tarea.id)  )
           @grupos = Array.new
           if(current_user!=nil)
             current_user.subscripcions.each do |subs|
@@ -46,7 +46,7 @@ class TareasController < ApplicationController
     if(@responder_tarea.save)
       add_attached_files_respuesta(@responder_tarea.id)
       flash[:alert] = 'Tarea enviada Exitosamente!'
-      redirect_to '/grupos/'+@tarea.grupo.id.to_s+'/temas'
+      redirect_to '/grupos/'+@tarea.grupo.id.to_s+'/tareas'
     else
       @grupos = Array.new
       if(current_user!=nil)

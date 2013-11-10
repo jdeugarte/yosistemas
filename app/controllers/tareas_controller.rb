@@ -112,9 +112,9 @@ class TareasController < ApplicationController
       end
     end
   end
-  def edit #id tarea
-    if(params[:id]!="1")
-      @tarea = Tarea.find(params[:id])
+  def edit #id tarea        
+    if(Tarea.find(params[:id]).usuario==current_user)
+      @tarea = Tarea.find(params[:id])      
       @grupos = Array.new
       if(current_user!=nil)
         current_user.subscripcions.each do |subs|
@@ -130,11 +130,23 @@ class TareasController < ApplicationController
   def update
     @tarea = Tarea.find(params[:id])
     if(@tarea.update(params[:tarea].permit(:titulo,:descripcion,:fecha_entrega,:grupo_id,:hora_entrega)))
+      eliminar_archivos_adjuntos(params[:elemsParaElim])
       redirect_to @tarea
     else
       render 'edit'
     end
   end
+
+  def eliminar_archivos_adjuntos(idsParaBorrar)
+    if (!idsParaBorrar.nil?)
+      idsParaBorrar.slice!(0)
+       idsParaBorrar=idsParaBorrar.split("-")
+       idsParaBorrar.each do |id|
+           ArchivoAdjunto.destroy(id)
+       end
+    end
+  end
+
   #POST tareas/create
   def create
     @tarea = Tarea.new(tarea_params)

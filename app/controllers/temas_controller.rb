@@ -26,7 +26,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     else
       @temas = aux
     end
-    /codigo agregado para busqueda por descripcion/
+    #/codigo agregado para busqueda por descripcion/
     if params[:descripcion] != "" && params[:descripcion] != nil
       byDescription = searchByDescription(params[:descripcion])
       if params[:titulo] == "" || params[:titulo] == nil
@@ -191,6 +191,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     @tema = Tema.find(params[:id])
     if(@tema.update(params[:tema].permit(:titulo,:cuerpo)))
       eliminar_archivos_adjuntos(params[:elemsParaElim])
+      add_attached_files(@tema.id)
       redirect_to @tema
     else
       render 'edit'

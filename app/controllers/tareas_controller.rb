@@ -1,5 +1,4 @@
 class TareasController < ApplicationController
-
   #GET tareas
   def index
     if(params[:grupo]!="1" && current_user.esta_subscrito?((params[:grupo])))
@@ -11,22 +10,15 @@ class TareasController < ApplicationController
       redirect_to temas_path
     end
   end
-
   #GET tareas/new
-  def responder_tarea
-    if(current_user.rol == "Estudiante" )
+  def responder_tarea   
       @responder_tarea = ResponderTarea.new
-      begin
-        @tarea = Tarea.find(params[:id])
-        rescue ActiveRecord::RecordNotFound
-        redirect_to root_path
-      end
+      @tarea = Tarea.buscar_tarea(params[:id])
       if(!@tarea.nil?)
         @grupo = @tarea.grupo
         @id=@grupo.id
-        enviado=ResponderTarea.where(:usuario_id => current_user.id,:tarea_id => @tarea.id)
         @suscrito = Subscripcion.where(:grupo_id => @grupo.id, :usuario_id => current_user.id)
-        if(!@suscrito.first.nil? && enviado.first.nil?)
+        if((@tarea.usuario_id!=current_user.id) && !@suscrito.first.nil? && !ResponderTarea.ya_envio_tarea(current_user.id,@tarea.id)  )
           @grupos = Array.new
           if(current_user!=nil)
             current_user.subscripcions.each do |subs|
@@ -36,11 +28,11 @@ class TareasController < ApplicationController
         else
           redirect_to root_path
         end
+      else
+       redirect_to root_path
       end
-    else
-      redirect_to root_path
-    end
   end
+  
 
   def mostrar_respuesta_tarea
     @respuesta_tarea=ResponderTarea.find(params[:id])
@@ -54,7 +46,7 @@ class TareasController < ApplicationController
     if(@responder_tarea.save)
       add_attached_files_respuesta(@responder_tarea.id)
       flash[:alert] = 'Tarea enviada Exitosamente!'
-      redirect_to '/grupos/'+@tarea.grupo.id.to_s+'/temas'
+      redirect_to '/grupos/'+@tarea.grupo.id.to_s+'/tareas'
     else
       @grupos = Array.new
       if(current_user!=nil)
@@ -104,7 +96,7 @@ class TareasController < ApplicationController
     if(!current_user.esta_subscrito?(@tarea.grupo.id))
       redirect_to temas_path
     else
-      @enviado=ResponderTarea.where(:usuario_id => current_user.id,:tarea_id => @tarea.id).first.nil?
+      @enviado=!ResponderTarea.where(:usuario_id => current_user.id,:tarea_id => @tarea.id).first.nil?
       suscripcion=Subscripcion.where(:usuario_id=>current_user.id, :grupo_id=>@tarea.grupo.id)
       suscripcion.first.notificacion_grupos.where(:notificado=>false).each do |notificacion|
         if notificacion.tarea_id.to_s==params[:id].to_s
@@ -114,9 +106,9 @@ class TareasController < ApplicationController
       end
     end
   end
-  def edit #id tarea        
+  def edit #id tarea
     if(Tarea.find(params[:id]).usuario==current_user)
-      @tarea = Tarea.find(params[:id])      
+      @tarea = Tarea.find(params[:id])
       @grupos = Array.new
       if(current_user!=nil)
         current_user.subscripcions.each do |subs|
@@ -133,6 +125,7 @@ class TareasController < ApplicationController
     @tarea = Tarea.find(params[:id])
     if(@tarea.update(params[:tarea].permit(:titulo,:descripcion,:fecha_entrega,:grupo_id,:hora_entrega)))
       eliminar_archivos_adjuntos(params[:elemsParaElim])
+       add_attached_files(@tarea.id)
       redirect_to @tarea
     else
       render 'edit'
@@ -148,7 +141,6 @@ class TareasController < ApplicationController
        end
     end
   end
-
   #POST tareas/create
   def create
     @tarea = Tarea.new(tarea_params)

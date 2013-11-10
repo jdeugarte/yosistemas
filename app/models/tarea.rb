@@ -9,4 +9,12 @@ class Tarea < ActiveRecord::Base
   validates :fecha_entrega, :presence => { :message => " es requerida" }
   validates :hora_entrega, :presence => { :message => " es requerida" }
   delegate :nombre_usuario, :to => :usuario, :prefix => true
+  def self.buscar_tarea(id)
+        tarea=nil
+        begin
+          tarea = Tarea.find(id)
+          rescue ActiveRecord::RecordNotFound
+        end
+      return tarea
+  end
 end

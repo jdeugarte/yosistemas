@@ -53,4 +53,14 @@ factory :other_student, class: Usuario do
     nombre_usuario "jarry"
     activa false
   end
+
+  factory :usuario_estudiante , class: Usuario do
+    nombre "Pedro"
+    apellido "Pedregal"
+    contrasenia "password"
+    correo "email666@email666.com"
+    nombre_usuario "pedrito666"
+    rol "Estudiante"
+    activa true
+  end
 end

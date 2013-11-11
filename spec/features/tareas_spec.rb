@@ -62,4 +62,68 @@ feature 'Gestion de tareas' do
   #   expect(page).to have_content 'Tarea 2'
   # end
 
+  scenario 'Responder una tarea' do
+   usuario = FactoryGirl.create(:usuario_estudiante)
+   usuario_docente = FactoryGirl.create(:usuario)
+     grupo = FactoryGirl.create(:grupo, usuario_id: usuario.id)
+     subscripcion = FactoryGirl.create(:subscripcion, llave: "qwerty", usuario_id: usuario.id, grupo_id: grupo.id)
+     tarea = FactoryGirl.create(:tarea, usuario_id: usuario_docente.id, grupo_id: grupo.id)
+    visit root_path
+    fill_in 'correo', with: "email666@email666.com"
+    fill_in 'contrasenia', with: "password"
+    click_button 'Ingresar'
+
+
+
+    visit "/tareas/"+tarea.id.to_s
+    expect(current_path).to eq "/tareas/"+tarea.id.to_s
+    click_link "Responder"
+    expect{
+    fill_in 'responder_tarea_descripcion', with: 'Descripcion de prueba' 
+    click_button "Responder"  }.to change(ResponderTarea, :count).by(1)
+  end
+
+  scenario 'No puedo responder una tarea si ya lo hice' do
+    estudiante = FactoryGirl.create(:usuario_estudiante)
+    docente = FactoryGirl.create(:usuario)
+    grupo = FactoryGirl.create(:grupo, usuario_id: docente.id)
+    subscripcion = FactoryGirl.create(:subscripcion, llave: "qwerty", usuario_id: estudiante.id, grupo_id: grupo.id)
+    tarea = FactoryGirl.create(:tarea, usuario_id: docente.id, grupo_id: grupo.id)
+    visit root_path
+    fill_in 'correo', with: "email666@email666.com"
+    fill_in 'contrasenia', with: "password"
+    click_button 'Ingresar'
+    visit "/tareas/"+tarea.id.to_s
+    click_link "Responder"
+    fill_in 'responder_tarea_descripcion', with: 'Descripcion de prueba' 
+    click_button "Responder"
+    visit "/tareas/"+tarea.id.to_s
+    expect(page).to have_no_content 'Responder'
+    expect(page).to have_content 'Ya respondio esta tarea'
+
+  end
+  scenario 'Un docente no puede responder una tarea como creador de la misma' do
+    docente = FactoryGirl.create(:usuario)
+    grupo = FactoryGirl.create(:grupo, usuario_id: docente.id)
+    subscripcion = FactoryGirl.create(:subscripcion, llave: "qwerty", usuario_id: docente.id, grupo_id: grupo.id)
+    tarea = FactoryGirl.create(:tarea, usuario_id: docente.id, grupo_id: grupo.id)
+    visit root_path
+    ingresar_sistema(docente)
+    visit "/tareas/"+tarea.id.to_s
+    expect(page).to have_no_content 'Responder'
+  end
+
+  scenario 'Ver lista de tareas' do
+    usuario = FactoryGirl.create(:usuario)
+     grupo = FactoryGirl.create(:grupo, usuario_id: usuario.id)
+     subscripcion = FactoryGirl.create(:subscripcion, llave: "qwerty", usuario_id: usuario.id, grupo_id: grupo.id)
+     tarea = FactoryGirl.create(:tarea, usuario_id: usuario.id, grupo_id: grupo.id)
+     tarea = FactoryGirl.create(:tarea2, usuario_id: usuario.id, grupo_id: grupo.id)
+     tarea = FactoryGirl.create(:tarea3, usuario_id: usuario.id, grupo_id: grupo.id)
+     visit "/grupos/"+grupo.id.to_s+"/temas-y-tareas"
+     expect(page).to have_content 'Tarea de Prueba'
+     expect(page).to have_content 'Tarea de Prueba 2'
+     expect(page).to have_content 'Tarea de Prueba 3'
+  end
+
 end

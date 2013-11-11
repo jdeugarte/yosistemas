@@ -5,8 +5,8 @@ ruby "1.9.3"
 gem 'rails', '4.0.0'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', group: [:development, :test]
-gem 'pg', group: [:production]
+gem 'sqlite3', group: [:production,:development, :test]
+
 gem 'aescrypt','>= 1.0.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'

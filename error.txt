@@ -1,0 +1,28 @@
+2013-11-11T06:25:04.051779+00:00 heroku[api]: Enable Logplex by ger.sal.jo@gmail.com
+2013-11-11T06:25:04.065994+00:00 heroku[api]: Release v2 created by ger.sal.jo@gmail.com
+2013-11-11T06:28:05+00:00 heroku[slug-compiler]: Slug compilation started
+2013-11-11T06:29:26.016927+00:00 heroku[api]: Scale to web=1 by ger.sal.jo@gmail.com
+2013-11-11T06:29:27.189347+00:00 heroku[api]: Attach HEROKU_POSTGRESQL_SILVER resource by ger.sal.jo@gmail.com
+2013-11-11T06:29:27.208386+00:00 heroku[api]: Release v3 created by ger.sal.jo@gmail.com
+2013-11-11T06:29:27.301635+00:00 heroku[api]: Add DATABASE_URL config by ger.sal.jo@gmail.com
+2013-11-11T06:29:27.313150+00:00 heroku[api]: Release v4 created by ger.sal.jo@gmail.com
+2013-11-11T06:29:27.375508+00:00 heroku[api]: Deploy 0380651 by ger.sal.jo@gmail.com
+2013-11-11T06:29:27.387922+00:00 heroku[api]: Release v5 created by ger.sal.jo@gmail.com
+2013-11-11T06:29:27+00:00 heroku[slug-compiler]: Slug compilation finished
+2013-11-11T06:29:31.073470+00:00 heroku[web.1]: Starting process with command `bin/rails server -p 4716 -e $RAILS_ENV`
+2013-11-11T06:29:31.208910+00:00 heroku[web.1]: Starting process with command `bin/rails server -p 49121 -e $RAILS_ENV`
+2013-11-11T06:29:31.604008+00:00 app[web.1]: /usr/bin/env: ruby: No such file or directory
+2013-11-11T06:29:31.769317+00:00 app[web.1]: /usr/bin/env: ruby: No such file or directory
+2013-11-11T06:29:32.738415+00:00 heroku[web.1]: Process exited with status 127
+2013-11-11T06:29:32.752917+00:00 heroku[web.1]: State changed from starting to crashed
+2013-11-11T06:29:32.754046+00:00 heroku[web.1]: State changed from crashed to starting
+2013-11-11T06:29:32.874272+00:00 heroku[web.1]: Process exited with status 127
+2013-11-11T06:29:35.830838+00:00 heroku[web.1]: Starting process with command `bin/rails server -p 52527 -e $RAILS_ENV`
+2013-11-11T06:29:36.510000+00:00 app[web.1]: /usr/bin/env: ruby: No such file or directory
+2013-11-11T06:29:37.807054+00:00 heroku[web.1]: Process exited with status 127
+2013-11-11T06:29:37.822308+00:00 heroku[web.1]: State changed from starting to crashed
+2013-11-11T06:29:57.376844+00:00 heroku[api]: Starting process with command `bundle exec rake db:migrate` by ger.sal.jo@gmail.com
+2013-11-11T06:30:00.539997+00:00 heroku[run.1839]: Awaiting client
+2013-11-11T06:30:00.572643+00:00 heroku[run.1839]: Starting process with command `bundle exec rake db:migrate`
+2013-11-11T06:30:01.764262+00:00 heroku[run.1839]: Process exited with status 127
+2013-11-11T06:30:01.779184+00:00 heroku[run.1839]: State changed from starting to complete

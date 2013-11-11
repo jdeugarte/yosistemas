@@ -5,7 +5,7 @@ class GruposController < ApplicationController
   end
 
   def mis_grupos
-    @grupos = Grupo.find(:all, :conditions => { :usuario_id => current_user.id })
+    @grupos = Grupo.buscar_mis_grupos(current_user)
     @grupos = Kaminari.paginate_array(@grupos).page(params[:page]).per(5)
   end
 

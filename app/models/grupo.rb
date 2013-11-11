@@ -5,7 +5,9 @@ class Grupo < ActiveRecord::Base
   	has_many :tareas
   	validates :nombre, :presence => true
     delegate :nombre_usuario, :to => :usuario, :prefix => true
-  	def usuario_suscrito?(id)
+  	scope :buscar_mis_grupos,lambda { |user| where("usuario_id = ?", user.id)}
+
+    def usuario_suscrito?(id)
   		resp = true
   		for suscripcion in self.subscripcions
   			if suscripcion.usuario_id == id

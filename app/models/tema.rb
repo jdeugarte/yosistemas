@@ -25,4 +25,36 @@ class Tema < ActiveRecord::Base
       self.save
     end
   end
+
+  def self.searchByDescription(keyWords)
+    keyWords = keyWords.downcase
+      initialResult = Tema.where('cuerpo LIKE ?', '%'+keyWords+'%')
+      deepResult = Tema.deepSearchOfDescription(keyWords)
+      finalRes  = (initialResult+deepResult).uniq
+      finalRes
+  end
+
+    def self.deepSearchOfDescription(keyWords)
+      keyWordArray = keyWords.split
+      keyWordArray = Tema.deleteIrrelevantWords(keyWordArray)
+      keyWordArray.uniq!
+      results=[]
+      keyWordArray.each do |word|
+        results<<Tema.where('cuerpo LIKE ?', '%'+word+'%')
+      end
+      finalResArray = results.flatten.uniq
+      finalResArray
+    end
+
+    def self.deleteIrrelevantWords(keyWordArray)
+      res = keyWordArray - ["de", "a", "la", "el","los","en","al", "con", "que","por", "si","es","son"]
+      i=0
+      while(i<res.length)
+        if(res[i].length<=3)
+          res.delete_at(i)
+        end
+        i+=1
+      end
+      res
+    end
 end

@@ -11,7 +11,7 @@ class TareasController < ApplicationController
     end
   end
   #GET tareas/new
-  def responder_tarea   
+  def responder_tarea
       @responder_tarea = ResponderTarea.new
       @tarea = Tarea.buscar_tarea(params[:id])
       if(!@tarea.nil?)

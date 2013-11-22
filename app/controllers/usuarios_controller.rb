@@ -36,6 +36,9 @@ class UsuariosController < ApplicationController
   def edit
 	 @usuario=current_user
   end
+  def cambiar_email 
+   @usuario=current_user
+  end
   def forgot_password
     if(current_user!=nil)
           redirect_to root_url

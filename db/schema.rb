@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131110143052) do
+ActiveRecord::Schema.define(version: 20131123171016) do
 
   create_table "adjuntos_comentarios", force: true do |t|
     t.integer  "tema_comentario_id"
@@ -77,6 +77,20 @@ ActiveRecord::Schema.define(version: 20131110143052) do
   end
 
   add_index "archivo_adjuntos", ["tarea_id"], name: "index_archivo_adjuntos_on_tarea_id"
+
+  create_table "cuestionarios", force: true do |t|
+    t.string   "titulo"
+    t.text     "descripcion"
+    t.datetime "fecha_limite"
+    t.boolean  "estado"
+    t.integer  "grupo_id"
+    t.integer  "usuario_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "cuestionarios", ["grupo_id"], name: "index_cuestionarios_on_grupo_id"
+  add_index "cuestionarios", ["usuario_id"], name: "index_cuestionarios_on_usuario_id"
 
   create_table "grupos", force: true do |t|
     t.string   "nombre"

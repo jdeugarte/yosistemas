@@ -6,6 +6,7 @@ require 'digest/md5'
 	has_many :subscripcions
 	has_many :tareas
 	has_many :suscripcion_temas
+	has_many :cuestionarios
 	  has_many :usuarios
   	  accepts_nested_attributes_for :usuarios
   	before_create :encrypt_password

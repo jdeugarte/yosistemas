@@ -57,6 +57,8 @@ Yosistemas::Application.routes.draw do
   get "tareas/editar_comentario/:id_comentario" => "tareas#editar_comentario"
   post "tarea_comentarios/editar/:id" => "tarea_comentarios#editar"
   get "tarea_comentarios/delete/:id" => "tarea_comentarios#delete"
+  #Cuestionarios
+  get "cuestionarios/nuevo_cuestionario/:id" => "cuestionarios#nuevo_cuestionario", :as => 'nuevo_cuestionario'
   resources :usuarios , except: [:destroy] do
     resources :tema_comentarios, only: [:create]
   end
@@ -73,6 +75,7 @@ Yosistemas::Application.routes.draw do
     resources :tarea_comentarios
   end
   resources :tarea_comentarios
+  resources :cuestionarios, only: [:create, :edit, :update, :delete]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   # You can have the root of your site routed with "root"

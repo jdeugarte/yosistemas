@@ -1,7 +1,7 @@
 <h1>Lista de grupos</h1>
 <br>
 <br>
-<form method="GET" action="/grupos/search">
+<form method="GET" action="/grupos/buscar">
 <div class="row">
   <%if current_user!=nil%>
     <div class="col-sm-12 col-md-2 col-lg-2">
@@ -78,6 +78,9 @@
                     </form>
                     <form class="navbar-form navbar-left" method="get" action=<%=suscriptores_path(grupo)%> >
                       <button type="submit" class="btn btn-primary">Ver suscriptores del grupo</button>
+                    </form>
+                    <form class="navbar-form navbar-left" method="get" action=<%=nuevo_cuestionario_path(grupo)%> >
+                      <button type="submit" class="btn btn-primary">crear cuestionario</button>
                     </form>
               </div>
           </div>

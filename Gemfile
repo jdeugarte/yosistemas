@@ -7,7 +7,7 @@ gem 'rails', '4.0.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', group: [:development, :test]
 gem 'pg', group: [:production]
-gem 'aescrypt','>= 1.0.0'
+gem 'aescrypt'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 gem 'recaptcha', :require => 'recaptcha/rails'
@@ -21,23 +21,29 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails','>= 3.0.4'
+gem 'jquery-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 
 #gems for files upload
-gem 'paperclip','~> 3.0'
+gem 'paperclip'
 gem 'paperclip-dropbox', '~> 1.1.7'
+gem 'dropbox'
 gem "metric_fu", "~> 4.4.4"
-gem 'kaminari' ,'>= 0.14.1'
+gem 'kaminari'
+
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
+
 #gem encrypt password in user register
 gem "bcrypt-ruby", :require => "bcrypt"
+
 group :development, :test do
   gem "rspec-rails", "~> 2.14.0"
   gem "factory_girl_rails", "~> 4.2.1"
 end
+
 group :test do
   gem "faker", "~> 1.1.2"
   gem "capybara", "~>2.1.0"
@@ -45,6 +51,7 @@ group :test do
   gem "launchy", "~> 2.3.0"
   gem "selenium-webdriver", "~> 2.35.1"
 end
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

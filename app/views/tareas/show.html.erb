@@ -33,10 +33,14 @@
                   &nbsp&nbsp&nbsp&nbsp
                   <%= link_to 'Editar', "/tareas/edit/"+@tarea.id.to_s %>
                   <%elsif(!@enviado)%>
-                  <br>
-                  <%= link_to 'Responder', "/tareas/responder_tarea/"+@tarea.id.to_s%>
+                    <%if(!@tarea.tarea_caducada)%>
+                      <br>
+                      <%= link_to 'Responder', "/tareas/responder_tarea/"+@tarea.id.to_s%>
+                    <%else%>
+                      <h4>La fecha de entrega finalizó.<h4>
+                    <%end%>
                   <%else%>
-                  <h4>Ya respondio esta tarea<h4>
+                    <h4>Ya respondio esta tarea<h4>
                 <% end %>
                 </div>
                 </div>

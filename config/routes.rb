@@ -61,6 +61,8 @@ Yosistemas::Application.routes.draw do
   get "tarea_comentarios/delete/:id" => "tarea_comentarios#delete"
   #Cuestionarios
   get "cuestionarios/nuevo_cuestionario/:id" => "cuestionarios#nuevo_cuestionario", :as => 'nuevo_cuestionario'
+  get "cuestionarios/cuestionarios_de_grupo_index/:id" => "cuestionarios#cuestionarios_de_grupo_index", :as => 'cuestionarios_de_grupo_index'
+  get "cuestionarios/delete/:id" => "cuestionarios#delete", :as => 'borrar_cuestionario'
   resources :usuarios , except: [:destroy] do
     resources :tema_comentarios, only: [:create]
   end

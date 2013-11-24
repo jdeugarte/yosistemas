@@ -1,0 +1,34 @@
+<%= form_for @cuestionario, :html => { :class => 'bs-example form-horizontal' } do |f| %>
+  <div class="row">
+          <div class="col-lg-6">
+            <div class="well">
+                <fieldset>
+                  <legend>Ingrese los datos del cuestionario </legend>
+                  <div class="form-group">
+                     <label for="inputTitle" class="col-lg-2 control-label">Titulo:</label>
+                    <div class="col-lg-10">
+                        <%= f.text_field :titulo , :class=>'form-control', :placeholder=>'titulo', :maxlength => 50, :required => true, :title => "El titulo del cuestionario es obligatorio, Por favor rellene este campo"%>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputContent" class="col-lg-2 control-label">Descripcion:</label>
+                    <div class="col-lg-10">
+                      <%= f.text_area :descripcion, :class=>'form-control',:rows=>'6', :placeholder=>'Descripcion', :maxlength => 500 %>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-lg-2 control-label">Fecha limite</label>
+                    <div class="col-lg-10">
+                      <%= f.date_select :fecha_limite, :class=>'form-control' %>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                      <input type="submit" value="Editar cuestionario" class="btn btn-primary">
+                    </div>
+                  </div>
+                </fieldset>
+        </div>
+    </div>
+   </div>
+<% end %>

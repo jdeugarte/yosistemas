@@ -33,7 +33,7 @@ feature 'Gestion de tareas' do
      expect(page).to have_content 'pedrito' #deberia tener, el username del que creador de la tarea
      expect(page).to have_content 'Tarea de Prueba' #deberia tener, el titulo de la tarea
      expect(page).to have_content 'Una tarea de prueba no muy larga para que no se resuma' #deberia tener, la descripcion
-     expect(page).to have_content '13/Oct/2013' #deberia tener, la fecha de entrega
+     expect(page).to have_content '13/Oct/2014' #deberia tener, la fecha de entrega
      expect(page).to have_content '10:00 PM' #deberia tener, la hora de entrega
   end
 

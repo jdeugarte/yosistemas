@@ -13,5 +13,14 @@ module ApplicationHelper
 	      end
 	    end
 	    @notificaciones_grupo
-  end
+  	end
+
+  	def subscripciones_usuario()
+  		subscrpciones = current_user.subscripcions.sort{|x,y| x.created_at <=> y.created_at}
+  		if(!params[:search].nil?)
+  			search = params[:search]
+  			subscrpciones=subscrpciones.select{|subs| (/#{search}/i.match(subs.grupo.nombre) || subs.grupo.id==@grupo.id)}
+  		end
+  		subscrpciones
+  	end
 end

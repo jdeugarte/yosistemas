@@ -17,4 +17,15 @@ class Tarea < ActiveRecord::Base
         end
       return tarea
   end
+
+  def tarea_caducada
+    fecha_actual=Date.new(Date.today().year, Date.today().month,Date.today().day)
+    hora_actual=Time.new(hora_entrega.year, hora_entrega.month, hora_entrega.day, Time.now().hour, Time.now().min, Time.now().sec, "-00:00")
+    if( (fecha_entrega <=> fecha_actual) == -1)
+      return true
+    elsif((fecha_entrega === fecha_actual) && ((hora_entrega<=>hora_actual)==-1))
+      return true
+    end
+    return false
+  end
 end

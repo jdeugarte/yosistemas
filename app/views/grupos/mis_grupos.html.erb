@@ -79,12 +79,15 @@
                     <form class="navbar-form navbar-left" method="get" action=<%=suscriptores_path(grupo)%> >
                       <button type="submit" class="btn btn-primary">Ver suscriptores del Grupo</button>
                     </form>
-                    <form class="navbar-form navbar-left" method="get" action=<%=cuestionarios_de_grupo_index_path(grupo)%> >
-                      <button type="submit" class="btn btn-primary">Ver Cuestionarios del Grupo</button>
-                    </form>
+                   
                     <form class="navbar-form navbar-left" method="get" action=<%=nuevo_cuestionario_path(grupo)%> >
                       <button type="submit" class="btn btn-primary">crear cuestionario</button>
                     </form>
+
+                       <form class="navbar-form navbar-left" method="get" action=<%=cuestionarios_de_grupo_index_path(grupo)%> >
+                      <button type="submit" class="btn btn-primary">Ver Cuestionarios <br>del Grupo</button>
+                    </form>
+
               </div>
           </div>
         </div>

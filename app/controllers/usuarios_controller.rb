@@ -154,6 +154,7 @@ def create
   	  params.permit!
   		@usuario = Usuario.new(params[:usuario])
       @usuario.rol=params[:rol]
+      @usuario.mostrar_correo = false
   		if @usuario.save
         redirect_to root_url
         SendMail.activate_acount(@usuario).deliver

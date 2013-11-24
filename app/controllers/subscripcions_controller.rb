@@ -24,6 +24,12 @@ class SubscripcionsController < ApplicationController
         redirect_to suscriptores_path(@grupo)
     end
 
+    def notificar
+      @usuario = Usuario.find(params[:usuario_id])
+      SendMail.notify_user(current_user, @usuario)
+      redirect_to grupos_path, notice: 'Se actualizo el estado.'
+    end
+
 private
 	def subscripcions_params
 		params.require(:subscripcion).permit(:llave)

@@ -36,6 +36,7 @@ Yosistemas::Application.routes.draw do
   get "suscripcion_temas/create/:id" => 'suscripcion_temas#create', :as => 'suscribirse_tema'
   get "suscripcion_temas/delete/:id" => 'suscripcion_temas#delete', :as => 'rechazar_tema'
   get "subscripcion/delete/:id" => "subscripcions#delete", :as => 'borrar_suscripcion'
+  post "subscripcion/notificar/:id" => 'subscripcions#notificar', :as => 'notificar'
   #rutas de grupos
   get 'grupos/subscripcion_grupo/:id' => 'grupos#subscripcion_grupo', :as=>'suscribirse'
   get "grupos/buscar" => "grupos#buscar", :as=>'buscar_grupo'
@@ -44,6 +45,7 @@ Yosistemas::Application.routes.draw do
   get 'gruopos/detalle_usuario/:id' => 'grupos#detalle_usuario', :as => 'detalle_usuario'
   get "grupos/:id/temas"  => "temas#index", :as=> 'filtrar_temas'
   get "grupos/:id/temas-y-tareas"  => "temas_y_tareas#index", :as=> 'temas_y_tareas'
+  get 'grupos/invitacion_grupo/:id' => 'grupos#invitacion_grupo', :as => 'invitacion_grupo'
   #rutas de tareas
   get 'tareas/new/:id' => 'tareas#new', :as => 'tarea_para_grupo'
   get 'tareas/eliminar/:id' => 'tareas#eliminar'

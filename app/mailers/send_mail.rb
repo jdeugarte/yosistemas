@@ -36,6 +36,7 @@ class SendMail < ActionMailer::Base
   end
   def notify_user(usuario,usuario2)
     @user = usuario
+    @user2 = usuario
     mail(to: @user.correo,subject: 'Te invito al grupo: ')
   end
 end

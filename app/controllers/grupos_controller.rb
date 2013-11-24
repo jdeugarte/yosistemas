@@ -66,6 +66,10 @@ class GruposController < ApplicationController
     @usuario = Usuario.find(params[:id])
   end
 
+  def invitacion_grupo
+    @grupo = Grupo.find(params[:id])
+  end
+
   private
     def grupo_params
       params.require(:grupo).permit(:nombre, :descripcion, :estado, :llave)

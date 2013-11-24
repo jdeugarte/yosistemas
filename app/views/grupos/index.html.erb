@@ -76,6 +76,11 @@
                  <form class="navbar-form navbar-left" method="get" action="/grupos/<%=grupo.id%>/temas/" >
                       <button type="submit" class="btn btn-primary">Ver Temas del Grupo</button>
                     </form>
+                <%if grupo.usuario_suscrito?(current_user.id) == false %>
+                    <form class="navbar-form navbar-left" method="get" action=<%=invitacion_grupo_path(grupo)%>  >
+                      <button type="submit" class="btn btn-primary">enviar invitacion al grupo</button>
+                    </form>
+                <%end%>
               </div>
           </div>
         </div>

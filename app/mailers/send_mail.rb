@@ -34,4 +34,8 @@ class SendMail < ActionMailer::Base
     @url  = 'http://localhost:3000'
     mail(to: @user.correo, subject: 'Se creo una nueva tarea ')
   end
+  def notify_user(usuario,usuario2)
+    @user = usuario
+    mail(to: @user.correo,subject: 'Te invito al grupo: ')
+  end
 end

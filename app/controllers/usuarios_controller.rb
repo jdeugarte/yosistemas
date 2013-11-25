@@ -91,6 +91,11 @@ class UsuariosController < ApplicationController
   def update
     current_user.nombre=params[:usuario][:nombre]
     current_user.apellido=params[:usuario][:apellido]
+    if variable=params[:mostrarcorreo]
+      current_user.mostrar_correo=true
+    else
+      current_user.mostrar_correo=false
+    end
     if(current_user.save)
       flash[:alert] = 'Usuario Modificado'
     else

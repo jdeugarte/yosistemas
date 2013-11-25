@@ -8,7 +8,7 @@
 	<% end %>
 <% end %>
 </div>
-<%= form_for @usuario do |usuario| %>
+<%= form_for @usuario, :url =>guardar_cambio_email_path, :method=>'post'  do |usuario| %>
 <% usuario.hidden_field  :activa, :value=>true %>
 <div class="row">
           <div class="col-lg-6">

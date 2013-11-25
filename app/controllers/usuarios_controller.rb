@@ -39,6 +39,18 @@ class UsuariosController < ApplicationController
   def cambiar_email 
    @usuario=current_user
   end
+  def guardar_cambio_email
+    if(@usuario!=nil)
+      SendMail.cambiar_correo(@usuario).deliver
+    end
+  end
+  def comfirmar_cambio_correo
+    if(current_user!=nil)
+      @errorMessagge="no puede recuperar su password si esta loggeado"
+    else
+      flash[:alert] = 'a'
+    end
+  end
   def forgot_password
     if(current_user!=nil)
           redirect_to root_url

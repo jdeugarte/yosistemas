@@ -70,6 +70,15 @@ class GruposController < ApplicationController
     @grupo = Grupo.find(params[:id])
   end
 
+  def enviar_invitaciones
+    @grupo=Grupo.find(params[:id])
+    correos=(params[:correos]).split(",")
+    correos.each do |correo|
+        SendMail.enviar_notificaciones(current_user, correo, @grupo).deliver
+    end
+    redirect_to '/grupos/invitacion_grupo/'+params[:id].to_s, :flash => { :info => "Sus invitaciones fueron enviadas."}
+  end
+
   private
     def grupo_params
       params.require(:grupo).permit(:nombre, :descripcion, :estado, :llave)

@@ -39,4 +39,12 @@ class SendMail < ActionMailer::Base
     @user2 = usuario
     mail(to: @user.correo,subject: 'Te invito al grupo: ')
   end
+
+  def enviar_notificaciones(usuario, destinatario, grupo)
+    @usuario=usuario
+    @grupo=grupo
+    #@url='http://localhost:3000/grupos/subscripcion_grupo/'+@grupo.id.to_s
+    @url = 'http://yosistemas.herokuapp.com/grupos/subscripcion_grupo/'+@grupo.id.to_s
+    mail(to: destinatario, subject: "Invitacion a grupo")
+  end
 end

@@ -49,7 +49,7 @@
   </div>
   <div class="col-lg-8"  style="background-color:white;">
     <div>
-        <% tab_selec = ((!@temas.nil?||!@tema.nil?) ? 1 : ((!@tareas.nil?||!@tarea.nil?) ? 2 : 0))%>
+        <% tab_selec = ((!@temas.nil?||!@tema.nil?) ? 1 : ((!@tareas.nil?||!@tarea.nil?) ? 2 : (!@cuestionarios.nil?||!@cuestionario.nil?) ? 3 : 0))%>
             <div>
               <ul class="nav nav-tabs" style="margin-bottom: 15px;">
               <%if(@grupo.id!=1)%>

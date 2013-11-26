@@ -43,6 +43,19 @@
 					      </div>
 					    </div>
 					  </div>
+					  <div class="form-group">
+					    <div class="col-lg-offset-2 col-lg-10">
+					      <div class="checkbox">
+					        <label>
+					        <%if @usuario.mostrar_correo %>
+					          Correo Visible a Terceros.
+					        <%else%>
+					          Correo No Visible a Terceros.
+					        <%end%>
+					        </label>
+					      </div>
+					    </div>
+					  </div>
 					  <%= link_to "Modificar Perfil",  usuario_edit_path %>
 					</form>
 			   </div>

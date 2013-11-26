@@ -8,6 +8,11 @@ class SendMail < ActionMailer::Base
     @url  = 'http://yosistemas.herokuapp.com/usuarios/confirm/'+@user.id.to_s #AESCrypt.encrypt(@user.id.to_s,"Taller")
     mail(to: @user.correo, subject: 'YoSistemas')
   end
+  def cambiar_correo(user,correo)
+    @user = user
+    @url  = 'http://yosistemas.herokuapp.com/usuarios/comfirmar_cambio_correo/'+@user.id.to_s+"/"+correo.to_s
+    mail(to: correo, subject: 'YoSistemas')
+  end
   def recover_password(user,id)
     @user=user
     @url  = 'http://yosistemas.herokuapp.com/usuarios/password_recovered/'+@user.id.to_s+"/"+id.to_s
@@ -38,5 +43,13 @@ class SendMail < ActionMailer::Base
     @user = usuario
     @user2 = usuario
     mail(to: @user.correo,subject: 'Te invito al grupo: ')
+  end
+
+  def enviar_invitaciones(usuario, destinatario, grupo)
+    @usuario=usuario
+    @grupo=grupo
+    #@url='http://localhost:3000/grupos/subscripcion_grupo/'+@grupo.id.to_s
+    @url = 'http://yosistemas.herokuapp.com/grupos/subscripcion_grupo/'+@grupo.id.to_s
+    mail(to: destinatario, subject: "Invitacion a grupo")
   end
 end

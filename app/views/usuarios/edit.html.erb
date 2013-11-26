@@ -39,6 +39,17 @@
                       <div class="col-lg-8">
                         <%= usuario.text_field :apellido, :class=>'form-control', :placeholder=>'Apellido'  %>
                       </div>
+                    </div><br><br><br>
+                    <div class="form-group">
+                        <div class="checkbox">
+                          <label class="col-lg-4 control-label">
+                          <%if @usuario.mostrar_correo %>
+                            <input type="checkbox"  checked name="mostrarcorreo"> Mostrar Correo
+                          <%else%>
+                            <input type="checkbox" name="mostrarcorreo" > Mostrar Correo
+                          <%end%>
+                          </label>
+                        </div>
                     </div>
                     <div class="form-group">
                       <div class="col-lg-10 col-lg-offset-4">

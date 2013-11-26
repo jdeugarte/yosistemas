@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Invitacion de suscricion a un grupo </h1>
+    <p>
+     El usuario <%= @usuario.nombre.upcase%>
+ 	    te invita a unirte al grupo: <%= @grupo.nombre.upcase %>.<br>
+      Para suscribirte ve al siguiente enlace.<br>
+     <a href=<%= @url %>>Suscribirse a grupo</a>
+      <br>
+      <b>Codigo de suscripcion al grupo: <%=@grupo.llave%>
+    </p>
+    <p>Staff de YoSistemas</p>
+  </body>
+</html>

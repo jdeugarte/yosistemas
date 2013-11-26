@@ -17,7 +17,7 @@ class UsuariosController < ApplicationController
     newPass=params[:contrasenia_nueva2].to_s
     @usuario=Usuario.find(params[:id_user])
       if (pass==newPass)
-        if(pass.length>5)
+        if(pass.length>5) 
         @usuario.contrasenia=Digest::MD5.hexdigest(pass)
         @usuario.solicitud_contrasenia_id=-1
         @usuario.save
@@ -38,6 +38,40 @@ class UsuariosController < ApplicationController
   end
   def cambiar_email 
    @usuario=current_user
+  end
+  def guardar_cambio_email
+    if params[:correonuevo] != "" && params[:contrasenia] != ""
+      otrousuario = Usuario.find_by(correo: params[:correonuevo])
+      encriptado=Digest::MD5.hexdigest(params[:contrasenia].to_s)
+      if otrousuario == nil
+        if  current_user.contrasenia == encriptado 
+          if(@usuario!=nil)
+            SendMail.cambiar_correo(@usuario,params[:correonuevo]).deliver
+          end
+          flash[:alert] = 'Necesita ver su correo para confirmar la operacion'
+          redirect_to root_url
+        else
+          flash[:alert] = 'El password es incorrecto'
+          redirect_to :back
+        end
+      else
+        flash[:alert] = 'El correo que ingreso ya existe'
+          redirect_to :back
+      end
+    else
+      flash[:alert] = 'Necesita llenar los campos.'
+      redirect_to :back
+    end
+  end
+  def comfirmar_cambio_correo
+    if(current_user!=nil)
+      @errorMessagge="no puede confirma el cambio de correo electronico si no esta loggeado"
+    else
+      usuario= Usuario.find(params[:id_user].to_s)
+      usuario.correo = params[:correo].to_s
+      usuario.save
+      @messagge="Correo modificado con exito.";
+    end
   end
   def forgot_password
     if(current_user!=nil)
@@ -91,6 +125,11 @@ class UsuariosController < ApplicationController
   def update
     current_user.nombre=params[:usuario][:nombre]
     current_user.apellido=params[:usuario][:apellido]
+    if variable=params[:mostrarcorreo]
+      current_user.mostrar_correo=true
+    else
+      current_user.mostrar_correo=false
+    end
     if(current_user.save)
       flash[:alert] = 'Usuario Modificado'
     else
@@ -154,6 +193,11 @@ def create
   	  params.permit!
   		@usuario = Usuario.new(params[:usuario])
       @usuario.rol=params[:rol]
+      if variable=params[:mostrarcorreo]
+        @usuario.mostrar_correo=true
+      else
+        @usuario.mostrar_correo=false
+      end
   		if @usuario.save
         redirect_to root_url
         SendMail.activate_acount(@usuario).deliver

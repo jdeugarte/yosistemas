@@ -1,12 +1,25 @@
+<%= render :layout => 'layouts/groups_layout' do%>
 <h1>Lista de Cuestionarios</h1>
 <br>
 <br>
 <div class="row bs-example bs-example-type">
    <div class="col-lg-1">
   </div>
-  <div class="col-lg-6">
+  <div class="col-lg-10">
     <% @cuestionarios.each do |cuestionario| %>
-        <div class="well">
+          
+            <div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="<%= collapse = "#collapse" + cuestionario.titulo %>">
+         <%= cuestionario.titulo%>
+        </a>
+      </h4>
+    </div>
+    <div id="<%= collapse = "collapse" + cuestionario.titulo %>" class="panel-collapse collapse in">
+      <div class="panel-body">
+                        <div class="well">
           <div class="row">
         <div class="col-lg-8">
           <br>
@@ -47,18 +60,26 @@
                         </tbody>
                   </table>
         </div>
-        <div class="col-lg-3">
+         <% if (current_user.rol == "Docente")%>
+                  <div class="col-lg-3">
         </br>
-                    <form class="navbar-form navbar-left" method="get" action=<%= edit_cuestionario_path(cuestionario)%>>
-                      <button type="submit" class="btn btn-primary">Editar Cuestionario</button>
-                    </form>
-                    <form class="navbar-form navbar-left" method="get" action=<%=borrar_cuestionario_path(cuestionario.id)%> data-confirm="Se eliminara el cuestionario, ¿está seguro?" data-method="delete" >
-                      <button type="submit" class="btn btn-primary">Eliminar Cuestionario</button>
-                    </form>
-        </div>
+                          <form class="navbar-form navbar-left" method="get" action=<%= edit_cuestionario_path(cuestionario)%>>
+                            <button type="submit" class="btn btn-primary">Editar Cuestionario</button>
+                          </form>
+                          <form class="navbar-form navbar-left" method="get" action=<%=borrar_cuestionario_path(cuestionario.id)%> data-confirm="Se eliminara el cuestionario, ¿está seguro?" data-method="delete" >
+                            <button type="submit" class="btn btn-primary">Eliminar Cuestionario</button>
+                          </form>
+                 </div>
+                 <%end%>
          </div>
         </div>
+      </div>
+    </div>
+  </div>
     <% end %>
   </div>
   </div>
-<%= link_to "Atras", mis_grupos_path %>
+  <%end%>
+  <% if (current_user.rol == "Docente")%>
+<%= link_to "Atras", mis_grupos_path %> 
+<%end%>

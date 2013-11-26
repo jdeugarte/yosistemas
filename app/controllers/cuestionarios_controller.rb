@@ -35,6 +35,7 @@ class CuestionariosController < ApplicationController
 
   private
     def cuestionario_params
+      params.permit!
       params.require(:cuestionario).permit(:titulo, :descripcion, :fecha_limite, :estado, :grupo_id, :usuario_id)
     end
 end

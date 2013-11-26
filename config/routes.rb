@@ -16,8 +16,11 @@ Yosistemas::Application.routes.draw do
   get "usuarios/edit" => "usuarios#edit", :as=>"usuario_edit"
   get "usuarios/cambiar_email" => "usuarios#cambiar_email", :as=>"usuario_cambiar_email"
   post "usuarios/edit_password" => "usuarios#edit_password", :as=> "edit_password"
+  
+  post "usuarios/guardar_cambio_email" => "usuarios#guardar_cambio_email", :as=> "guardar_cambio_email"
   get 'usuarios/password_recovered/:id_user/:id_request' => 'usuarios#recover', :as => 'recover'
   post "usuarios/password_recovered/:id_user/:id_request" => "usuarios#password_recovered", :as=> "password_recovered"
+  get 'usuarios/comfirmar_cambio_correo/:id_user/:correo' => 'usuarios#comfirmar_cambio_correo', :as => 'confirmar_cambio_correo'
   post "usuarios/send_password_mail" => "usuarios#send_password_mail", :as => "send_password_mail"
   get "usuarios/send_password_mail" => "usuarios#forgot_password", :as => "forgot_password"
   #rutas de temas
@@ -46,6 +49,7 @@ Yosistemas::Application.routes.draw do
   get "grupos/:id/temas"  => "temas#index", :as=> 'filtrar_temas'
   get "grupos/:id/temas-y-tareas"  => "temas_y_tareas#index", :as=> 'temas_y_tareas'
   get 'grupos/invitacion_grupo/:id' => 'grupos#invitacion_grupo', :as => 'invitacion_grupo'
+  post 'grupos/enviar_invitaciones/:id' => 'grupos#enviar_invitaciones', :as => 'enviar_invitaciones'
   #rutas de tareas
   get 'tareas/new/:id' => 'tareas#new', :as => 'tarea_para_grupo'
   get 'tareas/eliminar/:id' => 'tareas#eliminar'
@@ -63,6 +67,8 @@ Yosistemas::Application.routes.draw do
   get "cuestionarios/nuevo_cuestionario/:id" => "cuestionarios#nuevo_cuestionario", :as => 'nuevo_cuestionario'
   get "cuestionarios/cuestionarios_de_grupo_index/:id" => "cuestionarios#cuestionarios_de_grupo_index", :as => 'cuestionarios_de_grupo_index'
   get "cuestionarios/delete/:id" => "cuestionarios#delete", :as => 'borrar_cuestionario'
+
+  post "mensajes/enviar" => "mensajes#enviar", as: 'enviar_mensaje'
   resources :usuarios , except: [:destroy] do
     resources :tema_comentarios, only: [:create]
   end

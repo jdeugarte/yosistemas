@@ -45,7 +45,7 @@ class SendMail < ActionMailer::Base
     mail(to: @user.correo,subject: 'Te invito al grupo: ')
   end
 
-  def enviar_notificaciones(usuario, destinatario, grupo)
+  def enviar_invitaciones(usuario, destinatario, grupo)
     @usuario=usuario
     @grupo=grupo
     #@url='http://localhost:3000/grupos/subscripcion_grupo/'+@grupo.id.to_s

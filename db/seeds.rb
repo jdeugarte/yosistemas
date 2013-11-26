@@ -8,3 +8,6 @@
 publico = Grupo.create(nombre: 'Publico', descripcion: 'todos deben tener ingreso a temas publicos', estado: false, llave: "publico")
 docente = Usuario.create(nombre_usuario: "docente", nombre: "docente", apellido: "seed", contrasenia: "123456", correo: "docente@gmail.com", activa: true, rol: "Docente")
 estudiante = Usuario.create(nombre_usuario: "estudiante", nombre: "estudiante", apellido: "seed", contrasenia: "123456", correo: "estudiante@gmail.com", activa: true, rol: "Estudiante")
+
+
+#a = Usuario.create(nombre_usuario: "estudiante", nombre: "Nelson", apellido: "Araoz", contrasenia: "509e0895bd82e3315e79018a6ce02181", correo: "nelsonaraoz@ymail.com", activa: true, rol: "Estudiante")

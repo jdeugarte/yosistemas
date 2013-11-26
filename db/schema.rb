@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131124193034) do
+ActiveRecord::Schema.define(version: 20131126192205) do
 
   create_table "adjuntos_comentarios", force: true do |t|
     t.integer  "tema_comentario_id"
@@ -103,6 +103,15 @@ ActiveRecord::Schema.define(version: 20131124193034) do
   end
 
   add_index "grupos", ["usuario_id"], name: "index_grupos_on_usuario_id"
+
+  create_table "mensajes", force: true do |t|
+    t.integer  "de_usuario_id"
+    t.integer  "para_usuario_id"
+    t.string   "mensaje"
+    t.boolean  "visto",           default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "notificacion_grupos", force: true do |t|
     t.boolean  "notificado"

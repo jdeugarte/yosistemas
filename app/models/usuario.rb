@@ -1,6 +1,8 @@
 class Usuario < ActiveRecord::Base
 require 'digest/md5'
 
+	has_many :mensajes_recibidos, class_name:'Mensaje',inverse_of: :de_usuario
+	has_many :mensajes_enviados, class_name:'Mensaje',inverse_of: :para_usuario
 	has_many :temas
 	has_many :tema_comentarios	
 	has_many :subscripcions

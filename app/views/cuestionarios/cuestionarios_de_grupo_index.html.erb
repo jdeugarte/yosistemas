@@ -1,10 +1,11 @@
+<%= render :layout => 'layouts/groups_layout' do%>
 <h1>Lista de Cuestionarios</h1>
 <br>
 <br>
 <div class="row bs-example bs-example-type">
    <div class="col-lg-1">
   </div>
-  <div class="col-lg-6">
+  <div class="col-lg-10">
     <% @cuestionarios.each do |cuestionario| %>
           
             <div class="panel-group" id="accordion">
@@ -59,6 +60,7 @@
                         </tbody>
                   </table>
         </div>
+         <% if (current_user.rol == "Docente")%>
                   <div class="col-lg-3">
         </br>
                           <form class="navbar-form navbar-left" method="get" action=<%= edit_cuestionario_path(cuestionario)%>>
@@ -68,6 +70,7 @@
                             <button type="submit" class="btn btn-primary">Eliminar Cuestionario</button>
                           </form>
                  </div>
+                 <%end%>
          </div>
         </div>
       </div>
@@ -76,4 +79,7 @@
     <% end %>
   </div>
   </div>
-<%= link_to "Atras", mis_grupos_path %>
+  <%end%>
+  <% if (current_user.rol == "Docente")%>
+<%= link_to "Atras", mis_grupos_path %> 
+<%end%>

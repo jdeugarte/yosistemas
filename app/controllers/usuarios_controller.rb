@@ -43,6 +43,7 @@ class UsuariosController < ApplicationController
     if(@usuario!=nil)
       SendMail.cambiar_correo(@usuario).deliver
     end
+    redirect_to root_url
   end
   def comfirmar_cambio_correo
     if(current_user!=nil)
@@ -171,7 +172,11 @@ def create
   	  params.permit!
   		@usuario = Usuario.new(params[:usuario])
       @usuario.rol=params[:rol]
-      @usuario.mostrar_correo = false
+      if variable=params[:mostrarcorreo]
+        @usuario.mostrar_correo=true
+      else
+        @usuario.mostrar_correo=false
+      end
   		if @usuario.save
         redirect_to root_url
         SendMail.activate_acount(@usuario).deliver

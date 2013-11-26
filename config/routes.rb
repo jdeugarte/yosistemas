@@ -15,9 +15,9 @@ Yosistemas::Application.routes.draw do
   get "usuarios/update_password" => "usuarios#update_password", :as=>"update_password"
   get "usuarios/edit" => "usuarios#edit", :as=>"usuario_edit"
   get "usuarios/cambiar_email" => "usuarios#cambiar_email", :as=>"usuario_cambiar_email"
-  get "usuarios/guardar_cambio_email" => "usuarios#guardar_cambio_email", :as=>"guardar_cambio_email"
-
   post "usuarios/edit_password" => "usuarios#edit_password", :as=> "edit_password"
+  
+  post "usuarios/guardar_cambio_email" => "usuarios#guardar_cambio_email", :as=> "guardar_cambio_email"
   get 'usuarios/password_recovered/:id_user/:id_request' => 'usuarios#recover', :as => 'recover'
   post "usuarios/password_recovered/:id_user/:id_request" => "usuarios#password_recovered", :as=> "password_recovered"
   post "usuarios/send_password_mail" => "usuarios#send_password_mail", :as => "send_password_mail"

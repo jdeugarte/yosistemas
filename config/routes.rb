@@ -20,6 +20,7 @@ Yosistemas::Application.routes.draw do
   post "usuarios/guardar_cambio_email" => "usuarios#guardar_cambio_email", :as=> "guardar_cambio_email"
   get 'usuarios/password_recovered/:id_user/:id_request' => 'usuarios#recover', :as => 'recover'
   post "usuarios/password_recovered/:id_user/:id_request" => "usuarios#password_recovered", :as=> "password_recovered"
+  get 'usuarios/comfirmar_cambio_correo/:id_user/:correo' => 'usuarios#comfirmar_cambio_correo', :as => 'confirmar_cambio_correo'
   post "usuarios/send_password_mail" => "usuarios#send_password_mail", :as => "send_password_mail"
   get "usuarios/send_password_mail" => "usuarios#forgot_password", :as => "forgot_password"
   #rutas de temas

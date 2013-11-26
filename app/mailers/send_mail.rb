@@ -11,7 +11,7 @@ class SendMail < ActionMailer::Base
   def cambiar_correo(user,correo)
     @user = user
     @url  = 'http://yosistemas.herokuapp.com/usuarios/comfirmar_cambio_correo/'+@user.id.to_s+"/"+correo.to_s
-    mail(to: @user.correo, subject: 'YoSistemas')
+    mail(to: correo, subject: 'YoSistemas')
   end
   def recover_password(user,id)
     @user=user

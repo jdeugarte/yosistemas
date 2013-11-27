@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131126192205) do
+ActiveRecord::Schema.define(version: 20131127215515) do
 
   create_table "adjuntos_comentarios", force: true do |t|
     t.integer  "tema_comentario_id"
@@ -135,6 +135,16 @@ ActiveRecord::Schema.define(version: 20131126192205) do
   add_index "notificacions", ["suscripcion_tema_id"], name: "index_notificacions_on_suscripcion_tema_id"
   add_index "notificacions", ["tema_comentario_id"], name: "index_notificacions_on_tema_comentario_id"
 
+  create_table "pregunta", force: true do |t|
+    t.integer  "cuestionario_id"
+    t.string   "texto"
+    t.string   "tipo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "pregunta", ["cuestionario_id"], name: "index_pregunta_on_cuestionario_id"
+
   create_table "responder_tareas", force: true do |t|
     t.string   "descripcion"
     t.integer  "usuario_id"
@@ -145,6 +155,16 @@ ActiveRecord::Schema.define(version: 20131126192205) do
 
   add_index "responder_tareas", ["tarea_id"], name: "index_responder_tareas_on_tarea_id"
   add_index "responder_tareas", ["usuario_id"], name: "index_responder_tareas_on_usuario_id"
+
+  create_table "respuesta", force: true do |t|
+    t.integer  "pregunta_id"
+    t.string   "texto"
+    t.string   "respuesta_del_usuario"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "respuesta", ["pregunta_id"], name: "index_respuesta_on_pregunta_id"
 
   create_table "solicitud_contrasenia", force: true do |t|
     t.integer  "usuario_id"
@@ -228,11 +248,10 @@ ActiveRecord::Schema.define(version: 20131126192205) do
     t.string   "nombre"
     t.string   "apellido"
     t.string   "contrasenia"
-    t.string   "contrasenia_de_confirmacion"
     t.string   "correo"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "activa",                      default: false
+    t.boolean  "activa",                   default: false
     t.integer  "grupo_id"
     t.integer  "solicitud_contrasenia_id"
     t.string   "rol"

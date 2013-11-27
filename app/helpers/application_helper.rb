@@ -23,4 +23,16 @@ module ApplicationHelper
   		end
   		subscrpciones
   	end
+
+    def usuarios_conectados()
+      Usuario.all
+    end
+
+    def todos_los_usuarios()
+      array_nombres_de_usuario =Array.new
+      Usuario.all.each do |usuario|
+        array_nombres_de_usuario << usuario.nombre_usuario
+      end
+      array_nombres_de_usuario
+    end
 end

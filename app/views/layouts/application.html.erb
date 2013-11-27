@@ -36,8 +36,21 @@
   <!-- Cuerpo de la pagina -->
   <div class="row">
     <!--Espacio Vacio del Lateral izquierdo.-->
-    <div class="col-sm-12 col-md-9 col-lg-11 col-md-offset-1 col-md-offset-1">
+    <div class="col-sm-1 col-md-1 col-lg-1"></div>
+    <div class="col-sm-9 col-md-9 col-lg-9">
       <%= yield %>
+    </div>
+    <div class="col-sm-2 col-md-2 col-lg-2 hidden-phone">
+      <ul class="list-group" style="height:100%; width:16.7%; position:fixed; top:184px; right:5px; background-color:white;">
+      <% usuarios_conectados.each do |usuario| %>
+        <li class="list-group-item" style="cursor:pointer;" onmouseover="this.style.background='#F7F7F7';" onmouseout="this.style.background='white';">
+        <a>
+          <span class="badge">2</span>
+          <b><%=usuario.nombre_usuario%></b>
+        </a>
+        </li>
+      <%end%>
+      </ul>
     </div>
   </div>
       <!-- Pie de Pagina -->

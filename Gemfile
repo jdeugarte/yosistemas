@@ -50,6 +50,8 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem "nested_form"
+
 #gem 'rails_12factor', group: :production
 
 # Use ActiveModel has_secure_password

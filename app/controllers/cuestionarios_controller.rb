@@ -8,6 +8,7 @@ class CuestionariosController < ApplicationController
 	def nuevo_cuestionario
 		@cuestionario = Cuestionario.new
 		@grupo = Grupo.find(params[:id])
+		@cuestionarios = Cuestionario.buscar_cuestionarios(@grupo)
 	end
 
 	def edit

@@ -248,10 +248,11 @@ ActiveRecord::Schema.define(version: 20131128182232) do
     t.string   "nombre"
     t.string   "apellido"
     t.string   "contrasenia"
+    t.string   "contrasenia_de_confirmacion"
     t.string   "correo"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "activa",                   default: false
+    t.boolean  "activa",                      default: false
     t.integer  "grupo_id"
     t.integer  "solicitud_contrasenia_id"
     t.string   "rol"

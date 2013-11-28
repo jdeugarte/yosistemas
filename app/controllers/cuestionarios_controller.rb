@@ -13,6 +13,8 @@ class CuestionariosController < ApplicationController
 
 	def edit
 		@cuestionario = Cuestionario.find(params[:id])
+		@grupo = Grupo.find(params[:id])
+		@cuestionarios = Cuestionario.buscar_cuestionarios(@grupo)
 	end
 
 	def create
@@ -32,6 +34,13 @@ class CuestionariosController < ApplicationController
 		@cuestionario = Cuestionario.find(params[:id])
     	@cuestionario.destroy
     	redirect_to mis_grupos_path
+  	end
+
+  	def usar_plantilla
+  		@cuestionario_plantilla = Cuestionario.find(params[:id])
+  		@cuestionario=@cuestionario_plantilla.clone
+  		@grupo = Grupo.find(@cuestionario_plantilla.grupo_id)
+  		redirect_to '/cuestionarios/'+@cuestionario.id.to_s+'/edit'
   	end
 
   private

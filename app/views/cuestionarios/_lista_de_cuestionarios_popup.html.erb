@@ -13,9 +13,18 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="<%= "#collapse" + cuestionario.id.to_s %>">
-         <%= cuestionario.titulo%>
-        </a>
+        <div class="row">
+          <div class="col-lg-4">
+            <a data-toggle="collapse" data-parent="#accordion" href="<%= "#collapse" + cuestionario.id.to_s %>">
+              <%= cuestionario.titulo%>
+          </a>
+        </div>
+        <div class="col-lg-4 col-lg-offset-4">
+          <a  href="<%= "/cuestionarios/usar_plantilla/" + cuestionario.id.to_s %>">
+             Usar Cuestionario
+           </a>
+       </div>
+       </div>
       </h4>
     </div>
     <div id="<%= "collapse" + cuestionario.id.to_s%>" class="panel-collapse collapse in">

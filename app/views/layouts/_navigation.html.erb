@@ -119,16 +119,15 @@ function changeSrc()
           <span class="badge"><%=mensajes_nuevos.size%></span>
         <%end%>
         </a>
-        <ul class="dropdown-menu">          
-           <li><a href="#myModal" role="button" class="btn" data-toggle="modal">Enviar Mensaje</a></li>                        
-        <% mensajes_nuevos.each do |mensaje|%>          
-            <li><a href="#" role="button" class="btn" data-toggle="modal"><%=Usuario.find(mensaje.de_usuario_id).nombre%></a></li>              
+        <ul class="dropdown-menu">
+           <li><a href="#myModal" role="button" class="btn" data-toggle="modal">Enviar Mensaje</a></li>
+        <% mensajes_nuevos.each do |mensaje|%>
+            <li><a href="#" role="button" class="btn" data-toggle="modal"><%=Usuario.find(mensaje.de_usuario_id).nombre%></a></li>
         <%end%>
         </ul>
       </li>
       <% end %>
     </ul>
-
     <%if current_user.nil?%>
       <form class="navbar-form navbar-right" method="get" action=<%=register_path%>  >
         <button type="submit" id="Registrarse" class="btn btn-primary" name="Registrarse">Registrarse</button>
@@ -161,8 +160,6 @@ function changeSrc()
     <%end%>
   </div><!-- /.navbar-collapse -->
 </nav>
-
-
 <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
       <div class="modal-content">
@@ -184,7 +181,7 @@ function changeSrc()
                   <div class="form-group">
                     <label for="password" class="col-lg-2 control-label">Mensaje:</label>
                     <div class="col-lg-9">
-                    <textarea name="mensaje" class="form-control" placeholder="Mensaje...." style="resize:none;" rows="9" maxlength="500" required></textarea>                    
+                    <textarea name="mensaje" class="form-control" placeholder="Mensaje...." style="resize:none;" rows="9" maxlength="500" required></textarea>
                     </div>
                   </div>
                 </fieldset>

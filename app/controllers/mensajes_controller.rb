@@ -1,4 +1,4 @@
-class MensajesController < ApplicationController  
+class MensajesController < ApplicationController
 	skip_before_filter :verify_authenticity_token
   def enviar
   	para=Usuario.find_by_nombre_usuario(params[:para].to_s)
@@ -14,4 +14,3 @@ class MensajesController < ApplicationController
 	end
   	redirect_to :back
   end
-end

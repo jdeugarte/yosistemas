@@ -16,7 +16,6 @@ Yosistemas::Application.routes.draw do
   get "usuarios/edit" => "usuarios#edit", :as=>"usuario_edit"
   get "usuarios/cambiar_email" => "usuarios#cambiar_email", :as=>"usuario_cambiar_email"
   post "usuarios/edit_password" => "usuarios#edit_password", :as=> "edit_password"
-  
   post "usuarios/guardar_cambio_email" => "usuarios#guardar_cambio_email", :as=> "guardar_cambio_email"
   get 'usuarios/password_recovered/:id_user/:id_request' => 'usuarios#recover', :as => 'recover'
   post "usuarios/password_recovered/:id_user/:id_request" => "usuarios#password_recovered", :as=> "password_recovered"
@@ -68,7 +67,7 @@ Yosistemas::Application.routes.draw do
   get "cuestionarios/cuestionarios_de_grupo_index/:id" => "cuestionarios#cuestionarios_de_grupo_index", :as => 'cuestionarios_de_grupo_index'
   get "cuestionarios/delete/:id" => "cuestionarios#delete", :as => 'borrar_cuestionario'
   get "cuestionarios/usar_plantilla/:id" => "cuestionarios#usar_plantilla"
-
+  #mensajes
   post "mensajes/enviar" => "mensajes#enviar", as: 'enviar_mensaje'
   resources :usuarios , except: [:destroy] do
     resources :tema_comentarios, only: [:create]

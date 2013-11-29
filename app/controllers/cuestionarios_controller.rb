@@ -55,8 +55,8 @@ class CuestionariosController < ApplicationController
    			contador=0
    			pregunta.respuestas.each do |respuesta|
    				if(respuesta.respuesta_correcta)
-   					contador+=1 
-   				end  			
+   					contador+=1
+   				end
    			end
    			if(contador==1)
    				pregunta.tipo="Respuesta unica"

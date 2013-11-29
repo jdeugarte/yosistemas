@@ -33,6 +33,8 @@ class TareasController < ApplicationController
       end
   end
   
+  #GET tareas/cargar_tareas
+ 
 
   def mostrar_respuesta_tarea
     @respuesta_tarea=ResponderTarea.find(params[:id])
@@ -73,6 +75,25 @@ class TareasController < ApplicationController
       end
     else
       redirect_to tareas_path
+    end
+  end
+
+  def cargar_datos_tarea
+    @tarea_antigua = Tarea.find(params[:id_tarea])
+    @tarea=Tarea.new
+    @tarea.titulo=@tarea_antigua.titulo
+    @tarea.descripcion=@tarea_antigua.descripcion
+    @tarea.fecha_entrega=@tarea_antigua.fecha_entrega
+    @tarea.hora_entrega=@tarea_antigua.hora_entrega
+    @tarea.grupo_id=@tarea_antigua.grupo_id
+    @tarea.usuario_id=@tarea_antigua.usuario_id
+    @grupos = Array.new
+    if(current_user!=nil)
+      current_user.subscripcions.each do |subs|
+        @grupos.push(subs.grupo)
+      end
+      @grupo = Grupo.find(params[:id])
+      @id = @tarea.grupo_id
     end
   end
 
@@ -121,6 +142,11 @@ class TareasController < ApplicationController
       redirect_to temas_path
     end
   end
+
+ def ver_tareas
+    @tareas=  Tarea.where(:usuario_id => current_user.id).order("updated_at DESC")
+  end
+
   def update
     @tarea = Tarea.find(params[:id])
     if(@tarea.update(params[:tarea].permit(:titulo,:descripcion,:fecha_entrega,:grupo_id,:hora_entrega)))

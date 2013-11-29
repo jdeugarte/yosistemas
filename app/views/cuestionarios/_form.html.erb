@@ -29,32 +29,9 @@
                     <%= f.hidden_field :usuario_id, :value => @current_user.id, :readonly => true %>
                   </div>
                   <div class="col-lg-12 col-lg-offset-2">
-                    <%= f.fields_for :preguntas do |preguntas_form| %>
+                    <%= f.fields_for :preguntas do |builder| %>
                       <div class="panel panel-info">
-                        <div class="panel-heading">Nueva Pregunta</div>
-                        <div class="panel-body">
-                          <div class="form-group">
-                            <label for="inputTitle" class="col-lg-2 control-label">Pregunta:</label>
-                            <div class="col-lg-10">
-                                <%= preguntas_form.text_field :texto, :class=>'form-control', :placeholder=>'Pregunta', :maxlength => 50, :required => true, :title => "El titulo del cuestionario es obligatorio, Por favor rellene este campo" %>
-                            </div>
-                          </div>
-                          <div class="form-group nested_fields">
-                            <label for="inputTitle" class="col-lg-2 control-label ">Tipo de respuesta:</label>
-                            <div class="col-lg-10 nested_fields">
-                                <%=preguntas_form.select :tipo, ['Seleccion Multiple','Seleccion Unica','Respuesta libre'], :class=>'form-control' %>
-                                
-                            </div>
-                          </div>
-                          <% f.fields_for :answers do |builder| %>
-                            <%= render 'campo_de_respuesta', :f => builder %>
-                          <% end %>
-                          <div class="form-group">
-                            <div class="col-lg-10">
-                               <%= preguntas_form.link_to_remove "Eliminar Pregunta", :class=>"btn btn-warning" %>
-                            </div>
-                          </div>
-                       
+                        <%= render 'campo_de_pregunta', :preguntas_form=> builder %>
                       <% end %>
                         <div class="form-group">
                             <div class="col-lg-10 ">

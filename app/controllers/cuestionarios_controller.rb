@@ -21,6 +21,7 @@ class CuestionariosController < ApplicationController
 		@cuestionario = Cuestionario.new(cuestionario_params)
 		@cuestionario.estado = true
 		@cuestionario.save
+		definir_tipo_de_pregunta(@cuestionario)
 		redirect_to mis_grupos_path
 	end
 
@@ -46,6 +47,24 @@ class CuestionariosController < ApplicationController
   private
     def cuestionario_params
       params.permit!
-      params.require(:cuestionario).permit(:titulo, :descripcion, :fecha_limite, :estado, :grupo_id, :usuario_id, preguntas_attributes: [:id, :texto, :_destroy, respuestas_attributes: [:id, :texto, :_destroy]])
+      params.require(:cuestionario).permit(:titulo, :descripcion, :fecha_limite, :estado, :grupo_id, :usuario_id, preguntas_attributes: [:id, :texto, :_destroy, respuestas_attributes: [:id, :texto, :respuesta_correcta, :_destroy]])
     end
+
+   	def definir_tipo_de_pregunta(cuestionario)
+   		cuestionario.preguntas.each do |pregunta|
+   			contador=0
+   			pregunta.respuestas.each do |respuesta|
+   				if(respuesta.respuesta_correcta)
+   					contador+=1 
+   				end  			
+   			end
+   			if(contador==1)
+   				pregunta.tipo="Respuesta unica"
+   			else
+   				pregunta.tipo="Respuesta multiple"
+   			end
+   			pregunta.save
+   		end
+   		cuestionario.save
+   	end
 end

@@ -67,6 +67,7 @@ Yosistemas::Application.routes.draw do
   get "cuestionarios/nuevo_cuestionario/:id" => "cuestionarios#nuevo_cuestionario", :as => 'nuevo_cuestionario'
   get "cuestionarios/cuestionarios_de_grupo_index/:id" => "cuestionarios#cuestionarios_de_grupo_index", :as => 'cuestionarios_de_grupo_index'
   get "cuestionarios/delete/:id" => "cuestionarios#delete", :as => 'borrar_cuestionario'
+  get "cuestionarios/usar_plantilla/:id" => "cuestionarios#usar_plantilla"
 
   post "mensajes/enviar" => "mensajes#enviar", as: 'enviar_mensaje'
   resources :usuarios , except: [:destroy] do

@@ -7,8 +7,7 @@
   </div>
   <div class="col-lg-10">
     <% @cuestionarios.each do |cuestionario| %>
-          
-            <div class="panel-group" id="accordion">
+  <div class="panel-group" id="accordion">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
@@ -81,5 +80,5 @@
   </div>
   <%end%>
   <% if (current_user.rol == "Docente")%>
-<%= link_to "Atras", mis_grupos_path %> 
-<%end%>
+    <%= link_to "Atras", mis_grupos_path %>
+  <%end%>

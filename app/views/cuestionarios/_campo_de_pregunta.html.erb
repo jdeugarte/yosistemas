@@ -1,0 +1,21 @@
+<div class="panel-heading">Nueva Pregunta</div>
+  <div class="panel-body">
+    <div class="form-group">
+      <label for="inputTitle" class="col-lg-2 control-label">Pregunta:</label>
+        <div class="col-lg-10">
+          <%= preguntas_form.text_field :texto, :class=>'form-control', :placeholder=>'Pregunta', :maxlength => 50 %>
+        </div>
+    </div>
+        <% preguntas_form.fields_for :respuestas do |builder| %>
+          <%= render 'campo_de_respuesta', :respuestas_form=> builder %>
+        <% end %>
+    <div class="form-group">
+      <div class="col-lg-10 ">
+        <%= preguntas_form.link_to_add "Agregar Respuesta", :respuestas, :class=>"btn btn-success" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-10">
+        <%= preguntas_form.link_to_remove "Eliminar Pregunta", :class=>"btn btn-warning" %>
+      </div>
+    </div>

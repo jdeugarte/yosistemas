@@ -29,32 +29,9 @@
                     <%= f.hidden_field :usuario_id, :value => @current_user.id, :readonly => true %>
                   </div>
                   <div class="col-lg-12 col-lg-offset-2">
-                    <%= f.fields_for :preguntas do |preguntas_form| %>
+                    <%= f.fields_for :preguntas do |builder| %>
                       <div class="panel panel-info">
-                        <div class="panel-heading">Nueva Pregunta</div>
-                        <div class="panel-body">
-                          <div class="form-group">
-                            <label for="inputTitle" class="col-lg-2 control-label">Pregunta:</label>
-                            <div class="col-lg-10">
-                                <%= preguntas_form.text_field :texto, :class=>'form-control', :placeholder=>'Pregunta', :maxlength => 50, :required => true, :title => "El titulo del cuestionario es obligatorio, Por favor rellene este campo" %>
-                            </div>
-                          </div>
-                          <div class="form-group nested_fields">
-                            <label for="inputTitle" class="col-lg-2 control-label ">Tipo de respuesta:</label>
-                            <div class="col-lg-10 nested_fields">
-                                <%=preguntas_form.select :tipo, ['Seleccion Multiple','Seleccion Unica','Respuesta libre'], :class=>'form-control' %>
-                                
-                            </div>
-                          </div>
-                          <% f.fields_for :answers do |builder| %>
-                            <%= render 'campo_de_respuesta', :f => builder %>
-                          <% end %>
-                          <div class="form-group">
-                            <div class="col-lg-10">
-                               <%= preguntas_form.link_to_remove "Eliminar Pregunta", :class=>"btn btn-warning" %>
-                            </div>
-                          </div>
-                       
+                        <%= render 'campo_de_pregunta', :preguntas_form=> builder %>
                       <% end %>
                         <div class="form-group">
                             <div class="col-lg-10 ">
@@ -68,12 +45,6 @@
                     <div class="col-lg-4 col-lg-offset-2">
                       <input type="submit" value="Crear cuestionario" class="btn btn-primary">
                     </div>
-                    <div class="col-lg-4 col-lg-offset-2">
-                      <button class="btn btn-primary " data-toggle="modal" data-target="#myModal2">
-                      Cargar Cuestionario
-                    </button>
-                    </div>
-                    
                   </div>
 
                 </fieldset>
@@ -84,21 +55,4 @@
 <% end %>
 
 
-<!-- Modal -->
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Lista de Cuestionarios Existentes</h4>
-      </div>
-      <div class="modal-body">
-            <%= render 'lista_de_cuestionarios_popup' %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131128182232) do
+ActiveRecord::Schema.define(version: 20131129161415) do
 
   create_table "adjuntos_comentarios", force: true do |t|
     t.integer  "tema_comentario_id"
@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(version: 20131128182232) do
     t.string   "respuesta_del_usuario"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "respuesta_correcta"
   end
 
   add_index "respuestas", ["pregunta_id"], name: "index_respuestas_on_pregunta_id"

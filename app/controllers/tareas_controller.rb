@@ -2,9 +2,7 @@ class TareasController < ApplicationController
   #GET tareas
   def index
     if(params[:grupo]!="1" && current_user.esta_subscrito?((params[:grupo])))
-
       @tareas = Tarea.where(:grupo_id => params[:grupo]).order("updated_at DESC")
-
       @grupo = Grupo.find(params[:grupo])
     else
       redirect_to temas_path
@@ -32,9 +30,6 @@ class TareasController < ApplicationController
        redirect_to root_path
       end
   end
-  
-  #GET tareas/cargar_tareas
- 
 
   def mostrar_respuesta_tarea
     @respuesta_tarea=ResponderTarea.find(params[:id])
@@ -104,7 +99,6 @@ class TareasController < ApplicationController
         @tarea.destroy
         flash[:alert] = 'Tarea eliminada'
       end
-
       redirect_to '/grupos/'+@grupo.id.to_s+'/tareas'
     end
 

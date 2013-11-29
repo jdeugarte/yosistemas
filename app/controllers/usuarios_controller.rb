@@ -8,6 +8,7 @@ class UsuariosController < ApplicationController
   def show
     @usuario=Usuario.find(params[:id])
   end
+
   def password_recovered
       if(current_user!=nil)
           redirect_to root_url
@@ -17,7 +18,7 @@ class UsuariosController < ApplicationController
     newPass=params[:contrasenia_nueva2].to_s
     @usuario=Usuario.find(params[:id_user])
       if (pass==newPass)
-        if(pass.length>5) 
+        if(pass.length>5)
         @usuario.contrasenia=Digest::MD5.hexdigest(pass)
         @usuario.solicitud_contrasenia_id=-1
         @usuario.save
@@ -36,7 +37,7 @@ class UsuariosController < ApplicationController
   def edit
 	 @usuario=current_user
   end
-  def cambiar_email 
+  def cambiar_email
    @usuario=current_user
   end
   def guardar_cambio_email
@@ -44,7 +45,7 @@ class UsuariosController < ApplicationController
       otrousuario = Usuario.find_by(correo: params[:correonuevo])
       encriptado=Digest::MD5.hexdigest(params[:contrasenia].to_s)
       if otrousuario == nil
-        if  current_user.contrasenia == encriptado 
+        if  current_user.contrasenia == encriptado
           if(@usuario!=nil)
             SendMail.cambiar_correo(@usuario,params[:correonuevo]).deliver
           end

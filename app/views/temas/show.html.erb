@@ -6,10 +6,10 @@
           <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-3">
                 <div>
-                  <%= image_tag avatar_tam_url(@tema.usuario,110), :onmouseover => "dentro(this);"%>
+                  <h2 style="margin-top:0px;"><%= link_to @tema.usuario.nombre_usuario,  @tema.usuario %></h2>
                 </div>
                 <div>
-                  <sub><%= @tema.usuario_nombre_usuario%></sub>
+                  <%= image_tag avatar_tam_url(@tema.usuario,110), :onmouseover => "dentro(this);"%>
                 </div>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-9">
@@ -111,7 +111,7 @@
 	  	<%= image_tag avatar_tam_url(comentario.usuario,70) %>
 	  </a>
 	  <div class="media-body">
-	    <h4 class="media-heading"><%=comentario.usuario.nombre_usuario%></h4>
+	    <h4 class="media-heading"><%= link_to comentario.usuario.nombre_usuario,  comentario.usuario %></h4>
 	    <%=comentario.cuerpo%>
 	    <br>
 	    <%if current_user!=nil && comentario.usuario.correo == current_user.correo%>

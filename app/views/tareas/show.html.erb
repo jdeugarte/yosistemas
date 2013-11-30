@@ -5,7 +5,7 @@
           <div class="row">
             <div class="col-lg-2 col-md-2 col-sm-2" style="margin-right: 25px;">
                 <div>
-                  <h2 style="margin-top:0px;"><%= @tarea.usuario_nombre_usuario%></h2>
+                  <h2 style="margin-top:0px;"><%= link_to @tarea.usuario.nombre_usuario,  @tarea.usuario %></h2>
                 </div>
                 <div>
                   <%= image_tag avatar_tam_url(@tarea.usuario,80) %>
@@ -81,7 +81,7 @@
       <% @tareas_enviadas.each do |tarea_enviada| %>
           <tr style='cursor:pointer' onclick=<%="document.location.href='/tareas/mostrar_respuesta_tarea/"+tarea_enviada.id.to_s+"'"%>>
             <td>
-              <FONT FACE="raro, courier" SIZE=3 COLOR="black"> <%= tarea_enviada.usuario.nombre_usuario[0..10]+"..." %> </FONT>
+              <FONT FACE="raro, courier" SIZE=3 COLOR="black"> <%= link_to tarea_enviada.usuario.nombre_usuario,  tarea_enviada.usuario %></FONT>
             </td>
             <td><%= tarea_enviada.descripcion[0..10]+"..." %></td>
             <td><%= tarea_enviada.created_at.strftime("%e-%m-%Y") %></td>
@@ -127,11 +127,11 @@
       <%= image_tag avatar_tam_url(comentario.usuario,70) %>
     </a>
     <div class="media-body">
-      <h4 class="media-heading"><%=comentario.usuario.nombre_usuario%></h4>
+      <h4 class="media-heading"><%= link_to comentario.usuario.nombre_usuario, comentario.usuario %></h4>
       <%=comentario.cuerpo%>
       <br>
       <small><%= comentario.created_at.strftime("%d-%m-%Y %H:%M:%S")%></small></h5>
-      <%if current_user!=nil && comentario.usuario.correo == current_user.correo%>
+      <%if current_user!=nil && comentario.usuario.id == current_user.id%>
         <%= link_to 'Editar', "/tareas/editar_comentario/"+comentario.id.to_s %>
         <%= link_to 'Eliminar', "/tarea_comentarios/delete/"+comentario.id.to_s, data: { confirm: 'Se eliminara el comentario, ¿está seguro?' } %>
       <%end%>

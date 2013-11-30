@@ -11,6 +11,7 @@ Yosistemas::Application.routes.draw do
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "usuarios/index"
   get "usuarios/show"
+  #get "usuarios/perfil/:id" => "usuarios#perfil", :as => "perfil"
   get "usuarios/new" => "usuarios#new", :as =>"register"
   get "usuarios/update_password" => "usuarios#update_password", :as=>"update_password"
   get "usuarios/edit" => "usuarios#edit", :as=>"usuario_edit"

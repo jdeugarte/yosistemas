@@ -6,16 +6,21 @@
           <%= preguntas_form.text_field :texto, :class=>'form-control', :placeholder=>'Pregunta', :maxlength => 50 %>
         </div>
     </div>
+    <div class="col-lg-12 col-lg-offset-2">
         <% preguntas_form.fields_for :respuestas do |builder| %>
-          <%= render 'campo_de_respuesta', :respuestas_form=> builder %>
+          <div class="panel panel-info">
+            <%= render 'campo_de_respuesta', :respuestas_form => builder %>
         <% end %>
-    <div class="form-group">
-      <div class="col-lg-10 ">
-        <%= preguntas_form.link_to_add "Agregar Respuesta", :respuestas, :class=>"btn btn-success" %>
-      </div>
+        <div class="form-group">
+          <div class="col-lg-10 ">
+            <%= preguntas_form.link_to_add "Agregar Respuesta", :respuestas, :class=>"btn btn-success" %>
+          </div>
+        </div>
+          </div>
     </div>
     <div class="form-group">
-      <div class="col-lg-10">
+      <div class="col-lg-10 col-lg-offset-9">
         <%= preguntas_form.link_to_remove "Eliminar Pregunta", :class=>"btn btn-warning" %>
       </div>
     </div>
+  </div>

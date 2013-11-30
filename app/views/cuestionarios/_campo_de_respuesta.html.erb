@@ -1,9 +1,10 @@
-
+<div class="panel-heading">Respuesta</div>
+<div class="panel-body">
  <div class="form-group">
     <label for="inputContent" class="col-lg-2 control-label">Respuesta:</label>
         <div class="col-lg-10">
         	<div class="row">
-        		<div class="col-lg-11">
+        		<div class="col-lg-10">
 	            	<%= respuestas_form.text_field :texto, :class=>'form-control',:rows=>'6', :placeholder=>'Respuesta', :maxlength => 500 %>
 	            </div>
 	            <div class="col-lg-1">
@@ -13,7 +14,8 @@
         </div>
     </div>
 <div class="form-group">
-  <div class="col-lg-10">
+  <div class="col-lg-10 col-lg-offset-9">
     <%= respuestas_form.link_to_remove "Eliminar Respuesta", :class=>"btn btn-warning" %>
   </div>
+</div>
 </div>

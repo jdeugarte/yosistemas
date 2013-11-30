@@ -9,7 +9,7 @@
     {
       clearInterval(timerId);
     }
-    if(@notificaciones.size >0)
+    if(notificaciones.size >0)
     {
       s=document.getElementById("demo");
       s.src="/assets/not2.jpg";
@@ -21,7 +21,7 @@
 <script>
 function changeSrc()
 {
-    if (@notificaciones.size == 0 || @notificaciones == nil)
+    if (notificaciones.size == 0 || notificaciones == nil)
     {
       s=document.getElementById("demo");
       s.src="/assets/not3.jpg";
@@ -69,7 +69,7 @@ function changeSrc()
       <%end%>
       <%if  !current_user.nil? %>
       <li class="dropdown" onclick="changeSrc()">
-        <%if @notificaciones!= nil && @notificaciones.size >0%>
+        <%if notificaciones!= nil && notificaciones.size >0%>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <img src="/assets/not2.jpg" height="25" width="30" id="demo">Notificaciones
             <b class="caret"></b>
@@ -81,11 +81,11 @@ function changeSrc()
           </a>
         <%end%>
         <ul class="dropdown-menu">
-          <%if((@notificaciones == nil || @notificaciones.size <= 0)&&( notificaciones_nueva_tarea == nil || notificaciones_nueva_tarea.size <= 0)) %>
+          <%if((notificaciones == nil || notificaciones.size <= 0)&&( notificaciones_nueva_tarea == nil || notificaciones_nueva_tarea.size <= 0)) %>
             <li><a>Vacio </a> </li>
           <%else%>
-            <% if @notificaciones != nil && @notificaciones.size > 0%>
-              <% @notificaciones.each do |notificacion| %>
+            <% if notificaciones != nil && notificaciones.size > 0%>
+              <% notificaciones.each do |notificacion| %>
                 <li>
                   <a href=<%="/temas/"+ TemaComentario.find(notificacion.tema_comentario_id).tema_id.to_s %>  >
                     <h4>

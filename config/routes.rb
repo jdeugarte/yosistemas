@@ -53,6 +53,8 @@ Yosistemas::Application.routes.draw do
   get 'tareas/new/:id' => 'tareas#new', :as => 'tarea_para_grupo'
   get 'tareas/eliminar/:id' => 'tareas#eliminar'
   get 'tareas/edit/:id' => 'tareas#edit'
+  get 'tareas/ver_tareas' => 'tareas#ver_tareas'
+  get '/tareas/cargar_datos_tarea/:id/:id_tarea' => 'tareas#cargar_datos_tarea'
   get 'grupos/:grupo/tareas' => 'tareas#index', :as => 'tareas_index'
   get 'tareas/responder_tarea/:id' => 'tareas#responder_tarea', :as =>'responder_tareas'
   post 'tareas/responder_tarea/:id' => 'tareas#responder_tarea_crear', :as =>'responder_tarea_crear'
@@ -69,6 +71,8 @@ Yosistemas::Application.routes.draw do
   get "cuestionarios/usar_plantilla/:id" => "cuestionarios#usar_plantilla"
   #mensajes
   post "mensajes/enviar" => "mensajes#enviar", as: 'enviar_mensaje'
+  
+
   resources :usuarios , except: [:destroy] do
     resources :tema_comentarios, only: [:create]
   end

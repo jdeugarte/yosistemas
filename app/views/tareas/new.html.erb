@@ -14,6 +14,8 @@
 	      </ul>
 	   </div>
 	<% end %>
+	&nbsp; <%= link_to "Utilizar Tarea", "/tareas/ver_tareas/"%>
+	<p> &nbsp;</p>
 	<%= form_for @tarea, :html => { :class => 'bs-example form-horizontal', :multipart => true} do |t| %>
 	<%= t.hidden_field :id,:value => @id%>
 	  <div class="row">

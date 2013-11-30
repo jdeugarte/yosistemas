@@ -2,7 +2,7 @@ class CuestionariosController < ApplicationController
 
 	def cuestionarios_de_grupo_index
 		@grupo = Grupo.find(params[:id])
-		@cuestionarios = Cuestionario.buscar_cuestionarios(@grupo)
+		@cuestionarios = Cuestionario.buscar_cuestionarios(@grupo).page(params[:page]).per(2)
 	end
 
 	def nuevo_cuestionario
@@ -13,7 +13,7 @@ class CuestionariosController < ApplicationController
 
 	def edit
 		@cuestionario = Cuestionario.find(params[:id])
-		@grupo = Grupo.find(params[:id])
+		@grupo = Grupo.find(@cuestionario.grupo_id)
 		@cuestionarios = Cuestionario.buscar_cuestionarios(@grupo)
 	end
 

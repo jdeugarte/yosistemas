@@ -5,12 +5,40 @@ class TareaComentariosController < ApplicationController
     @comentario = @tarea.tarea_comentarios.create(comentario_params)
     @comentario.usuario_id = current_user.id
     @comentario.save
+    add_attached_files(@comentario.id)
     redirect_to @tarea
   end
+
+  private
+    def add_attached_files(tarea_comentario_id)
+      if(!params[:tarea_comentario][:archivo].nil?)
+        params[:tarea_comentario][:archivo].each do |arch|
+        @archivo = AdjuntoTareaComentario.new(:archivo=>arch)
+        @archivo.tarea_comentario_id = tarea_comentario_id
+        @archivo.save
+        end
+      end
+    end
+
+    def eliminar_archivos_adjuntos(idsParaBorrar)
+        if (!idsParaBorrar.nil?)
+          idsParaBorrar.slice!(0)
+           idsParaBorrar=idsParaBorrar.split("-")
+           idsParaBorrar.each do |id|
+               AdjuntoTareaComentario.destroy(id)
+           end
+        end
+    end
+
+    public
+
   def editar
-        @comentario = TareaComentario.find(params[:id])
-        @comentario.update(:cuerpo=>params[:cuerpo])
-        redirect_to @comentario.tarea
+        comentario = TareaComentario.find(params[:id])
+        comentario.update(params[:tarea_comentario].permit(:cuerpo))
+        eliminar_archivos_adjuntos(params[:elemsParaElim])
+        add_attached_files(comentario.id)
+        comentario.save
+        redirect_to comentario.tarea
    end
    def delete
         @comentario = TareaComentario.find(params[:id])

@@ -5,9 +5,33 @@ class TemaComentariosController < ApplicationController
     	@comentario = @tema.tema_comentarios.create(comentario_params)
     	@comentario.usuario_id = current_user.id
     	@comentario.save
+        add_attached_files(@comentario.id)
         notify_users(@tema.id,@comentario)
         redirect_to @tema
   	end
+
+    private
+    def add_attached_files(tema_comentario_id)
+      if(!params[:tema_comentario][:archivo].nil?)
+        params[:tema_comentario][:archivo].each do |arch|
+        @archivo = AdjuntoTemaComentario.new(:archivo=>arch)
+        @archivo.tema_comentario_id = tema_comentario_id
+        @archivo.save
+        end
+      end
+    end
+
+    def eliminar_archivos_adjuntos(idsParaBorrar)
+        if (!idsParaBorrar.nil?)
+          idsParaBorrar.slice!(0)
+           idsParaBorrar=idsParaBorrar.split("-")
+           idsParaBorrar.each do |id|
+               AdjuntoTemaComentario.destroy(id)
+           end
+        end
+    end
+
+    public
 
     def notify_users(id_tema,comentario)
         @comentario = comentario
@@ -40,7 +64,9 @@ class TemaComentariosController < ApplicationController
 
     def editar
         comentario = TemaComentario.find(params[:id])
-        comentario.cuerpo = params[:cuerpo]
+        comentario.update(params[:tema_comentario].permit(:cuerpo))
+        eliminar_archivos_adjuntos(params[:elemsParaElim])
+        add_attached_files(comentario.id)
         comentario.save
         redirect_to "/temas/"+comentario.tema_id.to_s
     end

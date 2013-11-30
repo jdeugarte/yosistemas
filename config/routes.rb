@@ -24,8 +24,8 @@ Yosistemas::Application.routes.draw do
   get "usuarios/send_password_mail" => "usuarios#forgot_password", :as => "forgot_password"
   #rutas de temas
   get "temas/buscar/:grupo" => "temas#buscar", :as=>'buscar_tema'
-  get "temas/editar_comentario/:id_comentario" => "temas#editar_comentario"
-  post "tema_comentarios/editar/:id" => "tema_comentarios#editar"
+  get "temas/editar_comentario/:id_comentario" => "temas#editar_comentario", :as  => 'editar_tema_comentario'
+  post "tema_comentarios/editar/:id" => "tema_comentarios#editar", :as  => 'editar_comentario_tema'
   get "tema_comentarios/delete/:id" => "tema_comentarios#delete"
   get "temas/ordertable/:themes/:id/:var" => 'temas#ordertable', :as  => 'ordertable'
   get "temas/ordertablemine/:themes/:var" => 'temas#ordertablemine' , :as => 'ordertablemine'
@@ -60,7 +60,7 @@ Yosistemas::Application.routes.draw do
   post 'tareas/mostrar_respuesta_tarea/:id' => 'tareas#mostrar_respuesta_tarea_crear', :as =>'mostrar_respuesta_tarea_crear'
   post "usuarios/update_user/:id"=>"usuarios#update"
   get "tareas/editar_comentario/:id_comentario" => "tareas#editar_comentario"
-  post "tarea_comentarios/editar/:id" => "tarea_comentarios#editar"
+  post "tarea_comentarios/editar/:id" => "tarea_comentarios#editar", :as  => 'editar_comentario_tarea'
   get "tarea_comentarios/delete/:id" => "tarea_comentarios#delete"
   #Cuestionarios
   get "cuestionarios/nuevo_cuestionario/:id" => "cuestionarios#nuevo_cuestionario", :as => 'nuevo_cuestionario'

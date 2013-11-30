@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user
   before_filter :require_log_in
-  helper_method :notifications
+  helper_method :notificaciones
   private
   def current_user
     @current_user ||= Usuario.find(session[:usuario_id]) if session[:usuario_id]
@@ -13,19 +13,19 @@ class ApplicationController < ActionController::Base
     unless current_user
       redirect_to root_path
     end
-  end
+  end 
 
   def notificaciones
-    @notifications = Array.new
+    @notificaciones = Array.new
     if current_user!=nil
       suscripciones = SuscripcionTema.where(:usuario_id=>current_user.id)
       suscripciones.each do |suscripcion|
-        notificaciones = Notificacion.where(:suscripcion_tema_id=>suscripcion.id,:notificado=>false)
-        notificaciones.each do |notificacion|
-          @notifications.push (notificacion)
+        notificacionesTodo = Notificacion.where(:suscripcion_tema_id=>suscripcion.id,:notificado=>false)
+        notificacionesTodo.each do |notificacion|
+          @notificaciones.push (notificacion)
         end
       end
     end
-    @notifications
+    @notificaciones
   end
 end

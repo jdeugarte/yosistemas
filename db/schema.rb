@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131130155637) do
+ActiveRecord::Schema.define(version: 20131201084906) do
 
   create_table "adjunto_tarea_comentarios", force: true do |t|
     t.integer  "tarea_comentario_id"
@@ -273,16 +273,16 @@ ActiveRecord::Schema.define(version: 20131130155637) do
     t.string   "nombre"
     t.string   "apellido"
     t.string   "contrasenia"
-    t.string   "contrasenia_de_confirmacion"
     t.string   "correo"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "activa",                      default: false
+    t.boolean  "activa",                   default: false
     t.integer  "grupo_id"
     t.integer  "solicitud_contrasenia_id"
     t.string   "rol"
     t.string   "nombre_usuario"
     t.boolean  "mostrar_correo"
+    t.boolean  "conectado",                default: false
   end
 
   add_index "usuarios", ["grupo_id"], name: "index_usuarios_on_grupo_id"

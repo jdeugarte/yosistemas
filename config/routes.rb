@@ -27,7 +27,6 @@ Yosistemas::Application.routes.draw do
   get "usuarios/send_password_mail" => "usuarios#forgot_password", :as => "forgot_password"
   get "usuarios/obtener_charla/:usuario_id" => "usuarios#obtener_charla", :as => "obtener_charla"
   get "usuarios/obtener_notificacion/:comentario_id" => "usuarios#obtener_notificacion", :as => "obtener_notificacion"
-  
   #rutas de temas
   get "temas/buscar/:grupo" => "temas#buscar", :as=>'buscar_tema'
   get "temas/editar_comentario/:id_comentario" => "temas#editar_comentario", :as  => 'editar_tema_comentario'
@@ -78,7 +77,6 @@ Yosistemas::Application.routes.draw do
   get "cuestionarios/usar_plantilla/:id" => "cuestionarios#usar_plantilla"
   #mensajes
   post "mensajes/enviar" => "mensajes#enviar", as: 'enviar_mensaje'
-
 
   resources :usuarios , except: [:destroy] do
     resources :tema_comentarios, only: [:create]

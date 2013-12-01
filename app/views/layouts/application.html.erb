@@ -32,7 +32,7 @@
   </script>
 </head>
 <body>
-  <input type="hidden" id="current_user" value="<%=current_user.id%>">
+  <input type="hidden" id="current_user" value="<%=current_user.nil? ? 0 : current_user.id%>">
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -64,6 +64,8 @@
     <div class="col-sm-9 col-md-9 col-lg-9">
       <%= yield %>
     </div>
+        <% if !current_user.nil?%>
+    
     <div class="col-sm-2 col-md-2 col-lg-2 hidden-phone">
       <ul class="list-group" style="height:100%; width:16.7%; position:fixed; top:184px; right:5px; background-color:white;">
       <% usuarios_conectados.each do |usuario| %>
@@ -74,8 +76,11 @@
         </a>
         </li>
       <%end%>
+
       </ul>
     </div>
+  <%end%>
+ 
   </div>
     <div id="chat_window" class="panel panel-primary hidden-phone fade" style="margin-bottom:0px;height:42%; width:18%; position:fixed; bottom:-3px; right:18%; background-color:white; padding-bottom:10px;">
     <button onclick="closeChat();" style="margin-top:5px; margin-right:7px;" type="button" class="close">×</button>

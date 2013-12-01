@@ -4,7 +4,7 @@ module ApplicationHelper
     	"http://gravatar.com/avatar/#{gravatar_id}.png?s=#{tam}&d=wavatar"
   	end
     def mensajes_nuevos
-    Mensaje.unscoped.select("de_usuario_id,created_at,count(de_usuario_id) as cantidad").where('para_usuario_id'=>current_user.id,'visto'=>false).group('de_usuario_id')
+    Mensaje.select("de_usuario_id,count(de_usuario_id) as cantidad").where('para_usuario_id'=>current_user.id,'visto'=>false).group('de_usuario_id')
     end
   	def notificaciones_nueva_tarea
 	    @notificaciones_grupo = Array.new

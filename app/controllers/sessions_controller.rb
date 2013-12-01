@@ -34,8 +34,11 @@ class SessionsController < ApplicationController
     end
   end
 
-  def destroy
-    session[:usuario_id] = nil
+  def destroy   
+    usuario=Usuario.find(session[:usuario_id])
+    usuario.conectado=false
+    usuario.save    
+    session[:usuario_id] = nil    
     redirect_to root_url, :notice => "Logged out!"
   end
 

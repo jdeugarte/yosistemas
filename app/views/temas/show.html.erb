@@ -120,6 +120,9 @@
 	    <%if current_user!=nil && comentario.usuario.correo == current_user.correo%>
 	    	<%= link_to 'Editar', "/temas/editar_comentario/"+comentario.id.to_s %>
         <%= link_to 'Eliminar', "/tema_comentarios/delete/"+comentario.id.to_s, data: { confirm: 'Se eliminara el tema, ¿está seguro?' } %>
+        <%end%>
+        <%if current_user!=nil && comentario.tema.grupo.usuario_id == current_user.id%>
+        <%= link_to 'Eliminar', "/tema_comentarios/delete/"+comentario.id.to_s, data: { confirm: 'Se eliminara el tema, ¿está seguro?' } %>
 	    <%end%>
 	  </div>
 	</div>

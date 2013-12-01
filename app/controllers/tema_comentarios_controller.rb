@@ -56,9 +56,7 @@ class TemaComentariosController < ApplicationController
     def delete
         @comentario = TemaComentario.find(params[:id])
         @tema = @comentario.tema
-        if(@comentario.usuario.correo == current_user.correo)
-            @comentario.destroy
-        end
+        @comentario.destroy
         redirect_to @tema
     end
 

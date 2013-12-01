@@ -122,7 +122,8 @@ function changeSrc()
         <ul class="dropdown-menu">
            <li><a href="#myModal" role="button" class="btn" data-toggle="modal">Enviar Mensaje</a></li>
         <% mensajes_nuevos.each do |mensaje|%>
-            <li><a href="#" role="button" class="btn" data-toggle="modal"><%=Usuario.find(mensaje.de_usuario_id).nombre%></a></li>
+            <%usuario=Usuario.find(mensaje.de_usuario_id)%>
+            <li><a href="#" role="button" class="btn" onclick="showChat('<%=usuario.nombre_usuario%>','<%=usuario.id%>');" data-toggle="modal"><%=usuario.nombre%></a></li>
         <%end%>
         </ul>
       </li>

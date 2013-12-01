@@ -1,38 +1,13 @@
 <div class="row">
   <div class="col-lg-6">
     <div class="well">
-      <form class="bs-example form-horizontal">
-		  <fieldset>
-		  <legend>Nombre:
-		  	<%= @grupo.nombre %>
-		  </legend>
-		  <div class="form-group">
-		    <div class="col-lg-10">
-		     <b>Descripcion:</b><%= @grupo.descripcion %>
-		    </div>
-		   </div>
-  		  </fieldset>
-		</form>
-		<%= form_tag(notificar_path, :method=>'post',) do%>
-        <div class="form-group"> <br>
-           <label for="inputTitle" class="col-lg-10 control-label">Enviar email de notificacion:</label><br>
-           <%= select_tag :usuario_id, options_for_select(options_from_collection_for_select(Usuario.all,:id,:nombre)) %>
-        </div>
-         <%= submit_tag "Enviar notificacion", :name => nil, :class => 'btn btn-primary btn' %>
-         <% end %>
-      </div>
-    </div>
-  </div>
-<div class="row">
-  <div class="col-lg-6">
-    <div class="well">
       <legend>Invitar amigos al grupo
       </legend>
       <%= form_tag('/grupos/enviar_invitaciones/'+@grupo.id.to_s, :method=>'post') do%>
         <div class="form-group">
           <label for="emails" class="col-sm-2 control-label">Ingrese:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" name="correos" placeholder="Ingrese emails separados por comas" data-role="tagsinput">
+            <input type="text" class="form-control" name="correos" required placeholder="Ingrese emails separados por comas" data-role="tagsinput">
           </div>
         </div>
         <button type="submit" class="btn btn-primary">Enviar invitaciones</button>

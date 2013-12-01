@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
 <script>
   var runCount = 0;
   function timerMethod() {
@@ -27,6 +29,14 @@ function changeSrc()
       s.src="/assets/not3.jpg";
     }
 }
+var channel = pusher.subscribe('notificaciones_channel');
+channel.bind('notificacion_event', function(data) {     
+
+  if(data.para_usuario==document.getElementById('current_user').value)
+  {
+      mostrar_notificacion(data.usuario_id,data.comentario_id,data.tema_id);
+  }
+});      
 </script>
 </head>
 <nav class="navbar navbar-inverse" role="navigation">
@@ -114,16 +124,18 @@ function changeSrc()
       <%if current_user!=nil %>
       <li class="dropdown active">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/assets/message.png" width="21" title="Mensajes">
-        <%mensajes_nuevos=Mensaje.where('para_usuario_id'=>current_user.id,'visto'=>false)%>
-        <%if  mensajes_nuevos.size >0 %>
-          <span class="badge"><%=mensajes_nuevos.size%></span>
+        
+        <%if  mensajes_nuevos.length >0 %>
+          <span class="badge"><%=mensajes_nuevos.length%></span>
         <%end%>
         </a>
         <ul class="dropdown-menu">
            <li><a href="#myModal" role="button" class="btn" data-toggle="modal">Enviar Mensaje</a></li>
         <% mensajes_nuevos.each do |mensaje|%>
             <%usuario=Usuario.find(mensaje.de_usuario_id)%>
-            <li><a href="#" role="button" class="btn" onclick="showChat('<%=usuario.nombre_usuario%>','<%=usuario.id%>');" data-toggle="modal"><%=usuario.nombre%></a></li>
+            <li class="divider"></li>
+            <li><a href="#" role="button" class="btn" onclick="showChat('<%=usuario.nombre_usuario%>','<%=usuario.id%>');" data-toggle="modal"><label style="margin-bottom: 7px;"><%=usuario.nombre_usuario%></label><span style="margin-left: 5px;" class="badge"><%=mensaje.cantidad%></span></a></li>
+
         <%end%>
         </ul>
       </li>
@@ -161,6 +173,7 @@ function changeSrc()
     <%end%>
   </div><!-- /.navbar-collapse -->
 </nav>
+<
 <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
       <div class="modal-content">
@@ -197,3 +210,17 @@ function changeSrc()
       </div>
   </div>
 </div>
+<script>
+function mostrar_notificacion(usuario_id,comentario_id,tema_id)
+{ 
+  
+  $.get('/usuarios/obtener_notificacion/'+comentario_id, function(response){          
+           
+             response=response.replace(/\&quot;/g, '"');
+            var notificacion=JSON.parse(response);
+             alert(notificacion.cuerpo);
+            
+            
+          });
+}
+</script>

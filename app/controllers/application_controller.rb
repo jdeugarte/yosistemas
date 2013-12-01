@@ -5,8 +5,10 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   before_filter :require_log_in
   helper_method :notificaciones
+
   private
   def current_user
+    
     @current_user ||= Usuario.find(session[:usuario_id]) if session[:usuario_id]
   end
   def require_log_in
@@ -16,6 +18,7 @@ class ApplicationController < ActionController::Base
   end 
 
   def notificaciones
+
     @notificaciones = Array.new
     if current_user!=nil
       suscripciones = SuscripcionTema.where(:usuario_id=>current_user.id)
@@ -28,4 +31,6 @@ class ApplicationController < ActionController::Base
     end
     @notificaciones
   end
+
+
 end

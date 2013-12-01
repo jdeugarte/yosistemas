@@ -1,3 +1,4 @@
+require 'pusher'
 class TemaComentariosController < ApplicationController	
     skip_before_filter :verify_authenticity_token
     def create
@@ -48,6 +49,10 @@ class TemaComentariosController < ApplicationController
                 @notificacion.tema_comentario_id = @comentario.id
                 @notificacion.save
                 SendMail.notify_users_tema(@usuario, @tema, @grupo).deliver
+                Pusher.url = "http://5ea0579076700b536e21:503a6ba2bb803aa4ae5c@api.pusherapp.com/apps/60344"
+                Pusher['notificaciones_channel'].trigger('notificacion_event', {
+                  :usuario_id => current_user.id,:comentario_id => @comentario.id,:tema_id => @tema.id, :para_usuario => @usuario.id
+                })
             end
             end
         end
@@ -56,9 +61,7 @@ class TemaComentariosController < ApplicationController
     def delete
         @comentario = TemaComentario.find(params[:id])
         @tema = @comentario.tema
-        if(@comentario.usuario.correo == current_user.correo)
-            @comentario.destroy
-        end
+        @comentario.destroy
         redirect_to @tema
     end
 

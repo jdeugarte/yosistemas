@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <title>Yosistemas</title>
   	<%= stylesheet_link_tag    "application", :media => "all" %>
   	<%= javascript_include_tag "application" %>
@@ -100,12 +101,13 @@
         <div class="panel-heading" >
           <h3 class="panel-title" id="chat_name"></h3>
           <input type="hidden" id="id_usuario_envio">
+          
         </div>
         <div id="chat_conversacion" class="panel-body" style="height:74%; width:100%; overflow-y: auto;">          
         </div>
         <div style="height:10%; width:100%; margin-bottom:0px;">
           <div class="input-group">
-                    <input type="text" id="mensaje_sincrono"class="form-control input-sm">
+                    <input type="text" id="mensaje_sincrono"class="form-control input-sm" onkeypress="return runScript(event)">
                     <span class="input-group-btn">
                       <button onClick="send();" class="btn btn-default btn-sm" type="button">Enviar</button>
                     </span>
@@ -119,6 +121,14 @@
 
     <script type="text/javascript">   
     obtener_conectados();
+    </script>
+    <script type="text/javascript">
+      function runScript(e) {
+          if (e.keyCode == 13) {
+              send();
+              return false;
+          }
+      }
     </script>
 </body>
 </html>

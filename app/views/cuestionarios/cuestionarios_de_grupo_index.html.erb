@@ -8,6 +8,7 @@
   <div class="col-lg-10">
     <% @cuestionarios.each do |cuestionario| %>
     <% if current_user.rol == "Estudiante" && cuestionario.estado == true || current_user.rol == "Docente" %>
+    <% if cuestionario.esta_cerrado_cuestionario?(cuestionario.fecha_limite) %>
     <div class="panel-group" id="accordion">
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -79,6 +80,9 @@
         </div>
       </div>
     </div>
+    <% else%>
+      <h1>Cuestionario <%= cuestionario.titulo %> Cerrado</h1>
+    <% end %>
     <% end %>
     <% end %>
     <center><%= paginate @cuestionarios %></center>

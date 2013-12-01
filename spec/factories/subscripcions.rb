@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :subscripcion do
     llave "MyString"
-    usuario nil
-    grupo nil
+    usuario 1
+    grupo 2
   end
 end

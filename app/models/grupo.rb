@@ -28,4 +28,19 @@ class Grupo < ActiveRecord::Base
       end
       false
     end
+
+    #genera un string aleatorio
+    def generar_llave
+      cadena = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten
+    llave = (0...6).map{ cadena[rand(cadena.length)] }.join
+    llave
+    end
+
+    def verificar_grupo
+      if self.estado == true
+        self.llave = generar_llave
+      else
+        self.llave = "publico"
+      end
+    end
 end

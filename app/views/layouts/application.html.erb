@@ -22,7 +22,7 @@
     var pusher = new Pusher('5ea0579076700b536e21');
     var channel = pusher.subscribe('chat_channel');
     channel.bind('chat_event', function(data) {     
-      document.getElementById('chat_conversacion').innerHTML=data.mensaje;             
+          showChat(data.nombre_usuario,data.de_usuario);       
     });      
     
   </script>

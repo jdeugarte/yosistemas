@@ -11,7 +11,8 @@
   <script src="http://js.pusher.com/2.1/pusher.min.js" type="text/javascript"></script>
   
   <script type="text/javascript">
-    // Enable pusher logging - don't include this in production
+    // Enable pusher logging - don't include this in production   
+   
     Pusher.log = function(message) {
       if (window.console && window.console.log) {
         window.console.log(message);
@@ -20,12 +21,10 @@
 
     var pusher = new Pusher('5ea0579076700b536e21');
     var channel = pusher.subscribe('chat_channel');
-    channel.bind('chat_event', function(data) {
-       $.get('/usuarios/obtener_charla/1', function(response){
-        var elem=document.getElementById("response");
-           elem.innerHTML=response;
-        });
-    });
+    channel.bind('chat_event', function(data) {     
+      document.getElementById('chat_conversacion').innerHTML=data.mensaje;             
+    });      
+    
   </script>
 </head>
 <body>
@@ -63,7 +62,7 @@
     <div class="col-sm-2 col-md-2 col-lg-2 hidden-phone">
       <ul class="list-group" style="height:100%; width:16.7%; position:fixed; top:184px; right:5px; background-color:white;">
       <% usuarios_conectados.each do |usuario| %>
-        <li class="list-group-item" id="<%=usuario.id%>" onclick="showChat('<%=usuario.nombre_usuario%>');" style="cursor:pointer;" onmouseover="this.style.background='#F7F7F7';" onmouseout="this.style.background='white';">
+        <li class="list-group-item" onclick="showChat('<%=usuario.nombre_usuario%>','<%=usuario.id%>');" style="cursor:pointer;" onmouseover="this.style.background='#F7F7F7';" onmouseout="this.style.background='white';">
         <a>
           <span class="badge">2</span>
           <b><%=usuario.nombre_usuario%></b>
@@ -78,21 +77,35 @@
         <div class="panel-heading">
           <h3 class="panel-title" id="chat_name"></h3>
         </div>
-        <div class="panel-body">
-          Panel content
+        <div id="chat_conversacion" class="panel-body" style="height:100%; width:100%; overflow-y: auto;">          
         </div>
     </div>
       <!-- Pie de Pagina -->
     <div class="row">
         <%= render 'layouts/bootom_bar' %>
       </div>
-      <div id="response">
-      </div>
+
     <script>
-      function showChat(nombre_usuario)
+      function showChat(nombre_usuario,usuario_id)
       {
         document.getElementById('chat_name').innerText=nombre_usuario;
-        $("#chat_window").addClass("in");
+        $("#chat_window").addClass("in");        
+         $.get('/usuarios/obtener_charla/'+usuario_id, function(response){          
+
+            response=response.replace(/\&quot;/g, '"');
+            var conversacion=JSON.parse(response)
+            for(var i=0;i<conversacion.length;i++)
+            {              
+              if(conversacion[i].para_usuario_id!=usuario_id)
+              {
+                document.getElementById('chat_conversacion').innerHTML+="<div class='row'><div class='col-lg-12'><div class='pull-left pager' style='margin-bottom: 5px; margin-top: 0px;'><ul style='padding-left:0px;'><li><a style='color:black;'>"+conversacion[i].mensaje+"</a></li></ul></div></div></div>";
+              }
+              else
+              {
+                document.getElementById('chat_conversacion').innerHTML+="<div class='row'><div class='col-lg-12'><div class='pull-right pager' style='margin-bottom: 5px; margin-top: 0px;'><ul><li><a style='color:black;  background-color:#b81e0d;'>"+conversacion[i].mensaje+"</a></li></ul></div></div></div>"; 
+              }    
+            }            
+          });
       }
       function closeChat()
       {

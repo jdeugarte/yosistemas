@@ -82,6 +82,15 @@ class TareasController < ApplicationController
     @tarea.hora_entrega=@tarea_antigua.hora_entrega
     @tarea.grupo_id=@tarea_antigua.grupo_id
     @tarea.usuario_id=@tarea_antigua.usuario_id
+    @tarea.save
+   # @adjuntos=ArchivoAdjunto.where(:tarea_id => @tarea_antigua.id)
+   # if(@adjuntos != nil)
+   #  @adjuntos.each do |arch|
+   #     @archivo = ArchivoAdjunto.new(:archivo=>arch)
+   #     @archivo.tarea_id = @tarea.id
+   #     @archivo.save
+   #   end
+   # end
     @grupos = Array.new
     if(current_user!=nil)
       current_user.subscripcions.each do |subs|

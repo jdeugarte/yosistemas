@@ -3,7 +3,9 @@ module ApplicationHelper
     	gravatar_id = Digest::MD5::hexdigest(user.correo).downcase
     	"http://gravatar.com/avatar/#{gravatar_id}.png?s=#{tam}&d=wavatar"
   	end
-
+    def mensajes_nuevos
+    Mensaje.select("de_usuario_id,count(de_usuario_id) as cantidad").where('para_usuario_id'=>current_user.id,'visto'=>false).group('de_usuario_id')
+    end
   	def notificaciones_nueva_tarea
 	    @notificaciones_grupo = Array.new
 	    if current_user!=nil
@@ -25,7 +27,7 @@ module ApplicationHelper
   	end
 
     def usuarios_conectados()
-      Usuario.all
+      conectados=Usuario.where.not(:conectado=>false,:id=>current_user.id)
     end
 
     def todos_los_usuarios()

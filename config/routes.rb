@@ -6,6 +6,8 @@ Yosistemas::Application.routes.draw do
   post 'temas/edit/:id' => 'temas#edit', :as => 'edit_tema'
   post 'sessions/create' => 'sessions#create', :as => 'loguear'
   get 'sessions/destroy' => 'sessions#destroy', :as => 'desloguear'
+  get 'sessions/obtener_conectados/:usuario_id' => 'sessions#obtener_conectados', :as => 'obtener_conectados'
+  post 'sessions/eliminar_conectado' => 'sessions#eliminar_conectado', :as => 'eliminar_conectado'
   get "usuarios/confirm/:pass" => "usuarios#confirm", :as => 'confirm'
   #get "log_in" => "sessions#new", :as => "log_in"
   get "log_out" => "sessions#destroy", :as => "log_out"
@@ -24,6 +26,7 @@ Yosistemas::Application.routes.draw do
   post "usuarios/send_password_mail" => "usuarios#send_password_mail", :as => "send_password_mail"
   get "usuarios/send_password_mail" => "usuarios#forgot_password", :as => "forgot_password"
   get "usuarios/obtener_charla/:usuario_id" => "usuarios#obtener_charla", :as => "obtener_charla"
+  get "usuarios/obtener_notificacion/:comentario_id" => "usuarios#obtener_notificacion", :as => "obtener_notificacion"
   
   #rutas de temas
   get "temas/buscar/:grupo" => "temas#buscar", :as=>'buscar_tema'
@@ -74,7 +77,7 @@ Yosistemas::Application.routes.draw do
   get "cuestionarios/usar_plantilla/:id" => "cuestionarios#usar_plantilla"
   #mensajes
   post "mensajes/enviar" => "mensajes#enviar", as: 'enviar_mensaje'
-  
+
 
   resources :usuarios , except: [:destroy] do
     resources :tema_comentarios, only: [:create]

@@ -21,11 +21,5 @@ class MensajesController < ApplicationController
   	redirect_to :back
   end
 
-  def notificar
-  	para = Tema.find_by_id(params[:para].to_s);
-  	if(para)
-	{
-		notificaciones = Notificaciones.create('tema_comentario'=>)
-	}
-  end
+ 
 end

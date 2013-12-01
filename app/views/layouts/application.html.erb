@@ -31,7 +31,7 @@
     
   </script>
 </head>
-<body>
+<body>   
   <input type="hidden" id="current_user" value="<%=current_user.nil? ? 0 : current_user.id%>">
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
@@ -65,22 +65,35 @@
       <%= yield %>
     </div>
         <% if !current_user.nil?%>
+             
     
     <div class="col-sm-2 col-md-2 col-lg-2 hidden-phone">
-      <ul class="list-group" id="usuarios_conectados" style="height:100%; width:16.7%; position:fixed; top:184px; right:5px; background-color:white;">
-      <% usuarios_conectados.each do |usuario| %>
-        <li class="list-group-item" onclick="showChat('<%=usuario.nombre_usuario%>','<%=usuario.id%>');" style="cursor:pointer;" onmouseover="this.style.background='#F7F7F7';" onmouseout="this.style.background='white';">
-        <a>
-          <span><img src="/assets/conected.png" /></span>
-          <b><%=usuario.nombre_usuario%></b>
-        </a>
-        </li>
-      <%end%>
 
-      </ul>
+        <div class="panel panel-default" style="height:100%; width:16.7%; position:fixed; top:184px; right:5px; background-color:white; ">
+            <div class="panel-body" style="padding-top: 0px;"> 
+              <h4 >Usuarios conectados...</h4>
+              <ul class="list-group" id="usuarios_conectados" >
+              <% usuarios_conectados.each do |usuario| %>
+                <li class="list-group-item" onclick="showChat('<%=usuario.nombre_usuario%>','<%=usuario.id%>');" style="cursor:pointer;" onmouseover="this.style.background='#F7F7F7';" onmouseout="this.style.background='white';">
+                <a>
+                  <span><img src="/assets/conected.png" /></span>
+                  <b><%=usuario.nombre_usuario%></b>
+                </a>
+                </li>
+              <%end%>
+
+              </ul>
+          </div>
+        </div>
     </div>
   <%end%>
- 
+  <script type="text/javascript">
+        $(window).bind('beforeunload' ,function() {
+      //return 'Warning!\nIf you leave, you will cancel the installation of ' + $("#softwareName").clone().children().remove().end().text();
+        $.post( "/sessions/eliminar_conectado", { usuario_id: document.getElementById('current_user').value } );
+    });
+    </script>
+
   </div>
     <div id="chat_window" class="panel panel-primary hidden-phone fade" style="margin-bottom:0px;height:42%; width:18%; position:fixed; bottom:-3px; right:18%; background-color:white; padding-bottom:10px;">
     <button onclick="closeChat();" style="margin-top:5px; margin-right:7px;" type="button" class="close">×</button>
@@ -102,22 +115,9 @@
       <!-- Pie de Pagina -->
     <div class="row">
         <%= render 'layouts/bootom_bar' %>
-      </div>
+      </div>  
 
-    <script type="text/javascript">
-    function obtener_conectados()
-    {
-       $.get('/sessions/obtener_conectados/'+document.getElementById('current_user').value, function(response){          
-            response=response.replace(/\&quot;/g, '"');
-            var conectados=JSON.parse(response);
-            document.getElementById('usuarios_conectados').innerHTML="";
-            for(var i=0; i<conectados.length;i++)
-            {
-              document.getElementById('usuarios_conectados').innerHTML+="<li class='list-group-item' onclick='showChat(\""+conectados[i].nombre_usuario+"\",\""+conectados[i].id+"\");' style='cursor:pointer;' onmouseover='this.style.background=\"#F7F7F7\";' onmouseout='this.style.background=\"white\";' ><a><img src='/assets/conected.png' /><b> "+conectados[i].nombre_usuario+"</b></a></li>";
-            }
-          });
-       setTimeout(obtener_conectados,10000);
-    }
+    <script type="text/javascript">   
     obtener_conectados();
     </script>
 </body>

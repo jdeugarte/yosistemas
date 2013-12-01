@@ -38,4 +38,20 @@ class SessionsController < ApplicationController
     session[:usuario_id] = nil
     redirect_to root_url, :notice => "Logged out!"
   end
+
+
+  def obtener_conectados
+    usuario=Usuario.find(params[:usuario_id])
+    usuario.conectado=true
+    usuario.save
+    render :layout => nil
+  end
+
+  def eliminar_conectado
+    usuario=Usuario.find(params[:usuario_id])
+    usuario.conectado=false
+    usuario.save
+    redirect_to :back
+  end
+
 end

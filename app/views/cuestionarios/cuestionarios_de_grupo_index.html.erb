@@ -59,12 +59,14 @@
                   </tbody>
                   </table>
                 </div>
-                <% if (current_user.rol == "Docente")%>
+                <% if (current_user.rol == "Docente" )%>
                 <div class="col-lg-3">
                   </br>
+                  <%if cuestionario.estado == false %>
                     <form class="navbar-form navbar-left" method="get" action=<%= edit_cuestionario_path(cuestionario)%>>
                       <button type="submit" class="btn btn-primary">Editar Cuestionario</button>
                     </form>
+                    <% end %>
                     <form class="navbar-form navbar-left" method="get" action=<%=borrar_cuestionario_path(cuestionario.id)%> data-confirm="Se eliminara el cuestionario, ¿está seguro?" data-method="delete" >
                       <button type="submit" class="btn btn-primary">Eliminar Cuestionario</button>
                     </form>

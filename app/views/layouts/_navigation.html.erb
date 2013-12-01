@@ -114,16 +114,18 @@ function changeSrc()
       <%if current_user!=nil %>
       <li class="dropdown active">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/assets/message.png" width="21" title="Mensajes">
-        <%mensajes_nuevos=Mensaje.where('para_usuario_id'=>current_user.id,'visto'=>false)%>
-        <%if  mensajes_nuevos.size >0 %>
-          <span class="badge"><%=mensajes_nuevos.size%></span>
+        
+        <%if  mensajes_nuevos.length >0 %>
+          <span class="badge"><%=mensajes_nuevos.length%></span>
         <%end%>
         </a>
         <ul class="dropdown-menu">
            <li><a href="#myModal" role="button" class="btn" data-toggle="modal">Enviar Mensaje</a></li>
         <% mensajes_nuevos.each do |mensaje|%>
             <%usuario=Usuario.find(mensaje.de_usuario_id)%>
-            <li><a href="#" role="button" class="btn" onclick="showChat('<%=usuario.nombre_usuario%>','<%=usuario.id%>');" data-toggle="modal"><%=usuario.nombre%></a></li>
+            <li class="divider"></li>
+            <li><a href="#" role="button" class="btn" onclick="showChat('<%=usuario.nombre_usuario%>','<%=usuario.id%>');" data-toggle="modal"><label style="margin-bottom: 7px;"><%=usuario.nombre_usuario%></label><span style="margin-left: 5px;" class="badge"><%=mensaje.cantidad%></span></a></li>
+
         <%end%>
         </ul>
       </li>

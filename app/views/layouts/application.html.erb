@@ -5,7 +5,7 @@
   <title>Yosistemas</title>
   	<%= stylesheet_link_tag    "application", :media => "all" %>
   	<%= javascript_include_tag "application" %>
-    <%= javascript_include_tag :defaults, "nested_form" %>
+    
 	<%= csrf_meta_tags %>
   <link rel="shortcut icon" href="/assets/favicon.png" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -107,7 +107,7 @@
         </div>
         <div style="height:10%; width:100%; margin-bottom:0px;">
           <div class="input-group">
-                    <input type="text" id="mensaje_sincrono"class="form-control input-sm" >
+                    <input type="text" id="mensaje_sincrono"class="form-control input-sm" maxlength="50" >
                     <span class="input-group-btn">
                       <button onClick="send();" class="btn btn-default btn-sm" type="button">Enviar</button>
                     </span>

@@ -1,4 +1,6 @@
 
+
+<input type="hidden" id="current_user" value="<%=current_user.nil? ? 0 : current_user.id%>">
 <div class="row">
 <div class="col-lg-6 ">
     <div class="well">
@@ -163,5 +165,8 @@
     js = d.createElement(s); js.id = id;
     js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1";
     fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));</script>
+  }(document, 'script', 'facebook-jssdk'));
+
+  </script>
+
 </div>

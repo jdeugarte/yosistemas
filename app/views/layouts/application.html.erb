@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <%= include_gon %>
   <title>Yosistemas</title>
   	<%= stylesheet_link_tag    "application", :media => "all" %>
   	<%= javascript_include_tag "application" %>
@@ -87,6 +88,7 @@
         <div class="panel-heading" >
           <h3 class="panel-title" id="chat_name"></h3>
           <input type="hidden" id="id_usuario_envio">
+          
         </div>
         <div id="chat_conversacion" class="panel-body" style="height:72%; width:100%; overflow-y: auto;">          
         </div>

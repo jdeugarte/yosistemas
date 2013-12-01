@@ -19,7 +19,6 @@ class CuestionariosController < ApplicationController
 
 	def create
 		@cuestionario = Cuestionario.new(cuestionario_params)
-		@cuestionario.estado = true
 		@cuestionario.save
 		definir_tipo_de_pregunta(@cuestionario)
 		redirect_to mis_grupos_path

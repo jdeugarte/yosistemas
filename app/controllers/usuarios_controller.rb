@@ -66,9 +66,8 @@ end
       encriptado=Digest::MD5.hexdigest(params[:contrasenia].to_s)
       if otrousuario == nil
         if  current_user.contrasenia == encriptado
-          if(@usuario!=nil)
-            SendMail.cambiar_correo(@usuario,params[:correonuevo]).deliver
-          end
+          @usuario = current_user
+          SendMail.cambiar_correo(@usuario,params[:correonuevo]).deliver
           flash[:alert] = 'Necesita ver su correo para confirmar la operacion'
           redirect_to root_url
         else

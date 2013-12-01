@@ -120,6 +120,36 @@
 	    <%end%>
 	  </div>
 	</div>
+  <%if (comentario.adjunto_tema_comentarios.size>0)%>
+  <div class="row">
+   <div class="col-lg-4">
+    <div class="panel-group" id="acordeon<%=comentario.id%>">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#acordeon<%=comentario.id%>" href="#collapse<%=comentario.id%>">
+              <div>
+              Archivos adjuntos
+              </div>
+            </a>
+          </h4>
+        </div>
+        <div id="collapse<%=comentario.id%>" class="panel-collapse collapse">
+          <div class="panel-body">
+            <% comentario.adjunto_tema_comentarios.each do |arch|%>
+                <div class="attachment-link" title="Archivo tipo .<%=arch.archivo_file_name.split('.').last%>">
+                  <a href="<%=arch.archivo.url(download: true)%>"><img class="attachment-img" src="/assets/filetypes/default.png" file-type="<%=arch.archivo_file_name.split('.').last%>" width="16px"><%=arch.archivo_file_name[0,arch.archivo_file_name.rindex('.')]%></a>
+                </div>
+            <%end%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+  </div>
+</div>
+<%end%>
 	<%end%>
 <%end%>
 <script type="text/javascript">

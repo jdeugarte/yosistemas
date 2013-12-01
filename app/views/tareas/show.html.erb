@@ -134,9 +134,40 @@
       <%if current_user!=nil && comentario.usuario.id == current_user.id%>
         <%= link_to 'Editar', "/tareas/editar_comentario/"+comentario.id.to_s %>
         <%= link_to 'Eliminar', "/tarea_comentarios/delete/"+comentario.id.to_s, data: { confirm: 'Se eliminara el comentario, ¿está seguro?' } %>
+
       <%end%>
     </div>
   </div>
+<%if (comentario.adjunto_tarea_comentarios.size>0)%>
+<div class="row">
+   <div class="col-lg-4">
+    <div class="panel-group" id="acordeon<%=comentario.id%>">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#acordeon<%=comentario.id%>" href="#collapse<%=comentario.id%>">
+              <div>
+              Archivos adjuntos
+              </div>
+            </a>
+          </h4>
+        </div>
+        <div id="collapse<%=comentario.id%>" class="panel-collapse collapse">
+          <div class="panel-body">
+            <% comentario.adjunto_tarea_comentarios.each do |arch|%>
+                <div class="attachment-link" title="Archivo tipo .<%=arch.archivo_file_name.split('.').last%>">
+                  <a href="<%=arch.archivo.url(download: true)%>"><img class="attachment-img" src="/assets/filetypes/default.png" file-type="<%=arch.archivo_file_name.split('.').last%>" width="16px"><%=arch.archivo_file_name[0,arch.archivo_file_name.rindex('.')]%></a>
+                </div>
+            <%end%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+  </div>
+</div>
+<%end%>
   <%end%>
 <%end%>
 </div>

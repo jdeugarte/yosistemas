@@ -34,6 +34,9 @@
                 &nbsp;<%= link_to "Editar", edit_tema_path(@tema), :method => :post%>
                 &nbsp;&nbsp;&nbsp;<%= link_to 'Eliminar Tema', visible_tema_path(@tema), data: { confirm: 'Se eliminara la tarea, ¿Está seguro?' } %>
                     <%end%>
+                    <%if @tema.grupo.usuario_id == current_user.id %>
+                      &nbsp;&nbsp;&nbsp;<%= link_to 'Eliminar Tema', visible_tema_path(@tema), data: { confirm: 'Se eliminara la tarea, ¿Está seguro?' } %>
+                    <%end%>
                  &nbsp;&nbsp;&nbsp;
                 <%if current_user!=nil%>
                 <%cont=0%>
@@ -118,6 +121,9 @@
 	    <br>
 	    <%if current_user!=nil && comentario.usuario.correo == current_user.correo%>
 	    	<%= link_to 'Editar', "/temas/editar_comentario/"+comentario.id.to_s %>
+        <%= link_to 'Eliminar', "/tema_comentarios/delete/"+comentario.id.to_s, data: { confirm: 'Se eliminara el tema, ¿está seguro?' } %>
+        <%end%>
+        <%if current_user!=nil && comentario.tema.grupo.usuario_id == current_user.id%>
         <%= link_to 'Eliminar', "/tema_comentarios/delete/"+comentario.id.to_s, data: { confirm: 'Se eliminara el tema, ¿está seguro?' } %>
 	    <%end%>
 	  </div>

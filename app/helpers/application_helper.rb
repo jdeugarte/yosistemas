@@ -25,7 +25,7 @@ module ApplicationHelper
   	end
 
     def usuarios_conectados()
-      Usuario.all
+      conectados=Usuario.where.not(:conectado=>false,:id=>current_user.id)
     end
 
     def todos_los_usuarios()

@@ -12,7 +12,12 @@ def obtener_charla
   @user=Usuario.find(params[:usuario_id])
   @charla=Mensaje.find_all_by_de_usuario_id_and_para_usuario_id(params[:usuario_id],current_user.id)
   @charla_inversa=Mensaje.find_all_by_de_usuario_id_and_para_usuario_id(current_user.id,params[:usuario_id])
-   @charla+=@charla_inversa
+
+  @charla+=@charla_inversa
+  @charla.each do |mensaje|
+      mensaje.visto=true
+      mensaje.save
+  end
   @charla.sort!{|x,y|  x.created_at <=> y.created_at}
   render :layout => nil
 

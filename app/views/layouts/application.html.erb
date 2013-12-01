@@ -22,12 +22,17 @@
     var pusher = new Pusher('5ea0579076700b536e21');
     var channel = pusher.subscribe('chat_channel');
     channel.bind('chat_event', function(data) {     
+   
+      if(data.para_usuario==document.getElementById('current_user').value)
+      {
           showChat(data.nombre_usuario,data.de_usuario);       
+      }
     });      
     
   </script>
 </head>
 <body>
+  <input type="hidden" id="current_user" value="<%=current_user.id%>">
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -72,12 +77,21 @@
       </ul>
     </div>
   </div>
-    <div id="chat_window" class="panel panel-primary hidden-phone fade" style="margin-bottom:0px;height:42%; width:18%; position:fixed; bottom:-3px; right:18%; background-color:white; ">
+    <div id="chat_window" class="panel panel-primary hidden-phone fade" style="margin-bottom:0px;height:42%; width:18%; position:fixed; bottom:-3px; right:18%; background-color:white; padding-bottom:10px;">
     <button onclick="closeChat();" style="margin-top:5px; margin-right:7px;" type="button" class="close">×</button>
-        <div class="panel-heading">
+        <div class="panel-heading" >
           <h3 class="panel-title" id="chat_name"></h3>
+          <input type="hidden" id="id_usuario_envio">
         </div>
-        <div id="chat_conversacion" class="panel-body" style="height:100%; width:100%; overflow-y: auto;">          
+        <div id="chat_conversacion" class="panel-body" style="height:72%; width:100%; overflow-y: auto;">          
+        </div>
+        <div style="height:10%; width:100%;">
+          <div class="input-group">
+                    <input type="text" id="mensaje_sincrono"class="form-control input-sm">
+                    <span class="input-group-btn">
+                      <button onClick="send();" class="btn btn-default btn-sm" type="button">Enviar</button>
+                    </span>
+                  </div>
         </div>
     </div>
       <!-- Pie de Pagina -->
@@ -86,9 +100,19 @@
       </div>
 
     <script>
+    function send()
+    {
+      var para_u=document.getElementById('chat_name').innerText;
+      var mensaje_u=document.getElementById("mensaje_sincrono").value;
+      var usuario_id_u=document.getElementById('id_usuario_envio').value;
+      $.post( "/mensajes/enviar", { para: para_u, mensaje: mensaje_u } );
+      document.getElementById("mensaje_sincrono").value="";
+      showChat(para_u,usuario_id_u);
+    }
       function showChat(nombre_usuario,usuario_id)
       {
         document.getElementById('chat_name').innerText=nombre_usuario;
+        document.getElementById("id_usuario_envio").value=usuario_id;
         $("#chat_window").addClass("in");        
          $.get('/usuarios/obtener_charla/'+usuario_id, function(response){          
 
@@ -106,8 +130,10 @@
 
                 document.getElementById('chat_conversacion').innerHTML+="<div class='row'><div class='col-lg-12'><div class='pull-right pager' style='margin-bottom: 5px; margin-top: 0px;'><ul><li><a style='color:white;  background-color:#b81e0d;' title='"+conversacion[i].created_at+"'>"+conversacion[i].mensaje+"</a></li></ul></div></div></div>"; 
               }    
-            }            
+            } 
+             document.getElementById('chat_conversacion').scrollTop = 99999999;           
           });
+       
       }
       function closeChat()
       {

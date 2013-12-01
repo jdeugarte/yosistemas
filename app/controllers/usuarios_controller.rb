@@ -13,10 +13,10 @@ def obtener_charla
   @charla=Mensaje.find_all_by_de_usuario_id_and_para_usuario_id(params[:usuario_id],current_user.id)
   @charla_inversa=Mensaje.find_all_by_de_usuario_id_and_para_usuario_id(current_user.id,params[:usuario_id])
  @charla+=@charla_inversa
-  @charla.sort!{|x,y|  y.created_at <=> x.created_at}
+  @charla.sort!{|x,y|  x.created_at <=> y.created_at}
   render :layout => nil
 
-  # @charla="PEdro"
+
 end
   def password_recovered
       if(current_user!=nil)

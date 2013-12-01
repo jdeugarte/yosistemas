@@ -32,6 +32,9 @@
                 &nbsp;<%= link_to "Editar", edit_tema_path(@tema), :method => :post%>
                 &nbsp;&nbsp;&nbsp;<%= link_to 'Eliminar Tema', visible_tema_path(@tema), data: { confirm: 'Se eliminara la tarea, ¿Está seguro?' } %>
                     <%end%>
+                    <%if @tema.grupo.usuario_id == current_user.id %>
+                      &nbsp;&nbsp;&nbsp;<%= link_to 'Eliminar Tema', visible_tema_path(@tema), data: { confirm: 'Se eliminara la tarea, ¿Está seguro?' } %>
+                    <%end%>
                  &nbsp;&nbsp;&nbsp;
                 <%if current_user!=nil%>
                 <%cont=0%>

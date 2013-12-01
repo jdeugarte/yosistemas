@@ -1,17 +1,21 @@
 function send()
     {
-      var para_u=document.getElementById('chat_name').innerText;
+
+      var para_u=document.getElementById('chat_name').innerHTML;
       var mensaje_u=document.getElementById("mensaje_sincrono").value;
-      var usuario_id_u=document.getElementById('id_usuario_envio').value;
-      $.post( "/mensajes/enviar", { para: para_u, mensaje: mensaje_u } );
-      document.getElementById("mensaje_sincrono").value="";
-      document.getElementById('chat_conversacion').innerHTML+="<div class='row'><div class='col-lg-12'><div class='pull-right pager' style='margin-bottom: 5px; margin-top: 0px;'><ul><li><a style='color:white;  background-color:#b81e0d;' title='"+mensaje_u+"'>"+mensaje_u+"</a></li></ul></div></div></div>";
-        document.getElementById('chat_conversacion').scrollTop = 99999999;     
+      if(mensaje_u)
+      {
+        var usuario_id_u=document.getElementById('id_usuario_envio').value;
+        $.post( "/mensajes/enviar", { para: para_u, mensaje: mensaje_u } );
+        document.getElementById("mensaje_sincrono").value="";
+        document.getElementById('chat_conversacion').innerHTML+="<div class='row'><div class='col-lg-12'><div class='pull-right pager' style='margin-bottom: 5px; margin-top: 0px;'><ul><li><a style='color:white;  background-color:#b81e0d;' title='"+mensaje_u+"'>"+mensaje_u+"</a></li></ul></div></div></div>";
+          document.getElementById('chat_conversacion').scrollTop = 99999999;     
+      }
     }
       function showChat(nombre_usuario,usuario_id)
       {
         document.getElementById('chat_conversacion').innerHTML="";
-        document.getElementById('chat_name').innerText=nombre_usuario;
+        document.getElementById('chat_name').innerHTML=nombre_usuario;
         document.getElementById("id_usuario_envio").value=usuario_id;
         $("#chat_window").addClass("in");        
          $.get('/usuarios/obtener_charla/'+usuario_id, function(response){          

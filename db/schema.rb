@@ -289,3 +289,4 @@ ActiveRecord::Schema.define(version: 20131201084906) do
   add_index "usuarios", ["grupo_id"], name: "index_usuarios_on_grupo_id"
 
 end
+>>>>>>> 1babaffd03bb53377d11c534794437a644d54525

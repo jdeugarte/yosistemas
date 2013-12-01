@@ -52,8 +52,6 @@ end
 
 gem "nested_form"
 
-gem "gon"
-
 #gem 'rails_12factor', group: :production
 
 # Use ActiveModel has_secure_password

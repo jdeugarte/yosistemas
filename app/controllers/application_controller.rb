@@ -29,7 +29,6 @@ class ApplicationController < ActionController::Base
         end
       end
     end
-    gon.notificaciones = @notificaciones
     @notificaciones
   end
 

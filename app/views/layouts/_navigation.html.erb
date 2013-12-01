@@ -30,13 +30,12 @@ function changeSrc()
     }
 }
 var channel = pusher.subscribe('notificaciones_channel');
-channel.bind('notificacion_event', function(data) {     
-
+channel.bind('notificacion_event', function(data) {
   if(data.para_usuario==document.getElementById('current_user').value)
   {
       mostrar_notificacion(data.usuario_id,data.comentario_id,data.tema_id);
   }
-});      
+});
 </script>
 </head>
 <nav class="navbar navbar-inverse" role="navigation">
@@ -97,7 +96,7 @@ channel.bind('notificacion_event', function(data) {
             <% if notificaciones != nil && notificaciones.size > 0%>
               <% notificaciones.each do |notificacion| %>
                 <li>
-                  <a href=<%="/temas/"+ TemaComentario.find(notificacion.tema_comentario_id).tema_id.to_s %>  >
+                  <a href=<%="/temas/"+ TemaComentario.find(notificacion.tema_comentario_id).tema_id.to_s %>>
                     <h4>
                       <%= "tema: "+Tema.find(TemaComentario.find(notificacion.tema_comentario_id).tema_id).titulo+" " %>
                     </h4>
@@ -124,7 +123,6 @@ channel.bind('notificacion_event', function(data) {
       <%if current_user!=nil %>
       <li class="dropdown active">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/assets/message.png" width="21" title="Mensajes">
-        
         <%if  mensajes_nuevos.length >0 %>
           <span class="badge"><%=mensajes_nuevos.length%></span>
         <%end%>
@@ -135,7 +133,6 @@ channel.bind('notificacion_event', function(data) {
             <%usuario=Usuario.find(mensaje.de_usuario_id)%>
             <li class="divider"></li>
             <li><a href="#" role="button" class="btn" onclick="showChat('<%=usuario.nombre_usuario%>','<%=usuario.id%>');" data-toggle="modal"><label style="margin-bottom: 7px;"><%=usuario.nombre_usuario%></label><span style="margin-left: 5px;" class="badge"><%=mensaje.cantidad%></span></a></li>
-
         <%end%>
         </ul>
       </li>
@@ -173,7 +170,6 @@ channel.bind('notificacion_event', function(data) {
     <%end%>
   </div><!-- /.navbar-collapse -->
 </nav>
-<
 <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
       <div class="modal-content">
@@ -197,7 +193,7 @@ channel.bind('notificacion_event', function(data) {
                     <div class="col-lg-9">
                     <textarea name="mensaje" class="form-control" placeholder="Mensaje...." style="resize:none;" rows="9" maxlength="500" required></textarea>
                     </div>
-                  </div>                  
+                  </div>
                 </fieldset>
               </div>
             </div>
@@ -212,15 +208,11 @@ channel.bind('notificacion_event', function(data) {
 </div>
 <script>
 function mostrar_notificacion(usuario_id,comentario_id,tema_id)
-{ 
-  
-  $.get('/usuarios/obtener_notificacion/'+comentario_id, function(response){          
-           
+{
+  $.get('/usuarios/obtener_notificacion/'+comentario_id, function(response){
              response=response.replace(/\&quot;/g, '"');
             var notificacion=JSON.parse(response);
              alert(notificacion.cuerpo);
-            
-            
           });
 }
 </script>

@@ -26,7 +26,9 @@ end
 
   def obtener_notificacion
     @comentario = TemaComentario.find_by_id(params[:comentario_id])
-
+    @tema = Tema.find_by_id(params[:tema_id])
+    @usuario = Usuario.find_by_id(params[:usuario_id])
+    @lista_datos = [@comentario,@usuario,@tema]
     render :layout => nil;
   end
   def password_recovered

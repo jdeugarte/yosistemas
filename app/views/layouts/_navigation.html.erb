@@ -29,13 +29,6 @@ function changeSrc()
       s.src="/assets/not3.jpg";
     }
 }
-var channel = pusher.subscribe('notificaciones_channel');
-channel.bind('notificacion_event', function(data) {
-  if(data.para_usuario==document.getElementById('current_user').value)
-  {
-      mostrar_notificacion(data.usuario_id,data.comentario_id,data.tema_id);
-  }
-});
 </script>
 </head>
 <nav class="navbar navbar-inverse" role="navigation">
@@ -206,13 +199,3 @@ channel.bind('notificacion_event', function(data) {
       </div>
   </div>
 </div>
-<script>
-function mostrar_notificacion(usuario_id,comentario_id,tema_id)
-{
-  $.get('/usuarios/obtener_notificacion/'+comentario_id, function(response){
-             response=response.replace(/\&quot;/g, '"');
-            var notificacion=JSON.parse(response);
-             alert(notificacion.cuerpo);
-          });
-}
-</script>

@@ -7,6 +7,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
      else
        @grupo = Grupo.find(1)
     end
+    
      @temas = @grupo.temas.order("updated_at DESC").page(params[:page]).per(5)
     @ides=sacarIds(@grupo.temas)
   end

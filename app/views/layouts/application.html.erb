@@ -23,7 +23,18 @@
       {
           showChat(data.nombre_usuario,data.de_usuario);
       }
-    });
+    });      
+
+    var channel2 = pusher.subscribe('notificaciones_channel');
+
+  channel2.bind('notificacion_event', function(data) {     
+
+    if(data.para_usuario==document.getElementById('current_user').value)
+    {
+
+       mostrar_notificacion(data.usuario_id,data.comentario_id,data.tema_id);
+    }
+  });     
   </script>
 </head>
 <body>
@@ -102,6 +113,23 @@
                   </div>
         </div>
     </div>
+
+    <div id="book">
+      <div id="ventana_notificacion" class="list-group" style=" visibility:hidden; margin-bottom:15px;height:20%; width:18%; position:fixed; bottom:10px; right:80%; background-color:white; padding-bottom:30px;">
+            <a href="#" class="list-group-item">
+              <div class="row">
+                <div class="col-lg-3">
+                  fot
+                </div>
+                <div class="col-lg-9">
+                  <h5 class="list-group-item-heading " id="cabecera_notificacion"></h5>
+                  <p class="list-group-item-text" id="contenido_notificacion"></p>
+                </div>
+              </div>
+            </a>
+        </div>
+    </div>
+
       <!-- Pie de Pagina -->
     <div class="row">
         <%= render 'layouts/bootom_bar' %>
@@ -114,6 +142,39 @@
         if (e.keyCode == 27) { closeChat(); }
          if (e.keyCode == 13) { send(); }
       });
+
+      function mostrar_notificacion(usuario_id,comentario_id,tema_id)
+      {  
+        alert("789");
+        $.get('/usuarios/obtener_notificacion/'+comentario_id+"/"+usuario_id+"/"+tema_id, function(response){          
+         
+        response=response.replace(/\&quot;/g, '"');
+
+        
+        var array_datos=JSON.parse(response);
+
+        var comentario = array_datos[0];
+
+        var usuario = array_datos[1];
+        var tema = array_datos[2];
+        
+        document.getElementById("cabecera_notificacion").innerHTML += usuario.nombre_usuario+" comento el tema: "+tema.titulo+;
+        document.getElementById("contenido_notificacion").innerHTML += comentario.cuerpo;
+        var form_notificacion = document.getElementById("ventana_notificacion"):
+        if(form_notificacion.style.visibility=="hidden")
+          {document.getElementById("ventana_notificacion").style.visibility = "visible";}
+         $( "#ventana_notificacion" ).animate({opacity: 0}, 7000);
+         setTimeout('document.getElementById("ventana_notificacion").style.visibility = "hidden"',7000);
+         
+                  
+        });
+      }
+    </script>
+    <script>
+
+       
+         
+      
     </script>
 </body>
 </html>

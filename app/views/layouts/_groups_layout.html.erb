@@ -49,7 +49,7 @@
   </div>
   <div class="col-lg-8"  style="background-color:white;">
     <div>
-        <% tab_selec = ((!@temas.nil?||!@tema.nil?) ? 1 : ((!@tareas.nil?||!@tarea.nil?) ? 2 : (!@cuestionarios.nil?||!@cuestionario.nil?) ? 3 : 0))%>
+        <% tab_selec = ((!@temas.nil?||!@tema.nil?) ? 1 : ((!@tareas.nil?||!@tarea.nil?) ? 2 : (!@cuestionarios.nil?||!@cuestionario.nil?) ? 3 : (!@eventos.nil?||!@eventos.nil?) ? 4 : 0))%>
             <div>
               <ul class="nav nav-tabs" style="margin-bottom: 15px;">
               <%if(@grupo.id!=1)%>
@@ -61,6 +61,7 @@
 
 
                    <li class="<%=tab_selec==3 ? 'active' : ''%>" onclick="<%= (tab_selec!=3) ? "throwFade(); window.location='/cuestionarios/cuestionarios_de_grupo_index/"+@grupo.id.to_s+"'; return false;" : "" %>" ><a href="#cuestionarios" data-toggle="tab"><h3 style="margin-top:5px;">Cuestionarios</h3></a></li>
+                   <li class="<%=tab_selec==4 ? 'active' : ''%>" onclick="<%= (tab_selec!=4) ? "throwFade(); window.location='/cuestionarios/cuestionarios_de_grupo_index/"+@grupo.id.to_s+"'; return false;" : "" %>" ><a href="#cuestionarios" data-toggle="tab"><h3 style="margin-top:5px;">Eventos</h3></a></li>
 
 
                 <%end%>

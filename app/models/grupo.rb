@@ -4,6 +4,7 @@ class Grupo < ActiveRecord::Base
   	has_many :subscripcions
   	has_many :tareas
     has_many :cuestionarios
+    has_many :eventos
   	validates :nombre, :presence => true
     delegate :nombre_usuario, :to => :usuario, :prefix => true
   	scope :buscar_mis_grupos,lambda { |user| where("usuario_id = ?", user.id)}
@@ -26,5 +27,20 @@ class Grupo < ActiveRecord::Base
          end
       end
       false
+    end
+
+    #genera un string aleatorio
+    def generar_llave
+      cadena = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten
+    llave = (0...6).map{ cadena[rand(cadena.length)] }.join
+    llave
+    end
+
+    def verificar_grupo
+      if self.estado == true
+        self.llave = generar_llave
+      else
+        self.llave = "publico"
+      end
     end
 end

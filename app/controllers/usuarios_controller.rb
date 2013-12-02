@@ -68,9 +68,8 @@ end
       encriptado=Digest::MD5.hexdigest(params[:contrasenia].to_s)
       if otrousuario == nil
         if  current_user.contrasenia == encriptado
-          if(@usuario!=nil)
-            SendMail.cambiar_correo(@usuario,params[:correonuevo]).deliver
-          end
+          @usuario = current_user
+          SendMail.cambiar_correo(@usuario,params[:correonuevo]).deliver
           flash[:alert] = 'Necesita ver su correo para confirmar la operacion'
           redirect_to root_url
         else
@@ -87,13 +86,17 @@ end
     end
   end
   def comfirmar_cambio_correo
-    if(current_user!=nil)
-      @errorMessagge="no puede confirma el cambio de correo electronico si no esta loggeado"
+    if(current_user==nil)
+      flash[:alert] = "no puede confirma el cambio de correo electronico si no esta loggeado"
     else
       usuario= Usuario.find(params[:id_user].to_s)
-      usuario.correo = params[:correo].to_s
-      usuario.save
-      @messagge="Correo modificado con exito.";
+      if(usuario.id==current_user.id)
+        current_user.correo = params[:correo].to_s
+        current_user.save
+        flash[:alert] = "Correo modificado con exito.";
+      else
+        flash[:alert] = "No se pudo modificar el correo.";
+      end
     end
   end
   def forgot_password

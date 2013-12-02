@@ -16,7 +16,7 @@
 	<% end %>
 	&nbsp; <%= link_to "Utilizar Tarea", "/tareas/ver_tareas/"%>
 	<p> &nbsp;</p>
-	<%= form_for @tarea, :html => { :class => 'bs-example form-horizontal', :multipart => true} do |t| %>
+	<%= form_for @tarea, :html => { :class => 'bs-example form-horizontal', :multipart => true}, :url =>guardar_tarea_a_partir_de_otra_path(@tarea_antigua.id), method: :post do |t| %>
 	<%= t.hidden_field :id,:value => @id%>
 	  <div class="row">
 	          <div class="col-lg-10">
@@ -64,7 +64,7 @@
 	                    <%=t.collection_select(:grupo_id, @grupos.select { |g| g.usuario_id ==current_user.id } , :id, :nombre,{:selected => @grupo.id},{:class=>'form-control'})%>
 	                    </div>
 	                  </div>
-	          <div class="form-group">
+	         <div class="form-group">
 	           <label for="inputDate" class="col-lg-2 control-label">Adjuntar archivos:</label>
 	            <div class="col-lg-10 input-group">
 	            <input id="showFiles" class="form-control" type="text" placeholder="Seleccione archivos..." onclick="document.getElementById('tarea_archivo').click();" onfocus="this.blur();">
@@ -73,6 +73,25 @@
 	              <i class="icon-file icon-white"></i>
 	            </span>
 	            </div>
+	          </div>
+	           <div class="form-group" >
+	          	 <% if(@tarea_antigua.archivo_adjuntos.size>0) %>
+		          <div class="col-lg-12" style="whidth:100%;">
+		            <div class="panel panel-default">
+		                <div class="panel-body">
+		                  <label><i class="icon-download"></i> Adjuntos</label>
+		                  <hr style="margin-top:0px;" />
+		                  <ul>
+		                  <% @tarea_antigua.archivo_adjuntos.each do |arch| %>
+		                    <li id="<%=arch.id%>" class="attachment-link" title="Archivo tipo .<%=arch.archivo_file_name.split('.').last%>">
+		                      <a href="<%=arch.archivo.url(download: true)%>" name="archivo_antiguo"><img class="attachment-img" src="/assets/filetypes/default.png" file-type="<%=arch.archivo_file_name.split('.').last%>" ><%=arch.archivo_file_name[0,arch.archivo_file_name.rindex('.')]%></a><span class="pull-right" style="cursor:pointer;" onclick="eliminarItemDeVista(<%=arch.id%>)"><img src="/assets/delete.png" width="24"></span>
+		                    </li>
+		                  <%end%>
+		                  </ul>
+		                </div>
+		              </div>
+		          </div>
+		          <% end %>
 	          </div>
 	          <div class="form-group">
 	                    <div class="col-lg-10 col-lg-offset-2">

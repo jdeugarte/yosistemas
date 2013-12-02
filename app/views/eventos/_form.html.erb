@@ -1,0 +1,61 @@
+<%= form_for(@evento) do |f| %>
+  <div class="row">
+    <div class="col-lg-10">
+      <div class="well">
+        <% if @evento.errors.any? %>
+          <div id="error_explanation" class="alert alert-error">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <ul>
+              <% @evento.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <fieldset>
+          <legend>Ingrese los datos del evento</legend>
+            <div class="form-group">
+              <label for="inputTitle" class="col-lg-2 control-label">Nombre:</label>
+              <div class="col-lg-10">
+                <%= f.text_field :nombre, :class=>'form-control', :placeholder=>'Nombre', :maxlength => 50, :required => true, :title => "El nombre del evento es obligatorio, Por favor rellene este campo"%>
+              </div>
+            </div>
+            <div class="form-group">
+                <label for="inputDescription" class="col-lg-2 control-label">Detalle:</label>
+                <div class="col-lg-10">
+                <%= f.text_area :detalle, :class=>'form-control',:rows=>'6', :placeholder=>'Descripcion', :maxlength => 500 %>
+                </div>
+                </div>
+            <div class="form-group">
+                <label for="inputContent" class="col-lg-2 control-label">Lugar:</label>
+                <div class="col-lg-10">
+                <%= f.text_field :lugar,:class=>'form-control',:rows=>'6', :placeholder=>'Lugar', :maxlength => 500  %>
+                </div>
+            </div>
+            <div class="form-group">
+              <label for="inputDate" class="col-lg-2 control-label">Fecha del evento:</label>
+              <div class="col-lg-10">
+                <div id="datetimepicker2" class="input-group">
+                <%= f.date_select :fecha, :class=>'form-control input-append',:"data-format"=>'dd/MM/yyyy', :placeholder=>'Fecha de Entrega', :style=>"border-bottom-left-radius: 4px;  border-top-left-radius: 4px;"%>
+                          <span id="dateButton" class="input-group-addon add-on" style="background-color: #D5230F; cursor:pointer;">
+                            <i data-time-icon="icon-time" data-date-icon="icon-calendar icon-white">
+                            </i>
+                          </span>
+              </div>
+            </div>
+            <div class="form-group">
+                    <label for="inputEmail" class="col-lg-4 control-label">Estado:</label>
+                    <div class="col-lg-8">
+                      <label for="inputEmail" class="col-lg-4 control-label">
+                        <input type="checkbox" name="estadoevento">
+                      </label>
+                    </div>
+                  </div>
+          </fieldset>
+  <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                      <input type="submit" value="Crear evento" class="btn btn-primary">
+                    </div>
+                  </div>
+  </div>
+<% end %>

@@ -1,7 +1,14 @@
 <%= render :layout => 'layouts/groups_layout' do%>
-<h1>Lista de Cuestionarios</h1>
-<br>
-<br>
+<div class="page-header">
+     <h1 id="forms">Lista de Cuestionarios</h1>
+</div>
+<div class="row" style="margin-bottom:50px;">
+  <%if current_user!=nil && current_user.id==@grupo.usuario_id && current_user.rol == "Docente" %>
+    <div class="col-sm-9 col-md-9 col-lg-9">
+          <a class="btn btn-primary btn-lg" onclick="throwFade()" href="/cuestionarios/nuevo_cuestionario/<%=@grupo.id%>"><span class="icon-pencil icon-white" style="vertical-align:-1px;  margin-right:7px; "></span>Nuevo Cuestionario</a>
+    </div>
+  <% end %>
+</div>
 <div class="row bs-example bs-example-type">
   <div class="col-lg-1">
   </div>
@@ -80,7 +87,7 @@
         </div>
       </div>
     </div>
-    <% else%>
+  
       <h1>Cuestionario <%= cuestionario.titulo %> Cerrado</h1>
     <% end %>
     <% end %>
@@ -88,7 +95,4 @@
     <center><%= paginate @cuestionarios %></center>
   </div>
 </div>
-<%end%>
-<% if (current_user.rol == "Docente")%>
-  <%= link_to "Atras", mis_grupos_path %>
 <%end%>

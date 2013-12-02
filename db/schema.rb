@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131201233854) do
+ActiveRecord::Schema.define(version: 20131201222858) do
+
 
   create_table "adjunto_tarea_comentarios", force: true do |t|
     t.integer  "tarea_comentario_id"
@@ -255,6 +256,7 @@ ActiveRecord::Schema.define(version: 20131201233854) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.time     "hora_entrega"
+    t.integer  "tarea_base"
   end
 
   add_index "tareas", ["grupo_id"], name: "index_tareas_on_grupo_id"

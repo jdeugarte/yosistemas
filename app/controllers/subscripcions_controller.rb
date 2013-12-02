@@ -6,7 +6,7 @@ class SubscripcionsController < ApplicationController
     	@grupo = Grupo.find(params[:grupo_id])
     	@subscripcion = @grupo.subscripcions.create(subscripcions_params)
 
-      if verificar_llave(@subscripcion.llave, @grupo.llave)
+      if @subscripcion.verificar_llave(@grupo.llave)
     	   @subscripcion.usuario_id = current_user.id
     	   @subscripcion.save
          SendMail.notify_users_grupo(current_user, @grupo.nombre).deliver #con sto envio el correo
@@ -34,8 +34,4 @@ private
 	def subscripcions_params
 		params.require(:subscripcion).permit(:llave)
 	end
-
-  def verificar_llave(llave_suscripcion, llave_grupo)
-    return llave_suscripcion == llave_grupo
-  end
 end

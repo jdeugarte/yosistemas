@@ -22,7 +22,7 @@ Yosistemas::Application.routes.draw do
   post "usuarios/guardar_cambio_email" => "usuarios#guardar_cambio_email", :as=> "guardar_cambio_email"
   get 'usuarios/password_recovered/:id_user/:id_request' => 'usuarios#recover', :as => 'recover'
   post "usuarios/password_recovered/:id_user/:id_request" => "usuarios#password_recovered", :as=> "password_recovered"
-  get 'usuarios/comfirmar_cambio_correo/:id_user/:correo' => 'usuarios#comfirmar_cambio_correo', :as => 'confirmar_cambio_correo'
+  get 'usuarios/comfirmar_cambio_correo/:id_user/:correo' => 'usuarios#comfirmar_cambio_correo', :as => 'comfirmar_cambio_correo'
   post "usuarios/send_password_mail" => "usuarios#send_password_mail", :as => "send_password_mail"
   get "usuarios/send_password_mail" => "usuarios#forgot_password", :as => "forgot_password"
   get "usuarios/obtener_charla/:usuario_id" => "usuarios#obtener_charla", :as => "obtener_charla"
@@ -59,7 +59,7 @@ Yosistemas::Application.routes.draw do
   get 'tareas/eliminar/:id' => 'tareas#eliminar'
   get 'tareas/edit/:id' => 'tareas#edit'
   get 'tareas/ver_tareas' => 'tareas#ver_tareas'
-  get 'tareas/guardar_tarea_a_partir_de_otra'=>'tareas#guardar_tarea_a_partir_de_otra',:as =>'guardar_tarea_a_partir_de_otra'
+  post 'tareas/guardar_tarea_a_partir_de_otra/:id_tarea_antigua'=>'tareas#guardar_tarea_a_partir_de_otra',:as =>'guardar_tarea_a_partir_de_otra'
   get '/tareas/cargar_datos_tarea/:id/:id_tarea' => 'tareas#cargar_datos_tarea'
   get 'grupos/:grupo/tareas' => 'tareas#index', :as => 'tareas_index'
   get 'tareas/responder_tarea/:id' => 'tareas#responder_tarea', :as =>'responder_tareas'
@@ -74,6 +74,7 @@ Yosistemas::Application.routes.draw do
   get "cuestionarios/nuevo_cuestionario/:id" => "cuestionarios#nuevo_cuestionario", :as => 'nuevo_cuestionario'
   get "cuestionarios/cuestionarios_de_grupo_index/:id" => "cuestionarios#cuestionarios_de_grupo_index", :as => 'cuestionarios_de_grupo_index'
   get "cuestionarios/delete/:id" => "cuestionarios#delete", :as => 'borrar_cuestionario'
+  get "cuestionarios/editar_cuestionario/:id" => "cuestionarios#editar_cuestionario", :as => 'editar_cuestionario'
   get "cuestionarios/usar_plantilla/:id" => "cuestionarios#usar_plantilla"
   #mensajes
   post "mensajes/enviar" => "mensajes#enviar", as: 'enviar_mensaje'

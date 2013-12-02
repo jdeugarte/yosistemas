@@ -68,6 +68,13 @@
 		                      <a href="<%=arch.archivo.url(download: true)%>"><img class="attachment-img" src="/assets/filetypes/default.png" file-type="<%=arch.archivo_file_name.split('.').last%>" ><%=arch.archivo_file_name[0,arch.archivo_file_name.rindex('.')]%></a><span class="pull-right" style="cursor:pointer;" onclick="eliminarItemDeVista(<%=arch.id%>)"><img src="/assets/delete.png" width="24"></span>
 		                    </li>
 		                  <%end%>
+		                  <% if @tarea_base !=nil %>
+                  <% @tarea_base.archivo_adjuntos.each do |arch| %>
+                  <li class="attachment-link" title="Archivo tipo .<%=arch.archivo_file_name.split('.').last%>">
+                      <a href="<%=arch.archivo.url(download: true)%>"><img class="attachment-img" src="/assets/filetypes/default.png" file-type="<%=arch.archivo_file_name.split('.').last%>" ><%=arch.archivo_file_name[0,arch.archivo_file_name.rindex('.')]%></a>
+                    </li>
+                    <%end%>
+                  <%end %>
 		                  </ul>
 		                </div>
 		              </div>

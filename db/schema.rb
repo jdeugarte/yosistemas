@@ -255,6 +255,7 @@ ActiveRecord::Schema.define(version: 20131201233854) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.time     "hora_entrega"
+    t.integer  "tarea_base"
   end
 
   add_index "tareas", ["grupo_id"], name: "index_tareas_on_grupo_id"
@@ -304,3 +305,4 @@ ActiveRecord::Schema.define(version: 20131201233854) do
   add_index "usuarios", ["grupo_id"], name: "index_usuarios_on_grupo_id"
 
 end
+>>>>>>> c2216425f994d1b5dc2be8893127bd54d2a9ceea

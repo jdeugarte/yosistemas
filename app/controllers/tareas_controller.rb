@@ -118,6 +118,9 @@ class TareasController < ApplicationController
 
   def show
     @tarea = Tarea.find(params[:id])
+    if(@tarea.tarea_base!=nil)
+      @tarea_base=Tarea.find(@tarea.tarea_base)
+    end
     @todos_los_comentarios = @tarea.tarea_comentarios.reverse
     if(current_user==@tarea.usuario)
         @tareas_enviadas=ResponderTarea.where(:tarea_id => @tarea.id)

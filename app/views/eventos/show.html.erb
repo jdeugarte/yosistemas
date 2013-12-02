@@ -1,29 +1,33 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Nombre:</strong>
-  <%= @evento.nombre %>
-</p>
-
-<p>
-  <strong>Detalle:</strong>
+<div class="row">
+<div class="col-lg-6">
+    <div class="well">
+        <form class="bs-example form-horizontal">
+          <fieldset>
+            <legend>Nombre del Evento:
+                    <%= @evento.nombre %>
+      </legend>
+      <div class="form-group">
+        <div class="col-lg-10">
+  <b>Detalle:</b>
   <%= @evento.detalle %>
-</p>
-
-<p>
-  <strong>Lugar:</strong>
+</div>
+</div>
+<div class="form-group">
+        <div class="col-lg-10">
+  <b>Lugar:</b>
   <%= @evento.lugar %>
-</p>
-
-<p>
-  <strong>Fecha:</strong>
+</div>
+</div>
+<div class="form-group">
+        <div class="col-lg-10">
+  <b>Fecha:</b>
   <%= @evento.fecha %>
-</p>
+</div>
+</div>
+</fieldset>
+      </p>
+      </p>
+    </form>
 
-<p>
-  <strong>Estado:</strong>
-  <%= @evento.estado %>
-</p>
-
-<%= link_to 'Edit', edit_evento_path(@evento) %> |
-<%= link_to 'Back', eventos_path %>
+<%= link_to 'Editar', edit_evento_path(@evento) %> |
+<%= link_to 'Atras', eventos_path %>

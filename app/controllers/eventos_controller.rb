@@ -22,7 +22,11 @@ class EventosController < ApplicationController
   # POST /eventos
   def create
     @evento = Evento.new(evento_params)
-
+    if variable=params[:estadoevento]
+        @evento.estado=true
+      else
+        @evento.estado=false
+      end
     respond_to do |format|
       if @evento.save
         format.html { redirect_to @evento, notice: 'Evento ha sido creado.' }
@@ -37,7 +41,7 @@ class EventosController < ApplicationController
   def update
     respond_to do |format|
       if @evento.update(evento_params)
-        format.html { redirect_to @evento, notice: 'Evento was successfully updated.' }
+        format.html { redirect_to @evento, notice: 'Evento fue actualizado satisfactoriamente.' }
       else
         format.html { render action: 'edit' }
       end

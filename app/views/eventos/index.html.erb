@@ -1,8 +1,4 @@
-<h1>Listing eventos</h1>
-
 <h1>Lista de Eventos</h1>
-<br>
-<br>
 <br>
 <br>
 <div class="row bs-example bs-example-type">
@@ -54,6 +50,16 @@
                         <tbody>
                           <tr>
                             <td><%=evento.fecha%> <%=evento.hora%></td>
+                          </tr>
+                        </tbody>
+                        <thead>
+                          <tr>
+                            <th>Grupo:</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><%=evento.grupo.nombre%></td>
                           </tr>
                         </tbody>
                   </table>

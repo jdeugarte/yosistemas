@@ -87,10 +87,13 @@ end
     if(current_user==nil)
       flash[:alert] = "no puede confirma el cambio de correo electronico si no esta loggeado"
     else
-      current_user= Usuario.find(params[:id_user].to_s)
-      current_user.correo = params[:correo].to_s
-      current_user.save
-      flash[:alert] = "Correo modificado con exito.";
+      usuario= Usuario.find(params[:id_user].to_s)
+      if(usuario.id==current_user.id)
+        current_user.correo = params[:correo].to_s
+        current_user.save
+        flash[:alert] = "Correo modificado con exito.";
+      end
+      flash[:alert] = "No se pudo modificar el correo.";
     end
   end
   def forgot_password

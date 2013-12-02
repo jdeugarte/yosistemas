@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131201222858) do
-
+ActiveRecord::Schema.define(version: 20131201233854) do
 
   create_table "adjunto_tarea_comentarios", force: true do |t|
     t.integer  "tarea_comentario_id"

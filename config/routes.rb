@@ -95,6 +95,7 @@ Yosistemas::Application.routes.draw do
   end
   resources :tarea_comentarios
   resources :cuestionarios, only: [:create, :edit, :update, :delete]
+  resources :eventos
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   # You can have the root of your site routed with "root"

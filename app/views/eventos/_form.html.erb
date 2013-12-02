@@ -42,6 +42,12 @@
        </div>
    </div>
    <div class="form-group">
+      <label for="inputContent" class="col-lg-2 control-label">Fecha:</label>
+       <div class="col-lg-10">
+       <%= f.time_select :hora, :class=>'form-control' %>
+       </div>
+   </div>
+   <div class="form-group">
        <label for="inputEmail" class="col-lg-2 control-label">Privacidad</label>
        <div class="col-lg-10">
       <select class="form-control" id="evento_estado" name="evento[estado]">

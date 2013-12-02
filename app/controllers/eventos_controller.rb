@@ -3,7 +3,7 @@ class EventosController < ApplicationController
 
   # GET /eventos
   def index
-    @eventos = Evento.all
+    @eventos = Evento.all.reverse
   end
 
   # GET /eventos/1
@@ -47,6 +47,7 @@ class EventosController < ApplicationController
   # DELETE /eventos/1
   def destroy
     @evento.destroy
+    flash[:alert] = 'Evento eliminado'
     respond_to do |format|
       format.html { redirect_to eventos_url }
     end
@@ -60,6 +61,6 @@ class EventosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def evento_params
-      params.require(:evento).permit(:nombre, :detalle, :lugar, :fecha, :estado)
+      params.require(:evento).permit(:nombre, :detalle, :lugar, :fecha, :estado,:hora, :grupo_id)
     end
 end

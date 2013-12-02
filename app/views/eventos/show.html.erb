@@ -27,9 +27,9 @@
 </div>
 <div class="row">
   <%if current_user!=nil && @evento.usuario_id==current_user.id%>
-                &nbsp;<%= link_to "Editar", edit_evento_path(@evento), :method => :post%>
-                    <%end%>
-                    <%if  @evento.usuario_id==current_user.id %>
+                &nbsp;<%= link_to "Editar", edit_evento_path(@evento)%>
+  <%end%>
+  <%if  @evento.usuario_id==current_user.id %>
                       &nbsp;&nbsp;&nbsp;<%= link_to 'Eliminar Evento',@evento, method: :delete, data: { confirm: 'Are you sure?' } %>
 
                     <%end%>

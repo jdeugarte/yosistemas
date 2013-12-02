@@ -13,6 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20131201222858) do
 
+
   create_table "adjunto_tarea_comentarios", force: true do |t|
     t.integer  "tarea_comentario_id"
     t.datetime "created_at"
@@ -115,6 +116,21 @@ ActiveRecord::Schema.define(version: 20131201222858) do
 
   add_index "cuestionarios", ["grupo_id"], name: "index_cuestionarios_on_grupo_id"
   add_index "cuestionarios", ["usuario_id"], name: "index_cuestionarios_on_usuario_id"
+
+  create_table "eventos", force: true do |t|
+    t.string   "nombre"
+    t.string   "detalle"
+    t.string   "lugar"
+    t.date     "fecha"
+    t.boolean  "estado"
+    t.integer  "grupo_id"
+    t.integer  "usuario_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "eventos", ["grupo_id"], name: "index_eventos_on_grupo_id"
+  add_index "eventos", ["usuario_id"], name: "index_eventos_on_usuario_id"
 
   create_table "grupos", force: true do |t|
     t.string   "nombre"

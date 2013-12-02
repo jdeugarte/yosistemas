@@ -96,7 +96,16 @@ feature 'Gestion de tema' do
     expect(page).to have_content 'Titulo tema de prueba'
     expect(page).to have_content 'Descripcion o contenido del tema de prueba'
   end
-
+    scenario 'Como creador de grupo eliminar comentarios' do
+    docente = FactoryGirl.create(:usuario)
+    estudiante = FactoryGirl.create(:other_user_estudiante)
+    grupo = FactoryGirl.create(:grupo, usuario_id: docente.id)
+    subscripcion = FactoryGirl.create(:subscripcion, llave: "qwerty", usuario_id: estudiante.id, grupo_id: grupo.id)
+    tema=FactoryGirl.create(:tema,titulo:"nuevo",cuerpo:"cuerpo de tema",usuario_id:estudiante.id,visible:1,grupo_id:grupo.id)
+    ingresar_sistema(docente)
+    visit "/temas/"+tema.id.to_s  #no muy util aqui, pero sirve para mostrar esta opcion
+    expect(page).to have_content 'Eliminar Tema'
+  end
 
 end
 

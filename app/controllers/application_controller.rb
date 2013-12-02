@@ -8,17 +8,15 @@ class ApplicationController < ActionController::Base
 
   private
   def current_user
-    
     @current_user ||= Usuario.find(session[:usuario_id]) if session[:usuario_id]
   end
   def require_log_in
     unless current_user
       redirect_to root_path
     end
-  end 
+  end
 
   def notificaciones
-
     @notificaciones = Array.new
     if current_user!=nil
       suscripciones = SuscripcionTema.where(:usuario_id=>current_user.id)
@@ -31,6 +29,4 @@ class ApplicationController < ActionController::Base
     end
     @notificaciones
   end
-
-
 end

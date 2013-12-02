@@ -27,7 +27,6 @@ Yosistemas::Application.routes.draw do
   get "usuarios/send_password_mail" => "usuarios#forgot_password", :as => "forgot_password"
   get "usuarios/obtener_charla/:usuario_id" => "usuarios#obtener_charla", :as => "obtener_charla"
   get "usuarios/obtener_notificacion/:comentario_id" => "usuarios#obtener_notificacion", :as => "obtener_notificacion"
-  
   #rutas de temas
   get "temas/buscar/:grupo" => "temas#buscar", :as=>'buscar_tema'
   get "temas/editar_comentario/:id_comentario" => "temas#editar_comentario", :as  => 'editar_tema_comentario'
@@ -79,7 +78,6 @@ Yosistemas::Application.routes.draw do
   #mensajes
   post "mensajes/enviar" => "mensajes#enviar", as: 'enviar_mensaje'
 
-
   resources :usuarios , except: [:destroy] do
     resources :tema_comentarios, only: [:create]
   end
@@ -97,6 +95,7 @@ Yosistemas::Application.routes.draw do
   end
   resources :tarea_comentarios
   resources :cuestionarios, only: [:create, :edit, :update, :delete]
+  resources :eventos
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   # You can have the root of your site routed with "root"

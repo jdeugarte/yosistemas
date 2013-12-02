@@ -34,14 +34,13 @@ class SessionsController < ApplicationController
     end
   end
 
-  def destroy   
+  def destroy
     usuario=Usuario.find(session[:usuario_id])
     usuario.conectado=false
-    usuario.save    
-    session[:usuario_id] = nil    
+    usuario.save
+    session[:usuario_id] = nil
     redirect_to root_url, :notice => "Logged out!"
   end
-
 
   def obtener_conectados
     usuario=Usuario.find(params[:usuario_id])
@@ -56,5 +55,4 @@ class SessionsController < ApplicationController
     usuario.save
     redirect_to :back
   end
-
 end

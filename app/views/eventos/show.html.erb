@@ -30,7 +30,7 @@
                 &nbsp;<%= link_to "Editar", edit_evento_path(@evento), :method => :post%>
                     <%end%>
                     <%if  @evento.usuario_id==current_user.id %>
-                      &nbsp;&nbsp;&nbsp;<%= link_to 'Eliminar Evento', method: :delete, data: { confirm: 'Are you sure?' } %>
+                      &nbsp;&nbsp;&nbsp;<%= link_to 'Eliminar Evento',@evento, method: :delete, data: { confirm: 'Are you sure?' } %>
 
                     <%end%>
   </div>

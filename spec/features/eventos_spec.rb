@@ -27,8 +27,7 @@ feature 'Gestion de Evento' do
       click_button 'Guardar evento'
     }.to change(Evento, :count).by(1)
    	expect(current_path).to eq '/eventos/'+ Evento.last.id.to_s #no muy util aqui, pero sirve para mostrar esta opcion
-    visit '/eventos'
-    #click_link 'Eliminar Evento'
-    #expect(page).to have_content 'Evento eliminado'
+    click_link 'Eliminar Evento'
+    expect(page).to have_content 'Evento eliminado'
   end
 end

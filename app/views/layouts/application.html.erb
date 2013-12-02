@@ -114,20 +114,8 @@
         </div>
     </div>
 
-    <div id="book">
-      <div id="ventana_notificacion" class="list-group" style=" visibility:hidden; margin-bottom:15px;height:20%; width:18%; position:fixed; bottom:10px; right:80%; background-color:white; padding-bottom:30px;">
-            <a href="#" class="list-group-item">
-              <div class="row">
-                <div class="col-lg-3">
-                  fot
-                </div>
-                <div class="col-lg-9">
-                  <h5 class="list-group-item-heading " id="cabecera_notificacion"></h5>
-                  <p class="list-group-item-text" id="contenido_notificacion"></p>
-                </div>
-              </div>
-            </a>
-        </div>
+    <div id="notificacion_panel">
+      
     </div>
 
       <!-- Pie de Pagina -->
@@ -142,8 +130,7 @@
         if (e.keyCode == 27) { closeChat(); }
          if (e.keyCode == 13) { send(); }
       });
-
-      $("#ventana_notificacion").animate({opacity: 0.25,left: "+=50",height: "toggle"}, 7000);
+      
       function mostrar_notificacion(usuario_id,comentario_id,tema_id)
       {  
         $.get('/usuarios/obtener_notificacion/'+comentario_id+"/"+usuario_id+"/"+tema_id, function(response){          
@@ -158,7 +145,8 @@
         var usuario = array_datos[1];
         var tema = array_datos[2];
         
-        alert(usuario.nombre_usuario+" comento el tema: "+tema.titulo+". Comentario: "+comentario.cuerpo);
+        document.getElementById('notificacion_panel').innerHTML='<div id="ventana_notificacion" class="list-group" style="margin-bottom:15px;height:20%; width:18%; position:fixed; bottom:10px; right:80%; background-color:white; padding-bottom:30px;"> <a href="#" class="list-group-item"> <div class="row"><h4 class="list-group-item-heading " id="cabecera_notificacion">'+usuario.nombre_usuario+' comento el tema <b>'+tema.titulo+'</b></h4><p class="list-group-item-text" id="contenido_notificacion">'+comentario.cuerpo+'</p></div></a></div>';
+         $("#notificacion_panel").animate({opacity: 0,left: "+=50",height: "toggle"}, 7000);
                   
         });
       }

@@ -92,8 +92,9 @@ end
         current_user.correo = params[:correo].to_s
         current_user.save
         flash[:alert] = "Correo modificado con exito.";
+      else
+        flash[:alert] = "No se pudo modificar el correo.";
       end
-      flash[:alert] = "No se pudo modificar el correo.";
     end
   end
   def forgot_password

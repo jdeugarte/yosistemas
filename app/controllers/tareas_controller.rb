@@ -73,10 +73,11 @@ class TareasController < ApplicationController
     end
   end
 
-  def guardar_tarea_a_partir_de_otra(tarea_antigua)
+  def guardar_tarea_a_partir_de_otra
     @tarea = Tarea.new(tarea_params)
     @tarea.grupo_id=params[:tarea][:grupo_id]
     @tarea.usuario_id = current_user.id
+    @tarea.tarea_base=params[:id_tarea_antigua]
     if(@tarea.save)
       add_attached_files(@tarea.id)
       flash[:alert] = 'Tarea creada Exitosamente!'
@@ -94,6 +95,7 @@ class TareasController < ApplicationController
     @tarea.hora_entrega=@tarea_antigua.hora_entrega
     @tarea.grupo_id=@tarea_antigua.grupo_id
     @tarea.usuario_id=@tarea_antigua.usuario_id
+    @tarea.tarea_base=@tarea_antigua.id
     @grupos = Array.new
     if(current_user!=nil)
       current_user.subscripcions.each do |subs|

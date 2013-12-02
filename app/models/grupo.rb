@@ -4,6 +4,7 @@ class Grupo < ActiveRecord::Base
   	has_many :subscripcions
   	has_many :tareas
     has_many :cuestionarios
+    has_many :eventos
   	validates :nombre, :presence => true
     delegate :nombre_usuario, :to => :usuario, :prefix => true
   	scope :buscar_mis_grupos,lambda { |user| where("usuario_id = ?", user.id)}

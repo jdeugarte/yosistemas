@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131201084906) do
+ActiveRecord::Schema.define(version: 20131201222858) do
+
 
   create_table "adjunto_tarea_comentarios", force: true do |t|
     t.integer  "tarea_comentario_id"
@@ -115,6 +116,21 @@ ActiveRecord::Schema.define(version: 20131201084906) do
 
   add_index "cuestionarios", ["grupo_id"], name: "index_cuestionarios_on_grupo_id"
   add_index "cuestionarios", ["usuario_id"], name: "index_cuestionarios_on_usuario_id"
+
+  create_table "eventos", force: true do |t|
+    t.string   "nombre"
+    t.string   "detalle"
+    t.string   "lugar"
+    t.date     "fecha"
+    t.boolean  "estado"
+    t.integer  "grupo_id"
+    t.integer  "usuario_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "eventos", ["grupo_id"], name: "index_eventos_on_grupo_id"
+  add_index "eventos", ["usuario_id"], name: "index_eventos_on_usuario_id"
 
   create_table "grupos", force: true do |t|
     t.string   "nombre"
@@ -240,6 +256,7 @@ ActiveRecord::Schema.define(version: 20131201084906) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.time     "hora_entrega"
+    t.integer  "tarea_base"
   end
 
   add_index "tareas", ["grupo_id"], name: "index_tareas_on_grupo_id"

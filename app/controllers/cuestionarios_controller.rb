@@ -17,7 +17,7 @@ class CuestionariosController < ApplicationController
 		@cuestionarios = Cuestionario.buscar_cuestionarios(@grupo)
 	end
 
-	def create
+  def create
 		@cuestionario = Cuestionario.new(cuestionario_params)
 		@cuestionario.save
 		definir_tipo_de_pregunta(@cuestionario)
@@ -29,6 +29,12 @@ class CuestionariosController < ApplicationController
       	@cuestionario.update(cuestionario_params)
       	redirect_to mis_grupos_path
 	end
+
+  def editar_cuestionario
+    @cuestionario = Cuestionario.find(params[:id])
+    @grupo = Grupo.find(@cuestionario.grupo_id)
+    @cuestionarios = Cuestionario.buscar_cuestionarios(@grupo)
+  end
 
 	def delete
 		@cuestionario = Cuestionario.find(params[:id])

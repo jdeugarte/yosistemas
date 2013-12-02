@@ -47,6 +47,7 @@ class EventosController < ApplicationController
   # DELETE /eventos/1
   def destroy
     @evento.destroy
+    flash[:alert] = 'Evento eliminado'
     respond_to do |format|
       format.html { redirect_to eventos_url }
     end

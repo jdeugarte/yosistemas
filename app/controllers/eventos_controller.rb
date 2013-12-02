@@ -22,11 +22,7 @@ class EventosController < ApplicationController
   # POST /eventos
   def create
     @evento = Evento.new(evento_params)
-    if variable=params[:estadoevento]
-        @evento.estado=true
-      else
-        @evento.estado=false
-      end
+    @evento.usuario_id = current_user.id
     respond_to do |format|
       if @evento.save
         format.html { redirect_to @evento, notice: 'Evento ha sido creado.' }

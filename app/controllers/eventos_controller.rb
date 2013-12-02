@@ -3,7 +3,7 @@ class EventosController < ApplicationController
 
   # GET /eventos
   def index
-    @eventos = Evento.all
+    @eventos = Evento.all.reverse
   end
 
   # GET /eventos/1

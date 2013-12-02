@@ -85,11 +85,11 @@ end
   end
   def comfirmar_cambio_correo
     if(current_user==nil)
-       flash[:alert] = "no puede confirma el cambio de correo electronico si no esta loggeado"
+      flash[:alert] = "no puede confirma el cambio de correo electronico si no esta loggeado"
     else
-      usuario= Usuario.find(params[:id_user].to_s)
-      usuario.correo = params[:correo].to_s
-      usuario.save
+      current_user= Usuario.find(params[:id_user].to_s)
+      current_user.correo = params[:correo].to_s
+      current_user.save
       flash[:alert] = "Correo modificado con exito.";
     end
   end

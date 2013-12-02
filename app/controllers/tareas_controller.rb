@@ -141,6 +141,9 @@ class TareasController < ApplicationController
   def edit #id tarea
     if(Tarea.find(params[:id]).usuario==current_user)
       @tarea = Tarea.find(params[:id])
+      if(@tarea.tarea_base!=nil)
+        @tarea_base=Tarea.find(@tarea.tarea_base)
+      end
       @grupos = Array.new
       if(current_user!=nil)
         current_user.subscripcions.each do |subs|

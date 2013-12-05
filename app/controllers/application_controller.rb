@@ -28,5 +28,7 @@ class ApplicationController < ActionController::Base
       end
     end
     @notificaciones
+
+    
   end
 end

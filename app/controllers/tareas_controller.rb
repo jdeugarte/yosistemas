@@ -244,13 +244,15 @@ class TareasController < ApplicationController
           if suscrito.grupo_id == id_grupo
             if suscrito.usuario_id != current_user.id
                 @usuario = suscrito.usuario
-                @grupo=Grupo.find(id_grupo)
-                @notificacion = NotificacionGrupo.new
-                @notificacion.notificado = false
-                @notificacion.subscripcion_id = suscrito.id
-                @notificacion.tarea = tarea
-                @notificacion.save
-                SendMail.notify_users_task_create(@usuario, tarea, @grupo).deliver
+                if @usuario != nil
+                  @grupo=Grupo.find(id_grupo)
+                  @notificacion = NotificacionGrupo.new
+                  @notificacion.notificado = false
+                  @notificacion.subscripcion_id = suscrito.id
+                  @notificacion.tarea = tarea
+                  @notificacion.save
+                  SendMail.notify_users_task_create(@usuario, tarea, @grupo).deliver
+                end
             end
           end
         end

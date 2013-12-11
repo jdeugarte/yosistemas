@@ -181,7 +181,9 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
 
   def visible
     @tema = Tema.find(params[:id])
-    @tema.destroy
+    if(@tema.usuario_id == current_user.id)
+      @tema.destroy
+    end
     redirect_to temas_url
   end
 

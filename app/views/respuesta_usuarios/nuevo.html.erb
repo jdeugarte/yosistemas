@@ -1,0 +1,14 @@
+<%= form_tag(crear_path, :method=>'post',) do%>
+<% @cuestionario.preguntas.each do |pregunta| %>
+  <%=pregunta.texto%><br>
+  <%if pregunta.tipo != "texto" %> 
+  <%pregunta.respuestas.each do |respuesta|%>
+    <%=respuesta.texto%>
+    <%= check_box_tag respuesta.texto, respuesta.id %>
+  <% end %>
+  <%else%>
+    <%= text_area_tag :respuesta %>
+  <%end%>
+  <br>
+<% end %>
+<%end%>

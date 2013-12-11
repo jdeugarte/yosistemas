@@ -80,6 +80,9 @@ Yosistemas::Application.routes.draw do
   get "cuestionarios/usar_plantilla/:id" => "cuestionarios#usar_plantilla"
   #mensajes
   post "mensajes/enviar" => "mensajes#enviar", as: 'enviar_mensaje'
+  #respuesta_usuarios
+  get "respuesta_usuarios/nuevo/:id" => "respuesta_usuarios#nuevo", :as => "nuevo"
+  post "respuesta_usuarios/crear" => "respuesta_usuarios#crear", :as => "crear"
 
   resources :usuarios , except: [:destroy] do
     resources :tema_comentarios, only: [:create]

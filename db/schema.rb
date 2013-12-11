@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131202042541) do
+ActiveRecord::Schema.define(version: 20131211010510) do
 
   create_table "adjunto_tarea_comentarios", force: true do |t|
     t.integer  "tarea_comentario_id"
@@ -195,6 +195,20 @@ ActiveRecord::Schema.define(version: 20131202042541) do
 
   add_index "responder_tareas", ["tarea_id"], name: "index_responder_tareas_on_tarea_id"
   add_index "responder_tareas", ["usuario_id"], name: "index_responder_tareas_on_usuario_id"
+
+  create_table "respuesta_usuarios", force: true do |t|
+    t.string   "respuesta"
+    t.string   "tipo"
+    t.integer  "cuestionario_id"
+    t.integer  "usuario_id"
+    t.integer  "pregunta_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "respuesta_usuarios", ["cuestionario_id"], name: "index_respuesta_usuarios_on_cuestionario_id"
+  add_index "respuesta_usuarios", ["pregunta_id"], name: "index_respuesta_usuarios_on_pregunta_id"
+  add_index "respuesta_usuarios", ["usuario_id"], name: "index_respuesta_usuarios_on_usuario_id"
 
   create_table "respuestas", force: true do |t|
     t.integer  "pregunta_id"

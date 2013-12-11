@@ -82,6 +82,9 @@
                     <form class="navbar-form navbar-left" method="get" action=<%=editar_cuestionario_path(cuestionario.id)%> data-method="delete" >
                       <button type="submit" class="btn btn-primary">Editar Cuestionario</button>
                     </form>
+                    <form class="navbar-form navbar-left" method="get" action=<%=nuevo_path(cuestionario.id)%> data-method="delete" >
+                      <button type="submit" class="btn btn-primary">Responder Cuestionario</button>
+                    </form>
                 </div>
                 <%end%>
               </div>

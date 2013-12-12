@@ -1,27 +1,16 @@
-<% if @contador < @cuestionario.preguntas.count-1%>
-  <%ruta = crear_path%>
-<%else%>
-  <%ruta = terminado_path%>
-<% end %>
-<%= form_tag(ruta, :method=>'post',) do%>
-
- <%pregunta = @cuestionario.preguntas[@contador] %>
- <%=pregunta.texto%><br>
-  <%if pregunta.tipo != "texto" %> 
-  <%pregunta.respuestas.each do |respuesta|%>
-    <%=respuesta.texto%>
-    <%= check_box_tag :respuetabool, respuesta.id %>
+<%= form_tag( crear_path, :method=>'post') do %>
+  <% @cuestionario.preguntas.each do |pregunta| %>
+    <%= pregunta.texto %></br>
+    <% if pregunta.tipo != 'texto'%>
+      <% pregunta.respuestas.each do |respuesta| %>
+        <%= respuesta.texto %>
+        <%= check_box_tag 'resp[]', respuesta.texto %></br>
+      <% end %>
+    <% else %>
+        <%= text_field_tag 'resp[]' %></br>
+    <% end %>
   <% end %>
-  <%else%>
-    <%= text_area_tag :respuesta %>
- <%end%>
-<%= hidden_field :id_cuestionario,:value => @cuestionario_id%>
-<%@contador=(@contador+1)%>
-<%= hidden_field :cont,:value => @contador%>
-<br>
-<% if @contador < @cuestionario.preguntas.count%>
-  <button class = 'btn btn-primary btn-mini' >siguiente</button>
-<%else%>
-  <button class = 'btn btn-primary btn-mini' >Terminar</button>
+  <%= hidden_field_tag :id_cuestionario, @cuestionario.id %>
+  <%= hidden_field_tag :id_usuario, current_user.id %>
+  <%= button_tag "Aceptar" %>
 <% end %>
-<%end%>

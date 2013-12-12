@@ -6,6 +6,7 @@
 <%= form_tag(ruta, :method=>'post',) do%>
 
  <%pregunta = @cuestionario.preguntas[@contador] %>
+ <%=pregunta.texto%><br>
   <%if pregunta.tipo != "texto" %> 
   <%pregunta.respuestas.each do |respuesta|%>
     <%=respuesta.texto%>
@@ -17,7 +18,7 @@
 <%= hidden_field :id_cuestionario,:value => @cuestionario_id%>
 <%@contador=(@contador+1)%>
 <%= hidden_field :cont,:value => @contador%>
-
+<br>
 <% if @contador < @cuestionario.preguntas.count%>
   <button class = 'btn btn-primary btn-mini' >siguiente</button>
 <%else%>

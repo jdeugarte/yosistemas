@@ -9,6 +9,7 @@ require 'digest/md5'
 	has_many :tareas
 	has_many :suscripcion_temas
 	has_many :eventos
+	has_many :respuesta_usuarios
 	has_many :cuestionarios
 	  has_many :usuarios
   	  accepts_nested_attributes_for :usuarios

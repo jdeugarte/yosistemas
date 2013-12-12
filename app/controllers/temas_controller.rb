@@ -51,7 +51,9 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
       @ids.slice!(0)
       @ids=@ids.split("-")
       @ids.each do |id|
+        if id != "" && id != nil
           @temas.push(Tema.find(id))
+        end
       end
       if params[:var] == "titulo"
         @temas.sort! { |a,b| a.titulo.downcase <=> b.titulo.downcase }
@@ -71,7 +73,9 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
       @ids.slice!(0)
       @ids=@ids.split("-")
       @ids.each do |id|
+        if id != "" && id != nil
           @temas.push(Tema.find(id))
+        end
       end
       if params[:var] == "titulo"
         @temas.sort! { |a,b| a.titulo.downcase <=> b.titulo.downcase }

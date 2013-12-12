@@ -1,14 +1,27 @@
-<%= form_tag(crear_path, :method=>'post',) do%>
-<% @cuestionario.preguntas.each do |pregunta| %>
-  <%=pregunta.texto%><br>
+<% if @contador < @cuestionario.preguntas.count-1%>
+  <%ruta = crear_path%>
+<%else%>
+  <%ruta = terminado_path%>
+<% end %>
+<%= form_tag(ruta, :method=>'post',) do%>
+
+ <%pregunta = @cuestionario.preguntas[@contador] %>
+ <%=pregunta.texto%><br>
   <%if pregunta.tipo != "texto" %> 
   <%pregunta.respuestas.each do |respuesta|%>
     <%=respuesta.texto%>
-    <%= check_box_tag respuesta.texto, respuesta.id %>
+    <%= check_box_tag :respuetabool, respuesta.id %>
   <% end %>
   <%else%>
     <%= text_area_tag :respuesta %>
-  <%end%>
-  <br>
+ <%end%>
+<%= hidden_field :id_cuestionario,:value => @cuestionario_id%>
+<%@contador=(@contador+1)%>
+<%= hidden_field :cont,:value => @contador%>
+<br>
+<% if @contador < @cuestionario.preguntas.count%>
+  <button class = 'btn btn-primary btn-mini' >siguiente</button>
+<%else%>
+  <button class = 'btn btn-primary btn-mini' >Terminar</button>
 <% end %>
 <%end%>

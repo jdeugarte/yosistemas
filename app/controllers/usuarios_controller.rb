@@ -91,8 +91,10 @@ end
     else
       usuario= Usuario.find(params[:id_user].to_s)
       if(usuario.id==current_user.id)
+        usuario.correo = params[:correo].to_s
+        usuario.save
         current_user.correo = params[:correo].to_s
-        current_user.save
+        current_user.save 
         flash[:alert] = "Correo modificado con exito.";
       else
         flash[:alert] = "No se pudo modificar el correo.";

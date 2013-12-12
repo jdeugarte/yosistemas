@@ -83,6 +83,7 @@ Yosistemas::Application.routes.draw do
   #respuesta_usuarios
   get "respuesta_usuarios/nuevo/:id" => "respuesta_usuarios#nuevo", :as => "nuevo"
   post "respuesta_usuarios/crear" => "respuesta_usuarios#crear", :as => "crear"
+  post "respuesta_usuarios/terminado" => "respuesta_usuarios#terminado", :as => "terminado"
 
   resources :usuarios , except: [:destroy] do
     resources :tema_comentarios, only: [:create]

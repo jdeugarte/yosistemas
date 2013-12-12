@@ -6,17 +6,27 @@
           <%= preguntas_form.text_field :texto, :class=>'form-control', :placeholder=>'Pregunta', :maxlength => 150 %>
         </div>
     </div>
+    <div class="form-group">
+      <label for="tipo" class="col-lg-2 control-label">Tipo:</label>
+        <div class="col-lg-10 tipo">
+         <%= preguntas_form.select "tipo",options_for_select(["Texto Libre","Opcion Multiple"]), {}, { :class => 'myselect', :onchange=>"show_message(this, this.value)" }%>
+        </div>
+    </div>
+    
     <div class="col-lg-12 col-lg-offset-2">
+      <div class="semilla" style="display:none">
         <% preguntas_form.fields_for :respuestas do |builder| %>
           <div class="panel panel-info">
             <%= render 'campo_de_respuesta', :respuestas_form => builder %>
         <% end %>
-        <div class="form-group">
-          <div class="col-lg-10 ">
-            <%= preguntas_form.link_to_add "Agregar Respuesta", :respuestas, :class=>"btn btn-success" %>
+            <div class="form-group">
+              <div class="col-lg-10 respuestas">
+                <%= preguntas_form.link_to_add "Agregar Respuesta", :respuestas, :class=>"btn btn-success" %>
+              </div>
+            </div>
           </div>
         </div>
-          </div>
+       
     </div>
     <div class="form-group">
       <div class="col-lg-10 col-lg-offset-9">
@@ -24,3 +34,4 @@
       </div>
     </div>
   </div>
+

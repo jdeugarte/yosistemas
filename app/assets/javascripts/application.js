@@ -13,3 +13,20 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+function show_message(elemento, valor)
+ {
+    var valueSelected=valor;
+    var padre=$(elemento).closest('.panel-body');
+    if(valueSelected=="Texto Libre")
+     {
+        var div_respuestas=padre.find(".respuestas"); 
+        div_respuestas.find('.fields').remove();
+        padre.find(".semilla").hide();
+     }
+     else if(valueSelected=="Opcion Multiple")
+     {
+        var div_respuestas=padre.find(".respuestas"); 
+        div_respuestas.find('.fields').remove();
+        padre.find(".semilla").show();
+     }
+ };

@@ -6,11 +6,12 @@ class RespuestaUsuariosController < ApplicationController
 		#@cuestionario_id = params[:id]
 	end
 
-	def crear
+	def crear 
 		@respuestas = params[:resp]
 		@cuestionario_id = params[:id_cuestionario]
 		@usuario_id = params[:id_usuario]
 		@preguntas_id = params[:id_pregunta]
+		
 		cont = 0
 		@respuestas.each do |r|
 			@respuestaUsuario = RespuestaUsuario.new(:respuesta => r, :cuestionario_id => @cuestionario_id , 

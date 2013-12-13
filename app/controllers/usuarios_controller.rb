@@ -86,29 +86,18 @@ end
     end
   end
   def comfirmar_cambio_correo
-    if(current_user!=nil)
+    if(current_user==nil)
       flash[:alert] = "no puede confirma el cambio de correo electronico si esta loggeado"
     else
       usuario= Usuario.find(params[:id_user].to_s)
-      if usuario == nil
-          flash[:alert] = "nillll";
-      else
-        flash[:alert] = "no nillll";
-      end  
-      
-      #if(usuario.id==current_user.id)
-        usuario.correo = params[:correo].to_s
-       if usuario.save
-        flash[:alert] = "save";
-       else
-        flash[:alert] = "no sab";
-       end
-        #current_user.correo = params[:correo].to_s
-        #current_user.save 
+      flash[:alert] = "mierda"+usuario.nombre+params[:id_user].to_s+params[:correo].to_s;
+      if(usuario.id==current_user.id)
+        current_user.correo = params[:correo].to_s+".com"
+        current_user.save 
         flash[:alert] = "Correo modificado con exito.";
-      #else
-       # //flash[:alert] = "No se pudo modificar el correo.";
-      #end
+      else
+        flash[:alert] = "No se pudo modificar el correo.";
+      end
     end
   end
   def forgot_password

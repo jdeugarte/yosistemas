@@ -8,8 +8,9 @@ class SendMail < ActionMailer::Base
     @url  = 'http://yosistemas.herokuapp.com/usuarios/confirm/'+@user.id.to_s #AESCrypt.encrypt(@user.id.to_s,"Taller")
     mail(to: @user.correo, subject: 'YoSistemas')
   end
-  def cambiar_correo(correo)
-    @url  = 'http://yosistemas.herokuapp.com/usuarios/comfirmar_cambio_correo/'+current_user.id.to_s+"/"+correo.to_s
+  def cambiar_correo(usuario,correo)
+    @user = usuario
+    @url  = 'http://yosistemas.herokuapp.com/usuarios/comfirmar_cambio_correo/'+usuario.id.to_s+"/"+correo.to_s
     mail(to: correo, subject: 'YoSistemas')
   end
   def recover_password(user,id)

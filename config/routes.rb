@@ -78,6 +78,7 @@ Yosistemas::Application.routes.draw do
   get "cuestionarios/delete/:id" => "cuestionarios#delete", :as => 'borrar_cuestionario'
   get "cuestionarios/editar_cuestionario/:id" => "cuestionarios#editar_cuestionario", :as => 'editar_cuestionario'
   get "cuestionarios/usar_plantilla/:id" => "cuestionarios#usar_plantilla"
+  get "cuestionarios/ver_cuestionarios_usuarios/:id_cuestionario"=> "cuestionarios#ver_cuestionarios_usuarios", :as => 'ver_cuestionarios_usuarios'
   #mensajes
   post "mensajes/enviar" => "mensajes#enviar", as: 'enviar_mensaje'
   #respuesta_usuarios

@@ -1,0 +1,14 @@
+<h1>Lista de Suscritos</h1>
+<br>
+<br>
+  <div class="col-sm-6">
+  <div class="list-group">
+    <% @usuarios.each do |usuario| %>
+       <a href="#" class="list-group-item">
+            <%= image_tag avatar_tam_url(usuario,40) %>
+            <h4 class="list-group-item-heading"><%= usuario.nombre %> &nbsp;<%= usuario.apellido %></h4>
+      </a>
+      <br>
+      <% end %>
+  </div>
+  </div>

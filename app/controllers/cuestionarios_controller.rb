@@ -1,5 +1,17 @@
 class CuestionariosController < ApplicationController
 
+	def ver_cuestionarios_usuarios
+  		@cuestionario=Cuestionario.find(params[:id_cuestionario])
+  		@suscritos= Subscripcion.where(grupo_id: @cuestionario.grupo_id)
+  		@usuarios=Array.new
+  		@suscritos.each do |suscrito|
+  			if (suscrito.usuario_id!=current_user.id)
+  				@usuario=Usuario.find(suscrito.usuario_id)
+  				@usuarios.push(@usuario)
+  			end
+  		end  		
+  	end
+
 	def cuestionarios_de_grupo_index
 		@grupo = Grupo.find(params[:id])
 		@cuestionarios = Cuestionario.buscar_cuestionarios(@grupo).page(params[:page]).per(2)
@@ -48,6 +60,8 @@ class CuestionariosController < ApplicationController
   		@grupo = Grupo.find(@cuestionario_plantilla.grupo_id)
   		redirect_to '/cuestionarios/'+@cuestionario.id.to_s+'/edit'
   	end
+
+  	
 
   private
     def cuestionario_params

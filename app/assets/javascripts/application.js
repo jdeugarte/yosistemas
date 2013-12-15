@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-function show_message(elemento, valor)
+function mostrar_ocultar_opcion(elemento, valor)
  {
     var valueSelected=valor;
     var padre=$(elemento).closest('.panel-body');

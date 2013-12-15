@@ -1,18 +1,48 @@
-<%= form_tag( crear_path, :method=>'post') do %>
-  <% @cuestionario.preguntas.each do |pregunta| %>
-    <%= pregunta.texto %></br>
-    <% if pregunta.tipo != 'Texto Libre'%>
-      <% pregunta.respuestas.each do |respuesta| %>
-        <%= respuesta.texto %>
-        <%= check_box_tag 'resp[]', respuesta.texto %></br>
-        <%= hidden_field_tag 'id_pregunta[]', pregunta.id %>
-      <% end %>
-    <% else %>
-        <%= text_field_tag 'resp[]' %></br>
-        <%= hidden_field_tag 'id_pregunta[]', pregunta.id %>
-    <% end %>
-  <% end %>
-  <%= hidden_field_tag :id_cuestionario, @cuestionario.id %>
-  <%= hidden_field_tag :id_usuario, current_user.id %>
-  <%= button_tag "Aceptar" %>
+<%= form_tag( crear_path, :method=>'post', :multipart => true) do %>
+<div class='bs-example form-horizontal'>
+  <div class="row">
+    <div class="col-lg-10">
+       <div class="well">
+          <fieldset>
+            <% @cuestionario.preguntas.each do |pregunta| %>
+              <div class="form-group">
+                <label for="inputTitle" class="col-lg-3 control-label"><%= pregunta.texto %></label>
+                  <% if pregunta.tipo != 'Texto Libre'%>
+                    <% pregunta.respuestas.each do |respuesta| %>
+                      <label for="inputTitle" class="control-label"><%= respuesta.texto %></label>
+                        <%= check_box_tag 'resp[]', respuesta.texto %>
+                        <%= hidden_field_tag 'id_pregunta[]', pregunta.id %>
+                    <% end %><br>
+                  <% else %>
+                    <div class="col-lg-9">    
+                      <%= text_area_tag 'resp[]', nil,options={:class=>'form-control' ,:placeholder => 'tu respuesta'} %>
+                    </div>
+
+                    <div class="form-group">
+                   <label for="inputDate" class="col-lg-3 control-label">Adjuntar archivos:</label>
+                    <div class="col-lg-8 input-group">
+                      <input id="showFiles" class="form-control" type="text" placeholder="Seleccione archivos..." onclick="document.getElementById('respuesta_cuestionario').click();" onfocus="this.blur();">
+                      <%= file_field :archivo , :class=>'form-control',:multiple => true, :style=>"display:none;", :onchange=>"document.getElementById('showFiles').value = (this.files.length>1)?''+this.files.length+' Archivos seleccionados.':this.files[0].name;" %>
+                      <span class="input-group-addon" style="background-color: #D5230F; cursor:pointer;" onclick="document.getElementById('respuesta_cuestionario').click();">
+                        <i class="icon-file icon-white"></i>
+                      </span>
+                    </div>
+                  </div>
+
+                      <%= hidden_field_tag 'id_pregunta[]', pregunta.id %>
+                  <% end %>
+              </div>
+            <% end %>
+            <%= hidden_field_tag :id_cuestionario, @cuestionario.id %>
+            <%= hidden_field_tag :id_usuario, current_user.id %>
+            <div class="form-group">
+              <div class="col-lg-10 col-lg-offset-10">
+                <input type="submit" value="Aceptar" class="btn btn-primary">
+              </div>
+            </div>
+        </fieldset>
+      </div>
+    </div>
+   </div>
+  </div>
 <% end %>

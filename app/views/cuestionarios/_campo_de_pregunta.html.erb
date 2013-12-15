@@ -6,10 +6,11 @@
           <%= preguntas_form.text_field :texto, :class=>'form-control', :placeholder=>'Pregunta', :maxlength => 150 %>
         </div>
     </div>
+    
     <div class="form-group">
       <label for="tipo" class="col-lg-2 control-label">Tipo:</label>
         <div class="col-lg-10 tipo">
-         <%= preguntas_form.select "tipo",options_for_select(["Texto Libre","Opcion Multiple"]), {}, { :class => 'myselect', :onchange=>"show_message(this, this.value)" }%>
+         <%= preguntas_form.select :tipo ,options_for_select(["Texto Libre","Opcion Multiple"]), {}, { :class => 'myselect', :onchange=>"mostrar_ocultar_opcion(this, this.value)" }%>
         </div>
     </div>
     

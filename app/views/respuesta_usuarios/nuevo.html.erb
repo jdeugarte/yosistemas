@@ -17,6 +17,7 @@
                     <div class="col-lg-9">    
                       <%= text_area_tag 'resp[]', nil,options={:class=>'form-control' ,:placeholder => 'tu respuesta'} %>
                     </div>
+                    <%= hidden_field_tag 'id_pregunta[]', pregunta.id %>
                   <!-- vista para adjutar archivos -->
                     <label for="inputTitle" class="col-lg-3 control-label">Adjuntar Archivo</label>
                      <div class="col-lg-4 input-group">

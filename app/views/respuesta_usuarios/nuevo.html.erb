@@ -11,9 +11,8 @@
                     <% pregunta.respuestas.each do |respuesta| %>
                       <label for="inputTitle" class="control-label"><%= respuesta.texto %></label>
                         <%= check_box_tag 'resp[]', respuesta.texto %>
-                        
+                        <%= hidden_field_tag 'id_pregunta[]', pregunta.id %>
                     <% end %><br>
-                    <%= hidden_field_tag 'id_pregunta[]', pregunta.id %>
                   <% else %>
                     <div class="col-lg-9">    
                       <%= text_area_tag 'resp[]', nil,options={:class=>'form-control' ,:placeholder => 'tu respuesta'} %>

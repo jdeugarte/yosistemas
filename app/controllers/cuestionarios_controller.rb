@@ -53,6 +53,27 @@ class CuestionariosController < ApplicationController
 		@cuestionarios = Cuestionario.buscar_cuestionarios(@grupo)
 	end
 
+  def calificar
+    @comentarios = params[:comentarios]
+    @calificacion = params[:calificacion]
+    @id_respuestas = params[:id_respuestas]
+    cont = 0
+    @id_respuestas.each do |id|
+      @respuesta = RespuestaUsuario.find(id)
+      @respuesta.comentario = @comentarios[cont]
+      @respuesta.calificacion = @calificacion[cont]
+      @respuesta.save
+      cont += 1
+    end 
+=begin
+    @respuesta=RespuestaUsuario.find(params[:id_resp])
+    @respuesta.comentario=params[:comentario]
+    @respuesta.calificacion=params[:calificacion]
+    @respuesta.save
+    redirect_to "cargar_respuestas/"+ params[:id_usuario].to_s + "/" + params[:id_cuestionario].to_s
+=end
+  end
+
 	def edit
 		@cuestionario = Cuestionario.find(params[:id])
 		@grupo = Grupo.find(@cuestionario.grupo_id)

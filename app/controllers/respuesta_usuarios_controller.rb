@@ -13,11 +13,13 @@ class RespuestaUsuariosController < ApplicationController
 		@preguntas_id = params[:id_pregunta]
 		
 		cont = 0
-		@respuestas.each do |r|
-			@respuestaUsuario = RespuestaUsuario.new(:respuesta => r, :cuestionario_id => @cuestionario_id , 
-				:usuario_id => @usuario_id, :pregunta_id => @preguntas_id[cont])
-			@respuestaUsuario.save
-			cont += 1
+		if(!RespuestaUsuario.ya_respondio_cuestionario(current_user.id,@cuestionario_id))
+			@respuestas.each do |r|
+				@respuestaUsuario = RespuestaUsuario.new(:respuesta => r, :cuestionario_id => @cuestionario_id , 
+					:usuario_id => @usuario_id, :pregunta_id => @preguntas_id[cont])
+				@respuestaUsuario.save
+				cont += 1
+			end
 		end
 	end
 =begin

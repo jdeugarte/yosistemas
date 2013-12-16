@@ -16,6 +16,7 @@ class CuestionariosController < ApplicationController
         end
   		end  		
   	end
+  end
 
   def ver_resultados_usuarios
       @cuestionario=Cuestionario.find(params[:id_cuestionario])

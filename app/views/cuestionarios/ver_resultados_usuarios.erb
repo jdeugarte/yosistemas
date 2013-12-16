@@ -16,7 +16,13 @@
         <% @respuestas.each do |respuesta|%>
           <% if respuesta.usuario_id == usuario.id && pregunta.id == respuesta.pregunta_id%>
             Respuesta: <%= respuesta.respuesta %><br>
-          <% end %>  
+            <% if respuesta.calificacion == true %>
+              Correcta
+            <% end %>
+            <% if respuesta.calificacion == false %>
+              Incorrecta
+            <% end %>
+          <% end %>   
         <% end %><br>
       <% end %>  
       </div>    

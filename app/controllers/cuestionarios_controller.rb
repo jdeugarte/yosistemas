@@ -18,7 +18,7 @@ class CuestionariosController < ApplicationController
   	end
   end
 
-  def ver_resultados_usuarios #sssss
+  def ver_resultados_usuarios #sssss 
       @cuestionario=Cuestionario.find(params[:id_cuestionario])
       @suscritos= Subscripcion.where(grupo_id: @cuestionario.grupo_id)
       @usuarios=Array.new

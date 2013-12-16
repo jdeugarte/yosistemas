@@ -12,10 +12,7 @@
       <a data-toggle="collapse" data-parent="#accordion" href="<%= "#collapse"+ usuario.id.to_s %>">
         Ver resultados individuales
       </a>
-      <a data-toggle="collapse" data-parent="#accordion" href="<%= "#collapse"+ usuario.nombre.to_s %>">
-        Evaluar respuestas text
-      </a>
-
+                 
       
       <div id="<%= "collapse"+usuario.id.to_s%>" class="panel-collapse collapse in">
       <% @preguntas.each do |pregunta| %>
@@ -25,15 +22,15 @@
             Respuesta: <%= respuesta.respuesta %><br>
           <% end %>  
         <% end %><br>
-      <% end %>  
+      <% end %> 
+      <form class="navbar-form navbar-left" method="get" action="<%= "cargar_respuestas/"+ usuario.id.to_s + "/" + @cuestionario.id.to_s %> " data-method="delete" >
+           <button type="submit" class="btn btn-primary">Calificar preguntas de texto</button>
+        </form> 
+
       </div>    
       
       <div id="<%= "collapse"+ usuario.nombre.to_s%>" class="panel-collapse collapse in">
-        <tbody>
-          <tr>
-            <td><%= usuario.nombre %></td>
-          </tr>
-        </tbody>
+       <br> 
       </div>    
 
       </div>

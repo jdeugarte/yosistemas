@@ -1,23 +1,46 @@
 class CuestionariosController < ApplicationController
 
 	def ver_cuestionarios_usuarios
-  		@cuestionario=Cuestionario.find(params[:id_cuestionario])
-  		@suscritos= Subscripcion.where(grupo_id: @cuestionario.grupo_id)
-  		@usuarios=Array.new
+  	@cuestionario=Cuestionario.find(params[:id_cuestionario])
+  	@suscritos= Subscripcion.where(grupo_id: @cuestionario.grupo_id)
+  	@usuarios=Array.new
+    @respuestas=Array.new
+    @preguntas=Array.new
+    @preguntas=Pregunta.where(cuestionario_id: @cuestionario.id)
+  	@suscritos.each do |suscrito|
+  		if (suscrito.usuario_id!=current_user.id)
+  			@usuario=Usuario.find(suscrito.usuario_id)
+        @respuestas_usuario=RespuestaUsuario.where(usuario_id: suscrito.usuario_id)
+        if(@respuestas_usuario.count >0)
+          @usuarios.push(@usuario)
+        end
+  		end  		
+  	end
+  end
+
+  def ver_resultados_usuarios
+      @cuestionario=Cuestionario.find(params[:id_cuestionario])
+      @suscritos= Subscripcion.where(grupo_id: @cuestionario.grupo_id)
+      @usuarios=Array.new
       @respuestas=Array.new
       @preguntas=Array.new
       @preguntas=Pregunta.where(cuestionario_id: @cuestionario.id)
-  		@suscritos.each do |suscrito|
-  			if (suscrito.usuario_id!=current_user.id)
-  				@usuario=Usuario.find(suscrito.usuario_id)
-  				@usuarios.push(@usuario)
+      @suscritos.each do |suscrito|
+        if (suscrito.usuario_id!=current_user.id)
+          @usuario=Usuario.find(suscrito.usuario_id)
+          @usuarios.push(@usuario)
           @respuestas_usuario=RespuestaUsuario.where(usuario_id: suscrito.usuario_id)
           @respuestas_usuario.each do |respuesta|
             @respuestas.push(respuesta)
           end
-  			end
-  		end  		
-  	end
+        end
+  		end
+  end
+
+  def cargar_respuestas
+    @cuestionario=Cuestionario.find(params[:id_cuestionario])
+    @respuestas=RespuestaUsuario.where(:usuario_id=>params[:id_usuario], :cuestionario_id=> params[:id_cuestionario])
+  end
 
 	def cuestionarios_de_grupo_index
 		@grupo = Grupo.find(params[:id])

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131214151212) do
+ActiveRecord::Schema.define(version: 20131216065652) do
 
   create_table "adjunto_respuesta_cuestionarios", force: true do |t|
     t.integer  "respuesta_usuario_id"
@@ -216,6 +216,8 @@ ActiveRecord::Schema.define(version: 20131214151212) do
     t.integer  "pregunta_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "calificacion"
+    t.string   "comentario"
   end
 
   add_index "respuesta_usuarios", ["cuestionario_id"], name: "index_respuesta_usuarios_on_cuestionario_id"

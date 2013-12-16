@@ -68,10 +68,12 @@
                   </tbody>
                   </table>
                 </div>
-                <%if cuestionario.usuario_id!= current_user.id%>
+                <%if cuestionario.usuario_id!= current_user.id && (!@res_enviado)%>
                     <form class="navbar-form navbar-left" method="get" action=<%=nuevo_path(cuestionario.id)%> data-method="delete" >
                       <button type="submit" class="btn btn-primary">Responder Cuestionario</button>
                     </form>
+                    <%else%>
+                      <h4>Ya resolvio este cuestionario<h4>
                     <%end%>
                 <% if (current_user.rol == "Docente" )%>
                 <div class="col-lg-3">
@@ -89,6 +91,9 @@
                     </form>
                   <form class="navbar-form navbar-left" method="get" action=<%=ver_cuestionarios_usuarios_path(cuestionario.id)%> data-method="delete" >
                       <button type="submit" class="btn btn-primary">Calificar Cuestionarios</button>
+                  </form>
+                  <form class="navbar-form navbar-left" method="get" action=<%=ver_resultados_usuarios_path(cuestionario.id)%> data-method="delete" >
+                      <button type="submit" class="btn btn-primary">Resultados Individuales</button>
                   </form>
                 </div>
                 <%end%>

@@ -1,4 +1,9 @@
-<h2>cuestionario respondido correctamente</h2>
+<h2>Ha finalizado de responder el cuestionario</h2>
 <% @preguntas_id.each do |id| %>
 	<%= id %>
 <% end %>
+
+<% @respuestas.each do |a| %>
+	<%= a+"." %>
+<% end %>
+<%= @respuestas %>

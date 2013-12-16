@@ -1,13 +1,39 @@
 <h1>Lista de Suscritos</h1>
 <br>
 <br>
-  <div class="col-sm-6">
+<div class="col-sm-6">
   <div class="list-group">
     <% @usuarios.each do |usuario| %>
-       <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading"> <%= image_tag avatar_tam_url(usuario,40) %>&nbsp;&nbsp;<%= usuario.nombre %> &nbsp;<%= usuario.apellido %></h4>
+      <div class="panel-group" id="accordion">
+       <!--a href="#" class="list-group-item"-->
+        
+      <h4 class="list-group-item-heading"> <%= image_tag avatar_tam_url(usuario,40) %>&nbsp;&nbsp;<%= usuario.nombre %> &nbsp;<%= usuario.apellido %></h4>
+      
+      <a data-toggle="collapse" data-parent="#accordion" href="<%= "#collapse"+ usuario.id.to_s %>">
+        Ver resultados individuales
       </a>
-      <br>
-      <% end %>
+                 
+      
+      <div id="<%= "collapse"+usuario.id.to_s%>" class="panel-collapse collapse in">
+      <% @preguntas.each do |pregunta| %>
+        Pregunta: <%= pregunta.texto %><br>
+        <% @respuestas.each do |respuesta|%>
+          <% if respuesta.usuario_id == usuario.id && pregunta.id == respuesta.pregunta_id%>
+            Respuesta: <%= respuesta.respuesta %><br>
+          <% end %>  
+        <% end %><br>
+      <% end %> 
+      <form class="navbar-form navbar-left" method="get" action="<%= "cargar_respuestas/"+ usuario.id.to_s + "/" + @cuestionario.id.to_s %> " data-method="delete" >
+           <button type="submit" class="btn btn-primary">Calificar preguntas de texto</button>
+        </form> 
+
+      </div>    
+      
+      <div id="<%= "collapse"+ usuario.nombre.to_s%>" class="panel-collapse collapse in">
+       <br> 
+      </div>    
+
+      </div>
+    <% end %>
   </div>
-  </div>
+</div>

@@ -7,14 +7,13 @@ class RespuestaUsuariosController < ApplicationController
 	end
 
 	def crear 
+		puts "mmmmmmmmmmmmmmmmmmmmmmmmmmmm fFFFFFFFFFFFFFFFFFFFFFFFFFFFF"+params.to_s
 		@respuestas = params[:resp]
 		@cuestionario_id = params[:id_cuestionario]
 		@usuario_id = params[:id_usuario]
 		@preguntas_id = params[:id_pregunta]
 		@pregunta_tipo = params[:tipo_pregunta]
-		
 		cont = 0
-
 		if(!RespuestaUsuario.ya_respondio_cuestionario(current_user.id,@cuestionario_id))
 			@respuestas.each do |r|
 				@respuestaUsuario = RespuestaUsuario.new(:respuesta => r, :cuestionario_id => @cuestionario_id , 
@@ -40,6 +39,7 @@ class RespuestaUsuariosController < ApplicationController
 
 private
     def agregar_archivos_adjuntos(respuesta_usuario_id)
+
       if(!params[:respuesta_usario][:archivo].nil?)
         params[:respuesta_usuario][:archivo].each do |arch|
         @archivo = AdjuntoRespuestaCuestinario.new(:archivo=>arch)

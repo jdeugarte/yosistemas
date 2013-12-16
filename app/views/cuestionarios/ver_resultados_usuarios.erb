@@ -18,7 +18,14 @@
 
       
       <div id="<%= "collapse"+usuario.id.to_s%>" class="panel-collapse collapse in">
-        mensaje para desplegar
+      <% @preguntas.each do |pregunta| %>
+        Pregunta: <%= pregunta.texto %><br>
+        <% @respuestas.each do |respuesta|%>
+          <% if respuesta.usuario_id == usuario.id && pregunta.id == respuesta.pregunta_id%>
+            Respuesta: <%= respuesta.respuesta %><br>
+          <% end %>  
+        <% end %><br>
+      <% end %>  
       </div>    
       
       <div id="<%= "collapse"+ usuario.nombre.to_s%>" class="panel-collapse collapse in">

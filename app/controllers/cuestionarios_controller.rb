@@ -22,6 +22,9 @@ class CuestionariosController < ApplicationController
 	def cuestionarios_de_grupo_index
 		@grupo = Grupo.find(params[:id])
 		@cuestionarios = Cuestionario.buscar_cuestionarios(@grupo).page(params[:page]).per(2)
+    @cuestionarios.each do |cuestion|
+     @res_enviado=!RespuestaUsuario.where(usuario_id:current_user.id,cuestionario_id:cuestion.id).first.nil?
+    end
 	end
 
 	def nuevo_cuestionario

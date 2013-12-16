@@ -30,3 +30,18 @@ function mostrar_ocultar_opcion(elemento, valor)
         padre.find(".semilla").show();
      }
  };
+
+
+ function mostrar_nombre_archivo(elemento)
+ {
+    
+    $(elemento).parent().find("#showfiles").val($(elemento).val());
+
+ }
+
+ function mostrar_nombre_archivo_dos(elemento)
+ {
+    
+    $(elemento).parent().find("#respuesta_archivo_").click();
+
+ }

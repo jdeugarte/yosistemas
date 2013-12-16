@@ -18,7 +18,7 @@ class CuestionariosController < ApplicationController
   	end
   end
 
-  def ver_resultados_usuarios
+  def ver_resultados_usuarios #sssss 
       @cuestionario=Cuestionario.find(params[:id_cuestionario])
       @suscritos= Subscripcion.where(grupo_id: @cuestionario.grupo_id)
       @usuarios=Array.new
@@ -29,7 +29,7 @@ class CuestionariosController < ApplicationController
         if (suscrito.usuario_id!=current_user.id)
           @usuario=Usuario.find(suscrito.usuario_id)
           @usuarios.push(@usuario)
-          @respuestas_usuario=RespuestaUsuario.where(usuario_id: suscrito.usuario_id)
+          @respuestas_usuario=RespuestaUsuario.where(usuario_id: suscrito.usuario_id,cuestionario_id: @cuestionario.id)
           @respuestas_usuario.each do |respuesta|
             @respuestas.push(respuesta)
           end
@@ -45,6 +45,9 @@ class CuestionariosController < ApplicationController
 	def cuestionarios_de_grupo_index
 		@grupo = Grupo.find(params[:id])
 		@cuestionarios = Cuestionario.buscar_cuestionarios(@grupo).page(params[:page]).per(2)
+    @cuestionarios.each do |cuestion|
+     @res_enviado=!RespuestaUsuario.where(usuario_id:current_user.id,cuestionario_id:cuestion.id).first.nil?
+    end
 	end
 
 	def nuevo_cuestionario

@@ -13,12 +13,27 @@ class CuestionariosController < ApplicationController
         @respuestas_usuario=RespuestaUsuario.where(usuario_id: suscrito.usuario_id)
         if(@respuestas_usuario.count >0)
           @usuarios.push(@usuario)
+        end
+  		end  		
+  	end
+
+  def ver_resultados_usuarios
+      @cuestionario=Cuestionario.find(params[:id_cuestionario])
+      @suscritos= Subscripcion.where(grupo_id: @cuestionario.grupo_id)
+      @usuarios=Array.new
+      @respuestas=Array.new
+      @preguntas=Array.new
+      @preguntas=Pregunta.where(cuestionario_id: @cuestionario.id)
+      @suscritos.each do |suscrito|
+        if (suscrito.usuario_id!=current_user.id)
+          @usuario=Usuario.find(suscrito.usuario_id)
+          @usuarios.push(@usuario)
+          @respuestas_usuario=RespuestaUsuario.where(usuario_id: suscrito.usuario_id)
           @respuestas_usuario.each do |respuesta|
             @respuestas.push(respuesta)
           end
         end
   		end
-  	end
   end
 
   def cargar_respuestas

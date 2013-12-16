@@ -80,6 +80,8 @@ Yosistemas::Application.routes.draw do
   get "cuestionarios/usar_plantilla/:id" => "cuestionarios#usar_plantilla"
   get "cuestionarios/ver_cuestionarios_usuarios/:id_cuestionario"=> "cuestionarios#ver_cuestionarios_usuarios", :as => 'ver_cuestionarios_usuarios'
   get "cuestionarios/ver_cuestionarios_usuarios/cargar_respuestas/:id_usuario/:id_cuestionario"=> "cuestionarios#cargar_respuestas", :as => 'cargar_respuestas'
+  get "cuestionarios/ver_resultados_usuarios/:id_cuestionario"=> "cuestionarios#ver_resultados_usuarios", :as => 'ver_resultados_usuarios'
+
   #mensajes
   post "mensajes/enviar" => "mensajes#enviar", as: 'enviar_mensaje'
   #respuesta_usuarios

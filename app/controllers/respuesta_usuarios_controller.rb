@@ -18,8 +18,19 @@ class RespuestaUsuariosController < ApplicationController
 			@respuestas.each do |r|
 				@respuestaUsuario = RespuestaUsuario.new(:respuesta => r, :cuestionario_id => @cuestionario_id , 
 					:usuario_id => @usuario_id, :pregunta_id => @preguntas_id[cont], :tipo => @pregunta_tipo[cont])
+				res = Respuesta.where(pregunta_id: @preguntas_id[cont])
+				res.each do |reee|
+					if @preguntas_id[cont]==reee.pregunta_id && r==reee.texto && reee.respuesta_correcta == true
+						@respuestaUsuario.calificacion = true
+						@respuestaUsuario.save
+						break
+					else
+						@respuestaUsuario.calificacion = false
+					end
+				end	   
 				@respuestaUsuario.save
-				agregar_archivos_adjuntos(@respuestaUsuario.id)
+				
+				#agregar_archivos_adjuntos(@respuestaUsuario.id)
 				cont += 1
 			end
 		end

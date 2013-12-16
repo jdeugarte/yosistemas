@@ -19,7 +19,16 @@
         Pregunta: <%= pregunta.texto %><br>
         <% @respuestas.each do |respuesta|%>
           <% if respuesta.usuario_id == usuario.id && pregunta.id == respuesta.pregunta_id%>
-            Respuesta: <%= respuesta.respuesta %><br>
+            Respuestaaaa: <%= respuesta.respuesta %>
+            aaa<%if respuesta.calificacion==true %>  
+              Correcta          
+            <% end %>
+            <%if respuesta.calificacion==false %>  
+              Incorrecta          
+            <% end %>
+            <%if respuesta.calificacion==nil %>  
+              No respondio          
+            <% end %>
           <% end %>  
         <% end %><br>
       <% end %> 

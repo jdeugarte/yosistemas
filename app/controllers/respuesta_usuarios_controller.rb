@@ -32,4 +32,26 @@ class RespuestaUsuariosController < ApplicationController
 		redirect_to root_path
 	end
 =end
+
+private
+    def agregar_archivos_adjuntos(respuesta_usuario_id)
+      if(!params[:respuesta_usario][:archivo].nil?)
+        params[:respuesta_usuario][:archivo].each do |arch|
+        @archivo = AdjuntoRespuestaCuestinario.new(:archivo=>arch)
+        @archivo.respuesta_usuario_id = respuesta_usuario_id
+        @archivo.save
+        end
+      end
+    end
+
+    def eliminar_archivos_adjuntos(idsParaBorrar)
+        if (!idsParaBorrar.nil?)
+          idsParaBorrar.slice!(0)
+           idsParaBorrar=idsParaBorrar.split("-")
+           idsParaBorrar.each do |id|
+               AdjuntoRespuestaCuestinario.destroy(id)
+           end
+        end
+    end
+
 end

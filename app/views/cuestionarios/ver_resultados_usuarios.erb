@@ -6,17 +6,10 @@
     <% @usuarios.each do |usuario| %>
       <div class="panel-group" id="accordion">
        <!--a href="#" class="list-group-item"-->
-        
+      
+      <a data-toggle="collapse" data-parent="#accordion" href="<%= "#collapse"+ usuario.id.to_s %>">  
       <h4 class="list-group-item-heading"> <%= image_tag avatar_tam_url(usuario,40) %>&nbsp;&nbsp;<%= usuario.nombre %> &nbsp;<%= usuario.apellido %></h4>
-      
-      <a data-toggle="collapse" data-parent="#accordion" href="<%= "#collapse"+ usuario.id.to_s %>">
-        Ver resultados individuales
       </a>
-      <a data-toggle="collapse" data-parent="#accordion" href="<%= "#collapse"+ usuario.nombre.to_s %>">
-        Evaluar respuestas text
-      </a>
-
-      
       <div id="<%= "collapse"+usuario.id.to_s%>" class="panel-collapse collapse in">
       <% @preguntas.each do |pregunta| %>
         Pregunta: <%= pregunta.texto %><br>
@@ -27,15 +20,6 @@
         <% end %><br>
       <% end %>  
       </div>    
-      
-      <div id="<%= "collapse"+ usuario.nombre.to_s%>" class="panel-collapse collapse in">
-        <tbody>
-          <tr>
-            <td><%= usuario.nombre %></td>
-          </tr>
-        </tbody>
-      </div>    
-
       </div>
     <% end %>
   </div>

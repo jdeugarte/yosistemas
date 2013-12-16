@@ -31,6 +31,7 @@
 
                   <% end %>
               </div>
+              <%= hidden_field_tag 'tipo_pregunta[]', pregunta.tipo %>
             <% end %>
             <%= hidden_field_tag :id_cuestionario, @cuestionario.id %>
             <%= hidden_field_tag :id_usuario, current_user.id %>

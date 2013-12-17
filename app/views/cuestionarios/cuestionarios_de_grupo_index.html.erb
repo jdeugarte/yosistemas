@@ -68,11 +68,12 @@
                   </tbody>
                   </table>
                 </div>
-                <%if cuestionario.usuario_id!= current_user.id && (!@res_enviado)%>
+                <%if cuestionario.usuario_id!= current_user.id && (!@res_enviado) %>
                     <form class="navbar-form navbar-left" method="get" action=<%=nuevo_path(cuestionario.id)%> data-method="delete" >
                       <button type="submit" class="btn btn-primary">Responder Cuestionario</button>
                     </form>
-                    <%else%>
+                <%end%>
+                    <%if cuestionario.usuario_id!= current_user.id && (@res_enviado)%>
                       <h4>Ya resolvio este cuestionario<h4>
                     <%end%>
                 <% if (current_user.rol == "Docente" )%>

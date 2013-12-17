@@ -123,7 +123,7 @@ class CuestionariosController < ApplicationController
 
   	def usar_plantilla
   		@cuestionario_plantilla = Cuestionario.find(params[:id])
-  		@cuestionario=@cuestionario_plantilla.clone
+  		@cuestionario=@cuestionario_plantilla.dup
   		@grupo = Grupo.find(@cuestionario_plantilla.grupo_id)
   		redirect_to '/cuestionarios/'+@cuestionario.id.to_s+'/edit'
   	end

@@ -1,17 +1,13 @@
 <h1>Lista de Suscritos</h1>
 <br>
 <br>
-<div class="col-sm-6">
+<div class="col-sm-4">
   <div class="list-group">
     <% @usuarios.each do |usuario| %>
-        
-      <h4 class="list-group-item-heading"> <%= image_tag avatar_tam_url(usuario,40) %>&nbsp;&nbsp;<%= usuario.nombre %> &nbsp;<%= usuario.apellido %></h4>
-
-      <form class="navbar-form navbar-left" method="get" action="<%= "cargar_respuestas/"+ usuario.id.to_s + "/" + @cuestionario.id.to_s %> " data-method="delete" >
+          <h4 class="list-group-item-heading"> <%= image_tag avatar_tam_url(usuario,40) %>&nbsp;&nbsp;<%= usuario.nombre %> &nbsp;<%= usuario.apellido %></h4>
+      <form class="navbar-form navbar-left" method="get" action=	"<%= "cargar_respuestas/"+ usuario.id.to_s + "/" + @cuestionario.id.to_s %> " data-method="delete" >
            <button type="submit" class="btn btn-primary">Calificar preguntas de texto</button>
-      </form> 
-
-      
+      </form>       
     <% end %>
   </div>
 </div>

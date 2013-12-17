@@ -1,0 +1,15 @@
+<h1>Resultados generales</h1>
+<br>
+<br>
+<div class="col-sm-6">
+  <div class="list-group">
+    <% cont=0%>
+    <% @preguntas.each do |pregunta| %>
+      <%= pregunta.texto %>
+      CORRECTAS:<%= @respuestas_correctas.at(cont) %>
+      INCORRECTAS:<%= @respuestas_incorrectas.at(cont) %>
+      <% cont=cont+1 %>
+      <br>
+    <% end %>
+  </div>
+</div>

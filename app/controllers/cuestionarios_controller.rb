@@ -37,6 +37,19 @@ class CuestionariosController < ApplicationController
   		end
   end
 
+  def ver_resumen
+    @cuestionario=Cuestionario.find(params[:id_cuestionario])
+    @preguntas=Pregunta.where(cuestionario_id: @cuestionario.id)  
+    @respuestas_correctas = Array.new
+    @respuestas_incorrectas = Array.new
+    @preguntas.each do |pregunta|
+      respuestas_usuarios_true=RespuestaUsuario.where(pregunta_id: pregunta.id,calificacion: true)
+      respuestas_usuarios_false=RespuestaUsuario.where(pregunta_id: pregunta.id,calificacion: false)
+      @respuestas_correctas.push(respuestas_usuarios_true.size)
+      @respuestas_incorrectas.push(respuestas_usuarios_false.size)
+    end
+  end
+
   def cargar_respuestas
     @cuestionario=Cuestionario.find(params[:id_cuestionario])
     @respuestas=RespuestaUsuario.where(:usuario_id=>params[:id_usuario], :cuestionario_id=> params[:id_cuestionario])

@@ -95,6 +95,9 @@
                   <form class="navbar-form navbar-left" method="get" action=<%=ver_resultados_usuarios_path(cuestionario.id)%> data-method="delete" >
                       <button type="submit" class="btn btn-primary">Resultados Individuales</button>
                   </form>
+                  <form class="navbar-form navbar-left" method="get" action=<%=ver_resumen_path(cuestionario.id)%> data-method="delete" >
+                      <button type="submit" class="btn btn-primary">Resumen Resultados</button>
+                  </form>
                 </div>
                 <%end%>
               </div>

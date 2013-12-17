@@ -136,6 +136,7 @@ class CuestionariosController < ApplicationController
   	def usar_plantilla
   		@cuestionario_plantilla = Cuestionario.find(params[:id])
   		@cuestionario=@cuestionario_plantilla.dup
+      @cuestionario.preguntas=@cuestionario_plantilla.preguntas
       @cuestionario.save
   		@grupo = Grupo.find(@cuestionario_plantilla.grupo_id)
   		redirect_to '/cuestionarios/'+@cuestionario.id.to_s+'/edit'

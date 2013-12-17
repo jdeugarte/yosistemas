@@ -2,15 +2,16 @@
 <br>
 <br>
 <div class="col-sm-4">
+	<div class="table-responsive">
   <div class="list-group">
-  	<table>
-  		<tr>
+  	<table class="table table-condensed">
+  	<tr>
     <% @usuarios.each do |usuario| %>
-        <td>
-      <h4 class="list-group-item-heading"> <%= image_tag avatar_tam_url(usuario,40) %>&nbsp;&nbsp;<%= usuario.nombre %> &nbsp;<%= usuario.apellido %></h4>
+        <td class="active">
+      <p class="list-group-item-heading"> <%= image_tag avatar_tam_url(usuario,40) %>&nbsp;&nbsp;<%= usuario.nombre %> &nbsp;<%= usuario.apellido %></p>
   		</td>
-  		<td>
-      <form class="navbar-form navbar-left" method="get" action="<%= "cargar_respuestas/"+ usuario.id.to_s + "/" + @cuestionario.id.to_s %> " data-method="delete" >
+  		<td class="active">
+      <form method="get" action="<%= "cargar_respuestas/"+ usuario.id.to_s + "/" + @cuestionario.id.to_s %> " data-method="delete" >
            <button type="submit" class="btn btn-primary">Calificar preguntas de texto</button>
       </form>
       </td>
@@ -19,4 +20,5 @@
 
 	</table>
   </div>
+</div>
 </div>

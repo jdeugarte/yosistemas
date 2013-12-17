@@ -18,6 +18,18 @@ class CuestionariosController < ApplicationController
   	end
   end
 
+  def ver_resultado
+      @cuestionario=Cuestionario.find(params[:id_cuestionario])
+      @usuario = current_user
+      @respuestas=Array.new
+      @preguntas=Array.new
+      @preguntas=Pregunta.where(cuestionario_id: @cuestionario.id)
+      @respuestas_usuario=RespuestaUsuario.where(usuario_id: @usuario.id,cuestionario_id: @cuestionario.id)
+      @respuestas_usuario.each do |respuesta|
+        @respuestas.push(respuesta)
+      end
+  end
+
   def ver_resultados_usuarios #sssss 
       @cuestionario=Cuestionario.find(params[:id_cuestionario])
       @suscritos= Subscripcion.where(grupo_id: @cuestionario.grupo_id)

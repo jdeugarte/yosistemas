@@ -17,7 +17,8 @@ function send()
         document.getElementById('chat_conversacion').innerHTML="";
         document.getElementById('chat_name').innerHTML=nombre_usuario;
         document.getElementById("id_usuario_envio").value=usuario_id;
-        $("#chat_window").addClass("in");        
+        $("#chat_window").addClass("in");
+        $("#chat_window").show();        
          $.get('/usuarios/obtener_charla/'+usuario_id, function(response){          
 
             response=response.replace(/\&quot;/g, '"');
@@ -42,4 +43,5 @@ function send()
       function closeChat()
       {
          $("#chat_window").removeClass("in");
+         $("#chat_window").hide();
       }

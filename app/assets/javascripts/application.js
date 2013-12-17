@@ -42,6 +42,6 @@ function mostrar_ocultar_opcion(elemento, valor)
  function mostrar_nombre_archivo_dos(elemento)
  {
     
-    $(elemento).parent().find("#respuesta_archivo_").click();
+    $(elemento).parent().find("#respuesta_usuario_archivo_").click();
 
  }

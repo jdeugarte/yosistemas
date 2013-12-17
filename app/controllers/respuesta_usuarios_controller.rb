@@ -6,7 +6,6 @@ class RespuestaUsuariosController < ApplicationController
 		#@contador = 0
 		#@cuestionario_id = params[:id]
 	end
-
 	def crear 
 		
 		@respuestas = params[:resp]

@@ -31,7 +31,7 @@ class RespuestaUsuariosController < ApplicationController
 				end	   
 				@respuestaUsuario.save
 				
-				agregar_archivos_adjuntos(@respuestaUsuario.id)
+				#agregar_archivos_adjuntos(@respuestaUsuario.id)
 				cont += 1
 			end
 		end

@@ -76,7 +76,7 @@
                     <%if cuestionario.usuario_id!= current_user.id && (@res_enviado)%>
                       <h4>Ya resolvio este cuestionario<h4>
                     <%end%>
-                <% if (current_user.rol == "Docente" )%>
+                <% if (cuestionario.usuario_id== current_user.id )%>
                 <div class="col-lg-3">
                   </br>
                   <%if cuestionario.estado == false %>

@@ -22,7 +22,7 @@
                   <!-- vista para adjutar archivos -->
                     <label for="inputTitle" class="col-lg-3 control-label">Adjuntar Archivo</label>
                      <div class="col-lg-4 input-group" >
-                     <input id="showfiles" class="form-control" type="text" placeholder="Seleccione archivos..." onclick="document.getElementById('respuesta_archivo_').click();" onfocus="this.blur();">    
+                     <input id="showfiles" class="form-control" type="text" placeholder="Seleccione archivos..." onclick="mostrar_nombre_archivo_dos(this)" onfocus="this.blur();">    
                     <%= file_field_tag 'respuesta_archivo[]' , :class=>'form-control',:multiple => true, :style=>"display:none;", :onchange=>"mostrar_nombre_archivo(this)" %>
                       <span class="input-group-addon" style="background-color: #D5230F; cursor:pointer;" onclick="mostrar_nombre_archivo_dos(this)">
                       <i class="icon-file icon-white"></i>

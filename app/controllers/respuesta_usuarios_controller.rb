@@ -7,7 +7,7 @@ class RespuestaUsuariosController < ApplicationController
 	end
 
 	def crear 
-		puts "mmmmmmmmmmmmmmmmmmmmmmmmmmmm fFFFFFFFFFFFFFFFFFFFFFFFFFFFF"+params.to_s
+		
 		@respuestas = params[:resp]
 		@cuestionario_id = params[:id_cuestionario]
 		@usuario_id = params[:id_usuario]

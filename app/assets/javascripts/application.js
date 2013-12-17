@@ -35,7 +35,7 @@ function mostrar_ocultar_opcion(elemento, valor)
  function mostrar_nombre_archivo(elemento)
  {
     
-    $(elemento).parent().find("#showfiles").val($(elemento).val());
+    $(elemento).parent().find("#showfiles").val($(elemento).val().split('\\').pop());
 
  }
 

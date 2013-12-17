@@ -18,6 +18,18 @@ class CuestionariosController < ApplicationController
   	end
   end
 
+  def ver_resultado
+      @cuestionario=Cuestionario.find(params[:id_cuestionario])
+      @usuario = current_user
+      @respuestas=Array.new
+      @preguntas=Array.new
+      @preguntas=Pregunta.where(cuestionario_id: @cuestionario.id)
+      @respuestas_usuario=RespuestaUsuario.where(usuario_id: @usuario.id,cuestionario_id: @cuestionario.id)
+      @respuestas_usuario.each do |respuesta|
+        @respuestas.push(respuesta)
+      end
+  end
+
   def ver_resultados_usuarios #sssss 
       @cuestionario=Cuestionario.find(params[:id_cuestionario])
       @suscritos= Subscripcion.where(grupo_id: @cuestionario.grupo_id)
@@ -123,7 +135,8 @@ class CuestionariosController < ApplicationController
 
   	def usar_plantilla
   		@cuestionario_plantilla = Cuestionario.find(params[:id])
-  		@cuestionario=@cuestionario_plantilla.clone
+  		@cuestionario=@cuestionario_plantilla.dup
+      @cuestionario.save
   		@grupo = Grupo.find(@cuestionario_plantilla.grupo_id)
   		redirect_to '/cuestionarios/'+@cuestionario.id.to_s+'/edit'
   	end

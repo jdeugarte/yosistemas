@@ -27,6 +27,7 @@ class RespuestaUsuariosController < ApplicationController
 						end
 					end	
 					@respuestaUsuario.save
+					agregar_archivos_adjuntos(@respuestaUsuario.id, key)	
 				}
 			}
 		end
@@ -48,14 +49,12 @@ class RespuestaUsuariosController < ApplicationController
 =end
 
 private
-    def agregar_archivos_adjuntos(respuesta_usuario_id)
-      if(!params[:respuesta_usuario][:archivo].nil?)
-        params[:respuesta_usuario][:archivo].each do |arch|
-        @archivo = AdjuntoRespuestaCuestionario.new(:archivo=>arch)
+    def agregar_archivos_adjuntos(respuesta_usuario_id, idPregunta)
+      if(!params[:archivo][idPregunta].nil?)
+        @archivo = AdjuntoRespuestaCuestionario.new(:archivo=>params[:archivo][idPregunta])
         @archivo.respuesta_usuario_id = respuesta_usuario_id
         @archivo.save
        
-        end
       end
     end
 

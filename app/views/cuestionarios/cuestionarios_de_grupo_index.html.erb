@@ -75,6 +75,8 @@
                 <%end%>
                     <%if cuestionario.usuario_id!= current_user.id && (@res_enviado)%>
                       <h4>Ya resolvio este cuestionario<h4>
+                      <form class="navbar-form navbar-left" method="get" action=<%=ver_resultado_path(cuestionario.id)%> >  <button type="submit" class="btn btn-primary">Ver Resultado</button>
+                      </form>
                     <%end%>
                 <% if (current_user.rol == "Docente" )%>
                 <div class="col-lg-3">

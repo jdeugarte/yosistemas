@@ -10,12 +10,12 @@
                   <% if pregunta.tipo != 'Texto Libre'%>
                     <% pregunta.respuestas.each do |respuesta| %>
                       <label for="inputTitle" class="control-label"><%= respuesta.texto %></label>
-                        <%= check_box_tag 'resp[]', respuesta.texto %>
+                        <%= check_box_tag  'resp[' + pregunta.id.to_s + '][]', respuesta.texto %>
                         <%= hidden_field_tag 'id_pregunta[]', pregunta.id %>
                     <% end %><br>
                   <% else %>
                     <div class="col-lg-9">    
-                      <%= text_area_tag 'resp[]', nil,options={:class=>'form-control' ,:placeholder => 'tu respuesta'} %>
+                      <%= text_area_tag 'resp['+ pregunta.id.to_s+ '][]', nil,options={:class=>'form-control' ,:placeholder => 'tu respuesta'} %>
                     </div>
 
                     <%= hidden_field_tag 'id_pregunta[]', pregunta.id %>
@@ -31,7 +31,7 @@
                   <!-- fin de vista para adjuntar archivos -->
                   <% end %>
               </div>
-              <%= hidden_field_tag 'tipo_pregunta[]', pregunta.tipo %>
+              <%= hidden_field_tag 'tipo_pregunta[' +pregunta.id.to_s + ']', pregunta.tipo %>
             <% end %>
             <%= hidden_field_tag :id_cuestionario, @cuestionario.id %>
             <%= hidden_field_tag :id_usuario, current_user.id %>

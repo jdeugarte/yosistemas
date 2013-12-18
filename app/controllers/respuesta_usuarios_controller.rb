@@ -27,7 +27,7 @@ class RespuestaUsuariosController < ApplicationController
 						end
 					end	
 					@respuestaUsuario.save
-					agregar_archivos_adjuntos(@respuestaUsuario.id, key)	
+					#agregar_archivos_adjuntos(@respuestaUsuario.id, key)	
 				}
 			}
 		end

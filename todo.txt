@@ -1,0 +1,19 @@
+(IAR)- El link en el email para registro direccion incorrectamente a staging en lugar 
+  de a producción
+(IAR)-Interfaz de usuario de la pantalla principal, se podría mejorar la alineación
+
+CHAT:
+(IAR)- El chat muestra todos los usuarios, debería mostrar solo los de mis grupos
+(IAR)- El chat debería poder minimarse
+(IAR)- El chat se sale de cuadro cuando te mueves arriba/abajo
+
+
+GRUPOS:
+(IAR)-La opción de subscribirse a grupos debería tener un link en la pagina principal, 
+para hacerlo más intuitivo, puede ser cerca de grupos
+(IAR)- En la pantalla principal, se debería distinguir los grupos privados de los públicos
+actualmente solo se tiene un título que dice 'publicos' donde se listan los grupos 
+públicos y privados
+
+
+

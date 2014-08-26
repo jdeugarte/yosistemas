@@ -62,3 +62,35 @@ CUESTIONARIOS:
 
 NOTIFICACIONES:
 (AJ,MA) No funcionan
+
+MAIL:
+(AP,SK) - La configuracion de mail es correcta, este funciona y manda los corres, el unico problema es que en ciertos 
+          servicios de email tarda mas en llegar, por ejemplo a Yahoo tarda mas que a Gmail, pero esto es algo que no podemos 
+          controlar.
+(AP,SK) - El link para la confirmacion debe ser corregido, este redirecciona a stage.yosistemas.herokuapp.com.
+
+SUBIDA ARCHIVOS:
+(AP,SK) - La subida de archivos esta realizada de manera correcta, no se pudo observar ningun inconveniente. Se probo subir 
+          imagenes como png o jpg y estas fueron subidas correctamente, tambien se probo subir archivos .tar.gz o .zip
+          y estos se subieron sin problemas. De la misma manera se subieron archivos pdf y docx.
+        - SUGERENCIAS: Como sugerencia se podria implementar una barra que nos indique el porcentaje que se ha subido
+          de un archivo, algo especialmente util para archivos grandes.
+INTERFAZ GRAFICA:
+(AP,SK) - Al crear un evento con un detalle muy corto, el footer sube demasiado, sobreponiendose al chat.
+        - Al deslizar la pagina hacia abajo, el chat se oculta debajo del footer, lo que no permite ver el chat.
+        - Cuando uno accede a una pagina como por ejemplo cuestionarios y selecciona la opcion de cuestinarios, si esta
+          seccion esta vacia, el footer se pone encima del chat, pero no puede deslizarse la pagina, por lo que resulta 
+          imposible ver el chat de manera correcta.
+        - Se pierde mucho espacion en la parte superior con un logo tan grande y en navegadores como Mozilla, que tienen
+          una barra de tareas y menus ancha, el primer vistazo de la pagina no nos dice mucho del contenido.
+        - El footer tambien es muy amplio, podria reducrise a simplemente la seccion inferior mas oscura.
+        - En monitores anchos, el logo se observa pixeleado, deberia redisenarse el logo con un programa de editaje 
+          vectorial.
+        - En la pagina principal, al cambiar de grupo, se intento realizar la carga de la seccion de temas y tareas
+          de manera que no se deba recargar toda la pagina, solo esa seccion, pero esto no es asi, ya que toda la pagina
+          vuelve a recargase.
+        - Lo mismo ocurre al cambiar entre las pestanas de Temas y Tareas, Temas, Tareas y Cuestionarios.
+  MISCELANEO:
+(AP,SK) - La hora de rails no esta correctamente configurada.
+        - Ordenar los temas y tareas por detalle no tiene utilidad para el usuario.
+        

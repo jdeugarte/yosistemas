@@ -1,0 +1,64 @@
+(IAR) -  El link en el email para registro direccion incorrectamente a staging en lugar 
+  de a producción
+(IAR) - Interfaz de usuario de la pantalla principal, se podría mejorar la alineación
+
+CHAT:
+(IAR) -  El chat muestra todos los usuarios, debería mostrar solo los de mis grupos
+(IAR) -  El chat debería poder minimizarse
+(IAR) -  El chat se sale de cuadro cuando te mueves arriba/abajo
+(OG) - La interfaz de la barra de chat y las conversaciones, no es muy buena y se pierde en el footer.
+(OG) - Deberia poder acceder al perfil de un Usuario desde su nombre en la ventana de chat.
+
+
+GRUPOS:
+(IAR) - La opción de subscribirse a grupos debería tener un link en la pagina principal, 
+para hacerlo más intuitivo, puede ser cerca de grupos
+(IAR) -  En la pantalla principal, se debería distinguir los grupos privados de los públicos
+actualmente solo se tiene un título que dice 'publicos' donde se listan los grupos 
+públicos y privados
+(AJ) - Interfaz fuera de lugar(crear grupo)
+(AJ) - No se valida el nombre del grupo, pueden haber grupos con el mismo nombre
+(MA) - Faltan links hacia atras
+(MA) - Mal redireccionamiento en la creacion o modificacion
+(AJ) - Icono de buscar grupos no funciona
+(MA) - No hay una opcion que te permita modificar informacion del grupo
+(AJ) - No se pueden eliminar grupos
+
+EVENTOS:
+(RC) - No se pueden elimar o modificar eventos desde la lista de eventos
+(RC) - Al momento de crear un evento la barra de info bloquea por completo la opcion de modificar y eliminar evento
+(OG) - Al crear un evento, tengo las opciones de visibilidad Publico/Privado, y la opcion de que el evento sea publico o aparezca en un grupo seleccionado al que pertenezco... No entiendo la diferencia o la utilidad que hay en tener la opcion de visibilidad(privacidad)
+(OG) - Al crear un evento, no me permite crearlo en dias que ya pasaron, pero si me permite crearlo el dia presente en horas que ya pasaron. Ejemplo, hoy 26, son las 2:30 PM, no deberia poder crear eventos con horas antes de las 3:00 PM, el sistema me permite hacerlo.
+(OG) - El index de Eventos, no tiene paginacion, es decir me mostrara todos los eventos en una misma pagina.
+(OG) - Los labels para la informacion de los eventos, no esta de acuerdo a un formato, mezcla mayusculas, minusculas, no hay puntos (:) en todas.
+(OG) - El formato de la fecha que se muestra en los eventos, no es el adecuado para los usuarios o clientes del sistema.
+(OG) - Los eventos no tienen privacidad, un usuario puede ver todos los eventos creados.
+
+TEMAS:
+(RC) - Cuando ingresas a un tema que ya fue eliminado no te redirecciona a otra pagina automaticamente, salta un error que la pagina no existe
+(OG) - La interfaz del Show de tema esta mal, la foto de perfil se sale de cuadro y el nombre de usuario colisiona con el titulo del tema y las opciones de editar, eliminar, etc.
+(OG) - El Boton de Like de facebook da error, ya que la pagina no existe.
+(OG) - Los archivos que se comparten en los temas, son descargados automaticamente, seria mejor poder ver (En caso de imagenes) un preview o un thumbnail del archivo, o verlo antes de que sea descargado.
+(OG) - La opcion de seguir tema, me imagino que cuando se le da click deberia permitirnos recibir notificaciones cuando alguien comenta o sube algun archivo en el tema, contrario a esto, solo manda un correo avisando que se hizo un comentario.... NOtificaciones no sirven de nada al parecer.
+
+
+SESIONES:
+(OG) - El sistema permite estar con varias sesiones para el mismo usuario al mismo tiempo, no hay control de acceso o de inicio de sesion.
+
+
+USUARIOS:
+(OG) - El perfil de un usuario es sumamente basico y poco interesante, solo tiene nombre y apellido...
+(AJ) - Validaciones en ingles y español
+(AJ) - Interfaz fuera de lugar(modificar perfil,modificar correo)
+(MA) - No existen validaciones al modificar nombre y apellido
+(MA) - Deja utilizar la misma contraseña al hacer cambio
+(AJ) - La opcion no es la misma que el titulo(modificar correo-cambiar correo, modificar perfil)
+
+CUESTIONARIOS:
+(AJ) - Al querer calificar una pregunta con opciones de respuesta multiples no salen las respuestas para calificar
+(AJ) - Interfaz fuera de lugar(crear cuestionario, preguntas, respuestas)
+(MA) - Pregunta esperada por defecto para todas al colocar mas de una opcion
+(MA) - Si ya se respondio la encuesta no se debe poder modificar, o notificar a las personas que ya respodieron de que se modifico el cuestionario
+
+NOTIFICACIONES:
+(AJ,MA) No funcionan

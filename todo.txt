@@ -15,5 +15,13 @@ para hacerlo más intuitivo, puede ser cerca de grupos
 actualmente solo se tiene un título que dice 'publicos' donde se listan los grupos 
 públicos y privados
 
+Eventos:
+-No se pueden elimar o modificar eventos desde la lista de eventos
+-Al momento de crear un evento la barra de info bloquea por completo la opcion de modificar y eliminar evento
+
+Tema
+-Cuando ingresas a un tema que ya fue eliminado no te redirecciona a otra pagina automaticamente, salta un error que la pagina no existe
+
+
 
 

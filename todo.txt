@@ -4,8 +4,10 @@
 
 CHAT:
 (IAR)- El chat muestra todos los usuarios, debería mostrar solo los de mis grupos
-(IAR)- El chat debería poder minimarse
+(IAR)- El chat debería poder minimizarse
 (IAR)- El chat se sale de cuadro cuando te mueves arriba/abajo
+(OG) - La interfaz de la barra de chat y las conversaciones, no es muy buena y se pierde en el footer.
+(OG) - Deberia poder acceder al perfil de un Usuario desde su nombre en la ventana de chat.
 
 
 GRUPOS:
@@ -16,12 +18,25 @@ actualmente solo se tiene un título que dice 'publicos' donde se listan los gru
 públicos y privados
 
 Eventos:
--No se pueden elimar o modificar eventos desde la lista de eventos
--Al momento de crear un evento la barra de info bloquea por completo la opcion de modificar y eliminar evento
+(RC) - No se pueden elimar o modificar eventos desde la lista de eventos
+(RC) - Al momento de crear un evento la barra de info bloquea por completo la opcion de modificar y eliminar evento
+(OG) - Al crear un evento, tengo las opciones de visibilidad Publico/Privado, y la opcion de que el evento sea publico o aparezca en un grupo seleccionado al que pertenezco... No entiendo la diferencia o la utilidad que hay en tener la opcion de visibilidad(privacidad)
+(OG) - Al crear un evento, no me permite crearlo en dias que ya pasaron, pero si me permite crearlo el dia presente en horas que ya pasaron. Ejemplo, hoy 26, son las 2:30 PM, no deberia poder crear eventos con horas antes de las 3:00 PM, el sistema me permite hacerlo.
+(OG) - El index de Eventos, no tiene paginacion, es decir me mostrara todos los eventos en una misma pagina.
+(OG) - Los labels para la informacion de los eventos, no esta de acuerdo a un formato, mezcla mayusculas, minusculas, no hay puntos (:) en todas.
+(OG) - El formato de la fecha que se muestra en los eventos, no es el adecuado para los usuarios o clientes del sistema.
 
-Tema
--Cuando ingresas a un tema que ya fue eliminado no te redirecciona a otra pagina automaticamente, salta un error que la pagina no existe
+Tema:
+(RC) - Cuando ingresas a un tema que ya fue eliminado no te redirecciona a otra pagina automaticamente, salta un error que la pagina no existe
+(OG) - La interfaz del Show de tema esta mal, la foto de perfil se sale de cuadro y el nombre de usuario colisiona con el titulo del tema y las opciones de editar, eliminar, etc.
+(OG) - El Boton de Like de facebook da error, ya que la pagina no existe.
+(OG) - Los archivos que se comparten en los temas, son descargados automaticamente, seria mejor poder ver (En caso de imagenes) un preview o un thumbnail del archivo, o verlo antes de que sea descargado.
 
 
+SESIONES:
+(OG) - El sistema permite estar con varias sesiones para el mismo usuario al mismo tiempo, no hay control de acceso o de inicio de sesion.
 
+
+USUARIOS:
+(OG) - El perfil de un usuario es sumamente basico y poco interesante, solo tiene nombre y apellido...
 

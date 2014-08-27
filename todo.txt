@@ -25,8 +25,8 @@ públicos y privados
 (AJ) - No se pueden eliminar grupos
 
 EVENTOS:
-(RC) - No se pueden elimar o modificar eventos desde la lista de eventos
-(RC) - Al momento de crear un evento la barra de info bloquea por completo la opcion de modificar y eliminar evento
+(RE) - No se pueden elimar o modificar eventos desde la lista de eventos
+(RE) - Al momento de crear un evento la barra de info bloquea por completo la opcion de modificar y eliminar evento
 (OG) - Al crear un evento, tengo las opciones de visibilidad Publico/Privado, y la opcion de que el evento sea publico o aparezca en un grupo seleccionado al que pertenezco... No entiendo la diferencia o la utilidad que hay en tener la opcion de visibilidad(privacidad)
 (OG) - Al crear un evento, no me permite crearlo en dias que ya pasaron, pero si me permite crearlo el dia presente en horas que ya pasaron. Ejemplo, hoy 26, son las 2:30 PM, no deberia poder crear eventos con horas antes de las 3:00 PM, el sistema me permite hacerlo.
 (OG) - El index de Eventos, no tiene paginacion, es decir me mostrara todos los eventos en una misma pagina.
@@ -35,11 +35,14 @@ EVENTOS:
 (OG) - Los eventos no tienen privacidad, un usuario puede ver todos los eventos creados.
 
 TEMAS:
-(RC) - Cuando ingresas a un tema que ya fue eliminado no te redirecciona a otra pagina automaticamente, salta un error que la pagina no existe
+(RE) - Cuando ingresas a un tema que ya fue eliminado no te redirecciona a otra pagina automaticamente, salta un error que la pagina no existe
 (OG) - La interfaz del Show de tema esta mal, la foto de perfil se sale de cuadro y el nombre de usuario colisiona con el titulo del tema y las opciones de editar, eliminar, etc.
 (OG) - El Boton de Like de facebook da error, ya que la pagina no existe.
 (OG) - Los archivos que se comparten en los temas, son descargados automaticamente, seria mejor poder ver (En caso de imagenes) un preview o un thumbnail del archivo, o verlo antes de que sea descargado.
 (OG) - La opcion de seguir tema, me imagino que cuando se le da click deberia permitirnos recibir notificaciones cuando alguien comenta o sube algun archivo en el tema, contrario a esto, solo manda un correo avisando que se hizo un comentario.... NOtificaciones no sirven de nada al parecer.
+
+CHAT:
+(RE) - La barra de info bloquea en algunas ocaciones el espacio para responder el chat 
 
 
 SESIONES:

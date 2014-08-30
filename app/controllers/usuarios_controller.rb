@@ -174,19 +174,24 @@ end
     dos=params[:contrasenia_nueva2].to_s
     encriptado=Digest::MD5.hexdigest(uno)
     contrasenia=params[:contrasenia].to_s
-    contrasenia=Digest::MD5.hexdigest(contrasenia)
-    if current_user.contrasenia==contrasenia
-      if uno==dos
-        current_user.contrasenia=encriptado
-        current_user.save
-        flash[:alert] = 'Contrasenia modificada'
-        redirect_to root_url
+    if (contrasenia != uno && contrasenia != dos)
+      contrasenia=Digest::MD5.hexdigest(contrasenia)
+      if (current_user.contrasenia==contrasenia)
+        if (uno==dos)
+          current_user.contrasenia=encriptado
+          current_user.save
+          flash[:alert] = 'Contrasenia modificada'
+          redirect_to root_url
+        else
+          flash[:alert] = 'Las contrasenias no coinciden'
+          redirect_to :back
+        end
       else
-        flash[:alert] = 'Las contrasenias no coinciden'
+        flash[:alert] = 'la contrasenia no es correcta'
         redirect_to :back
       end
     else
-      flash[:alert] = 'la contrasenia no es correcta'
+      flash[:alert] = 'La nueva contraseña ingresada ya a sido utilizada'
       redirect_to :back
     end
   end

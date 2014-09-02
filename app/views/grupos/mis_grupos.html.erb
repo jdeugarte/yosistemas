@@ -72,7 +72,12 @@
                     <form class="navbar-form navbar-left" method="get" action=<%=suscribirse_path(grupo)%>>
                       <button type="submit" class="btn btn-primary">Suscribirse al grupo</button>
                     </form>
-                <%end%>
+                <%end%>                    
+
+                    <form class="navbar-form navbar-left" method="get" action="/grupos/<%=grupo.id%>/editar_grupo">
+                      <button type="submit" class="btn btn-primary">Editar datos del Grupo</button>
+                    </form>
+
                     <form class="navbar-form navbar-left" method="get" action="/grupos/<%=grupo.id%>/temas/">
                       <button type="submit" class="btn btn-primary">Ver Temas del Grupo</button>
                     </form>

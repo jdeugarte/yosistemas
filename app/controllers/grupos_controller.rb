@@ -99,10 +99,6 @@ class GruposController < ApplicationController
       params.require(:grupo).permit(:nombre, :descripcion, :estado, :llave)
     end
 
-    def update_group_params
-      params.require(:grupo).permit(:nombre, :descripcion, :estado)
-    end
-
     def redirigir_a(grupo)
       if grupo.estado==true
          redirect_to grupo, :flash => { :info => "Grupo creado exitosamente" }

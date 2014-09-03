@@ -26,5 +26,4 @@ describe Grupo do
     expect(grupo.correspondeAGrupo("pr e")).to be_true
   end
   
-  
 end

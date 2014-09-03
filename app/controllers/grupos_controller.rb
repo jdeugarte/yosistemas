@@ -22,7 +22,7 @@ class GruposController < ApplicationController
     else
       @grupos = aux
     end
-    @grupos=Kaminari.paginate_array(@grupos).page(params[:page]).per(5)
+    @grupos = Kaminari.paginate_array(@grupos).page(params[:page]).per(5)
     render 'index'
   end
 
@@ -97,10 +97,6 @@ class GruposController < ApplicationController
   private
     def grupo_params
       params.require(:grupo).permit(:nombre, :descripcion, :estado, :llave)
-    end
-
-    def update_group_params
-      params.require(:grupo).permit(:nombre, :descripcion, :estado)
     end
 
     def redirigir_a(grupo)

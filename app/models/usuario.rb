@@ -47,6 +47,11 @@ require 'digest/md5'
 	:uniqueness =>{
 		:message=> " ya existente"
 	}
+
+	validates :nombre, format: {:multiline => true, with: /^[a-zA-Z ]+$/, message: "solo letras permitidas" }
+	validates :apellido, format: {:multiline => true, with: /^[a-zA-Z ]+$/, message: "solo letras permitidas" }
+
+
 	def self.autenticar(correo, contrasenia)
     	usuario = find_by_correo(correo)
     	if usuario && usuario.contrasenia == Digest::MD5.hexdigest(contrasenia) && usuario.activa==true

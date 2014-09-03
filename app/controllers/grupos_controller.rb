@@ -92,8 +92,6 @@ class GruposController < ApplicationController
     redirect_to '/grupos/invitacion_grupo/'+params[:id].to_s, :flash => { :info => "Sus invitaciones fueron enviadas."}
   end
 
-
-
   private
     def grupo_params
       params.require(:grupo).permit(:nombre, :descripcion, :estado, :llave)

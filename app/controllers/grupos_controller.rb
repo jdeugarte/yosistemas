@@ -38,6 +38,19 @@ class GruposController < ApplicationController
      @grupo = Grupo.find(params[:id])
   end
 
+  def edit
+    @grupo = Grupo.find(params[:id])
+  end
+
+  def update
+    @grupo = Grupo.find(params[:id])
+    if(@grupo.update(grupo_params))               
+      redirect_to @grupo, :flash => { :alert => "Los datos del grupo han sido actualizados exitosamente." }
+    else
+      render 'edit'
+    end
+  end
+
   def create
     @grupo = Grupo.new(grupo_params)
     @grupo.usuario_id = current_user.id
@@ -79,9 +92,15 @@ class GruposController < ApplicationController
     redirect_to '/grupos/invitacion_grupo/'+params[:id].to_s, :flash => { :info => "Sus invitaciones fueron enviadas."}
   end
 
+
+
   private
     def grupo_params
       params.require(:grupo).permit(:nombre, :descripcion, :estado, :llave)
+    end
+
+    def update_group_params
+      params.require(:grupo).permit(:nombre, :descripcion, :estado)
     end
 
     def redirigir_a(grupo)

@@ -56,6 +56,12 @@ Yosistemas::Application.routes.draw do
   get "grupos/:id/temas-y-tareas"  => "temas_y_tareas#index", :as=> 'temas_y_tareas'
   get 'grupos/invitacion_grupo/:id' => 'grupos#invitacion_grupo', :as => 'invitacion_grupo'
   post 'grupos/enviar_invitaciones/:id' => 'grupos#enviar_invitaciones', :as => 'enviar_invitaciones'
+
+  get 'grupos/:id/editar_grupo' => 'grupos#edit', :as => 'edit' 
+
+
+
+
   #rutas de tareas
   get 'tareas/new/:id' => 'tareas#new', :as => 'tarea_para_grupo'
   get 'tareas/eliminar/:id' => 'tareas#eliminar'
@@ -99,7 +105,7 @@ Yosistemas::Application.routes.draw do
     resources :tema_comentarios, only: [:create]
   end
   resources :tema_comentarios, only: [:create]
-  resources :grupos, except: [:edit, :update, :destroy]  do
+  resources :grupos, except: [:destroy]  do
     resources :subscripcions, only: [:create]
   end
   resources :subscripcions, only: [:create]

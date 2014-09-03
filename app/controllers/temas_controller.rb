@@ -7,14 +7,14 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
      else
        @grupo = Grupo.find(1)
     end
-    
-     @temas = @grupo.temas.order("updated_at DESC").page(params[:page]).per(5)
-    @ides=sacarIds(@grupo.temas)
+    @temas = @grupo.temas.order("updated_at DESC").page(params[:page]).per(5)
+    @ides = sacarIds(@grupo.temas)
+
   end
 
   def buscar
-    @temas=Array.new
-    @grupo=Grupo.find(params[:grupo])
+    @temas = Array.new
+    @grupo = Grupo.find(params[:grupo])
     aux = Tema.where(:grupo_id=>params[:grupo])
     if params[:titulo] != "" && params[:titulo]!=nil
       aux.each do |tema|
@@ -29,7 +29,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     if params[:descripcion] != "" && params[:descripcion] != nil
       byDescription = Tema.searchByDescription(params[:descripcion])
       if params[:titulo] == "" || params[:titulo] == nil
-        @temas=byDescription
+        @temas = byDescription
       else
         @temas = ((@temas&byDescription)+@temas+byDescription).uniq
       end
@@ -58,7 +58,8 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
       if params[:var] == "titulo"
         @temas.sort! { |a,b| a.titulo.downcase <=> b.titulo.downcase }
       else
-        @temas.sort! { |a,b| a.cuerpo.downcase <=> b.cuerpo.downcase }
+        #@temas.sort! { |a,b| a.cuerpo.downcase <=> b.cuerpo.downcase }
+        @temas.sort! { |a,b| a.created_at <=> b.created_at }
       end
     end
     @ides=sacarIds(@temas)
@@ -80,10 +81,11 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
       if params[:var] == "titulo"
         @temas.sort! { |a,b| a.titulo.downcase <=> b.titulo.downcase }
       else
-        if params[:var] == "detalle"
-          @temas.sort! { |a,b| a.cuerpo.downcase <=> b.cuerpo.downcase }
-        else
-          @temas.sort! { |a,b| a.grupo.nombre.downcase <=> b.grupo.nombre.downcase }
+        if params[:var] == "fecha"
+          #@temas.sort! { |a,b| a.cuerpo.downcase <=> b.cuerpo.downcase }
+          @temas.sort! { |a,b| a.created_at <=> b.created_at }
+        #else
+         # @temas.sort! { |a,b| a.grupo.nombre.downcase <=> b.grupo.nombre.downcase }
         end
       end
     end

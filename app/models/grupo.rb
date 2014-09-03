@@ -8,6 +8,7 @@ class Grupo < ActiveRecord::Base
   	validates :nombre, :presence => true
     delegate :nombre_usuario, :to => :usuario, :prefix => true
   	scope :buscar_mis_grupos,lambda { |user| where("usuario_id = ?", user.id)}
+    validates :nombre, uniqueness: {case_sensitive: false, :message => "El nombre del grupo ya existe"}
 
     def usuario_suscrito?(id)
   		resp = true

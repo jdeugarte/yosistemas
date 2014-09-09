@@ -138,7 +138,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
       @suscripcion.usuario_id=current_user.id
       @suscripcion.tema_id=@tema.id
       @suscripcion.save
-      redirect_to '/grupos/'+params[:tema][:grupo_id]+'/temas'
+      redirect_to '/temas/'+@tema.id.to_s
     else
       @grupos = Array.new
       if(current_user!=nil)

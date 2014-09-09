@@ -51,7 +51,7 @@ end
           render :action => 'recover',:format=>'html'
         end
       else
-        @pass_error= 'Las contrasenias no coinciden'
+        @pass_error= 'Las contrasenas no coinciden'
         render :action => 'recover'
       end
     end

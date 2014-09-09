@@ -1,7 +1,8 @@
 class TemasYTareasController < ApplicationController
   skip_before_filter :require_log_in,:only=>[:index]
   def index
-    if(params[:id] != nil)
+    
+    if( params[:id] != nil && Grupo.find(params[:id]).habilitado )
        @grupo = Grupo.find(params[:id])
      else
        @grupo = Grupo.find(1)
@@ -14,4 +15,5 @@ class TemasYTareasController < ApplicationController
     @temas_y_tareas.sort!{|x,y|  y.created_at <=> x.created_at}
    end
   end
+
 end

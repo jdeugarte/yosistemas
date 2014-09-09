@@ -69,6 +69,9 @@ class CuestionariosController < ApplicationController
 
 	def cuestionarios_de_grupo_index
 		@grupo = Grupo.find(params[:id])
+    if !@grupo.habilitado
+      redirect_to temas_path
+    end
 		@cuestionarios = Cuestionario.buscar_cuestionarios(@grupo).page(params[:page]).per(2)
 	end
 

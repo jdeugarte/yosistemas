@@ -148,6 +148,7 @@ ActiveRecord::Schema.define(version: 20131216065652) do
     t.string   "nombre"
     t.text     "descripcion"
     t.boolean  "estado"
+    t.boolean  "habilitado"
     t.string   "llave"
     t.integer  "usuario_id"
     t.datetime "created_at"

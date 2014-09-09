@@ -33,13 +33,13 @@
               <div class="col-lg-3">
                 <h5>Creador:</h5>
                  <div class="row">
-                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<%= image_tag avatar_tam_url(grupo.usuario,100) %>
+                  &nbsp&nbsp&nbsp<%= image_tag avatar_tam_url(grupo.usuario,100) %><br/>
                 </div>
                 <div>
                   <h3 style="margin-top:0px;"><%= link_to grupo.usuario.nombre_usuario,  grupo.usuario %></h3>
                 </div>
               </div>
-              <div class="col-lg-6">
+              <div class="col-lg-5">
                   <br>
                   <table class="table table-striped table-bordered table-hover">
                         <thead>
@@ -68,7 +68,7 @@
                     </table>
                   <%end%>
               </div>
-              <div class="col-lg-3">
+              <div class="col-lg-1">
                 <br>
                  <%if current_user.id != grupo.usuario_id && grupo.usuario_suscrito?(current_user.id) %>
                     <form class="navbar-form navbar-left" method="get" action=<%=suscribirse_path(grupo)%>  >

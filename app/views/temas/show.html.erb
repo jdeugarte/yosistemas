@@ -1,5 +1,3 @@
-
-
 <input type="hidden" id="current_user" value="<%=current_user.nil? ? 0 : current_user.id%>">
 <div class="row">
 <div class="col-lg-6 ">
@@ -8,18 +6,18 @@
           <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-3">
                 <div>
-                  <h2 style="margin-top:0px;"><%= link_to @tema.usuario.nombre_usuario,  @tema.usuario %></h2>
+                  <h2><%= link_to @tema.usuario.nombre_usuario,  @tema.usuario %></h2>
                 </div>
                 <div>
                   <%= image_tag avatar_tam_url(@tema.usuario,110), :onmouseover => "dentro(this);"%>
                 </div>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-9">
-            <div class=row>
+            <div class=row style="margin-left:20px;">
               <legend>
                 &nbsp;<%= @tema.titulo %></legend>
             </div>
-            <div class=row>
+            <div class=row style="margin-left:20px;">
               <table class="table table-bordered">
                 <tr>
                   <td>&nbsp;<%= @tema.created_at.strftime("%Y-%m-%e Hora: %I:%M") %></td>
@@ -29,12 +27,12 @@
                 </tr>
               </table>
             </div>
-              <div class=row>
+              <div class=row style="margin-left:20px;">
                 <%if current_user!=nil && @tema.usuario_correo==current_user.correo%>
                 &nbsp;<%= link_to "Editar", edit_tema_path(@tema), :method => :post%>
                     
                     <%if @tema.grupo.usuario_id == current_user.id || @tema.usuario_correo==current_user.correo %>
-                      &nbsp;&nbsp;&nbsp;<%= link_to 'Eliminar Tema', visible_tema_path(@tema), data: { confirm: 'Se eliminara la tarea, ¿Está seguro?' } %>
+                      &nbsp;&nbsp;&nbsp;<%= link_to 'Eliminar Tema', visible_tema_path(@tema), data: { confirm: 'Se eliminara el tema, ¿Está seguro?' } %>
                     <%end%>
                 <%end%>
                  &nbsp;&nbsp;&nbsp;

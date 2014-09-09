@@ -40,7 +40,9 @@
                       <%if subs.grupo.id == @grupo.id%>
                         <li class="active"><a name="currentSelected" href="#"><%= subs.grupo.nombre %></a></li>
                       <%else%>
-                        <li><a name="itemMenu" href="/grupos/<%=subs.grupo.id%>/temas-y-tareas"><%= subs.grupo.nombre %></a></li>
+                        <% if subs.grupo.habilitado %>
+                          <li><a name="itemMenu" href="/grupos/<%=subs.grupo.id%>/temas-y-tareas"><%= subs.grupo.nombre %></a></li>
+                        <% end %>    
                       <% end %>
                   <% end %>
                 <%else%>

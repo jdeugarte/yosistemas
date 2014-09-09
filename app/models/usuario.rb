@@ -18,21 +18,29 @@ require 'digest/md5'
 	validates :nombre,
 	:presence  => { :message => " es requerido, no puede ser nulo" },
 	:length => {
-		:minimum => 2,
+		:minimum => 2, :message => " minimo 2 letras",
 		:allow_blank => TRUE
 	}
 	validates :apellido,
 	:presence  => { :message => " es requerido, no puede ser nulo" },
 	:length => {
-		:minimum => 2,
+		:minimum => 2, :message => " minimo 2 letras",
 		:allow_blank => TRUE
 	}
-	validates :contrasenia,
+	/validates :contrasenia, anterior version
 	:presence  =>  { :message => " es requerido, no puede ser nulo" },
 	:length => {
-		:minimum => 6,
+		:minimum =>  6 , :message => " minimo 6 caracteres"
+	},
+	:confirmation => TRUE/
+  validates_confirmation_of :contrasenia, :message =>"no son iguales",
+	:presence  =>  { :message => " es requerido, no puede ser nulo" },
+	:length => {
+		:minimum =>  6 , :message => " minimo 6 caracteres"
 	},
 	:confirmation => TRUE
+  
+  validates_confirmation_of :contrasenia_de_confirmacion, :message => "no son iguales"
 
 	validates_format_of :correo,
 	:presence => { :message => " es requerido" },

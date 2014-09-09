@@ -73,11 +73,12 @@
                       <button type="submit" class="btn btn-primary">Suscribirse al grupo</button>
                     </form>
                 <%end%>                    
-
+                <% if grupo.habilitado %>
                     <form class="navbar-form navbar-left" method="get" action="/grupos/<%=grupo.id%>/editar_grupo">
                       <button type="submit" class="btn btn-primary">Editar datos del Grupo</button>
                     </form>
 
+    
                     <form class="navbar-form navbar-left" method="get" action="/grupos/<%=grupo.id%>/temas/">
                       <button type="submit" class="btn btn-primary">Ver Temas del Grupo</button>
                     </form>
@@ -90,9 +91,16 @@
                        <form class="navbar-form navbar-left" method="get" action=<%=cuestionarios_de_grupo_index_path(grupo)%> >
                       <button type="submit" class="btn btn-primary">Ver Cuestionarios <br>del Grupo</button>
                     </form>
+                <% end %>
               </div>
           </div>
+          <% if grupo.habilitado %>
+            <a href="deshabilitar_grupo/<%=grupo.id%>">Deshabilitar Grupo</a>
+          <% else %>
+            <a href="habilitar_grupo/<%=grupo.id%>">Habilitar Grupo</a>
+          <% end %>
         </div>
+
     <% end %>
     <% end %>
     <center><%= paginate @grupos %></center>

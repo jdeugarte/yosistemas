@@ -2,7 +2,7 @@ class TemasController < ApplicationController
 skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:show,:searchtitulo]
 
   def index
-    if(params[:id] != nil)
+    if(params[:id] != nil && Grupo.find(params[:id]).habilitado)
        @grupo = Grupo.find(params[:id])
      else
        @grupo = Grupo.find(1)
@@ -18,7 +18,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     aux = Tema.where(:grupo_id=>params[:grupo])
     if params[:titulo] != "" && params[:titulo]!=nil
       aux.each do |tema|
-        if (tema.correspondeATitulo(params[:titulo]))
+        if (tema.correspondeATitulo(params[:titulo]) && tema.grupo.habilitado)
           @temas.push(tema)
         end
       end
@@ -29,9 +29,18 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
     if params[:descripcion] != "" && params[:descripcion] != nil
       byDescription = Tema.searchByDescription(params[:descripcion])
       if params[:titulo] == "" || params[:titulo] == nil
-        @temas = byDescription
+        byDescription.each do |tema|
+          if tema.grupo.habilitado    
+            @temas.push(tema)
+          end
+        end
       else
         @temas = ((@temas&byDescription)+@temas+byDescription).uniq
+        @temas.each do |tema|
+          if !tema.grupo.habilitado
+            @temas.delete(tema)
+          end
+        end
       end
     end
     @ides=sacarIds(@temas)
@@ -129,7 +138,7 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
       @suscripcion.usuario_id=current_user.id
       @suscripcion.tema_id=@tema.id
       @suscripcion.save
-      redirect_to '/grupos/'+params[:tema][:grupo_id]+'/temas'
+      redirect_to '/temas/'+@tema.id.to_s
     else
       @grupos = Array.new
       if(current_user!=nil)

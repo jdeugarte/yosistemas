@@ -48,8 +48,18 @@
                 <% end %>
               </ul>
             </div>
-
-           
+<!--subscription by group key-->
+            <%if  current_user!=nil %>
+              
+                <h3>Suscribirse a Grupo</h3>
+                <form method="GET" action="/grupos/buscar_por_llave">            
+                  <input id="llave" name="llave" placeholder="Llave..." class="form-control input-sm"  style="" type="text"><br>              
+                
+                  <center><input type="submit" value="Suscribirse"  class="btn btn-primary"></center>
+                </form>
+      
+            <%end%>
+<!--______________________________________________________-->
   </div>
 
   <div class="col-lg-8"  style="background-color:white;">

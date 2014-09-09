@@ -8,7 +8,7 @@ class GruposController < ApplicationController
     @grupos = Grupo.buscar_mis_grupos(current_user)
     @grupos = Kaminari.paginate_array(@grupos).page(params[:page]).per(5)
   end
-
+  
   def buscar
     @grupos=Array.new
     aux = Grupo.all
@@ -24,6 +24,24 @@ class GruposController < ApplicationController
     end
     @grupos = Kaminari.paginate_array(@grupos).page(params[:page]).per(5)
     render 'index'
+  end
+
+  def buscar_por_llave    
+    aux = Grupo.all
+    llave = params[:llave]
+    if llave != nil && llave != "publico"
+      aux.each do |grupo| 
+        if(grupo.llave==llave)
+          subscrip = Subscripcion.new
+          subscrip.grupo_id = grupo.id
+          subscrip.usuario_id = current_user.id
+          subscrip.save                    
+        end  
+      end
+      redirect_to root_path, :flash => { :info => "Se ha suscrito a un grupo exitosamente" }
+    else    
+      render 'index'
+    end
   end
 
 	def new

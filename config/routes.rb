@@ -1,4 +1,5 @@
 Yosistemas::Application.routes.draw do
+  get "grupos/buscar_por_llave" => "grupos#buscar_por_llave", :as=>'buscar_grupo_por_llave'
   get "comment_tasks/create"
   get "comment_tasks/delete"
   get "comment_tasks/edit"
@@ -9,10 +10,17 @@ Yosistemas::Application.routes.draw do
   get 'sessions/obtener_conectados/:usuario_id' => 'sessions#obtener_conectados', :as => 'obtener_conectados'
   post 'sessions/eliminar_conectado' => 'sessions#eliminar_conectado', :as => 'eliminar_conectado'
   get "usuarios/confirm/:pass" => "usuarios#confirm", :as => 'confirm'
+  
+
+
+
   #get "log_in" => "sessions#new", :as => "log_in"
   get "log_out" => "sessions#destroy", :as => "log_out"
+  
   get "usuarios/index"
   get "usuarios/show"
+
+
   #get "usuarios/perfil/:id" => "usuarios#perfil", :as => "perfil"
   get "usuarios/new" => "usuarios#new", :as =>"register"
   get "usuarios/update_password" => "usuarios#update_password", :as=>"update_password"
@@ -47,6 +55,7 @@ Yosistemas::Application.routes.draw do
   get "subscripcion/delete/:id" => "subscripcions#delete", :as => 'borrar_suscripcion'
   post "subscripcion/notificar/:id" => 'subscripcions#notificar', :as => 'notificar'
   #rutas de grupos
+  
   get 'grupos/subscripcion_grupo/:id' => 'grupos#subscripcion_grupo', :as=>'suscribirse'
   get "grupos/buscar" => "grupos#buscar", :as=>'buscar_grupo'
   get 'grupos/mis_grupos' => 'grupos#mis_grupos', :as => 'mis_grupos'
@@ -57,8 +66,15 @@ Yosistemas::Application.routes.draw do
   get 'grupos/invitacion_grupo/:id' => 'grupos#invitacion_grupo', :as => 'invitacion_grupo'
   post 'grupos/enviar_invitaciones/:id' => 'grupos#enviar_invitaciones', :as => 'enviar_invitaciones'
   get 'grupos/:id/editar_grupo' => 'grupos#edit', :as => 'edit' 
+<<<<<<< HEAD
+  
+
+
+
+=======
   get 'grupos/deshabilitar_grupo/:id' => 'grupos#deshabilitar_grupo'
   get 'grupos/habilitar_grupo/:id' => 'grupos#habilitar_grupo'
+>>>>>>> c4eedc221983d90d701db2676522cb9cc8a54f99
   #rutas de tareas
   get 'tareas/new/:id' => 'tareas#new', :as => 'tarea_para_grupo'
   get 'tareas/eliminar/:id' => 'tareas#eliminar'

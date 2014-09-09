@@ -46,6 +46,16 @@ class Grupo < ActiveRecord::Base
       false
     end
 
+    def correspondeLlaveAGrupo(llave)
+      parametros llave.split(' ')
+      parametros.each do |parametro|
+         if self.llave.downcase.include?(parametro.downcase)
+           return true
+         end
+      end
+      false
+    end
+
     #genera un string aleatorio
     def generar_llave
       cadena = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten

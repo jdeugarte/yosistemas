@@ -27,10 +27,15 @@ Yosistemas::Application.routes.draw do
   get "usuarios/edit" => "usuarios#edit", :as=>"usuario_edit"
   get "usuarios/cambiar_email" => "usuarios#cambiar_email", :as=>"usuario_cambiar_email"
   post "usuarios/edit_password" => "usuarios#edit_password", :as=> "edit_password"
+  
   post "usuarios/guardar_cambio_email" => "usuarios#guardar_cambio_email", :as=> "guardar_cambio_email"
+  
   get 'usuarios/password_recovered/:id_user/:id_request' => 'usuarios#recover', :as => 'recover'
   post "usuarios/password_recovered/:id_user/:id_request" => "usuarios#password_recovered", :as=> "password_recovered"
+  
   get 'usuarios/comfirmar_cambio_correo/:id_user/:correo' => 'usuarios#comfirmar_cambio_correo', :as => 'comfirmar_cambio_correo'
+  get 'usuarios/confirm_change_password/:id_user' => 'usuarios#confirm_change_password', :as => 'confirm_change_password'  
+
   post "usuarios/send_password_mail" => "usuarios#send_password_mail", :as => "send_password_mail"
   get "usuarios/send_password_mail" => "usuarios#forgot_password", :as => "forgot_password"
   get "usuarios/obtener_charla/:usuario_id" => "usuarios#obtener_charla", :as => "obtener_charla"
@@ -66,7 +71,7 @@ Yosistemas::Application.routes.draw do
   get 'grupos/invitacion_grupo/:id' => 'grupos#invitacion_grupo', :as => 'invitacion_grupo'
   post 'grupos/enviar_invitaciones/:id' => 'grupos#enviar_invitaciones', :as => 'enviar_invitaciones'
   get 'grupos/:id/editar_grupo' => 'grupos#edit', :as => 'edit' 
-  
+        
   get 'grupos/deshabilitar_grupo/:id' => 'grupos#deshabilitar_grupo'
   get 'grupos/habilitar_grupo/:id' => 'grupos#habilitar_grupo'
 

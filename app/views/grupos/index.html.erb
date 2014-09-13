@@ -83,6 +83,25 @@
                       <button type="submit" class="btn btn-primary">enviar invitacion al grupo</button>
                     </form>
                 <%end%>
+                 <% if grupo.usuario_id == current_user.id %>
+                    <form class="navbar-form navbar-left" method="get" action="/grupos/<%=grupo.id%>/editar_grupo">
+                      <button type="submit" class="btn btn-primary">Editar datos del Grupo</button>
+                    </form>
+
+    
+                    <form class="navbar-form navbar-left" method="get" action="/grupos/<%=grupo.id%>/temas/">
+                      <button type="submit" class="btn btn-primary">Ver Temas del Grupo</button>
+                    </form>
+                    <form class="navbar-form navbar-left" method="get" action=<%=suscriptores_path(grupo)%> >
+                      <button type="submit" class="btn btn-primary">Ver suscriptores del Grupo</button>
+                    </form>
+                    <form class="navbar-form navbar-left" method="get" action=<%=nuevo_cuestionario_path(grupo)%> >
+                      <button type="submit" class="btn btn-primary">crear cuestionario</button>
+                    </form>
+                       <form class="navbar-form navbar-left" method="get" action=<%=cuestionarios_de_grupo_index_path(grupo)%> >
+                      <button type="submit" class="btn btn-primary">Ver Cuestionarios <br>del Grupo</button>
+                    </form>
+                <% end %>
               </div>
           </div>
         </div>

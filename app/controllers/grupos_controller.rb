@@ -1,7 +1,7 @@
 class GruposController < ApplicationController
 
   def index
-    @grupos = Grupo.all.page(params[:page]).per(5)
+    @grupos = Grupo.all_habilitados.page(params[:page]).per(5)
   end
 
   def mis_grupos
@@ -9,9 +9,25 @@ class GruposController < ApplicationController
     @grupos = Kaminari.paginate_array(@grupos).page(params[:page]).per(5)
   end
 
+  def deshabilitar_grupo
+    grupo = Grupo.find(params[:id])
+    if current_user == grupo.usuario
+      grupo.deshabilitar_grupo
+    end
+    redirect_to (:back)
+  end
+
+  def habilitar_grupo
+    grupo = Grupo.find(params[:id])
+    if current_user == grupo.usuario
+      grupo.habilitar_grupo
+    end
+    redirect_to (:back)
+  end
+
   def buscar
     @grupos=Array.new
-    aux = Grupo.all
+    aux = Grupo.all_habilitados
     nombre = params[:nombre]
     if nombre != "" && nombre != nil
       aux.each do |grupo|

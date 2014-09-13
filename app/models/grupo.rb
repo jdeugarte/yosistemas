@@ -9,6 +9,22 @@ class Grupo < ActiveRecord::Base
     delegate :nombre_usuario, :to => :usuario, :prefix => true
   	scope :buscar_mis_grupos,lambda { |user| where("usuario_id = ?", user.id)}
     validates :nombre, uniqueness: {case_sensitive: false, :message => "El nombre del grupo ya existe"}
+    after_create :habilitar_grupo
+
+
+    def habilitar_grupo
+      self.habilitado = true
+      self.save
+    end
+
+    def deshabilitar_grupo
+      self.habilitado = false
+      self.save
+    end
+
+    def self.all_habilitados
+      Grupo.where(:habilitado => true)
+    end
 
     def usuario_suscrito?(id)
   		resp = true
@@ -44,4 +60,6 @@ class Grupo < ActiveRecord::Base
         self.llave = "publico"
       end
     end
+
+
 end

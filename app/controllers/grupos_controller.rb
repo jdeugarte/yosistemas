@@ -52,9 +52,10 @@ class GruposController < ApplicationController
           subscrip.grupo_id = grupo.id
           subscrip.usuario_id = current_user.id
           subscrip.save                    
+          @grupo = grupo
         end  
-      end
-      redirect_to root_path, :flash => { :info => "Se ha suscrito a un grupo exitosamente" }
+      end 
+      redirect_to @grupo, :flash => { :info => "Se ha suscrito a un grupo exitosamente" }     
     else    
       render 'index'
     end

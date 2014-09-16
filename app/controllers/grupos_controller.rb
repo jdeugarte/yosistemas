@@ -55,7 +55,8 @@ class GruposController < ApplicationController
           @grupo = grupo
         end  
       end 
-      redirect_to @grupo, :flash => { :info => "Se ha suscrito el grupo: "+ @grupo.nombre+" exitosamente" }     
+      #grupos/2/temas-y-tareas
+      redirect_to '/grupos/'+@grupo.id.to_s+'/temas-y-tareas/', :flash => { :info => "Se ha suscrito al grupo: "+"' "+ @grupo.nombre+" '"+" exitosamente" }     
     else    
       render 'index'
     end

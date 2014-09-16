@@ -38,5 +38,5 @@ en:
       models:
         tema:
           attributes:
-            first_name:
+            cuerpo:
               blank: "no puede estar vacio"

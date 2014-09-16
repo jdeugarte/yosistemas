@@ -1,7 +1,21 @@
-<%= form_for @grupo, :html => { :class => 'bs-example form-horizontal' } do |f| %>
+<%= form_for @grupo, :html => { :class => 'bs-example form-horizontal', :multipart => true} do |f| %>
+<%= f.hidden_field :id,:value => @id%>
   <div class="row">
           <div class="col-lg-6">
             <div class="well">
+              <% if @grupo.errors.any? %>
+                   <div id ="errorRegistroUsuario" class="alert alert-error">
+                      <button type="button" class="close" data-dismiss="alert">&times;</button>
+                      <ul>
+                         <% @grupo.errors.full_messages.each do |msg| %>
+                         <li><%= msg %></li>
+                         <% end %>
+                      </ul>
+                   </div>
+                <% end %>
+                
+
+
                 <fieldset>
                   <legend>Ingrese los datos del grupo </legend>
                   <div class="form-group">

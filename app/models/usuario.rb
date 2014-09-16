@@ -16,13 +16,13 @@ require 'digest/md5'
   	before_create :encrypt_password
 
 	validates :nombre,
-	:presence  => { :message => " es requerido, no puede ser nulo" },
+	:presence  => { :message => " es requerido, no puede dejar vacio" },
 	:length => {
 		:minimum => 2, :message => " minimo 2 letras",
 		:allow_blank => TRUE
 	}
 	validates :apellido,
-	:presence  => { :message => " es requerido, no puede ser nulo" },
+	:presence  => { :message => " es requerido, no puede dejar vacio" },
 	:length => {
 		:minimum => 2, :message => " minimo 2 letras",
 		:allow_blank => TRUE
@@ -34,7 +34,7 @@ require 'digest/md5'
 	},
 	:confirmation => TRUE/
   validates_confirmation_of :contrasenia, :message =>"no son iguales",
-	:presence  =>  { :message => " es requerido, no puede ser nulo" },
+	:presence  =>  { :message => " es requerida" },
 	:length => {
 		:minimum =>  6 , :message => " minimo 6 caracteres"
 	},
@@ -56,8 +56,8 @@ require 'digest/md5'
 		:message=> " ya existente"
 	}
 
-	validates :nombre, format: {:multiline => true, with: /^[a-zA-Z ]+$/, message: "solo letras permitidas" }
-	validates :apellido, format: {:multiline => true, with: /^[a-zA-Z ]+$/, message: "solo letras permitidas" }
+	validates :nombre, format: {:multiline => true, with: /^[a-zA-Z ]+$/, message: "no se permiten caracteres que no sean alfabeticos" }
+	validates :apellido, format: {:multiline => true, with: /^[a-zA-Z ]+$/, message: "no se permiten caracteres que no sean alfabeticos" }
 
 
 	def self.autenticar(correo, contrasenia)

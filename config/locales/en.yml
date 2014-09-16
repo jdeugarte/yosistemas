@@ -28,3 +28,15 @@ en:
       previous: "&lsaquo; Ant"
       next: "Sig &rsaquo;"
       truncate: "..."
+
+en:
+  activerecord:
+    attributes:
+      tema:
+        cuerpo: "Contenido"
+    errors:
+      models:
+        tema:
+          attributes:
+            cuerpo:
+              blank: "no puede estar vacio"

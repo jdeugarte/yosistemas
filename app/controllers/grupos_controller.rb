@@ -24,7 +24,7 @@ class GruposController < ApplicationController
     end
     redirect_to (:back)
   end
-
+  
   def buscar
     @grupos=Array.new
     aux = Grupo.all_habilitados
@@ -40,6 +40,26 @@ class GruposController < ApplicationController
     end
     @grupos = Kaminari.paginate_array(@grupos).page(params[:page]).per(5)
     render 'index'
+  end
+
+  def buscar_por_llave    
+    aux = Grupo.all
+    llave = params[:llave]
+    if llave != nil && llave != "publico"
+      aux.each do |grupo| 
+        if(grupo.llave==llave)
+          subscrip = Subscripcion.new
+          subscrip.grupo_id = grupo.id
+          subscrip.usuario_id = current_user.id
+          subscrip.save                    
+          @grupo = grupo
+        end  
+      end 
+      #grupos/2/temas-y-tareas
+      redirect_to '/grupos/'+@grupo.id.to_s+'/temas-y-tareas/', :flash => { :info => "Se ha suscrito al grupo: "+"' "+ @grupo.nombre+" '"+" exitosamente" }     
+    else    
+      render 'index'
+    end
   end
 
 	def new
@@ -78,7 +98,8 @@ class GruposController < ApplicationController
       subs.save
       redirigir_a(@grupo)
     else
-      redirect_to "/grupos/new", :flash => { :error => "Error al crear un grupo" }
+      #redirect_to "/grupos/new", :flash => { :error => "Error al crear un grupo" }
+      render 'new', :flash => { :alert => "Error al crear un grupo" }
     end
   end
 

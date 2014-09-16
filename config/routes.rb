@@ -1,4 +1,5 @@
 Yosistemas::Application.routes.draw do
+  get "grupos/buscar_por_llave" => "grupos#buscar_por_llave", :as=>'buscar_grupo_por_llave'
   get "comment_tasks/create"
   get "comment_tasks/delete"
   get "comment_tasks/edit"
@@ -9,20 +10,31 @@ Yosistemas::Application.routes.draw do
   get 'sessions/obtener_conectados/:usuario_id' => 'sessions#obtener_conectados', :as => 'obtener_conectados'
   post 'sessions/eliminar_conectado' => 'sessions#eliminar_conectado', :as => 'eliminar_conectado'
   get "usuarios/confirm/:pass" => "usuarios#confirm", :as => 'confirm'
+  get '/agregar_url' => 'url#agregar_url'
+  post '/agregar_url' => 'url#create'
+
   #get "log_in" => "sessions#new", :as => "log_in"
   get "log_out" => "sessions#destroy", :as => "log_out"
+  
   get "usuarios/index"
   get "usuarios/show"
+
+
   #get "usuarios/perfil/:id" => "usuarios#perfil", :as => "perfil"
   get "usuarios/new" => "usuarios#new", :as =>"register"
   get "usuarios/update_password" => "usuarios#update_password", :as=>"update_password"
   get "usuarios/edit" => "usuarios#edit", :as=>"usuario_edit"
   get "usuarios/cambiar_email" => "usuarios#cambiar_email", :as=>"usuario_cambiar_email"
   post "usuarios/edit_password" => "usuarios#edit_password", :as=> "edit_password"
+  
   post "usuarios/guardar_cambio_email" => "usuarios#guardar_cambio_email", :as=> "guardar_cambio_email"
+  
   get 'usuarios/password_recovered/:id_user/:id_request' => 'usuarios#recover', :as => 'recover'
   post "usuarios/password_recovered/:id_user/:id_request" => "usuarios#password_recovered", :as=> "password_recovered"
+  
   get 'usuarios/comfirmar_cambio_correo/:id_user/:correo' => 'usuarios#comfirmar_cambio_correo', :as => 'comfirmar_cambio_correo'
+  get 'usuarios/confirm_change_password/:id_user' => 'usuarios#confirm_change_password', :as => 'confirm_change_password'  
+
   post "usuarios/send_password_mail" => "usuarios#send_password_mail", :as => "send_password_mail"
   get "usuarios/send_password_mail" => "usuarios#forgot_password", :as => "forgot_password"
   get "usuarios/obtener_charla/:usuario_id" => "usuarios#obtener_charla", :as => "obtener_charla"
@@ -47,6 +59,7 @@ Yosistemas::Application.routes.draw do
   get "subscripcion/delete/:id" => "subscripcions#delete", :as => 'borrar_suscripcion'
   post "subscripcion/notificar/:id" => 'subscripcions#notificar', :as => 'notificar'
   #rutas de grupos
+  
   get 'grupos/subscripcion_grupo/:id' => 'grupos#subscripcion_grupo', :as=>'suscribirse'
   get "grupos/buscar" => "grupos#buscar", :as=>'buscar_grupo'
   get 'grupos/mis_grupos' => 'grupos#mis_grupos', :as => 'mis_grupos'
@@ -57,8 +70,10 @@ Yosistemas::Application.routes.draw do
   get 'grupos/invitacion_grupo/:id' => 'grupos#invitacion_grupo', :as => 'invitacion_grupo'
   post 'grupos/enviar_invitaciones/:id' => 'grupos#enviar_invitaciones', :as => 'enviar_invitaciones'
   get 'grupos/:id/editar_grupo' => 'grupos#edit', :as => 'edit' 
+        
   get 'grupos/deshabilitar_grupo/:id' => 'grupos#deshabilitar_grupo'
   get 'grupos/habilitar_grupo/:id' => 'grupos#habilitar_grupo'
+
   #rutas de tareas
   get 'tareas/new/:id' => 'tareas#new', :as => 'tarea_para_grupo'
   get 'tareas/eliminar/:id' => 'tareas#eliminar'

@@ -63,9 +63,9 @@ function changeSrc()
             <li><a href="/grupos/new">Crear Grupo</a></li>
           <%end%>
           <li><a href="/grupos">Ver grupos</a></li>
-          <%if current_user!=nil && current_user.rol == "Docente"%>
+          <!--<%if current_user!=nil && current_user.rol == "Docente"%>
             <li><a href="/grupos/mis_grupos">Mis grupos</a></li>
-          <% end %>
+          <% end %>-->
         </ul>
       </li>
       <li class="dropdown">
@@ -166,6 +166,9 @@ function changeSrc()
               <li><a href=<%=usuario_edit_path%> >Modificar Perfil</a></li>
               <li><a href=<%=update_password_path%> >Modificar Contraseña</a></li>
               <li><a href=<%=usuario_cambiar_email_path%> >Modificar Correo Electronico</a></li>
+              <% if current_user.rol=="Administrador" %>
+              <li><a href="/agregar_url">Modificar Url Del Mail</a></li>
+              <% end %>
               <li><a href=<%=log_out_path%> >Salir</a></li>
             </ul>
           </li>

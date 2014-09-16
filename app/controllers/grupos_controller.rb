@@ -97,7 +97,8 @@ class GruposController < ApplicationController
       subs.save
       redirigir_a(@grupo)
     else
-      redirect_to "/grupos/new", :flash => { :error => "Error al crear un grupo" }
+      #redirect_to "/grupos/new", :flash => { :error => "Error al crear un grupo" }
+      render 'new', :flash => { :alert => "Error al crear un grupo" }
     end
   end
 

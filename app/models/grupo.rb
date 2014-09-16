@@ -8,7 +8,8 @@ class Grupo < ActiveRecord::Base
   	validates :nombre, :presence => true
     delegate :nombre_usuario, :to => :usuario, :prefix => true
   	scope :buscar_mis_grupos,lambda { |user| where("usuario_id = ?", user.id)}
-    validates :nombre, uniqueness: {case_sensitive: false, :message => "El nombre del grupo ya existe"}
+    validates :nombre, uniqueness: {case_sensitive: false, :message => ": Ya está en uso"}
+    #validates :name, format: { with: /\A[a-zA-Z\d\s]+\z/, message: "Solo Letras Permitidas" }
     after_create :habilitar_grupo
 
 

@@ -52,9 +52,11 @@ class GruposController < ApplicationController
           subscrip.grupo_id = grupo.id
           subscrip.usuario_id = current_user.id
           subscrip.save                    
+          @grupo = grupo
         end  
-      end
-      redirect_to root_path, :flash => { :info => "Se ha suscrito a un grupo exitosamente" }
+      end 
+      #grupos/2/temas-y-tareas
+      redirect_to '/grupos/'+@grupo.id.to_s+'/temas-y-tareas/', :flash => { :info => "Se ha suscrito al grupo: "+"' "+ @grupo.nombre+" '"+" exitosamente" }     
     else    
       render 'index'
     end
@@ -96,7 +98,8 @@ class GruposController < ApplicationController
       subs.save
       redirigir_a(@grupo)
     else
-      redirect_to "/grupos/new", :flash => { :error => "Error al crear un grupo" }
+      #redirect_to "/grupos/new", :flash => { :error => "Error al crear un grupo" }
+      render 'new', :flash => { :alert => "Error al crear un grupo" }
     end
   end
 

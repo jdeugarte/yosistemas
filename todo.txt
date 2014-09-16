@@ -99,3 +99,6 @@ INTERFAZ GRAFICA:
           vuelve a recargase.
         - Lo mismo ocurre al cambiar entre las pestanas de Temas y Tareas, Temas, Tareas y Cuestionarios.
 
+
+Próximos
+Cuando se tiene la ventana reducida no deberia distorsionar tanto la seccion de temas, en la pagina principal

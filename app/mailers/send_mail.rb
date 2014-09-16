@@ -10,12 +10,20 @@ class SendMail < ActionMailer::Base
     @url  = 'http://'+direccion+'/usuarios/confirm/'+@user.id.to_s #AESCrypt.encrypt(@user.id.to_s,"Taller")
     mail(to: @user.correo, subject: 'YoSistemas')
   end
+
   def cambiar_correo(usuario,correo)
     @user = usuario
     direccion = Url.last.direccion
     @url  = 'http://'+direccion+'/usuarios/comfirmar_cambio_correo/'+usuario.id.to_s+"/"+correo.to_s
     mail(to: correo, subject: 'YoSistemas')
   end
+
+  def change_password(usuario)
+    @user = usuario
+    @url  = 'http://staging-yosistemas2014.herokuapp.com/usuarios/confirm_change_password/'+usuario.id.to_s
+    mail(to: @user.correo, subject: 'YoSistemas')
+  end
+
   def recover_password(user,id)
     @user=user
     direccion = Url.last.direccion
@@ -23,6 +31,7 @@ class SendMail < ActionMailer::Base
     #@url  = 'http://yosistemas.herokuapp.com/usuarios/confirm?pass='+@user.id.to_s #AESCrypt.encrypt(@user.id.to_s,"Taller")
     mail(to: @user.correo, subject: 'Password YoSistemas')
   end
+
   def notify_users_tema(user, tema, grupo)
     @user = user
     @tema=tema

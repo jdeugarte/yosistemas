@@ -34,7 +34,10 @@
         </div>
         <div class="row ">
             <div class="col-sm-6 col-md-6 col-lg-6" title="Titulo">
-              <small style="color: gray;">Tema creado el <%= tema_o_tarea.created_at.localtime.strftime("%d/%m/%Y a las: %I:%M  %p") %></small>
+              <small style="color: gray;">Tema creado el <%= tema_o_tarea.created_at.localtime.strftime("%d/%m/%Y a las: %I:%M  %p") %>
+               <br/>
+              Usuario <a href="/usuarios/<%=tema_o_tarea.usuario_id%>"><%= tema_o_tarea.usuario.nombre %></a> </small>
+              </small>
             </div>
          </div>
         <% else %>

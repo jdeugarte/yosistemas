@@ -8,21 +8,19 @@ class UsuariosController < ApplicationController
   def show
     @usuario=Usuario.find(params[:id])
   end
-def obtener_charla
-  @user=Usuario.find(params[:usuario_id])
-  @charla=Mensaje.find_all_by_de_usuario_id_and_para_usuario_id(params[:usuario_id],current_user.id)
-  @charla_inversa=Mensaje.find_all_by_de_usuario_id_and_para_usuario_id(current_user.id,params[:usuario_id])
+  def obtener_charla
+    @user=Usuario.find(params[:usuario_id])
+    @charla=Mensaje.find_all_by_de_usuario_id_and_para_usuario_id(params[:usuario_id],current_user.id)
+    @charla_inversa=Mensaje.find_all_by_de_usuario_id_and_para_usuario_id(current_user.id,params[:usuario_id])
 
-  @charla+=@charla_inversa
-  @charla.each do |mensaje|
-      mensaje.visto=true
-      mensaje.save
+    @charla+=@charla_inversa
+    @charla.each do |mensaje|
+        mensaje.visto=true
+        mensaje.save
+    end
+    @charla.sort!{|x,y|  x.created_at <=> y.created_at}
+    render :layout => nil
   end
-  @charla.sort!{|x,y|  x.created_at <=> y.created_at}
-  render :layout => nil
-
-
-end
 
   def obtener_notificacion
     @comentario = TemaComentario.find_by_id(params[:comentario_id])
@@ -31,37 +29,41 @@ end
     @lista_datos = [@comentario,@usuario,@tema]
     render :layout => nil;
   end
+
   def password_recovered
-      if(current_user!=nil)
-          redirect_to root_url
-  else
-    @request_id=params[:id_request]
-    pass=params[:contrasenia_nueva].to_s
-    newPass=params[:contrasenia_nueva2].to_s
-    @usuario=Usuario.find(params[:id_user])
+    if(current_user!=nil)
+      redirect_to root_url
+    else
+      @request_id=params[:id_request]
+      pass=params[:contrasenia_nueva].to_s
+      newPass=params[:contrasenia_nueva2].to_s
+      @usuario=Usuario.find(params[:id_user])
       if (pass==newPass)
         if(pass.length>5)
-        @usuario.contrasenia=Digest::MD5.hexdigest(pass)
-        @usuario.solicitud_contrasenia_id=-1
-        @usuario.save
-        #flash[:alert]=@usuario.correo+" "+pass+" "+@usuario.activa.to_s
-        redirect_to root_url
+          @usuario.contrasenia=Digest::MD5.hexdigest(pass)
+          @usuario.solicitud_contrasenia_id=-1
+          @usuario.save
+          #flash[:alert]=@usuario.correo+" "+pass+" "+@usuario.activa.to_s
+          redirect_to root_url
         else
           @pass_error= 'la longitud minima es 6'
           render :action => 'recover',:format=>'html'
         end
       else
-        @pass_error= 'Las contrasenas no coinciden'
+        @pass_error= 'Las contraseñas no coinciden'
         render :action => 'recover'
       end
     end
-   end
+  end
+
   def edit
 	 @usuario=current_user
   end
+
   def cambiar_email
-   @usuario=current_user
+    @usuario=current_user
   end
+
   def guardar_cambio_email
     if params[:correonuevo] != "" && params[:contrasenia] != ""
       otrousuario = Usuario.find_by(correo: params[:correonuevo])
@@ -85,6 +87,7 @@ end
       redirect_to :back
     end
   end
+
   def comfirmar_cambio_correo
     if(current_user==nil)
       flash[:alert] = "no puede confirma el cambio de correo electronico si esta loggeado"
@@ -100,55 +103,104 @@ end
       end
     end
   end
+
+  def update_password
+    @usuario=current_user
+  end
+
+  def edit_password
+    uno=params[:contrasenia_nueva].to_s
+    dos=params[:contrasenia_nueva2].to_s
+    encriptado=Digest::MD5.hexdigest(uno)
+    contrasenia=params[:contrasenia].to_s
+    if (contrasenia != uno && contrasenia != dos)
+      contrasenia=Digest::MD5.hexdigest(contrasenia)
+      if (current_user.contrasenia==contrasenia)
+        if (uno==dos)    
+          current_user.contrasenia=encriptado
+          current_user.save                
+          SendMail.change_password(current_user).deliver          
+          flash[:alert] = 'Necesita ver su correo para confirmar la operacion'
+          redirect_to root_url
+        else
+          flash[:alert] = 'Las contraseñas no coinciden'
+          redirect_to :back
+        end
+      else
+        flash[:alert] = 'La contraseña no es correcta'
+        redirect_to :back
+      end
+    else      
+      flash[:alert] = 'La nueva contraseña ingresada ya ha sido utilizada'
+      redirect_to :back
+    end
+  end
+
+  def confirm_change_password
+    if(current_user==nil)
+      flash[:alert] = "no puede confirma el cambio de contraseña si esta loggeado"
+    else     
+      #flash[:alert] = "mierda"+usuario.nombre+params[:id_user].to_s+params[:correo].to_s;
+      usuario = Usuario.find(params[:id_user].to_s)
+      if(usuario.id==current_user.id)        
+        flash[:alert] = "Contraseña modificada con exito.";
+      else
+        flash[:alert] = "No se pudo modificar la contraseña.";
+      end
+    end     
+  end
+
   def forgot_password
     if(current_user!=nil)
-          redirect_to root_url
+      redirect_to root_url
     end
   end
+
   def send_password_mail
     if(current_user==nil)
-    mail=params[:mail]
-    @usuario=Usuario.where(:correo=>mail,:activa=>true).first
-    if(@usuario!=nil)
-    if ( verify_recaptcha)
-      p=SolicitudContrasenia.new(:usuario_id=>@usuario.id)
-      p.save
-      @usuario.solicitud_contrasenia_id=p.id
-      @usuario.save
-      SendMail.recover_password(@usuario,p.id).deliver
+      mail=params[:mail]
+      @usuario=Usuario.where(:correo=>mail,:activa=>true).first
+      if(@usuario!=nil)
+        if ( verify_recaptcha)
+          p=SolicitudContrasenia.new(:usuario_id=>@usuario.id)
+          p.save
+          @usuario.solicitud_contrasenia_id=p.id
+          @usuario.save
+          SendMail.recover_password(@usuario,p.id).deliver
+        else
+          @pass_error = 'Ingrese las palabras correctamente'
+        render :action => 'forgot_password', :format => 'html'
+        end
+      else
+        @pass_error = 'No existe ningun usuario con ese correo'
+        render :action => 'forgot_password', :format => 'html'
+      end
     else
-        @pass_error = 'Ingrese las palabras correctamente'
-      render :action => 'forgot_password', :format => 'html'
+      redirect_to root_url
     end
-    else
-      @pass_error = 'No existe ningun usuario con ese correo'
-      render :action => 'forgot_password', :format => 'html'
-    end
-  else
-    redirect_to root_url
-  end
   end
 
   def recover
-  if(current_user!=nil)
-     @errorMessagge="no puede recuperar su password si esta loggeado"
-  else
-  begin
-    password_request=SolicitudContrasenia.find(params[:id_request])
-    rescue ActiveRecord::RecordNotFound
-  end
-    if(password_request!=nil && password_request.usuario.id.to_s==params[:id_user])
-        if(password_request.usuario.solicitud_contrasenia_id==password_request.id && DateTime.now<=(password_request.created_at+(86400)))
-          @request_id=password_request.id
-           @usuario=password_request.usuario
-        else
-          @errorMessagge="esta solicitud expiro, por favor solicite otra"
-        end
+    if(current_user!=nil)
+       @errorMessagge="No puede recuperar su contraseña si esta loggeado"
     else
-        @errorMessagge="no podemos procesar esta solicitud, por favor solicite otra"
+    begin
+      password_request=SolicitudContrasenia.find(params[:id_request])
+      rescue ActiveRecord::RecordNotFound
+    end
+      if(password_request!=nil && password_request.usuario.id.to_s==params[:id_user])
+          if(password_request.usuario.solicitud_contrasenia_id==password_request.id && DateTime.now<=(password_request.created_at+(86400)))
+            @request_id=password_request.id
+             @usuario=password_request.usuario
+          else
+            @errorMessagge="Esta solicitud expiro, por favor solicite otra"
+          end
+      else
+          @errorMessagge="No podemos procesar esta solicitud, por favor solicite otra"
+      end
     end
   end
-  end
+
   def update
     current_user.nombre=params[:usuario][:nombre]
     current_user.apellido=params[:usuario][:apellido]
@@ -163,37 +215,6 @@ end
       flash[:alert] = current_user.errors.full_messages
     end
     redirect_to :action => 'edit', :format => 'html'
-  end
-
-  def update_password
-    @usuario=current_user
-  end
-
-  def edit_password
-    uno=params[:contrasenia_nueva].to_s
-    dos=params[:contrasenia_nueva2].to_s
-    encriptado=Digest::MD5.hexdigest(uno)
-    contrasenia=params[:contrasenia].to_s
-    if (contrasenia != uno && contrasenia != dos)
-      contrasenia=Digest::MD5.hexdigest(contrasenia)
-      if (current_user.contrasenia==contrasenia)
-        if (uno==dos)
-          current_user.contrasenia=encriptado
-          current_user.save
-          flash[:alert] = 'Contrasenia modificada'
-          redirect_to root_url
-        else
-          flash[:alert] = 'Las contrasenias no coinciden'
-          redirect_to :back
-        end
-      else
-        flash[:alert] = 'la contrasenia no es correcta'
-        redirect_to :back
-      end
-    else
-      flash[:alert] = 'La nueva contraseña ingresada ya a sido utilizada'
-      redirect_to :back
-    end
   end
 
   def new

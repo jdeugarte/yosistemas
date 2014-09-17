@@ -16,15 +16,15 @@ require 'digest/md5'
   	before_create :encrypt_password
 
 	validates :nombre,
-	:presence  => { :message => " es requerido, no puede ser nulo" },
+	:presence  => { :message => ": es requerido, no puede dejar vacio" },
 	:length => {
-		:minimum => 2, :message => " minimo 2 letras",
+		:minimum => 2, :message => ": minimo 2 letras",
 		:allow_blank => TRUE
 	}
 	validates :apellido,
-	:presence  => { :message => " es requerido, no puede ser nulo" },
+	:presence  => { :message => ": es requerido, no puede dejar vacio" },
 	:length => {
-		:minimum => 2, :message => " minimo 2 letras",
+		:minimum => 2, :message => ": minimo 2 letras",
 		:allow_blank => TRUE
 	}
 	/validates :contrasenia, anterior version
@@ -33,31 +33,31 @@ require 'digest/md5'
 		:minimum =>  6 , :message => " minimo 6 caracteres"
 	},
 	:confirmation => TRUE/
-  validates_confirmation_of :contrasenia, :message =>"no son iguales",
-	:presence  =>  { :message => " es requerido, no puede ser nulo" },
+  validates_confirmation_of :contrasenia, :message =>": no son iguales",
+	:presence  =>  { :message => ": es requerida" },
 	:length => {
-		:minimum =>  6 , :message => " minimo 6 caracteres"
+		:minimum =>  6 , :message => ": minimo 6 caracteres"
 	},
 	:confirmation => TRUE
   
-  validates_confirmation_of :contrasenia_de_confirmacion, :message => "no son iguales"
+  validates_confirmation_of :contrasenia_de_confirmacion, :message => ": no son iguales"
 
 	validates_format_of :correo,
-	:presence => { :message => " es requerido" },
+	:presence => { :message => ": es requerido" },
 	:with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
-	:message    => 'no valido'
+	:message    => ': no valido'
 
 	validates :nombre_usuario,
-	:presence  =>  { :message => " es requerido" },
-	:uniqueness => { :message => " ya esta siendo utilizado" }		
+	:presence  =>  { :message => ": es requerido" },
+	:uniqueness => { :message => ": ya esta siendo utilizado" }		
 
 	validates :correo,
 	:uniqueness =>{
-		:message=> " ya existente"
+		:message=> ": ya existente"
 	}
 
-	validates :nombre, format: {:multiline => true, with: /^[a-zA-Z ]+$/, message: "solo letras permitidas" }
-	validates :apellido, format: {:multiline => true, with: /^[a-zA-Z ]+$/, message: "solo letras permitidas" }
+	validates :nombre, format: {:multiline => true, with: /^[a-zA-Z ]+$/, message: ": no valido" }
+	validates :apellido, format: {:multiline => true, with: /^[a-zA-Z ]+$/, message: ": no valido" }
 
 
 	def self.autenticar(correo, contrasenia)

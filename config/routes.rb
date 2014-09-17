@@ -10,9 +10,8 @@ Yosistemas::Application.routes.draw do
   get 'sessions/obtener_conectados/:usuario_id' => 'sessions#obtener_conectados', :as => 'obtener_conectados'
   post 'sessions/eliminar_conectado' => 'sessions#eliminar_conectado', :as => 'eliminar_conectado'
   get "usuarios/confirm/:pass" => "usuarios#confirm", :as => 'confirm'
-  
-
-
+  get '/agregar_url' => 'url#agregar_url'
+  post '/agregar_url' => 'url#create'
 
   #get "log_in" => "sessions#new", :as => "log_in"
   get "log_out" => "sessions#destroy", :as => "log_out"

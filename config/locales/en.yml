@@ -39,4 +39,6 @@ en:
         tema:
           attributes:
             cuerpo:
-              blank: "no puede estar vacio"
+              blank: ": No puede estar vacio"
+            titulo:
+              blank: ": No puede estar vacio"

@@ -57,7 +57,7 @@ class GruposController < ApplicationController
         end  
       end 
       if @grupo == nil
-        redirect_to root_path, :flash => { :info => "holaaaaaaaaaaaaaaaaa" }
+        redirect_to root_path, :flash => { :info => "La llave que proporciono no pertenece a ningun grupo" }
       else
         redirect_to '/grupos/'+@grupo.id.to_s+'/temas-y-tareas/', :flash => { :info => "Se ha suscrito al grupo: "+"' "+ @grupo.nombre+" '"+" exitosamente" }     
       end            

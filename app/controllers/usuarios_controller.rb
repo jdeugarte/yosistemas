@@ -140,10 +140,7 @@ class UsuariosController < ApplicationController
     if(current_user==nil)
       flash[:alert] = "no puede confirma el cambio de contraseña si esta loggeado"
     else     
-      #flash[:alert] = "mierda"+usuario.nombre+params[:id_user].to_s+params[:correo].to_s;
-      if( current_user.temp_password == nil)
-        flash[:alert] = "no tienes solicitudes pendintes"
-      else
+      #flash[:alert] = "mierda"+usuario.nombre+params[:id_user].to_s+params[:correo].to_s;      
         usuario = Usuario.find(params[:id_user].to_s)      
         if(usuario.id==current_user.id)   
           uno=current_user.temp_password        
@@ -153,8 +150,7 @@ class UsuariosController < ApplicationController
           flash[:alert] = "Contraseña modificada con exito.";
         else
           flash[:alert] = "No se pudo modificar la contraseña.";        
-        end
-      end
+        end      
     end     
   end
 

@@ -43,7 +43,8 @@ class GruposController < ApplicationController
   end
 
   def buscar_por_llave    
-    aux = Grupo.all
+    
+    aux = Grupo.all    
     llave = params[:llave]
     if llave != nil && llave != "publico"
       aux.each do |grupo| 
@@ -52,11 +53,14 @@ class GruposController < ApplicationController
           subscrip.grupo_id = grupo.id
           subscrip.usuario_id = current_user.id
           subscrip.save                    
-          @grupo = grupo
+          @grupo = grupo                              
         end  
       end 
-      #grupos/2/temas-y-tareas
-      redirect_to '/grupos/'+@grupo.id.to_s+'/temas-y-tareas/', :flash => { :info => "Se ha suscrito al grupo: "+"' "+ @grupo.nombre+" '"+" exitosamente" }     
+      if @grupo == nil
+        redirect_to root_path, :flash => { :info => "holaaaaaaaaaaaaaaaaa" }
+      else
+        redirect_to '/grupos/'+@grupo.id.to_s+'/temas-y-tareas/', :flash => { :info => "Se ha suscrito al grupo: "+"' "+ @grupo.nombre+" '"+" exitosamente" }     
+      end            
     else    
       render 'index'
     end
@@ -140,5 +144,5 @@ class GruposController < ApplicationController
       else
         redirect_to root_path, :flash => { :info => "Grupo creado exitosamente" }
       end
-    end
+    end    
 end

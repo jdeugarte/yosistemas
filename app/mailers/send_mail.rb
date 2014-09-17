@@ -18,6 +18,7 @@ class SendMail < ActionMailer::Base
   def change_password(usuario)
     @user = usuario
     @url  = 'http://staging-yosistemas2014.herokuapp.com/usuarios/confirm_change_password/'+usuario.id.to_s
+    #@url  = 'http://localhost:3000/usuarios/confirm_change_password/'+usuario.id.to_s
     mail(to: @user.correo, subject: 'YoSistemas')
   end
 

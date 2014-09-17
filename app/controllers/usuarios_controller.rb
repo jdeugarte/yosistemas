@@ -116,9 +116,9 @@ class UsuariosController < ApplicationController
     if (contrasenia != uno && contrasenia != dos)
       contrasenia=Digest::MD5.hexdigest(contrasenia)
       if (current_user.contrasenia==contrasenia)
-        if (uno==dos)    
-          current_user.contrasenia=encriptado
-          current_user.save                
+        if (uno==dos)        
+          current_user.temp_password=encriptado
+          current_user.save
           SendMail.change_password(current_user).deliver          
           flash[:alert] = 'Necesita ver su correo para confirmar la operacion'
           redirect_to root_url
@@ -141,11 +141,19 @@ class UsuariosController < ApplicationController
       flash[:alert] = "no puede confirma el cambio de contraseña si esta loggeado"
     else     
       #flash[:alert] = "mierda"+usuario.nombre+params[:id_user].to_s+params[:correo].to_s;
-      usuario = Usuario.find(params[:id_user].to_s)
-      if(usuario.id==current_user.id)        
-        flash[:alert] = "Contraseña modificada con exito.";
+      if( current_user.temp_password == nil)
+        flash[:alert] = "no tienes solicitudes pendintes"
       else
-        flash[:alert] = "No se pudo modificar la contraseña.";
+        usuario = Usuario.find(params[:id_user].to_s)      
+        if(usuario.id==current_user.id)   
+          uno=current_user.temp_password        
+          current_user.contrasenia=uno
+          current_user.temp_password=nil
+          current_user.save        
+          flash[:alert] = "Contraseña modificada con exito.";
+        else
+          flash[:alert] = "No se pudo modificar la contraseña.";        
+        end
       end
     end     
   end

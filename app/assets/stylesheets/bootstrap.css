@@ -4132,6 +4132,30 @@ textarea.input-group-sm > .input-group-btn > .btn {
   background-color: #256188;
 }
 
+
+
+.nav-pills-public > li {
+  float: left;
+}
+
+.nav-pills-public > li > a {
+  border-radius: 5px;
+}
+
+.nav-pills-public > li + li {
+  margin-left: 2px;
+}
+
+.nav-pills-public > li.active > a,
+.nav-pills-public > li.active > a:hover,
+.nav-pills-public > li.active > a:focus {
+  color: #ffffff;
+  background-color: #25BD92;
+}
+
+
+
+
 .nav-stacked > li {
   float: none;
 }
@@ -5273,6 +5297,19 @@ a.list-group-item.active > .badge,
 .nav-pills > li > a > .badge {
   margin-left: 3px;
 }
+
+
+a.list-group-item.active > .badge,
+.nav-pills-public > .active > a > .badge {
+  color: #256188;
+  background-color: #ffffff;
+}
+
+.nav-pills-public > li > a > .badge {
+  margin-left: 3px;
+}
+
+
 
 .jumbotron {
   padding: 30px;

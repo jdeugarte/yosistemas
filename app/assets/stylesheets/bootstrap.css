@@ -7307,13 +7307,13 @@ td.visible-print {
 
 .btn-danger,
 .btn-danger:hover {
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#e8a75d), color-stop(6%, #d9831f), to(#c7781c));
-  background-image: -webkit-linear-gradient(#e8a75d, #d9831f 6%, #c7781c);
-  background-image: -moz-linear-gradient(top, #e8a75d, #d9831f 6%, #c7781c);
-  background-image: linear-gradient(#e8a75d, #d9831f 6%, #c7781c);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#E41C1C), color-stop(6%, #E41C1C), to(#E41C1C));
+  background-image: -webkit-linear-gradient(#E41C1C, #E41C1C 6%, #E41C1C);
+  background-image: -moz-linear-gradient(top, #E41C1C, #E41C1C 6%, #E41C1C);
+  background-image: linear-gradient(#e8a75d, #E41C1C 6%, #E41C1C);
   background-repeat: no-repeat;
-  border: 1px solid #ac6819;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffe8a75d', endColorstr='#ffc7781c', GradientType=0);
+  border: 1px solid #E41C1C;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E41C1C', endColorstr='#ffc7781c', GradientType=0);
 }
 
 h1,

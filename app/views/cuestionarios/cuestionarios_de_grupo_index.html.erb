@@ -70,7 +70,7 @@
                 </div>
                 <%if cuestionario.usuario_id!= current_user.id && !RespuestaUsuario.ya_respondio_cuestionario(current_user.id,cuestionario.id)%>
                     <form class="navbar-form navbar-left" method="get" action=<%=nuevo_path(cuestionario.id)%> data-method="delete" >
-                      <button type="submit" class="btn btn-primary">Responder Cuestionario</button>
+                      <button type="submit" class="btn btn-success">Responder Cuestionario</button>
                     </form>
                 <%end%>
                     <%if cuestionario.usuario_id!= current_user.id && RespuestaUsuario.ya_respondio_cuestionario(current_user.id,cuestionario.id)%>

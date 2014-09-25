@@ -35,19 +35,30 @@
       </div>      
     </div>
     <div class="bs-example" style="overflow:auto; height:150px; width:200px; position:fixed; top:42%; left:5px;">
-              <ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
+              <ul class="nav nav-pills-public nav stacked" style="max-width: 300px;">                  
                 <%if  current_user!=nil%>
                   <% subscripciones_usuario().each do |subs| %>
-                      <%if subs.grupo.id == @grupo.id%>
+                      <%if subs.grupo.id == @grupo.id and subs.grupo.nombre=="Publico"%>
                         <li class="active"><a name="currentSelected" href="#"><%= subs.grupo.nombre %></a></li>
                       <%else%>
-                        <% if subs.grupo.habilitado %>
+                        <% if subs.grupo.habilitado and subs.grupo.nombre=="Publico"%>
                           <li><a name="itemMenu" href="/grupos/<%=subs.grupo.id%>/temas-y-tareas"><%= subs.grupo.nombre %></a></li>
                         <% end %>    
                       <% end %>
                   <% end %>
-                <%else%>
-                   <li class="active"><a href="/grupos/1/temas">Publico</a></li>                   
+                <% end %>
+              </ul>
+              <ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
+                <%if  current_user!=nil%>
+                  <% subscripciones_usuario().each do |subs| %>
+                      <%if subs.grupo.id == @grupo.id and subs.grupo.nombre!="Publico"%>
+                        <li class="active"><a name="currentSelected" href="#"><%= subs.grupo.nombre %></a></li>
+                      <%else%>
+                        <% if subs.grupo.habilitado and subs.grupo.nombre!="Publico"%>
+                          <li><a name="itemMenu" href="/grupos/<%=subs.grupo.id%>/temas-y-tareas"><%= subs.grupo.nombre %></a></li>
+                        <% end %>    
+                      <% end %>
+                  <% end %>
                 <% end %>
               </ul>
             </div>

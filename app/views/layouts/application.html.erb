@@ -47,7 +47,7 @@
   js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1&appId=522116067832259";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-  <div class="row">
+  <div class="row" >
     <div>
       <% flash.each do |name, msg| %>
         <div class="alert alert-info alert-dismissable">
@@ -57,11 +57,12 @@
       <% end %>
     </div>
   </div>
-  <div class="row" >
+ <!-- <div class="row" >
     <a class="navbar-brand" href="/"><img src="/assets/logo.png" /></a>
-  </div>
+  </div>-->
   <div class="row">
     <%= render 'layouts/navigation' %>
+    <br><br><br>
   </div>
   <!-- Cuerpo de la pagina -->
   <div class="row">

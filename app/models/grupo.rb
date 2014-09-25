@@ -12,7 +12,6 @@ class Grupo < ActiveRecord::Base
     #validates :name, format: { with: /\A[a-zA-Z\d\s]+\z/, message: "Solo Letras Permitidas" }
     after_create :habilitar_grupo
 
-
     def habilitar_grupo
       self.habilitado = true
       self.save

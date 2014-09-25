@@ -135,6 +135,7 @@ svg:not(:root) {
 }
 
 figure {
+figure {
   margin: 0;
 }
 
@@ -7413,4 +7414,9 @@ h6 {
 
 .alert.alert-error {
 background: #e7adad;
+}
+.barraizquierdafijo {
+  position: fixed;
+  left: 0;
+  top: 30%;
 }

@@ -1,6 +1,6 @@
 footer {
 	background: #121214;
-	border-top: 4px solid #1F1F1F;
+	border-top: 4px solid #F1F1F1;
 	font-size: 0.9em;
 	margin-top: 70px;
 	padding: 80px 0 0;
@@ -109,7 +109,7 @@ div.footer-copyright {
 	background: #0C0C0C;
 	border-top: 4px solid #111;
 	margin-top: 40px;
-	padding: 30px 0 10px;
+	padding: 10px 0 0px;
 }
 
 div.footer-copyright nav {
@@ -139,6 +139,9 @@ div.footer-copyright p {
 	color: #555;
 	margin: 0;
 	padding: 0;
+}
+div.footer-copyright {
+	height: 20px;
 }
 
 footer div.alert a {
@@ -217,3 +220,28 @@ footer a.view-more-recent-work {
 footer ul.list.icons li {
 	margin-bottom: 5px;
 }
+.mifooter2{
+	position:fixed;
+	top:94%;
+	left: 0;
+	padding-top: 10px;
+	padding-left: 20px;
+	width: 100%;
+	background:#0C0C0C;
+}
+.mifooter2 .row div ul li{
+	display: inline-block;
+}
+.mifooter{
+	float: left;
+	width: 98%;
+	clear: left;
+}	
+.mimenu{
+	float: right;
+}
+.cambio{
+	display: inline;
+margin-top: 10px;
+}
+

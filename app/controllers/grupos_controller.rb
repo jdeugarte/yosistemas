@@ -1,5 +1,5 @@
 class GruposController < ApplicationController
-
+before_filter :grupos
   def index
     @grupos = Grupo.all_habilitados.page(params[:page]).per(5)
   end
@@ -136,6 +136,14 @@ class GruposController < ApplicationController
   private
     def grupo_params
       params.require(:grupo).permit(:nombre, :descripcion, :estado, :llave)
+    end
+
+    def grupos
+      if(params[:id] != nil && Grupo.find(params[:id]).habilitado)
+       @grupo = Grupo.find(params[:id])
+     else
+       @grupo = Grupo.find(1)
+    end
     end
 
     def redirigir_a(grupo)

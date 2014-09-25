@@ -1,6 +1,6 @@
 class EventosController < ApplicationController
   before_action :set_evento, only: [:show, :edit, :update, :destroy]
-
+  before_filter :grupos
   # GET /eventos
   def index
     @eventos = Evento.all.reverse
@@ -57,6 +57,13 @@ class EventosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_evento
       @evento = Evento.find(params[:id])
+    end
+     def grupos
+      if(params[:id] != nil && Grupo.find(params[:id]).habilitado)
+       @grupo = Grupo.find(params[:id])
+     else
+       @grupo = Grupo.find(1)
+    end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

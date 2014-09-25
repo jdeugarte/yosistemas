@@ -1,3 +1,4 @@
+<%= render :layout => 'layouts/groups_layout' do%>
 <h1>Lista de grupos</h1>
 <br>
 <br>
@@ -11,6 +12,7 @@
     </div>
   <%end%>
   <div class="input-group col-sm-12 col-md-8 col-lg-8" >
+    <div class="col-md-8 control-label" ></div>
     <span class="input-group-addon ">Nombre:</span>
     <input type="text" name="nombre" class="form-control">
     <span class="input-group-btn">
@@ -110,3 +112,4 @@
     <center><%= paginate @grupos %></center>
   </div>
 </div>
+<%end%>

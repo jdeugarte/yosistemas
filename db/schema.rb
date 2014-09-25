@@ -11,7 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20140917030056) do
 
   create_table "adjunto_respuesta_cuestionarios", force: true do |t|

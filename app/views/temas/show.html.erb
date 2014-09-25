@@ -1,3 +1,4 @@
+<%= render :layout => 'layouts/groups_layout' do%>
 <input type="hidden" id="current_user" value="<%=current_user.nil? ? 0 : current_user.id%>">
 <div class="row">
 <div class="col-lg-6 ">
@@ -159,6 +160,7 @@
 </div>
 <%end%>
 	<%end%>
+<%end%>
 <%end%>
 <script type="text/javascript">
   getImagesForAttachedFiles();

@@ -16,10 +16,11 @@
 </script>
 </head>
 <body >
+  <div class= "barraizquierdafijo">
   <div class='row'>
   <div class="col-lg-4" style="width: 28%;">
-    <div class="page-header">
-      <div class="row">
+    <div class="page-header"style="position:fixed; top:20%; left:5px;">
+      <div class="row" >
         <div class="col-lg-4">
           <h1 style="margin-top:0px;" id="forms">Grupos</h1>          
           <form method="GET" action="/grupos/buscar">
@@ -33,7 +34,7 @@
         </form>
       </div>      
     </div>
-    <div class="bs-example">
+    <div class="bs-example" style="overflow:auto; height:150px; width:200px; position:fixed; top:42%; left:5px;">
               <ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
                 <%if  current_user!=nil%>
                   <% subscripciones_usuario().each do |subs| %>
@@ -52,15 +53,16 @@
             </div>
 <!--subscription by group key-->
             <%if  current_user!=nil %>
-              
+              <div style="position:fixed; top:62%; left:5px;">
                 <h3>Suscribirse a Grupo</h3>
-                <form method="GET" action="/grupos/buscar_por_llave">            
+                <form method="GET" action="/grupos/buscar_por_llave" >            
                   <input id="llave" name="llave" placeholder="Llave..." class="form-control input-sm"  style="" type="text"><br>              
                 
                   <center><input type="submit" value="Suscribirse"  class="btn btn-primary"></center>
                 </form>
       
             <%end%>
+          </div>
 <!--______________________________________________________-->
   </div>
 
@@ -69,7 +71,7 @@
         <% tab_selec = ((!@temas.nil?||!@tema.nil?) ? 1 : ((!@tareas.nil?||!@tarea.nil?) ? 2 : (!@cuestionarios.nil?||!@cuestionario.nil?) ? 3 : 0))%>
             <div>
               <ul class="nav nav-tabs" style="margin-bottom: 15px;">
-              <%if(@grupo.id!=1)%>
+              <!--<%if(@grupo.id!=1)%>
                 <li class="<%=tab_selec==0 ? 'active' : ''%>" onclick="<%= (tab_selec!=0) ? "throwFade(); window.location='/grupos/"+@grupo.id.to_s+"/temas-y-tareas'; return false;" : "" %>" ><a href="#temas-y-tareas" data-toggle="tab"><h3 style="margin-top:5px;">Temas y Tareas</h3></a></li>
               <%end%>
                 <li class="<%=tab_selec==1 ? 'active' : ''%>" onclick="<%= (tab_selec!=1) ? "throwFade(); window.location='/grupos/"+@grupo.id.to_s+"/temas'; return false;" : "" %>" ><a href="#temas" data-toggle="tab"><h3 style="margin-top:5px;">Temas</h3></a></li>
@@ -78,10 +80,8 @@
 
 
                    <li class="<%=tab_selec==3 ? 'active' : ''%>" onclick="<%= (tab_selec!=3) ? "throwFade(); window.location='/cuestionarios/cuestionarios_de_grupo_index/"+@grupo.id.to_s+"'; return false;" : "" %>" ><a href="#cuestionarios" data-toggle="tab"><h3 style="margin-top:5px;">Cuestionarios</h3></a></li>
-
-
                 <%end%>
-
+                -->
               </ul>
               <div class="go-left tab-content" id="principal">
               <%if tab_selec==0 %>
@@ -108,6 +108,7 @@
             </div>
     </div>
   </div>
+</div>
 </div>
 <script type="text/javascript">
    $( document ).ready( throwShow );

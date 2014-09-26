@@ -1,5 +1,4 @@
 class CuestionariosController < ApplicationController
-
 	def ver_cuestionarios_usuarios
   	@cuestionario=Cuestionario.find(params[:id_cuestionario])
   	@suscritos= Subscripcion.where(grupo_id: @cuestionario.grupo_id)

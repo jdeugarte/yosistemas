@@ -1,3 +1,4 @@
+<%= render :layout => 'layouts/groups_layout' do%>
 <%= nested_form_for @cuestionario, :html => { :class => 'bs-example form-horizontal' } do |f| %>
 <div class="row">
   <div class="col-lg-12">
@@ -76,5 +77,5 @@
                 });
               });
   </script>
-
+<%end%>
 <% end %>

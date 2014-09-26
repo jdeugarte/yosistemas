@@ -13,7 +13,7 @@
   		<%if RespuestaUsuario.ya_respondio_cuestionario(usuario.id,@cuestionario.id)%>
   		<td class="active">
       <form method="get" action="<%= "cargar_respuestas/"+ usuario.id.to_s + "/" + @cuestionario.id.to_s %> " data-method="delete" >
-           <button type="submit" class="btn btn-primary">Calificar preguntas de texto</button>
+           <button type="submit" class="btn btn-success">Calificar preguntas de texto</button>
       </form>
       </td>
       <%else%>

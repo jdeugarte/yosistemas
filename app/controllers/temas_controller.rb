@@ -1,7 +1,6 @@
 class TemasController < ApplicationController
 skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:show,:searchtitulo]
 before_filter :grupos
-
   def index
     @temas = @grupo.temas.order("updated_at DESC").page(params[:page]).per(5)
     @ides = sacarIds(@grupo.temas)
@@ -237,6 +236,7 @@ before_filter :grupos
     def tema_params
       params.require(:tema).permit(:titulo, :cuerpo)
     end
+    
     def grupos
       if(params[:id] != nil && Grupo.find(params[:id]).habilitado)
        @grupo = Grupo.find(params[:id])

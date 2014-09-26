@@ -50,7 +50,7 @@ Yosistemas::Application.routes.draw do
   get "temas/ordertablemine/:themes/:var" => 'temas#ordertablemine' , :as => 'ordertablemine'
   get 'temas/visible/:id' => 'temas#visible', :as => 'visible_tema'
   get 'temas/show_mine' => 'temas#show_mine', :as=>'show_mine'
-  get 'temas/searchmine' => 'temas#searchmine', :as=>'searchmine'
+  get 'temas/search_main' => 'temas#search_main', :as=>'search_main'
   get 'temas/new/:id' => 'temas#new', :as => 'tema_para_grupo'
   #get 'temas/:grupo' => 'temas#index'
   #rutas de suscripciones

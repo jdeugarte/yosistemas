@@ -89,7 +89,7 @@
             <div class="col-lg-10 input-group">
             <input id="showFiles" class="form-control" type="text" placeholder="Seleccione archivos..." onclick="document.getElementById('tarea_archivo').click();" onfocus="this.blur();">
             <%= t.file_field :archivo , :class=>'form-control',:multiple => true, :style=>"display:none;", :onchange=>"document.getElementById('showFiles').value = (this.files.length>1)?''+this.files.length+' Archivos seleccionados.':this.files[0].name;" %>
-            <span class="input-group-addon" style="background-color: #D5230F; cursor:pointer;" onclick="document.getElementById('tarea_archivo').click();">
+            <span class="input-group-addon" style="background-color: #256188; cursor:pointer;" onclick="document.getElementById('tarea_archivo').click();">
               <i class="icon-file icon-white"></i>
             </span>
             </div>

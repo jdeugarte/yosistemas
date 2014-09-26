@@ -6,41 +6,27 @@ before_filter :grupos
     @ides = sacarIds(@grupo.temas)
   end
 
+   
+
   def buscar
     @temas = Array.new
     @grupo = Grupo.find(params[:grupo])
     aux = Tema.where(:grupo_id=>params[:grupo])
-    if params[:titulo] != "" && params[:titulo]!=nil
-      aux.each do |tema|
-        if (tema.correspondeATitulo(params[:titulo]) && tema.grupo.habilitado)
-          @temas.push(tema)
+    if params[:search] != "" && params[:search] != nil
+      byAll = Tema.allResultsSearchs(params[:search])
+      @temas = byAll        
+      @temas.each do |tema|
+        if !tema.grupo.habilitado
+          @temas.delete(tema)
         end
-      end
-    else
-      @temas = aux
-    end
-    #/codigo agregado para busqueda por descripcion/
-    if params[:descripcion] != "" && params[:descripcion] != nil
-      byDescription = Tema.searchByDescription(params[:descripcion])
-      if params[:titulo] == "" || params[:titulo] == nil
-        byDescription.each do |tema|
-          if tema.grupo.habilitado    
-            @temas.push(tema)
-          end
-        end
-      else
-        @temas = ((@temas&byDescription)+@temas+byDescription).uniq
-        @temas.each do |tema|
-          if !tema.grupo.habilitado
-            @temas.delete(tema)
-          end
-        end
-      end
+      end          
     end
     @ides=sacarIds(@temas)
     @temas= Kaminari.paginate_array(@temas).page(params[:page]).per(5)
     render 'index'
   end
+
+
 
   def ordertable
     @temas = Array.new
@@ -231,6 +217,17 @@ before_filter :grupos
     end
     render "show_mine"
   end
+
+  def search_main
+    @temas=Array.new
+    aux= Tema.all
+    if params[:search] != "" && params[:search] != nil
+      byAll = Tema.allResultsSearchs(params[:search])
+      @temas = byAll
+    end
+    render "show_mine"
+  end
+
   private
     # No permite parametros de internet
     def tema_params

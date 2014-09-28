@@ -44,7 +44,7 @@
           <div class="field">
             <%= f.hidden_field :usuario_id, :value => @current_user.id, :readonly => true %>
           </div>
-          <div class="col-lg-9 col-lg-offset-2">
+          <div class="col-lg-9 col-lg-offset-2" style="margin-bottom:10px;">
             <%= f.fields_for :preguntas do |builder| %>
               <div class="panel panel-info col-lg-12 col-lg-offset-0">
                 <%= render 'campo_de_pregunta', :preguntas_form => builder %>

@@ -3,11 +3,12 @@ class EventosController < ApplicationController
   before_filter :grupos
   # GET /eventos
   def index
-    @eventos = Evento.all.reverse
+    @eventos = Evento.all.page(params[:page]).per(5)
   end
 
   # GET /eventos/1
   def show
+    @evento = Evento.find(params[:id])
   end
 
   # GET /eventos/new
@@ -58,7 +59,8 @@ class EventosController < ApplicationController
     def set_evento
       @evento = Evento.find(params[:id])
     end
-     def grupos
+
+    def grupos
       if(params[:id] != nil && Grupo.find(params[:id]).habilitado)
        @grupo = Grupo.find(params[:id])
      else

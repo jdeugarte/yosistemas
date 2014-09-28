@@ -181,7 +181,9 @@ function changeSrc()
               <li><a href=<%=usuario_edit_path%> >Modificar Perfil</a></li>
               <li><a href=<%=update_password_path%> >Modificar Contraseña</a></li>
               <li><a href=<%=usuario_cambiar_email_path%> >Modificar Correo Electronico</a></li>
-              <li><a href="/agregar_url">Cambiar Url De Los Correos</a></li>
+              <% if current_user.rol=="Administrador" %>
+                <li><a href="/agregar_url">Cambiar Url De Los Correos</a></li>
+              <% end %>
               <li><a href=<%=log_out_path%> >Salir</a></li>
             </ul>
           </li>

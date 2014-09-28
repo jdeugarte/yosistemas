@@ -6279,6 +6279,7 @@ body.modal-open,
   display: none;
   max-width: 276px;
   padding: 1px;
+  width: 214px;
   text-align: left;
   white-space: normal;
   background-color: #ffffff;

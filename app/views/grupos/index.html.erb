@@ -23,22 +23,20 @@
 </form>
 <br>
 <br>
-<div class="row bs-example bs-example-type">
-   <div class="col-lg-1">
-  </div>
-  <div class="col-lg-8">
+<div class="row bs-example bs-example-type" style="margin-bottom:50px;">
+  <div class="col-lg-12">
     <% @grupos.each do |grupo| %>
     <%if grupo.nombre!="Publico"%>
         <div class="well">
           <strong><legend><%=grupo.nombre%></legend></strong>
           <div class="row">
               <div class="col-lg-3">
-                <h5>Creador:</h5>
+                <h5>Grupo creador por:</h5>
                  <div class="row">
                   &nbsp&nbsp&nbsp<%= image_tag avatar_tam_url(grupo.usuario,100) %><br/>
                 </div>
                 <div>
-                  <h3 style="margin-top:0px;"><%= link_to grupo.usuario.nombre_usuario,  grupo.usuario %></h3>
+                  <h3 style="margin-top:10px;"><%= link_to grupo.usuario.nombre_usuario,  grupo.usuario %></h3>
                 </div>
               </div>
               <div class="col-lg-5">
@@ -74,35 +72,37 @@
                 <br>
                  <%if current_user.id != grupo.usuario_id && grupo.usuario_suscrito?(current_user.id) %>
                     <form class="navbar-form navbar-left" method="get" action=<%=suscribirse_path(grupo)%>  >
-                      <button type="submit" class="btn btn-primary">Suscribirse al grupo</button>
+                      <button type="submit" class="btn btn-primary" style="width:180px;">Suscribirse al grupo</button>
                     </form>
                 <%end%>
-                 <form class="navbar-form navbar-left" method="get" action="/grupos/<%=grupo.id%>/temas/" >
-                      <button type="submit" class="btn btn-primary">Ver Temas del Grupo</button>
+                 <form class="navbar-form navbar-left" method="get" action="/grupos/<%=grupo.id%>/temas" >
+                      <button type="submit" class="btn btn-primary" style="width:180px;">Ver Temas del Grupo</button>
                     </form>
                 <%if grupo.usuario_suscrito?(current_user.id) == false %>
                     <form class="navbar-form navbar-left" method="get" action=<%=invitacion_grupo_path(grupo)%>  >
-                      <button type="submit" class="btn btn-primary">enviar invitacion al grupo</button>
+                      <button type="submit" class="btn btn-primary" style="width:180px;">Enviar Invitacion al Grupo</button>
                     </form>
                 <%end%>
                  <% if grupo.usuario_id == current_user.id %>
-                    <form class="navbar-form navbar-left" method="get" action="/grupos/<%=grupo.id%>/editar_grupo">
-                      <button type="submit" class="btn btn-primary">Editar datos del Grupo</button>
-                    </form>
-
-    
-                    <form class="navbar-form navbar-left" method="get" action="/grupos/<%=grupo.id%>/temas/">
-                      <button type="submit" class="btn btn-primary">Ver Temas del Grupo</button>
-                    </form>
-                    <form class="navbar-form navbar-left" method="get" action=<%=suscriptores_path(grupo)%> >
-                      <button type="submit" class="btn btn-primary">Ver suscriptores del Grupo</button>
-                    </form>
+                <div class="col-lg-3" style="margin-top:2px;">
+                    <button type="button" class="btn btn-default" style="width:180px;" data-container="body" data-toggle="popover" data-trigger="focus" data-placement="right" data-html="true" data-content="<a href='/grupos/<%=grupo.id%>/editar_grupo' class='btn btn-primary' style='width:180px;'>Editar datos del grupo</a>
+                    <!--Segundo boton -->
+                    <a href='<%=suscriptores_path(grupo)%>' class='btn btn-primary' style='margin-top:5px; width:180px;'>Ver Suscriptores del Grupo</a>
+                    <!--Tercer boton -->
+                    <a href='<%=cuestionarios_de_grupo_index_path(grupo)%>' class='btn btn-primary' style='margin-top:5px; width:180px;'>Ver Cuestionarios del grupo</a>
+                    <!--Cuarto boton -->
+                    <a href='grupos/deshabilitar_grupo/<%= grupo.id%>' class='btn btn-primary' style='margin-top:5px; width:180px;'>Deshabilitar Grupo</a>
+                    ">
+                      Más Opciones
+                    </button>
+                </div>
+                
+                  <!--
+                    
+                       
                     <form class="navbar-form navbar-left" method="get" action=<%=nuevo_cuestionario_path(grupo)%> >
-                      <button type="submit" class="btn btn-primary">crear cuestionario</button>
-                    </form>
-                       <form class="navbar-form navbar-left" method="get" action=<%=cuestionarios_de_grupo_index_path(grupo)%> >
-                      <button type="submit" class="btn btn-primary">Ver Cuestionarios <br>del Grupo</button>
-                    </form>
+                      <button type="submit" class="btn btn-primary">Deshabilitar Grupo</button>
+                    </form>-->
                 <% end %>
               </div>
           </div>
@@ -113,3 +113,7 @@
   </div>
 </div>
 <%end%>
+ <script>$(function () 
+     { $("[data-toggle='popover']").popover();
+           });
+   </script>

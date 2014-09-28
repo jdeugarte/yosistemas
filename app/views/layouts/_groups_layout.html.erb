@@ -19,7 +19,7 @@
   <div class= "barraizquierdafijo">
   <div class='row'>
   <div class="col-lg-4" style="width: 28%;">
-    <div class="page-header"style="position:fixed; top:20%; left:20px;">
+    <div class="page-header"style="position:fixed; top:15%; left:20px;">
       <div class="row" >
         <div class="col-lg-4">
           <h1 style="margin-top:0px;" id="forms">Grupos</h1>          
@@ -34,7 +34,7 @@
         </form>
       </div>      
     </div>
-    <div class="bs-example" style="overflow:auto; height:150px; width:200px; position:fixed; top:42%; left:20px;">
+    <div class="bs-example" style="overflow:auto; height:150px; width:200px; position:fixed; top:38%; left:20px;">
               <ul class="nav nav-pills-public nav stacked" style="max-width: 300px;">                  
                 <%if  current_user!=nil%>
                   <% subscripciones_usuario().each do |subs| %>
@@ -64,7 +64,7 @@
             </div>
 <!--subscription by group key-->
             <%if  current_user!=nil %>
-              <div style="position:fixed; top:62%; left:20px;">
+              <div style="position:fixed; margin-top:300px; left:20px;">
                 <h3>Suscribirse a Grupo</h3>
                 <form method="GET" action="/grupos/buscar_por_llave" >            
                   <input id="llave" name="llave" placeholder="Llave..." class="form-control input-sm"  style="" type="text"><br>              

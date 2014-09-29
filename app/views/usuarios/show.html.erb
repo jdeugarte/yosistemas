@@ -1,35 +1,71 @@
-<% if current_user != nil %>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6">
-                <div class="well well-sm">
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >   
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <Center><h3 class="panel-title"><b><%=@usuario.nombre%> <%=@usuario.apellido%></b></h3></Center>
+                </div>
+                <div class="panel-body">
                     <div class="row">
-                        <div class="col-sm-6 col-md-4">
-                        <!--img src="http://placehold.it/380x500" alt="" class="img-rounded img-responsive" /-->
-                            <%= image_tag avatar_tam_url(@usuario,140) %>
+                        <div class="col-md-3 col-lg-3 " align="center"> 
+                            <img class="img-circle"> <%= image_tag avatar_tam_url(@usuario,110) %>
                         </div>
-                        <div class="col-sm-6 col-md-8">
-                            <CENTER><h4><%=@usuario.nombre%> <%=@usuario.apellido%> </h4></CENTER>
-                            <p>
-                        	   <% if @usuario.mostrar_correo ||  @usuario.id == current_user.id %>
-                                 <i class="glyphicon glyphicon-envelope"></i><%=@usuario.correo%>
-                                <%end%>
-                                <br />
-                            <!--i class="glyphicon glyphicon-gift"></i>June 02, 1988</p-->
-                            </p>
-                            <% if @usuario.id == current_user.id %>
-					  		   <%= link_to "Modificar Perfil",  usuario_edit_path %>
-					  	    <% end %>
+                        <div class=" col-md-9 col-lg-9 "> 
+                            <table class="table table-user-information">
+                                <tbody>
+                                    <% if @usuario.mostrar_correo ||  @usuario.id == current_user.id %>
+                                        <tr>
+                                            <td>Email:</td>
+                                            <td><a href="mailto:<%=@usuario.correo%>"><%=@usuario.correo%></a></td>
+                                        </tr>
+                                    <%else%>
+                                        <tr>
+                                            <td>Email:</td>
+                                            <td>No disponible para este usuario</td>
+                                        </tr> 
+                                    <%end%>
+                                    <tr>
+                                        <td>Cumpleaños:</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                        <!--tr>
+                                            <td>Hire date:</td>
+                                            <td>06/23/2013</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Date of Birth</td>
+                                            <td>01/24/1988</td>
+                                        </tr>
+                                        <tr>
+                                        <tr>
+                                            <td>Gender</td>
+                                            <td>Male</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Home Address</td>
+                                            <td>Metro Manila,Philippines</td>
+                                        </tr>
+                                        
+                                            <td>Phone Number</td>
+                                            <td>123-4567-890(Landline)<br><br>555-4567-890(Mobile)</td>
+                                    </tr-->                                       
+                                </tbody>
+                            </table>                                      
                         </div>
                     </div>
+                </div>
+                <div class="panel-footer">
+                    <% if @usuario.id == current_user.id %>
+                        <p align="right">
+                            <%= link_to "Modificar Perfil",  usuario_edit_path, :class => "btn btn-success"%>
+                        </p>
+                    <% end %>
                 </div>
             </div>
         </div>
     </div>
-<% else %>
-    <div class="row">
-	   <div class="col-lg-9 col-md-11 col-md-offset-1">
-	       <h3><b> Debe inciciar sesión para ver el perfil de un usuario </b></h3>
-	   </div>
-    </div>
-<% end %>
+</div>

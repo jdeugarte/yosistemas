@@ -2,6 +2,7 @@ require 'date'
 class UsuariosController < ApplicationController
   skip_before_filter :verify_authenticity_token
   skip_before_filter :require_log_in ,:only=>[:confirm,:new,:create,:forgot_password,:send_password_mail,:recover,:password_recovered]
+  before_filter :grupos
   def index
   end
 
@@ -266,5 +267,13 @@ def create
   			else
         render :new, :format => 'html'
   		end
+  end
+  
+  def grupos
+    if(params[:id] != nil && Grupo.find(params[:id]).habilitado)
+     @grupo = Grupo.find(params[:id])
+   else
+     @grupo = Grupo.find(1)
+  end
   end
 end

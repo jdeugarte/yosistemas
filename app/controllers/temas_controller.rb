@@ -4,9 +4,9 @@ before_filter :grupos
   def index
     @temas = @grupo.temas.order("updated_at DESC").page(params[:page]).per(5)
     @ides = sacarIds(@grupo.temas)
+    @todosgrupos=Grupo.all
   end
 
-   
 
   def buscar
     @temas = Array.new

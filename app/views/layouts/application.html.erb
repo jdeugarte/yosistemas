@@ -69,11 +69,11 @@
   <div class="row">
     <!--Espacio Vacio del Lateral izquierdo.-->
     <div class="col-sm-9 col-md-9 col-lg-9">
-      <%= yield %>
+      <%= yield %> 
     </div>
         <% if !current_user.nil?%>
     <div class="col-sm-2 col-md-2 col-lg-2 hidden-phone">
-        <div class="panel panel-default" style="height:100%; width:16.7%; position:fixed; top:184px; right:5px; background-color:white; ">
+        <div class="panel panel-default" style="height:69%; width:16.7%; position:fixed; top:25%; right:0px; background-color:white;">
             <div class="panel-body" style="padding-top: 0px;">
               <h4 >Usuarios conectados...</h4>
               <ul class="list-group" id="usuarios_conectados" >
@@ -120,9 +120,9 @@
     </div>
 
       <!-- Pie de Pagina -->
-    <div class="row">
-        <%= render 'layouts/bootom_bar' %>
-      </div>
+	 <div class="row">
+	         <%= render 'layouts/bootom_bar' %>
+	       </div>
     <script type="text/javascript">
     obtener_conectados();
     </script>

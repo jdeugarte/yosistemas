@@ -1,4 +1,3 @@
-<h1>Modificar Perfil</h1>
 <div>
 	<% if flash[:status] == TRUE %>
 		<P><%= flash[:alert]%></P>
@@ -8,60 +7,76 @@
 	<% end %>
 <% end %>
 </div>
+
 <%= form_for @usuario do |usuario| %>
 <% usuario.hidden_field  :activa, :value=>true %>
-<div class="row">
-          <div class="col-lg-6">
-            <div class="well">
-              <form class="bs-example form-horizontal">
-                <fieldset>
-                  <legend>Ingrese sus datos para modificaciones.</legend>
-                  <div class="col-lg-3" align="center">
-                    <div class="row" align="center">
-                      <%= image_tag avatar_tam_url(current_user,140) %>
-                    </div>
-                    <div class="row" align="center">
-                      <a href="https://en.gravatar.com/"  target="_blank">Cambiar foto</a>
-                    </div>
-                  </div>
-                  <div class="col-lg-9" align="center">
-                    <div class="form-group">
-                      <label for="inputName" class="col-lg-4 control-label">Nombre:</label>
-                      <div class="col-lg-8">
-                        <%= usuario.text_field :nombre, :class=>'form-control', :placeholder=>'Nombre' %>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="inputPassword" class="col-lg-4 control-label">Apellido:</label>
-                      <div class="col-lg-8">
-                        <%= usuario.text_field :apellido, :class=>'form-control', :placeholder=>'Apellido'  %>
-                      </div>
-                    </div><br><br><br>
-                    <div class="form-group">
-                        <div class="checkbox">
-                          <label class="col-lg-4 control-label">
-                          <%if @usuario.mostrar_correo %>
-                            <input type="checkbox"  checked name="mostrarcorreo"> Mostrar Correo
-                          <%else%>
-                            <input type="checkbox" name="mostrarcorreo" > Mostrar Correo
-                          <%end%>
-                          </label>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >   
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <Center><h3 class="panel-title"><b>Modificar Usuario</b></h3></Center>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 col-lg-3 " align="center"> 
+                            <img class="img-circle"> <%= image_tag avatar_tam_url(@usuario,110) %>
+                            <a href="https://en.gravatar.com/"  target="_blank">Cambiar foto</a>
+                        </div>
+                        <div class=" col-md-9 col-lg-9 "> 
+                            <table class="table table-user-information">
+                                <tbody>
+                                <tr>
+                                  <td>Nombre:</td>
+                                  <td><%= usuario.text_field :nombre, :class=>'form-control', :placeholder=>'Nombre' %></td>                                    
+                                </tr>
+                                <tr>
+                                  <td>Apellido:</td>
+                                  <td><%= usuario.text_field :apellido, :class=>'form-control', :placeholder=>'Apellido'%></td>                                    
+                                </tr>
+                                <tr>
+                                  <td>Cumpleaños:</td>
+                                  <td></td>
+                                </tr>
+                                <tr>
+                                  <td></td>
+                                  <td></td>
+                                </tr>
+                                        <!--tr>
+                                            <td>Hire date:</td>
+                                            <td>06/23/2013</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Date of Birth</td>
+                                            <td>01/24/1988</td>
+                                        </tr>
+                                        <tr>
+                                        <tr>
+                                            <td>Gender</td>
+                                            <td>Male</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Home Address</td>
+                                            <td>Metro Manila,Philippines</td>
+                                        </tr>
+                                        
+                                            <td>Phone Number</td>
+                                            <td>123-4567-890(Landline)<br><br>555-4567-890(Mobile)</td>
+                                    </tr-->                                       
+                                </tbody>
+                            </table>                                      
                         </div>
                     </div>
-                    <div class="form-group">
-                      <div class="col-lg-10 col-lg-offset-4">
-                        &nbsp;
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="col-lg-10 col-lg-offset-4">
-                        <button type="submit" class="btn btn-success">Guardar</button>
-                      </div>
-                    </div>
-                  </div>
-                </fieldset>
-              </form>
+                </div>
+                <div class="panel-footer">
+                  <p align="right">
+                    <a href=<%="/usuarios/"+current_user.id.to_s%>>Volver al perfil</a>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
-   </div>
+</div>
 <% end %>

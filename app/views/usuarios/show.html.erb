@@ -1,75 +1,35 @@
 <% if current_user != nil %>
-<div class="row">
-	<div class="col-lg-9 col-md-11 col-md-offset-1">
-	<h1><b>Perfil de usuario</b></h1>
-	</div>
-</div>
-<div class="row">
-	<div class="col-lg-9 col-md-11 col-md-offset-1">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-2">
-					<%= image_tag avatar_tam_url(@usuario,140) %>
-				</div>
-				<div class="col-lg-6">
-				   <form class="form-horizontal" role="form">
-					  <div class="form-group">
-					    <label class="col-lg-2 control-label">Nombre: </label>
-					    <div class="col-lg-8">
-					      <input id="usuario[nombre]" name="usuario_nombre" class="form-control" type="text" placeholder=<%=@usuario.nombre%> value=<%=@usuario.nombre%> disabled>
-					    </div>
-					  </div>
-					 <div class="form-group">
-					    <label class="col-lg-2 control-label">Apellido: </label>
-					    <div class="col-lg-8">
-					      <input id= "usuario_apellido" name="usuario_apellido" class="form-control" type="text" placeholder=<%=@usuario.apellido%> value=<%=@usuario.apellido%> disabled>
-					    </div>
-					  </div>
-					  <% if @usuario.mostrar_correo ||  @usuario.id == current_user.id %>
-						  <div class="form-group">
-						    <label class="col-lg-2 control-label">Correo: </label>
-						    <div class="col-lg-8">
-						      <input id= "usuario_correo" name="usuario_correo" class="form-control" type="text" placeholder=<%=@usuario.correo%> value=<%=@usuario.correo%> disabled>
-						    </div>
-						  </div>
-					  <% end %>
-					  <div class="form-group">
-					    <div class="col-lg-offset-2 col-lg-10">
-					      <div class="checkbox">
-					        <label>
-					          <input type="checkbox" checked=<%=@usuario.activa%> disabled> Activa
-					        </label>
-					      </div>
-					    </div>
-					  </div>
-					  <% if @usuario.id == current_user.id %>
-					  <div class="form-group">
-					    <div class="col-lg-offset-2 col-lg-10">
-					      <div class="checkbox">
-					        <label>
-					        <%if @usuario.mostrar_correo %>
-					          Correo Visible a Terceros.
-					        <%else%>
-					          Correo No Visible a Terceros.
-					        <%end%>
-					        </label>
-					      </div>
-					    </div>
-					  </div>
-					  <% end %>
-					  <% if @usuario.id == current_user.id %>
-					  	<%= link_to "Modificar Perfil",  usuario_edit_path %>
-					  <% end %>
-					</form>
-			   </div>
-			</div>
-		 </div>
-	</div>
-</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="well well-sm">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4">
+                        <!--img src="http://placehold.it/380x500" alt="" class="img-rounded img-responsive" /-->
+                            <%= image_tag avatar_tam_url(@usuario,140) %>
+                        </div>
+                        <div class="col-sm-6 col-md-8">
+                            <CENTER><h4><%=@usuario.nombre%> <%=@usuario.apellido%> </h4></CENTER>
+                            <p>
+                        	   <% if @usuario.mostrar_correo ||  @usuario.id == current_user.id %>
+                                 <i class="glyphicon glyphicon-envelope"></i><%=@usuario.correo%>
+                                <%end%>
+                                <br />
+                            <!--i class="glyphicon glyphicon-gift"></i>June 02, 1988</p-->
+                            </p>
+                            <% if @usuario.id == current_user.id %>
+					  		   <%= link_to "Modificar Perfil",  usuario_edit_path %>
+					  	    <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <% else %>
-<div class="row">
-	<div class="col-lg-9 col-md-11 col-md-offset-1">
-	<h3><b> Debe inciciar sesión para ver el perfil de un usuario </b></h3>
-	</div>
-</div>
+    <div class="row">
+	   <div class="col-lg-9 col-md-11 col-md-offset-1">
+	       <h3><b> Debe inciciar sesión para ver el perfil de un usuario </b></h3>
+	   </div>
+    </div>
 <% end %>

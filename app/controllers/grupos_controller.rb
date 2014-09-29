@@ -1,4 +1,5 @@
 class GruposController < ApplicationController
+  attr_accessor :estado, :nombre
 before_filter :grupos
   def index
     @grupos = Grupo.all_habilitados.page(params[:page]).per(5)

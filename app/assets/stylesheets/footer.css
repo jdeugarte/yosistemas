@@ -221,16 +221,16 @@ footer ul.list.icons li {
 	margin-bottom: 5px;
 }
 .mifooter2{
-	position:fixed;
-	top:95%;
-	left: 0;
+	position:absolute;
+	top:350%;
 	padding-top: 10px;
 	padding-left: 20px;
 	width: 100%;
-	background:#0C0C0C;
+	background:#000;
 }
 .mifooter2 .row div ul li{
 	display: inline-block;
+	padding-right:10px;
 }
 .mifooter{
 	float: left;
@@ -243,5 +243,8 @@ footer ul.list.icons li {
 .cambio{
 	display: inline;
 margin-top: 10px;
+}
+footer {
+	height:200px;
 }
 

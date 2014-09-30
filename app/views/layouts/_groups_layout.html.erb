@@ -35,26 +35,28 @@
       </div>      
     </div>
     <div class="bs-example" style="overflow:auto; height:150px; width:200px; position:fixed; top:38%; left:20px;">
-            <ul class="nav nav-pills-public nav stacked" style="max-width: 300px;">                  
+              <h4 background-color="black">Publicos</h4>
+              <ul class="nav nav-pills-public nav-stacked">                  
                 <%if  current_user!=nil%>
                   <% subscripciones_usuario().each do |subs| %>
-                      <%if subs.grupo.id == @grupo.id and subs.grupo.nombre=="Publico"%>
+                      <%if subs.grupo.id == @grupo.id and subs.grupo.estado==false%>
                         <li class="active"><a name="currentSelected" href="#"><%= subs.grupo.nombre %></a></li>
                       <%else%>
-                        <% if subs.grupo.habilitado and subs.grupo.nombre=="Publico"%>
+                        <% if subs.grupo.habilitado and subs.grupo.estado==false%>
                           <li><a name="itemMenu" href="/grupos/<%=subs.grupo.id%>/temas-y-tareas"><%= subs.grupo.nombre %></a></li>
                         <% end %>    
                       <% end %>
                   <% end %>
                 <% end %>
               </ul>
-             <ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
+              <h4>Privados</h4>
+              <ul class="nav nav-pills nav-stacked">
                 <%if  current_user!=nil%>
                   <% subscripciones_usuario().each do |subs| %>
-                      <%if subs.grupo.id == @grupo.id and subs.grupo.nombre!="Publico"%>
+                      <%if subs.grupo.id == @grupo.id and subs.grupo.estado==true%>
                         <li class="active"><a name="currentSelected" href="#"><%= subs.grupo.nombre %></a></li>
                       <%else%>
-                        <% if subs.grupo.habilitado and subs.grupo.nombre!="Publico"%>
+                        <% if subs.grupo.habilitado and subs.grupo.estado==true%>
                           <li><a name="itemMenu" href="/grupos/<%=subs.grupo.id%>/temas-y-tareas"><%= subs.grupo.nombre %></a></li>
                         <% end %>    
                       <% end %>

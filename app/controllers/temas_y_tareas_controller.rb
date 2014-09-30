@@ -15,5 +15,4 @@ class TemasYTareasController < ApplicationController
       @temas_y_tareas.sort!{|x,y|  y.created_at <=> x.created_at}
     end
   end
-
 end

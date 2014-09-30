@@ -12,20 +12,22 @@
 <%= form_for @usuario do |usuario| %>
 <% usuario.hidden_field  :activa, :value=>true %>
 
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >   
+<div class="row">
+    <div class="col-lg-8">
+            <div class="well">
+              <form class="bs-example form-horizontal">
+                <fieldset>  
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <Center><h3 class="panel-title"><b>Modificar Usuario</b></h3></Center>
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-3 col-lg-3 " align="center"> 
+                        <div class="col-md-3 col-lg-3 " > 
                             <img class="img-circle"> <%= image_tag avatar_tam_url(@usuario,110) %>
                             <a href="https://en.gravatar.com/"  target="_blank">Cambiar foto</a>
                         </div>
-                        <div class=" col-md-9 col-lg-9 "> 
+                        <div class=" col-md-18 col-lg-18 "> 
                             <table class="table table-user-information">
                                 <tbody>
                                 <tr>
@@ -44,7 +46,7 @@
                                   <td></td>
                                   <td></td>
                                 </tr>
-                                        <!--tr>
+                                        <tr>
                                             <td>Hire date:</td>
                                             <td>06/23/2013</td>
                                         </tr>
@@ -64,7 +66,7 @@
                                         
                                             <td>Phone Number</td>
                                             <td>123-4567-890(Landline)<br><br>555-4567-890(Mobile)</td>
-                                    </tr-->                                       
+                                    </tr>                                      
                                 </tbody>
                             </table>                                      
                         </div>
@@ -78,7 +80,7 @@
                 </div>
             </div>
         </div>
-    </div>
+			</div>
 </div>
 <% end %>
 <%end%>

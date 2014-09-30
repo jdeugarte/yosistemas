@@ -68,7 +68,9 @@
   <!-- Cuerpo de la pagina -->
   <div class="row">
     <!--Espacio Vacio del Lateral izquierdo.-->
+		
     <div class="col-sm-9 col-md-9 col-lg-9">
+			
       <%= yield %> 
     </div>
         <% if !current_user.nil?%>
@@ -120,9 +122,7 @@
     </div>
 
       <!-- Pie de Pagina -->
-	 <div class="row">
-	         <%= render 'layouts/bootom_bar' %>
-	       </div>
+	
     <script type="text/javascript">
     obtener_conectados();
     </script>
@@ -158,5 +158,9 @@
          
       
     </script>
+		
 </body>
+	 <div class="row">
+	         <%= render 'layouts/bootom_bar' %>
+	       </div>
 </html>

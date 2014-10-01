@@ -96,15 +96,17 @@ before_filter :grupos
     @grupo = Grupo.new(grupo_params)
     @grupo.usuario_id = current_user.id
     @grupo.verificar_grupo
-    if @grupo.save
-      subs = Subscripcion.new
-      subs.grupo = @grupo
-      subs.usuario = current_user
-      subs.save
-      redirigir_a(@grupo)
-    else
-      #redirect_to "/grupos/new", :flash => { :error => "Error al crear un grupo" }
-      render 'new', :flash => { :alert => "Error al crear un grupo" }
+    respond_to do |format|  
+      if @grupo.save
+        subs = Subscripcion.new
+        subs.grupo = @grupo
+        subs.usuario = current_user
+        subs.save
+        format.html { redirect_to @grupo, notice: 'Grupo ha sido creado.' }
+      else
+        #redirect_to "/grupos/new", :flash => { :error => "Error al crear un grupo" }
+        render 'new', :flash => { :alert => "Error al crear un grupo" }
+      end
     end
   end
 

@@ -39,7 +39,7 @@
                   <h3 style="margin-top:10px;"><%= link_to grupo.usuario.nombre_usuario,  grupo.usuario %></h3>
                 </div>
               </div>
-              <div class="col-lg-5">
+              <div class="col-lg-8">
                   <br>
                   <table class="table table-striped table-bordered table-hover">
                         <thead>
@@ -68,35 +68,23 @@
                     </table>
                   <%end%>
               </div>
-              <div class="col-lg-1">
-                <br>
-                 <%if current_user.id != grupo.usuario_id && grupo.usuario_suscrito?(current_user.id) %>
-                    <form class="navbar-form navbar-left" method="get" action=<%=suscribirse_path(grupo)%>  >
-                      <button type="submit" class="btn btn-primary" style="width:180px;">Suscribirse al grupo</button>
-                    </form>
+          </div>
+              <div style="margin-left:15px;;">
+                <%if current_user.id != grupo.usuario_id && grupo.usuario_suscrito?(current_user.id) %>
+                    <a href='<%=suscribirse_path(grupo)%>' class='btn btn-primary btn-xs' style='margin-top:6px;'>Suscribirse al grupo</a>
                 <%end%>
-                 <form class="navbar-form navbar-left" method="get" action="/grupos/<%=grupo.id%>/temas" >
-                      <button type="submit" class="btn btn-primary" style="width:180px;">Ver Temas del Grupo</button>
-                    </form>
+                <a href='/grupos/<%=grupo.id%>/temas' class='btn btn-primary btn-xs' style='margin-top:6px;'>Ver Temas del grupo</a>
                 <%if grupo.usuario_suscrito?(current_user.id) == false %>
-                    <form class="navbar-form navbar-left" method="get" action=<%=invitacion_grupo_path(grupo)%>  >
-                      <button type="submit" class="btn btn-primary" style="width:180px;">Enviar Invitacion al Grupo</button>
-                    </form>
+                  <a href='<%=invitacion_grupo_path(grupo)%>' class='btn btn-primary btn-xs' style='margin-top:6px;'>Editar datos del grupo</a>
                 <%end%>
-                 <% if grupo.usuario_id == current_user.id %>
-                <div class="col-lg-3" style="margin-top:2px;">
-                    <button type="button" class="btn btn-default" style="width:180px;" data-container="body" data-toggle="popover" data-placement="right" data-html="true" data-content="<a href='/grupos/<%=grupo.id%>/editar_grupo' class='btn btn-primary' style='width:180px;'>Editar datos del grupo</a>
-                    <!--Segundo boton -->
-                    <a href='<%=suscriptores_path(grupo)%>' class='btn btn-primary' style='margin-top:5px; width:180px;'>Ver Suscriptores del Grupo</a>
-                    <!--Tercer boton -->
-                    <a href='<%=cuestionarios_de_grupo_index_path(grupo)%>' class='btn btn-primary' style='margin-top:5px; width:180px;'>Ver Cuestionarios del grupo</a>
-                    <!--Cuarto boton -->
-                    <a href='grupos/deshabilitar_grupo/<%= grupo.id%>' class='btn btn-primary' style='margin-top:5px; width:180px;'>Deshabilitar Grupo</a>
-                    ">
-                      Más Opciones
-                    </button>
-                </div>
+                <% if grupo.usuario_id == current_user.id %>
                 
+                  <a href='/grupos/<%=grupo.id%>/editar_grupo' class='btn btn-primary btn-xs' style='margin-top:6px;'>Editar datos del grupo</a>
+                
+                  <a href='<%=suscriptores_path(grupo)%>' class='btn btn-primary btn-xs' style='margin-top:5px;'>Ver Suscriptores del Grupo</a>
+
+                  <a href='grupos/deshabilitar_grupo/<%= grupo.id%>' class='btn btn-primary btn-xs' style='margin-top:5px;'>Deshabilitar Grupo</a>
+              </div>
                   <!--
                     
                        

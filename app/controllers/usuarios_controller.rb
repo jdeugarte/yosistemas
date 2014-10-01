@@ -270,7 +270,7 @@ def create
   end
   
   def grupos
-    if(params[:id] != nil && Grupo.find(params[:id]).habilitado)
+    if(params[:id] != nil && Grupo.find_by_id(params[:id]) && Grupo.find_by_id(params[:id]).habilitado)
      @grupo = Grupo.find(params[:id])
    else
      @grupo = Grupo.find(1)

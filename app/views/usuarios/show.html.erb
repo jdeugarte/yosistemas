@@ -98,7 +98,7 @@
         <% @usuario.temas.each do |tema| %>
             <strong>TEMA <%= aux %></strong><br>
             <strong>Nombre del grupo:</strong><br>
-            <%= tema.grupo.nombre %><br>
+            <%= tema.nombre %><br>
             <strong>Fecha de creacion del tema:</strong><br>
             <%= tema.created_at.to_date %><br><br>
             <% aux = aux + 1 %>
@@ -128,7 +128,7 @@
         <% @usuario.eventos.each do |evento| %>
             <strong>TEMA <%= aux %></strong><br>
             <strong>Nombre del grupo:</strong><br>
-            <%= evento.grupo.nombre %><br>
+            <%= evento.nombre %><br>
             <strong>Fecha de creacion evento:</strong><br>
             <%= evento.created_at.to_date %><br><br>
             <% aux = aux + 1 %>
@@ -150,16 +150,16 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Mis Eventos</h4>
+        <h4 class="modal-title" id="myModalLabel">Mis Cuestionarios</h4>
       </div>
       <div class="modal-body" style="text-align:center;">
         <% aux = 1 %>
-        <% @usuario.eventos.each do |suscripcion| %>
-            <strong>TEMA <%= aux %></strong><br>
-            <strong>Nombre del grupo:</strong><br>
-            <%= suscripcion.grupo.nombre %><br>
-            <strong>Fecha de suscripcion:</strong><br>
-            <%= suscripcion.created_at.to_date %><br><br>
+        <% @usuario.cuestionarios.each do |cuestionario| %>
+            <strong>CUESTIONARIO <%= aux %></strong><br>
+            <strong>Grupo del cuestionario:</strong><br>
+            <%= cuestionario.grupo.nombre %><br>
+            <strong>Fecha de cuestionario:</strong><br>
+            <%= cuestionario.created_at.to_date %><br><br>
             <% aux = aux + 1 %>
         <% end %>
         <% if @usuario.cuestionarios.count == 0 %>

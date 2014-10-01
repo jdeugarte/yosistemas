@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140929022422) do
+ActiveRecord::Schema.define(version: 20140917030056) do
 
   create_table "adjunto_respuesta_cuestionarios", force: true do |t|
     t.integer  "respuesta_usuario_id"
@@ -337,7 +337,6 @@ ActiveRecord::Schema.define(version: 20140929022422) do
     t.boolean  "mostrar_correo"
     t.boolean  "conectado",                   default: false
     t.string   "temp_password"
-    t.date     "fecha_de_nacimiento"
   end
 
   add_index "usuarios", ["grupo_id"], name: "index_usuarios_on_grupo_id"

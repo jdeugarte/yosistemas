@@ -372,8 +372,8 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     var $active   = this.$element.find('.item.active')
     var $next     = next || $active[type]()
     var isCycling = this.interval
-    var direction = type == 'next' ? 'left' : 'right'
-    var fallback  = type == 'next' ? 'first' : 'last'
+    var direction = type == 'next' ? 'Izquierda' : 'Derecha'
+    var fallback  = type == 'next' ? 'Primera' : 'Ultima'
     var that      = this
 
     this.sliding = true

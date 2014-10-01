@@ -236,10 +236,10 @@ before_filter :grupos
     
     def grupos
       if(params[:id] != nil && Grupo.find(params[:id]).habilitado)
-       @grupo = Grupo.find(params[:id])
-     else
-       @grupo = Grupo.find(1)
-    end
+        @grupo = Grupo.find(params[:id])
+      else
+        @grupo = Grupo.find(1)
+      end
     end
 
     def sacarIds(temas)

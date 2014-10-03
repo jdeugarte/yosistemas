@@ -10,12 +10,12 @@ class SessionsController < ApplicationController
       session[:usuario_id] = usuario.id
       if (request.referrer.include? "/usuarios") || (request.referrer.include? "usuarios/confirm" ) || (request.referrer.include? "/send_password_mail")
         if notificaciones == nil || notificaciones.size < 1
-          redirect_to root_url, :notice => "Logged in!"
+          redirect_to "/", :notice => "Logged in!"
         else
           if notificaciones.size == 1
-            redirect_to root_url, :notice => "Logged in!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificacion"
+            redirect_to "/", :notice => "Logged in!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificacion"
           else
-            redirect_to root_url, :notice => "Logged in!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificaciones"
+            redirect_to "/", :notice => "Logged in!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificaciones"
           end
         end
       else
@@ -39,7 +39,7 @@ class SessionsController < ApplicationController
     usuario.conectado=false
     usuario.save
     session[:usuario_id] = nil
-    redirect_to root_url, :notice => "Logged out!"
+    redirect_to "/", :notice => "Logged out!"
   end
 
   def obtener_conectados

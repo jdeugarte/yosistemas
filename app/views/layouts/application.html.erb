@@ -38,7 +38,7 @@
   </script>
 </head>
 <body>
-  <input type="hidden" id="current_user" value="<%=current_user.nil? ? 0 : current_user.id%>">
+<input type="hidden" id="current_user" value="<%=current_user.nil? ? 0 : current_user.id%>">
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -71,7 +71,7 @@
 		<div id="main" class="col-sm-9 col-md-9 col-lg-9">
       <%= yield %> 
     </div>
-        <% if !current_user.nil?%>
+    <!--    <% if !current_user.nil?%>
     <div class="col-sm-2 col-md-2 col-lg-2 hidden-phone">
         <div class="panel panel-default" style="height:69%; width:16.7%; position:fixed; top:25%; right:0px; background-color:white;">
             <div class="panel-body" style="padding-top: 0px;">
@@ -112,7 +112,7 @@
                       <button onClick="send();" class="btn btn-default btn-sm" type="button">Enviar</button>
                     </span>
                   </div>
-        </div>
+        </div>-->
     </div>
 
     <div id="notificacion_panel">

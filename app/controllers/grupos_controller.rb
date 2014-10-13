@@ -1,13 +1,9 @@
 class GruposController < ApplicationController
   attr_accessor :estado, :nombre
-before_filter :grupos
+  before_filter :grupos
+  
   def index
     @grupos = Grupo.all_habilitados.page(params[:page]).per(5)
-  end
-
-  def mis_grupos
-    @grupos = Grupo.buscar_mis_grupos(current_user)
-    @grupos = Kaminari.paginate_array(@grupos).page(params[:page]).per(5)
   end
 
   def deshabilitar_grupo
@@ -27,49 +23,27 @@ before_filter :grupos
   end
   
   def buscar
-    @grupos=Array.new
-    aux = Grupo.all_habilitados
-    nombre = params[:nombre]
-    if nombre != "" && nombre != nil
-      aux.each do |grupo|
-        if (grupo.correspondeAGrupo(nombre))
-          @grupos.push(grupo)
-        end
-      end
-    else
-      @grupos = aux
-    end
-    @grupos = Kaminari.paginate_array(@grupos).page(params[:page]).per(5)
+    @grupos = Grupo.where("nombre LIKE ? AND estado = ?", "%#{params[:nombre]}%", true).page(params[:page]).per(5)
     render 'index'
   end
 
-  def buscar_por_llave    
-    
-    aux = Grupo.all    
-    llave = params[:llave]
-    if llave != nil && llave != "publico"
-      aux.each do |grupo| 
-        if(grupo.llave==llave)
-          subscrip = Subscripcion.new
-          subscrip.grupo_id = grupo.id
-          subscrip.usuario_id = current_user.id
-          subscrip.save                    
-          @grupo = grupo                              
-        end  
-      end 
-      if @grupo == nil
-        redirect_to root_path, :flash => { :info => "La llave que proporciono no pertenece a ningun grupo" }
-      else
-        redirect_to '/grupos/'+@grupo.id.to_s+'/temas-y-tareas/', :flash => { :info => "Se ha suscrito al grupo: "+"' "+ @grupo.nombre+" '"+" exitosamente" }     
-      end            
-    else    
-      render 'index'
-    end
+  def buscar_por_llave
+    @grupos = Grupo.where("llave = ? AND estado = ?", "#{params[:llave]}", true)
+    @grupo = @grupos.first
+    if @grupo != nil
+      suscripcion = Subscripcion.new
+      suscripcion.grupo_id = @grupo.id
+      suscripcion.usuario_id = current_user.id
+      suscripcion.save
+      redirect_to '/grupos/'+@grupo.id.to_s+'/temas-y-tareas/', :flash => { :info => "Se ha suscrito al grupo: "+"' "+ @grupo.nombre+" '"+" exitosamente" }     
+    else
+      redirect_to root_path, :flash => { :info => "La llave que proporciono no pertenece a ningun grupo" }
+    end 
   end
 
-	def new
-    if (current_user!=nil && current_user.rol=="Estudiante")
-      redirect_to root_path
+  def new
+    if (current_user == nil || current_user.rol == "Estudiante")
+      redirect_to root_path, :flash => { :info => "No tiene privilegios requeridos para crear un grupo" }
     else
       @grupo = Grupo.new
     end
@@ -95,6 +69,7 @@ before_filter :grupos
   def create
     @grupo = Grupo.new(grupo_params)
     @grupo.usuario_id = current_user.id
+    #la funcion de abajo verifica si se creo un grupo publico, o uno privado para generar la clave
     @grupo.verificar_grupo
     respond_to do |format|  
       if @grupo.save
@@ -104,7 +79,6 @@ before_filter :grupos
         subs.save
         format.html { redirect_to @grupo, notice: 'Grupo ha sido creado.' }
       else
-        #redirect_to "/grupos/new", :flash => { :error => "Error al crear un grupo" }
         render 'new', :flash => { :alert => "Error al crear un grupo" }
       end
     end
@@ -128,10 +102,10 @@ before_filter :grupos
   end
 
   def enviar_invitaciones
-    @grupo=Grupo.find(params[:id])
-    correos=(params[:correos]).split(",")
+    @grupo = Grupo.find(params[:id])
+    correos = (params[:correos]).split(",")
     correos.each do |correo|
-        SendMail.enviar_invitaciones(current_user, correo, @grupo).deliver
+      SendMail.enviar_invitaciones(current_user, correo, @grupo).deliver
     end
     redirect_to '/grupos/invitacion_grupo/'+params[:id].to_s, :flash => { :info => "Sus invitaciones fueron enviadas."}
   end
@@ -143,10 +117,10 @@ before_filter :grupos
 
     def grupos
       if(params[:id] != nil && Grupo.find(params[:id]).habilitado)
-       @grupo = Grupo.find(params[:id])
-     else
-       @grupo = Grupo.find(1)
-    end
+        @grupo = Grupo.find(params[:id])
+      else
+        @grupo = Grupo.find(1)
+      end
     end
 
     def redirigir_a(grupo)

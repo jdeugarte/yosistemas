@@ -1,7 +1,7 @@
 require 'date'
 class UsuariosController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  skip_before_filter :require_log_in ,:only=>[:confirm,:new,:create,:forgot_password,:send_password_mail,:recover,:password_recovered]
+  skip_before_filter :require_log_in ,:only=>[:confirm,:new,:create,:forgot_password,:send_password_mail,:recover,:password_recovered,:index]
   before_filter :grupos
   def index
   end

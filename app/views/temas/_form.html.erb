@@ -1,3 +1,4 @@
+<%= render :layout => 'layouts/groups_layout' do%>
 <%= form_for @tema, :html => { :class => 'bs-example form-horizontal', :multipart => true} do |f| %>
 <%= f.hidden_field :id,:value => @id%>
   <div class="row">
@@ -63,3 +64,4 @@
     </div>
    </div>
 <% end %>
+<%end%>

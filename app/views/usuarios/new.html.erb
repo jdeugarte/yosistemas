@@ -1,7 +1,6 @@
 <div class="page-header">
      <h1 id="forms">Registrarse</h1>
 </div>
-<!-- <p>Find me in app/views/usuarios/new.html.erb</p> -->
 <% if @usuario.errors.any? %>
    <div id ="errorRegistroUsuario" class="alert alert-error">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -13,74 +12,65 @@
    </div>
 <% end %>
 <%= form_for @usuario do |usuario| %>
-<% usuario.hidden_field  :activa, :value=>true %>
-<div class="row">
-          <div class="col-lg-8">
-            <div class="well">
-              <form class="bs-example form-horizontal">
-                <fieldset>
-                  <legend>Ingrese sus datos para registro.</legend>
-                  <div class="form-group">
-                    <label for="inputEmail" class="col-lg-4 control-label">Nombre:</label>
-                    <div class="col-lg-8">
-                      <%= usuario.text_field :nombre, :class=>'form-control', :placeholder=>'Nombre' %>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputPassword" class="col-lg-4 control-label">Apellido:</label>
-                    <div class="col-lg-8">
-                      <%= usuario.text_field :apellido, :class=>'form-control', :placeholder=>'Apellido'  %>
-                    </div>
-                  </div>
-                    <div class="form-group">
-                    <label for="inputEmail" class="col-lg-4 control-label">Nombre de usuario:</label>
-                    <div class="col-lg-8">
-                      <%= usuario.text_field :nombre_usuario, :class=>'form-control', :placeholder=>'Nombre de Usuario' %>
-                    </div>
-                  </div>
-                   <div class="form-group">
-                    <label for="inputEmail" class="col-lg-4 control-label">Correo:</label>
-                    <div class="col-lg-8">
-                      <%= usuario.text_field :correo, :class=>'form-control', :placeholder=>'Correo' %>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputEmail" class="col-lg-4 control-label">Contraseña:</label>
-                    <div class="col-lg-8">
-                      <%= usuario.password_field :contrasenia, :class=>'form-control', :placeholder=>'Contraseña' %>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputEmail" class="col-lg-4 control-label">Confirmar Contraseña:</label>
-                    <div class="col-lg-8">
-                      <%= usuario.password_field :contrasenia_confirmation, :class=>'form-control', :placeholder=>'Confirmar Contraseña' %>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputEmail" class="col-lg-4 control-label">Seleccionar Rol:</label>
-                    <div class="col-lg-8">
-                      <select class="form-control" id="select" name="rol">
-                            <option>Estudiante</option>
-                            <option>Docente</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputEmail" class="col-lg-4 control-label">Correo Visible:</label>
-                    <div class="col-lg-8">
-                      <label for="inputEmail" class="col-lg-4 control-label">
-                        <input type="checkbox" name="mostrarcorreo">
-                      </label>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-4">
-						<input type="submit" name="Registrar" id="Registrar" value="Registrar" class="btn btn-success">
-					</div>
-                  </div>
-                </fieldset>
-              </form>
-        </div>
+  <% usuario.hidden_field  :activa, :value=>true %>
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <Center><h3><b>Ingrese sus datos para registro</b></h3></Center>
+      </div>
+      <div class="panel-body">
+        <table class="table table-user-information">
+          <tbody>
+              <tr>
+                <td>Nombre:</td>
+                <td><%=usuario.text_field :nombre, :maxlength => 25, :placeholder=>'Nombre' %></td>
+              </tr>
+              <tr>
+                <td>Apellido:</td>
+                <td><%=usuario.text_field :apellido, :maxlength =>25, :placeholder=>'Apellido'  %></td>
+              </tr>
+              <tr>
+                <td>Telefono:</td>
+                <td><%=usuario.text_field :telefono, :maxlength =>25, :placeholder=>'Telefono'  %></td>
+              </tr>
+              <tr>
+                <td>Fecha de Nacimiento:</td>
+                <td><%= usuario.date_select :fecha_nacimiento, :order => [:day, :month, :year], :start_year => 1950 %></td>
+              </tr>
+              <tr>
+                <td>Acerca de mi:</td>
+                <td><%=usuario.text_area :acerca_de, :size => "30x5", :placeholder=>'Acerca de mi'  %></td>
+              </tr>
+              <tr>
+                <td>Nombre de Usuario:</td>
+                <td><%= usuario.text_field :nombre_usuario, :maxlength =>25, :placeholder=>'Nombre de Usuario' %></td>
+              </tr>
+              <tr>
+                <td>Correo Electronico:</td>
+                <td><%= usuario.text_field :correo, :maxlength=>25, :placeholder=>'E-mail' %></td>
+              </tr>
+              <tr>
+                <td>Contraseña:</td>
+                <td><%= usuario.password_field :contrasenia, :maxlength=>25, :placeholder=>'Contraseña' %></td>
+              </tr>
+              <tr>
+                <td>Confirmar Contraseña:</td>
+                <td><%= usuario.password_field :contrasenia_confirmation, :maxlength=>25, :placeholder=>'Confirmar Contraseña' %></td>
+              </tr>
+              <tr>
+                <td>Seleccionar Rol:</td>
+                <td><%= usuario.select(:rol, options_for_select([['Docente', 'docente'], ['Estudiante', 'estudiante']])) %></td>
+              </tr>
+              <tr>
+                <td>Mostrar Correo:</td>
+                <td><%= usuario.check_box :mostrar_correo %> <br /></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <center><input type="submit" name="Registrar" id="Registrar" value="Registrar" class="btn btn-success"></center>
+        </li>
+      </ul>
     </div>
-   </div>
 <% end %>

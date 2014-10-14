@@ -6,6 +6,9 @@ class CreateUsuarios < ActiveRecord::Migration
       t.string :contrasenia
       t.string :contrasenia_de_confirmacion
       t.string :correo
+      t.date :fecha_nacimiento
+      t.text :acerca_de
+      t.integer :telefono
       t.timestamps
     end
   end

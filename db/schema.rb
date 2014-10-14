@@ -327,6 +327,9 @@ ActiveRecord::Schema.define(version: 20140917030056) do
     t.string   "contrasenia"
     t.string   "contrasenia_de_confirmacion"
     t.string   "correo"
+    t.date     "fecha_nacimiento"
+    t.text     "acerca_de"
+    t.integer  "telefono"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "activa",                      default: false

@@ -16,7 +16,7 @@
           <ul class="dropdown-menu" role="menu">
             <%if  !current_user.nil? %>
             <li><a href="/temas/new/1">Crear Tema</a></li>
-            <li><a href="/temas/show_mine">Mis Temas</a></li>
+            <!--li><a href="/temas/show_mine">Mis Temas</a></li-->
             <%end%>
             <li><a href="/temas">Ver Temas</a></li>
           </ul>
@@ -29,6 +29,14 @@
             <li><a href="/grupos/new">Crear Grupo</a></li>
             <%end%>
             <li><a href="/grupos">Ver grupos</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cuestionarios<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <%if current_user!=nil && current_user.rol == "Docente"%>
+            <li><a href="/cuestionarios/nuevo_cuestionario/1">Crear Cuestionario</a></li>
+            <%end%>
           </ul>
         </li>
         <li class="dropdown">
@@ -54,14 +62,8 @@
       </form>
         <!--/.nav-collapse -->
         <%if current_user.nil?%>
-          <form class="navbar-form navbar-right" role="form" method="Post" action=<%=sessions_path%>>
-            <div class="form-group">
-              <%= text_field_tag :correo, params[:correo], :class=>'form-control', :placeholder=>'Nombre de usuario', :size => 20 %>
-            </div>
-            <div class="form-group">
-              <%= password_field_tag :contrasenia, params[:contrasenia], :class=>'form-control', :placeholder=>'Contraseña'%>
-            </div>
-            <button type="submit" class="btn btn-success">Ingresar</button>
+          <form class="navbar-form navbar-right">
+            <%= link_to 'Ingresar',usuarios_path, class: "btn btn-success" %>
           </form>
         <%else%>
           <ul class="nav navbar-nav" >

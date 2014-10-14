@@ -28,7 +28,7 @@
         </div>
       </div>
 </div>
-          <div class="form-group">
+        <div class="form-group">
                     <label for="inputTitle" class="col-lg-2 control-label" style="text-align:left;">¿Desea publicar el cuestionario?</label>
                     <div class="col-lg-2">
                       <select class="form-control" id="cuestionario_estado" name="cuestionario[estado]">
@@ -37,9 +37,18 @@
                       </select>
                     </div>
           </div>
-          <div class="field">
-            <%= f.hidden_field :grupo_id, :value => @grupo.id, :readonly => true %>
+
+
+          <div class="form-group">
+                    <label for="inputTitle" class="col-lg-2 control-label" style="text-align:left;">Grupo del cuestionario</label>
+                    <div class="col-lg-2">
+                      <!--%= f.select :grupo_id, options_for_select(@grupos) %-->
+                      <%= select_tag "grupo_id", options_for_select(@grupos.collect {|p| [ p['nombre'], p['id'] ] })%>
+                    </div>
           </div>
+          <!--div class="field">
+            <%= f.hidden_field :grupo_id, :value => @grupo.id, :readonly => true %>
+          </div-->
           <div class="field">
             <%= f.hidden_field :usuario_id, :value => @current_user.id, :readonly => true %>
           </div>

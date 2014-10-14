@@ -1,16 +1,16 @@
 class CuestionariosController < ApplicationController
 	def ver_cuestionarios_usuarios
-  	@cuestionario=Cuestionario.find(params[:id_cuestionario])
-  	@suscritos= Subscripcion.where(grupo_id: @cuestionario.grupo_id)
-  	@usuarios=Array.new
-    @respuestas=Array.new
-    @preguntas=Array.new
-    @preguntas=Pregunta.where(cuestionario_id: @cuestionario.id)
+  	@cuestionario = Cuestionario.find(params[:id_cuestionario])
+  	@suscritos =  Subscripcion.where(grupo_id: @cuestionario.grupo_id)
+  	@usuarios = Array.new
+    @respuestas = Array.new
+    @preguntas = Array.new
+    @preguntas = Pregunta.where(cuestionario_id: @cuestionario.id)
   	@suscritos.each do |suscrito|
-  		if (suscrito.usuario_id!=current_user.id)
-  			@usuario=Usuario.find(suscrito.usuario_id)
-        @respuestas_usuario=RespuestaUsuario.where(usuario_id: suscrito.usuario_id)
-        if(@respuestas_usuario.count >0)
+  		if (suscrito.usuario_id != current_user.id)
+  			@usuario = Usuario.find(suscrito.usuario_id)
+        @respuestas_usuario = RespuestaUsuario.where(usuario_id: suscrito.usuario_id)
+        if(@respuestas_usuario.count > 0)
           @usuarios.push(@usuario)
         end
   		end  		
@@ -18,29 +18,29 @@ class CuestionariosController < ApplicationController
   end
 
   def ver_resultado
-      @cuestionario=Cuestionario.find(params[:id_cuestionario])
+      @cuestionario = Cuestionario.find(params[:id_cuestionario])
       @usuario = current_user
-      @respuestas=Array.new
-      @preguntas=Array.new
-      @preguntas=Pregunta.where(cuestionario_id: @cuestionario.id)
-      @respuestas_usuario=RespuestaUsuario.where(usuario_id: @usuario.id,cuestionario_id: @cuestionario.id)
+      @respuestas = Array.new
+      @preguntas = Array.new
+      @preguntas = Pregunta.where(cuestionario_id: @cuestionario.id)
+      @respuestas_usuario = RespuestaUsuario.where(usuario_id: @usuario.id,cuestionario_id: @cuestionario.id)
       @respuestas_usuario.each do |respuesta|
         @respuestas.push(respuesta)
       end
   end
 
   def ver_resultados_usuarios #sssss 
-      @cuestionario=Cuestionario.find(params[:id_cuestionario])
-      @suscritos= Subscripcion.where(grupo_id: @cuestionario.grupo_id)
-      @usuarios=Array.new
-      @respuestas=Array.new
-      @preguntas=Array.new
-      @preguntas=Pregunta.where(cuestionario_id: @cuestionario.id)
+      @cuestionario = Cuestionario.find(params[:id_cuestionario])
+      @suscritos =  Subscripcion.where(grupo_id: @cuestionario.grupo_id)
+      @usuarios = Array.new
+      @respuestas = Array.new
+      @preguntas = Array.new
+      @preguntas = Pregunta.where(cuestionario_id: @cuestionario.id)
       @suscritos.each do |suscrito|
-        if (suscrito.usuario_id!=current_user.id)
-          @usuario=Usuario.find(suscrito.usuario_id)
+        if (suscrito.usuario_id != current_user.id)
+          @usuario = Usuario.find(suscrito.usuario_id)
           @usuarios.push(@usuario)
-          @respuestas_usuario=RespuestaUsuario.where(usuario_id: suscrito.usuario_id,cuestionario_id: @cuestionario.id)
+          @respuestas_usuario = RespuestaUsuario.where(usuario_id: suscrito.usuario_id,cuestionario_id: @cuestionario.id)
           @respuestas_usuario.each do |respuesta|
             @respuestas.push(respuesta)
           end
@@ -49,21 +49,21 @@ class CuestionariosController < ApplicationController
   end
 
   def ver_resumen
-    @cuestionario=Cuestionario.find(params[:id_cuestionario])
-    @preguntas=Pregunta.where(cuestionario_id: @cuestionario.id)  
+    @cuestionario = Cuestionario.find(params[:id_cuestionario])
+    @preguntas = Pregunta.where(cuestionario_id: @cuestionario.id)  
     @respuestas_correctas = Array.new
     @respuestas_incorrectas = Array.new
     @preguntas.each do |pregunta|
-      respuestas_usuarios_true=RespuestaUsuario.where(pregunta_id: pregunta.id,calificacion: true)
-      respuestas_usuarios_false=RespuestaUsuario.where(pregunta_id: pregunta.id,calificacion: false)
+      respuestas_usuarios_true = RespuestaUsuario.where(pregunta_id: pregunta.id,calificacion: true)
+      respuestas_usuarios_false = RespuestaUsuario.where(pregunta_id: pregunta.id,calificacion: false)
       @respuestas_correctas.push(respuestas_usuarios_true.size)
       @respuestas_incorrectas.push(respuestas_usuarios_false.size)
     end
   end
 
   def cargar_respuestas
-    @cuestionario=Cuestionario.find(params[:id_cuestionario])
-    @respuestas=RespuestaUsuario.where(:usuario_id=>params[:id_usuario], :cuestionario_id=> params[:id_cuestionario])
+    @cuestionario = Cuestionario.find(params[:id_cuestionario])
+    @respuestas = RespuestaUsuario.where(:usuario_id=>params[:id_usuario], :cuestionario_id=> params[:id_cuestionario])
   end
 
 	def cuestionarios_de_grupo_index
@@ -78,6 +78,7 @@ class CuestionariosController < ApplicationController
 		@cuestionario = Cuestionario.new
 		@grupo = Grupo.find(params[:id])
 		@cuestionarios = Cuestionario.buscar_cuestionarios(@grupo)
+    @grupos = Grupo.where("usuario_id = ?", current_user.id)
 	end
 
   def calificar
@@ -91,14 +92,7 @@ class CuestionariosController < ApplicationController
       @respuesta.calificacion = @calificacion[cont]
       @respuesta.save
       cont += 1
-    end 
-=begin
-    @respuesta=RespuestaUsuario.find(params[:id_resp])
-    @respuesta.comentario=params[:comentario]
-    @respuesta.calificacion=params[:calificacion]
-    @respuesta.save
-    redirect_to "cargar_respuestas/"+ params[:id_usuario].to_s + "/" + params[:id_cuestionario].to_s
-=end
+    end
   end
 
 	def edit
@@ -109,9 +103,10 @@ class CuestionariosController < ApplicationController
 
   def create
 		@cuestionario = Cuestionario.new(cuestionario_params)
+    @cuestionario.grupo_id = (params[:grupo_id])
 		@cuestionario.save
-		#definir_tipo_de_pregunta(@cuestionario)
-		redirect_to mis_grupos_path
+    flash[:alert] = "Cuestionario Creado con exito!";
+		redirect_to '/'
 	end
 
 	def update

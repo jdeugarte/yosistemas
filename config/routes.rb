@@ -91,6 +91,7 @@ Yosistemas::Application.routes.draw do
   post "tarea_comentarios/editar/:id" => "tarea_comentarios#editar", :as  => 'editar_comentario_tarea'
   get "tarea_comentarios/delete/:id" => "tarea_comentarios#delete"
   #Cuestionarios
+
   get "cuestionarios/nuevo_cuestionario/:id" => "cuestionarios#nuevo_cuestionario", :as => 'nuevo_cuestionario'
   get "cuestionarios/cuestionarios_de_grupo_index/:id" => "cuestionarios#cuestionarios_de_grupo_index", :as => 'cuestionarios_de_grupo_index'
   get "cuestionarios/delete/:id" => "cuestionarios#delete", :as => 'borrar_cuestionario'

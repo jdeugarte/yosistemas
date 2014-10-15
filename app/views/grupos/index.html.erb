@@ -36,23 +36,31 @@
         <li class="list-group-item"><small style="color: gray;">Grupo creado el <%= grupo.created_at.localtime.strftime("%d/%m/%Y a las: %I:%M  %p") %><br/>
                     Usuario <%= link_to grupo.usuario.nombre_usuario,  grupo.usuario %> </small></li>
       </ul>
-      <div class="panel-body" style="margin-left:15px;">
+      <div class="panel-body">
+
                 <%if current_user.id != grupo.usuario_id && grupo.usuario_suscrito?(current_user.id) %>
-                    <a href='<%=suscribirse_path(grupo)%>' class='btn btn-primary btn-xs' style='margin-top:6px;'>Suscribirse al Grupo</a>
+                    <a href='<%=suscribirse_path(grupo)%>' class='btn btn-primary' style='margin-top:6px;'>Suscribirse al Grupo</a>
                 <%end%>
-                <a href='/grupos/<%=grupo.id%>/temas' class='btn btn-primary btn-xs' style='margin-top:6px;'>Ver Temas del grupo</a>
-                <%if grupo.usuario_suscrito?(current_user.id) == false %>
-                  <a href='<%=invitacion_grupo_path(grupo)%>' class='btn btn-primary btn-xs' style='margin-top:6px;'>Invitar Amigos al Grupo</a>
+                
+                <%if grupo.usuario_suscrito?(current_user.id) == false and grupo.usuario_id!=current_user.id %>
+                  <a href='/grupos/<%=grupo.id%>/temas' class='btn btn-primary' style='margin-top:6px;'>Ver Temas del grupo</a>
+                  <a href='<%=invitacion_grupo_path(grupo)%>' class='btn btn-primary' style='margin-top:6px;'>Invitar Amigos al Grupo</a>
                 <%end%>
                 <% if grupo.usuario_id == current_user.id %>
-                
-                  <a href='/grupos/<%=grupo.id%>/editar_grupo' class='btn btn-primary btn-xs' style='margin-top:6px;'>Editar datos del grupo</a>
-                
-                  <a href='<%=suscriptores_path(grupo)%>' class='btn btn-primary btn-xs' style='margin-top:5px;'>Ver Suscriptores del Grupo</a>
+                  <a href='/grupos/<%=grupo.id%>/temas' class='btn btn-primary' style='margin-top:6px;'>Ver Temas del grupo</a>
 
-                  <a href='grupos/deshabilitar_grupo/<%= grupo.id%>' class='btn btn-primary btn-xs' style='margin-top:5px;'>Deshabilitar Grupo</a>
+                  <button id="popover" type="button" class="btn btn-primary" style="margin-top:6px;" data-toggle="popover" data-content="
+                  
+                    <a href='<%=invitacion_grupo_path(grupo)%>' class='btn btn-primary btn-xs btn-block'>Invitar Amigos al Grupo</a>
+
+                    <a href='/grupos/<%=grupo.id%>/editar_grupo' class='btn btn-primary btn-xs btn-block'>Editar datos del grupo</a>
+                  
+                    <a href='<%=suscriptores_path(grupo)%>' class='btn btn-primary btn-xs btn-block'>Ver Suscriptores del Grupo</a>
+
+                    <a href='grupos/deshabilitar_grupo/<%= grupo.id%>' class='btn btn-primary btn-danger btn-xs btn-block'>Deshabilitar Grupo</a>">Mas opciones</button>
+
                 <% end %>
-              </div>
+      </div>
     </div>
   <%end%>
 
@@ -61,4 +69,16 @@
 
 <script type="text/javascript">
    $(".square-color-tema").css("background-color",get_random_color());
+</script>
+<script type="text/javascript">
+  $(document).ready(function()
+{
+  $('#popover').popover(
+  {
+     trigger: 'onclick',
+     html: true,
+     placement: 'right',
+     content: 'hello world'
+  });
+});
 </script>

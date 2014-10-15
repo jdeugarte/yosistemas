@@ -97,6 +97,7 @@ before_filter :grupos
 
   def show
     @tema = Tema.find(params[:id])
+    @id = @tema.grupo_id
      notificaciones.each do |notificacion|
       if ( TemaComentario.find(notificacion.tema_comentario_id).tema_id == @tema.id )
         notificacion.notificado = true
@@ -118,7 +119,7 @@ before_filter :grupos
       @suscripcion.usuario_id=current_user.id
       @suscripcion.tema_id=@tema.id
       @suscripcion.save
-      redirect_to '/temas/'
+      redirect_to '/temas/'+@tema.id.to_s
     else
       @grupos = Array.new
       if(current_user!=nil)
@@ -235,11 +236,7 @@ before_filter :grupos
     end
     
     def grupos
-      if(params[:id] != nil && Grupo.find(params[:id]).habilitado)
-        @grupo = Grupo.find(params[:id])
-      else
         @grupo = Grupo.find(1)
-      end
     end
 
     def sacarIds(temas)

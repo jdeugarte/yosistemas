@@ -27,9 +27,10 @@
 </br>
 </br>
 
-<% @temas.each do |tema| %>  
-<div class="panel panel-info">
-  <div class="panel-heading"><%= tema.titulo %></div>
+<% @temas.each do |tema| %>
+<%= hidden_field :id,:value => tema.grupo_id%>  
+<div class="panel panel-info" style='cursor:pointer' onclick=<%="document.location.href='/"+tema.class.name.downcase+"s/"+tema.id.to_s+"'"%>>  
+  <div class="panel-heading"><h3><%= tema.titulo %></h3></div>
   <div class="panel-body">
     <img title="Tema" src="/assets/tema.png" class="square-color-tema hidden-phone" />&nbsp;
     <span><%= tema.cuerpo[0,315]+(tema.cuerpo.length>315 ? "..." : "")  %></span>

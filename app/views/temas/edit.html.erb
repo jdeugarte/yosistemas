@@ -1,6 +1,58 @@
 <%if @tema.usuario_id == current_user.id%>
 <h1>Editar tema</h1>
 <%= form_for :tema, url:tema_path(@tema.id), method: :patch do |f| %>
+<div class="panel panel-info">
+  <div class="panel-heading"><center><h3>Ingrese los datos del tema</h3></center></div>
+  <div class="panel-body">
+      <%= f.label :titulo, "Titulo:" %>
+      <%= f.text_field :titulo,:class=>"form-control", :placeholder=>'Titulo', :maxlength => 50 , :title => "El titulo del tema es obligatorio, Por favor rellene este campo" %>
+      <%= f.label :titulo, "Contenido:" %>
+      <%= f.text_area :cuerpo, :class=>'form-control',:rows=>'6', :placeholder=>'Contenido', :maxlength => 500 %>
+
+      <% if(@tema.archivo_adjunto_temas.size>0) %>
+        <label><i class="icon-download"></i> Adjuntos</label>
+        <hr style="margin-top:0px;" />
+        <ul>
+          <% @tema.archivo_adjunto_temas.each do |arch| %>
+          <li id="<%=arch.id%>"  class="attachment-link" title="Archivo tipo .<%=arch.archivo_file_name.split('.').last%>">
+            <a href="<%=arch.archivo.url(download: true)%>"><img class="attachment-img" src="/assets/filetypes/default.png" file-type="<%=arch.archivo_file_name.split('.').last%>" ><%=arch.archivo_file_name[0,arch.archivo_file_name.rindex('.')]%></a><span class="pull-right" style="cursor:pointer;" onclick="eliminarItemDeVista(<%=arch.id%>)"><img src="/assets/delete.png" width="24"></span>
+          </li>
+          </br>
+          <%end%>
+        </ul>
+      <% end %>
+                  
+
+      <div class="form-group">
+        <%= f.label :titulo, "Archivos seleccionados:" %>
+        <div class="col-lg input-group">
+          <input id="showFiles" class="form-control" type="text" placeholder="Seleccione archivos..." onclick="document.getElementById('tema_archivo').click();" onfocus="this.blur();">
+            <%= f.file_field :archivo , :class=>'form-control',:multiple => true, :style=>"display:none;", :onchange=>"document.getElementById('showFiles').value = (this.files.length>1)?''+this.files.length+' Archivos seleccionados.':this.files[0].name;" %>
+            <span class="input-group-addon" style="background-color: #256188; cursor:pointer;" onclick="document.getElementById('tema_archivo').click();">
+            <i class="icon-file icon-white"></i>
+            </span>
+        </div>
+      </div>
+
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <center>
+      <a href="javascript:window.history.back();" class="btn btn-danger">&laquo; Cancelar</a>
+      <button name="Guardar tema" id="Guardar tema" type="submit" class="btn btn-success">Guardar tema</button>
+      </center>
+    </li>
+  </ul>
+</div>
+<%end%>
+<%end%>
+
+<script type="text/javascript">
+  getImagesForAttachedFiles();
+</script>
+<!--
+<%if @tema.usuario_id == current_user.id%>
+<%= form_for :tema, url:tema_path(@tema.id), method: :patch do |f| %>
 <div class="row">
         <div class="col-lg-6">
             <div class="well">
@@ -86,7 +138,8 @@
   getImagesForAttachedFiles();
 </script>
    </div>
-<%end %>
+<%end%>
 <%else %>
 	<h1>No puedes editar este tema!</h1>
 <%end%>
+-->

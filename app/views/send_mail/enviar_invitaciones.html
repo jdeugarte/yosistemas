@@ -2,21 +2,31 @@
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <style type="text/css">     
+      p {font-family: Arial,Helvetica,sans-serif; color: #3e3e3e; font-size: 14px; }
+      h3 {font-family: Arial,Helvetica,sans-serif; color: #3e3e3e; font-size: 18px;}
+    </style>
   </head>
   <body>
-    <h2>Invitación de suscripción a un grupo </h2>
-    <p>
-     El usuario <%= @usuario.nombre.upcase%>
- 	    lo invita a unirse al grupo: <%= @grupo.nombre.upcase %>.<br>
-      Para suscribirse vaya al siguiente enlace.<br>
-     <a href=<%= @url %>>Suscribirse a grupo</a>
-      <br>
-      <b>Codigo de suscripcion al grupo: <%=@grupo.llave%>
-      <br>
-      <b>En caso de que no tenga una cuenta en Yosistemas vaya al siguiente enlace:
-        <br>
-        <a href=http://yosistemas.herokuapp.com/usuarios/new?Registrarse=>YoSistemas</a>
-    </p>
-    <p>Staff de YoSistemas</p>
+  <table border="0"> 
+        <th colspan="15" bgcolor="255E8A" width="12">
+        </th>
+        <th align="left">
+          <h3>Invitación de suscripción a un grupo </h3>
+          <p>
+            El usuario <%= @usuario.nombre.upcase%>
+       	    lo invita a unirse al grupo: <%= @grupo.nombre.upcase %>.<br>
+            Para suscribirse vaya al siguiente enlace.<br>
+           <a href=<%= @url %>>Suscribirse a grupo</a>
+            <br>
+            <b>Codigo de suscripcion al grupo: <%=@grupo.llave%>
+            <br>
+            <b>En caso de que no tenga una cuenta en Yosistemas vaya al siguiente enlace:
+              <br>
+              <a href=http://yosistemas.herokuapp.com/usuarios/new?Registrarse=>YoSistemas</a><br><br>
+              <p>Staff de YoSistemas</p>
+          </p>
+        </th>
+    </table>
   </body>
 </html>

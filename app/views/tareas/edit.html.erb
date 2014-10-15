@@ -1,63 +1,52 @@
-<%= render :layout => 'layouts/groups_layout' do%>
-<div class="page-header">
-<div class="btn-back" title="Atras" onclick="throwFade(); window.location='/grupos/<%=@id %>/tareas'; return false;" ></div>
-     <h1 id="forms">Editar Tarea</h1>
-</div>
-	<% if @tarea.errors.any? %>
-	   <div id ="errorRegistroUsuario" class="alert alert-error">
-	      <button type="button" class="close" data-dismiss="alert">&times;</button>
-	      <ul>
-	         <% @tarea.errors.full_messages.each do |msg| %>
-	         <li><%= msg %></li>
-	         <% end %>
-	      </ul>
-	   </div>
-	<% end %>
-	<%= form_for @tarea, :html => { :class => 'bs-example form-horizontal', :multipart => true} do |t| %>
+
+<% if @tarea.errors.any? %>
+   <div id ="errorRegistroUsuario" class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <ul>
+        <% @tarea.errors.full_messages.each do |msg| %>
+        	<li><%= msg %></li>
+		<% end %>
+	   </ul>
+	</div>
+<% end %>
+
+<%= form_for @tarea, :html => { :class => 'bs-example form-horizontal', :multipart => true} do |t| %>
 	<%= t.hidden_field :id,:value => @id%>
-	  <div class="row">
-	          <div class="col-lg-10">
-	            <div class="well">
-	                <fieldset>
-	                  <legend></legend>
-	                  <div class="form-group <%=((@tarea.errors.get(:titulo).nil?) ? '' : ' has-error')%>">
-	                     <label for="inputTitle" class="col-lg-2 control-label">Titulo:</label>
-	                    <div class="col-lg-10">
-	                        <%= t.text_field :titulo , :class=>'form-control', :placeholder=>'Titulo', :maxlength => 50 %>
-	                    </div>
-	                  </div>
-	                  <div class="form-group <%=((@tarea.errors.get(:descripcion).nil?) ? '' : ' has-error')%>">
-	                    <label for="inputDescription" class="col-lg-2 control-label">Descripcion:</label>
-	                    <div class="col-lg-10">
-	                      <%= t.text_area :descripcion, :class=>'form-control',:rows=>'6', :placeholder=>'Descripcion' ,  :maxlength=>500%>
-	                    </div>
-	                  </div>
-	                  	<div class="form-group <%=((@tarea.errors.get(:fecha_entrega).nil?) ? '' : ' has-error')%>">
-	                  	<label for="inputDate" class="col-lg-2 control-label">Fecha de entrega:</label>
-	                  	<div class="col-lg-6">
-	          					  <div id="datetimepicker2" class="input-group">
-	          					    <%= t.text_field :fecha_entrega, :class=>'form-control input-append',:"data-format"=>'dd/MM/yyyy', :placeholder=>'Fecha de Entrega', :value=> @tarea.fecha_entrega.strftime("%d/%m/%Y"), :style=>"border-bottom-left-radius: 4px;  border-top-left-radius: 4px;"%>
-	          					    <span id="dateButton" class="input-group-addon add-on" style="background-color: #256188; cursor:pointer;">
-	          					      <i data-time-icon="icon-time" data-date-icon="icon-calendar icon-white">
-	          					      </i>
-	          					    </span>
-	          					  </div>
-						 </div>
-						</div>
-	          <div class="form-group  <%=((@tarea.errors.get(:hora_entrega).nil?) ? '' : ' has-error')%>">
-	            <label for="inputTime" class="col-lg-2 control-label">Hora de entrega:</label>
-	            <div class="col-lg-6">
-	              <div class="input-group bootstrap-timepicker-component">
-	                  <%= t.text_field :hora_entrega, :class=>'form-control timepicker-default', :value=> @tarea.hora_entrega.strftime("%I:%M %p") , :placeholder=>'Hora de Entrega', :style=>"border-bottom-left-radius: 4px;  border-top-left-radius: 4px;"%>
-	                  <span id="timeButton" class="input-group-addon add-on " style="background-color: #256188;" >
-	                    <i class="icon-time icon-white"></i>
-	                  </span>
-	              </div>
-	            </div>
-	          </div>
-	          <div class="form-group" >
+	  <div class="panel panel-warning">
+	    <div class="panel-heading">
+	    	<h3>
+                <b>Editar Tarea</b>
+            </h3>
+	    </div>
+	    <div class="panel-body">
+	    	<table class="table table-user-information">	                
+	    		<tr>
+	    			<td>Titulo:</td>	                
+	                <td><%= t.text_field :titulo , :class=>'form-control', :placeholder=>'Titulo', :maxlength => 50 %></td>	
+	    		</tr>
+	        	
+	        	<tr>
+	        		    <td>Descripcion:</td>  
+	                    <td><%= t.text_area :descripcion, :class=>'form-control',:rows=>'6', :placeholder=>'Descripcion' ,  :maxlength=>500%></td>	                
+	        	</tr>
+	            
+	        	<tr>
+	                <td>Fecha de entrega:</td>
+	          		<td><%= t.date_select :fecha_entrega, :order => [:day, :month, :year], :start_year => 1950%></td>
+
+	          				<!--t.text_field :fecha_entrega, :class=>'form-control input-append',:"data-format"=>'dd/MM/yyyy', :placeholder=>'Fecha de Entrega', :value=> @tarea.fecha_entrega.strftime("%d/%m/%Y"), :style=>"border-bottom-left-radius: 4px;  border-top-left-radius: 4px;"-->	          					    
+	        	</tr>
+
+	        	<tr>	        		
+		            <td>Hora de entrega:</td>
+		            <td><%= t.text_field :hora_entrega, :class=>'form-control timepicker-default', :value=> @tarea.hora_entrega.strftime("%I:%M %p") , :placeholder=>'Hora de Entrega', :style=>"border-bottom-left-radius: 4px;  border-top-left-radius: 4px;"%>
+		            </td>
+	        	</tr>
+
+	        	<tr>
+	        		
 	          	 <% if(@tarea.archivo_adjuntos.size>0) %>
-		          <div class="col-lg-12" style="whidth:100%;">
+		          
 		            <div class="panel panel-default">
 		                <div class="panel-body">
 		                  <label><i class="icon-download"></i> Adjuntos</label>
@@ -69,42 +58,49 @@
 		                    </li>
 		                  <%end%>
 		                  <% if @tarea_base !=nil %>
-                  <% @tarea_base.archivo_adjuntos.each do |arch| %>
-                  <li class="attachment-link" title="Archivo tipo .<%=arch.archivo_file_name.split('.').last%>">
-                      <a href="<%=arch.archivo.url(download: true)%>"><img class="attachment-img" src="/assets/filetypes/default.png" file-type="<%=arch.archivo_file_name.split('.').last%>" ><%=arch.archivo_file_name[0,arch.archivo_file_name.rindex('.')]%></a>
-                    </li>
-                    <%end%>
-                  <%end %>
+                  			<% @tarea_base.archivo_adjuntos.each do |arch| %>
+                  				<li class="attachment-link" title="Archivo tipo .<%=arch.archivo_file_name.split('.').last%>">
+                      				<a href="<%=arch.archivo.url(download: true)%>"><img class="attachment-img" src="/assets/filetypes/default.png" file-type="<%=arch.archivo_file_name.split('.').last%>" ><%=arch.archivo_file_name[0,arch.archivo_file_name.rindex('.')]%></a>
+                    			</li>
+                    		<%end%>
+                  		  <%end %>
 		                  </ul>
 		                </div>
-		              </div>
-		          </div>
-		          <% end %>
-	          </div>
-	        <div class="form-group" style="margin-top:10px;">
-                    <div class="col-lg-11" style="width: 100%; margin-bottom: 10px;">
-                    <span data-toggle="collapse" data-target="#demo" style="cursor:pointer;" title="Añadir adjuntos">Agregar adjuntos&nbsp;<img style="margin-top:-2px;" src="/assets/add.png" width="24"></span>
-                      <div id="demo" class="collapse" style="margin-top: 10px;">
-                         <label for="inputDate" class="col-lg-2 control-label">Adjuntar archivos:</label>
-            <div class="col-lg-10 input-group">
-            <input id="showFiles" class="form-control" type="text" placeholder="Seleccione archivos..." onclick="document.getElementById('tarea_archivo').click();" onfocus="this.blur();">
-            <%= t.file_field :archivo , :class=>'form-control',:multiple => true, :style=>"display:none;", :onchange=>"document.getElementById('showFiles').value = (this.files.length>1)?''+this.files.length+' Archivos seleccionados.':this.files[0].name;" %>
-            <span class="input-group-addon" style="background-color: #256188; cursor:pointer;" onclick="document.getElementById('tarea_archivo').click();">
-              <i class="icon-file icon-white"></i>
-            </span>
-            </div>
-            </div>
-	          <div class="form-group " style="margin-top:10px;">
-	                    <div class="col-lg-10 col-lg-offset-2">
-	                      <input type="submit" value="Guardar cambios" class="btn btn-primary">
-	                    </div>
-	                  </div>
-	                </fieldset>
-	        </div>
-	    </div>
-	   </div>
+		              </div>		          
+		          <% end %>	          
+	        	</tr>
+		                  	
+	          <tr>
+	        	
+            	<td><span data-toggle="collapse" data-target="#demo" style="cursor:pointer;" title="Añadir adjuntos">Agregar adjuntos&nbsp;<img style="margin-top:-2px;" src="/assets/add.png" width="24"></span></td>
+
+	          </tr>
+
+	          <tr>
+	          	
+               	<td>Adjuntar archivos:</td>
+            
+	            <td><input id="showFiles" class="form-control" type="text" placeholder="Seleccione archivos..." onclick="document.getElementById('tarea_archivo').click();" onfocus="this.blur();">
+	            <%= t.file_field :archivo , :class=>'form-control',:multiple => true, :style=>"display:none;", :onchange=>"document.getElementById('showFiles').value = (this.files.length>1)?''+this.files.length+' Archivos seleccionados.':this.files[0].name;" %>
+	            <span class="input-group-addon" style="background-color: #256188; cursor:pointer;" onclick="document.getElementById('tarea_archivo').click();">
+	              <i class="icon-file icon-white"></i>
+	            </span>
+	            </td>
+	          </tr>
+            </table>
+             <ul class="list-group">
+	        	<li class="list-group-item">
+	        		<center><input type="submit" value="Guardar cambios" class="btn btn-success"></center>
+	        	</li>
+	        </ul>
+		</div>
+	</div>
 	   <input type="hidden" id="elemsParaElim" name="elemsParaElim"  />
 	<% end %>
+
+
+
+
 	<script>
 	  $('.timepicker-default').timepicker();
 	   $(function() {
@@ -119,4 +115,3 @@
 	<script type="text/javascript">
   getImagesForAttachedFiles();
 </script>
-<%end%>

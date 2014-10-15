@@ -23,6 +23,7 @@
           <li class="attachment-link" title="Archivo tipo .<%=arch.archivo_file_name.split('.').last%>">
             <a href="<%=arch.archivo.url(download: true)%>"><img class="attachment-img" src="/assets/filetypes/default.png" file-type="<%=arch.archivo_file_name.split('.').last%>" ><%=arch.archivo_file_name[0,arch.archivo_file_name.rindex('.')]%></a>
           </li>
+          </br>
         <%end%>
         </ul>
       <%end%>
@@ -34,12 +35,12 @@
       <!--Botones-->
       <center>
       <%if current_user!=nil && @tema.usuario_correo==current_user.correo%>
-        &nbsp;<%= link_to "Editar", edit_tema_path(@tema), :method => :post, :class => "btn btn-warning"%>                   
+        <%= link_to "Editar", edit_tema_path(@tema), :method => :post, :class => "btn btn-warning"%>                   
         <%if @tema.grupo.usuario_id == current_user.id || @tema.usuario_correo==current_user.correo %>
-          &nbsp;&nbsp;&nbsp;<%= link_to 'Eliminar Tema', visible_tema_path(@tema),:class => "btn btn-danger", data: { confirm: 'Se eliminara el tema, ¿Está seguro?' } %>
+          <%= link_to 'Eliminar', visible_tema_path(@tema),:class => "btn btn-danger", data: { confirm: 'Se eliminara el tema, ¿Está seguro?' } %>
         <%end%>
       <%end%>
-      &nbsp;&nbsp;&nbsp;
+      
       <%if current_user!=nil%>
         <%cont=0%>
           <% current_user.suscripcion_temas.each do |subs| %>
@@ -57,6 +58,7 @@
   </ul>
 </div>
 
+<%if current_user!=nil%>
 <h3>Comentarios:</h3>
 <%for comentario in @comentarios%>
   <%if(comentario.id!=nil)%>
@@ -107,7 +109,7 @@
     <% end %>
   <%end%>
 <center><%= paginate @comentarios %></center>
-
+<%end%>
 
 
 <!--<input type="hidden" id="current_user" value="<%=current_user.nil? ? 0 : current_user.id%>">

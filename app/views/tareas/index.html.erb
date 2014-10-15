@@ -9,8 +9,8 @@
   <%end%>
 <br><br>
     <% @tareas.each do |tarea| %>
-    <div class="panel panel-info" style='cursor:pointer' onclick=<%="document.location.href='/tareas/"+tarea.id.to_s+"'"%>>
-      <div class="panel-heading" title="Titulo"><%= tarea.titulo %></div>
+    <div class="panel panel-success" style='cursor:pointer' onclick=<%="document.location.href='/tareas/"+tarea.id.to_s+"'"%>>
+      <div class="panel-heading" title="Titulo"><h3><%= tarea.titulo %></h3></div>
       <div class="panel-body">           
             <img title="Tarea" src="/assets/tarea.png" class="square-color-tarea hidden-phone" />&nbsp;
           

@@ -1,19 +1,20 @@
-<%= render :layout => 'layouts/groups_layout' do%>
-<div class="row">
-  <div class="col-lg-6">
-    <div class="well">
-      <legend>Invitar amigos al grupo
-      </legend>
-      <%= form_tag('/grupos/enviar_invitaciones/'+@grupo.id.to_s, :method=>'post') do%>
+<div class="page-header">
+     <h1 id="forms">Invitar amigos al grupo</h1>
+</div>
+
+
+<div class="panel panel-info">
+      <div class="panel-heading"><%= @grupo.nombre %></div>
+      <div class="panel-body">
+        <%if current_user!=nil%>
+     <%= form_tag('/grupos/enviar_invitaciones/'+@grupo.id.to_s, :method=>'post') do%>
         <div class="form-group">
-          <label for="emails" class="col-sm-2 control-label">Ingrese:</label>
-          <div class="col-sm-10">
             <input type="text" class="form-control" name="correos" required placeholder="Ingrese emails separados por comas" data-role="tagsinput">
-          </div>
         </div>
         <button type="submit" class="btn btn-primary">Enviar invitaciones</button>
       <%end%>
-    </div>
-  </div>
+      <% end %>
+      </div>
 </div>
-<%end%>
+<a href="/grupos" class="btn btn-danger">Atras</a>
+

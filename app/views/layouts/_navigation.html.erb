@@ -21,7 +21,7 @@
             <li><a href="/temas">Ver Temas</a></li>
           </ul>
         </li>
-        <%if  !current_user.nil? %>
+        <%if !current_user.nil? %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Grupos<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -54,20 +54,7 @@
         </li>
       </ul>
         <%end%>
-         <!-- <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Buscar...">
-        </div>
-        <button type="submit" class="btn btn-success">Buscar</button>
-      </form>-->
-         <!--% if @grupo!=nil%>
-          <form class="navbar-form navbar-left" method="GET" action="/temas/buscar/<%=@grupo.id%>">    
-            <input id="search" name="search" placeholder="Buscar Temas por: titulo, descripcion" class="form-control input-sm"  style="width: 250px; height: 30px; margin-top: 5px;" type="text"><br>
-          </form-->
-        <!--% end %-->
-
-        
-        <!--/.nav-collapse -->
+         
         <%if current_user.nil?%>
            <% if @grupo!=nil%>
           <form class="navbar-form navbar-left" method="GET" action="/temas/buscar/<%=@grupo.id%>">    

@@ -1,20 +1,24 @@
 
 <h1>Ingresar</h1>
 <div class="panel panel-info">
- <div class="panel-heading">Introdusca sus datos</div>
+ <div class="panel-heading"><center><h3><b>Introduzca sus datos</b></h3></center></div>
   <div class="panel-body">
   	<form class="navbar-form" role="form" method="Post" action=<%=sessions_path%>>
-            <div class="form-group">
-              <%= text_field_tag :correo, params[:correo], :class=>'form-control', :placeholder=>'Nombre de usuario', :size => 40 %>
-          </br></br>
-              <%= password_field_tag :contrasenia, params[:contrasenia], :class=>'form-control', :placeholder=>'Contraseña', :size => 40 %>
-            </div>
-            <button type="submit" class="btn btn-success">Ingresar</button>
-          </form>
-          <div class="panel-footer">
-            <div class ="btn-group ">
-              <%= link_to 'Registrarse', new_usuario_path, class: "btn btn-info" %>
-            </div>
-          </div>
+      <div class="form-group">
+        <%= text_field_tag :correo, params[:correo], :class=>'form-control', :placeholder=>'Nombre de usuario', :size => 40 %>
+        </br></br>
+        <%= password_field_tag :contrasenia, params[:contrasenia], :class=>'form-control', :placeholder=>'Contraseña', :size => 40 %>
       </div>
+    
   </div>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <center>
+        <button type="submit" class="btn btn-success">Ingresar</button>
+        </form>
+        <%= link_to 'Registrarse', new_usuario_path, class: "btn btn-info" %>
+        
+      </center>
+    </li>
+  </ul>
+</div>

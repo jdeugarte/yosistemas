@@ -65,7 +65,7 @@ class EventosController < ApplicationController
        @grupo = Grupo.find(params[:id])
      else
        @grupo = Grupo.find(1)
-    end
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

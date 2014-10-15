@@ -52,6 +52,8 @@ end
 
 gem "nested_form"
 
+gem 'bootstrap_form'
+
 #habilitar esta gema para habilitar ajaxify
 #gem 'ajaxify_rails'
 

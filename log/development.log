@@ -61047,3 +61047,703 @@ Processing by SessionsController#obtener_conectados as */*
 Completed 200 OK in 8ms (Views: 5.1ms | ActiveRecord: 0.7ms)
 =======
 >>>>>>> 33664f7dd63478444f36bef8a266798364905877
+
+
+Started GET "/" for 127.0.0.1 at 2014-10-15 01:18:55 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by TemasController#index as HTML
+  [1m[35mGrupo Load (1.9ms)[0m  SELECT "grupos".* FROM "grupos" WHERE "grupos"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTema Load (0.2ms)[0m  [1mSELECT "temas".* FROM "temas" WHERE "temas"."grupo_id" = ?[0m  [["grupo_id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "temas" WHERE "temas"."grupo_id" = ? LIMIT 5 OFFSET 0) subquery_for_count  [["grupo_id", 1]]
+  [1m[36mTema Load (0.2ms)[0m  [1mSELECT "temas".* FROM "temas" WHERE "temas"."grupo_id" = ? ORDER BY updated_at DESC LIMIT 5 OFFSET 0[0m  [["grupo_id", 1]]
+  [1m[35mUsuario Load (0.2ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? ORDER BY "usuarios"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "temas" WHERE "temas"."grupo_id" = ?[0m  [["grupo_id", 1]]
+  Rendered temas/index.html.erb within layouts/application (56.8ms)
+  Rendered layouts/_navigation.html.erb (1.0ms)
+  [1m[35mGrupo Load (0.2ms)[0m  SELECT "grupos".* FROM "grupos" WHERE "grupos"."estado" = 'f'
+  Rendered layouts/_barra_grupos.html.erb (3.1ms)
+  Rendered layouts/_bootom_bar.html.erb (0.3ms)
+Completed 200 OK in 286ms (Views: 197.7ms | ActiveRecord: 4.2ms)
+
+
+Started GET "/assets/dashboard.css?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/offcanvas.css?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/sticky-footer-navbar.css?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/attachments.js?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/bootstrap-datetimepicker.min.js?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/bootstrap-tagsinput.js?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/bootstrap-timepicker.js?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/bootstrap.min.js?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/chat-scripts.js?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/colors.js?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/nested_form.js?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/online-users.js?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/search-groups.js?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/assets/url.js?body=1" for 127.0.0.1 at 2014-10-15 01:18:56 -0400
+
+
+Started GET "/usuarios" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+Processing by UsuariosController#index as HTML
+  [1m[36mGrupo Load (0.1ms)[0m  [1mSELECT "grupos".* FROM "grupos" WHERE "grupos"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered usuarios/index.html.erb within layouts/application (0.9ms)
+  Rendered layouts/_navigation.html.erb (0.2ms)
+  [1m[35mGrupo Load (0.4ms)[0m  SELECT "grupos".* FROM "grupos" WHERE "grupos"."estado" = 'f'
+  Rendered layouts/_barra_grupos.html.erb (1.7ms)
+  Rendered layouts/_bootom_bar.html.erb (0.0ms)
+Completed 200 OK in 12ms (Views: 10.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/sticky-footer-navbar.css?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/offcanvas.css?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/dashboard.css?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/attachments.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/bootstrap-datetimepicker.min.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/bootstrap-tagsinput.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/bootstrap-timepicker.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/bootstrap.min.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/chat-scripts.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/colors.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/online-users.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/nested_form.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/search-groups.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/url.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:27 -0400
+
+
+Started POST "/sessions" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+Processing by SessionsController#create as HTML
+  Parameters: {"correo"=>"docente", "contrasenia"=>"123456"}
+  [1m[36mUsuario Load (0.2ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."correo" = 'docente' LIMIT 1[0m
+  [1m[35mUsuario Load (0.2ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."nombre_usuario" = 'docente' LIMIT 1
+  [1m[36mUsuario Load (0.2ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mSuscripcionTema Load (0.2ms)[0m  SELECT "suscripcion_temas".* FROM "suscripcion_temas" WHERE "suscripcion_temas"."usuario_id" = 1
+  [1m[36mNotificacion Load (0.1ms)[0m  [1mSELECT "notificacions".* FROM "notificacions" WHERE "notificacions"."suscripcion_tema_id" = 1 AND "notificacions"."notificado" = 'f'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "suscripcion_temas".* FROM "suscripcion_temas" WHERE "suscripcion_temas"."usuario_id" = 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "notificacions".* FROM "notificacions" WHERE "notificacions"."suscripcion_tema_id" = 1 AND "notificacions"."notificado" = 'f'[0m
+Redirected to http://0.0.0.0:3000/
+Completed 302 Found in 60ms (ActiveRecord: 1.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+Processing by TemasController#index as HTML
+  [1m[35mGrupo Load (0.1ms)[0m  SELECT "grupos".* FROM "grupos" WHERE "grupos"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTema Load (0.1ms)[0m  [1mSELECT "temas".* FROM "temas" WHERE "temas"."grupo_id" = ?[0m  [["grupo_id", 1]]
+  [1m[35mUsuario Load (0.1ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "temas" WHERE "temas"."grupo_id" = ? LIMIT 5 OFFSET 0) subquery_for_count[0m  [["grupo_id", 1]]
+  [1m[35mTema Load (0.1ms)[0m  SELECT "temas".* FROM "temas" WHERE "temas"."grupo_id" = ? ORDER BY updated_at DESC LIMIT 5 OFFSET 0  [["grupo_id", 1]]
+  [1m[36mUsuario Load (0.1ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? ORDER BY "usuarios"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "temas" WHERE "temas"."grupo_id" = ?  [["grupo_id", 1]]
+  Rendered temas/index.html.erb within layouts/application (5.4ms)
+  Rendered layouts/_navigation.html.erb (1.0ms)
+  [1m[36mUsuario Load (0.2ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE ("usuarios"."conectado" != 'f') AND ("usuarios"."id" != 1)[0m
+  Rendered layouts/_chat.html.erb (2.1ms)
+  [1m[35mSubscripcion Load (0.2ms)[0m  SELECT "subscripcions".* FROM "subscripcions" WHERE "subscripcions"."usuario_id" = ?  [["usuario_id", 1]]
+  [1m[36mGrupo Load (0.2ms)[0m  [1mSELECT "grupos".* FROM "grupos" WHERE "grupos"."id" = ? ORDER BY "grupos"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mGrupo Load (0.1ms)[0m  SELECT "grupos".* FROM "grupos" WHERE "grupos"."id" = ? ORDER BY "grupos"."id" ASC LIMIT 1  [["id", 2]]
+  [1m[36mGrupo Load (0.1ms)[0m  [1mSELECT "grupos".* FROM "grupos" WHERE "grupos"."id" = ? ORDER BY "grupos"."id" ASC LIMIT 1[0m  [["id", 3]]
+  [1m[35mGrupo Load (0.1ms)[0m  SELECT "grupos".* FROM "grupos" WHERE "grupos"."id" = ? ORDER BY "grupos"."id" ASC LIMIT 1  [["id", 4]]
+  Rendered layouts/_barra_grupos.html.erb (22.3ms)
+  Rendered layouts/_bootom_bar.html.erb (0.0ms)
+Completed 200 OK in 43ms (Views: 38.9ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/offcanvas.css?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/sticky-footer-navbar.css?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/dashboard.css?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/attachments.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/bootstrap-datetimepicker.min.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/bootstrap-tagsinput.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/bootstrap-timepicker.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/bootstrap.min.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/chat-scripts.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/colors.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/nested_form.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/online-users.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/search-groups.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/url.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+
+
+Started GET "/sessions/obtener_conectados/1" for 127.0.0.1 at 2014-10-15 01:19:31 -0400
+Processing by SessionsController#obtener_conectados as */*
+  Parameters: {"usuario_id"=>"1"}
+  [1m[36mUsuario Load (0.1ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1[0m  [["id", "1"]]
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mUsuario Exists (0.2ms)[0m  [1mSELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."nombre_usuario" = 'docente' AND "usuarios"."id" != 1) LIMIT 1[0m
+  [1m[35mUsuario Exists (0.1ms)[0m  SELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."correo" = 'docente@gmail.com' AND "usuarios"."id" != 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mUsuario Load (0.2ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUsuario Load (0.3ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE ("usuarios"."conectado" != 'f') AND ("usuarios"."id" != 1)[0m
+  Rendered sessions/obtener_conectados.erb (3.8ms)
+Completed 200 OK in 20ms (Views: 6.3ms | ActiveRecord: 1.1ms)
+
+
+Started POST "/sessions/eliminar_conectado" for 127.0.0.1 at 2014-10-15 01:19:34 -0400
+Processing by SessionsController#eliminar_conectado as */*
+  Parameters: {"usuario_id"=>"1"}
+  [1m[35mUsuario Load (0.1ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1  [["id", "1"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUsuario Exists (0.3ms)[0m  SELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."nombre_usuario" = 'docente' AND "usuarios"."id" != 1) LIMIT 1
+  [1m[36mUsuario Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."correo" = 'docente@gmail.com' AND "usuarios"."id" != 1) LIMIT 1[0m
+  [1m[35mSQL (0.7ms)[0m  UPDATE "usuarios" SET "conectado" = ?, "updated_at" = ? WHERE "usuarios"."id" = 1  [["conectado", false], ["updated_at", Wed, 15 Oct 2014 01:19:34 BOT -04:00]]
+  [1m[36m (126.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://0.0.0.0:3000/
+Completed 302 Found in 134ms (ActiveRecord: 127.4ms)
+
+
+Started GET "/grupos" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+Processing by GruposController#index as HTML
+  [1m[35mUsuario Load (0.2ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mGrupo Load (0.1ms)[0m  [1mSELECT "grupos".* FROM "grupos" WHERE "grupos"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mGrupo Load (0.2ms)[0m  SELECT "grupos".* FROM "grupos" WHERE "grupos"."habilitado" = 't' LIMIT 5 OFFSET 0
+  [1m[36mUsuario Load (0.1ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? ORDER BY "usuarios"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mSubscripcion Load (0.2ms)[0m  SELECT "subscripcions".* FROM "subscripcions" WHERE "subscripcions"."grupo_id" = ?  [["grupo_id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? ORDER BY "usuarios"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mSubscripcion Load (0.1ms)[0m  SELECT "subscripcions".* FROM "subscripcions" WHERE "subscripcions"."grupo_id" = ?  [["grupo_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? ORDER BY "usuarios"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mSubscripcion Load (0.2ms)[0m  SELECT "subscripcions".* FROM "subscripcions" WHERE "subscripcions"."grupo_id" = ?  [["grupo_id", 4]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "grupos" WHERE "grupos"."habilitado" = 't'[0m
+  Rendered grupos/index.html.erb within layouts/application (15.1ms)
+  Rendered layouts/_navigation.html.erb (0.3ms)
+  [1m[35mUsuario Load (0.2ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE ("usuarios"."conectado" != 'f') AND ("usuarios"."id" != 1)
+  Rendered layouts/_chat.html.erb (0.9ms)
+  [1m[36mSubscripcion Load (0.1ms)[0m  [1mSELECT "subscripcions".* FROM "subscripcions" WHERE "subscripcions"."usuario_id" = ?[0m  [["usuario_id", 1]]
+  [1m[35mGrupo Load (0.1ms)[0m  SELECT "grupos".* FROM "grupos" WHERE "grupos"."id" = ? ORDER BY "grupos"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mGrupo Load (0.1ms)[0m  [1mSELECT "grupos".* FROM "grupos" WHERE "grupos"."id" = ? ORDER BY "grupos"."id" ASC LIMIT 1[0m  [["id", 2]]
+  [1m[35mGrupo Load (0.1ms)[0m  SELECT "grupos".* FROM "grupos" WHERE "grupos"."id" = ? ORDER BY "grupos"."id" ASC LIMIT 1  [["id", 3]]
+  [1m[36mGrupo Load (0.1ms)[0m  [1mSELECT "grupos".* FROM "grupos" WHERE "grupos"."id" = ? ORDER BY "grupos"."id" ASC LIMIT 1[0m  [["id", 4]]
+  Rendered layouts/_barra_grupos.html.erb (3.9ms)
+  Rendered layouts/_bootom_bar.html.erb (0.0ms)
+Completed 200 OK in 34ms (Views: 27.4ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/dashboard.css?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/offcanvas.css?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/sticky-footer-navbar.css?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/attachments.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/bootstrap-datetimepicker.min.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/bootstrap-tagsinput.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/bootstrap-timepicker.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/bootstrap.min.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/chat-scripts.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/colors.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/nested_form.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/online-users.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/search-groups.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/url.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+
+
+Started GET "/sessions/obtener_conectados/1" for 127.0.0.1 at 2014-10-15 01:19:35 -0400
+Processing by SessionsController#obtener_conectados as */*
+  Parameters: {"usuario_id"=>"1"}
+  [1m[35mUsuario Load (0.2ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1  [["id", "1"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUsuario Exists (0.2ms)[0m  SELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."nombre_usuario" = 'docente' AND "usuarios"."id" != 1) LIMIT 1
+  [1m[36mUsuario Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."correo" = 'docente@gmail.com' AND "usuarios"."id" != 1) LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE "usuarios" SET "conectado" = ?, "updated_at" = ? WHERE "usuarios"."id" = 1  [["conectado", true], ["updated_at", Wed, 15 Oct 2014 01:19:35 BOT -04:00]]
+  [1m[36m (226.4ms)[0m  [1mcommit transaction[0m
+  [1m[35mUsuario Load (0.2ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUsuario Load (0.4ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE ("usuarios"."conectado" != 'f') AND ("usuarios"."id" != 1)[0m
+  Rendered sessions/obtener_conectados.erb (4.6ms)
+Completed 200 OK in 244ms (Views: 10.5ms | ActiveRecord: 228.0ms)
+
+
+Started GET "/sessions/obtener_conectados/1" for 127.0.0.1 at 2014-10-15 01:19:45 -0400
+Processing by SessionsController#obtener_conectados as */*
+  Parameters: {"usuario_id"=>"1"}
+  [1m[35mUsuario Load (0.1ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1  [["id", "1"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUsuario Exists (0.1ms)[0m  SELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."nombre_usuario" = 'docente' AND "usuarios"."id" != 1) LIMIT 1
+  [1m[36mUsuario Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."correo" = 'docente@gmail.com' AND "usuarios"."id" != 1) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36mUsuario Load (0.2ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUsuario Load (0.2ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE ("usuarios"."conectado" != 'f') AND ("usuarios"."id" != 1)
+  Rendered sessions/obtener_conectados.erb (2.3ms)
+Completed 200 OK in 8ms (Views: 4.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/sessions/obtener_conectados/1" for 127.0.0.1 at 2014-10-15 01:19:55 -0400
+Processing by SessionsController#obtener_conectados as */*
+  Parameters: {"usuario_id"=>"1"}
+  [1m[36mUsuario Load (0.1ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1[0m  [["id", "1"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUsuario Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."nombre_usuario" = 'docente' AND "usuarios"."id" != 1) LIMIT 1[0m
+  [1m[35mUsuario Exists (0.1ms)[0m  SELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."correo" = 'docente@gmail.com' AND "usuarios"."id" != 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mUsuario Load (0.1ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUsuario Load (0.2ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE ("usuarios"."conectado" != 'f') AND ("usuarios"."id" != 1)[0m
+  Rendered sessions/obtener_conectados.erb (2.1ms)
+Completed 200 OK in 8ms (Views: 4.8ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/sessions/obtener_conectados/1" for 127.0.0.1 at 2014-10-15 01:20:05 -0400
+Processing by SessionsController#obtener_conectados as */*
+  Parameters: {"usuario_id"=>"1"}
+  [1m[35mUsuario Load (0.1ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1  [["id", "1"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUsuario Exists (0.1ms)[0m  SELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."nombre_usuario" = 'docente' AND "usuarios"."id" != 1) LIMIT 1
+  [1m[36mUsuario Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."correo" = 'docente@gmail.com' AND "usuarios"."id" != 1) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  commit transaction
+  [1m[36mUsuario Load (0.1ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUsuario Load (0.2ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE ("usuarios"."conectado" != 'f') AND ("usuarios"."id" != 1)
+  Rendered sessions/obtener_conectados.erb (2.0ms)
+Completed 200 OK in 8ms (Views: 4.3ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/sessions/obtener_conectados/1" for 127.0.0.1 at 2014-10-15 01:20:15 -0400
+Processing by SessionsController#obtener_conectados as */*
+  Parameters: {"usuario_id"=>"1"}
+  [1m[36mUsuario Load (0.1ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1[0m  [["id", "1"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUsuario Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."nombre_usuario" = 'docente' AND "usuarios"."id" != 1) LIMIT 1[0m
+  [1m[35mUsuario Exists (0.1ms)[0m  SELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."correo" = 'docente@gmail.com' AND "usuarios"."id" != 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mUsuario Load (0.1ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUsuario Load (0.2ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE ("usuarios"."conectado" != 'f') AND ("usuarios"."id" != 1)[0m
+  Rendered sessions/obtener_conectados.erb (2.3ms)
+Completed 200 OK in 9ms (Views: 5.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/sessions/obtener_conectados/1" for 127.0.0.1 at 2014-10-15 01:20:25 -0400
+Processing by SessionsController#obtener_conectados as */*
+  Parameters: {"usuario_id"=>"1"}
+  [1m[35mUsuario Load (0.1ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1  [["id", "1"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUsuario Exists (0.1ms)[0m  SELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."nombre_usuario" = 'docente' AND "usuarios"."id" != 1) LIMIT 1
+  [1m[36mUsuario Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."correo" = 'docente@gmail.com' AND "usuarios"."id" != 1) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36mUsuario Load (0.1ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUsuario Load (0.2ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE ("usuarios"."conectado" != 'f') AND ("usuarios"."id" != 1)
+  Rendered sessions/obtener_conectados.erb (2.3ms)
+Completed 200 OK in 8ms (Views: 4.6ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/sessions/obtener_conectados/1" for 127.0.0.1 at 2014-10-15 01:20:35 -0400
+Processing by SessionsController#obtener_conectados as */*
+  Parameters: {"usuario_id"=>"1"}
+  [1m[36mUsuario Load (0.1ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1[0m  [["id", "1"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUsuario Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."nombre_usuario" = 'docente' AND "usuarios"."id" != 1) LIMIT 1[0m
+  [1m[35mUsuario Exists (0.1ms)[0m  SELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."correo" = 'docente@gmail.com' AND "usuarios"."id" != 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mUsuario Load (0.1ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUsuario Load (0.1ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE ("usuarios"."conectado" != 'f') AND ("usuarios"."id" != 1)[0m
+  Rendered sessions/obtener_conectados.erb (1.8ms)
+Completed 200 OK in 7ms (Views: 3.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/sessions/obtener_conectados/1" for 127.0.0.1 at 2014-10-15 01:20:45 -0400
+Processing by SessionsController#obtener_conectados as */*
+  Parameters: {"usuario_id"=>"1"}
+  [1m[35mUsuario Load (0.1ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1  [["id", "1"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUsuario Exists (0.1ms)[0m  SELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."nombre_usuario" = 'docente' AND "usuarios"."id" != 1) LIMIT 1
+  [1m[36mUsuario Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."correo" = 'docente@gmail.com' AND "usuarios"."id" != 1) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36mUsuario Load (0.1ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUsuario Load (0.2ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE ("usuarios"."conectado" != 'f') AND ("usuarios"."id" != 1)
+  Rendered sessions/obtener_conectados.erb (2.3ms)
+Completed 200 OK in 8ms (Views: 4.6ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/sessions/eliminar_conectado" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+Processing by SessionsController#eliminar_conectado as */*
+  Parameters: {"usuario_id"=>"1"}
+  [1m[36mUsuario Load (0.1ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1[0m  [["id", "1"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUsuario Exists (0.2ms)[0m  [1mSELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."nombre_usuario" = 'docente' AND "usuarios"."id" != 1) LIMIT 1[0m
+  [1m[35mUsuario Exists (0.1ms)[0m  SELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."correo" = 'docente@gmail.com' AND "usuarios"."id" != 1) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "usuarios" SET "conectado" = ?, "updated_at" = ? WHERE "usuarios"."id" = 1[0m  [["conectado", false], ["updated_at", Wed, 15 Oct 2014 01:20:54 BOT -04:00]]
+  [1m[35m (114.2ms)[0m  commit transaction
+Redirected to http://0.0.0.0:3000/grupos
+Completed 302 Found in 120ms (ActiveRecord: 115.0ms)
+
+
+Started GET "/grupos" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+Processing by GruposController#index as HTML
+  [1m[36mUsuario Load (0.2ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mGrupo Load (0.1ms)[0m  SELECT "grupos".* FROM "grupos" WHERE "grupos"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mGrupo Load (0.4ms)[0m  [1mSELECT "grupos".* FROM "grupos" WHERE "grupos"."habilitado" = 't' LIMIT 5 OFFSET 0[0m
+  [1m[35mUsuario Load (0.2ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? ORDER BY "usuarios"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mSubscripcion Load (0.2ms)[0m  [1mSELECT "subscripcions".* FROM "subscripcions" WHERE "subscripcions"."grupo_id" = ?[0m  [["grupo_id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? ORDER BY "usuarios"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mSubscripcion Load (0.4ms)[0m  [1mSELECT "subscripcions".* FROM "subscripcions" WHERE "subscripcions"."grupo_id" = ?[0m  [["grupo_id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? ORDER BY "usuarios"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mSubscripcion Load (0.2ms)[0m  [1mSELECT "subscripcions".* FROM "subscripcions" WHERE "subscripcions"."grupo_id" = ?[0m  [["grupo_id", 4]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "grupos" WHERE "grupos"."habilitado" = 't'
+  Rendered grupos/index.html.erb within layouts/application (17.6ms)
+  Rendered layouts/_navigation.html.erb (0.5ms)
+  [1m[36mUsuario Load (0.2ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE ("usuarios"."conectado" != 'f') AND ("usuarios"."id" != 1)[0m
+  Rendered layouts/_chat.html.erb (1.0ms)
+  [1m[35mSubscripcion Load (0.1ms)[0m  SELECT "subscripcions".* FROM "subscripcions" WHERE "subscripcions"."usuario_id" = ?  [["usuario_id", 1]]
+  [1m[36mGrupo Load (0.1ms)[0m  [1mSELECT "grupos".* FROM "grupos" WHERE "grupos"."id" = ? ORDER BY "grupos"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mGrupo Load (0.1ms)[0m  SELECT "grupos".* FROM "grupos" WHERE "grupos"."id" = ? ORDER BY "grupos"."id" ASC LIMIT 1  [["id", 2]]
+  [1m[36mGrupo Load (0.1ms)[0m  [1mSELECT "grupos".* FROM "grupos" WHERE "grupos"."id" = ? ORDER BY "grupos"."id" ASC LIMIT 1[0m  [["id", 3]]
+  [1m[35mGrupo Load (0.1ms)[0m  SELECT "grupos".* FROM "grupos" WHERE "grupos"."id" = ? ORDER BY "grupos"."id" ASC LIMIT 1  [["id", 4]]
+  Rendered layouts/_barra_grupos.html.erb (3.5ms)
+  Rendered layouts/_bootom_bar.html.erb (0.0ms)
+Completed 200 OK in 35ms (Views: 29.9ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/dashboard.css?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/offcanvas.css?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/sticky-footer-navbar.css?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/attachments.js?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/bootstrap-tagsinput.js?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/bootstrap-datetimepicker.min.js?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/bootstrap-timepicker.js?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/colors.js?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/chat-scripts.js?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/bootstrap.min.js?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/nested_form.js?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/search-groups.js?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/online-users.js?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/url.js?body=1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/nuevologo.png" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/not3.png" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/sessions/obtener_conectados/1" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+Processing by SessionsController#obtener_conectados as */*
+  Parameters: {"usuario_id"=>"1"}
+  [1m[36mUsuario Load (0.1ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1[0m  [["id", "1"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUsuario Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."nombre_usuario" = 'docente' AND "usuarios"."id" != 1) LIMIT 1[0m
+  [1m[35mUsuario Exists (0.1ms)[0m  SELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."correo" = 'docente@gmail.com' AND "usuarios"."id" != 1) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "usuarios" SET "conectado" = ?, "updated_at" = ? WHERE "usuarios"."id" = 1[0m  [["conectado", true], ["updated_at", Wed, 15 Oct 2014 01:20:54 BOT -04:00]]
+  [1m[35m (128.4ms)[0m  commit transaction
+  [1m[36mUsuario Load (0.1ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUsuario Load (0.2ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE ("usuarios"."conectado" != 'f') AND ("usuarios"."id" != 1)
+  Rendered sessions/obtener_conectados.erb (2.1ms)
+Completed 200 OK in 140ms (Views: 6.9ms | ActiveRecord: 129.4ms)
+
+
+Started GET "/assets/conected.png" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/assets/search.png" for 127.0.0.1 at 2014-10-15 01:20:54 -0400
+
+
+Started GET "/sessions/obtener_conectados/1" for 127.0.0.1 at 2014-10-15 01:21:04 -0400
+Processing by SessionsController#obtener_conectados as */*
+  Parameters: {"usuario_id"=>"1"}
+  [1m[36mUsuario Load (0.2ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1[0m  [["id", "1"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUsuario Exists (0.2ms)[0m  [1mSELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."nombre_usuario" = 'docente' AND "usuarios"."id" != 1) LIMIT 1[0m
+  [1m[35mUsuario Exists (0.1ms)[0m  SELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."correo" = 'docente@gmail.com' AND "usuarios"."id" != 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mUsuario Load (0.1ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUsuario Load (0.2ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE ("usuarios"."conectado" != 'f') AND ("usuarios"."id" != 1)[0m
+  Rendered sessions/obtener_conectados.erb (2.6ms)
+Completed 200 OK in 12ms (Views: 6.6ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/sessions/obtener_conectados/1" for 127.0.0.1 at 2014-10-15 01:21:14 -0400
+Processing by SessionsController#obtener_conectados as */*
+  Parameters: {"usuario_id"=>"1"}
+  [1m[35mUsuario Load (0.1ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1  [["id", "1"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUsuario Exists (0.1ms)[0m  SELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."nombre_usuario" = 'docente' AND "usuarios"."id" != 1) LIMIT 1
+  [1m[36mUsuario Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "usuarios" WHERE ("usuarios"."correo" = 'docente@gmail.com' AND "usuarios"."id" != 1) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  commit transaction
+  [1m[36mUsuario Load (0.1ms)[0m  [1mSELECT "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUsuario Load (0.2ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE ("usuarios"."conectado" != 'f') AND ("usuarios"."id" != 1)
+  Rendered sessions/obtener_conectados.erb (1.9ms)
+Completed 200 OK in 8ms (Views: 4.5ms | ActiveRecord: 0.7ms)

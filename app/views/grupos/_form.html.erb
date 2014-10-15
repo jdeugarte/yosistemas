@@ -1,46 +1,46 @@
-<div class="row">
+<!--div class="row"-->
 <%= form_for @grupo, :html => { :class => 'bs-example form-horizontal', :multipart => true} do |f| %>
-<%= f.hidden_field :id,:value => @id%>
-            <div class="well">
-              <% if @grupo.errors.any? %>
-                   <div id ="errorRegistroUsuario" class="alert alert-error">
-                      <button type="button" class="close" data-dismiss="alert">&times;</button>
-                      <ul>
-                         <% @grupo.errors.full_messages.each do |msg| %>
-                         <li><%= msg %></li>
-                         <% end %>
-                      </ul>
-                   </div>
-                <% end %>
-                
-
-
-                <fieldset>
-                  <legend>Ingrese los datos del grupo </legend>
-                  <div class="form-group">
-                     <label for="inputTitle" class="control-label">Nombre:</label>
-                        <%= f.text_field :nombre , :class=>'form-control', :placeholder=>'Nombre', :maxlength => 50, :required => true, :title => "El nombre del grupo es obligatorio, Por favor rellene este campo"%>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputContent" class="control-label">Descripcion:</label>
-                      <%= f.text_area :descripcion, :class=>'form-control',:rows=>'6', :placeholder=>'Descripcion', :maxlength => 500 %>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputEmail" class="control-label">Estado</label>
-                      <select class="form-control" id="grupo_estado" name="grupo[estado]">
+  <%= f.hidden_field :id,:value => @id%>
+      <% if @grupo.errors.any? %>
+        <div id ="errorRegistroUsuario" class="alert alert-error">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <ul>
+            <% @grupo.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>                
+  <div class="panel panel-info">
+    <div class="panel-heading"><Center><H3><b>Ingrese los datos del grupo</b></H3></Center></div>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <tbody>
+            <tr>
+              <td><b>Nombre:</b></td>
+              <td> <%= f.text_field :nombre,  :placeholder=>'Nombre', :maxlength => 50, :required => true, :title => "El nombre del grupo es obligatorio, Por favor rellene este campo"%></td>
+            </tr>
+            <tr>
+              <td><b>Descripcion:</b></td>
+              <td><%= f.text_area :descripcion, :size => "30x5", :placeholder=>'Descripcion', :maxlength => 500,:required=>true %></td>
+            </tr>
+            <tr>
+              <td><b>Estado:</b></td>
+              <td><select id="grupo_estado" name="grupo[estado]">
                             <option value= "true">Privado</option>
                             <option value = "false">Publico</option>
-                      </select>
-                  </div>
-                  <div class="form-group">
-													<div class "btn-group">							
-													<a href="javascript:window.history.back();" class="btn btn-danger">&laquo; Cancelar</a>
-											</div>
-									</div>	
-                      <input type="submit" value="Crear grupo" class="btn btn-success">
-
-									
-                </fieldset>
-        </div>
+                      </select></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <ul class="list-group">
+      <li class="list-group-item">
+          <center>
+            <a href="javascript:window.history.back();" class="btn btn-danger">&laquo; Cancelar</a>
+            <input type="submit" value="Crear grupo" class="btn btn-success">
+          </center>
+      </li>
+    </ul>
+  </div>
 <% end %>
-</div>

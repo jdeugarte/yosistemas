@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 Started GET "/" for 127.0.0.1 at 2014-10-15 00:14:21 -0400
@@ -61044,3 +61045,5 @@ Processing by SessionsController#obtener_conectados as */*
   [1m[35mUsuario Load (0.2ms)[0m  SELECT "usuarios".* FROM "usuarios" WHERE ("usuarios"."conectado" != 'f') AND ("usuarios"."id" != 1)
   Rendered sessions/obtener_conectados.erb (2.2ms)
 Completed 200 OK in 8ms (Views: 5.1ms | ActiveRecord: 0.7ms)
+=======
+>>>>>>> 33664f7dd63478444f36bef8a266798364905877

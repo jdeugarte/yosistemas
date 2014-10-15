@@ -1,28 +1,29 @@
-<div class="row">
-	<div class="col-lg-6">
-		<div class="well">
-			<form class="bs-example form-horizontal">
-				<fieldset>
-					<legend>
-						Nombre:
-						<%= @grupo.nombre %>
-					</legend>
-					<div class="form-group">
-						<div class="col-lg-10">
-							<b>Descripcion:</b><%= @grupo.descripcion %>
-						</div>
-					</div>
-					<legend>
-						Llave:
-						<% if @grupo.llave != "publico" %>
-							<%= @grupo.llave %>
-						<% else %>
-							sin llave
-						<% end %>
-					</legend>
-				</fieldset>	
-			</form>
-			<a class="btn btn-primary btn-lg" href="/grupos"> Ver Grupos </a>
-		</div>
-	</div>
+<div class="panel panel-info">
+  <div class="panel-heading"><center><h3><b><%= @grupo.nombre%></b></h3></center></div>
+  <div class="panel-body">
+    <center><table class="table table-hover">
+      <tbody>        
+        <tr>
+          <td><center><strong>Descripcion:</strong></center></td>
+          <td><%= @grupo.descripcion %></td>
+        </tr>
+        <tr>
+       		<td><center><strong>Llave:</strong></center</td>
+       		<% if @grupo.llave != "publico" %>
+       			<td><%= @grupo.llave %></td>
+       		<% else %>
+				<td>No hay llave</td>
+			<% end %>  
+      	</tr>
+        
+      </tbody>
+    </table> 
+    </center>
+  </div>
+  <center>
+  <ul class="list-group">
+  	<li class="list-group-item">
+    	<a class="btn btn-primary btn-lg" href="/grupos"> Ver Grupos </a>
+	</li>
+  </ul>
 </div>

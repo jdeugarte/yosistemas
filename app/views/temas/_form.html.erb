@@ -1,5 +1,52 @@
 <%= form_for @tema, :html => { :class => 'bs-example form-horizontal', :multipart => true} do |f| %>
 <%= f.hidden_field :id,:value => @id%>
+<div class="panel panel-success">
+  <div class="panel-heading"><center><h3>Ingrese los datos del tema</h3></center></div>
+  <div class="panel-body">
+      <%= f.label :titulo, "Titulo:" %>
+      <%= f.text_field :titulo,:class=>"form-control", :placeholder=>'Titulo', :maxlength => 50 , :title => "El titulo del tema es obligatorio, Por favor rellene este campo" %>
+      <%= f.label :titulo, "Contenido:" %>
+      <%= f.text_area :cuerpo, :class=>'form-control',:rows=>'6', :placeholder=>'Contenido', :maxlength => 500 %>
+      <%= f.label :titulo, "Grupo:" %>
+      <%=f.collection_select(:grupo_id, @grupos, :id, :nombre, {:selected => @grupo.id}, :class=>'form-control')%>
+
+      <div class="form-group" style>
+        <%= f.label :titulo, "Archivos seleccionados:" %>
+        <div class="col-lg input-group">
+          <input id="showFiles" class="form-control" type="text" placeholder="Seleccione archivos..." onclick="document.getElementById('tema_archivo').click();" onfocus="this.blur();">
+            <%= f.file_field :archivo , :class=>'form-control',:multiple => true, :style=>"display:none;", :onchange=>"document.getElementById('showFiles').value = (this.files.length>1)?''+this.files.length+' Archivos seleccionados.':this.files[0].name;" %>
+            <span class="input-group-addon" style="background-color: #256188; cursor:pointer;" onclick="document.getElementById('tema_archivo').click();">
+            <i class="icon-file icon-white"></i>
+            </span>
+        </div>
+      </div>
+
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <center>
+      <a href="javascript:window.history.back();" class="btn btn-danger">&laquo; Cancelar</a>
+      <input type="submit" value="Crear tema" class="btn btn-success">
+      </center>
+    </li>
+  </ul>
+</div>
+
+
+<%end%>
+
+
+
+
+
+
+
+
+
+
+
+<!--<%= form_for @tema, :html => { :class => 'bs-example form-horizontal', :multipart => true} do |f| %>
+<%= f.hidden_field :id,:value => @id%>
   <div class="row">
           <div class="col-lg-10">
             <div class="well">
@@ -18,7 +65,7 @@
                 <legend>Ingrese los datos del tema </legend>
                   <div class="form-group">
                     <div class="form-group <%=((@tema.errors.get(:titulo).nil?) ? '' : ' has-error')%>">
-                     <label for="inputTitle" class="col-lg-2 control-label">Titulo:</label>
+                    <label for="inputTitle" class="col-lg-2 control-label">Titulo:</label>
                     <div class="col-lg-10">
                         <%= f.text_field :titulo , :class=>'form-control', :placeholder=>'Titulo', :maxlength => 50 , :title => "El titulo del tema es obligatorio, Por favor rellene este campo" %>
                     </div>
@@ -63,3 +110,4 @@
     </div>
    </div>
 <% end %>
+-->

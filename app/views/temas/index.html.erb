@@ -40,36 +40,7 @@
 </div>
 <%end%>
 <center><%= paginate @temas%></center>
-<!-- 
-<br/>
-<div class="col-lg-10">
-    <% @temas.each do |tema| %>
-    <div class="panel panel-default" style='cursor:pointer' onclick=<%="document.location.href='/temas/"+tema.id.to_s+"'"%>>
-      <div class="panel-heading" title="Titulo">
-        <h3 style="margin-top:0px; margin-bottom:0px;"><%= tema.titulo %></h3>
-      </div>
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-sm-2 col-md-2 col-lg-2">
-            <img title="Tema" src="/assets/tema.png" class="square-color-tema visible-phone" width="32" />
-            <img title="Tema" src="/assets/tema.png" class="square-color-tema hidden-phone" />&nbsp;
-          </div>
-          <div class="col-sm-9 col-md-9 col-lg-9" title="Detalle">
-            <span><%= tema.cuerpo[0,315]+(tema.cuerpo.length>315 ? "..." : "")  %></span>
-          </div>
-        </div>
-        <div class="row ">
-            <div class="col-sm-6 col-md-6 col-lg-6" title="Titulo">
-              <small style="color: gray;">Tema creado el <%= tema.created_at.localtime.strftime("%d/%m/%Y a las: %I:%M  %p") %><br/>
-                Usuario <a href="/usuarios/<%=tema.usuario_id%>"><%= tema.usuario.nombre %></a> </small>
 
-            </div>
-         </div>
-      </div>
-    </div>
-    <%end%>
-  <center><%= paginate @temas %></center>
-</div>-->
 <script type="text/javascript">
    $(".square-color-tema").css("background-color",get_random_color());
 </script>

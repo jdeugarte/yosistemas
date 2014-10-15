@@ -11,9 +11,10 @@
           </div>
       </a>
       
-        <%if current_user!=nil%>
+        <%if !current_user.nil? %>
               <a class="list-group-item list-group-item-info">Publicos</a>
                 <% subscripciones_usuario().each do |subs| %>
+                  <% if !subs.nil? and !@grupo.nil?%>
                         <%if subs.grupo.id == @grupo.id and subs.grupo.estado==false%>
                           <a class="list-group-item active"><%= subs.grupo.nombre %></a>
                         <%else%>
@@ -21,12 +22,13 @@
                             <a href="/grupos/<%=subs.grupo.id%>/temas-y-tareas" class="list-group-item"><%= subs.grupo.nombre %></a>
                           <% end %>    
                         <% end %>
-                    <% end %>
+                  <% end %>
+                <% end %>
 
               
               <a class="list-group-item list-group-item-info">Privados</a>
-              
                   <% subscripciones_usuario().each do |subs| %>
+                    <% if !subs.nil? and !@grupo.nil?%>
                       <%if subs.grupo.id == @grupo.id and subs.grupo.estado==true%>
                         <a class="list-group-item active"><%= subs.grupo.nombre %></a>
                       <%else%>
@@ -34,17 +36,20 @@
                           <a href="/grupos/<%=subs.grupo.id%>/temas-y-tareas" class="list-group-item"><%= subs.grupo.nombre %></a>
                         <% end %>    
                       <% end %>
+                    <% end %>
                   <% end %>
-
                 <!--<a class="list-group-item list-group-item">Suscribirse a grupo</a>-->
-                <form method="GET" action="/grupos/buscar_por_llave" >      
                 <a class="list-group-item">  
-                  <h5>Suscribirse a grupo</h5>  
-                  <input id="llave" name="llave" placeholder="Llave..." class="form-control input-sm"  style="" type="text"><br>              
-                  <center><input type="submit" value="Suscribirse"  class="btn btn-xs btn-primary"></center></a>
-                </form>
+                    <form method="GET" action="/grupos/buscar_por_llave" >      
+                      <h5>Suscribirse a grupo</h5>  
+                      <input id="llave" name="llave" placeholder="Llave..." class="form-control input-sm"  style="" type="text"><br>              
+                      <center>
+                        <input type="submit" value="Suscribirse"  class="btn btn-xs btn-primary">
+                      </center>
+                    </form>
+                </a>
           <%end%>  
-          <% if current_user==nil %>
+          <% if current_user.nil? %>
               <a class="list-group-item list-group-item-info">Publicos</a>
               <% publicos=Grupo.where(:estado => false) %>
               <% publicos.each do |p| %>

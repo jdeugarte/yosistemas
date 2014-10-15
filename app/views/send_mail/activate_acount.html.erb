@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+
+    <style type="text/css">			
+		p {font-family: Arial,Helvetica,sans-serif; color: #3e3e3e; font-size: 14px; }
+		h3 {font-family: Arial,Helvetica,sans-serif; color: #3e3e3e; font-size: 18px;}
+	</style>
+  </head>
+   <body>	
+	<table border="0"> 
+    	<th colspan="15" bgcolor="255E8A" width="12">
+    	</th>
+       	<th align="left">
+      		<h3>
+    			Bienvenido a YoSistemas, <%= @user.nombre %>
+			</h3>
+			<p>
+				Fuiste registrado exitosamente
+				<br>
+				Para activar tu cuenta sigue el siguiente enlace:
+				<%= @url %>
+				<br>
+				Gracias por unirte a nosotros, que tengas un buen dia!
+				<br><br>
+				<b><i>Staff de YoSistemas</i></b>
+			</p>
+		</th>
+	</table>	
+ </body>
+</html>

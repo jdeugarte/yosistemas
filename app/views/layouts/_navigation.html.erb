@@ -11,16 +11,29 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+        
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Temas<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <%if  !current_user.nil? %>
-            <li><a href="/temas/new/1">Crear Tema</a></li>
+            <li><a href="/temas/new/<%=@grupo.id%>">Crear Tema</a></li>
             <!--li><a href="/temas/show_mine">Mis Temas</a></li-->
             <%end%>
             <li><a href="/temas">Ver Temas</a></li>
           </ul>
         </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tareas<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <%if  !current_user.nil? %>
+            <li><a href="/tareas/new/<%=@grupo.id%>">Crear Tarea</a></li>
+            <!--li><a href="/temas/show_mine">Mis Temas</a></li-->
+            <%end%>
+            <li><a href="/grupos/<%=@grupo.id%>/tareas">Ver Tareas</a></li>
+          </ul>
+        </li>
+
         <%if !current_user.nil? %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Grupos<span class="caret"></span></a>

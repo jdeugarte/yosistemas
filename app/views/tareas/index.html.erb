@@ -12,9 +12,7 @@
     <div class="panel panel-success" style='cursor:pointer' onclick=<%="document.location.href='/tareas/"+tarea.id.to_s+"'"%>>
       <div class="panel-heading" title="Titulo"><h3><%= tarea.titulo %></h3></div>
       <div class="panel-body">           
-            <img title="Tarea" src="/assets/tarea.png" class="square-color-tarea hidden-phone" />&nbsp;
-          
-           
+            <img title="Tarea" src="/assets/tarea.png" style=" background-color: #3c763d;" />&nbsp;
             <span><%= tarea.descripcion[0,315]+(tarea.descripcion.length>315 ? "..." : "") %></span>
       </div>
       <ul class="list-group">          

@@ -30,13 +30,7 @@
           <tr>
             <td><b>Fecha:</b></td>
             <td>
-              <div id="datetimepicker2" class="input-group">
-                <%= f.text_field :fecha, :class=>'form-control input-append',:"data-format"=>'dd/MM/yyyy', :placeholder=>'Fecha', :style=>"border-bottom-left-radius: 4px;  border-top-left-radius: 4px;"%>
-                <span id="dateButton" class="input-group-addon add-on" style="background-color: #256188; cursor:pointer;">
-                  <i data-time-icon="icon-time" data-date-icon="icon-calendar icon-white">
-                  </i>
-                </span>
-              </div>
+             <%= f.date_select :fecha, :order => [:day, :month, :year], :start_year => 1950 %>  
             </td>
           </tr>
           <tr>

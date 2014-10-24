@@ -8,7 +8,7 @@
   </div>
 
   <div class="panel-body">
-    <%= preguntas_form.text_field :texto, :placeholder=>'Pregunta', :maxlength => 150 %>
+    <%= preguntas_form.text_field :texto, :placeholder=>'Pregunta', :maxlength => 150 , size: "45"%>
     <%= preguntas_form.select :tipo ,options_for_select(["Texto Libre","Opcion Multiple"]), {}, { :class => 'myselect', :onchange=>"mostrar_ocultar_opcion(this, this.value)" }%>
     
     

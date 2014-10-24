@@ -8,19 +8,19 @@
   </div>
 
   <div class="panel-body">
-    <%= bootstrap_nested_form_for @cuestionario, :html => { :class => 'bs-example form-horizontal', :multipart => true } do |f| %>
+    <%= nested_form_for @cuestionario, :html => { :class => 'bs-example form-horizontal', :multipart => true } do |f| %>
             
-    <%= f.text_field :titulo , :class=>'form-control', :placeholder=>'titulo', :maxlength => 50, :required => true, :title => "El titulo del cuestionario es obligatorio, Por favor rellene este campo"%>
-    <%= f.text_area :descripcion, :class=>'form-control', :placeholder=>'Descripcion', :maxlength => 500 %>
+    <%= f.text_field :titulo , :class=>'form-control', :placeholder=>'titulo', :maxlength => 50, :required => true, :title => "El titulo del cuestionario es obligatorio, Por favor rellene este campo"%></br>
+    <%= f.text_area :descripcion, :class=>'form-control', :placeholder=>'Descripcion', :maxlength => 500 %></br></br>
     
-    <div id="datetimepicker2" class="input-group">
-      <%= f.text_field :fecha_limite, :class=>'form-control input-append',:"data-format"=>'dd/MM/yyyy', :placeholder=>'Fecha'%>
-        <span id="dateButton" class="input-group-addon add-on" style="background-color: #256188; cursor:pointer;">
-            <i class="glyphicon glyphicon-calendar">
-            </i>
-        </span>
-    </div>
-
+    <tr>            
+                <td>Fecha de limite:</td>                                  
+                <td><%= f.date_select :fecha_limite, :order => [:day, :month, :year], :start_year => 1950 %>
+                <!--:class=>'form-control input-append',:"data-format"=>'dd/MM/yyyy', :placeholder=>'Fecha de Entrega', :style=>"border-bottom-left-radius: 4px;  border-top-left-radius: 4px;"%>-->
+            </tr>       
+             
+            <tr>
+            </br></br>
     <label for="inputTitle">
       ¿Desea publicar el cuestionario?
     </label>

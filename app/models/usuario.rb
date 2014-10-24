@@ -90,4 +90,25 @@ require 'digest/md5'
         subscripcion.grupo = Grupo.find_by_id(1)
         subscripcion.save
   	end
+
+  	def misgrupos
+  		misgrupos = []
+  		lista_subscripciones = Subscripcion.where(:usuario_id => self.id)
+  		lista_subscripciones.each do |subscripcion|
+  			if Grupo.find(subscripcion.grupo.id).estado == true
+  				misgrupos.push(subscripcion.grupo_id)
+  			end
+  		end
+  		return misgrupos
+  	end
+
+  	def lista_usuarios_misgrupos
+  		lista_usuarios = []
+  		Usuario.all.each do |usuario|
+  			if usuario.misgrupos&self.misgrupos != []
+  				lista_usuarios.push(usuario)
+  			end
+  		end
+  		return lista_usuarios
+  	end
 end

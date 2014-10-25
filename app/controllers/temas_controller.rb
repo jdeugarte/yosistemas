@@ -7,7 +7,7 @@ before_filter :grupos
     @todosgrupos=Grupo.all
   end
 
-
+=begin
   def buscar
     @temas = Array.new
     @grupo = Grupo.find(params[:grupo])
@@ -25,7 +25,7 @@ before_filter :grupos
     @temas= Kaminari.paginate_array(@temas).page(params[:page]).per(5)
     render 'index'
   end
-
+=end
 
 
   def ordertable
@@ -55,7 +55,7 @@ before_filter :grupos
     @temas= Kaminari.paginate_array(@temas).page(params[:page]).per(5)
     render 'index'
   end
-
+=begin
   def ordertablemine
     @temas = Array.new
     if params[:themes] != nil && params[:themes] != ""
@@ -80,7 +80,7 @@ before_filter :grupos
     end
     render "show_mine"
   end
-
+=end
   public
   # GET /temas/new
   def new

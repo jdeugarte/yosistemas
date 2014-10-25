@@ -28,4 +28,52 @@ class Tarea < ActiveRecord::Base
     end
     return false
   end
+
+   def self.searchByDescription(keyWords)
+    keyWords = keyWords.downcase
+      initialResult = Tarea.where('descripcion LIKE ?', '%'+keyWords+'%')
+      deepResult = Tarea.deepSearchOfDescription(keyWords)
+      finalRes  = (initialResult+deepResult).uniq
+      finalRes
+  end
+
+  def self.deepSearchOfDescription(keyWords)
+    keyWordArray = keyWords.split
+    keyWordArray = Tarea.deleteIrrelevantWords(keyWordArray)
+    keyWordArray.uniq!
+    results=[]
+    keyWordArray.each do |word|
+      results<<TTarea.where('descripcion LIKE ?', '%'+word+'%')
+    end
+    finalResArray = results.flatten.uniq
+    finalResArray
+  end
+
+  def self.searchBytitle(keyWords)
+    keyWords = keyWords.downcase
+    initialResult = Tarea.where('titulo LIKE ?', '%'+keyWords+'%')
+    deepResult = Tarea.deepSearchOfDescription(keyWords)
+    finalRes  = (initialResult+deepResult).uniq
+    finalRes
+  end
+
+  def self.deepSearchOftitle(keyWords)
+    keyWordArray = keyWords.split
+    keyWordArray = Tarea.deleteIrrelevantWords(keyWordArray)
+    keyWordArray.uniq!
+    results=[]
+    keyWordArray.each do |word|
+      results<<Tarea.where('titulo LIKE ?', '%'+word+'%')
+    end
+    finalResArray = results.flatten.uniq
+    finalResArray
+  end
+
+  def self.allResultsSearchs(keyWords)
+    rTitle = searchBytitle(keyWords)
+    rDescription = searchByDescription(keyWords)
+    allResults = (rTitle+rDescription).uniq
+  end
+
+
 end

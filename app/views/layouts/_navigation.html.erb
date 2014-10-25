@@ -68,9 +68,9 @@
       </ul>
         <%end%>
             <% if @grupo!=nil%>
-            <form class="navbar-form navbar-left" method="GET" action="/temas/buscar/<%=@grupo.id%>">   
-            <input id="search" name="search" placeholder="Buscar Temas por: titulo, descripcion" class="form-control input-sm"  style="width: 250px; height: 30px; margin-top: 5px;" type="text"><br>
-          </form>
+              <form class="navbar-form navbar-left" method="GET" action="/temas_y_tareas/buscar/<%=@grupo.id%>">   
+                <input id="search" name="search" placeholder="Buscar Temas y Tareas" class="form-control input-sm"  style="width: 250px; height: 30px; margin-top: 5px;" type="text"><br>
+              </form>
         <% end %>
         <%if current_user.nil?%>
           <form class="navbar-form navbar-right">

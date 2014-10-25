@@ -1,3 +1,4 @@
+  <!--<meta http-equiv="refresh" content="5">-->
   <script src="http://js.pusher.com/2.1/pusher.min.js" type="text/javascript"></script>
   <script type="text/javascript">
     // Enable pusher logging - don't include this in production
@@ -34,9 +35,17 @@
     <div class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-sidebar">
         <% if !current_user.nil?%>
-          <li class="active"><a>Usuarios conectados...</a></li>
-          <% usuarios_conectados.each do |usuario| %>
-          <li onclick="showChat('<%=usuario.nombre_usuario%>','<%=usuario.id%>');" style="cursor:pointer;" onmouseover="this.style.background='#F7F7F7';" onmouseout="this.style.background='white';"><a href="#"><span><img src="/assets/conected.png" /></span> <%=usuario.nombre_usuario%></a></li>
+          <li class="active"><a>Usuarios...</a></li>
+          <% current_user.lista_usuarios_misgrupos.each do |usuario| %>
+          <li onclick="showChat('<%=usuario.nombre_usuario%>','<%=usuario.id%>');" style="cursor:pointer;" onmouseover="this.style.background='#F7F7F7';" onmouseout="this.style.background='white';">
+            <%if current_user.id!=usuario.id.to_i%>
+              <%if usuario.conectado == true%>
+                <a href="#"><span><img src="/assets/conected.png" /></span> 
+              <%else%>
+                <a href="#"><span><img src="/assets/conected1.png" /></span>
+              <%end%>
+              <%=usuario.nombre_usuario%></a></li>
+            <%end%>
           <%end%>
         <%end%>
       </ul>

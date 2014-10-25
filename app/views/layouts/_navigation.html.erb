@@ -59,6 +59,23 @@
             <li><a href="/eventos">Ver Eventos</a></li>
           </ul>
         </li>
+        
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/assets/message.png" width="21" title="Mensajes">
+        <%if  mensajes_nuevos.length >0 %>
+          <span class="badge"><%=mensajes_nuevos.length%></span>
+        <%end%>
+        </a>
+        <ul class="dropdown-menu">
+           <li><a href="#myModal" role="button" class="btn" data-toggle="modal">Enviar Mensaje</a></li>
+        <% mensajes_nuevos.each do |mensaje|%>
+            <%usuario=Usuario.find(mensaje.de_usuario_id)%>
+            <li class="divider"></li>
+            <li><a href="#" role="button" class="btn" onclick="showChat('<%=usuario.nombre_usuario%>','<%=usuario.id%>');" data-toggle="modal"><label style="margin-bottom: 7px;"><%=usuario.nombre_usuario%></label><span style="margin-left: 5px;" class="badge"><%=mensaje.cantidad%></span></a></li>
+        <%end%>
+        </ul>
+      </li>
+
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/assets/not3.png" width="15" id="demo">Notificaciones<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">

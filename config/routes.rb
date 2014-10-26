@@ -12,6 +12,7 @@ Yosistemas::Application.routes.draw do
   get "usuarios/confirm/:pass" => "usuarios#confirm", :as => 'confirm'
   get '/agregar_url' => 'url#agregar_url'
   post '/agregar_url' => 'url#create'
+  get "temas_y_tareas/ordenar/:id/:opcion" => 'temas_y_tareas#ordenar', :as  => 'ordenar'
 
   #get "log_in" => "sessions#new", :as => "log_in"
   get "log_out" => "sessions#destroy", :as => "log_out"

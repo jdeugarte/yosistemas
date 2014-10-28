@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user
   before_filter :require_log_in
-  helper_method :notificaciones
+  #helper_method :notificaciones_nuevas
+  #helper_method :notificaciones
 
   private
   def current_user
@@ -16,19 +17,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def notificaciones
-    @notificaciones = Array.new
-    if current_user!=nil
-      suscripciones = SuscripcionTema.where(:usuario_id=>current_user.id)
-      suscripciones.each do |suscripcion|
-        notificacionesTodo = Notificacion.where(:suscripcion_tema_id=>suscripcion.id,:notificado=>false)
-        notificacionesTodo.each do |notificacion|
-          @notificaciones.push (notificacion)
-        end
-      end
-    end
-    @notificaciones
-
-    
-  end
+  #def notificaciones
+   # @notificaciones = Array.new
+    #if current_user!=nil
+     # suscripciones = SuscripcionTema.where(:usuario_id=>current_user.id)
+      #suscripciones.each do |suscripcion|
+       # notificacionesTodo = Notificacion.where(:suscripcion_tema_id=>suscripcion.id,:notificado=>false)
+        #notificacionesTodo.each do |notificacion|
+         # @notificaciones.push (notificacion)
+        #end
+      #end
+    #end
+    #@notificaciones  
+  #end
 end

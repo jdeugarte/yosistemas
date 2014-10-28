@@ -9,6 +9,7 @@ class UsuariosController < ApplicationController
   def show
     @usuario = Usuario.find(params[:id])
   end
+  
   def obtener_charla
     @user = Usuario.find(params[:usuario_id])
     @charla = Mensaje.find_all_by_de_usuario_id_and_para_usuario_id(params[:usuario_id],current_user.id)
@@ -21,14 +22,6 @@ class UsuariosController < ApplicationController
     end
     @charla.sort!{|x,y|  x.created_at <=> y.created_at}
     render :layout => nil
-  end
-
-  def obtener_notificacion
-    @comentario = TemaComentario.find_by_id(params[:comentario_id])
-    @tema = Tema.find_by_id(params[:tema_id])
-    @usuario = Usuario.find_by_id(params[:usuario_id])
-    @lista_datos = [@comentario,@usuario,@tema]
-    render :layout => nil;
   end
 
   def password_recovered

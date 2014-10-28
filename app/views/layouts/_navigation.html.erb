@@ -17,7 +17,6 @@
           <ul class="dropdown-menu" role="menu">
             <%if  !current_user.nil? %>
             <li><a href="/temas/new/<%=@grupo.id%>">Crear Tema</a></li>
-            <!--li><a href="/temas/show_mine">Mis Temas</a></li-->
             <%end%>
             <li><a href="/temas">Ver Temas</a></li>
           </ul>
@@ -69,7 +68,7 @@
         <ul class="dropdown-menu">
            <li><a href="#myModal" role="button" class="btn" data-toggle="modal">Enviar Mensaje</a></li>
         <% mensajes_nuevos.each do |mensaje|%>
-            <%usuario=Usuario.find(mensaje.de_usuario_id)%>
+            <% usuario = Usuario.find(mensaje.de_usuario_id)%>
             <li class="divider"></li>
             <li><a href="#" role="button" class="btn" onclick="showChat('<%=usuario.nombre_usuario%>','<%=usuario.id%>');" data-toggle="modal"><label style="margin-bottom: 7px;"><%=usuario.nombre_usuario%></label><span style="margin-left: 5px;" class="badge"><%=mensaje.cantidad%></span></a></li>
         <%end%>
@@ -77,9 +76,52 @@
       </li>
 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/assets/not3.png" width="15" id="demo">Notificaciones<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Vacio</a></li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/assets/not3.png" width="15" title="notificaciones">
+            <%if  notificaciones_nuevas.length >=0 %>
+              <span class="badge"><%=notificaciones_nuevas.length%></span>
+            <%end%>
+          </a>
+          <ul class="dropdown-menu" >
+            <%if notificaciones_nuevas.length == 0 %>
+              <li><Center>No hay notificaciones :(</Center></li>
+            <%else%>
+              <li><a href="#notificationModal" role="button" class="btn" data-toggle="modal"></a></li>
+              <% notificaciones_nuevas.each do |notificacion|%>
+                <% usuario = Usuario.find(notificacion.de_usuario_id)%>
+                <li class="divider"></li>
+                <%if notificacion.tipo == 0 %>
+                  <li>
+                  <table>
+                    <tr>
+                      <th><a href="/tareas/<%=notificacion.id_item%>" role="button" class="btn" data-toggle="modal"><b><%=usuario.nombre_usuario%></b> ha creado la tarea <%=notificacion.title[0,5]+(notificacion.title.length>5 ? "..." : "")%>
+                      </a></th>
+                      <th> <span><a href="/notifications/change_seen/<%=notificacion.id%>" role="button" class="btn" data-toggle="modal"><img src="/assets/notA.jpg" width="13" title="Eliminar notificaciones"></a></span></th>
+                    </tr>
+                  </table>
+                  </li>
+                <%end%>
+                <%if notificacion.tipo == 1 %>
+                  <li>
+                  <table>
+                    <tr>
+                      <th><a href="/temas/<%=notificacion.id_item%>" role="button" class="btn" data-toggle="modal" ><b><%=usuario.nombre_usuario%></b> ha creado el tema <%=notificacion.title[0,5]+(notificacion.title.length>5 ? "..." : "")%></a></th>
+                      <th></th>
+                      <th><span><a href="/notifications/change_seen/<%=notificacion.id%>" role="button" class="btn" data-toggle="modal"><img src="/assets/notA.jpg" width="13" title="Eliminar notificacion"></a></span></th>
+                    </tr>
+                  </table>
+                  </li>
+                <%end%>
+                <%if notificacion.tipo == 2 %>
+                 <li>
+                 <table>
+                   <tr>
+                     <th><a href="/eventos/<%=notificacion.id_item%>" role="button" class="btn" data-toggle="modal" ><b><%=usuario.nombre_usuario%></b> ha creado el evento <%=notificacion.title[0,5]+(notificacion.title.length>5 ? "..." : "")%></a></th>
+                     <th><span><a href="/notifications/change_seen/<%=notificacion.id%>" role="button" class="btn" data-toggle="modal"><img src="/assets/notA.jpg" width="13" title="Eliminar notificacion"></a></span></th>
+                   </tr>
+                 </table></li>
+                <%end%>
+              <%end%>
+            <%end %>
           </ul>
         </li>
       </ul>

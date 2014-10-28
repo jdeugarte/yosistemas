@@ -1,3 +1,4 @@
+require 'pusher'
 class TemasController < ApplicationController
 skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:show,:searchtitulo]
 before_filter :grupos
@@ -98,12 +99,12 @@ before_filter :grupos
   def show
     @tema = Tema.find(params[:id])
     @id = @tema.grupo_id
-     notificaciones.each do |notificacion|
-      if ( TemaComentario.find(notificacion.tema_comentario_id).tema_id == @tema.id )
-        notificacion.notificado = true
-        notificacion.save
-      end
-    end
+     #notificaciones.each do |notificacion|
+      #if ( TemaComentario.find(notificacion.tema_comentario_id).tema_id == @tema.id )
+       # notificacion.notificado = true
+        #notificacion.save
+      #end
+    #end
      @comentarios= Kaminari.paginate_array(@tema.tema_comentarios).page(params[:page]).per(10)
   end
 
@@ -119,6 +120,7 @@ before_filter :grupos
       @suscripcion.usuario_id=current_user.id
       @suscripcion.tema_id=@tema.id
       @suscripcion.save
+      notificacion_push(@tema.grupo_id, @tema)
       redirect_to '/temas/'+@tema.id.to_s
     else
       @grupos = Array.new
@@ -172,7 +174,7 @@ before_filter :grupos
   end
 
   def editar_comentario
-    @comentario=TemaComentario.find(params[:id_comentario])
+    @comentario = TemaComentario.find(params[:id_comentario])
   end
 
   def visible
@@ -196,7 +198,7 @@ before_filter :grupos
   end
 
   def searchmine
-    @temas=Array.new
+    @temas = Array.new
     aux = Tema.all
     if params[:titulo] != "" && params[:titulo] != nil
       aux.each do |tema|
@@ -232,11 +234,41 @@ before_filter :grupos
   private
     # No permite parametros de internet
     def tema_params
-      params.require(:tema).permit(:titulo, :cuerpo)
+      params.require(:tema).permit(:titulo, :cuerpo, :grupo_id)
     end
     
     def grupos
         @grupo = Grupo.find(1)
+    end
+
+
+    def notificacion_push(id_grupo, tema)
+      suscripciones = Subscripcion.all
+      suscripciones.each do |suscrito|
+        if suscrito.grupo_id == id_grupo
+          if suscrito.usuario_id != current_user.id
+            @usuario = suscrito.usuario
+            if @usuario != nil
+              @grupo = Grupo.find(id_grupo)
+              @notificacion = Notification.new
+              @notificacion.title = tema.titulo
+              @notificacion.description = tema.cuerpo
+              @notificacion.reference_date = nil
+              @notificacion.tipo = 1
+              @notificacion.de_usuario_id = current_user.id
+              @notificacion.para_usuario_id = @usuario.id
+              @notificacion.seen = false
+              @notificacion.id_item = tema.id
+              @notificacion.save
+
+              Pusher.url = "http://5ea0579076700b536e21:503a6ba2bb803aa4ae5c@api.pusherapp.com/apps/60344"
+              Pusher['notifications_channel'].trigger('notification_event', {
+                'message' => 'This is an HTML5 Realtime Push Notification!'
+              })
+            end
+          end
+        end
+      end
     end
 
     def sacarIds(temas)

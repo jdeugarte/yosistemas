@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140917030056) do
+ActiveRecord::Schema.define(version: 20141028001351) do
 
   create_table "adjunto_respuesta_cuestionarios", force: true do |t|
     t.integer  "respuesta_usuario_id"
@@ -166,27 +166,18 @@ ActiveRecord::Schema.define(version: 20140917030056) do
     t.datetime "updated_at"
   end
 
-  create_table "notificacion_grupos", force: true do |t|
-    t.boolean  "notificado"
-    t.integer  "subscripcion_id"
-    t.integer  "tarea_id"
+  create_table "notifications", force: true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.date     "reference_date"
+    t.integer  "tipo"
+    t.boolean  "seen"
+    t.integer  "de_usuario_id"
+    t.integer  "para_usuario_id"
+    t.integer  "id_item"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "notificacion_grupos", ["subscripcion_id"], name: "index_notificacion_grupos_on_subscripcion_id"
-  add_index "notificacion_grupos", ["tarea_id"], name: "index_notificacion_grupos_on_tarea_id"
-
-  create_table "notificacions", force: true do |t|
-    t.boolean  "notificado"
-    t.integer  "suscripcion_tema_id"
-    t.integer  "tema_comentario_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "notificacions", ["suscripcion_tema_id"], name: "index_notificacions_on_suscripcion_tema_id"
-  add_index "notificacions", ["tema_comentario_id"], name: "index_notificacions_on_tema_comentario_id"
 
   create_table "preguntas", force: true do |t|
     t.integer  "cuestionario_id"
@@ -330,6 +321,8 @@ ActiveRecord::Schema.define(version: 20140917030056) do
     t.date     "fecha_nacimiento"
     t.text     "acerca_de"
     t.integer  "telefono"
+    t.boolean  "push",                        default: true
+    t.boolean  "mailer",                      default: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "activa",                      default: false

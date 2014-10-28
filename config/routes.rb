@@ -1,4 +1,5 @@
 Yosistemas::Application.routes.draw do
+
   get "grupos/buscar_por_llave" => "grupos#buscar_por_llave", :as=>'buscar_grupo_por_llave'
   get "comment_tasks/create"
   get "comment_tasks/delete"
@@ -112,6 +113,10 @@ Yosistemas::Application.routes.draw do
   get "respuesta_usuarios/nuevo/:id" => "respuesta_usuarios#nuevo", :as => "nuevo"
   post "respuesta_usuarios/crear" => "respuesta_usuarios#crear", :as => "crear"
   post "respuesta_usuarios/terminado" => "respuesta_usuarios#terminado", :as => "terminado"
+
+  get "notifications/change_seen/:id" => "notifications#change_seen"
+
+  resources :notifications
 
   resources :usuarios , except: [:destroy] do
     resources :tema_comentarios, only: [:create]

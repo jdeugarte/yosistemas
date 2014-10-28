@@ -1,3 +1,4 @@
+require 'pusher'
 class TareasController < ApplicationController
   #GET tareas
   def index
@@ -88,16 +89,16 @@ class TareasController < ApplicationController
 
   def cargar_datos_tarea
     @tarea_antigua = Tarea.find(params[:id_tarea])
-    @tarea=Tarea.new
-    @tarea.titulo=@tarea_antigua.titulo
-    @tarea.descripcion=@tarea_antigua.descripcion
-    @tarea.fecha_entrega=@tarea_antigua.fecha_entrega
-    @tarea.hora_entrega=@tarea_antigua.hora_entrega
-    @tarea.grupo_id=@tarea_antigua.grupo_id
-    @tarea.usuario_id=@tarea_antigua.usuario_id
-    @tarea.tarea_base=@tarea_antigua.id
+    @tarea = Tarea.new
+    @tarea.titulo = @tarea_antigua.titulo
+    @tarea.descripcion = @tarea_antigua.descripcion
+    @tarea.fecha_entrega = @tarea_antigua.fecha_entrega
+    @tarea.hora_entrega = @tarea_antigua.hora_entrega
+    @tarea.grupo_id = @tarea_antigua.grupo_id
+    @tarea.usuario_id = @tarea_antigua.usuario_id
+    @tarea.tarea_base = @tarea_antigua.id
     @grupos = Array.new
-    if(current_user!=nil)
+    if(current_user != nil)
       current_user.subscripcions.each do |subs|
         @grupos.push(subs.grupo)
       end
@@ -119,23 +120,11 @@ class TareasController < ApplicationController
   def show
     @tarea = Tarea.find(params[:id])
     if(@tarea.tarea_base!=nil)
-      @tarea_base=Tarea.find(@tarea.tarea_base)
+      @tarea_base = Tarea.find(@tarea.tarea_base)
     end
     @todos_los_comentarios = @tarea.tarea_comentarios.reverse
-    if(current_user==@tarea.usuario)
-        @tareas_enviadas=ResponderTarea.where(:tarea_id => @tarea.id)
-    end
-    if(!current_user.esta_subscrito?(@tarea.grupo.id))
-      redirect_to temas_path
-    else
-      @enviado=!ResponderTarea.where(:usuario_id => current_user.id,:tarea_id => @tarea.id).first.nil?
-      suscripcion=Subscripcion.where(:usuario_id=>current_user.id, :grupo_id=>@tarea.grupo.id)
-      suscripcion.first.notificacion_grupos.where(:notificado=>false).each do |notificacion|
-        if notificacion.tarea_id.to_s==params[:id].to_s
-          notificacion.notificado=true
-          notificacion.save
-        end
-      end
+    if(current_user == @tarea.usuario)
+        @tareas_enviadas = ResponderTarea.where(:tarea_id => @tarea.id)
     end
   end
   def edit #id tarea
@@ -158,7 +147,7 @@ class TareasController < ApplicationController
   end
 
  def ver_tareas
-    @tareas=  Tarea.where(:usuario_id => current_user.id).order("updated_at DESC")
+    @tareas = Tarea.where(:usuario_id => current_user.id).order("updated_at DESC")
   end
 
   def update
@@ -189,7 +178,8 @@ class TareasController < ApplicationController
     if(@tarea.save)
       add_attached_files(@tarea.id)
       flash[:alert] = 'Tarea creada Exitosamente!'
-      notificar_por_email(@tarea.grupo_id, @tarea)
+      #notificar_por_email(@tarea.grupo_id, @tarea)
+      notificacion_push(@tarea.grupo_id, @tarea)
       redirect_to '/grupos/'+params[:tarea][:grupo_id]+'/tareas'
     else
        @grupos = Array.new
@@ -205,7 +195,7 @@ class TareasController < ApplicationController
   end
 
   def editar_comentario
-    @comentario=TareaComentario.find(params[:id_comentario])
+    @comentario = TareaComentario.find(params[:id_comentario])
   end
 
   private
@@ -238,6 +228,26 @@ class TareasController < ApplicationController
       end
     end
 
+    def notificacion_push(id_grupo,tarea)
+      suscripciones = Subscripcion.all
+      suscripciones.each do |suscrito|
+        if suscrito.grupo_id == id_grupo
+          if suscrito.usuario_id != current_user.id
+            @usuario = suscrito.usuario
+            if @usuario != nil
+              @grupo = Grupo.find(id_grupo)
+              notificacion = Notification.create('title'=>tarea.titulo, 'description'=>tarea.descripcion, 'reference_date'=> tarea.fecha_entrega,
+              'tipo'=>0, 'de_usuario_id'=>current_user.id, 'para_usuario_id'=> @usuario.id, 'seen'=>false, 'id_item'=> tarea.id)
+              Pusher.url = "http://5ea0579076700b536e21:503a6ba2bb803aa4ae5c@api.pusherapp.com/apps/60344"
+              Pusher['notifications_channel'].trigger('notification_event', {
+              })
+            end
+          end
+        end
+      end
+    end
+
+
     def notificar_por_email(id_grupo,tarea)
         suscripciones = Subscripcion.all
         suscripciones.each do |suscrito|
@@ -245,16 +255,12 @@ class TareasController < ApplicationController
             if suscrito.usuario_id != current_user.id
                 @usuario = suscrito.usuario
                 if @usuario != nil
-                  @grupo=Grupo.find(id_grupo)
-                  @notificacion = NotificacionGrupo.new
-                  @notificacion.notificado = false
-                  @notificacion.subscripcion_id = suscrito.id
-                  @notificacion.tarea = tarea
-                  @notificacion.save
+                  @grupo = Grupo.find(id_grupo)
                   SendMail.notify_users_task_create(@usuario, tarea, @grupo).deliver
                 end
             end
           end
         end
     end
+
 end

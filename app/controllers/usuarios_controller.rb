@@ -278,4 +278,9 @@ def create
      @grupo = Grupo.find(1)
   end
   end
+
+    def usuario_params
+      params.require(:usuario).permit(:nombre_usuario)
+    end
+
 end

@@ -9,6 +9,8 @@ class CreateUsuarios < ActiveRecord::Migration
       t.date :fecha_nacimiento
       t.text :acerca_de
       t.integer :telefono
+      t.boolean :push, default: true
+      t.boolean :mailer, default: true
       t.timestamps
     end
   end

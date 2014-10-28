@@ -21,7 +21,20 @@
         <ul>
         <% @tema.archivo_adjunto_temas.each do |arch| %>
           <li class="attachment-link" title="Archivo tipo .<%=arch.archivo_file_name.split('.').last%>">
-            <a href="<%=arch.archivo.url(download: true)%>"><img class="attachment-img" src="/assets/filetypes/default.png" file-type="<%=arch.archivo_file_name.split('.').last%>" ><%=arch.archivo_file_name[0,arch.archivo_file_name.rindex('.')]%></a>
+            <% if arch.archivo_file_name.split('.').last=="jpg" or arch.archivo_file_name.split('.').last=="jpeg" or arch.archivo_file_name.split('.').last=="png" %>
+              <a href="#" data-toggle="modal" data-target=".bs-example-modal-lg"><img class="attachment-img" src="/assets/filetypes/default.png" file-type="<%=arch.archivo_file_name.split('.').last%>"><%=arch.archivo_file_name[0,arch.archivo_file_name.rindex('.')]%></a> 
+              <a href="<%=arch.archivo.url(download: true)%>">Descargar archivo</a>
+              <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria- labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <%= image_tag arch.archivo.url %>
+                  </div>
+                </div>
+              </div>
+            <% else %>
+              <a href="https://docs.google.com/gview?url=<%=arch.archivo.url%>&embedded=true" target="_blank"><img class="attachment-img" src="/assets/filetypes/default.png" file-type="<%=arch.archivo_file_name.split('.').last%>" ><%=arch.archivo_file_name[0,arch.archivo_file_name.rindex('.')]%></a>
+              <a href="<%=arch.archivo.url(download: true)%>">Descargar archivo</a>
+            <% end %>
           </li>
           </br>
         <%end%>

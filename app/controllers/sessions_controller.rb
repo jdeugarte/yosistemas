@@ -8,27 +8,28 @@ class SessionsController < ApplicationController
     usuario = Usuario.autenticar(params[:correo], params[:contrasenia])
     if usuario
       session[:usuario_id] = usuario.id
-      if (request.referrer.include? "/usuarios") || (request.referrer.include? "usuarios/confirm" ) || (request.referrer.include? "/send_password_mail")
-        if notificaciones == nil || notificaciones.size < 1
-          redirect_to "/", :notice => "Sesion iniciada correctamente!"
-        else
-          if notificaciones.size == 1
-            redirect_to "/", :notice => "Sesion iniciada correctamente!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificacion"
-          else
-            redirect_to "/", :notice => "Sesion iniciada correctamente!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificaciones"
-          end
-        end
-      else
-      if notificaciones == nil || notificaciones.size < 1
-        redirect_to :back, :notice => "Sesion iniciada correctamente!"
-      else
-        if notificaciones.size == 1
-          redirect_to :back, :notice => "Sesion iniciada correctamente!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificacion"
-        else
-          redirect_to :back, :notice => "Sesion iniciada correctamente!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificaciones"
-        end
-      end
-    end
+      redirect_to "/", :notice => "Sesion iniciada correctamente!"
+      #if (request.referrer.include? "/usuarios") || (request.referrer.include? "usuarios/confirm" ) || (request.referrer.include? "/send_password_mail")
+       # if notificaciones_nuevas == nil || notificaciones_nuevas.length < 1
+        #  redirect_to "/", :notice => "Sesion iniciada correctamente!"
+        #else
+         # if notificaciones_nuevas.length == 1
+          #  redirect_to "/", :notice => "Sesion iniciada correctamente!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificacion"
+          #else
+           # redirect_to "/", :notice => "Sesion iniciada correctamente!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificaciones"
+          #end
+        #end
+      #else
+      #if notificaciones_nuevas == nil || notificaciones_nuevas.length < 1
+       # redirect_to :back, :notice => "Sesion iniciada correctamente!"
+      #else
+        #if notificaciones_nuevas.length == 1
+       #   redirect_to :back, :notice => "Sesion iniciada correctamente!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificacion"
+        #else
+         # redirect_to :back, :notice => "Sesion iniciada correctamente!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificaciones"
+        #end
+      #end
+    #end
     else
       redirect_to :back, :notice => "Correo o Contrasenia Invalida!"
     end

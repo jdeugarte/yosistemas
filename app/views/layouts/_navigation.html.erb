@@ -28,16 +28,19 @@
 
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tareas<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
+          <ul class="dropdown-menu" role="menu">         
+          <%if  !current_user.nil? %>
             <% if !@grupo.nil? %>
-            <li><a href="/tareas/new/<%=@grupo.id%>">Crear Tarea</a></li>
+              <li><a href="/tareas/new/<%=@grupo.id%>">Crear Tarea</a></li>
             <% end %>
+          <% end %>
 
             <!--li><a href="/temas/show_mine">Mis Temas</a></li-->
 
             <% if !@grupo.nil? %>
             <li><a href="/grupos/<%=@grupo.id%>/tareas">Ver Tareas</a></li>
             <% end %>
+
           </ul>
         </li>
 

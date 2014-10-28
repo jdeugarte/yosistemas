@@ -9,9 +9,9 @@
       </button>
       <a class="navbar-brand" href="/" style="padding-top: 10px;"><img src="/assets/nuevologo.png" width="99px"></a>
     </div>
+    
     <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        
+      <ul class="nav navbar-nav">        
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Temas<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -25,7 +25,7 @@
             <li><a href="/temas">Ver Temas</a></li>
           </ul>
         </li>
-
+        <%if @grupo.nombre!="Publico"%>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tareas<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">         
@@ -34,15 +34,14 @@
               <li><a href="/tareas/new/<%=@grupo.id%>">Crear Tarea</a></li>
             <% end %>
           <% end %>
-
             <!--li><a href="/temas/show_mine">Mis Temas</a></li-->
-
             <% if !@grupo.nil? %>
             <li><a href="/grupos/<%=@grupo.id%>/tareas">Ver Tareas</a></li>
             <% end %>
 
           </ul>
         </li>
+        <% end %>        
 
         <%if !current_user.nil? %>
         <li class="dropdown">
@@ -163,6 +162,8 @@
             </li>
           </ul>
         <%end%>
-    </div><!--/.navbar-collapse -->
+    </div><!--/.navbar-collapse -->  
+    </div>
+    
   </div>
 </div>

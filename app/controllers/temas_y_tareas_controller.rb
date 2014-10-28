@@ -22,18 +22,22 @@ class TemasYTareasController < ApplicationController
   end
 
   def indexTemas
-    @temas = @grupo.temas.order("updated_at DESC").page(params[:page]).per(5)
-    @ides = sacarIds(@grupo.temas)
+     
+    @search = Array.new 
+    @temas = @grupo.temas.order("updated_at DESC").page(params[:page]).per(3)
+    #@ides = sacarIds(@grupo.temas)
     @tareas = Tarea.where(:grupo_id => params[:id]).order("updated_at DESC").page(params[:page]).per(3)
-    @idest = sacarIdsTareas(@grupo.tareas)
-    
+    #@idest = sacarIdsTareas(@grupo.tareas)
+
+    @search
     
     @todosgrupos=Grupo.all
   end
 
   def buscar
     @temas = Array.new
-    @tareas = Array.new
+    @tareas= Array.new
+    @search = Array.new
     @grupo = Grupo.find(params[:grupo])
     aux = Tema.where(:grupo_id=>params[:grupo])
     if params[:search] != "" && params[:search] != nil
@@ -49,7 +53,8 @@ class TemasYTareasController < ApplicationController
     end
     @idest=sacarIdsTareas(@tareas)
     @ides=sacarIds(@temas)
-    @temas= Kaminari.paginate_array(@temas).page(params[:page]).per(5)
+    @search=(@temas+@tareas).sort_by(&:created_at).reverse
+    #@temas= Kaminari.paginate_array(@temas).page(params[:page]).per(5)
     render 'indexSearch'
   end
 

@@ -12,6 +12,42 @@
   <%end%>
 </div>
 
+ <% @search.each do |todo| %>
+    <%if todo.instance_of? (Tema)%>
+      <div class="panel panel-info" style='cursor:pointer' onclick=<%="document.location.href='/"+todo.class.name.downcase+"s/"+todo.id.to_s+"'"%>>
+        <div class="panel-heading" title="Titulo">
+          <h3><%= todo.titulo %></h3>
+        </div>
+        <div class="panel-body">
+          <img title="Tema" src="/assets/tema.png" style=" background-color: #5FC5F8;" />&nbsp;
+          <span><%= todo.cuerpo[0,315]+(todo.cuerpo.length>315 ? "..." : "")  %></span>
+        </div>
+        <div class="list-group">
+          <li class="list-group-item"><small style="color: gray;">Tema creado el <%= todo.created_at.localtime.strftime("%d/%m/%Y a las: %I:%M  %p") %><br/>
+                Usuario <a href="/usuarios/<%=todo.usuario_id%>"><%= todo.usuario.nombre %></a> </small>
+                </small>
+          </li>
+        </div>
+      </div>
+    <%end%>
+    <%if todo.instance_of? (Tarea)%>    
+      <div class="panel panel-success" style='cursor:pointer' onclick=<%="document.location.href='/"+todo.class.name.downcase+"s/"+todo.id.to_s+"'"%>>
+        <div class="panel-heading" title="Titulo">
+          <h3><%= todo.titulo %></h3>
+        </div>
+        <div class="panel-body">
+          <img title="Tarea" src="/assets/tarea.png" style=" background-color: #3c763d;" />&nbsp;
+          <span><%= todo.descripcion[0,315]+(todo.descripcion.length>315 ? "..." : "") %></span>
+        </div>
+        <div class="list-group">
+          <li class="list-group-item"><small style="color: gray;">Tarea creada el <%= todo.created_at.localtime.strftime("%d/%m/%Y a las: %I:%M  %p") %>
+                <span style="margin-left: 12px;"><i class="icon-calendar" style="margin-top: 0px;"></i>Fecha de entrega: <%= todo.fecha_entrega.strftime("%d/%b/%Y")%></span></small>
+          </li>
+        </div>
+      </div> 
+    <%end%>
+  <%end%>
+<!--
 <% @temas.each do |tema| %>
 <%= hidden_field :id,:value => tema.grupo_id%>  
 <div class="panel panel-info" style='cursor:pointer' onclick=<%="document.location.href='/"+tema.class.name.downcase+"s/"+tema.id.to_s+"'"%>>  
@@ -40,6 +76,7 @@
          </ul>
     </div>
     <%end%>
+    -->
 <script type="text/javascript">
    $(".square-color-tema").css("background-color",get_random_color());
    $(".square-color-tarea").css("background-color",get_random_color());

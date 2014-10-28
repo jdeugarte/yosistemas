@@ -27,7 +27,9 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tareas<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <%if  !current_user.nil? %>
-            <li><a href="/tareas/new/<%=@grupo.id%>">Crear Tarea</a></li>
+           
+              <li><a href="/tareas/new/<%=@grupo.id%>">Crear Tarea</a></li>
+
             <!--li><a href="/temas/show_mine">Mis Temas</a></li-->
             <%end%>
             <li><a href="/grupos/<%=@grupo.id%>/tareas">Ver Tareas</a></li>

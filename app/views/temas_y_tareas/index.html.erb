@@ -10,6 +10,18 @@
   <%if current_user!=nil && current_user.id==@grupo.usuario_id%>
       <a class="btn btn-success btn-lg" onclick="throwFade()" href="/tareas/new/<%=@grupo.id%>"><span class="icon-pencil icon-white" style="vertical-align:-1px;  margin-right:7px; "></span>Nueva Tarea</a>
   <%end%>
+  <%if current_user!=nil%>
+      <div class="btn-group">
+      <button type="button" class="btn btn-default">Ordenar por:</button>
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <%@opcion=" "%>
+        <li><%=link_to "Mas reciente", ordenar_path(@grupo.id,@opcion="reciente")%></li>
+        <li><%=link_to "Mas antiguo", ordenar_path(@grupo.id,@opcion="antiguo")%></li-->
+        <li><%=link_to "Alfabeticamente", ordenar_path(@grupo.id,@opcion="alfabeticamente")%></li>
+      </ul>
+    </div>
+  <%end%>
 </div>
 
   <% @all.each do |todo| %>

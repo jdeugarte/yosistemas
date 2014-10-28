@@ -16,7 +16,9 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Temas<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <%if  !current_user.nil? %>
+            <% if !@grupo.nil? %>
             <li><a href="/temas/new/<%=@grupo.id%>">Crear Tema</a></li>
+            <% end %>
             <!--li><a href="/temas/show_mine">Mis Temas</a></li-->
             <%end%>
             <li><a href="/temas">Ver Temas</a></li>
@@ -27,10 +29,14 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tareas<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <%if  !current_user.nil? %>
+            <% if !@grupo.nil? %>
             <li><a href="/tareas/new/<%=@grupo.id%>">Crear Tarea</a></li>
+            <% end %>
             <!--li><a href="/temas/show_mine">Mis Temas</a></li-->
             <%end%>
+            <% if !@grupo.nil? %>
             <li><a href="/grupos/<%=@grupo.id%>/tareas">Ver Tareas</a></li>
+            <% end %>
           </ul>
         </li>
 
@@ -85,7 +91,7 @@
       </ul>
         <%end%>
             <% if @grupo!=nil%>
-              <form class="navbar-form navbar-left" method="GET" action="/temas_y_tareas/buscar/<%=@grupo.id%>">   
+              <form class="navbar-form navbar-left" method="GET" action="/temas_y_tareas/buscar/<%= @grupo.id%>">   
                 <input id="search" name="search" placeholder="Buscar Temas y Tareas" class="form-control input-sm"  style="width: 250px; height: 30px; margin-top: 5px;" type="text"><br>
               </form>
         <% end %>

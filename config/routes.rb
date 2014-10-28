@@ -43,7 +43,7 @@ Yosistemas::Application.routes.draw do
   get "usuarios/obtener_notificacion/:comentario_id/:usuario_id/:tema_id" => "usuarios#obtener_notificacion", :as => "obtener_notificacion"
   
   #rutas de temas
-  get "temas_y_tareas/buscar/:grupo" => "temas_y_tareas#buscar", :as=>'buscar_tema'
+  get "temas_y_tareas/buscar/:grupo" => "temas_y_tareas#buscar"
   
 
   get "temas/editar_comentario/:id_comentario" => "temas#editar_comentario", :as  => 'editar_tema_comentario'

@@ -35,7 +35,7 @@
     <div class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-sidebar">
         <% if !current_user.nil?%>
-          <li class="active"><a>Usuarios...</a></li>
+          <div id="minimizar" class="new">Chat</div>
           <% current_user.lista_usuarios_misgrupos.each do |usuario| %>
           <li onclick="showChat('<%=usuario.nombre_usuario%>','<%=usuario.id%>');" style="cursor:pointer;" onmouseover="this.style.background='#F7F7F7';" onmouseout="this.style.background='white';">
             <%if current_user.id!=usuario.id.to_i%>
@@ -53,6 +53,15 @@
   </div>
 </div>
 
+<script type="text/javascript">
+    $("#minimizar").click(function()
+    {
+      $(".sidebar").toggleClass("sidebar2");
+      $(".nav-sidebar").toggleClass("nav-sidebar2");
+        //$(".sidebar").removeClass("col-sm-3 col-md-2 sidebar").addClass("col-sm-3 col-md-2 sidebar2");
+        //$(".nav-sidebar").removeClass("nav nav-sidebar").addClass("nav nav-sidebar2");
+    });
+</script>
 
 
   <script type="text/javascript">
@@ -61,9 +70,9 @@
         $.post( "/sessions/eliminar_conectado", { usuario_id: document.getElementById('current_user').value });
     });
   </script>
-    <div id="chat_window" class="panel panel-primary hidden-phone fade" style="z-index:10;margin-bottom:64px;height:42%; display:none; width:18%; position:fixed; bottom:-3px; right:18%; background-color:white; padding-bottom:10px;">
+    <div id="chat_window" class="panel panel-primary hidden-phone fade" style="float:left; z-index:10;margin-bottom:64px;height:42%; display:none; width:18%; position:fixed; bottom:-3px; right:18%; background-color:white; padding-bottom:10px;">
       <button onclick="closeChat();" style="margin-top:5px; margin-right:7px;" type="button" class="close">×</button>
-        <div class="panel-heading" >
+        <div class="panel-heading">
           <h3 class="panel-title" id="chat_name"></h3>
           <input type="hidden" id="id_usuario_envio">
         </div>

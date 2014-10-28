@@ -10,11 +10,11 @@ GEM
       erubis (~> 2.7.0)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
-    activemodel (4.0.0)
+    activemodel (4.0.1)
       activesupport (= 4.0.0)
       builder (~> 3.1.0)
     activerecord (4.0.0)
-      activemodel (= 4.0.0)
+      activemodel (= 4.0.1)
       activerecord-deprecated_finders (~> 1.0.2)
       activesupport (= 4.0.0)
       arel (~> 4.0.0)
@@ -166,6 +166,8 @@ GEM
     pg (0.17.1-x64-mingw32)
     pg (0.17.1-x86-mingw32)
     polyglot (0.3.5)
+    protected_attributes (1.0.8)
+      activemodel (>= 4.0.1, < 5.0)
     pusher (0.14.1)
       httpclient (~> 2.3)
       multi_json (~> 1.0)
@@ -305,6 +307,7 @@ DEPENDENCIES
   paperclip (~> 3.0)
   paperclip-dropbox (~> 1.1.7)
   pg
+  protected_attributes (~> 1.0.5)
   pusher
   rails (= 4.0.0)
   recaptcha

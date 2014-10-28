@@ -54,6 +54,8 @@ gem "nested_form"
 
 gem 'bootstrap_form'
 
+gem "protected_attributes", "~> 1.0.5"
+
 #habilitar esta gema para habilitar ajaxify
 #gem 'ajaxify_rails'
 

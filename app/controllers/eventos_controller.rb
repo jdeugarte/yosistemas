@@ -85,17 +85,17 @@ class EventosController < ApplicationController
               @notificacion = Notification.new
               @notificacion.title = evento.nombre
               @notificacion.description = evento.detalle
-              @notificacion.date = evento.fecha
+              @notificacion.reference_date = evento.fecha
               @notificacion.tipo = 2
-              @notificacion.de_usuario = current_user.id
-              @notificacion.para_usuario = @usuario.id
+             @notificacion.de_usuario_id = current_user.id
+              @notificacion.para_usuario_id = @usuario.id
               @notificacion.seen = false
               @notificacion.id_item = evento.id
               @notificacion.save
 
               Pusher.url = "http://5ea0579076700b536e21:503a6ba2bb803aa4ae5c@api.pusherapp.com/apps/60344"
               Pusher['notifications_channel'].trigger('notification_event', {
-       
+                para_usuario: @notificacion.para_usuario_id
               })
             end
           end

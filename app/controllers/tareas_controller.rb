@@ -240,6 +240,7 @@ class TareasController < ApplicationController
               'tipo'=>0, 'de_usuario_id'=>current_user.id, 'para_usuario_id'=> @usuario.id, 'seen'=>false, 'id_item'=> tarea.id)
               Pusher.url = "http://5ea0579076700b536e21:503a6ba2bb803aa4ae5c@api.pusherapp.com/apps/60344"
               Pusher['notifications_channel'].trigger('notification_event', {
+                para_usuario: notificacion.para_usuario_id
               })
             end
           end

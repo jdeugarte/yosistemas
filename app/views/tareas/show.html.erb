@@ -2,13 +2,9 @@
 <div class="col-lg-6 col-md-6">
   <div class="panel panel-info">
     <div class="panel-heading" >                
-      <h2 style="margin-top:0px;"><%= link_to @tarea.usuario.nombre_usuario,  @tarea.usuario %></h2>
-        <%= image_tag avatar_tam_url(@tarea.usuario,80) %>
+      <center><h3><%= @tarea.titulo %></h3></center>
     </div>
     <div class="panel-body">            
-      <div class="panel-heading" align="center">
-        <h3 class="panel-title" style="font-size:20px;"><%= @tarea.titulo %></h3>
-      </div>
       <div class="panel-body" align="right">                
         <p><%= @tarea.descripcion %></p>
           <div align="right">Entrega:&nbsp;
@@ -17,9 +13,9 @@
           </div>
           <small>Tarea creada el <%= @tarea.created_at.localtime.strftime("%d/%m/%Y a las: %I:%M  %p") %></small>
           <div>
-            <% if @tarea.usuario_id==current_user.id %>
+            <% if @tarea.usuario_id == current_user.id %>
               <%= link_to 'Eliminar', "/tareas/eliminar/"+@tarea.id.to_s, data: { confirm: 'Se eliminara la tarea, ¿Está seguro?' } %>
-                  &nbsp&nbsp&nbsp&nbsp
+                  &nbsp;&nbsp;&nbsp;&nbsp;
               <%= link_to 'Editar', "/tareas/edit/"+@tarea.id.to_s %>
             <%elsif(!@enviado)%>
                 <%if(!@tarea.tarea_caducada)%><br>

@@ -263,7 +263,7 @@ before_filter :grupos
 
               Pusher.url = "http://5ea0579076700b536e21:503a6ba2bb803aa4ae5c@api.pusherapp.com/apps/60344"
               Pusher['notifications_channel'].trigger('notification_event', {
-                'message' => 'This is an HTML5 Realtime Push Notification!'
+                para_usuario: @notificacion.para_usuario_id
               })
             end
           end

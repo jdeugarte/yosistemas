@@ -16,18 +16,7 @@
     channel2.bind('notification_event', function(data) {     
       if(data.para_usuario == document.getElementById('current_user').value)
       {
-          if(data.tipo == 0 )
-          {
-            alert.("tarea");
-          }
-          if(data.tipo == 1 )
-          {
-            alert.("tema"); 
-          }
-          if(data.tipo == 2 )
-          {
-            alert.("evento");
-          }
+         location.reload();
       }
     });     
   </script>

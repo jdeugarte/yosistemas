@@ -32,6 +32,11 @@
     });     
   </script>
 
+<div id="min_chat_container" style="display:none;">
+    
+  </div>
+
+
 <!--Barra de chat-->
 <div class="container-fluid">
   <div class="row">
@@ -73,10 +78,13 @@
         $.post( "/sessions/eliminar_conectado", { usuario_id: document.getElementById('current_user').value });
     });
   </script>
-    <div id="chat_window" class="panel panel-primary hidden-phone fade" style="float:left; z-index:10;margin-bottom:64px;height:42%; display:none; width:18%; position:fixed; bottom:-3px; right:18%; background-color:white; padding-bottom:10px;">
+
+
+    <div id="chat_window" class="panel panel-primary hidden-phone fade" style="z-index:10;margin-bottom:64px;height:42%; display:none; width:18%; position:fixed; bottom:-3px; right:18%; background-color:white; padding-bottom:10px;">
       <button onclick="closeChat();" style="margin-top:5px; margin-right:7px;" type="button" class="close">×</button>
-        <div class="panel-heading">
-          <h3 class="panel-title" id="chat_name"></h3>
+      <button onclick="hideChat();" style="margin-top:5px; margin-right:7px;" type="button" class="close">-</button>
+        <div class="panel-heading" >
+          <h3 class="panel-title" id="chat_name" ></h3>
           <input type="hidden" id="id_usuario_envio">
         </div>
         <div id="chat_conversacion" class="panel-body" style="height:74%; width:100%; overflow-y: auto; overflow-x: none;"></div>
@@ -88,6 +96,14 @@
             </span>
           </div>
         </div>
+    </div>
+
+
+    <div id="minimizeChat" class="panel panel-primary hidden-phone " style="display:none; z-index:10;margin-bottom:64px;height:6%; width:18%; position:fixed; bottom:-3px; right:18%; background-color:white; padding-bottom:10px;">
+      <button onclick="showChatAux();" style="margin-top:5px; margin-right:7px;" type="button" class="close">+</button>
+    <div class="panel-heading" id="chat-panel-heading" >
+    <h3 class="panel-title" id="chat_minimized_name" ></h3>
+    </div>
     </div>
 
     <script type="text/javascript">

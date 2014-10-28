@@ -12,7 +12,7 @@
         <%if current_user!=nil%>
 		<%= form_for([@grupo, @grupo.subscripcions.build]) do |f| %>
 			<%if @grupo.estado == true %>
-                <%= f.text_field :llave ,:placeholder=>'    Ingresar la llave', :size => 15%> 
+                <%= f.text_field :llave ,:placeholder=>'Ingresar la llave', :size => 15%> 
 			<%elsif @grupo.estado == false%>
 				</p> Este grupo es publico</p>
 				<%= f.hidden_field :llave, :value =>"publico" %>

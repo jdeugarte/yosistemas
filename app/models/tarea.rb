@@ -9,6 +9,7 @@ class Tarea < ActiveRecord::Base
   validates :fecha_entrega, :presence => { :message => " es requerida" }
   validates :hora_entrega, :presence => { :message => " es requerida" }
   delegate :nombre_usuario, :to => :usuario, :prefix => true
+  
   def self.buscar_tarea(id)
         tarea=nil
         begin
@@ -27,5 +28,63 @@ class Tarea < ActiveRecord::Base
       return true
     end
     return false
+  end
+
+   def self.searchByDescriptionTarea(keyWords)
+    keyWords = keyWords.downcase
+      initialResult = Tarea.where('descripcion LIKE ?', '%'+keyWords+'%')
+      deepResult = Tarea.deepSearchOfDescriptionTarea(keyWords)
+      finalRes  = (initialResult+deepResult).uniq
+      finalRes
+  end
+
+  def self.deepSearchOfDescriptionTarea(keyWords)
+    keyWordArray = keyWords.split
+    keyWordArray = Tarea.deleteIrrelevantWords(keyWordArray)
+    keyWordArray.uniq!
+    results=[]
+    keyWordArray.each do |word|
+      results<<Tarea.where('descripcion LIKE ?', '%'+word+'%')
+    end
+    finalResArray = results.flatten.uniq
+    finalResArray
+  end
+
+  def self.searchBytitleTarea(keyWords)
+    keyWords = keyWords.downcase
+    initialResult = Tarea.where('titulo LIKE ?', '%'+keyWords+'%')
+    deepResult = Tarea.deepSearchOfDescriptionTarea(keyWords)
+    finalRes  = (initialResult+deepResult).uniq
+    finalRes
+  end
+
+  def self.deepSearchOftitleTarea(keyWords)
+    keyWordArray = keyWords.split
+    keyWordArray = Tarea.deleteIrrelevantWords(keyWordArray)
+    keyWordArray.uniq!
+    results=[]
+    keyWordArray.each do |word|
+      results<<Tarea.where('titulo LIKE ?', '%'+word+'%')
+    end
+    finalResArray = results.flatten.uniq
+    finalResArray
+  end
+
+  def self.allResultsSearchsTarea(keyWords)
+    rTitle = searchBytitleTarea(keyWords)
+    rDescription = searchByDescriptionTarea(keyWords)
+    allResults = (rTitle+rDescription).uniq
+  end
+  
+  def self.deleteIrrelevantWords(keyWordArray)
+    res = keyWordArray - ["de", "a", "la", "el","los","en","al", "con", "que","por", "si","es","son"]
+    i=0
+    while(i<res.length)
+      if(res[i].length<=3)
+        res.delete_at(i)
+      end
+      i+=1
+    end
+    res
   end
 end

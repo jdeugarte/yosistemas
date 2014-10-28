@@ -1,4 +1,5 @@
 Yosistemas::Application.routes.draw do
+
   get "grupos/buscar_por_llave" => "grupos#buscar_por_llave", :as=>'buscar_grupo_por_llave'
   get "comment_tasks/create"
   get "comment_tasks/delete"
@@ -12,6 +13,7 @@ Yosistemas::Application.routes.draw do
   get "usuarios/confirm/:pass" => "usuarios#confirm", :as => 'confirm'
   get '/agregar_url' => 'url#agregar_url'
   post '/agregar_url' => 'url#create'
+  get "temas_y_tareas/ordenar/:id/:opcion" => 'temas_y_tareas#ordenar', :as  => 'ordenar'
 
   #get "log_in" => "sessions#new", :as => "log_in"
   get "log_out" => "sessions#destroy", :as => "log_out"
@@ -42,7 +44,9 @@ Yosistemas::Application.routes.draw do
   get "usuarios/obtener_notificacion/:comentario_id/:usuario_id/:tema_id" => "usuarios#obtener_notificacion", :as => "obtener_notificacion"
   
   #rutas de temas
-  get "temas/buscar/:grupo" => "temas#buscar", :as=>'buscar_tema'
+  get "temas_y_tareas/buscar/:grupo" => "temas_y_tareas#buscar"
+  
+
   get "temas/editar_comentario/:id_comentario" => "temas#editar_comentario", :as  => 'editar_tema_comentario'
   post "tema_comentarios/editar/:id" => "tema_comentarios#editar", :as  => 'editar_comentario_tema'
   get "tema_comentarios/delete/:id" => "tema_comentarios#delete"
@@ -109,6 +113,10 @@ Yosistemas::Application.routes.draw do
   get "respuesta_usuarios/nuevo/:id" => "respuesta_usuarios#nuevo", :as => "nuevo"
   post "respuesta_usuarios/crear" => "respuesta_usuarios#crear", :as => "crear"
   post "respuesta_usuarios/terminado" => "respuesta_usuarios#terminado", :as => "terminado"
+
+  get "notifications/change_seen/:id" => "notifications#change_seen"
+
+  resources :notifications
 
   resources :usuarios , except: [:destroy] do
     resources :tema_comentarios, only: [:create]

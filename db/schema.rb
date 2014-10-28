@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140917030056) do
+ActiveRecord::Schema.define(version: 20141028001351) do
 
   create_table "adjunto_respuesta_cuestionarios", force: true do |t|
     t.integer  "respuesta_usuario_id"
@@ -187,6 +187,19 @@ ActiveRecord::Schema.define(version: 20140917030056) do
 
   add_index "notificacions", ["suscripcion_tema_id"], name: "index_notificacions_on_suscripcion_tema_id"
   add_index "notificacions", ["tema_comentario_id"], name: "index_notificacions_on_tema_comentario_id"
+
+  create_table "notifications", force: true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.date     "reference_date"
+    t.integer  "tipo"
+    t.boolean  "seen"
+    t.integer  "de_usuario_id"
+    t.integer  "para_usuario_id"
+    t.integer  "id_item"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "preguntas", force: true do |t|
     t.integer  "cuestionario_id"

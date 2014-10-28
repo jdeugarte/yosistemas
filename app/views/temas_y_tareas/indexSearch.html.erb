@@ -1,0 +1,46 @@
+<div class="page-header">
+     <h1 id="forms">Lista de Temas y Tareas</h1>
+</div>
+
+<div class="row" style="margin-bottom:35px;">
+  <%if current_user!=nil%>
+      <a class="btn btn-primary btn-lg" onclick="throwFade()" href="/temas/new/<%=@grupo.id%>"><span class="icon-list icon-white" style="vertical-align:-1px;  margin-right:7px; "></span>Nuevo Tema</a>
+  <%end%>
+  
+  <%if current_user!=nil && current_user.id==@grupo.usuario_id%>
+      <a class="btn btn-success btn-lg" onclick="throwFade()" href="/tareas/new/<%=@grupo.id%>"><span class="icon-pencil icon-white" style="vertical-align:-1px;  margin-right:7px; "></span>Nueva Tarea</a>
+  <%end%>
+</div>
+
+<% @temas.each do |tema| %>
+<%= hidden_field :id,:value => tema.grupo_id%>  
+<div class="panel panel-info" style='cursor:pointer' onclick=<%="document.location.href='/"+tema.class.name.downcase+"s/"+tema.id.to_s+"'"%>>  
+  <div class="panel-heading"><h3><%= tema.titulo %></h3></div>
+  <div class="panel-body">
+    <img title="Tema" src="/assets/tema.png" style=" background-color: #5FC5F8;" />&nbsp;
+    <span><%= tema.cuerpo[0,315]+(tema.cuerpo.length>315 ? "..." : "")  %></span>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item"><small style="color: gray;">Tema creado el <%= tema.created_at.localtime.strftime("%d/%m/%Y a las: %I:%M  %p") %><br/>
+                Usuario <a href="/usuarios/<%=tema.usuario_id%>"><%= tema.usuario.nombre %></a> </small></li>
+  </ul>
+</div>
+<%end%>
+
+<% @tareas.each do |tarea| %>
+    <div class="panel panel-success" style='cursor:pointer' onclick=<%="document.location.href='/tareas/"+tarea.id.to_s+"'"%>>
+      <div class="panel-heading" title="Titulo"><h3><%= tarea.titulo %></h3></div>
+      <div class="panel-body">           
+            <img title="Tarea" src="/assets/tarea.png" style=" background-color: #3c763d;" />&nbsp;
+            <span><%= tarea.descripcion[0,315]+(tarea.descripcion.length>315 ? "..." : "") %></span>
+      </div>
+      <ul class="list-group">          
+              <li class="list-group-item"><small style="color: gray;">&nbsp;&nbsp;&nbsp;Tarea creada el <%= tarea.created_at.localtime.strftime("%d/%m/%Y a las: %I:%M  %p") %><br>
+              <span style="margin-left: 12px;"><i class="icon-calendar" style="margin-top: 0px;"></i>Fecha de entrega: <%= tarea.fecha_entrega.strftime("%d/%b/%Y")%></span></small></li>            
+         </ul>
+    </div>
+    <%end%>
+<script type="text/javascript">
+   $(".square-color-tema").css("background-color",get_random_color());
+   $(".square-color-tarea").css("background-color",get_random_color());
+</script>

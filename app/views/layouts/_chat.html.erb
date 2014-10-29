@@ -10,13 +10,13 @@
       {
           showChat(data.nombre_usuario,data.de_usuario);
       }
-    });      
+    }); 
 
     var channel2 = pusher.subscribe('notifications_channel');
     channel2.bind('notification_event', function(data) {     
       if(data.para_usuario == document.getElementById('current_user').value)
       {
-         location.reload();
+        location.reload();
       }
     });     
   </script>

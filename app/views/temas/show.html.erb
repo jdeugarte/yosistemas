@@ -85,15 +85,25 @@
       <!--adjuntos-->
       <% comentario.adjunto_tema_comentarios.each do |arch|%>
         <div class="attachment-link" title="Archivo tipo .<%=arch.archivo_file_name.split('.').last%>">
-          <a href="<%=arch.archivo.url(download: true)%>"><img class="attachment-img" src="/assets/filetypes/default.png" file-type="<%=arch.archivo_file_name.split('.').last%>" width="16px"><%=arch.archivo_file_name[0,arch.archivo_file_name.rindex('.')]%></a>
+          <% if arch.archivo_file_name.split('.').last=="jpg" or arch.archivo_file_name.split('.').last=="jpeg" or arch.archivo_file_name.split('.').last=="png" %>
+              <a href="#" data-toggle="modal" data-target=".bs-example-modal-sm"><img class="attachment-img" src="/assets/filetypes/default.png" file-type="<%=arch.archivo_file_name.split('.').last%>"><%=arch.archivo_file_name[0,arch.archivo_file_name.rindex('.')]%></a> 
+              <a href="<%=arch.archivo.url(download: true)%>">Descargar archivo</a>
+              <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria- labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <%= image_tag arch.archivo.url %>
+                  </div>
+                </div>
+              </div>
+            <% else %>
+              <a href="https://docs.google.com/gview?url=<%=arch.archivo.url%>&embedded=true" target="_blank"><img class="attachment-img" src="/assets/filetypes/default.png" file-type="<%=arch.archivo_file_name.split('.').last%>" ><%=arch.archivo_file_name[0,arch.archivo_file_name.rindex('.')]%></a>
+              <a href="<%=arch.archivo.url(download: true)%>">Descargar archivo</a>
+            <% end %>
         </div>
       <%end%>
       <%if current_user!=nil && comentario.usuario.correo == current_user.correo%>
         <%= link_to 'Editar', "/temas/editar_comentario/"+comentario.id.to_s, :class=>"btn btn-xs btn-warning" %>
         <%= link_to 'Eliminar', "/tema_comentarios/delete/"+comentario.id.to_s, data: { confirm: 'Se eliminara el tema, ¿está seguro?' }, :class=>"btn btn-xs btn-danger" %>
-      <%end%>
-      <%if current_user!=nil && comentario.tema.grupo.usuario_id == current_user.id%>
-        <%= link_to 'Eliminar', "/tema_comentarios/delete/"+comentario.id.to_s, data: { confirm: 'Se eliminara el tema, ¿está seguro?' } %>
       <%end%>
     </div>
   </div>

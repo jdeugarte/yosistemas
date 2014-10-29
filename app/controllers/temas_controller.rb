@@ -121,7 +121,7 @@ before_filter :grupos
       @suscripcion.tema_id=@tema.id
       @suscripcion.save
       notificacion_push(@tema.grupo_id, @tema)
-      notificar_por_email(@tema_id.grupo_id, @tema)
+      notificar_por_email(@tema.grupo_id, @tema)
       redirect_to '/temas/'+@tema.id.to_s
     else
       @grupos = Array.new

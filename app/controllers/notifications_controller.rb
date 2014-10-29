@@ -19,7 +19,7 @@ class NotificationsController < ApplicationController
     @notification = Notification.find(params[:id])
     @notification.seen = true
     @notification.save
-    redirect_to "/"
+    redirect_to :back
   end
 
   def create

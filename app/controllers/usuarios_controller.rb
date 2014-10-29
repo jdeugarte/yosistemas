@@ -82,6 +82,21 @@ class UsuariosController < ApplicationController
     end
   end
 
+  def set_notifications
+    @usuario = current_user  
+  end
+
+  def configure_notifications
+    current_user.push_task = params[:push_task]
+    current_user.mailer_task = params[:mailer_task]
+    current_user.push_theme = params[:push_theme]
+    current_user.mailer_theme = params[:mailer_theme]
+    current_user.push_event = params[:push_event]
+    current_user.mailer_event = params[:mailer_event]
+    current_user.save
+    redirect_to root_url
+  end
+
   def comfirmar_cambio_correo
     if(current_user == nil)
       flash[:alert] = "no puede confirma el cambio de correo electronico si esta loggeado"
@@ -205,7 +220,7 @@ class UsuariosController < ApplicationController
 
 def update
     @usuario = Usuario.find(params[:id])
-    if(@usuario.update(params[:usuario].permit(:nombre, :apellido, :telefono, :fecha_nacimiento, :acerca_de)))
+    if(@usuario.update(params[:usuario].permit(:nombre, :apellido, :telefono, :fecha_nacimiento, :acerca_de, :push_task, :mailer_task, :push_theme, :mailer_theme, :push_event, :mailer_event)))
       flash[:alert] = 'Usuario Modificado'
       redirect_to @usuario
     else

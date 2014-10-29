@@ -321,8 +321,12 @@ ActiveRecord::Schema.define(version: 20141028001351) do
     t.date     "fecha_nacimiento"
     t.text     "acerca_de"
     t.integer  "telefono"
-    t.boolean  "push",                        default: true
-    t.boolean  "mailer",                      default: true
+    t.boolean  "push_task",                   default: true
+    t.boolean  "mailer_task",                 default: true
+    t.boolean  "push_theme",                  default: true
+    t.boolean  "mailer_theme",                default: true
+    t.boolean  "push_event",                  default: true
+    t.boolean  "mailer_event",                default: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "activa",                      default: false

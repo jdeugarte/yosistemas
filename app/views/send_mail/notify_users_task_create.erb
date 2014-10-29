@@ -14,10 +14,11 @@
         <th align="left">
           <h3>Hola, <%= @user.nombre %></h3>
           <p>
-            Se creo la tarea: <%= @tarea.titulo.upcase%>
-            en el grupo: <%= @grupo.nombre.upcase %>.<br>
-            Para verlo visita la pagina:<br>
-           <a href=<%= @url %>> </a><br><br>
+            El staff de YoSistemas te comunica que 
+            se creo la tarea: <%= @tarea.titulo%>
+            en el grupo: <%= @grupo.nombre%>.<br>
+            Para ver esta tarea, visita la pagina:<br>
+           <a href='<%= @url %>'> </a><br><br>
            <b><i>Staff de YoSistemas</i></b>
           </p>
       </th>

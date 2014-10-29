@@ -1,4 +1,5 @@
 class Tema < ActiveRecord::Base
+
   has_many :tema_comentarios
   has_many :suscripcion_temas
   has_many :archivo_adjunto_temas

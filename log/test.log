@@ -1,0 +1,117 @@
+  [1m[36m (156.3ms)[0m  [1mCREATE TABLE "adjunto_respuesta_cuestionarios" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "respuesta_usuario_id" integer, "created_at" datetime, "updated_at" datetime, "archivo_file_name" varchar(255), "archivo_content_type" varchar(255), "archivo_file_size" integer, "archivo_updated_at" datetime) [0m
+  [1m[35m (125.0ms)[0m  CREATE INDEX "index_adjunto_respuesta_cuestionarios_on_respuesta_usuario_id" ON "adjunto_respuesta_cuestionarios" ("respuesta_usuario_id")
+  [1m[36m (141.1ms)[0m  [1mCREATE TABLE "adjunto_tarea_comentarios" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tarea_comentario_id" integer, "created_at" datetime, "updated_at" datetime, "archivo_file_name" varchar(255), "archivo_content_type" varchar(255), "archivo_file_size" integer, "archivo_updated_at" datetime) [0m
+  [1m[35m (128.3ms)[0m  CREATE INDEX "index_adjunto_tarea_comentarios_on_tarea_comentario_id" ON "adjunto_tarea_comentarios" ("tarea_comentario_id")
+  [1m[36m (109.4ms)[0m  [1mCREATE TABLE "adjunto_tema_comentarios" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tema_comentario_id" integer, "created_at" datetime, "updated_at" datetime, "archivo_file_name" varchar(255), "archivo_content_type" varchar(255), "archivo_file_size" integer, "archivo_updated_at" datetime) [0m
+  [1m[35m (171.9ms)[0m  CREATE INDEX "index_adjunto_tema_comentarios_on_tema_comentario_id" ON "adjunto_tema_comentarios" ("tema_comentario_id")
+  [1m[36m (140.6ms)[0m  [1mCREATE TABLE "adjuntos_comentarios" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tema_comentario_id" integer, "created_at" datetime, "updated_at" datetime, "archivo_file_name" varchar(255), "archivo_content_type" varchar(255), "archivo_file_size" integer, "archivo_updated_at" datetime) [0m
+  [1m[35m (109.4ms)[0m  CREATE INDEX "index_adjuntos_comentarios_on_tema_comentario_id" ON "adjuntos_comentarios" ("tema_comentario_id")
+  [1m[36m (109.4ms)[0m  [1mCREATE TABLE "archivo_adjunto_comentarios" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (109.4ms)[0m  CREATE TABLE "archivo_adjunto_respuesta" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "responder_tarea_id" integer, "created_at" datetime, "updated_at" datetime, "archivo_file_name" varchar(255), "archivo_content_type" varchar(255), "archivo_file_size" integer, "archivo_updated_at" datetime) 
+  [1m[36m (140.6ms)[0m  [1mCREATE INDEX "index_archivo_adjunto_respuesta_on_responder_tarea_id" ON "archivo_adjunto_respuesta" ("responder_tarea_id")[0m
+  [1m[35m (109.4ms)[0m  CREATE TABLE "archivo_adjunto_respuestas" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "responder_tarea_id" integer, "created_at" datetime, "updated_at" datetime, "archivo_file_name" varchar(255), "archivo_content_type" varchar(255), "archivo_file_size" integer, "archivo_updated_at" datetime) 
+  [1m[36m (125.0ms)[0m  [1mCREATE INDEX "index_archivo_adjunto_respuestas_on_responder_tarea_id" ON "archivo_adjunto_respuestas" ("responder_tarea_id")[0m
+  [1m[35m (78.1ms)[0m  CREATE TABLE "archivo_adjunto_temas" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tema_id" integer, "created_at" datetime, "updated_at" datetime, "archivo_file_name" varchar(255), "archivo_content_type" varchar(255), "archivo_file_size" integer, "archivo_updated_at" datetime) 
+  [1m[36m (78.1ms)[0m  [1mCREATE INDEX "index_archivo_adjunto_temas_on_tema_id" ON "archivo_adjunto_temas" ("tema_id")[0m
+  [1m[35m (109.4ms)[0m  CREATE TABLE "archivo_adjuntos" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tarea_id" integer, "created_at" datetime, "updated_at" datetime, "archivo_file_name" varchar(255), "archivo_content_type" varchar(255), "archivo_file_size" integer, "archivo_updated_at" datetime) 
+  [1m[36m (125.0ms)[0m  [1mCREATE INDEX "index_archivo_adjuntos_on_tarea_id" ON "archivo_adjuntos" ("tarea_id")[0m
+  [1m[35m (187.5ms)[0m  CREATE TABLE "cuestionarios" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "titulo" varchar(255), "descripcion" text, "fecha_limite" datetime, "estado" boolean, "grupo_id" integer, "usuario_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (125.0ms)[0m  [1mCREATE INDEX "index_cuestionarios_on_grupo_id" ON "cuestionarios" ("grupo_id")[0m
+  [1m[35m (156.1ms)[0m  CREATE INDEX "index_cuestionarios_on_usuario_id" ON "cuestionarios" ("usuario_id")
+  [1m[36m (109.4ms)[0m  [1mCREATE TABLE "eventos" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "nombre" varchar(255), "detalle" varchar(255), "lugar" varchar(255), "fecha" date, "estado" boolean, "grupo_id" integer, "usuario_id" integer, "created_at" datetime, "updated_at" datetime, "hora" time) [0m
+  [1m[35m (93.7ms)[0m  CREATE INDEX "index_eventos_on_grupo_id" ON "eventos" ("grupo_id")
+  [1m[36m (93.7ms)[0m  [1mCREATE INDEX "index_eventos_on_usuario_id" ON "eventos" ("usuario_id")[0m
+  [1m[35m (109.4ms)[0m  CREATE TABLE "grupos" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "nombre" varchar(255), "descripcion" text, "estado" boolean, "habilitado" boolean, "llave" varchar(255), "usuario_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (140.6ms)[0m  [1mCREATE INDEX "index_grupos_on_usuario_id" ON "grupos" ("usuario_id")[0m
+  [1m[35m (109.4ms)[0m  CREATE TABLE "mensajes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "de_usuario_id" integer, "para_usuario_id" integer, "mensaje" varchar(255), "visto" boolean DEFAULT 'f', "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (140.6ms)[0m  [1mCREATE TABLE "notifications" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "description" varchar(255), "reference_date" date, "tipo" integer, "seen" boolean, "de_usuario_id" integer, "para_usuario_id" integer, "id_item" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (125.0ms)[0m  CREATE TABLE "preguntas" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "cuestionario_id" integer, "texto" varchar(255), "tipo" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (109.4ms)[0m  [1mCREATE INDEX "index_preguntas_on_cuestionario_id" ON "preguntas" ("cuestionario_id")[0m
+  [1m[35m (125.0ms)[0m  CREATE TABLE "responder_tareas" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "descripcion" varchar(255), "usuario_id" integer, "tarea_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (125.0ms)[0m  [1mCREATE INDEX "index_responder_tareas_on_tarea_id" ON "responder_tareas" ("tarea_id")[0m
+  [1m[35m (171.9ms)[0m  CREATE INDEX "index_responder_tareas_on_usuario_id" ON "responder_tareas" ("usuario_id")
+  [1m[36m (281.3ms)[0m  [1mCREATE TABLE "respuesta_usuarios" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "respuesta" varchar(255), "tipo" varchar(255), "cuestionario_id" integer, "usuario_id" integer, "pregunta_id" integer, "created_at" datetime, "updated_at" datetime, "calificacion" boolean, "comentario" varchar(255)) [0m
+  [1m[35m (136.1ms)[0m  CREATE INDEX "index_respuesta_usuarios_on_cuestionario_id" ON "respuesta_usuarios" ("cuestionario_id")
+  [1m[36m (97.4ms)[0m  [1mCREATE INDEX "index_respuesta_usuarios_on_pregunta_id" ON "respuesta_usuarios" ("pregunta_id")[0m
+  [1m[35m (93.8ms)[0m  CREATE INDEX "index_respuesta_usuarios_on_usuario_id" ON "respuesta_usuarios" ("usuario_id")
+  [1m[36m (93.8ms)[0m  [1mCREATE TABLE "respuestas" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "pregunta_id" integer, "texto" varchar(255), "respuesta_del_usuario" varchar(255), "created_at" datetime, "updated_at" datetime, "respuesta_correcta" boolean) [0m
+  [1m[35m (109.4ms)[0m  CREATE INDEX "index_respuestas_on_pregunta_id" ON "respuestas" ("pregunta_id")
+  [1m[36m (140.6ms)[0m  [1mCREATE TABLE "solicitud_contrasenia" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "usuario_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (234.4ms)[0m  CREATE INDEX "index_solicitud_contrasenia_on_usuario_id" ON "solicitud_contrasenia" ("usuario_id")
+  [1m[36m (156.3ms)[0m  [1mCREATE TABLE "subscripcions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "llave" varchar(255), "usuario_id" integer, "grupo_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (140.6ms)[0m  CREATE INDEX "index_subscripcions_on_grupo_id" ON "subscripcions" ("grupo_id")
+  [1m[36m (109.4ms)[0m  [1mCREATE INDEX "index_subscripcions_on_usuario_id" ON "subscripcions" ("usuario_id")[0m
+  [1m[35m (109.4ms)[0m  CREATE TABLE "suscripcion_temas" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tema_id" integer, "usuario_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (109.4ms)[0m  [1mCREATE INDEX "index_suscripcion_temas_on_tema_id" ON "suscripcion_temas" ("tema_id")[0m
+  [1m[35m (125.0ms)[0m  CREATE INDEX "index_suscripcion_temas_on_usuario_id" ON "suscripcion_temas" ("usuario_id")
+  [1m[36m (93.7ms)[0m  [1mCREATE TABLE "tarea_comentarios" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "cuerpo" text, "tarea_id" integer, "usuario_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (109.4ms)[0m  CREATE INDEX "index_tarea_comentarios_on_tarea_id" ON "tarea_comentarios" ("tarea_id")
+  [1m[36m (109.4ms)[0m  [1mCREATE INDEX "index_tarea_comentarios_on_usuario_id" ON "tarea_comentarios" ("usuario_id")[0m
+  [1m[35m (106.3ms)[0m  CREATE TABLE "tareas" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "titulo" varchar(255), "descripcion" varchar(255), "fecha_entrega" date, "grupo_id" integer, "usuario_id" integer, "created_at" datetime, "updated_at" datetime, "hora_entrega" time, "tarea_base" integer) 
+  [1m[36m (138.9ms)[0m  [1mCREATE INDEX "index_tareas_on_grupo_id" ON "tareas" ("grupo_id")[0m
+  [1m[35m (113.7ms)[0m  CREATE INDEX "index_tareas_on_usuario_id" ON "tareas" ("usuario_id")
+  [1m[36m (109.4ms)[0m  [1mCREATE TABLE "tema_comentarios" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "cuerpo" text, "tema_id" integer, "usuario_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (125.0ms)[0m  CREATE INDEX "index_tema_comentarios_on_tema_id" ON "tema_comentarios" ("tema_id")
+  [1m[36m (156.3ms)[0m  [1mCREATE INDEX "index_tema_comentarios_on_usuario_id" ON "tema_comentarios" ("usuario_id")[0m
+  [1m[35m (125.0ms)[0m  CREATE TABLE "temas" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "titulo" varchar(255), "cuerpo" text, "usuario_id" integer, "created_at" datetime, "updated_at" datetime, "visible" integer DEFAULT 1 NOT NULL, "grupo_id" integer) 
+  [1m[36m (125.0ms)[0m  [1mCREATE INDEX "index_temas_on_grupo_id" ON "temas" ("grupo_id")[0m
+  [1m[35m (218.7ms)[0m  CREATE INDEX "index_temas_on_usuario_id" ON "temas" ("usuario_id")
+  [1m[36m (109.4ms)[0m  [1mCREATE TABLE "urls" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "direccion" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (109.4ms)[0m  CREATE TABLE "usuarios" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "nombre" varchar(255), "apellido" varchar(255), "contrasenia" varchar(255), "contrasenia_de_confirmacion" varchar(255), "correo" varchar(255), "fecha_nacimiento" date, "acerca_de" text, "telefono" integer, "push" boolean DEFAULT 't', "mailer" boolean DEFAULT 't', "created_at" datetime, "updated_at" datetime, "activa" boolean DEFAULT 'f', "grupo_id" integer, "solicitud_contrasenia_id" integer, "rol" varchar(255), "nombre_usuario" varchar(255), "mostrar_correo" boolean, "conectado" boolean DEFAULT 'f', "temp_password" varchar(255)) 
+  [1m[36m (109.4ms)[0m  [1mCREATE INDEX "index_usuarios_on_grupo_id" ON "usuarios" ("grupo_id")[0m
+  [1m[35m (109.4ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (109.4ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (15.6ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (171.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141028001351')[0m
+  [1m[35m (217.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130920062120')
+  [1m[36m (125.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130921233305')[0m
+  [1m[35m (112.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130924232023')
+  [1m[36m (109.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130926214035')[0m
+  [1m[35m (109.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130929185915')
+  [1m[36m (109.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20131009214734')[0m
+  [1m[35m (109.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20131012221510')
+  [1m[36m (125.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20131012221531')[0m
+  [1m[35m (109.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20131013020420')
+  [1m[36m (218.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20131013020643')[0m
+  [1m[35m (125.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20131013155747')
+  [1m[36m (112.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20131013171709')[0m
+  [1m[35m (109.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20131013175347')
+  [1m[36m (109.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20131013214641')[0m
+  [1m[35m (140.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20131013224210')
+  [1m[36m (93.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20131018050325')[0m
+  [1m[35m (121.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20131031200015')
+  [1m[36m (100.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20131103051621')[0m
+  [1m[35m (125.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20131103073538')
+  [1m[36m (109.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20131103073906')[0m
+  [1m[35m (109.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20131105221337')
+  [1m[36m (140.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20131106000915')[0m
+  [1m[35m (109.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20131106001615')
+  [1m[36m (109.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20131108223010')[0m
+  [1m[35m (109.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20131109174210')
+  [1m[36m (109.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20131110143052')[0m
+  [1m[35m (156.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20131123171016')
+  [1m[36m (125.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20131124193034')[0m
+  [1m[35m (125.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20131126192205')
+  [1m[36m (109.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20131127215116')[0m
+  [1m[35m (109.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20131127215515')
+  [1m[36m (78.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20131128182232')[0m
+  [1m[35m (109.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20131129161415')
+  [1m[36m (78.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20131130135614')[0m
+  [1m[35m (95.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20131130155637')
+  [1m[36m (93.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20131201084906')[0m
+  [1m[35m (109.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20131201222858')
+  [1m[36m (93.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20131201233854')[0m
+  [1m[35m (93.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20131202042541')
+  [1m[36m (93.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20131211010510')[0m
+  [1m[35m (94.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20131214151212')
+  [1m[36m (122.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20131216065652')[0m
+  [1m[35m (160.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140916032415')
+  [1m[36m (93.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140917030056')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mGrupo Exists (1.0ms)[0m  [1mSELECT 1 AS one FROM "grupos" WHERE LOWER("grupos"."nombre") = LOWER('Grupo de prueba') LIMIT 1[0m
+  [1m[35mSQL (36.0ms)[0m  INSERT INTO "grupos" ("created_at", "descripcion", "estado", "llave", "nombre", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Tue, 28 Oct 2014 19:12:01 BOT -04:00], ["descripcion", "grupo para specs"], ["estado", false], ["llave", "qwerty"], ["nombre", "Grupo de prueba"], ["updated_at", Tue, 28 Oct 2014 19:12:01 BOT -04:00]]
+  [1m[36mGrupo Exists (1.0ms)[0m  [1mSELECT 1 AS one FROM "grupos" WHERE (LOWER("grupos"."nombre") = LOWER('Grupo de prueba') AND "grupos"."id" != 1) LIMIT 1[0m
+  [1m[35mSQL (2.0ms)[0m  UPDATE "grupos" SET "nombre" = ?, "descripcion" = ?, "estado" = ?, "llave" = ?, "created_at" = ?, "updated_at" = ?, "id" = ?, "habilitado" = ? WHERE "grupos"."id" = 1  [["nombre", "Grupo de prueba"], ["descripcion", "grupo para specs"], ["estado", false], ["llave", "qwerty"], ["created_at", Tue, 28 Oct 2014 19:12:01 BOT -04:00], ["updated_at", Tue, 28 Oct 2014 19:12:01 BOT -04:00], ["id", 1], ["habilitado", true]]
+  [1m[36m (135.0ms)[0m  [1mcommit transaction[0m

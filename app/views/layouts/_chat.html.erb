@@ -32,16 +32,24 @@
     <div class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-sidebar">
         <% if !current_user.nil?%>
-          <div id="minimizar" class="new">Chat</div>
-          <% current_user.lista_usuarios_misgrupos.each do |usuario| %>
+          <div class="new">Chat<button id="minimizar" style=" padding-botton:2px;float:right;font-size:13px;font-weight:700;line-height:1;color:#000;text-shadow:0 1px 0 #fff;filter:alpha(opacity=20);opacity:.2;" class="pushme">-</button></div>
+          <% $lista = current_user.lista_usuarios_misgrupos.sort_by! &:nombre_usuario %>
+          <% $lista.each do |usuario|%>
           <li onclick="showChat('<%=usuario.nombre_usuario%>','<%=usuario.id%>');" style="cursor:pointer;" onmouseover="this.style.background='#F7F7F7';" onmouseout="this.style.background='white';">
             <%if current_user.id!=usuario.id.to_i%>
               <%if usuario.conectado == true%>
-                <a href="#"><span><img src="/assets/conected.png" /></span> 
-              <%else%>
-                <a href="#"><span><img src="/assets/conected1.png" /></span>
+                <a href="#"><span><img src="/assets/conected.png" /></span>
+                <%=usuario.nombre_usuario%></a></li> 
               <%end%>
-              <%=usuario.nombre_usuario%></a></li>
+            <%end%>
+          <%end%>
+          <% $lista.each do |usuario|%>
+          <li onclick="showChat('<%=usuario.nombre_usuario%>','<%=usuario.id%>');" style="cursor:pointer;" onmouseover="this.style.background='#F7F7F7';" onmouseout="this.style.background='white';">
+            <%if current_user.id!=usuario.id.to_i%>
+              <%if usuario.conectado == false%>
+                <a href="#"><span><img src="/assets/conected1.png" /></span>
+                <%=usuario.nombre_usuario%></a></li> 
+              <%end%>
             <%end%>
           <%end%>
         <%end%>
@@ -58,6 +66,16 @@
         //$(".sidebar").removeClass("col-sm-3 col-md-2 sidebar").addClass("col-sm-3 col-md-2 sidebar2");
         //$(".nav-sidebar").removeClass("nav nav-sidebar").addClass("nav nav-sidebar2");
     });
+</script>
+
+<script type="text/javascript">
+$(function(){
+   $(".pushme").click(function () {
+      $(this).text(function(i, text){
+          return text === "+" ? "-" : "+";
+      })
+   });
+})
 </script>
 
 

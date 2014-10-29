@@ -42,14 +42,36 @@ class TemasYTareasController < ApplicationController
     aux = Tema.where(:grupo_id=>params[:grupo])
     if params[:search] != "" && params[:search] != nil
       byAll = Tema.allResultsSearchs(params[:search])
-      @temas = byAll        
+      @temas = byAll     
+      @temas.each do |tema|
+        res = false
+        current_user.suscripcion_temas.each do |sus|
+          if tema.id==sus.tema_id
+            res = true
+          end
+        end
+        if !res
+          @temas.delete(tema)
+        end
+      end
       @temas.each do |tema|
         if !tema.grupo.habilitado
           @temas.delete(tema)
         end
       end          
       byAllTarea = Tarea.allResultsSearchsTarea(params[:search])
-      @tareas = byAllTarea        
+      @tareas = byAllTarea 
+      @tareas.each do |tarea|
+        res = false
+        current_user.subscripcions.each do |sus|
+          if tarea.grupo_id == sus.grupo_id
+            res = true
+          end
+        end
+        if !res
+          @tareas.delete(tarea)
+        end
+      end
     end
     @idest=sacarIdsTareas(@tareas)
     @ides=sacarIds(@temas)

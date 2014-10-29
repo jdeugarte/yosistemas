@@ -31,7 +31,9 @@
           <ul class="dropdown-menu" role="menu">         
           <%if  !current_user.nil? %>
             <% if !@grupo.nil? %>
+              <% if current_user.rol == "Docente"%>
               <li><a href="/tareas/new/<%=@grupo.id%>">Crear Tarea</a></li>
+              <%end%>
             <% end %>
           <% end %>
             <!--li><a href="/temas/show_mine">Mis Temas</a></li-->

@@ -1,0 +1,49 @@
+<%= form_for @usuario do |usuario| %>
+    <% usuario.hidden_field  :activa, :value=>true %>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3>
+                <b>Modificar Configuracion de notificaciones</b>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <center><img class="img-circle"> <%= image_tag avatar_tam_url(@usuario,110) %><br>
+                <a href="https://en.gravatar.com/"  target="_blank">Cambiar foto</a></center>
+                <table class="table table-user-information">
+                    <tbody>
+                        <tr>
+                            <td>Tareas Push:</td>
+                            <td><%= usuario.select(:push_task, options_for_select([['Habilitado', true], ['Deshabilitado', false]])) %></td>                                    
+                        </tr>
+                        <tr>
+                            <td>Tareas Mail:</td>
+                            <td><%= usuario.select(:mailer_task, options_for_select([['Habilitado', true], ['Deshabilitado', false]])) %></td>                                    
+                        </tr>
+                        <tr>
+                            <td>Temas Push:</td>
+                            <td><%=usuario.select(:push_theme, options_for_select([['Habilitado', true], ['Deshabilitado', false]])) %></td>
+                        </tr>
+                        <tr>
+                            <td>Temas Mail:</td>
+                            <td><%= usuario.select(:mailer_theme, options_for_select([['Habilitado', true], ['Deshabilitado', false]])) %></td>
+                        </tr>                        
+                        <tr>
+                            <td>Eventos Push:</td>
+                            <td><%=usuario.select(:push_event, options_for_select([['Habilitado', true], ['Deshabilitado', false]])) %></td>
+                        </tr>
+                        <tr>
+                            <td>Eventos Mail:</td>
+                            <td><%= usuario.select(:mailer_event, options_for_select([['Habilitado', true], ['Deshabilitado', false]])) %></td>
+                        </tr>                                    
+                    </tbody>
+                </table>         
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item">
+            <center>
+                <button type="submit" class="btn btn-success">Guardar</button>
+            </center>
+        </li>
+      </ul>
+    </div>
+<% end %>

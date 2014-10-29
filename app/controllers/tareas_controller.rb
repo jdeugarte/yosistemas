@@ -178,7 +178,7 @@ class TareasController < ApplicationController
     if(@tarea.save)
       add_attached_files(@tarea.id)
       flash[:alert] = 'Tarea creada Exitosamente!'
-      #notificar_por_email(@tarea.grupo_id, @tarea)
+      notificar_por_email(@tarea.grupo_id, @tarea)
       notificacion_push(@tarea.grupo_id, @tarea)
       redirect_to '/grupos/'+params[:tarea][:grupo_id]+'/tareas'
     else
@@ -234,13 +234,16 @@ class TareasController < ApplicationController
         if suscrito.grupo_id == id_grupo
           if suscrito.usuario_id != current_user.id
             @usuario = suscrito.usuario
-            if @usuario != nil
-              @grupo = Grupo.find(id_grupo)
-              notificacion = Notification.create('title'=>tarea.titulo, 'description'=>tarea.descripcion, 'reference_date'=> tarea.fecha_entrega,
-              'tipo'=>0, 'de_usuario_id'=>current_user.id, 'para_usuario_id'=> @usuario.id, 'seen'=>false, 'id_item'=> tarea.id)
-              Pusher.url = "http://5ea0579076700b536e21:503a6ba2bb803aa4ae5c@api.pusherapp.com/apps/60344"
-              Pusher['notifications_channel'].trigger('notification_event', {
-              })
+            if @usuario.push_task == true
+              if @usuario != nil
+                @grupo = Grupo.find(id_grupo)
+                notificacion = Notification.create('title'=>tarea.titulo, 'description'=>tarea.descripcion, 'reference_date'=> tarea.fecha_entrega,
+                'tipo'=>0, 'de_usuario_id'=>current_user.id, 'para_usuario_id'=> @usuario.id, 'seen'=>false, 'id_item'=> tarea.id)
+                Pusher.url = "http://5ea0579076700b536e21:503a6ba2bb803aa4ae5c@api.pusherapp.com/apps/60344"
+                Pusher['notifications_channel'].trigger('notification_event', {
+                  para_usuario: notificacion.para_usuario_id
+                })
+              end
             end
           end
         end
@@ -254,9 +257,11 @@ class TareasController < ApplicationController
           if suscrito.grupo_id == id_grupo
             if suscrito.usuario_id != current_user.id
                 @usuario = suscrito.usuario
-                if @usuario != nil
-                  @grupo = Grupo.find(id_grupo)
-                  SendMail.notify_users_task_create(@usuario, tarea, @grupo).deliver
+                if @usuario.mailer_task == true
+                  if @usuario != nil
+                    @grupo = Grupo.find(id_grupo)
+                    SendMail.notify_users_task_create(@usuario, tarea, @grupo).deliver
+                  end
                 end
             end
           end

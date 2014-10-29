@@ -28,7 +28,8 @@
         <span><%= grupo.descripcion  %></span>
         <br/>
         <%if current_user.id == grupo.usuario_id%>
-          <strong>Llave</strong>
+        <br>
+          <strong>Llave:</strong>
             <span><%= grupo.llave %></span>
         <% end %>
       </div>

@@ -121,6 +121,7 @@ before_filter :grupos
       @suscripcion.tema_id=@tema.id
       @suscripcion.save
       notificacion_push(@tema.grupo_id, @tema)
+      notificar_por_email(@tema_id.grupo_id, @tema)
       redirect_to '/temas/'+@tema.id.to_s
     else
       @grupos = Array.new
@@ -248,27 +249,45 @@ before_filter :grupos
         if suscrito.grupo_id == id_grupo
           if suscrito.usuario_id != current_user.id
             @usuario = suscrito.usuario
-            if @usuario != nil
-              @grupo = Grupo.find(id_grupo)
-              @notificacion = Notification.new
-              @notificacion.title = tema.titulo
-              @notificacion.description = tema.cuerpo
-              @notificacion.reference_date = nil
-              @notificacion.tipo = 1
-              @notificacion.de_usuario_id = current_user.id
-              @notificacion.para_usuario_id = @usuario.id
-              @notificacion.seen = false
-              @notificacion.id_item = tema.id
-              @notificacion.save
-
-              Pusher.url = "http://5ea0579076700b536e21:503a6ba2bb803aa4ae5c@api.pusherapp.com/apps/60344"
-              Pusher['notifications_channel'].trigger('notification_event', {
-                'message' => 'This is an HTML5 Realtime Push Notification!'
-              })
+            if @usuario.push_theme == true
+              if @usuario != nil
+                @grupo = Grupo.find(id_grupo)
+                @notificacion = Notification.new
+                @notificacion.title = tema.titulo
+                @notificacion.description = tema.cuerpo
+                @notificacion.reference_date = nil
+                @notificacion.tipo = 1
+                @notificacion.de_usuario_id = current_user.id
+                @notificacion.para_usuario_id = @usuario.id
+                @notificacion.seen = false
+                @notificacion.id_item = tema.id
+                @notificacion.save
+                Pusher.url = "http://5ea0579076700b536e21:503a6ba2bb803aa4ae5c@api.pusherapp.com/apps/60344"
+                Pusher['notifications_channel'].trigger('notification_event', {
+                  para_usuario: @notificacion.para_usuario_id
+                })
+              end
             end
           end
         end
       end
+    end
+
+    def notificar_por_email(id_grupo, tema)
+        suscripciones = Subscripcion.all
+        suscripciones.each do |suscrito|
+          if suscrito.grupo_id == id_grupo
+            if suscrito.usuario_id != current_user.id
+                @usuario = suscrito.usuario
+                if @usuario.mailer_theme == true
+                  if @usuario != nil
+                    @grupo = Grupo.find(id_grupo)
+                    SendMail.notify_users_tema(@usuario, tema, @grupo).deliver
+                  end
+                end
+            end
+          end
+        end
     end
 
     def sacarIds(temas)

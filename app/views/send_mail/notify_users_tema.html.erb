@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-     <style type="text/css">     
+    <style type="text/css">     
       p {font-family: Arial,Helvetica,sans-serif; color: #3e3e3e; font-size: 14px; }
       h3 {font-family: Arial,Helvetica,sans-serif; color: #3e3e3e; font-size: 18px;}
     </style>
@@ -14,10 +14,12 @@
         <th align="left">
           <h3>Hola, <%= @user.nombre %></h3>
           <p>
-             Se registro un nuevo comentario en el tema <%= @tema.titulo %>.<br>
-             Para verlo visita la pagina:<br>
-             <a href=<%= @url %>> Comentarios </a><br><br>
-             <b><i>Staff de YoSistemas</i></b>
+            El staff de YoSistemas te comunica que 
+            se creo el tema: <%= @tema.titulo%>
+            en el grupo: <%= @grupo.nombre%>.<br>
+            Para ver esta tema, visita la pagina:<br>
+           <a href='<%= @url %>'> </a><br><br>
+           <b><i>Staff de YoSistemas</i></b>
           </p>
       </th>
     </table>

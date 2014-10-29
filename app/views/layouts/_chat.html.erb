@@ -16,7 +16,18 @@
     channel2.bind('notification_event', function(data) {     
       if(data.para_usuario == document.getElementById('current_user').value)
       {
-         location.reload();
+          if(data.tipo == 0 )
+          {
+            alert.("tarea");
+          }
+          if(data.tipo == 1 )
+          {
+            alert.("tema"); 
+          }
+          if(data.tipo == 2 )
+          {
+            alert.("evento");
+          }
       }
     });     
   </script>
@@ -29,10 +40,10 @@
 <!--Barra de chat-->
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
+    <div id="my" class="col-sm-3 col-md-2 jordi">
       <ul class="nav nav-sidebar">
         <% if !current_user.nil?%>
-          <div class="new">Chat<button id="minimizar" style=" padding-botton:2px;float:right;font-size:13px;font-weight:700;line-height:1;color:#000;text-shadow:0 1px 0 #fff;filter:alpha(opacity=20);opacity:.2;" class="pushme">-</button></div>
+          <div class="new">Chat<button id="addremoveClass" style=" padding-botton:2px;float:right;font-size:13px;font-weight:700;line-height:1;color:#000;text-shadow:0 1px 0 #fff;filter:alpha(opacity=20);opacity:.2;" class="pushme">+</button></div>
           <% $lista = current_user.lista_usuarios_misgrupos.sort_by! &:nombre_usuario %>
           <% $lista.each do |usuario|%>
           <li onclick="showChat('<%=usuario.nombre_usuario%>','<%=usuario.id%>');" style="cursor:pointer;" onmouseover="this.style.background='#F7F7F7';" onmouseout="this.style.background='white';">
@@ -59,12 +70,18 @@
 </div>
 
 <script type="text/javascript">
-    $("#minimizar").click(function()
-    {
-      $(".sidebar").toggleClass("sidebar2");
-      $(".nav-sidebar").toggleClass("nav-sidebar2");
-        //$(".sidebar").removeClass("col-sm-3 col-md-2 sidebar").addClass("col-sm-3 col-md-2 sidebar2");
-        //$(".nav-sidebar").removeClass("nav nav-sidebar").addClass("nav nav-sidebar2");
+    $("#addremoveClass").click(function () {
+ 
+    if ($('#my').is('.jordi')) {
+ 
+        $('#my').removeClass('col-sm-3 col-md-2 jordi');
+        $('#my').addClass('col-sm-3 col-md-2 sidebar');
+    }
+    else{
+        $('#my').removeClass('col-sm-3 col-md-2 sidebar');  
+        $('#my').addClass('col-sm-3 col-md-2 jordi');
+    }
+ 
     });
 </script>
 
@@ -72,7 +89,7 @@
 $(function(){
    $(".pushme").click(function () {
       $(this).text(function(i, text){
-          return text === "+" ? "-" : "+";
+          return text === "-" ? "+" : "-";
       })
    });
 })

@@ -61,11 +61,10 @@ class TemasYTareasController < ApplicationController
       end          
       byAllTarea = Tarea.allResultsSearchsTarea(params[:search])
       @tareas = byAllTarea 
-
       @tareas.each do |tarea|
         res = false
-        current_user.tareas.each do |sus|
-          if tarea.id = sus.id
+        current_user.subscripcions.each do |sus|
+          if tarea.grupo_id == sus.grupo_id
             res = true
           end
         end
@@ -73,7 +72,6 @@ class TemasYTareasController < ApplicationController
           @tareas.delete(tarea)
         end
       end
-
     end
     @idest=sacarIdsTareas(@tareas)
     @ides=sacarIds(@temas)

@@ -7,33 +7,63 @@
             </h3>
         </div>
         <div class="panel-body">
-            <center><img class="img-circle"> <%= image_tag avatar_tam_url(@usuario,110) %><br>
-                <a href="https://en.gravatar.com/"  target="_blank">Cambiar foto</a></center>
+            <center><img class="img-circle"> <%= image_tag avatar_tam_url(@usuario,110) %><br></center>
                 <table class="table table-user-information">
                     <tbody>
                         <tr>
-                            <td>Tareas Push:</td>
-                            <td><%= usuario.select(:push_task, options_for_select([['Habilitado', true], ['Deshabilitado', false]])) %></td>                                    
+                            <td><h4>Tareas:</h4></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
-                            <td>Tareas Mail:</td>
-                            <td><%= usuario.select(:mailer_task, options_for_select([['Habilitado', true], ['Deshabilitado', false]])) %></td>                                    
+                        <td></td>
+                            <td><b>En la aplicación</b></td>
+                            <td><%= usuario.radio_button :push_task, true%> Activadas</td>
+                            <td><%= usuario.radio_button :push_task, false%> Desactivadas</td>
                         </tr>
                         <tr>
-                            <td>Temas Push:</td>
-                            <td><%=usuario.select(:push_theme, options_for_select([['Habilitado', true], ['Deshabilitado', false]])) %></td>
+                            <td></td>
+                            <td><b>Via Email:</b></td>
+                            <td><%= usuario.radio_button :mailer_task, true%> Activadas</td>
+                            <td><%= usuario.radio_button :mailer_task, false%> Desactivadas</td>
                         </tr>
                         <tr>
-                            <td>Temas Mail:</td>
-                            <td><%= usuario.select(:mailer_theme, options_for_select([['Habilitado', true], ['Deshabilitado', false]])) %></td>
+                            <td><h4>Temas:</h4></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><b>En la aplicación:</b></td>
+                            <td><%= usuario.radio_button :push_theme, true%> Activadas</td>
+                            <td><%= usuario.radio_button :push_theme, false%> Desactivadas</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><b>Via Email:</b></td>
+                            <td><%= usuario.radio_button :mailer_theme, true%> Activadas</td>
+                            <td><%= usuario.radio_button :mailer_theme, false%> Desactivadas</td>
                         </tr>                        
                         <tr>
-                            <td>Eventos Push:</td>
-                            <td><%=usuario.select(:push_event, options_for_select([['Habilitado', true], ['Deshabilitado', false]])) %></td>
+                            <td><h4>Eventos:</h4></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
-                            <td>Eventos Mail:</td>
-                            <td><%= usuario.select(:mailer_event, options_for_select([['Habilitado', true], ['Deshabilitado', false]])) %></td>
+                            <td></td>
+                            <td><b>En la aplicación:</b></td>
+                            <td><%= usuario.radio_button :push_event, true%> Activadas</td>
+                            <td><%= usuario.radio_button :push_event, false%> Desactivadas</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><b>Via Email:</b></td>
+                            <td><%= usuario.radio_button :mailer_event, true%> Activadas</td>
+                            <td><%= usuario.radio_button :mailer_event, false%> Desactivadas</td>
+                            
                         </tr>                                    
                     </tbody>
                 </table>         

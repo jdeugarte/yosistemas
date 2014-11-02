@@ -1,6 +1,6 @@
 <div class="row">
 <div class="col-lg-6 col-md-6">
-  <div class="panel panel-info">
+  <div class="panel panel-success">
     <div class="panel-heading" >                
       <center><h3><%= @tarea.titulo %></h3></center>
     </div>
@@ -32,7 +32,7 @@
   </div>
   <% if(@tarea.archivo_adjuntos.size>0) %>
           <div class="row">
-            <div class="panel panel-default">
+            <div class="panel panel-success">
                 <div class="panel-body">
                   <label><i class="icon-download"></i> Adjuntos</label>
                   <hr style="margin-top:0px;" />
@@ -95,7 +95,7 @@
 </div>
 <%end%>
 </div>
-<div class="panel panel-info">
+<div class="panel panel-success">
 <div class="panel-heading  ">
     
 <%if current_user!=nil%>
@@ -114,8 +114,8 @@
               </span>
           </div>
       </div>
-      <div class="form-group">
-          <input type="submit" value="Comentar" class="btn btn-primary">
+      <div class="form-group" align="right">
+          <input type="submit" value="Comentar" class="btn btn-success">
       </div>
     <% end %>
 <%end%>
@@ -144,7 +144,7 @@
 <%if (comentario.adjunto_tarea_comentarios.size>0)%>
   
     <div class="panel-group" id="acordeon<%=comentario.id%>">
-      <div class="panel panel-info">
+      <div class="panel panel-success">
         <div class="panel-heading">
           <h4 class="panel-title">
             <a data-toggle="collapse" data-parent="#acordeon<%=comentario.id%>" href="#collapse<%=comentario.id%>">

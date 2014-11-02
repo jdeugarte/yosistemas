@@ -1,5 +1,11 @@
 <div class="panel panel-info">
-  <div class="panel-heading"><center><h3><b>Bienvenido a tu perfil <%=@usuario.nombre%> <%=@usuario.apellido%></b></h3></center></div>
+  <div class="panel-heading"><center><h3>
+    <%if current_user.id == @usuario.id%>
+    <b>Bienvenido a tu perfil <%=@usuario.nombre%> <%=@usuario.apellido%></b>  
+    <%else%>
+    <b><%=@usuario.nombre%> <%=@usuario.apellido%></b>
+    <%end%>    
+  </h3></center></div>
   <div class="panel-body">
     <center><img class="img-circle"> <%= image_tag avatar_tam_url(@usuario,110) %></center>
     <br>

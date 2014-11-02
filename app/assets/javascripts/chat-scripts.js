@@ -19,7 +19,8 @@
         document.getElementById('minimizeChat').style.display = 'none';
         var aux = 'User' + nombre_usuario;
         document.getElementById('chat_conversacion').innerHTML="";
-        document.getElementById('chat_name').innerHTML=nombre_usuario;
+        //document.getElementById('chat_name').innerHTML = nombre_usuario;
+        document.getElementById('chat_name').innerHTML = "<a href='/usuarios/"+usuario_id+"'>"+nombre_usuario+"</a>";
         document.getElementById('chat_minimized_name').innerHTML=nombre_usuario;
         document.getElementById("id_usuario_envio").value=usuario_id;
         $("#chat_window").addClass("in");

@@ -144,8 +144,7 @@ body {
 @media (min-width: 768px) {
   .jordi {
       position: fixed;
-      top: 594px;
-      bottom: 61px;
+      bottom: -39px;
       right: 0;
       display: block;
       padding: 20px;
@@ -157,8 +156,7 @@ body {
 @media (min-width: 992px) {
   .jordi {
     position: fixed;
-    top: 594px;
-    bottom: 61px;
+    bottom: -39px;
     right: 0;
     display: block;
     padding: 20px;

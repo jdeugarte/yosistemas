@@ -30,7 +30,7 @@
 <div class="container-fluid">
   <div class="row">
     <div id="my" class="col-sm-3 col-md-2 jordi">
-      <ul class="nav nav-sidebar">
+      <ul id="jo" class="nav nav-jordi">
         <% if !current_user.nil?%>
           <div class="new">Chat<button id="addremoveClass" style=" padding-botton:2px;float:right;font-size:13px;font-weight:700;line-height:1;color:#000;text-shadow:0 1px 0 #fff;filter:alpha(opacity=20);opacity:.2;" class="pushme">+</button></div>
           <% $lista = current_user.lista_usuarios_misgrupos.sort_by! &:nombre_usuario %>
@@ -69,6 +69,15 @@
     else{
         $('#my').removeClass('col-sm-3 col-md-2 sidebar');  
         $('#my').addClass('col-sm-3 col-md-2 jordi');
+    }
+    if ($('#jo').is('.nav-jordi')) {
+ 
+        $('#jo').removeClass('nav nav-jordi');
+        $('#jo').addClass('nav nav-sidebar');
+    }
+    else{
+        $('#jo').removeClass('nav nav-sidebar');  
+        $('#jo').addClass('nav nav-jordi');
     }
  
     });

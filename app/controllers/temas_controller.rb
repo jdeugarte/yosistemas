@@ -97,15 +97,21 @@ before_filter :grupos
   end
 
   def show
+    if Tema.exists?(:id => params[:id])
     @tema = Tema.find(params[:id])
-    @id = @tema.grupo_id
+     @id = @tema.grupo_id
      #notificaciones.each do |notificacion|
       #if ( TemaComentario.find(notificacion.tema_comentario_id).tema_id == @tema.id )
        # notificacion.notificado = true
         #notificacion.save
       #end
     #end
-     @comentarios= Kaminari.paginate_array(@tema.tema_comentarios).page(params[:page]).per(10)
+      @comentarios= Kaminari.paginate_array(@tema.tema_comentarios).page(params[:page]).per(10)
+    else
+      @temas = @grupo.temas.order("updated_at DESC").page(params[:page]).per(5)
+      flash[:alert] = 'El Tema fue eliminado'
+      redirect_to :back
+    end 
   end
 
   # POST /temas
@@ -241,7 +247,6 @@ before_filter :grupos
     def grupos
         @grupo = Grupo.find(1)
     end
-
 
     def notificacion_push(id_grupo, tema)
       suscripciones = Subscripcion.all

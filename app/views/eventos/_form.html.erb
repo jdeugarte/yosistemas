@@ -41,14 +41,6 @@
             <td><b>Grupo:</b></td>
             <td><%=f.collection_select(:grupo_id, Grupo.all, :id, :nombre)%></td>
           </tr>
-          <tr>
-            <td><b>Privacidad:</b></td>
-            <td>
-              <select id="evento_estado" name="evento[estado]">
-                <option value= "true">Publico</option>
-                <option value = "false">Privado</option>
-              </select></td>
-          </tr>
         </tbody>
       </table>
     </div>

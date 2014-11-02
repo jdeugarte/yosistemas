@@ -4,35 +4,20 @@
 
 <% @eventos.each do |evento| %>  
   <%if evento.nombre != "Publico"%>
-    <div class="panel panel-info">
-      <div class="panel-heading"><h3><a href="/eventos/<%= evento.id %>"><%= evento.nombre %></a></h3>
-      </div>
+    
+    <div class="panel panel-warning"style='cursor:pointer' onclick=<%="document.location.href='/"+evento.class.name.downcase+"s/"+evento.id.to_s+"'"%>>
+      <div class="panel-heading"><h3><%= evento.nombre %></h3></div>
       <div class="panel-body">
-        <center>
-          <img title="Tema" src="/assets/tarea.png" style=" background-color: #5FC5F8;" />&nbsp;<br><br>
-        </center>
-        <center>
-          <table class="table table-user-information">
-            <tbody>
-              <tr>
-                <td><b>Descripcion:</b></td>
-                <td><%=evento.detalle%></td>
-              </tr>
-              <tr>
-                <td><b>Lugar:</b></td>
-                <td><%=evento.lugar%></td>
-              </tr>
-              <tr>
-                <td><b>Fecha y Hora:</b></td>
-                <td><%=evento.fecha%> <%=evento.hora.strftime("%H:%M")%></td>
-              </tr>
-              <tr>
-                <td><b>Grupo:</b></td>
-                <td><%=evento.grupo.nombre%></td>
-              </tr>
-            </tbody>
-          </table>
-        </center>
+        <img title="Tema" src="/assets/tarea.png" style=" background-color: #CAB157;" />&nbsp;
+        <span><%= evento.detalle[0,315]+(evento.detalle.length>315 ? "..." : "") %><br><br>
+        <b>Lugar</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <%= evento.lugar[0,315] %><br>
+        <b>Fecha y Hora </b>&nbsp;&nbsp;
+        <%=evento.fecha%> 
+        <%=evento.hora.strftime("%H:%M")[0,315]%><br>
+        <b>Grupo</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <%=evento.grupo.nombre[0,315]%>
+        </span>
       </div>
       <ul class="list-group">
         <li class="list-group-item">

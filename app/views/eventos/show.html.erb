@@ -1,23 +1,25 @@
-<div class="panel panel-info">
+<div class="panel panel-warning">
   <div class="panel-heading"><h3 align="center"><%= @evento.nombre %></h3></div>
   <div class="panel-body">
-    <table class="table table-user-information">
-      <tr>
-        <td><b>Detalle:</b></td>
+    <table class="table-responsive">
+      <tr>        
+        <th><%= image_tag avatar_tam_url(@evento.usuario,100)%></th>
+        <th>&nbsp;&nbsp;</th>        
         <td><%= @evento.detalle %></td>
       </tr>  
       <tr>
-        <td><b>Lugar:</b></td>
+        <td><small><center><%= link_to @evento.usuario.nombre_usuario,  @evento.usuario %></center></small></td>
+        <td><b>Lugar</b></td>
         <td><%=@evento.lugar%></td>
       </tr>
       <tr>
-        <td><b>Fecha:</b></td>
-        <td><%=@evento.fecha%></td>
+        <td><center></center></td>
+        <td><b>Fecha y Hora&nbsp;&nbsp;</b></td>
+        <td><%=@evento.fecha%>
+        <%=@evento.hora.strftime("%H:%M")%>
+        </td>
       </tr>
       <tr>
-        <td><b>Hora:</b></td>
-        <td><%=@evento.hora.strftime("%H:%M")%></td>
-      </tr>
     </table>
   </div>
   <%if current_user!=nil && @evento.usuario_id==current_user.id%>

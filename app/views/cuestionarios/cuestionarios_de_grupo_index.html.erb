@@ -14,7 +14,7 @@
   <div class="col-lg-10">
     <% @cuestionarios.each do |cuestionario| %>
     <% if current_user.rol == "Estudiante" && cuestionario.estado == true || current_user.rol == "Docente" %>
-    <% if cuestionario.esta_cerrado_cuestionario?(cuestionario.fecha_limite) %>
+    <% if !cuestionario.esta_cerrado_cuestionario?(cuestionario.fecha_limite, cuestionario.hora_limite) %>
     <div class="panel-group" id="accordion">
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -66,6 +66,18 @@
                     </tr>
                   </tbody>
                   </table>
+                  <table class="table table-striped table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th>Hora Limite</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><%= cuestionario.hora_limite.strftime("%I:%M %p") %></td>
+                    </tr>
+                  </tbody>
+                  </table>
                 </div>
                 <%if cuestionario.usuario_id!= current_user.id && !RespuestaUsuario.ya_respondio_cuestionario(current_user.id,cuestionario.id)%>
                     <form class="navbar-form navbar-left" method="get" action=<%=nuevo_path(cuestionario.id)%> data-method="delete" >
@@ -109,7 +121,7 @@
       </div>
     </div>
     <% else %>
-      <h1>Cuestionario <%= cuestionario.titulo %> Cerrado</h1>
+      <h1>Cuestionario:<%= cuestionario.titulo %>/Cerrado</h1>
     <% end %>
     <% end %>
     <% end %>

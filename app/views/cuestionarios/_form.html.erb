@@ -14,9 +14,13 @@
     <%= f.text_area :descripcion, :class=>'form-control', :placeholder=>'Descripcion', :maxlength => 500 %></br></br>
     
     <tr>            
-                <td>Fecha de limite:</td>                                  
-                <td><%= f.date_select :fecha_limite, :order => [:day, :month, :year], :start_year => 1950 %>
+                <td>Fecha limite:</td>                                  
+                <td><%= f.date_select :fecha_limite, :order => [:day, :month, :year], :start_year => 1950 %><br><br>
                 <!--:class=>'form-control input-append',:"data-format"=>'dd/MM/yyyy', :placeholder=>'Fecha de Entrega', :style=>"border-bottom-left-radius: 4px;  border-top-left-radius: 4px;"%>-->
+
+              <td>Hora limite:</td>
+              <td>  <%= f.text_field :hora_limite, :class=>'form-control timepicker-value', :placeholder=>'Hora de Entrega', :style=>"border-bottom-left-radius: 4px;  border-top-left-radius: 4px;", :value => @cuestionario.hora_limite.strftime("%I:%M %p")%> 
+              </td>
             </tr>       
              
             <tr>

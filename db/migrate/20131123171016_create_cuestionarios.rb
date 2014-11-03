@@ -3,7 +3,8 @@ class CreateCuestionarios < ActiveRecord::Migration
     create_table :cuestionarios do |t|
       t.string :titulo
       t.text :descripcion
-      t.datetime :fecha_limite
+      t.date :fecha_limite
+      t.time :hora_limite
       t.boolean :estado
       t.references :grupo, index: true
       t.references :usuario, index: true

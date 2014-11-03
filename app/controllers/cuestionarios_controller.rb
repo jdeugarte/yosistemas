@@ -77,6 +77,8 @@ class CuestionariosController < ApplicationController
 	def nuevo_cuestionario
 		@cuestionario = Cuestionario.new
 		@grupo = Grupo.find(params[:id])
+    @cuestionario.hora_limite = Time.now
+    @cuestionario.save
 		@cuestionarios = Cuestionario.buscar_cuestionarios(@grupo)
     @grupos = Grupo.where("usuario_id = ?", current_user.id)
 	end
@@ -99,6 +101,7 @@ class CuestionariosController < ApplicationController
 		@cuestionario = Cuestionario.find(params[:id])
 		@grupo = Grupo.find(@cuestionario.grupo_id)
 		@cuestionarios = Cuestionario.buscar_cuestionarios(@grupo)
+    @grupos = Grupo.where("usuario_id = ?", current_user.id)
 	end
 
   def create
@@ -112,19 +115,20 @@ class CuestionariosController < ApplicationController
 	def update
 		@cuestionario = Cuestionario.find(params[:id])
       	@cuestionario.update(cuestionario_params)
-      	redirect_to mis_grupos_path
+      	redirect_to "/"
 	end
 
   def editar_cuestionario
     @cuestionario = Cuestionario.find(params[:id])
     @grupo = Grupo.find(@cuestionario.grupo_id)
     @cuestionarios = Cuestionario.buscar_cuestionarios(@grupo)
+    @grupos = Grupo.where("usuario_id = ?", current_user.id)
   end
 
 	def delete
 		@cuestionario = Cuestionario.find(params[:id])
     	@cuestionario.destroy
-    	redirect_to mis_grupos_path
+    	redirect_to '/'
   	end
 
   	def usar_plantilla
@@ -141,6 +145,6 @@ class CuestionariosController < ApplicationController
   private
     def cuestionario_params
       params.permit!
-      params.require(:cuestionario).permit(:titulo, :descripcion, :fecha_limite, :estado, :grupo_id, :usuario_id, preguntas_attributes: [:id, :texto, :tipo, :_destroy, respuestas_attributes: [:id, :texto, :respuesta_correcta, :_destroy]])
+      params.require(:cuestionario).permit(:titulo, :descripcion, :fecha_limite, :hora_limite, :estado, :grupo_id, :usuario_id, preguntas_attributes: [:id, :texto, :tipo, :_destroy, respuestas_attributes: [:id, :texto, :respuesta_correcta, :_destroy]])
     end
 end

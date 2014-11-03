@@ -117,7 +117,8 @@ ActiveRecord::Schema.define(version: 20141028001351) do
   create_table "cuestionarios", force: true do |t|
     t.string   "titulo"
     t.text     "descripcion"
-    t.datetime "fecha_limite"
+    t.date     "fecha_limite"
+    t.time     "hora_limite"
     t.boolean  "estado"
     t.integer  "grupo_id"
     t.integer  "usuario_id"

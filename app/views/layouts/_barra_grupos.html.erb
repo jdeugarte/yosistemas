@@ -9,6 +9,7 @@
                                 'Texto alternativo')%>
               <input  src="/assets/search.png" type="image" width="30" style="cursor:pointer;float:left;">           
           </div>
+          </form>
       </a>
       
         <%if !current_user.nil? %>
@@ -42,7 +43,7 @@
               <!--<a class="list-group-item list-group-item">Suscribirse a grupo</a>-->
                 <a class="list-group-item">  
                   <h5>Suscribirse a grupo</h5>  
-                    <form method="GET" action="/grupos/buscar_por_llave" >                          
+                    <form method="GET" action="grupos/buscar_por_llave" >                          
                       <input id="llave" name="llave" placeholder="Llave..." class="form-control input-sm"  style="" type="text"><br>              
                       <center>
                         <input type="submit" value="Suscribirse"  class="btn btn-xs btn-primary">

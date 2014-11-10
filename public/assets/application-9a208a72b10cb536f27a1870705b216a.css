@@ -6283,9 +6283,11 @@ body {
     right: 0;
     z-index: 1000;
     display: block;
-    padding: 20px;
-    /*overflow-x: hidden;
-    /*overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background-color: #f5f5f5;
     border-right: 1px solid #eee;
   }
@@ -6299,9 +6301,11 @@ body {
     right: 0;
     z-index: 1000;
     display: block;
-    padding: 20px;
-    /*overflow-x: hidden;
-    /*overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background-color: #f5f5f5;
     border-right: 1px solid #eee;
   }
@@ -6374,50 +6378,48 @@ body {
 
 /* mi css jojo*/
 
-.sidebar2 {
+.jordi {
   display: none;
 }
 
 @media (min-width: 768px) {
-  .sidebar2 {
-    position: fixed;
-    top: 594px;
-    bottom: 61px;
-    right: 0;
-    display: block;
-    padding: 20px;
-    background-color: #f5f5f5;
-    border-right: 1px solid #eee;
+  .jordi {
+      position: fixed;
+      bottom: -39px;
+      right: 0;
+      display: block;
+      padding: 20px;
+      background-color: white;
+      border-right: 1px solid #eee;
   }
 }
 
 @media (min-width: 992px) {
-  .sidebar2 {
+  .jordi {
     position: fixed;
-    top: 594px;
-    bottom: 61px;
+    bottom: -39px;
     right: 0;
     display: block;
     padding: 20px;
-    background-color: #f5f5f5;
+    background-color: white;
     border-right: 1px solid #eee;
   }
 }
 
 /* Sidebar navigation */
-.nav-sidebar2 {
+.nav-jordi {
   margin-right: -21px; /* 20px padding + 1px border */
   margin-bottom: 80px;
   margin-left: -20px;
 }
-.nav-sidebar2 > li > a {
+.nav-jordi > li > a {
   padding-right: 20px;
   padding-left: 20px;
   display: none;
 }
-.nav-sidebar2 > .active > a,
-.nav-sidebar2 > .active > a:hover,
-.nav-sidebar2 > .active > a:focus {
+.nav-jordi > .active > a,
+.nav-jordi > .active > a:hover,
+.nav-jordi > .active > a:focus {
   color: #fff;
   background-color: red;
 }
@@ -6480,85 +6482,6 @@ footer {
     top: 0;
     width: 50%; /* 6 columns */
   }
-}
-/* line 1, /home/sergiokv13/Programacion/Rails/yosistemas/app/assets/stylesheets/scaffolds.css.scss */
-body {
-  background-color: #fff;
-  color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
-}
-
-/* line 9, /home/sergiokv13/Programacion/Rails/yosistemas/app/assets/stylesheets/scaffolds.css.scss */
-p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
-}
-
-/* line 15, /home/sergiokv13/Programacion/Rails/yosistemas/app/assets/stylesheets/scaffolds.css.scss */
-pre {
-  background-color: #eee;
-  padding: 10px;
-  font-size: 11px;
-}
-
-/* line 21, /home/sergiokv13/Programacion/Rails/yosistemas/app/assets/stylesheets/scaffolds.css.scss */
-a {
-  color: #000;
-}
-/* line 23, /home/sergiokv13/Programacion/Rails/yosistemas/app/assets/stylesheets/scaffolds.css.scss */
-a:visited {
-  color: #666;
-}
-/* line 26, /home/sergiokv13/Programacion/Rails/yosistemas/app/assets/stylesheets/scaffolds.css.scss */
-a:hover {
-  color: #fff;
-  background-color: #000;
-}
-
-/* line 33, /home/sergiokv13/Programacion/Rails/yosistemas/app/assets/stylesheets/scaffolds.css.scss */
-div.field, div.actions {
-  margin-bottom: 10px;
-}
-
-/* line 38, /home/sergiokv13/Programacion/Rails/yosistemas/app/assets/stylesheets/scaffolds.css.scss */
-#notice {
-  color: green;
-}
-
-/* line 42, /home/sergiokv13/Programacion/Rails/yosistemas/app/assets/stylesheets/scaffolds.css.scss */
-.field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table;
-}
-
-/* line 48, /home/sergiokv13/Programacion/Rails/yosistemas/app/assets/stylesheets/scaffolds.css.scss */
-#error_explanation {
-  width: 450px;
-  border: 2px solid red;
-  padding: 7px;
-  padding-bottom: 0;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
-}
-/* line 55, /home/sergiokv13/Programacion/Rails/yosistemas/app/assets/stylesheets/scaffolds.css.scss */
-#error_explanation h2 {
-  text-align: left;
-  font-weight: bold;
-  padding: 5px 5px 5px 15px;
-  font-size: 12px;
-  margin: -7px;
-  margin-bottom: 0px;
-  background-color: #c00;
-  color: #fff;
-}
-/* line 65, /home/sergiokv13/Programacion/Rails/yosistemas/app/assets/stylesheets/scaffolds.css.scss */
-#error_explanation ul li {
-  font-size: 12px;
-  list-style: square;
 }
 /* Sticky footer styles
 -------------------------------------------------- */

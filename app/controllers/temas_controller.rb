@@ -277,25 +277,25 @@ before_filter :grupos
     end
 
     def notificar_por_email(id_grupo, tema)
-       notificado = Hash.new
+      notificado = Hash.new
       notificado[current_user.id] = true
-        suscripciones = Subscripcion.all
-        id_grupos.each do |grupo|
-      id_grupo = grupo.to_i
-        suscripciones.each do |suscrito|
-          if suscrito.grupo_id == id_grupo
-            if notificado[suscrito.usuario_id] == nil
-               notificado[suscrito.usuario_id] = true
-                @usuario = suscrito.usuario
-                if @usuario.mailer_theme == true
-                  if @usuario != nil
-                    @grupo = Grupo.find(id_grupo)
-                    SendMail.notify_users_tema(@usuario, tema, @grupo).deliver
+      suscripciones = Subscripcion.all
+      id_grupos.each do |grupo|
+        id_grupo = grupo.to_i
+          suscripciones.each do |suscrito|
+            if suscrito.grupo_id == id_grupo
+              if notificado[suscrito.usuario_id] == nil
+                 notificado[suscrito.usuario_id] = true
+                  @usuario = suscrito.usuario
+                  if @usuario.mailer_theme == true
+                    if @usuario != nil
+                      @grupo = Grupo.find(id_grupo)
+                      SendMail.notify_users_tema(@usuario, tema, @grupo).deliver
+                    end
                   end
-                end
+              end
             end
           end
-        end
       end
     end
 

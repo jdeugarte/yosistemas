@@ -5,7 +5,7 @@
 
   <%if current_user!=nil && current_user.id==@grupo.usuario_id%>
 
-      <a class="btn btn-primary btn-lg" onclick="throwFade()" href="/tareas/new/<%=@grupo.id%>"><span class="icon-pencil icon-white"></span>Nueva Tarea</a>    
+      <a class="btn btn-success btn-lg" onclick="throwFade()" href="/tareas/new/<%=@grupo.id%>"><span class="icon-pencil icon-white"></span>Nueva Tarea</a>    
   <%end%>
 <br><br>
     <% @tareas.each do |tarea| %>

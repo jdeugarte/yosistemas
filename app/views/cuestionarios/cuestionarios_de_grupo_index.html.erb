@@ -110,6 +110,11 @@
                   <form class="navbar-form navbar-left" method="get" action=<%=ver_resumen_path(cuestionario.id)%> data-method="delete" >
                       <button type="submit" class="btn btn-primary">Resumen Resultados</button>
                   </form>
+                  <%if cuestionario.estado == false %>
+                  <form class="navbar-form navbar-left" method="get" action=<%=publicarlo_path(cuestionario.id)%> data-method="delete" >
+                      <button type="submit" class="btn btn-primary">Publicarlo</button>
+                  </form>
+                  <% end -%>
                 </div>
                 <%end%>
               </div>

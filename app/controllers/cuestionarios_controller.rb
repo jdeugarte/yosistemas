@@ -138,6 +138,13 @@ class CuestionariosController < ApplicationController
   		redirect_to '/cuestionarios/'+@cuestionario.id.to_s+'/edit'
   	end
 
+    def publicarlo
+      cuestionario = Cuestionario.find(params[:id])
+      cuestionario.estado = true
+      cuestionario.save
+      redirect_to '/'
+    end
+
   	
 
   private

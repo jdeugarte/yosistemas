@@ -15,19 +15,12 @@
         <b>Fecha y Hora </b>&nbsp;&nbsp;
         <%=evento.fecha%> 
         <%=evento.hora.strftime("%H:%M")[0,315]%><br>
-        <b>Grupo</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <%=evento.grupo.nombre[0,315]%>
         </span>
       </div>
       <ul class="list-group">
         <li class="list-group-item">
           <small style="color: gray;">Evento creado el <%= evento.created_at.localtime.strftime("%d/%m/%Y a las: %I:%M  %p") %><br/>
           Usuario <a href="/usuarios/<%=evento.usuario.id%>"><%= evento.usuario.nombre_usuario %></a> </small>
-          <p align="right">
-            <%if  evento.usuario_id == current_user.id %>
-              <%= link_to 'Eliminar Evento', evento, method: :delete, data: { confirm: 'Seguro de Eliminar el evento?' }, :class => 'btn btn-danger' %>
-            <%end%>
-          </p>
         </li>  
       </ul>
     </div>

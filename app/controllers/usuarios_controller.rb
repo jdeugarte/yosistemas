@@ -220,7 +220,7 @@ class UsuariosController < ApplicationController
 
 def update
     @usuario = Usuario.find(params[:id])
-    if(@usuario.update(params[:usuario].permit(:nombre, :apellido, :telefono, :fecha_nacimiento, :acerca_de, :push_task, :mailer_task, :push_theme, :mailer_theme, :push_event, :mailer_event)))
+    if(@usuario.update(params[:usuario].permit(:nombre, :apellido, :telefono, :rol, :fecha_nacimiento, :acerca_de, :push_task, :mailer_task, :push_theme, :mailer_theme, :push_event, :mailer_event)))
       flash[:alert] = 'Usuario Modificado'
       redirect_to @usuario
     else
@@ -249,7 +249,7 @@ def update
 
 def confirm
   if(current_user == nil)
-    @messagge="Error, datos invalidos"
+    @messagge = "Error, datos invalidos"
   begin
     #usuario= Usuario.find(AESCrypt.decrypt(params[:pass].to_s,"Taller"))
     usuario = Usuario.find(params[:pass].to_s)
@@ -271,7 +271,7 @@ end
 def create
   	  params.permit!
   		@usuario = Usuario.new(params[:usuario])
-      @usuario.rol = params[:rol]
+      #@usuario.rol = params[:rol]
       if variable = params[:mostrarcorreo]
         @usuario.mostrar_correo = true
       else

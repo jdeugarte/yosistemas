@@ -19,11 +19,6 @@
         <%=@evento.hora.strftime("%H:%M")%>
         </td>
       </tr>
-      <tr>
-        <td></td>
-        <td><b>Grupo</b></td>
-        <td><%=@evento.grupo.nombre[0,315]%></td>
-      </tr>
     </table>
   </div>
   <%if current_user!=nil && @evento.usuario_id==current_user.id%>

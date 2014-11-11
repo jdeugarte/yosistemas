@@ -35,11 +35,26 @@
           </tr>
           <tr>
             <td><b>Hora:</b></td>
-            <td><%= f.time_select :hora, :default=>(Time.now + 2.hours)%></td>
+            <td><%= f.time_select :hora %></td>
           </tr>
+
           <tr>
-            <td><b>Grupo:</b></td>
-            <td><%=f.collection_select(:grupo_id, Grupo.all, :id, :nombre)%></td>
+            <td><b>Grupos:</b></td>
+            <td><strong>Publico</strong> 
+            <%= check_box_tag "grupos[]", 1 %><br/>
+            <% current_user.grupos.each do |grupo| %>
+              <strong><%=grupo.nombre%></strong> 
+              <%= check_box_tag "grupos[]", grupo.id %><br/>
+            <% end %></td>
+          </tr>
+
+          <tr>
+            <td><b>Privacidad:</b></td>
+            <td>
+              <select id="evento_estado" name="evento[estado]">
+                <option value= "true">Publico</option>
+                <option value = "false">Privado</option>
+              </select></td>
           </tr>
         </tbody>
       </table>

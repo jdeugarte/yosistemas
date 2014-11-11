@@ -42,7 +42,18 @@
     <!--Barra de navegacion - header-->
     <%= render 'layouts/navigation' %>
     <!--Chat-->
-   
+    <%if current_user%>
+    <%= render 'layouts/chat'%>
+    <%end%>
+
+      <!--Alertas-->
+    <% flash.each do |name, msg| %>
+      <div class="alert alert-info alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+      </div>
+    <% end %>
+
     <!-- Cuerpo de la pagina -->
     </br></br>
     <div class="micontainer">

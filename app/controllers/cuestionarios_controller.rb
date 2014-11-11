@@ -77,8 +77,6 @@ class CuestionariosController < ApplicationController
 	def nuevo_cuestionario
 		@cuestionario = Cuestionario.new
 		@grupo = Grupo.find(params[:id])
-    @cuestionario.hora_limite = Time.now
-    @cuestionario.save
 		@cuestionarios = Cuestionario.buscar_cuestionarios(@grupo)
     @grupos = Grupo.where("usuario_id = ?", current_user.id)
 	end
@@ -106,16 +104,16 @@ class CuestionariosController < ApplicationController
 
   def create
 		@cuestionario = Cuestionario.new(cuestionario_params)
-    @cuestionario.grupo_id = (params[:grupo_id])
-		@cuestionario.save
+    @cuestionario.save
     flash[:alert] = "Cuestionario Creado con exito!";
-		redirect_to '/'
+		redirect_to "/cuestionarios/cuestionarios_de_grupo_index/"+params[:cuestionario][:grupo_id]
 	end
 
 	def update
 		@cuestionario = Cuestionario.find(params[:id])
-      	@cuestionario.update(cuestionario_params)
-      	redirect_to "/"
+    @cuestionario.update(cuestionario_params)
+    @cuestionario.save
+    redirect_to "/cuestionarios/cuestionarios_de_grupo_index/"+params[:grupo_id]
 	end
 
   def editar_cuestionario

@@ -14,17 +14,19 @@
     <%= f.text_area :descripcion, :class=>'form-control', :placeholder=>'Descripcion', :maxlength => 500 %></br></br>
     
     <tr>            
-                <td>Fecha limite:</td>                                  
-                <td><%= f.date_select :fecha_limite, :order => [:day, :month, :year], :start_year => 1950 %><br><br>
+      <td><b>Fecha limite:</b></td>                                  
+      <td><%= f.date_select :fecha_limite, :order => [:day, :month, :year], :start_year => 1950 %></td><br><br>
                 <!--:class=>'form-control input-append',:"data-format"=>'dd/MM/yyyy', :placeholder=>'Fecha de Entrega', :style=>"border-bottom-left-radius: 4px;  border-top-left-radius: 4px;"%>-->
-
-              <td>Hora limite:</td>
-              <td>  <%= f.text_field :hora_limite, :class=>'form-control timepicker-value', :placeholder=>'Hora de Entrega', :style=>"border-bottom-left-radius: 4px;  border-top-left-radius: 4px;", :value => @cuestionario.hora_limite.strftime("%I:%M %p")%> 
-              </td>
-            </tr>       
-             
-            <tr>
-            </br></br>
+    </tr>
+    <tr>
+      <td><b>Hora limite:</b></td>
+      <td><%= f.time_select :hora_limite, :default=>(Time.now + 2.hours)%></td>
+    </tr><br><br>
+    <tr>
+      <td><b>Grupo:</b></td>
+      <td><%=f.collection_select(:grupo_id, Grupo.privados, :id, :nombre)%></td>
+    </tr>       
+    </br></br>
     <label for="inputTitle">
       ¿Desea publicar el cuestionario?
     </label>
@@ -35,16 +37,6 @@
       </select>
     </div>
 
-    <label for="inputTitle">
-        Grupo del cuestionario
-    </label>
-    <div class="form-group">
-        <!--%= f.select :grupo_id, options_for_select(@grupos) %-->
-        <%= select_tag "grupo_id", options_for_select(@grupos.collect {|p| [ p['nombre'], p['id'] ] })%>
-    </div>
-            <!--div class="field">
-              <%= f.hidden_field :grupo_id, :value => @grupo.id, :readonly => true %>
-            </div-->
     <div class="field">
       <%= f.hidden_field :usuario_id, :value => @current_user.id, :readonly => true %>
     </div>

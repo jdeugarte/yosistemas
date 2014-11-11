@@ -45,8 +45,7 @@
     <%if current_user%>
     <%= render 'layouts/chat'%>
     <%end%>
-
-      <!--Alertas-->
+    <!--Alertas-->
     <% flash.each do |name, msg| %>
       <div class="alert alert-info alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
@@ -64,9 +63,7 @@
           <%= yield %> 
         </div>
         <!--Barra de grupos-->
-
           <%= render 'layouts/barra_grupos' %>
-
       </div>
     </div>
     </br></br>

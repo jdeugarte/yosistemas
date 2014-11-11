@@ -117,7 +117,6 @@ before_filter :grupos
   # POST /temas
   def create
     @tema = Tema.new(tema_params)
-    @tema.grupo_id=params[:tema][:grupo_id]
     @tema.usuario_id = current_user.id
     if @tema.save
       add_attached_files(@tema.id)
@@ -126,18 +125,11 @@ before_filter :grupos
       @suscripcion.usuario_id=current_user.id
       @suscripcion.tema_id=@tema.id
       @suscripcion.save
-      notificacion_push(@tema.grupo_id, @tema)
-      notificar_por_email(@tema.grupo_id, @tema)
+      notificacion_push(params[:grupos], @tema)
+      notificar_por_email(params[:grupos], @tema)
       redirect_to '/temas/'+@tema.id.to_s
     else
-      @grupos = Array.new
-      if(current_user!=nil)
-      current_user.subscripcions.each do |subs|
-        @grupos.push(subs.grupo)
-        end
-        @grupo = Grupo.find(params[:tema][:grupo_id])
-        @id = params[:tema][:grupo_id]
-      end
+      flash[:alert] = 'El tema no pudo ser creado!'
       render 'new'
     end
   end
@@ -248,29 +240,35 @@ before_filter :grupos
         @grupo = Grupo.find(1)
     end
 
-    def notificacion_push(id_grupo, tema)
+    def notificacion_push(id_grupos, tema)
+      notificado = Hash.new
+      notificado[current_user.id] = true
       suscripciones = Subscripcion.all
-      suscripciones.each do |suscrito|
-        if suscrito.grupo_id == id_grupo
-          if suscrito.usuario_id != current_user.id
-            @usuario = suscrito.usuario
-            if @usuario.push_theme == true
-              if @usuario != nil
-                @grupo = Grupo.find(id_grupo)
-                @notificacion = Notification.new
-                @notificacion.title = tema.titulo
-                @notificacion.description = tema.cuerpo
-                @notificacion.reference_date = nil
-                @notificacion.tipo = 1
-                @notificacion.de_usuario_id = current_user.id
-                @notificacion.para_usuario_id = @usuario.id
-                @notificacion.seen = false
-                @notificacion.id_item = tema.id
-                @notificacion.save
-                Pusher.url = "http://5ea0579076700b536e21:503a6ba2bb803aa4ae5c@api.pusherapp.com/apps/60344"
-                Pusher['notifications_channel'].trigger('notification_event', {
-                  para_usuario: @notificacion.para_usuario_id
-                })
+      id_grupos.each do |grupo|
+      id_grupo = grupo.to_i
+        suscripciones.each do |suscrito|
+          if suscrito.grupo_id == id_grupo
+            if notificado[suscrito.usuario_id] == nil
+               notificado[suscrito.usuario_id] = true
+              @usuario = suscrito.usuario
+              if @usuario.push_theme == true
+                if @usuario != nil
+                  @grupo = Grupo.find(id_grupo)
+                  @notificacion = Notification.new
+                  @notificacion.title = tema.titulo
+                  @notificacion.description = tema.cuerpo
+                  @notificacion.reference_date = nil
+                  @notificacion.tipo = 1
+                  @notificacion.de_usuario_id = current_user.id
+                  @notificacion.para_usuario_id = @usuario.id
+                  @notificacion.seen = false
+                  @notificacion.id_item = tema.id
+                  @notificacion.save
+                  Pusher.url = "http://5ea0579076700b536e21:503a6ba2bb803aa4ae5c@api.pusherapp.com/apps/60344"
+                  Pusher['notifications_channel'].trigger('notification_event', {
+                    para_usuario: @notificacion.para_usuario_id
+                  })
+                end
               end
             end
           end
@@ -279,10 +277,15 @@ before_filter :grupos
     end
 
     def notificar_por_email(id_grupo, tema)
+       notificado = Hash.new
+      notificado[current_user.id] = true
         suscripciones = Subscripcion.all
+        id_grupos.each do |grupo|
+      id_grupo = grupo.to_i
         suscripciones.each do |suscrito|
           if suscrito.grupo_id == id_grupo
-            if suscrito.usuario_id != current_user.id
+            if notificado[suscrito.usuario_id] == nil
+               notificado[suscrito.usuario_id] = true
                 @usuario = suscrito.usuario
                 if @usuario.mailer_theme == true
                   if @usuario != nil
@@ -293,6 +296,7 @@ before_filter :grupos
             end
           end
         end
+      end
     end
 
     def sacarIds(temas)

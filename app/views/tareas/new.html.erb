@@ -47,11 +47,10 @@
 		        	</td>
 		        </tr>          
 
-		        <tr>
-		        
-		            <td>Grupo:</td>
-					<td><%=t.collection_select(:grupo_id, @grupos.select { |g| g.usuario_id ==current_user.id } , :id, :nombre,{:selected => @grupo.id},{:class=>'form-control'})%></td>
-		        </tr>
+		      <tr>
+				<td>Grupo:</td>
+				<td><%=t.collection_select(:grupo_id, @grupos.select { |g| g.usuario_id ==current_user.id } , :id, :nombre,{:selected => @grupo.id},{:class=>'form-control'})%></td>
+				</tr>
 		        
 		        <tr>
 		        	<td>Adjuntar archivos:</td>		            

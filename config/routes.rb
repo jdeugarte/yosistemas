@@ -109,6 +109,7 @@ Yosistemas::Application.routes.draw do
   get "cuestionarios/ver_resumen/:id_cuestionario" => "cuestionarios#ver_resumen", :as => 'ver_resumen'
   get "cuestionarios/ver_resultado/:id_cuestionario" => "cuestionarios#ver_resultado", :as => 'ver_resultado'
   post "cuestionario/calificar" => "cuestionarios#calificar", :as => "calificar"
+  get "cuestionarios/publicarlo/:id" => "cuestionarios#publicarlo", :as => 'publicarlo'
   #mensajes
   post "mensajes/enviar" => "mensajes#enviar", as: 'enviar_mensaje'
   #respuesta_usuarios

@@ -220,7 +220,7 @@ class UsuariosController < ApplicationController
 
 def update
     @usuario = Usuario.find(params[:id])
-    if(@usuario.update(params[:usuario].permit(:nombre, :apellido, :telefono, :fecha_nacimiento, :acerca_de, :push_task, :mailer_task, :push_theme, :mailer_theme, :push_event, :mailer_event)))
+    if(@usuario.update(params[:usuario].permit(:nombre, :apellido, :telefono, :rol, :fecha_nacimiento, :acerca_de, :push_task, :mailer_task, :push_theme, :mailer_theme, :push_event, :mailer_event)))
       flash[:alert] = 'Usuario Modificado'
       redirect_to @usuario
     else

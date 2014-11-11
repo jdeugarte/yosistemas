@@ -46,6 +46,10 @@
                             <td><%=usuario.text_area :acerca_de, :size => "30x5"%></td>
                         </tr>
                         <tr>
+                            <td>Rol:</td>
+                            <td><%=usuario.select :rol, options_for_select([["Docente", "Docente"], ["Estudiante", "Estudiante"]]) %></td>
+                        </tr>
+                        <tr>
                             <td>Mostrar Correo:</td>
                             <td><%= usuario.check_box :mostrar_correo %></td>
                         </tr>                                    

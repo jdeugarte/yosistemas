@@ -53,7 +53,7 @@ class SendMail < ActionMailer::Base
     @tarea = tarea
     @grupo = grupo
     direccion = Url.last.direccion
-    @url  = 'http://'+direccion+'/tareas/<%=@tarea.id%>'
+    @url  = 'http://'+direccion+'/tareas/'+@tarea.id.to_s
     mail(to: @user.correo, subject: 'Nueva tarea creada! ')
   end
 
@@ -62,7 +62,7 @@ class SendMail < ActionMailer::Base
     @evento = evento
     @grupo = grupo
     direccion = Url.last.direccion
-    @url  = 'http://'+direccion+'/eventos/<%=@evento.id%>'
+    @url  = 'http://'+direccion+'/eventos/'+@evento.id.to_s
     mail(to: @user.correo, subject: 'Nuevo evento creado! ')
   end
 

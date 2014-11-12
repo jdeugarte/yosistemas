@@ -71,7 +71,14 @@ class CuestionariosController < ApplicationController
     if !@grupo.habilitado
       redirect_to temas_path
     end
-		@cuestionarios = Cuestionario.buscar_cuestionarios(@grupo).page(params[:page]).per(2)
+    @cuestionarios = Array.new
+    todos_cuestionarios = Cuestionario.all
+    todos_cuestionarios.each do |cuestionario|
+      if cuestionario.grupo_id==@grupo.id or cuestionario.grupos_pertenecen.include? @grupo.id.to_s
+        @cuestionarios<<cuestionario
+      end
+    end
+		#@cuestionarios = Cuestionario.buscar_cuestionarios(@grupo).page(params[:page]).per(2)
 	end
 
 	def nuevo_cuestionario
@@ -104,6 +111,7 @@ class CuestionariosController < ApplicationController
 
   def create
 		@cuestionario = Cuestionario.new(cuestionario_params)
+    @cuestionario.grupos_pertenecen = params[:grupos_pertenecen]
     @cuestionario.save
     flash[:alert] = "Cuestionario Creado con exito!";
 		redirect_to "/cuestionarios/cuestionarios_de_grupo_index/"+params[:cuestionario][:grupo_id]
@@ -150,6 +158,6 @@ class CuestionariosController < ApplicationController
   private
     def cuestionario_params
       params.permit!
-      params.require(:cuestionario).permit(:titulo, :descripcion, :fecha_limite, :hora_limite, :estado, :grupo_id, :usuario_id, preguntas_attributes: [:id, :texto, :tipo, :_destroy, respuestas_attributes: [:id, :texto, :respuesta_correcta, :_destroy]])
+      params.require(:cuestionario).permit(:titulo, :descripcion, :fecha_limite, :hora_limite, :estado, :grupo_id, :usuario_id, :grupos_pertenecen, preguntas_attributes: [:id, :texto, :tipo, :_destroy, respuestas_attributes: [:id, :texto, :respuesta_correcta, :_destroy]])
     end
 end

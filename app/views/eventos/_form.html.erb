@@ -39,14 +39,30 @@
           </tr>
 
           <tr>
+            <div class="ui-widget">
+              <label  for="grupos">Grupos: </label>
+              <input id="grupos">
+              <input type="button" onclick="getGrupo();"/>
+            </div>
+            <br/>
+            <div id="gruposDiv">
+              <div id="Publico">Publico<a href="#" onClick="quitarOpcion('Publico');">X</a> </div>
+            </div>
+
+          </tr>
+
+          <tbody style="display:none">
+          <tr>
             <td><b>Grupos:</b></td>
             <td><strong>Publico</strong> 
-            <%= check_box_tag "grupos[]", 1 %><br/>
+            <%= check_box_tag "grupos[]", 1 , checked = true , :id => "checkPublico"%><br/>
             <% current_user.grupos.each do |grupo| %>
               <strong><%=grupo.nombre%></strong> 
-              <%= check_box_tag "grupos[]", grupo.id %><br/>
+              <%= check_box_tag  "grupos[]", grupo.id ,checked = false, :id => "check#{grupo.nombre.gsub(' ','_')}" %><br/>
             <% end %></td>
-          </tr>
+          </tr></tbody>
+          
+
         </tbody>
       </table>
     </div>
@@ -59,6 +75,7 @@
     </li>
   </ul>
 </div>
+
 <script>
   $('.timepicker-default').timepicker();
     $(function() {
@@ -72,3 +89,34 @@
 </script>
 <% end %>
 
+
+ <script>
+  $(function() {
+    var gruposDisponibles = [
+    <% current_user.grupos.each do |grupo|%>
+      "<%=grupo.nombre.gsub(' ','_')%>",
+    <% end %>
+    "Publico"
+    ];
+   $( "#grupos" ).autocomplete({
+      source: gruposDisponibles,
+      minLength: 0
+   });
+   });
+
+  function getGrupo()
+  {
+    var grupo = document.getElementById("grupos").value;
+    document.getElementById("gruposDiv").innerHTML+="<div id='"+grupo+"'>"+ grupo +"<a href='#' onclick='quitarOpcion(&quot;"+grupo+"&quot);'>X</a> </div> ";
+     document.getElementById("check" + grupo).checked = true;
+    document.getElementById("grupos").value = "";
+
+  };
+
+  function quitarOpcion(id)
+  {
+    $("#" + id).replaceWith("");
+    document.getElementById("check" + id).checked = false;
+    return false;
+  };
+</script>

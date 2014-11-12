@@ -7,16 +7,30 @@
       <%= f.text_field :titulo,:class=>"form-control", :placeholder=>'Titulo', :maxlength => 50 , :title => "El titulo del tema es obligatorio, Por favor rellene este campo" %>
       <%= f.label :titulo, "Contenido:" %>
       <%= f.text_area :cuerpo, :class=>'form-control',:rows=>'6', :placeholder=>'Contenido', :maxlength => 500 %>
-      
 
-            <b>Grupos:</b> <br/>
-            <strong>Publico</strong> 
-            <%= check_box_tag "grupos[]", 1 %><br/>
+            <div class="ui-widget">
+              <label  for="grupos">Grupos: </label>
+              <input id="grupos">
+              <input type="button" onclick="getGrupo();"/>
+            </div>
+            <br/>
+            <div id="gruposDiv">
+              <div id="Publico">Publico<a href="#" onClick="quitarOpcion('Publico');">X</a> </div>
+            </div>
+
+
+         <div style="display:none">
+          <tr>
+            <td><b>Grupos:</b></td>
+            <td><strong>Publico</strong> 
+            <%= check_box_tag "grupos[]", 1 , checked = true , :id => "checkPublico"%><br/>
             <% current_user.grupos.each do |grupo| %>
               <strong><%=grupo.nombre%></strong> 
-              <%= check_box_tag "grupos[]", grupo.id %><br/>
-            <% end %>
-            <br/>
+              <%= check_box_tag  "grupos[]", grupo.id ,checked = false, :id => "check#{grupo.nombre.gsub(' ','_')}" %><br/>
+            <% end %></td>
+          </tr></div>
+
+
 
       <div class="form-group" style>
         <%= f.label :titulo, "Archivos seleccionados:" %>
@@ -119,3 +133,34 @@
    </div>
 <% end %>
 -->
+
+ <script>
+  $(function() {
+    var gruposDisponibles = [
+    <% current_user.grupos.each do |grupo|%>
+      "<%=grupo.nombre.gsub(' ','_')%>",
+    <% end %>
+    "Publico"
+    ];
+   $( "#grupos" ).autocomplete({
+      source: gruposDisponibles,
+      minLength: 0
+   });
+   });
+
+  function getGrupo()
+  {
+    var grupo = document.getElementById("grupos").value;
+    document.getElementById("gruposDiv").innerHTML+="<div id='"+grupo+"'>"+ grupo +"<a href='#' onclick='quitarOpcion(&quot;"+grupo+"&quot);'>X</a> </div> ";
+     document.getElementById("check" + grupo).checked = true;
+    document.getElementById("grupos").value = "";
+
+  };
+
+  function quitarOpcion(id)
+  {
+    $("#" + id).replaceWith("");
+    document.getElementById("check" + id).checked = false;
+    return false;
+  };
+</script>

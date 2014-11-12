@@ -1,5 +1,5 @@
 class Tema < ActiveRecord::Base
-
+  serialize :grupos_pertenece, Array
   has_many :tema_comentarios
   has_many :suscripcion_temas
   has_many :archivo_adjunto_temas

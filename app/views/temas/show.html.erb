@@ -13,6 +13,10 @@
         <td><p style="color: gray;">Tema creado: <%= @tema.created_at.strftime("%Y-%m-%e Hora: %I:%M") %></p></td>
       </tr>
     </table>
+      <b>Grupos</b><br/>
+          <% @tema.grupos_pertenece.each do |grupo| %>
+            <%= Grupo.find(grupo).nombre %><br/>
+          <% end %>
     <!--Adjuntos-->
     <span>
       <% if(@tema.archivo_adjunto_temas.size>0) %>

@@ -1,18 +1,16 @@
-<div class="page-header">
-     <h1 id="forms">Lista de Cuestionarios</h1>
-</div>
-<div class="row" style="margin-bottom:50px;">
+<div class="panel panel-info">
+  <div class="row" style="margin-bottom:50px;">
   <%if current_user!=nil && current_user.id==@grupo.usuario_id && current_user.rol == "Docente" %>
     <div class="col-sm-9 col-md-9 col-lg-9">
           <a class="btn btn-primary btn-lg" onclick="throwFade()" href="/cuestionarios/nuevo_cuestionario/<%=@grupo.id%>"><span class="icon-pencil icon-white" style="vertical-align:-1px;  margin-right:7px; "></span>Nuevo Cuestionario</a>
     </div>
   <% end %>
 </div>
-<div class="row bs-example bs-example-type">
-  <div class="col-lg-1">
-  </div>
-  <div class="col-lg-10">
-    <% @cuestionarios.each do |cuestionario| %>
+  <div class="panel-heading"><center><h3>
+      <h1>Lista de Cuestionarios</h1>
+  </h3></center></div>
+  <div class="panel-body">
+        <% @cuestionarios.each do |cuestionario| %>
     <% if current_user.rol == "Estudiante" && cuestionario.estado == true || current_user.rol == "Docente" %>
     <% if !cuestionario.esta_cerrado_cuestionario?(cuestionario.fecha_limite, cuestionario.hora_limite) %>
     <div class="panel-group" id="accordion">
@@ -112,6 +110,11 @@
                   <form class="navbar-form navbar-left" method="get" action=<%=ver_resumen_path(cuestionario.id)%> data-method="delete" >
                       <button type="submit" class="btn btn-primary">Resumen Resultados</button>
                   </form>
+                  <%if cuestionario.estado == false %>
+                  <form class="navbar-form navbar-left" method="get" action=<%=publicarlo_path(cuestionario.id)%> data-method="delete" >
+                      <button type="submit" class="btn btn-primary">Publicarlo</button>
+                  </form>
+                  <% end -%>
                 </div>
                 <%end%>
               </div>
@@ -127,4 +130,5 @@
     <% end %>
     <center><%= paginate @cuestionarios %></center>
   </div>
+  <center>
 </div>

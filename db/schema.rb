@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(version: 20141028001351) do
     t.string   "lugar"
     t.date     "fecha"
     t.boolean  "estado"
+    t.text     "grupos_pertenece", default: "--- []\n"
     t.integer  "grupo_id"
     t.integer  "usuario_id"
     t.datetime "created_at"
@@ -297,10 +298,11 @@ ActiveRecord::Schema.define(version: 20141028001351) do
   create_table "temas", force: true do |t|
     t.string   "titulo"
     t.text     "cuerpo"
+    t.text     "grupos_pertenece", default: "--- []\n"
     t.integer  "usuario_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "visible",    default: 1, null: false
+    t.integer  "visible",          default: 1,          null: false
     t.integer  "grupo_id"
   end
 

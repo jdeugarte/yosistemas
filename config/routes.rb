@@ -67,7 +67,9 @@ Yosistemas::Application.routes.draw do
   
   get 'grupos/subscripcion_grupo/:id' => 'grupos#subscripcion_grupo', :as=>'suscribirse'
   get "grupos/buscar" => "grupos#buscar", :as=>'buscar_grupo'
+
   get "grupos/buscar_por_llave" => "grupos#buscar_por_llave", :as=>'buscar_grupo_por_llave'
+  
   get 'grupos/mis_grupos' => 'grupos#mis_grupos', :as => 'mis_grupos'
   get 'grupos/suscriptores/:id' => 'grupos#suscriptores', :as => 'suscriptores'
   get 'gruopos/detalle_usuario/:id' => 'grupos#detalle_usuario', :as => 'detalle_usuario'
@@ -109,6 +111,7 @@ Yosistemas::Application.routes.draw do
   get "cuestionarios/ver_resumen/:id_cuestionario" => "cuestionarios#ver_resumen", :as => 'ver_resumen'
   get "cuestionarios/ver_resultado/:id_cuestionario" => "cuestionarios#ver_resultado", :as => 'ver_resultado'
   post "cuestionario/calificar" => "cuestionarios#calificar", :as => "calificar"
+  get "cuestionarios/publicarlo/:id" => "cuestionarios#publicarlo", :as => 'publicarlo'
   #mensajes
   post "mensajes/enviar" => "mensajes#enviar", as: 'enviar_mensaje'
   #respuesta_usuarios

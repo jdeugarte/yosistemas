@@ -25,6 +25,9 @@ class EventosController < ApplicationController
   def create
     @evento = Evento.new(evento_params)
     @evento.usuario_id = current_user.id
+    params[:grupos].each do |grupo|
+      @evento.grupos_pertenece << grupo
+    end
     respond_to do |format|
       if @evento.save
         notificacion_push(params[:grupos], @evento)

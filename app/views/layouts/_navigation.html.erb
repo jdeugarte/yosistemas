@@ -61,7 +61,7 @@
           <ul class="dropdown-menu" role="menu">
             <li><a href="/cuestionarios/cuestionarios_de_grupo_index/<%=@grupo.id%>">Ver Cuestionarios</a></li>
             <%if current_user.rol == "Docente"%>
-            <li><a href="/cuestionarios/nuevo_cuestionario/1">Crear Cuestionario</a></li>
+            <li><a href="/cuestionarios/nuevo_cuestionario/<%=@grupo.id%>">Crear Cuestionario</a></li>
             <%end%>
           </ul>
         </li>

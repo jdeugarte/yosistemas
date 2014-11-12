@@ -6,6 +6,7 @@ class CreateEventos < ActiveRecord::Migration
       t.string :lugar
       t.date :fecha
       t.boolean :estado
+      t.text :grupos_pertenece, :default => [].to_yaml
       t.references :grupo, index: true
       t.references :usuario, index: true
 

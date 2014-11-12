@@ -95,6 +95,7 @@
                       <button type="submit" class="btn btn-primary">Editar Cuestionario</button>
                     </form>
                     <% end %>
+                    <div>
                     <form class="navbar-form navbar-left" method="get" action=<%=borrar_cuestionario_path(cuestionario.id)%> data-confirm="Se eliminara el cuestionario, ¿está seguro?" data-method="delete" >
                       <button type="submit" class="btn btn-primary">Eliminar Cuestionario</button>
                     </form>
@@ -107,6 +108,7 @@
                   <form class="navbar-form navbar-left" method="get" action=<%=ver_resultados_usuarios_path(cuestionario.id)%> data-method="delete" >
                       <button type="submit" class="btn btn-primary">Resultados Individuales</button>
                   </form>
+                  </div>
                   <form class="navbar-form navbar-left" method="get" action=<%=ver_resumen_path(cuestionario.id)%> data-method="delete" >
                       <button type="submit" class="btn btn-primary">Resumen Resultados</button>
                   </form>
@@ -128,7 +130,7 @@
     <% end %>
     <% end %>
     <% end %>
-    <center><%= paginate @cuestionarios %></center>
+    
   </div>
   <center>
 </div>

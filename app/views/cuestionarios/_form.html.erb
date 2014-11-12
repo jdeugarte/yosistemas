@@ -23,8 +23,38 @@
       <td><%= f.time_select :hora_limite, :default=>(Time.now + 2.hours)%></td>
     </tr><br><br>
     <tr>
-      <td><b>Grupo:</b></td>
-      <td><%=f.collection_select(:grupo_id, Grupo.privados, :id, :nombre)%></td>
+      <td><b>Grupos:</b></td>
+
+      <a href="#" data-toggle="modal" data-target="#grupos" data-keyboard="true" class="btn btn-primary">
+            Agregar mas grupos
+      </a>
+
+      <div class="modal fade" id="grupos" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel2" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                <div class="modal-header">
+                  <center><h1>MIS GRUPOS</h1></center>
+                </div>
+                <div class="modal-body">  
+                  <% @grupos.each do |g| %>
+                  <% if g.id != @grupo.id %>
+                    <div style="float:left;margin-bottom:10px;margin-left:10px;">
+                      <%= image_tag avatar_tam_url(g.usuario,70) %><br>
+                      <%= g.nombre %>
+                      <%= check_box_tag "grupos_pertenecen[]", g.id %><br/>
+                    </div>   
+                  <% end %>
+                  <% end %>
+                </div>
+                <div class="clear"></div> 
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Listo</button>
+                </div>
+            </div>
+            </div>
+        </div>
+      <%= f.hidden_field :grupo_id, :value => @grupo.id %>
+      <!--<td><%=f.collection_select(:grupo_id, Grupo.privados, :id, :nombre)%></td>-->
     </tr>       
     </br></br>
     <label for="inputTitle">
@@ -43,8 +73,8 @@
     
     <%= f.fields_for :preguntas do |builder| %>
       <div>
-        <%= render 'campo_de_pregunta', :preguntas_form => builder %>
-    <% end %>
+         <%= render 'campo_de_pregunta', :preguntas_form => builder %>
+          <% end %>
         <div class="list-group">
           <div class="list-group-item">
             <center>
@@ -59,7 +89,7 @@
           </div> 
         </div>
       </div>
-  </div>
+    </div>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

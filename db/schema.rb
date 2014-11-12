@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141028001351) do
+ActiveRecord::Schema.define(version: 20141112050203) do
 
   create_table "adjunto_respuesta_cuestionarios", force: true do |t|
     t.integer  "respuesta_usuario_id"
@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(version: 20141028001351) do
     t.integer  "usuario_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "grupos_pertenecen"
   end
 
   add_index "cuestionarios", ["grupo_id"], name: "index_cuestionarios_on_grupo_id"

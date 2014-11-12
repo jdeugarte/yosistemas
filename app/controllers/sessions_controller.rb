@@ -9,27 +9,6 @@ class SessionsController < ApplicationController
     if usuario
       session[:usuario_id] = usuario.id
       redirect_to "/", :notice => "Sesion iniciada correctamente!"
-      #if (request.referrer.include? "/usuarios") || (request.referrer.include? "usuarios/confirm" ) || (request.referrer.include? "/send_password_mail")
-       # if notificaciones_nuevas == nil || notificaciones_nuevas.length < 1
-        #  redirect_to "/", :notice => "Sesion iniciada correctamente!"
-        #else
-         # if notificaciones_nuevas.length == 1
-          #  redirect_to "/", :notice => "Sesion iniciada correctamente!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificacion"
-          #else
-           # redirect_to "/", :notice => "Sesion iniciada correctamente!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificaciones"
-          #end
-        #end
-      #else
-      #if notificaciones_nuevas == nil || notificaciones_nuevas.length < 1
-       # redirect_to :back, :notice => "Sesion iniciada correctamente!"
-      #else
-        #if notificaciones_nuevas.length == 1
-       #   redirect_to :back, :notice => "Sesion iniciada correctamente!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificacion"
-        #else
-         # redirect_to :back, :notice => "Sesion iniciada correctamente!  .  .  .  .  .  .  .  .  .  .  Usted tiene "+notificaciones.size.to_s+" notificaciones"
-        #end
-      #end
-    #end
     else
       redirect_to :back, :notice => "Correo o Contrasenia Invalida!"
     end

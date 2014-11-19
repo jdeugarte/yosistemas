@@ -17,6 +17,9 @@
         <button type="submit" class="btn btn-success">Ingresar</button>
         </form>
         <%= link_to 'Registrarse', new_usuario_path, class: "btn btn-info" %>
+        <form class="navbar-form navbar-right" method="get" action=<%=forgot_password_path%>  >
+          <button type="submit" class="btn btn-primary">Olvide mi contraseña</button>
+        </form>
         
       </center>
     </li>

@@ -20,7 +20,7 @@
       }
     };
 
-    var pusher = new Pusher('5ea0579076700b536e21');
+    var pusher = new Pusher('673a73008280ca569283');
     var channel = pusher.subscribe('chat_channel');
     channel.bind('chat_event', function(data) {
       if(data.para_usuario==document.getElementById('current_user').value)

@@ -49,7 +49,7 @@ class TemaComentariosController < ApplicationController
                 @notificacion.tema_comentario_id = @comentario.id
                 @notificacion.save
                 SendMail.notify_users_tema(@usuario, @tema, @grupo).deliver
-                Pusher.url = "http://5ea0579076700b536e21:503a6ba2bb803aa4ae5c@api.pusherapp.com/apps/60344"
+                Pusher.url = "http://673a73008280ca569283:555e099ce1a2bfc840b9@api.pusherapp.com/apps/60344"
                 Pusher['notificaciones_channel'].trigger('notificacion_event', {
                   :usuario_id => current_user.id,:comentario_id => @comentario.id,:tema_id => @tema.id, :para_usuario => @usuario.id
                 })

@@ -223,7 +223,7 @@ class TareasController < ApplicationController
 		@grupo = Grupo.find(id_grupo)
 		notificacion = Notification.create('title'=>tarea.titulo, 'description'=>tarea.descripcion, 'reference_date'=> tarea.fecha_entrega,
 		'tipo'=>0, 'de_usuario_id'=>current_user.id, 'para_usuario_id'=> @usuario.id, 'seen'=>false, 'id_item'=> tarea.id)
-		Pusher.url = "http://5ea0579076700b536e21:503a6ba2bb803aa4ae5c@api.pusherapp.com/apps/60344"
+		Pusher.url = "http://673a73008280ca569283:555e099ce1a2bfc840b9@api.pusherapp.com/apps/60344"
 		Pusher['notifications_channel'].trigger('notification_event', {
 		para_usuario: notificacion.para_usuario_id
 		})

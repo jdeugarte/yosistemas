@@ -13,14 +13,6 @@ class TareasController < ApplicationController
     	else
       		@tareas = @grupo.tareas.order("updated_at DESC").page(params[:page]).per(5)
     	end
-
-
-		#@grupo = Grupo.find(params[:grupo])
-		#if(@grupo.habilitado && params[:grupo]!="1" && current_user.esta_subscrito?((params[:grupo])))
-		#@tareas = Tarea.where(:grupo_id => params[:grupo]).order("updated_at DESC").page(params[:page]).per(5)
-		#else
-		#redirect_to temas_path
-		#end
 	end
 	#GET tareas/new
 	def responder_tarea

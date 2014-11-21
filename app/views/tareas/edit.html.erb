@@ -37,11 +37,10 @@
 	          				<!--t.text_field :fecha_entrega, :class=>'form-control input-append',:"data-format"=>'dd/MM/yyyy', :placeholder=>'Fecha de Entrega', :value=> @tarea.fecha_entrega.strftime("%d/%m/%Y"), :style=>"border-bottom-left-radius: 4px;  border-top-left-radius: 4px;"-->	          					    
 	        	</tr>
 
-	        	<tr>	        		
-		            <td>Hora de entrega:</td>
-		            <td><%= t.text_field :hora_entrega, :class=>'form-control timepicker-default', :value=> @tarea.hora_entrega.strftime("%I:%M %p") , :placeholder=>'Hora de Entrega', :style=>"border-bottom-left-radius: 4px;  border-top-left-radius: 4px;"%>
-		            </td>
-	        	</tr>
+	        	<tr>
+      				<td>Hora de entrega:</td>
+      				<td><%= t.time_select :hora_entrega, :default=>(Time.now + 2.hours)%></td>
+    			</tr> 
 
 	        	<tr>
 	        		
@@ -69,25 +68,19 @@
 		              </div>		          
 		          <% end %>	          
 	        	</tr>
-		                  	
-	          <tr>
-	        	
-            	<td><span data-toggle="collapse" data-target="#demo" style="cursor:pointer;" title="Añadir adjuntos">Agregar adjuntos&nbsp;<img style="margin-top:-2px;" src="/assets/add.png" width="24"></span></td>
-
-	          </tr>
-
-	          <tr>
-	          	
-               	<td>Adjuntar archivos:</td>
-            
-	            <td><input id="showFiles" class="form-control" type="text" placeholder="Seleccione archivos..." onclick="document.getElementById('tarea_archivo').click();" onfocus="this.blur();">
-	            <%= t.file_field :archivo , :class=>'form-control',:multiple => true, :style=>"display:none;", :onchange=>"document.getElementById('showFiles').value = (this.files.length>1)?''+this.files.length+' Archivos seleccionados.':this.files[0].name;" %>
-	            <span class="input-group-addon" style="background-color: #256188; cursor:pointer;" onclick="document.getElementById('tarea_archivo').click();">
-	              <i class="icon-file icon-white"></i>
-	            </span>
-	            </td>
-	          </tr>
             </table>
+
+		<div class="form-group" style>
+        <%= t.label :titulo, "Archivos seleccionados:" %>
+        <div class="col-lg input-group">
+          <input id="showFiles" class="form-control" type="text" placeholder="Seleccione archivos..." onclick="document.getElementById('tarea_archivo').click();" onfocus="this.blur();">
+            <%= t.file_field :archivo , :class=>'form-control',:multiple => true, :style=>"display:none;", :onchange=>"document.getElementById('showFiles').value = (this.files.length>1)?''+this.files.length+' Archivos seleccionados.':this.files[0].name;" %>
+            <span class="input-group-addon" style="background-color: #256188; cursor:pointer;" onclick="document.getElementById('tarea_archivo').click();">
+            <i class="icon-file icon-white"></i>
+            </span>
+        </div>
+      	</div>
+
              <ul class="list-group">
 	        	<li class="list-group-item">
 	        		<center><input type="submit" value="Guardar cambios" class="btn btn-success"></center>

@@ -160,6 +160,16 @@ ActiveRecord::Schema.define(version: 20141112050203) do
 
   add_index "grupos", ["usuario_id"], name: "index_grupos_on_usuario_id"
 
+  create_table "grupos_tareas", id: false, force: true do |t|
+    t.integer "grupo_id"
+    t.integer "tarea_id"
+  end
+
+  create_table "grupos_temas", id: false, force: true do |t|
+    t.integer "grupo_id"
+    t.integer "tema_id"
+  end
+
   create_table "mensajes", force: true do |t|
     t.integer  "de_usuario_id"
     t.integer  "para_usuario_id"
@@ -274,7 +284,6 @@ ActiveRecord::Schema.define(version: 20141112050203) do
     t.string   "titulo"
     t.string   "descripcion"
     t.date     "fecha_entrega"
-    t.integer  "grupo_id"
     t.integer  "usuario_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -282,7 +291,6 @@ ActiveRecord::Schema.define(version: 20141112050203) do
     t.integer  "tarea_base"
   end
 
-  add_index "tareas", ["grupo_id"], name: "index_tareas_on_grupo_id"
   add_index "tareas", ["usuario_id"], name: "index_tareas_on_usuario_id"
 
   create_table "tema_comentarios", force: true do |t|

@@ -1,6 +1,6 @@
 class Tarea < ActiveRecord::Base
   belongs_to :usuario
-  belongs_to :grupo
+  has_and_belongs_to_many :grupos
   has_many :archivo_adjuntos
   has_many :notificacion_grupos
   has_many :tarea_comentarios

@@ -99,6 +99,13 @@ before_filter :grupos
   def show
     if Tema.exists?(:id => params[:id])
     @tema = Tema.find(params[:id])
+    @tema.grupos_pertenece.each do |grupo|
+      if current_user.esta_subscrito?(grupo)
+        @grupo = Grupo.find(grupo)
+        break
+      end
+    end
+
      @id = @tema.grupo_id
      #notificaciones.each do |notificacion|
       #if ( TemaComentario.find(notificacion.tema_comentario_id).tema_id == @tema.id )
@@ -118,10 +125,14 @@ before_filter :grupos
   def create
     @tema = Tema.new(tema_params)
     @tema.usuario_id = current_user.id
-    params[:grupos].each do |grupo|
-      @tema.grupos_pertenece << grupo
-    end
-    if @tema.save
+    if params[:grupos] != nil && @tema.save
+      params[:grupos].each do |grupo|
+        grupi = Grupo.find(grupo)
+        grupi.temas << @tema
+        @tema.grupos_pertenece << grupo
+        grupi.save
+      end
+      @tema.save
       add_attached_files(@tema.id)
       flash[:alert] = 'Tema creado Exitosamente!'
       @suscripcion=SuscripcionTema.new
@@ -133,7 +144,7 @@ before_filter :grupos
       redirect_to '/temas/'+@tema.id.to_s
     else
       flash[:alert] = 'El tema no pudo ser creado!'
-      render 'new'
+      redirect_to(:back)
     end
   end
 

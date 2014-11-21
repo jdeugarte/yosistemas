@@ -4,7 +4,7 @@ class Tema < ActiveRecord::Base
   has_many :suscripcion_temas
   has_many :archivo_adjunto_temas
   belongs_to :usuario
-  belongs_to :grupo
+  has_and_belongs_to_many :grupos
   validates :titulo, :cuerpo, :presence => { :message => " es requerido" }
   delegate :nombre_usuario, :correo, :to => :usuario, :prefix => true
   delegate :nombre, :to => :grupo, :prefix => true
@@ -19,13 +19,6 @@ class Tema < ActiveRecord::Base
     false
   end
 
-  after_create do
-    if(self.grupo==nil)
-      grupo = Grupo.find(1)
-      self.grupo = grupo
-      self.save
-    end
-  end
 
   def self.searchByDescription(keyWords)
     keyWords = keyWords.downcase

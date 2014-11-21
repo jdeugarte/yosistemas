@@ -6,10 +6,20 @@ class CreateGrupos < ActiveRecord::Migration
       t.boolean :estado
       t.boolean :habilitado
       t.string :llave
-      t.references :tema, index: true
       t.references :usuario, index: true
 
       t.timestamps
     end
   end
+
+    create_table :grupos_temas, id: false do |t|
+      t.integer :grupo_id
+      t.integer :tema_id
+    end
+
+    create_table :grupos_tareas, id: false do |t|
+      t.integer :grupo_id
+      t.integer :tarea_id
+    end
+
 end

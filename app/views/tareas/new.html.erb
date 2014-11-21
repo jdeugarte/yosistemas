@@ -39,27 +39,47 @@
 		          	<td><%= t.date_select :fecha_entrega, :order => [:day, :month, :year], :start_year => 1950 %>
 		          	<!--:class=>'form-control input-append',:"data-format"=>'dd/MM/yyyy', :placeholder=>'Fecha de Entrega', :style=>"border-bottom-left-radius: 4px;  border-top-left-radius: 4px;"%>-->
 		        </tr>       
-		         
+
 		        <tr>
-		        
-		          <td>Hora de entrega:</td>
-		          <td>  <%= t.text_field :hora_entrega, :class=>'form-control timepicker-default', :placeholder=>'Hora de Entrega', :style=>"border-bottom-left-radius: 4px;  border-top-left-radius: 4px;"%>	
-		        	</td>
-		        </tr>          
+      				<td>Hora de entrega:</td>
+      				<td><%= t.time_select :hora_entrega, :default=>(Time.now + 2.hours)%></td>
+    			</tr>          
 
 		      <tr>
-				<td>Grupo:</td>
-				<td><%=t.collection_select(:grupo_id, @grupos.select { |g| g.usuario_id ==current_user.id } , :id, :nombre,{:selected => @grupo.id},{:class=>'form-control'})%></td>
-				</tr>
+				<td>Grupos:</td>
+				<td>  <div class="ui-widget">
+              <input id="grupos">
+              <a href="#" onclick="getGrupo();"><img src="/assets/add.png" width="25"></a>
+            </div>
+            <br/>
+            <div id="gruposDiv">
+              <div id="<%=@grupo.nombre.gsub(' ','_')%>"><%=@grupo.nombre%><a href="#" onClick="quitarOpcion('<%=@grupo.nombre.gsub(' ','_')%>');"><img src="/assets/delete.png" width="20"></a> </div>
+            </div>
+            </td>
+
+
+	         <div style="display:none;">
+	          <strong><%=@grupo.nombre%></strong> <%= check_box_tag "grupos[]" , @grupo.id , checked = true , :id =>"check" + @grupo.nombre.gsub(' ','_')%><br/>
+	            <% current_user.grupos.each do |grupo| %>
+	              <% if grupo != @grupo %>
+	                  <strong><%=grupo.nombre%></strong> 
+	                  <%= check_box_tag  "grupos[]", grupo.id ,checked = false, :id => "check#{grupo.nombre.gsub(' ','_')}" %><br/>
+	              <% end %>
+            <% end %></div></td>
+			</tr>			
+	    </table>
 		        
-		        <tr>
-		        	<td>Adjuntar archivos:</td>		            
-		            <td><input id="showFiles" class="form-control" type="text" placeholder="Seleccione archivos..." onclick="document.getElementById('tarea_archivo').click();" onfocus="this.blur();">
-		            <%= t.file_field :archivo , :class=>'form-control',:multiple => true, :style=>"display:none;", :onchange=>"document.getElementById('showFiles').value = (this.files.length>1)?''+this.files.length+' Archivos seleccionados.':this.files[0].name;" %><span class="input-group-addon" style="background-color: #256188; cursor:pointer;" onclick="document.getElementById('tarea_archivo').click();">
-              <i class="icon-file icon-white"></i>
-            </span></td>
-		        </tr>          	
-	       </table>
+		<div class="form-group" style>
+        <%= t.label :titulo, "Archivos seleccionados:" %>
+        <div class="col-lg input-group">
+          <input id="showFiles" class="form-control" type="text" placeholder="Seleccione archivos..." onclick="document.getElementById('tarea_archivo').click();" onfocus="this.blur();">
+            <%= t.file_field :archivo , :class=>'form-control',:multiple => true, :style=>"display:none;", :onchange=>"document.getElementById('showFiles').value = (this.files.length>1)?''+this.files.length+' Archivos seleccionados.':this.files[0].name;" %>
+            <span class="input-group-addon" style="background-color: #256188; cursor:pointer;" onclick="document.getElementById('tarea_archivo').click();">
+            <i class="icon-file icon-white"></i>
+            </span>
+        </div>
+      	</div>
+	    
 	        <ul class="list-group">
 	        	<li class="list-group-item">
 	            <center><a href="javascript:window.history.back();" class="btn btn-danger">&laquo; Cancelar</a> <input type="submit" value="Crear tarea" class="btn btn-success"></center>
@@ -82,3 +102,38 @@
 	            });
 	</script>
 	</script>
+
+
+ <script>
+  $(function() {
+    var gruposDisponibles = [
+    <% current_user.grupos.each do |grupo|%>
+      "<%=grupo.nombre%>",
+    <% end %>
+    "Publico"
+    ];
+   $( "#grupos" ).autocomplete({
+      source: gruposDisponibles,
+      minLength: 0
+   });
+   });
+
+  function getGrupo()
+  {
+    var grupo = document.getElementById("grupos").value;
+    var grupo_sin = grupo.replace(/\s/g, "_");
+    if ($("#" + grupo_sin).length < 1)
+    {
+      document.getElementById("gruposDiv").innerHTML+="<div id='"+grupo_sin+"'>"+ grupo +"<a href='#' onclick='quitarOpcion(&quot;"+grupo_sin+"&quot);'><img src='/assets/delete.png' width='20'></a> </div> ";
+       document.getElementById("check" + grupo_sin).checked = true;
+      document.getElementById("grupos").value = "";
+    }
+  };
+
+  function quitarOpcion(id)
+  {
+    $("#" + id).replaceWith("");
+    document.getElementById("check" + id).checked = false;
+    return false;
+  };
+</script>

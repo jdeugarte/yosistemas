@@ -1,9 +1,9 @@
 class Grupo < ActiveRecord::Base
     
     belongs_to :usuario
-    has_many :temas
+    has_and_belongs_to_many :temas
     has_many :subscripcions
-    has_many :tareas
+    has_and_belongs_to_many :tareas
     has_many :cuestionarios
     has_many :eventos
   

@@ -2,12 +2,25 @@ require 'pusher'
 class TareasController < ApplicationController
 	#GET tareas
 	def index
-		@grupo = Grupo.find(params[:grupo])
-		if(@grupo.habilitado && params[:grupo]!="1" && current_user.esta_subscrito?((params[:grupo])))
-		@tareas = Tarea.where(:grupo_id => params[:grupo]).order("updated_at DESC").page(params[:page]).per(5)
-		else
-		redirect_to temas_path
-		end
+		if( params[:grupo] != nil && Grupo.find(params[:grupo]).habilitado)
+       	@grupo = Grupo.find(params[:grupo])
+    	else
+       	@grupo = Grupo.find(1)
+       	redirect_to temas_path
+    	end
+    	if(params[:grupo]=="1")
+      		redirect_to temas_path
+    	else
+      		@tareas = @grupo.tareas.order("updated_at DESC").page(params[:page]).per(5)
+    	end
+
+
+		#@grupo = Grupo.find(params[:grupo])
+		#if(@grupo.habilitado && params[:grupo]!="1" && current_user.esta_subscrito?((params[:grupo])))
+		#@tareas = Tarea.where(:grupo_id => params[:grupo]).order("updated_at DESC").page(params[:page]).per(5)
+		#else
+		#redirect_to temas_path
+		#end
 	end
 	#GET tareas/new
 	def responder_tarea
@@ -103,12 +116,17 @@ class TareasController < ApplicationController
 	end
 	def eliminar
 		@tarea = Tarea.find(params[:id])
-		@grupo = @tarea.grupo
+		@tarea.grupos.each do |grupo|
+	      if current_user.esta_subscrito?(grupo.id)
+	       		@grupo = grupo
+	        break
+	      end
+	    end
 		if(@tarea.usuario_id == current_user.id)
 		@tarea.destroy
 		flash[:alert] = 'Tarea eliminada'
 		end
-		redirect_to '/grupos/'+@grupo.id.to_s+'/tareas'
+		redirect_to '/grupos/'+@grupo.id.to_s + '/temas-y-tareas'
 	end
 	def show
 		@tarea = Tarea.find(params[:id])
@@ -131,7 +149,12 @@ class TareasController < ApplicationController
 		current_user.subscripcions.each do |subs|
 		@grupos.push(subs.grupo)
 		end
-		@grupo = Grupo.find(@tarea.grupo_id)
+		@tarea.grupos.each do |grupo|
+	      if current_user.esta_subscrito?(grupo.id)
+	       		@grupo = grupo
+	        break
+	      end
+	    end
 		@id = params[:id]
 		end
 		else
@@ -163,26 +186,26 @@ class TareasController < ApplicationController
 	#POST tareas/create
 	def create
 		@tarea = Tarea.new(tarea_params)
-		@tarea.grupo_id=params[:tarea][:grupo_id]
 		@tarea.usuario_id = current_user.id
-		if(@tarea.save)
-		add_attached_files(@tarea.id)
-		flash[:alert] = 'Tarea creada Exitosamente!'
-		notificar_por_email(@tarea.grupo_id, @tarea)
-		notificacion_push(@tarea.grupo_id, @tarea)
-		redirect_to '/grupos/'+params[:tarea][:grupo_id]+'/tareas'
+		if params[:grupos] != nil &&  @tarea.save 
+			 params[:grupos].each do |grupo|
+		        Grupo.find(grupo).tareas << @tarea
+		      end
+		     @tarea.save
+			add_attached_files(@tarea.id)
+			flash[:alert] = 'Tarea creada Exitosamente!'
+			@tarea.grupos.each do |grupo|
+				notificar_por_email(grupo.id, @tarea)
+				notificacion_push(grupo.id, @tarea)
+			end
+
+			redirect_to '/tareas/'+@tarea.id.to_s
 		else
-		@grupos = Array.new
-		if(current_user!=nil)
-		current_user.subscripcions.each do |subs|
-		@grupos.push(subs.grupo)
-		end
-		@grupo = Grupo.find(params[:tarea][:grupo_id])
-		@id = params[:tarea][:grupo_id]
-		end
-		render :new;
+			flash[:notice] = "La tarea no pudo ser guardada"
+			redirect_to(:back)
 		end
 	end
+
 	def editar_comentario
 		@comentario = TareaComentario.find(params[:id_comentario])
 	end

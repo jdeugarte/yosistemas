@@ -1,0 +1,21 @@
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mGrupo Exists (0.0ms)[0m  [1mSELECT 1 AS one FROM "grupos" WHERE LOWER("grupos"."nombre") = LOWER('Publico') LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mUsuario Exists (0.0ms)[0m  SELECT 1 AS one FROM "usuarios" WHERE "usuarios"."nombre_usuario" = 'docente' LIMIT 1
+  [1m[36mUsuario Exists (0.0ms)[0m  [1mSELECT 1 AS one FROM "usuarios" WHERE "usuarios"."correo" = 'docente@gmail.com' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mUsuario Exists (0.0ms)[0m  SELECT 1 AS one FROM "usuarios" WHERE "usuarios"."nombre_usuario" = 'administrador' LIMIT 1
+  [1m[36mUsuario Exists (0.0ms)[0m  [1mSELECT 1 AS one FROM "usuarios" WHERE "usuarios"."correo" = 'administrador@gmail.com' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mUsuario Exists (0.0ms)[0m  SELECT 1 AS one FROM "usuarios" WHERE "usuarios"."nombre_usuario" = 'estudiante' LIMIT 1
+  [1m[36mUsuario Exists (0.0ms)[0m  [1mSELECT 1 AS one FROM "usuarios" WHERE "usuarios"."correo" = 'estudiante@gmail.com' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (95.5ms)[0m  INSERT INTO "urls" ("created_at", "direccion", "updated_at") VALUES (?, ?, ?)  [["created_at", Thu, 20 Nov 2014 17:51:24 BOT -04:00], ["direccion", "staging-yosistemas2014.herokuapp.com"], ["updated_at", Thu, 20 Nov 2014 17:51:24 BOT -04:00]]
+  [1m[36m (109.4ms)[0m  [1mcommit transaction[0m

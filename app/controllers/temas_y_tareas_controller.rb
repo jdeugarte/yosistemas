@@ -11,7 +11,7 @@ class TemasYTareasController < ApplicationController
       redirect_to temas_path
     else
       @temas = @grupo.temas.order("updated_at DESC").page(params[:page]).per(3)
-      @tareas = Tarea.where(:grupo_id => params[:id]).order("updated_at DESC").page(params[:page]).per(3)
+      @tareas = @grupo.tareas.order("updated_at DESC").page(params[:page]).per(3)
       @all = (@temas+@tareas).sort_by(&:created_at).reverse
     end
   end

@@ -48,18 +48,20 @@
                   <a href='<%=invitacion_grupo_path(grupo)%>' class='btn btn-primary' style='margin-top:6px;'>Invitar Amigos al Grupo</a>
                 <%end%>
                 <% if grupo.usuario_id == current_user.id %>
-                  <a href='/grupos/<%=grupo.id%>/temas' class='btn btn-primary' style='margin-top:6px;'>Ver Temas del grupo</a>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                      <!--Botones-->
+                      <center>
+                        <a href='/grupos/<%=grupo.id%>/temas' class='btn btn-primary btn-xs' style="margin-top:1px;">Temas del grupo</a>
 
-                  <button id="popover" type="button" class="btn btn-primary" style="margin-top:6px;" data-toggle="popover" data-content="
+                    <a href='/grupos/<%=grupo.id%>/editar_grupo' class='btn btn-primary btn-xs' style="margin-top:1px;">Editar grupo</a>
                   
-                    <a href='<%=invitacion_grupo_path(grupo)%>' class='btn btn-primary btn-xs btn-block'>Invitar Amigos al Grupo</a>
+                    <a href='<%=suscriptores_path(grupo)%>' class='btn btn-primary btn-xs' style="margin-top:1px;">Suscriptores del Grupo</a>
 
-                    <a href='/grupos/<%=grupo.id%>/editar_grupo' class='btn btn-primary btn-xs btn-block'>Editar datos del grupo</a>
-                  
-                    <a href='<%=suscriptores_path(grupo)%>' class='btn btn-primary btn-xs btn-block'>Ver Suscriptores del Grupo</a>
-
-                    <a href='grupos/deshabilitar_grupo/<%= grupo.id%>' class='btn btn-primary btn-danger btn-xs btn-block'>Deshabilitar Grupo</a>">Mas opciones</button>
-
+                    <a href='grupos/deshabilitar_grupo/<%= grupo.id%>' class='btn btn-primary btn-danger btn-xs' style="margin-top:1px;">Deshabilitar Grupo</a>
+                      </center>
+                    </li>
+                  </ul>
                 <% end %>
       </div>
     </div>
@@ -70,15 +72,4 @@
 
 <script type="text/javascript">
    $(".square-color-tema").css("background-color",get_random_color());
-</script>
-<script type="text/javascript">
-  $(document).ready(function()
-{
-  $('#popover').popover(
-  {
-     trigger: 'click',
-     html: true,
-     placement: 'right',
-  });
-});
 </script>

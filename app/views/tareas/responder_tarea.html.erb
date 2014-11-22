@@ -29,15 +29,19 @@
           <td><%= t.text_area :descripcion, :class=>'form-control',:rows=>'6', :placeholder=>'Descripcion' %></td>
         </tr>
 
-        <tr>
-           <td>Adjuntar archivos:</td>
-            <td><input id="showFiles" class="form-control" type="text" placeholder="Seleccione archivos..." onclick="document.getElementById('responder_tarea_archivo').click();" onfocus="this.blur();">
+        </table>
+
+        <div class="form-group" style>
+        <%= t.label :titulo, "Archivos seleccionados:" %>
+        <div class="col-lg input-group">
+          <input id="showFiles" class="form-control" type="text" placeholder="Seleccione archivos..." onclick="document.getElementById('responder_tarea_archivo').click();" onfocus="this.blur();">
             <%= t.file_field :archivo , :class=>'form-control',:multiple => true, :style=>"display:none;", :onchange=>"document.getElementById('showFiles').value = (this.files.length>1)?''+this.files.length+' Archivos seleccionados.':this.files[0].name;" %>
             <span class="input-group-addon" style="background-color: #256188; cursor:pointer;" onclick="document.getElementById('responder_tarea_archivo').click();">
-              <i class="icon-file icon-white"></i>
-            </span></td>
-        </tr>
-        </table>
+            <i class="icon-file icon-white"></i>
+            </span>
+        </div>
+        </div>
+
         <ul class="list-group">
           <li class="list-group-item">
             <center><input type="submit" value="Responder tarea" class="btn btn-success"></center>

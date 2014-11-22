@@ -1,33 +1,19 @@
-<div class="panel panel-success">
+
+
+  <div class="panel panel-info">  
   <div class="panel-heading">
-    <Center><h3><b>Respuesta de tarea</b></h3></Center>
+    <h3><%= @respuesta_tarea.tarea.titulo %></h3>
   </div>
-  <div class="panel-body">        
-    <ul class="list-group">
-      <li class="list-group-item">
-          <%= image_tag avatar_tam_url(@respuesta_tarea.usuario,80)  %>
-        <center><h2 ><%= @respuesta_tarea.usuario.nombre_usuario%></h2></center>
-        <table class="table table-user-information">
-          <tr>
-            <td><Center><h3><b><%= @respuesta_tarea.tarea.titulo %></b></h3></Center></td>
-          </tr>
-          <tr>          
-            <td>
-            <br><br>
-              <p align="right"><textarea disabled="true" rows="4" cols="45" ><%= @respuesta_tarea.descripcion %></textarea></p>
-                <div align="right">Entrega:&nbsp;
-                  <label><i class="icon-calendar"></i> <%= @respuesta_tarea.tarea.fecha_entrega.strftime("%d/%b/%Y")%></label>&nbsp;&nbsp;
-                  <label><i class="icon-time"></i> <%= @respuesta_tarea.tarea.hora_entrega.strftime("%I:%M %p") %></label>
-                  </div>
-                  <p align="right">
-                    <small >Tarea enviada el <%= @respuesta_tarea.created_at.localtime.strftime("%d/%m/%Y a las: %I:%M  %p") %>
-                    </small></p>
-            </td>
-          </tr>
-        </table>
-      </li>
-    </ul>
+  <div class="panel-body">
+    <span><b>Respuesta:</b><br><%= @respuesta_tarea.descripcion %></span>
   </div>
+  <ul class="list-group">
+    <li class="list-group-item"><span style="color: gray;">Tarea enviada el <%= @respuesta_tarea.created_at.localtime.strftime("%d/%m/%Y a las: %I:%M  %p") %><br>Por: <%= image_tag avatar_tam_url(@respuesta_tarea.usuario,20)  %><%= @respuesta_tarea.usuario.nombre+" "+@respuesta_tarea.usuario.apellido%></span>
+    </li>
+  </ul>
+</div>
+
+
   <% if(@respuesta_tarea.archivo_adjunto_respuestas.size>0) %>        
     <ul class="list-group">
       <li class="list-group-item">
@@ -43,8 +29,6 @@
       </li>
     </ul>
   <% end %>
- 
-</div>
 
 <script>
   $(document).ready(function() {
@@ -54,3 +38,5 @@
 <script type="text/javascript">
   getImagesForAttachedFiles();
 </script>
+
+

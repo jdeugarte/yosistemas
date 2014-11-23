@@ -17,8 +17,9 @@
           <ul class="dropdown-menu" role="menu">
             <%if  !current_user.nil? %>
             <% if !@grupo.nil? %>
-            <li><a href="/temas/new/<%=@grupo.id%>">Crear Tema</a></li>
-
+            <% if current_uri = request.env['PATH_INFO'].to_s != "/grupos/new" %>
+              <li><a href="/temas/new/<%=@grupo.id%>">Crear Tema</a></li>
+            <% end %>
             <% end %>
             <!--li><a href="/temas/show_mine">Mis Temas</a></li-->
             <%end%>
@@ -26,24 +27,26 @@
           </ul>
         </li>
         <%if !@grupo.nil? and @grupo.nombre!="Publico"%>
+        <% if current_uri = request.env['PATH_INFO'].to_s != "/grupos/new" %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tareas<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">         
-          <%if  !current_user.nil? %>
-            <% if !@grupo.nil? %>
-              <% if current_user.rol == "Docente"%>
-              <li><a href="/tareas/new/<%=@grupo.id%>">Crear Tarea</a></li>
-              <%end%>
-            <% end %>
-          <% end %>
-            <!--li><a href="/temas/show_mine">Mis Temas</a></li-->
-            <% if !@grupo.nil? %>
-            <li><a href="/grupos/<%=@grupo.id%>/tareas">Ver Tareas</a></li>
-            <% end %>
-
+          <ul class="dropdown-menu" role="menu">   
+            
+              <%if  !current_user.nil? %>
+                <% if !@grupo.nil? %>
+                  <% if current_user.rol == "Docente"%>
+                    <li><a href="/tareas/new/<%=@grupo.id%>">Crear Tarea</a></li>
+                  <% end %>
+                <% end %>
+              <% end %>
+              <% if !@grupo.nil? %>
+                <li><a href="/grupos/<%=@grupo.id%>/tareas">Ver Tareas</a></li>
+              <% end %>
+            
           </ul>
         </li>
-        <% end %>        
+        <% end %>  
+        <% end %>      
 
         <%if !current_user.nil? %>
         <li class="dropdown">
@@ -56,20 +59,24 @@
           </ul>
         </li>
         <%if !@grupo.nil? and @grupo.nombre!="Publico" %>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cuestionarios<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="/cuestionarios/cuestionarios_de_grupo_index/<%=@grupo.id%>">Ver Cuestionarios</a></li>
-            <%if current_user.rol == "Docente"%>
-            <li><a href="/cuestionarios/nuevo_cuestionario/<%=@grupo.id%>">Crear Cuestionario</a></li>
-            <%end%>
-          </ul>
-        </li>
+          <% if current_uri = request.env['PATH_INFO'].to_s != "/grupos/new" %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cuestionarios<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/cuestionarios/cuestionarios_de_grupo_index/<%=@grupo.id%>">Ver Cuestionarios</a></li>
+                <%if current_user.rol == "Docente"%>
+                <li><a href="/cuestionarios/nuevo_cuestionario/<%=@grupo.id%>">Crear Cuestionario</a></li>
+                <%end%>
+              </ul>
+            </li>
+          <% end %>
         <%end%>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Eventos<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
+          <% if current_uri = request.env['PATH_INFO'].to_s != "/grupos/new" %>
             <li><a href="/eventos/new">Crear Evento</a></li>
+          <% end %>
             <li><a href="/eventos">Ver Eventos</a></li>
           </ul>
         </li>

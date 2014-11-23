@@ -23,7 +23,7 @@ class GruposController < ApplicationController
   end
   
   def buscar
-    @grupos = Grupo.where("nombre LIKE ? AND estado = ?", "%#{params[:nombre]}%", true).page(params[:page]).per(5)
+    @grupos = Grupo.where("nombre LIKE ?", "%#{params[:nombre]}%").page(params[:page]).per(5)
     render 'index'
   end
 

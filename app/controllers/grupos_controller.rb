@@ -71,17 +71,15 @@ class GruposController < ApplicationController
     @grupo.usuario_id = current_user.id
     #la funcion de abajo verifica si se creo un grupo publico, o uno privado para generar la clave
     @grupo.verificar_grupo
-    respond_to do |format|  
       if @grupo.save
         subs = Subscripcion.new
         subs.grupo = @grupo
         subs.usuario = current_user
         subs.save
-        format.html { redirect_to @grupo, notice: 'Grupo ha sido creado.' }
+        redirect_to @grupo, :flash => { :alert => 'Grupo ha sido creado.' } 
       else
         render 'new', :flash => { :alert => "Error al crear un grupo" }
       end
-    end
   end
 
   def subscripcion_grupo

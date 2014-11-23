@@ -58,7 +58,11 @@
                   
                     <a href='<%=suscriptores_path(grupo)%>' class='btn btn-primary btn-xs' style="margin-top:1px;">Suscriptores del Grupo</a>
 
-                    <a href='grupos/deshabilitar_grupo/<%= grupo.id%>' class='btn btn-primary btn-danger btn-xs' style="margin-top:1px;">Deshabilitar Grupo</a>
+                    <% if grupo.habilitado %>
+                      <a href='/grupos/deshabilitar_grupo/<%= grupo.id%>' class='btn btn-primary btn-danger btn-xs' style="margin-top:1px;">Deshabilitar Grupo</a>
+                    <% else %>
+                      <a href='/grupos/habilitar_grupo/<%= grupo.id%>' class='btn btn-primary btn-danger btn-xs' style="margin-top:1px;">Habilitar Grupo</a>
+                    <% end %>
                       </center>
                     </li>
                   </ul>

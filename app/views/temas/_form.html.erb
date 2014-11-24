@@ -72,16 +72,24 @@
    });
    });
 
+
+
   function getGrupo()
   {
+    var gruposDisponibles = [
+    <% current_user.grupos.each do |grupo|%>
+      "<%=grupo.nombre%>",
+    <% end %>
+    "Publico"
+    ];
     var grupo = document.getElementById("grupos").value;
     var grupo_sin = grupo.replace(/\s/g, "_");
-    if ($("#" + grupo_sin).length < 1)
+    if ($("#" + grupo_sin).length < 1 && grupo != "" && jQuery.inArray(grupo,gruposDisponibles) != -1)
     {
       document.getElementById("gruposDiv").innerHTML+="<div id='"+grupo_sin+"'>"+ grupo +"<a href='#' onclick='quitarOpcion(&quot;"+grupo_sin+"&quot);'><img src='/assets/delete.png' width='20'></a> </div> ";
        document.getElementById("check" + grupo_sin).checked = true;
-      document.getElementById("grupos").value = "";
     }
+    return false;
   };
 
   function quitarOpcion(id)

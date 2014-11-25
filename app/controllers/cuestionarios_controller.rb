@@ -17,6 +17,7 @@ class CuestionariosController < ApplicationController
   	end
   end
 
+
   def ver_resultado
       @cuestionario = Cuestionario.find(params[:id_cuestionario])
       @usuario = current_user
@@ -89,6 +90,7 @@ class CuestionariosController < ApplicationController
 	end
 
   def calificar
+
     @comentarios = params[:comentarios]
     @calificacion = params[:calificacion]
     @id_respuestas = params[:id_respuestas]
@@ -107,7 +109,7 @@ class CuestionariosController < ApplicationController
 		@grupo = Grupo.find(@cuestionario.grupo_id)
 		@cuestionarios = Cuestionario.buscar_cuestionarios(@grupo)
     @grupos = Grupo.where("usuario_id = ?", current_user.id)
-	end
+	end  
 
   def create
 		@cuestionario = Cuestionario.new(cuestionario_params)
@@ -121,7 +123,7 @@ class CuestionariosController < ApplicationController
 		@cuestionario = Cuestionario.find(params[:id])
     @cuestionario.update(cuestionario_params)
     @cuestionario.save
-    redirect_to "/cuestionarios/cuestionarios_de_grupo_index/"+params[:grupo_id]
+    redirect_to "/cuestionarios/cuestionarios_de_grupo_index/"+params[:cuestionario][:grupo_id]
 	end
 
   def editar_cuestionario

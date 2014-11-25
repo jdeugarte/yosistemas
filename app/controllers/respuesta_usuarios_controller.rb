@@ -2,6 +2,7 @@ class RespuestaUsuariosController < ApplicationController
 	skip_before_filter :verify_authenticity_token
 	def nuevo
 		@cuestionario = Cuestionario.find(params[:id])
+
 	end
 	def crear 
 		@respuestas = params[:resp]

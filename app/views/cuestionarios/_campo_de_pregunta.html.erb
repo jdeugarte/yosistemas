@@ -11,7 +11,6 @@
     <%= preguntas_form.text_field :texto, :placeholder=>'Pregunta', :maxlength => 150 , size: "45"%>
     <%= preguntas_form.select :tipo ,options_for_select(["Texto Libre","Opcion Multiple"]), {}, { :class => 'myselect', :onchange=>"mostrar_ocultar_opcion(this, this.value)" }%>
     
-    
       <div class="semilla" style="display:none">
         <% preguntas_form.fields_for :respuestas do |builder| %>
         <%= render 'campo_de_respuesta', :respuestas_form => builder %>

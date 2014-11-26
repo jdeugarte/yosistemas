@@ -10,7 +10,6 @@ class CreateGrupos < ActiveRecord::Migration
 
       t.timestamps
     end
-  end
 
     create_table :grupos_temas, id: false do |t|
       t.integer :grupo_id
@@ -27,4 +26,6 @@ class CreateGrupos < ActiveRecord::Migration
       t.integer :evento_id
     end
 
+    
+  end
 end

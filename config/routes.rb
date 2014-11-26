@@ -121,6 +121,11 @@ Yosistemas::Application.routes.draw do
 
   get "notifications/change_seen/:id" => "notifications#change_seen"
 
+  #eventos
+  get 'eventos/new/:id' => 'eventos#new'
+
+
+
   resources :notifications
 
   resources :usuarios , except: [:destroy] do

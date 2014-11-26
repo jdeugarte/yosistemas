@@ -19,15 +19,6 @@
         <%=@evento.hora.strftime("%H:%M")%>
         </td>
       </tr>
-      <tr>
-        <td><center></center></td>
-        <td><b>Grupos</b></td>
-        <td>
-          <% @evento.grupos_pertenece.each do |grupo| %>
-            <%= Grupo.find(grupo).nombre %><br/>
-          <% end %>
-        </td>
-      </tr>
     </table>
   </div>
   <%if current_user!=nil && @evento.usuario_id==current_user.id%>

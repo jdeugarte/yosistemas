@@ -2,4 +2,71 @@
 	<div class="col-md-4"></div>
      <h1 id="forms">Editar Evento</h1>
 </div>
-<%= render 'form' %>
+
+<%= form_for(@evento) do |f| %>
+  <% if @evento.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@evento.errors.count, "error") %> prohibited this evento from being saved:</h2>
+
+      <ul>
+      <% @evento.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="panel panel-warning">
+  <div class="panel-heading"><Center><H3><b>Ingrese los datos del evento</b></H3></Center></div>
+    <div class="panel-body">
+      <table class="table table-hover">
+        <tbody>
+          <tr>
+            <td><b>Nombre:</b></td>
+            <td> <%= f.text_field :nombre, :placeholder=>'Nombre Evento', :maxlength => 25 , :title => "El nombre del evento es obligatorio, Por favor rellene este campo", :required => true %></td>
+          </tr>
+          <tr>
+            <td><b>Detalle:</b></td>
+            <td><%= f.text_area :detalle, :size => "30x5", :placeholder=>'Contenido', :maxlength => 500,:required=>true %></td>
+          </tr>
+          <tr>
+            <td><b>Lugar:</b></td>
+            <td><%= f.text_field :lugar, :placeholder=>'Lugar del Evento', :maxlength => 25 , :title => "El lugar del evento es obligatorio, Por favor rellene este campo",:required => true %></td>
+          </tr>
+          <tr>
+            <td><b>Fecha:</b></td>
+            <td>
+             <%= f.date_select :fecha, :order => [:day, :month, :year], :start_year => 1950 %>  
+            </td>
+          </tr>
+          <tr>
+            <td><b>Hora:</b></td>
+            <td><%= f.time_select :hora %></td>
+          </tr>
+          
+      </table>
+    </div>
+  <ul class="list-group">
+    <li class="list-group-item">
+        <center>
+          <a class="btn btn-danger" href="/eventos">Volver</a>
+          <input type="submit" value="Guardar evento" class="btn btn-success">
+        </center>
+    </li>
+  </ul>
+</div>
+
+<script>
+  $('.timepicker-default').timepicker();
+    $(function() {
+      $('#datetimepicker2').datetimepicker({
+                  language: 'es',
+                  pickTime: false,
+                  maskInput: true,
+                  startDate: new Date(), // set a minimum date
+                });
+              });
+</script>
+<% end %>
+
+
+

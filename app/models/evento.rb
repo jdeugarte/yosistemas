@@ -1,7 +1,7 @@
 class Evento < ActiveRecord::Base
 	serialize :grupos_pertenece, Array
 	belongs_to :usuario
-	belongs_to :grupo
+	has_and_belongs_to_many :grupos
 
 	def pertenece_misgrupos(id,user)
 		evento = Evento.find(id)

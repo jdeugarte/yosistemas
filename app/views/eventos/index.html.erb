@@ -3,7 +3,6 @@
 </div>
 
 <% @eventos.each do |evento| %>
-  <%if evento.pertenece_misgrupos(evento.id,current_user) %>  
   <%if evento.nombre != "Publico"%>
     <div class="panel panel-warning"style='cursor:pointer' onclick=<%="document.location.href='/"+evento.class.name.downcase+"s/"+evento.id.to_s+"'"%>>
       <div class="panel-heading"><h3><%= evento.nombre %></h3></div>
@@ -25,10 +24,8 @@
       </ul>
     </div>
   <%end%>
-  <%end%>
 <%end%>
 
-<center><%= paginate @eventos%></center>
 
 <script type="text/javascript">
    $(".square-color-tema").css("background-color",get_random_color());

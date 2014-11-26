@@ -75,7 +75,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Eventos<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
           <% if current_uri = request.env['PATH_INFO'].to_s != "/grupos/new" %>
-            <li><a href="/eventos/new">Crear Evento</a></li>
+            <li><a href="/eventos/new/<%=@grupo.id%>">Crear Evento</a></li>
           <% end %>
             <li><a href="/eventos">Ver Eventos</a></li>
           </ul>

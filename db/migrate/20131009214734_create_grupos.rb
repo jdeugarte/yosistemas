@@ -22,4 +22,9 @@ class CreateGrupos < ActiveRecord::Migration
       t.integer :tarea_id
     end
 
+    create_table :eventos_grupos, id: false do |t|
+      t.integer :grupo_id
+      t.integer :evento_id
+    end
+
 end

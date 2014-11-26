@@ -147,6 +147,11 @@ ActiveRecord::Schema.define(version: 20141112050203) do
   add_index "eventos", ["grupo_id"], name: "index_eventos_on_grupo_id"
   add_index "eventos", ["usuario_id"], name: "index_eventos_on_usuario_id"
 
+  create_table "eventos_grupos", id: false, force: true do |t|
+    t.integer "grupo_id"
+    t.integer "evento_id"
+  end
+
   create_table "grupos", force: true do |t|
     t.string   "nombre"
     t.text     "descripcion"

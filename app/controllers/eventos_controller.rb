@@ -4,17 +4,33 @@ class EventosController < ApplicationController
   before_filter :grupos
   # GET /eventos
   def index
-    @eventos = Evento.all.page(params[:page]).per(5)
+    @eventos = Array.new
+    current_user.grupos.each do |grupo|
+      grupo.eventos.each do |evento|
+        @eventos << evento
+      end
+    end
+    Grupo.find(1).eventos.each do |evento|
+       @eventos << evento
+    end
+    @eventos = @eventos.uniq
   end
 
   # GET /eventos/1
   def show
     @evento = Evento.find(params[:id])
+   @evento.grupos.each do |grupo|
+    if current_user.esta_subscrito?(grupo.id)
+      @grupo = grupo
+      break
+    end
+    end
   end
 
   # GET /eventos/new
   def new
     @evento = Evento.new
+    @grupo = Grupo.find(params[:id])
   end
 
   # GET /eventos/1/edit
@@ -25,18 +41,20 @@ class EventosController < ApplicationController
   def create
     @evento = Evento.new(evento_params)
     @evento.usuario_id = current_user.id
-    params[:grupos].each do |grupo|
-      @evento.grupos_pertenece << grupo
-    end
-    respond_to do |format|
-      if @evento.save
+    if params[:grupos] != nil && @evento.save
+        params[:grupos].each do |grupo|
+          grupi = Grupo.find(grupo)
+          grupi.eventos << @evento
+          @evento.grupos_pertenece << grupo
+          grupi.save
+        end
         notificacion_push(params[:grupos], @evento)
         notificar_por_email(params[:grupos], @evento)
-        format.html { redirect_to @evento, notice: 'Evento ha sido creado.' }
+        flash[:notice] = "Evento creado Exitosamente! "
+        redirect_to '/eventos/' + @evento.id.to_s
       else
-        format.html { render action: 'Nuevo' }
-        
-      end
+        flash[:alert] = 'El evento no pudo ser creado!'
+        redirect_to(:back)
     end
   end
 

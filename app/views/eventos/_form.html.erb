@@ -39,14 +39,17 @@
           </tr>
 
           <tr>
-            <div class="ui-widget">
-              <label  for="grupos">Grupos: </label>
-              <input id="grupos">
-              <input type="button" onclick="getGrupo();"/>
+             <div class="ui-widget">
+              <td> 
+                <label  for="grupos">Grupos: </label> 
+              </td>
+              <td> <input id="grupos">
+              <a href="#" onclick="getGrupo();"><img src="/assets/add.png" width="25"></a>
+              <br/>
+              <div id="gruposDiv">
+              <div id="<%=@grupo.nombre.gsub(' ','_')%>"><%=@grupo.nombre%><a href="#" onClick="quitarOpcion('<%=@grupo.nombre.gsub(' ','_')%>');"><img src="/assets/delete.png" width="20"></a> </div>
             </div>
-            <br/>
-            <div id="gruposDiv">
-              <div id="Publico">Publico<a href="#" onClick="quitarOpcion('Publico');">X</a> </div>
+              </td>
             </div>
 
           </tr>
@@ -91,11 +94,10 @@
 
 
  <script>
-
   $(function() {
     var gruposDisponibles = [
     <% current_user.grupos.each do |grupo|%>
-      "<%=grupo.nombre.gsub(' ','_')%>",
+      "<%=grupo.nombre%>",
     <% end %>
     "Publico"
     ];
@@ -105,13 +107,24 @@
    });
    });
 
+
+
   function getGrupo()
   {
+    var gruposDisponibles = [
+    <% current_user.grupos.each do |grupo|%>
+      "<%=grupo.nombre%>",
+    <% end %>
+    "Publico"
+    ];
     var grupo = document.getElementById("grupos").value;
-    document.getElementById("gruposDiv").innerHTML+="<div id='"+grupo+"'>"+ grupo +"<a href='#' onclick='quitarOpcion(&quot;"+grupo+"&quot);'>X</a> </div> ";
-     document.getElementById("check" + grupo).checked = true;
-    document.getElementById("grupos").value = "";
-
+    var grupo_sin = grupo.replace(/\s/g, "_");
+    if ($("#" + grupo_sin).length < 1 && grupo != "" && jQuery.inArray(grupo,gruposDisponibles) != -1)
+    {
+      document.getElementById("gruposDiv").innerHTML+="<div id='"+grupo_sin+"'>"+ grupo +"<a href='#' onclick='quitarOpcion(&quot;"+grupo_sin+"&quot);'><img src='/assets/delete.png' width='20'></a> </div> ";
+       document.getElementById("check" + grupo_sin).checked = true;
+    }
+    return false;
   };
 
   function quitarOpcion(id)

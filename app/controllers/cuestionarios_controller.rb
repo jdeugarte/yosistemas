@@ -73,11 +73,8 @@ class CuestionariosController < ApplicationController
       redirect_to temas_path
     end
     @cuestionarios = Array.new
-    todos_cuestionarios = Cuestionario.all
-    todos_cuestionarios.each do |cuestionario|
-      if cuestionario.grupo_id==@grupo.id or cuestionario.grupos_pertenecen.include? @grupo.id.to_s
-        @cuestionarios<<cuestionario
-      end
+    @grupo.cuestionarios.each do |cuestio|
+      @cuestionarios << cuestio
     end
 		#@cuestionarios = Cuestionario.buscar_cuestionarios(@grupo).page(params[:page]).per(2)
 	end
@@ -114,9 +111,20 @@ class CuestionariosController < ApplicationController
   def create
 		@cuestionario = Cuestionario.new(cuestionario_params)
     @cuestionario.grupos_pertenecen = params[:grupos_pertenecen]
-    @cuestionario.save
-    flash[:alert] = "Cuestionario Creado con exito!";
-		redirect_to "/cuestionarios/cuestionarios_de_grupo_index/"+params[:cuestionario][:grupo_id]
+    if params[:grupos] != nil && @cuestionario.save
+      params[:grupos].each do |grupo|
+          grupi = Grupo.find(grupo)
+          grupi.cuestionarios << @cuestionario
+          grupi.save
+        end
+      flash[:notice] = "Cuestionario creado Exitosamente!"
+      redirect_to "/cuestionarios/cuestionarios_de_grupo_index/"+params[:grupos][0]
+    else
+      flash[:notice] = "El cuestionario no pudo ser creado!"
+      redirect_to(:back)
+    end
+
+		
 	end
 
 	def update

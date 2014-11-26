@@ -39,31 +39,26 @@
           </tr>
 
           <tr>
-             <div class="ui-widget">
-              <td> 
-                <label  for="grupos">Grupos: </label> 
-              </td>
-              <td> <input id="grupos">
+             <td> <div class="ui-widget">
+              <label  for="grupos">Grupos: </label></td>
+              <td><input id="grupos">
               <a href="#" onclick="getGrupo();"><img src="/assets/add.png" width="25"></a>
-              <br/>
-              <div id="gruposDiv">
+            </div>
+            <br/>
+            <div id="gruposDiv">
               <div id="<%=@grupo.nombre.gsub(' ','_')%>"><%=@grupo.nombre%><a href="#" onClick="quitarOpcion('<%=@grupo.nombre.gsub(' ','_')%>');"><img src="/assets/delete.png" width="20"></a> </div>
-            </div>
-              </td>
-            </div>
+            </div><td/>
 
           </tr>
-
-          <tbody style="display:none">
-          <tr>
-            <td><b>Grupos:</b></td>
-            <td><strong>Publico</strong> 
-            <%= check_box_tag "grupos[]", 1 , checked = true , :id => "checkPublico"%><br/>
+        <div style="display:none;">
+             <strong><%=@grupo.nombre%></strong> <%= check_box_tag "grupos[]" , @grupo.id , checked = true , :id =>"check" + @grupo.nombre.gsub(' ','_')%><br/>
             <% current_user.grupos.each do |grupo| %>
-              <strong><%=grupo.nombre%></strong> 
-              <%= check_box_tag  "grupos[]", grupo.id ,checked = false, :id => "check#{grupo.nombre.gsub(' ','_')}" %><br/>
-            <% end %></td>
-          </tr></tbody>
+              <% if grupo != @grupo %>
+                  <strong><%=grupo.nombre%></strong> 
+                  <%= check_box_tag  "grupos[]", grupo.id ,checked = false, :id => "check#{grupo.nombre.gsub(' ','_')}" %><br/>
+              <% end %>
+            <% end %>
+          </div>
           
 
         </tbody>

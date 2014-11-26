@@ -22,40 +22,30 @@
       <td><b>Hora limite:</b></td>
       <td><%= f.time_select :hora_limite, :default=>(Time.now + 2.hours)%></td>
     </tr><br><br>
-    <tr>
-      <td><b>Grupos:</b></td>
-
-      <a href="#" data-toggle="modal" data-target="#grupos" data-keyboard="true" class="btn btn-primary">
-            Agregar mas grupos
-      </a>
-
-      <div class="modal fade" id="grupos" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel2" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                <div class="modal-header">
-                  <center><h1>MIS GRUPOS</h1></center>
-                </div>
-                <div class="modal-body">  
-                  <% @grupos.each do |g| %>
-                  <% if g.id != @grupo.id %>
-                    <div style="float:left;margin-bottom:10px;margin-left:10px;">
-                      <%= image_tag avatar_tam_url(g.usuario,70) %><br>
-                      <%= g.nombre %>
-                      <%= check_box_tag "grupos_pertenecen[]", g.id %><br/>
-                    </div>   
-                  <% end %>
-                  <% end %>
-                </div>
-                <div class="clear"></div> 
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" data-dismiss="modal">Listo</button>
-                </div>
+       <tr>
+             <div class="ui-widget">
+              <label  for="grupos">Grupos: </label>
+              <input id="grupos">
+              <a href="#" onclick="getGrupo();"><img src="/assets/add.png" width="25"></a>
             </div>
+            <br/>
+            <div id="gruposDiv">
+              <div id="<%=@grupo.nombre.gsub(' ','_')%>"><%=@grupo.nombre%><a href="#" onClick="quitarOpcion('<%=@grupo.nombre.gsub(' ','_')%>');"><img src="/assets/delete.png" width="20"></a> </div>
             </div>
-        </div>
-      <%= f.hidden_field :grupo_id, :value => @grupo.id %>
-      <!--<td><%=f.collection_select(:grupo_id, Grupo.privados, :id, :nombre)%></td>-->
-    </tr>       
+
+
+          </tr>
+
+             <div style="display:none;">
+             <strong><%=@grupo.nombre%></strong> <%= check_box_tag "grupos[]" , @grupo.id , checked = true , :id =>"check" + @grupo.nombre.gsub(' ','_')%><br/>
+            <% current_user.grupos.each do |grupo| %>
+              <% if grupo != @grupo %>
+                  <strong><%=grupo.nombre%></strong> 
+                  <%= check_box_tag  "grupos[]", grupo.id ,checked = false, :id => "check#{grupo.nombre.gsub(' ','_')}" %><br/>
+              <% end %>
+            <% end %>
+          </div>
+
     </br></br>
     <label for="inputTitle">
       ¿Desea publicar el cuestionario?
@@ -120,3 +110,44 @@
               });
   </script>
 <%end%>
+
+ <script>
+  $(function() {
+    var gruposDisponibles = [
+    <% current_user.grupos.each do |grupo|%>
+      "<%=grupo.nombre%>",
+    <% end %>
+    ];
+   $( "#grupos" ).autocomplete({
+      source: gruposDisponibles,
+      minLength: 0
+   });
+   });
+
+
+
+  function getGrupo()
+  {
+    var gruposDisponibles = [
+    <% current_user.grupos.each do |grupo|%>
+      "<%=grupo.nombre%>",
+    <% end %>
+    "Publico"
+    ];
+    var grupo = document.getElementById("grupos").value;
+    var grupo_sin = grupo.replace(/\s/g, "_");
+    if ($("#" + grupo_sin).length < 1 && grupo != "" && jQuery.inArray(grupo,gruposDisponibles) != -1)
+    {
+      document.getElementById("gruposDiv").innerHTML+="<div id='"+grupo_sin+"'>"+ grupo +"<a href='#' onclick='quitarOpcion(&quot;"+grupo_sin+"&quot);'><img src='/assets/delete.png' width='20'></a> </div> ";
+       document.getElementById("check" + grupo_sin).checked = true;
+    }
+    return false;
+  };
+
+  function quitarOpcion(id)
+  {
+    $("#" + id).replaceWith("");
+    document.getElementById("check" + id).checked = false;
+    return false;
+  };
+</script>

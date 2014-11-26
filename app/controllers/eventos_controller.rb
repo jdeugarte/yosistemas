@@ -18,7 +18,7 @@ class EventosController < ApplicationController
 
   # GET /eventos/1
   def show
-    @evento = Evento.find(params[:id])
+   @evento = Evento.find(params[:id])
    @evento.grupos.each do |grupo|
     if current_user.esta_subscrito?(grupo.id)
       @grupo = grupo

@@ -10,8 +10,7 @@ module ApplicationHelper
 
     def notificaciones_nuevas
       notificaciones = Notification.where(:para_usuario_id => current_user.id, :seen => false)
-
-
+      notificaciones.order("created_at DESC")
     end
     
     def notificaciones_nueva_tarea

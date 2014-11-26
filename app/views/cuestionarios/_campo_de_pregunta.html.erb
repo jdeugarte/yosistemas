@@ -9,7 +9,7 @@
 
   <div class="panel-body">
     <%= preguntas_form.text_field :texto, :placeholder=>'Pregunta', :maxlength => 150 , size: "45"%>
-   <!-- <%= preguntas_form.select :tipo ,options_for_select(["Texto Libre","Opcion Multiple"]), {}, { :class => 'myselect', :onchange=>"mostrar_ocultar_opcion(this, this.value)" }%>
+   <%= preguntas_form.select :tipo ,options_for_select(["Texto Libre","Opcion Multiple"]), {}, { :class => 'myselect', :onchange=>"mostrar_ocultar_opcion(this, this.value)" }%>
     
       <div class="semilla" style="display:none">
         <% preguntas_form.fields_for :respuestas do |builder| %>
@@ -20,7 +20,7 @@
             <%= preguntas_form.link_to_add "Agregar Respuesta", :respuestas, :class=>"btn btn-success" %>
           </div>
         </div>
-      </div>-->
+      </div>
       <%= preguntas_form.link_to_remove "Eliminar Pregunta", :class=>"btn btn-danger" %>
   </div>
 </div>

@@ -128,17 +128,18 @@ class CuestionariosController < ApplicationController
 	end
 
 	def update
+    
 		@cuestionario = Cuestionario.find(params[:id])
     @cuestionario.update(cuestionario_params)
     @cuestionario.save
-    redirect_to "/cuestionarios/cuestionarios_de_grupo_index/"+params[:cuestionario][:grupo_id]
+    redirect_to "/cuestionarios/cuestionarios_de_grupo_index/"+@cuestionario.grupos.first.to_s
 	end
 
   def editar_cuestionario
     @cuestionario = Cuestionario.find(params[:id])
-    @grupo = Grupo.find(@cuestionario.grupo_id)
+    @grupo = @cuestionario.grupos.first
     @cuestionarios = Cuestionario.buscar_cuestionarios(@grupo)
-    @grupos = Grupo.where("usuario_id = ?", current_user.id)
+    
   end
 
 	def delete

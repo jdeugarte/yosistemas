@@ -1,5 +1,5 @@
 class Cuestionario < ActiveRecord::Base
-  belongs_to :grupo
+  has_and_belongs_to_many :grupos
   belongs_to :usuario
   has_many :preguntas, :dependent => :destroy
   accepts_nested_attributes_for :preguntas, :reject_if => lambda{ |a| a[:texto].blank? }, :allow_destroy => true

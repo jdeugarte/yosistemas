@@ -5,8 +5,8 @@ class EventosController < ApplicationController
   # GET /eventos
   def index
     @eventos = Array.new
-    current_user.grupos.each do |grupo|
-      grupo.eventos.each do |evento|
+    current_user.misgrupos.each do |grupo|
+      Grupo.find(grupo).eventos.each do |evento|
         @eventos << evento
       end
     end

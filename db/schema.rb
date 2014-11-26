@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141112050203) do
+ActiveRecord::Schema.define(version: 20141126033057) do
 
   create_table "adjunto_respuesta_cuestionarios", force: true do |t|
     t.integer  "respuesta_usuario_id"
@@ -129,6 +129,11 @@ ActiveRecord::Schema.define(version: 20141112050203) do
 
   add_index "cuestionarios", ["grupo_id"], name: "index_cuestionarios_on_grupo_id"
   add_index "cuestionarios", ["usuario_id"], name: "index_cuestionarios_on_usuario_id"
+
+  create_table "cuestionarios_grupos", id: false, force: true do |t|
+    t.integer "cuestionario_id"
+    t.integer "grupo_id"
+  end
 
   create_table "eventos", force: true do |t|
     t.string   "nombre"

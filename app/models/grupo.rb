@@ -4,7 +4,7 @@ class Grupo < ActiveRecord::Base
     has_and_belongs_to_many :temas
     has_many :subscripcions
     has_and_belongs_to_many :tareas
-    has_many :cuestionarios
+    has_and_belongs_to_many :cuestionarios
     has_and_belongs_to_many :eventos
   
     delegate :nombre_usuario, :to => :usuario, :prefix => true

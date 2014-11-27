@@ -1,7 +1,16 @@
 class CuestionariosController < ApplicationController
-	def ver_cuestionarios_usuarios
-  	@cuestionario = Cuestionario.find(params[:id_cuestionario])
-  	@suscritos =  Subscripcion.where(grupo_id: @cuestionario.grupo_id)
+	def ver_cuestionarios_usuarios  	
+    @cuestionario = Cuestionario.find(params[:id_cuestionario])
+  	@suscritos = Array.new
+    @mapi = Hash.new
+    @cuestionario.grupos.each do |grupo|
+      Subscripcion.where(grupo_id: grupo.id).each do |sub|
+        if @mapi[sub.usuario_id] != true 
+          @suscritos << sub
+          @mapi[sub.usuario_id] = true
+        end
+      end
+    end
   	@usuarios = Array.new
     @respuestas = Array.new
     @preguntas = Array.new
@@ -32,7 +41,16 @@ class CuestionariosController < ApplicationController
 
   def ver_resultados_usuarios #sssss 
       @cuestionario = Cuestionario.find(params[:id_cuestionario])
-      @suscritos =  Subscripcion.where(grupo_id: @cuestionario.grupo_id)
+      @mapi = Hash.new
+      @suscritos = Array.new
+       @cuestionario.grupos.each do |grupo|
+      Subscripcion.where(grupo_id: grupo.id).each do |sub|
+        if @mapi[sub.usuario_id] != true 
+          @suscritos << sub
+          @mapi[sub.usuario_id] = true
+        end
+      end
+    end
       @usuarios = Array.new
       @respuestas = Array.new
       @preguntas = Array.new
@@ -76,18 +94,26 @@ class CuestionariosController < ApplicationController
     @grupo.cuestionarios.each do |cuestio|
       @cuestionarios << cuestio
     end
-		#@cuestionarios = Cuestionario.buscar_cuestionarios(@grupo).page(params[:page]).per(2)
 	end
 
 	def nuevo_cuestionario
 		@cuestionario = Cuestionario.new
 		@grupo = Grupo.find(params[:id])
-		@cuestionarios = Cuestionario.buscar_cuestionarios(@grupo)
+		@cuestionarios = Array.new
+    current_user.grupos.each do |grupo|
+      grupo.cuestionarios.each do |cuestio|
+         @cuestionarios << cuestio 
+      end
+    end
+    @cuestionarios = @cuestionarios.uniq
+    
     @grupos = Grupo.where("usuario_id = ?", current_user.id)
 	end
 
   def calificar
-
+    if params[:comentarios] = nil && params[:calificacion] == nil
+      redirect_to (:back)
+    end
     @comentarios = params[:comentarios]
     @calificacion = params[:calificacion]
     @id_respuestas = params[:id_respuestas]
@@ -103,8 +129,21 @@ class CuestionariosController < ApplicationController
 
 	def edit
 		@cuestionario = Cuestionario.find(params[:id])
-		@grupo = Grupo.find(@cuestionario.grupo_id)
-		@cuestionarios = Cuestionario.buscar_cuestionarios(@grupo)
+    @cuestionario.grupos.each do |grupo|
+      if current_user.administra(grupo.id)
+        @grupo = grupo
+        break
+      end
+    end
+		
+    @cuestionarios = Array.new
+    current_user.grupos.each do |grupo|
+      grupo.cuestionarios.each do |cuestio|
+         @cuestionarios << cuestio 
+      end
+    end
+    @cuestionarios = @cuestionarios.uniq 
+
     @grupos = Grupo.where("usuario_id = ?", current_user.id)
 	end  
 
@@ -128,22 +167,37 @@ class CuestionariosController < ApplicationController
 	end
 
 	def update
-    
 		@cuestionario = Cuestionario.find(params[:id])
+    Grupo.all.each do |grupo|
+      grupo.cuestionarios.each do |cuestio|
+        if cuestio.titulo == @cuestionario.titulo
+          @grupo = grupo
+          break
+        end
+      end
+    end   
     @cuestionario.update(cuestionario_params)
     @cuestionario.save
-    redirect_to "/cuestionarios/cuestionarios_de_grupo_index/"+@cuestionario.grupos.first.to_s
+    redirect_to "/cuestionarios/cuestionarios_de_grupo_index/"+@grupo.id.to_s
 	end
 
   def editar_cuestionario
     @cuestionario = Cuestionario.find(params[:id])
-    @grupo = @cuestionario.grupos.first
-    @cuestionarios = Cuestionario.buscar_cuestionarios(@grupo)
+    @cuestionario.grupos.each do |grupo|
+      if current_user.administra(grupo.id)
+        @grupo = grupo
+        break
+      end
+    end
+     @cuestionarios = Array.new
+    @grupo.cuestionarios.each do |cuestio|
+      @cuestionarios << cuestio
+    end
     
   end
 
 	def delete
-		@cuestionario = Cuestionario.find(params[:id])
+		@cuestionario = Cuestionario.find(params[:id]) 
     	@cuestionario.destroy
     	redirect_to '/'
   	end
@@ -153,7 +207,14 @@ class CuestionariosController < ApplicationController
   		@cuestionario=@cuestionario_plantilla.dup
       @cuestionario.preguntas=@cuestionario_plantilla.preguntas
       @cuestionario.save
-  		@grupo = Grupo.find(@cuestionario_plantilla.grupo_id)
+
+      @cuestionario_plantilla.grupos.each do |grupo|
+      if current_user.administra(grupo.id)
+        @grupo = grupo
+        break
+      end
+    end
+
   		redirect_to '/cuestionarios/'+@cuestionario.id.to_s+'/edit'
   	end
 

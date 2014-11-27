@@ -66,7 +66,6 @@ class SendMail < ActionMailer::Base
     mail(to: @user.correo, subject: 'Nuevo evento creado! ')
   end
 
-
   def notify_user(usuario,usuario2)
     @user = usuario
     @user2 = usuario
@@ -76,9 +75,10 @@ class SendMail < ActionMailer::Base
   def enviar_invitaciones(usuario, destinatario, grupo)
     @usuario=usuario
     @grupo=grupo
-    direccion = Url.last.direccion
+    @direccion = Url.last.direccion
     #@url='http://localhost:3000/grupos/subscripcion_grupo/'+@grupo.id.to_s
-    @url = 'http://'+direccion+'/grupos/subscripcion_grupo/'+@grupo.id.to_s
+    @url = 'http://'+@direccion+'/grupos/subscripcion_grupo/'+@grupo.id.to_s
+    @direccion = @direccion + '/usuarios/new'
     mail(to: destinatario, subject: "Invitacion a grupo")
   end
 end

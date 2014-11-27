@@ -43,9 +43,9 @@
                     <a href='<%=suscribirse_path(grupo)%>' class='btn btn-primary' style='margin-top:6px;'>Suscribirse al Grupo</a>
                 <%end%>
                 
-                <%if grupo.usuario_suscrito?(current_user.id) == false and grupo.usuario_id!=current_user.id %>
+                <%if grupo.usuario_suscrito?(current_user.id) == false and grupo.usuario_id!=current_user.id %><center>
                   <a href='/grupos/<%=grupo.id%>/temas' class='btn btn-primary' style='margin-top:6px;'>Ver Temas del grupo</a>
-                  <a href='<%=invitacion_grupo_path(grupo)%>' class='btn btn-primary' style='margin-top:6px;'>Invitar Amigos al Grupo</a>
+                  <a href='<%=invitacion_grupo_path(grupo)%>' class='btn btn-primary' style='margin-top:6px;'>Invitar Amigos al Grupo</a></center>
                 <%end%>
                 <% if grupo.usuario_id == current_user.id %>
                 <ul class="list-group">

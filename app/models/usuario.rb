@@ -112,4 +112,13 @@ require 'digest/md5'
   		end
   		return lista_usuarios
   	end
+
+  	def administra(grupo)
+  		self.grupos.each do |g|
+  			if g.id == grupo
+  				return true
+  			end
+  		end
+  		return false
+  	end
 end

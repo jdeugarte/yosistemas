@@ -26,8 +26,11 @@ Yosistemas::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
 Recaptcha.configure do |config|
-  config.public_key  = '6Lc5uOgSAAAAALDvNoF85UGXsHWdSs3qA81fSA0u'
-  config.private_key = '6Lc5uOgSAAAAAOp-AFO_s_fkyFJpAsoOyNmwW_db'
+  #config.public_key  = '6Lc5uOgSAAAAALDvNoF85UGXsHWdSs3qA81fSA0u'
+  #config.private_key = '6Lc5uOgSAAAAAOp-AFO_s_fkyFJpAsoOyNmwW_db'
+
+  config.public_key  = '6LeTav4SAAAAAG1DSCxx4ycs2-s4C10TsdziAwJ-'
+  config.private_key = '6LeTav4SAAAAAMz7G0ZaXdubair834uF_GfDLPKm'
 end
   config.assets.debug = true
      config.action_mailer.delivery_method = :sendmail

@@ -1,35 +1,31 @@
 <div class="page-header">
      <h1 id="forms">Suscripciones</h1>
 </div>
-
-  <div class="row">
-    <% @suscriptores.each do |suscriptor| %>
-    <% if suscriptor.usuario_id != current_user.id %>
-      
-                  <table class="table table-striped table-bordered table-hover">
-                        <thead>
-                          <tr>
-                            <th>Nombre:</th>
-                            <th>Apellido:</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td><%= suscriptor.usuario.nombre %></td>
-                            <td><%= suscriptor.usuario.apellido %></td>
-                           <td> <form class="navbar-form navbar-left" method="get" action=<%=detalle_usuario_path(suscriptor.usuario)%>>
-                            <button type="submit" class="btn btn-primary">Ver Informacion</button>
-                          </form> </td>
-            
-                          <td> <form class="navbar-form navbar-left" method="get" action=<%=borrar_suscripcion_path(suscriptor.id)%> data-confirm="Se eliminara al suscriptor, ¿está seguro?" data-method="delete" >
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                          </form> <td/>
-                          </tr>
-                        </tbody>
-                  </table>
-        
+<div class="row">
+  <% @suscriptores.each do |suscriptor| %>
+    <% if suscriptor.usuario_id != current_user.id %>   
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Nombre:</td>
+            <th>Apellido:</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= suscriptor.usuario.nombre %></td>
+            <td><%= suscriptor.usuario.apellido %></td>
+            <td><Center><a class="btn btn-info" href=<%="/usuarios/"+suscriptor.usuario.id.to_s%>>Ver perfil</a></Center></td>
+            <td><Center>
+              <form class="navbar-form navbar-left" method="get" action=<%=borrar_suscripcion_path(suscriptor.id)%> data-confirm="Se eliminara al suscriptor, ¿está seguro?" data-method="delete" >
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+              </form></Center>
+            <td/>
+          </tr>
+        </tbody>
+      </table>    
     <% end %>
-    <% end %>
-    <a href="/grupos" class="btn btn-danger">Atras</a>
-  </div>
+  <% end %>
+  <a href="/grupos" class="btn btn-danger">Atras</a>
+</div>
 

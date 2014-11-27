@@ -9,11 +9,17 @@
       <h4> <%= image_tag avatar_tam_url(usuario,40) %>&nbsp;&nbsp;<%= usuario.nombre %> &nbsp;<%= usuario.apellido %></h4>
   		</td>
   		<%if RespuestaUsuario.ya_respondio_cuestionario(usuario.id,@cuestionario.id)%>
-  		<td class="active">
-      <form method="get" action="<%= "cargar_respuestas/"+ usuario.id.to_s + "/" + @cuestionario.id.to_s %> " data-method="delete" >
-           <button type="submit" class="btn btn-success">Calificar preguntas de texto</button>
-      </form>
-      </td>
+      <% if RespuestaUsuario.where(usuario_id: usuario.id, cuestionario_id: @cuestionario.id).first.calificacion !=nil %>
+        <td class="active">
+        <H4> El cuestionario ya fue calificado.</H4>
+        </td>
+      <% else %>
+    		<td class="active">
+        <form method="get" action="<%= "cargar_respuestas/"+ usuario.id.to_s + "/" + @cuestionario.id.to_s %> " data-method="delete" >
+             <button type="submit" class="btn btn-success">Calificar preguntas de texto</button>
+        </form>
+        </td>
+      <% end %>
       <%else%>
       <td>
       	<h4>Todavia no respondio cuestionario<h4>

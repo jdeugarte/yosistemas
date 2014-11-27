@@ -1,5 +1,94 @@
 <div class="page-header">
      <h1>Editar Cuestionario</h1>
 </div>
-<%= render 'form' %>
+<!--%= render 'form' %-->
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <center>
+      <h3>
+        Ingrese los datos del cuestionario
+      </h3>
+    </center>
+  </div>
+
+  <div class="panel-body">
+    <%= nested_form_for @cuestionario, :html => { :class => 'bs-example form-horizontal', :multipart => true } do |f| %>
+            
+    <%= f.text_field :titulo , :class=>'form-control', :placeholder=>'titulo', :maxlength => 50, :required => true, :title => "El titulo del cuestionario es obligatorio, Por favor rellene este campo"%></br>
+    <%= f.text_area :descripcion, :class=>'form-control', :placeholder=>'Descripcion', :maxlength => 500 %></br></br>
+    
+    <tr>            
+      <td><b>Fecha limite:</b></td>                                  
+      <td><%= f.date_select :fecha_limite, :order => [:day, :month, :year], :start_year => 1950 %></td><br><br>
+                <!--:class=>'form-control input-append',:"data-format"=>'dd/MM/yyyy', :placeholder=>'Fecha de Entrega', :style=>"border-bottom-left-radius: 4px;  border-top-left-radius: 4px;"%>-->
+    </tr>
+    <tr>
+      <td><b>Hora limite:</b></td>
+      <td><%= f.time_select :hora_limite, :default=>(Time.now + 2.hours)%></td>
+    </tr><br><br>
+    
+    </br></br>
+    <label for="inputTitle">
+      ¿Desea publicar el cuestionario?
+    </label>
+    <div class="form-group">
+      <select class="form-control" id="cuestionario_estado" name="cuestionario[estado]">
+            <option value= "true">Si</option>
+            <option value = "false">No</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <%= f.hidden_field :usuario_id, :value => @current_user.id, :readonly => true %>
+    </div>
+    
+    <%= f.fields_for :preguntas do |builder| %>
+      <div>
+         <%= render 'campo_de_pregunta', :preguntas_form => builder %>
+          <% end %>
+        <div class="list-group">
+          <div class="list-group-item">
+            <center>
+              <div class="btn-group">
+                <%= f.link_to_add "Agregar Pregunta", :preguntas, :class => "btn btn-primary btn-block" %>
+                <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal2">
+                  Cargar Cuestionario
+                </button>
+                <input type="submit" value="Guardar Cuestionario" class="btn btn-success btn-block">
+              </div>
+            </center>
+          </div> 
+        </div>
+      </div>
+    </div>
+</div>  
+<!-- Modal -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Lista de Cuestionarios Existentes</h4>
+      </div>
+      <div class="modal-body">
+            <%= render 'lista_de_cuestionarios_popup' %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script>
+    $('.timepicker-default').timepicker();
+     $(function() {
+                $('#datetimepicker2').datetimepicker({
+                  language: 'es',
+                  pickTime: false,
+                  maskInput: true,
+                  startDate: new Date(), // set a minimum date
+                });
+              });
+  </script>
+<%end%>
 

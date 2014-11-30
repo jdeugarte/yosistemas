@@ -173,7 +173,7 @@
                   <li><a href="/agregar_url">Cambiar Url De Los Correos</a></li>
                   <li><%= link_to 'Administrar Usuarios' , administrar_usuarios_path%></li>
                 <% end %>
-                <li><%= link_to ' Salir' , desloguear_path%></li>
+                <li><a class="no_ajaxify" href=<%=log_out_path%> >Salir</a></li>
               </ul>
             </li>
           </ul>

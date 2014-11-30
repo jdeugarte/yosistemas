@@ -7,7 +7,7 @@ Yosistemas::Application.routes.draw do
   get "temas/index"
   post 'temas/edit/:id' => 'temas#edit', :as => 'edit_tema'
   post 'sessions/create' => 'sessions#create', :as => 'loguear'
-  get 'sessions/destroy' => 'sessions#destroy', :as => 'desloguear'
+  #get 'sessions/destroy' => 'sessions#destroy', :as => 'desloguear'
   get 'sessions/obtener_conectados/:usuario_id' => 'sessions#obtener_conectados', :as => 'obtener_conectados'
   post 'sessions/eliminar_conectado' => 'sessions#eliminar_conectado', :as => 'eliminar_conectado'
   get "usuarios/confirm/:pass" => "usuarios#confirm", :as => 'confirm'
@@ -16,7 +16,7 @@ Yosistemas::Application.routes.draw do
   get "temas_y_tareas/ordenar/:id/:opcion" => 'temas_y_tareas#ordenar', :as  => 'ordenar'
 
   #get "log_in" => "sessions#new", :as => "log_in"
-  #get "log_out" => "sessions#destroy", :as => "log_out"
+  get "log_out" => "sessions#destroy", :as => "log_out"
   
   get "usuarios/index"
   get "usuarios/show"

@@ -48,6 +48,16 @@ class SendMail < ActionMailer::Base
     mail(to: @user.correo, subject: 'Evento creado requiere aprobación!')
   end
 
+
+  def notify_theme_creation(user, tema, grupo)
+    @user = user
+    @tema = tema
+    @grupo = grupo
+    direccion = Url.last.direccion
+    @url  = 'http://'+direccion+'/temas/'+tema.id.to_s
+    mail(to: @user.correo,subject: 'Tema creado requiere aprobación!')
+  end
+
   def notify_users_tema(user, tema, grupo)
     @user = user
     @tema = tema

@@ -162,7 +162,7 @@ class EventosController < ApplicationController
         id_grupo = grupo.to_i
         @grupo = Grupo.find(grupo)
         @usuario = Usuario.find(@grupo.usuario_id)
-        SendMail.notify_event_creation(@usuario, evento, @grupo).deliver
+        SendMail.notify_theme_creation(@usuario, evento, @grupo).deliver
       end  
     end
 

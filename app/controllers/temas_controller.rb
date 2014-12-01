@@ -125,6 +125,14 @@ before_filter :grupos
   def create
     @tema = Tema.new(tema_params)
     @tema.usuario_id = current_user.id
+
+    if current_user.rol == "Docente"
+      @tema.admitido = true
+    else
+      @tema.admitido = false
+    end
+
+
     if params[:grupos] != nil && @tema.save
       params[:grupos].each do |grupo|
         grupi = Grupo.find(grupo)
@@ -132,15 +140,25 @@ before_filter :grupos
         @tema.grupos_pertenece << grupo
         grupi.save
       end
+
       @tema.save
       add_attached_files(@tema.id)
-      flash[:alert] = 'Tema creado Exitosamente!'
+      
       @suscripcion=SuscripcionTema.new
       @suscripcion.usuario_id=current_user.id
       @suscripcion.tema_id=@tema.id
       @suscripcion.save
-      notificacion_push(params[:grupos], @tema)
-      notificar_por_email(params[:grupos], @tema)
+      
+      if @tema.admitido = true        
+        notificacion_push(params[:grupos], @tema)
+        notificar_por_email(params[:grupos], @tema)
+      end
+
+      if current_user.rol == "Estudiante"            
+        notificar_creacion(params[:grupos], @evento)
+      end
+
+      flash[:alert] = 'Tema creado Exitosamente!'
       redirect_to '/temas/'+@tema.id.to_s
     else
       flash[:alert] = 'El tema no pudo ser creado!'
@@ -242,6 +260,15 @@ before_filter :grupos
       @temas = byAll
     end
     render "show_mine"
+  end
+
+   def aprove
+    @tema = Tema.find(params[:id])
+    @temas.admitido = true
+    @tema.save
+    notificacion_push(@tema.grupos_pertenece, @tema)
+    notificar_por_email(@tema.grupos_pertenece, @tema)
+    redirect_to :back
   end
 
   private

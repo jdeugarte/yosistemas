@@ -193,20 +193,23 @@ class TareasController < ApplicationController
 			end
 			@tarea.save
 			add_attached_files(@tarea.id)
-			flash[:alert] = 'Tarea creada Exitosamente!'
-
 			if @tarea.admitido = true
           		@tarea.grupos.each do |grupo|
 					notificar_por_email(grupo.id, @tarea)
 					notificacion_push(grupo.id, @tarea)
 				end
         	end
-          
+
         	if current_user.rol == "Estudiante"            
         		@tarea.grupos.each do |grupo|
 					notificar_creacion(grupo.id, @tarea)
 				end
-        	end			
+        	end		
+
+			flash[:alert] = 'Tarea creada Exitosamente!'
+		
+          
+        		
 			redirect_to '/tareas/'+@tarea.id.to_s
 		else
 			flash[:notice] = "La tarea no pudo ser guardada"

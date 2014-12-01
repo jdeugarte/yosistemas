@@ -8,6 +8,8 @@ class SessionsController < ApplicationController
     usuario = Usuario.autenticar(params[:correo], params[:contrasenia])
     if usuario
       session[:usuario_id] = usuario.id
+      usuario.conectado=true
+      usuario.save
       redirect_to "/", :notice => "Sesion iniciada correctamente!"
     else
       redirect_to :back, :notice => "Correo o Contrasenia Invalida!"

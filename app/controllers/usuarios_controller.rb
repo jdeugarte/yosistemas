@@ -298,4 +298,25 @@ def create
       params.require(:usuario).permit(:nombre_usuario)
     end
 
+
+    def administrar_usuarios
+      @usuarios = Usuario.order("nombre_usuario ASC").page(params[:page]).per(6)
+    end
+
+    def habilitarlo
+    usuario = Usuario.find(params[:id])
+    usuario.activa = true
+    usuario.save
+    @usuarios = Usuario.order("nombre_usuario ASC").page(params[:page]).per(6)
+    render 'administrar_usuarios'
+  end
+
+  def desactivarlo
+    usuario = Usuario.find(params[:id])
+    usuario.activa = false
+    usuario.save
+    @usuarios = Usuario.order("nombre_usuario ASC").page(params[:page]).per(6)
+    render 'administrar_usuarios'
+  end
+
 end

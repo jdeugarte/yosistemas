@@ -171,6 +171,7 @@
                 <li><a href="/usuarios/set_notifications/<%=current_user.id%>">Configurar Notificaciones</a></li>
                 <% if current_user.rol=="Administrador" %>
                   <li><a href="/agregar_url">Cambiar Url De Los Correos</a></li>
+                  <li><%= link_to 'Administrar Usuarios' , administrar_usuarios_path%></li>
                 <% end %>
                 <li><a class="no_ajaxify" href=<%=log_out_path%> >Salir</a></li>
               </ul>

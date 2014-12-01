@@ -7,7 +7,7 @@ Yosistemas::Application.routes.draw do
   get "temas/index"
   post 'temas/edit/:id' => 'temas#edit', :as => 'edit_tema'
   post 'sessions/create' => 'sessions#create', :as => 'loguear'
-  get 'sessions/destroy' => 'sessions#destroy', :as => 'desloguear'
+  #get 'sessions/destroy' => 'sessions#destroy', :as => 'desloguear'
   get 'sessions/obtener_conectados/:usuario_id' => 'sessions#obtener_conectados', :as => 'obtener_conectados'
   post 'sessions/eliminar_conectado' => 'sessions#eliminar_conectado', :as => 'eliminar_conectado'
   get "usuarios/confirm/:pass" => "usuarios#confirm", :as => 'confirm'
@@ -20,6 +20,10 @@ Yosistemas::Application.routes.draw do
   
   get "usuarios/index"
   get "usuarios/show"
+  #pagina de administracion de usuarios
+  get "usuarios/administrar_usuarios" => 'usuarios#administrar_usuarios', :as  => 'administrar_usuarios' 
+  get "usuarios/lista_usuarios/habilitarlo" => "usuarios#habilitarlo"
+  get "usuarios/lista_usuarios/desactivarlo" => "usuarios#desactivarlo" 
 
 
   #get "usuarios/perfil/:id" => "usuarios#perfil", :as => "perfil"
@@ -123,7 +127,9 @@ Yosistemas::Application.routes.draw do
 
   #eventos
   get 'eventos/new/:id' => 'eventos#new'
-
+  get "eventos/aprove/:id" => "eventos#aprove"
+  get "temas/aprove/:id" => "temas#aprove"
+  get "tareas/aprove/:id" => "tareas#aprove"
 
 
   resources :notifications
@@ -150,6 +156,10 @@ Yosistemas::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
   # You can have the root of your site routed with "root"
  root :to => 'temas#index'
+
+
+ get '/no_existe' => "welcome#no_existe"
+  get "*missing" => redirect("/no_existe")
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
   # Example of named route that can be invoked with purchase_url(id: product.id)

@@ -1,0 +1,37 @@
+<% if current_user.rol=="Administrador"  %>
+<h1>Lista Usuarios</h1>
+<div class="table-responsive">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th class = "info">Nombre del Usuario</th>
+       <th></th>
+        <th>Opciones</th>
+	    <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @usuarios.each do |usuario| %>
+      <tr>
+        <td class = "info"><%= usuario.nombre_usuario%></td>
+        <td>
+        <li><a href=<%="/usuarios/"+usuario.id.to_s%>>Ver Perfil</a></li></td>
+        <% if usuario.activa ==false %>
+            <td class = "success">
+              <%= link_to 'habilitarlo', :controller => :usuarios ,:action => :habilitarlo, :id => usuario.id %>
+            </td>
+            <% else %>
+            <td class = "success">
+              <%= link_to 'Descativarlo', :controller => :usuarios ,:action => :desactivarlo, :id => usuario.id %>
+            </td>
+       <% end %>
+       </tr>
+    <% end %>
+  </tbody>
+</table>
+<center><%= paginate @usuarios%></center>
+</div>
+<% end -%>
+<br>
+
+

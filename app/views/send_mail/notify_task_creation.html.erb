@@ -15,10 +15,13 @@
           <h3>Hola, <%= @user.nombre %></h3>
           <p>
             El staff de YoSistemas te comunica que 
-            se creo el evento: <%= @evento.nombre%>
+            se creo la tarea: <%= @tarea.titulo%>
             en el grupo: <%= @grupo.nombre%>.<br>
-            Para ver este evento, visita la pagina:<br>
-            <a href="<%= @url %>"><%= @url %></a><br><br>
+            Necesitamos tu aprobación para<br>
+            que la tarea sea publicada en la <br>
+            página del grupo.<br>
+            Para ver esta tarea, visita la pagina:<br>
+            <%=@url%><br><br>
            <b><i>Staff de YoSistemas</i></b>
           </p>
       </th>

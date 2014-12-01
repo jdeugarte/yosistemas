@@ -6,22 +6,24 @@
         <th><%= image_tag avatar_tam_url(@evento.usuario,100)%></th>
         <th>&nbsp;&nbsp;</th>        
         <td><%= @evento.detalle %></td>
-      </tr>  
+      </tr>
+
       <tr>
         <td><small><center><%= link_to @evento.usuario.nombre_usuario,  @evento.usuario %></center></small></td>
-        <td><b>Lugar</b></td>
+      </tr>
+      <tr>
+      <td></td>
+        <td><b>Lugar:</b></td>
         <td><%=@evento.lugar%></td>
       </tr>
       <tr>
-        <td><center></center></td>
-        <td><b>Fecha y Hora&nbsp;&nbsp;</b></td>
-        <td><%=@evento.fecha%>
-        <%=@evento.hora.strftime("%H:%M")%>
-        </td>
+        <td></td>
+        <td><b>Fecha y Hora:&nbsp;&nbsp;</b></td>
+        <td><%=@evento.fecha%><%=@evento.hora.strftime("%H:%M")%></td>
       </tr>
     </table>
   </div>
-  <%if current_user!=nil && @evento.usuario_id==current_user.id%>
+  <%if current_user!=nil && @evento.usuario_id==current_user.id || current_user.rol== "Docente"%>
   <ul class="list-group">
     <li class="list-group-item">
       <!--Botones-->
@@ -29,9 +31,16 @@
         <%if current_user!=nil && @evento.usuario_id==current_user.id%>
           <%= link_to "Editar", edit_evento_path(@evento), :class =>"btn btn-warning"%>
         <%end%>
-        <%if  @evento.usuario_id==current_user.id %>
+        <%if  @evento.usuario_id==current_user.id || current_user.rol== "Docente" %>
           <%= link_to 'Eliminar Evento',@evento, :class => "btn btn-danger", method: :delete, data: { confirm: 'Se eliminara el evento, Está seguro?' } %>
         <%end%>
+
+        <%if  current_user.rol == "Docente" %>
+          <%if  @evento.admitido == false %>
+            <a href="/eventos/aprove/<%=@evento.id%>" role="button" class="btn">Aprobar Evento</a>          
+          <%end%>
+        <%end%>
+
     </center>
     </li>
   </ul>

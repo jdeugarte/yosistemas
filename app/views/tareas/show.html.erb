@@ -16,7 +16,7 @@
             <% if @tarea.usuario_id == current_user.id || current_user.rol = "Docente"%>
             <%if  current_user.rol == "Docente" %>
                 <%if  @tarea.admitido == false %>
-                  <a href="/tareas/aprove/<%=@tarea.id%>" role="button" class="btn">Aprobar tarea</a>          
+                  <a href="/tareas/aprove/<%=@tarea.id%>" role="button" class="btn">Aprobar tarea</a>
                 <%end%>
               <%end%>
               <%= link_to 'Eliminar', "/tareas/eliminar/"+@tarea.id.to_s, data: { confirm: 'Se eliminara la tarea, ¿Está seguro?' } %>

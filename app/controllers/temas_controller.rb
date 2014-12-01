@@ -155,7 +155,7 @@ before_filter :grupos
       end
 
       if current_user.rol == "Estudiante"            
-        notificar_creacion(params[:grupos], @evento)
+        notificar_creacion(params[:grupos], @tema)
       end
 
       flash[:alert] = 'Tema creado Exitosamente!'
@@ -264,7 +264,7 @@ before_filter :grupos
 
    def aprove
     @tema = Tema.find(params[:id])
-    @temas.admitido = true
+    @tema.admitido = true
     @tema.save
     notificacion_push(@tema.grupos_pertenece, @tema)
     notificar_por_email(@tema.grupos_pertenece, @tema)
@@ -317,6 +317,16 @@ before_filter :grupos
       end
     end
 
+     def notificar_creacion(id_grupos, tema)
+      notificado = Hash.new  
+      notificado[current_user.id] = true
+      id_grupos.each do |grupo|
+        id_grupo = grupo.to_i
+        @grupo = Grupo.find(grupo)
+        @usuario = Usuario.find(@grupo.usuario_id)
+        SendMail.notify_theme_creation(@usuario, tema, @grupo).deliver
+      end  
+    end
     def notificar_por_email(id_grupos, tema)
       notificado = Hash.new
       notificado[current_user.id] = true

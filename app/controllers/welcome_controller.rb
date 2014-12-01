@@ -3,6 +3,11 @@ class WelcomeController < ApplicationController
   before_filter :grupos
   def index
   end
+
+  def no_existe
+  	
+  end
+
   def grupos
    if(params[:id] != nil && Grupo.find(params[:id]).habilitado)
     @grupo = Grupo.find(params[:id])

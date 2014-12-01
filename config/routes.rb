@@ -1,6 +1,6 @@
 Yosistemas::Application.routes.draw do
 
-  
+  get '/no_existe' => "welcome#no_existe"
   get "comment_tasks/create"
   get "comment_tasks/delete"
   get "comment_tasks/edit"
@@ -128,6 +128,7 @@ Yosistemas::Application.routes.draw do
   #eventos
   get 'eventos/new/:id' => 'eventos#new'
 
+  get "*missing" => redirect("/no_existe")
 
 
   resources :notifications

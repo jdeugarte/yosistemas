@@ -1,6 +1,6 @@
 Yosistemas::Application.routes.draw do
 
-  get '/no_existe' => "welcome#no_existe"
+  
   get "comment_tasks/create"
   get "comment_tasks/delete"
   get "comment_tasks/edit"
@@ -128,8 +128,6 @@ Yosistemas::Application.routes.draw do
   #eventos
   get 'eventos/new/:id' => 'eventos#new'
 
-  get "*missing" => redirect("/no_existe")
-
 
   resources :notifications
 
@@ -155,6 +153,10 @@ Yosistemas::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
   # You can have the root of your site routed with "root"
  root :to => 'temas#index'
+
+
+ get '/no_existe' => "welcome#no_existe"
+  get "*missing" => redirect("/no_existe")
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
   # Example of named route that can be invoked with purchase_url(id: product.id)

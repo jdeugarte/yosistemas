@@ -111,7 +111,7 @@ class CuestionariosController < ApplicationController
 	end
 
   def calificar
-    if params[:comentarios] = nil && params[:calificacion] == nil
+    if params[:comentarios] == nil && params[:calificacion] == nil
       redirect_to (:back)
     end
     @comentarios = params[:comentarios]

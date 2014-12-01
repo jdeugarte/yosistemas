@@ -180,18 +180,33 @@ class TareasController < ApplicationController
 	def create
 		@tarea = Tarea.new(tarea_params)
 		@tarea.usuario_id = current_user.id
+
+		if current_user.rol == "Docente"
+			@tarea.admitido = true
+		else
+			@tarea.admitido = false
+		end
+
 		if params[:grupos] != nil &&  @tarea.save 
-			 params[:grupos].each do |grupo|
-		        Grupo.find(grupo).tareas << @tarea
-		      end
-		     @tarea.save
+			params[:grupos].each do |grupo|
+				Grupo.find(grupo).tareas << @tarea
+			end
+			@tarea.save
 			add_attached_files(@tarea.id)
 			flash[:alert] = 'Tarea creada Exitosamente!'
-			@tarea.grupos.each do |grupo|
-				notificar_por_email(grupo.id, @tarea)
-				notificacion_push(grupo.id, @tarea)
-			end
 
+			if @tarea.admitido = true
+          		@tarea.grupos.each do |grupo|
+					notificar_por_email(grupo.id, @tarea)
+					notificacion_push(grupo.id, @tarea)
+				end
+        	end
+          
+        	if current_user.rol == "Estudiante"            
+        		@tarea.grupos.each do |grupo|
+					notificar_creacion(grupo.id, @tarea)
+				end
+        	end			
 			redirect_to '/tareas/'+@tarea.id.to_s
 		else
 			flash[:notice] = "La tarea no pudo ser guardada"
@@ -199,13 +214,25 @@ class TareasController < ApplicationController
 		end
 	end
 
+	def aprove
+    	@tarea = Tarea.find(params[:id])
+    	@tarea.admitido = true
+    	@tarea.save
+    	@tarea.grupos.each do |grupo|
+			notificar_por_email(grupo.id, @tarea)
+			notificacion_push(grupo.id, @tarea)
+    	end
+    	redirect_to :back
+  	end
+
+
 	def editar_comentario
 		@comentario = TareaComentario.find(params[:id_comentario])
 	end
 	private
 	# No permite parametros de internet
 	def tarea_params
-		params.require(:tarea).permit(:titulo, :descripcion, :fecha_entrega, :hora_entrega)
+		params.require(:tarea).permit(:titulo, :descripcion, :fecha_entrega, :hora_entrega, :admitido)
 	end
 	def add_attached_files(tarea_id)
 		if(!params[:tarea][:archivo].nil?)
@@ -228,41 +255,61 @@ class TareasController < ApplicationController
 		end
 		end
 	end
+
 	def notificacion_push(id_grupo,tarea)
 		suscripciones = Subscripcion.all
 		suscripciones.each do |suscrito|
-		if suscrito.grupo_id == id_grupo
-		if suscrito.usuario_id != current_user.id
-		@usuario = suscrito.usuario
-		if @usuario.push_task == true
-		if @usuario != nil
-		@grupo = Grupo.find(id_grupo)
-		notificacion = Notification.create('title'=>tarea.titulo, 'description'=>tarea.descripcion, 'reference_date'=> tarea.fecha_entrega,
-		'tipo'=>0, 'de_usuario_id'=>current_user.id, 'para_usuario_id'=> @usuario.id, 'seen'=>false, 'id_item'=> tarea.id)
-		Pusher.url = "http://673a73008280ca569283:555e099ce1a2bfc840b9@api.pusherapp.com/apps/60344"
-		Pusher['notifications_channel'].trigger('notification_event', {
-		para_usuario: notificacion.para_usuario_id
-		})
-		end
+			if suscrito.grupo_id == id_grupo
+				if suscrito.usuario_id != current_user.id
+					@usuario = suscrito.usuario
+					if @usuario.push_task == true
+						if @usuario != nil
+							@grupo = Grupo.find(id_grupo)
+							notificacion = Notification.create('title'=>tarea.titulo, 'description'=>tarea.descripcion, 'reference_date'=> tarea.fecha_entrega,
+							'tipo'=>0, 'de_usuario_id'=>current_user.id, 'para_usuario_id'=> @usuario.id, 'seen'=>false, 'id_item'=> tarea.id)
+							Pusher.url = "http://673a73008280ca569283:555e099ce1a2bfc840b9@api.pusherapp.com/apps/60344"
+							Pusher['notifications_channel'].trigger('notification_event', {
+							para_usuario: notificacion.para_usuario_id
+							})
+						end
+					end
+				end
+			end
 		end
 	end
-end
-end
-end
-def notificar_por_email(id_grupo,tarea)
-suscripciones = Subscripcion.all
-suscripciones.each do |suscrito|
-if suscrito.grupo_id == id_grupo
-if suscrito.usuario_id != current_user.id
-@usuario = suscrito.usuario
-if @usuario.mailer_task == true
-if @usuario != nil
-@grupo = Grupo.find(id_grupo)
-SendMail.notify_users_task_create(@usuario, tarea, @grupo).deliver
-end
-end
-end
-end
-end
-end
+
+	def notificar_por_email(id_grupo,tarea)
+		suscripciones = Subscripcion.all
+		suscripciones.each do |suscrito|
+			if suscrito.grupo_id == id_grupo
+				if suscrito.usuario_id != current_user.id
+					@usuario = suscrito.usuario
+					if @usuario.mailer_task == true
+						if @usuario != nil
+							@grupo = Grupo.find(id_grupo)
+							SendMail.notify_users_task_create(@usuario, tarea, @grupo).deliver
+						end
+					end
+				end
+			end
+		end
+	end
+
+	def notificar_creacion(id_grupo,tarea)
+		suscripciones = Subscripcion.all
+		suscripciones.each do |suscrito|
+			if suscrito.grupo_id == id_grupo
+				if suscrito.usuario_id != current_user.id
+					@usuario = suscrito.usuario
+					if @usuario.mailer_task == true
+						if @usuario != nil
+							@grupo = Grupo.find(id_grupo)
+							SendMail.notify_task_creation(@usuario, tarea, @grupo).deliver
+						end
+					end
+				end
+			end
+		end
+	end
+
 end

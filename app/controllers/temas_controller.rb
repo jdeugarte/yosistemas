@@ -247,7 +247,7 @@ before_filter :grupos
   private
     # No permite parametros de internet
     def tema_params
-      params.require(:tema).permit(:titulo, :cuerpo, :grupo_id)
+      params.require(:tema).permit(:titulo, :cuerpo, :grupo_id, :admitido)
     end
     
     def grupos

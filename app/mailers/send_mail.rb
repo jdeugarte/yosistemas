@@ -39,6 +39,15 @@ class SendMail < ActionMailer::Base
     mail(to: @user.correo,subject: 'Te suscribiste a el grupo: '+grupo_nombre.to_s)
   end
 
+  def notify_event_creation(user, evento, grupo)
+    @user = user
+    @evento = evento
+    @grupo = grupo
+    direccion = Url.last.direccion
+    @url  = 'http://'+direccion+'/eventos/'+@evento.id.to_s
+    mail(to: @user.correo, subject: 'Evento creado requiere aprobación!')
+  end
+
   def notify_users_tema(user, tema, grupo)
     @user = user
     @tema = tema
@@ -46,6 +55,15 @@ class SendMail < ActionMailer::Base
     direccion = Url.last.direccion
     @url  = 'http://'+direccion+'/temas/'+tema.id.to_s
     mail(to: @user.correo,subject: 'Nuevo tema creado!')
+  end
+
+  def notify_task_creation(user, tarea, grupo)
+    @user = user
+    @tarea = tarea
+    @grupo = grupo
+    direccion = Url.last.direccion
+    @url  = 'http://'+direccion+'/tareas/'+@tarea.id.to_s
+    mail(to: @user.correo, subject: 'Tarea creada requiere aprobación!')
   end
 
   def notify_users_task_create(user, tarea, grupo)

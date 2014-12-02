@@ -30,7 +30,7 @@ class GruposController < ApplicationController
   def buscar_por_llave
     @grupos = Grupo.where("llave = ? AND estado = ?", "#{params[:llave]}", true)
     @grupo = @grupos.first
-    if !@grupo.nil?
+    if !@grupo.nil? || current_user.esta_subscrito?(@grupo.id)
       suscripcion = Subscripcion.new
       suscripcion.grupo_id = @grupo.id
       suscripcion.usuario_id = current_user.id

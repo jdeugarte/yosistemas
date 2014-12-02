@@ -26,7 +26,7 @@
             <li><a href="/grupos/<%=@grupo.id%>/temas">Ver Temas</a></li>
           </ul>
         </li>
-        <%if !@grupo.nil? and @grupo.nombre!="Publico"%>
+        <%if !@grupo.nil? and @grupo.llave!="publico"%>
         <% if current_uri = request.env['PATH_INFO'].to_s != "/grupos/new" %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tareas<span class="caret"></span></a>
@@ -58,7 +58,7 @@
             <li><a href="/grupos">Ver grupos</a></li>
           </ul>
         </li>
-        <%if !@grupo.nil? and @grupo.nombre!="Publico" %>
+        <%if !@grupo.nil? and @grupo.llave!="publico" %>
           <% if current_uri = request.env['PATH_INFO'].to_s != "/grupos/new" %>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cuestionarios<span class="caret"></span></a>

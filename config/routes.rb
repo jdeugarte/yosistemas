@@ -1,5 +1,6 @@
 Yosistemas::Application.routes.draw do
 
+  post "grupos/buscar_por_llave" => "grupos#buscar_por_llave"
   
   get "comment_tasks/create"
   get "comment_tasks/delete"
@@ -72,7 +73,7 @@ Yosistemas::Application.routes.draw do
   get 'grupos/subscripcion_grupo/:id' => 'grupos#subscripcion_grupo', :as=>'suscribirse'
   get "grupos/buscar" => "grupos#buscar", :as=>'buscar_grupo'
 
-  get "/grupos/buscar_por_llave" => "grupos#buscar_por_llave", :as=>'buscar_grupo_por_llave'
+ 
 
   
   
@@ -161,8 +162,8 @@ Yosistemas::Application.routes.draw do
  root :to => 'temas#index'
 
 
- get '/no_existe' => "welcome#no_existe"
-  get "*missing" => redirect("/no_existe")
+  # get '/no_existe' => "welcome#no_existe"
+  #get "*missing" => redirect("/no_existe")
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
   # Example of named route that can be invoked with purchase_url(id: product.id)

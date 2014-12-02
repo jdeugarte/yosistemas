@@ -14,7 +14,7 @@
       
         <%if !current_user.nil? %>
               <a class="list-group-item list-group-item-info">Publicos</a>
-                <% subscripciones_usuario().each do |subs| %>
+                <% subscripciones_usuario().uniq.each do |subs| %>
                   <% if !subs.nil? and !@grupo.nil?%>
                         <%if subs.grupo.id == @grupo.id and subs.grupo.estado==false%>
                           <a class="list-group-item active"><%= subs.grupo.nombre %></a>
@@ -43,7 +43,7 @@
               <!--<a class="list-group-item list-group-item">Suscribirse a grupo</a>-->
                 <a class="list-group-item">  
                   <h5>Suscribirse a grupo</h5>  
-                    <form method="GET" action="grupos/buscar_por_llave" >                          
+                    <form method="POST" action="/grupos/buscar_por_llave" >                          
                       <input id="llave" name="llave" placeholder="Llave..." class="form-control input-sm"  style="" type="text"><br>              
                       <center>
                         <input type="submit" value="Suscribirse"  class="btn btn-xs btn-primary">

@@ -7,7 +7,9 @@ class EventosController < ApplicationController
     @eventos = Array.new
     current_user.misgrupos.each do |grupo|
       Grupo.find(grupo).eventos.each do |evento|
-        @eventos << evento
+        if evento.admitido == true
+          @eventos << evento  
+        end
       end
     end
     Grupo.find(1).eventos.each do |evento|
@@ -41,6 +43,13 @@ class EventosController < ApplicationController
   def create
     @evento = Evento.new(evento_params)
     @evento.usuario_id = current_user.id
+    
+    if current_user.rol == "Docente"
+      @evento.admitido = true
+    else
+      @evento.admitido = false
+    end
+
     if params[:grupos] != nil && @evento.save
         params[:grupos].each do |grupo|
           grupi = Grupo.find(grupo)
@@ -48,8 +57,16 @@ class EventosController < ApplicationController
           @evento.grupos_pertenece << grupo
           grupi.save
         end
-        notificacion_push(params[:grupos], @evento)
-        notificar_por_email(params[:grupos], @evento)
+
+        if @evento.admitido = true
+          notificacion_push(params[:grupos], @evento)
+          notificar_por_email(params[:grupos], @evento)
+        end
+          
+        if current_user.rol == "Estudiante"            
+          notificar_creacion(params[:grupos], @evento)
+        end
+
         flash[:notice] = "Evento creado Exitosamente! "
         redirect_to '/eventos/' + @evento.id.to_s
       else
@@ -78,6 +95,15 @@ class EventosController < ApplicationController
     end
   end
 
+  def aprove
+    @evento = Evento.find(params[:id])
+    @evento.admitido = true
+    @evento.save
+    notificacion_push(@evento.grupos_pertenece, @evento)
+    notificar_por_email(@evento.grupos_pertenece, @evento)
+    redirect_to :back
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_evento
@@ -90,7 +116,7 @@ class EventosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def evento_params
-      params.require(:evento).permit(:nombre, :detalle, :lugar, :fecha, :estado,:hora, :grupo_id)
+      params.require(:evento).permit(:nombre, :detalle, :lugar, :fecha, :estado,:hora, :grupo_id, :admitido)
     end
 
     def notificacion_push(id_grupos, evento)
@@ -129,26 +155,37 @@ class EventosController < ApplicationController
       end
     end
 
-    def notificar_por_email(id_grupos, evento)
-       notificado = Hash.new  
-       notificado[current_user.id] = true
-        id_grupos.each do |grupo|
+    def notificar_creacion(id_grupos, evento)
+      notificado = Hash.new  
+      notificado[current_user.id] = true
+      id_grupos.each do |grupo|
         id_grupo = grupo.to_i
-          suscripciones = Subscripcion.all
-          suscripciones.each do |suscrito|
-            if suscrito.grupo_id == id_grupo
-              if notificado[suscrito.usuario_id] == nil
+        @grupo = Grupo.find(grupo)
+        @usuario = Usuario.find(@grupo.usuario_id)
+        SendMail.notify_event_creation(@usuario, evento, @grupo).deliver
+      end  
+    end
+
+    def notificar_por_email(id_grupos, evento)
+      notificado = Hash.new  
+      notificado[current_user.id] = true
+      id_grupos.each do |grupo|
+        id_grupo = grupo.to_i
+        suscripciones = Subscripcion.all
+        suscripciones.each do |suscrito|
+          if suscrito.grupo_id == id_grupo
+            if notificado[suscrito.usuario_id] == nil
               notificado[suscrito.usuario_id] = true
-                  @usuario = suscrito.usuario
-                  if @usuario.mailer_event == true
-                    if @usuario != nil
-                      @grupo = Grupo.find(id_grupo)
-                      SendMail.notify_users_event_create(@usuario, evento, @grupo).deliver
-                    end
-                  end
+              @usuario = suscrito.usuario
+              if @usuario.mailer_event == true
+                if @usuario != nil
+                  @grupo = Grupo.find(id_grupo)
+                  SendMail.notify_users_event_create(@usuario, evento, @grupo).deliver
+                end
               end
             end
           end
         end
+      end
     end
 end

@@ -26,6 +26,7 @@
 
   <% @all.each do |todo| %>
     <%if todo.instance_of? (Tema)%>
+    <%if todo.admitido == true%>
       <div class="panel panel-info" style='cursor:pointer' onclick=<%="document.location.href='/"+todo.class.name.downcase+"s/"+todo.id.to_s+"'"%>>
         <div class="panel-heading" title="Titulo">
           <h3><%= todo.titulo %></h3>
@@ -41,8 +42,9 @@
           </li>
         </div>
       </div>
-    <%end%>
-    <%if todo.instance_of? (Tarea)%>    
+    <%end%><%end%>
+    <%if todo.instance_of? (Tarea)%>   
+      <%if todo.admitido == true%>
       <div class="panel panel-success" style='cursor:pointer' onclick=<%="document.location.href='/"+todo.class.name.downcase+"s/"+todo.id.to_s+"'"%>>
         <div class="panel-heading" title="Titulo">
           <h3><%= todo.titulo %></h3>
@@ -57,6 +59,7 @@
           </li>
         </div>
       </div> 
+      <%end%>
     <%end%>
   <%end%>
 <center><%= paginate @temas && @tareas %></center>

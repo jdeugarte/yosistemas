@@ -9,6 +9,7 @@
   <%end%>
 <br><br>
     <% @tareas.each do |tarea| %>
+    <%if tarea.admitido == true%>
     <div class="panel panel-success" style='cursor:pointer' onclick=<%="document.location.href='/tareas/"+tarea.id.to_s+"'"%>>
       <div class="panel-heading" title="Titulo"><h3><%= tarea.titulo %></h3></div>
       <div class="panel-body">           
@@ -20,6 +21,7 @@
               <span style="margin-left: 12px;"><i class="icon-calendar" style="margin-top: 0px;"></i>Fecha de entrega: <%= tarea.fecha_entrega.strftime("%d/%b/%Y")%></span></small></li>            
          </ul>
     </div>
+    <%end%>
     <%end%>
 <center><%= paginate @tareas%></center>
 

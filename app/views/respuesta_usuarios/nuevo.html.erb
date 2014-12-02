@@ -1,4 +1,41 @@
 <%= form_tag( crear_path, :method=>'post', :multipart => true) do %>
+<div class="panel panel-success" style='cursor:pointer'%>
+      <div class="panel-heading" title="Titulo"><h3><%= @cuestionario.titulo %></h3></div>
+      <div class="panel-body">           
+            <span>
+            <% @cuestionario.preguntas.each do |pregunta| %>
+              <div class="form-group">
+                <label for="inputTitle"><%= pregunta.texto %></label><br>
+                  <% if pregunta.tipo != 'Texto Libre'%>
+                    <% pregunta.respuestas.each do |respuesta| %>
+                      <label for="inputTitle" class="control-label"><%= respuesta.texto %></label>
+                        <%= check_box_tag  'resp[' + pregunta.id.to_s + '][]', respuesta.texto %>
+                        <%= hidden_field_tag 'id_pregunta[]', pregunta.id %>
+                    <% end %><br>
+                  <% else %>    
+                      <%= text_area_tag 'resp['+ pregunta.id.to_s+ '][]', nil,options={:class=>'form-control' ,:placeholder => 'tu respuesta'} %>
+
+
+                    <%= hidden_field_tag 'id_pregunta[]', pregunta.id %>
+                  <% end %>
+              </div>
+              <%= hidden_field_tag 'tipo_pregunta[' +pregunta.id.to_s + ']', pregunta.tipo %>
+            <% end %>
+            <%= hidden_field_tag :id_cuestionario, @cuestionario.id %>
+            <%= hidden_field_tag :id_usuario, current_user.id %>
+            <div class="form-group">
+                <input type="submit" value="Aceptar" class="btn btn-success">
+            </div>
+            </span>
+      </div>
+      <ul class="list-group">          
+              <li class="list-group-item"><small style="color: gray;">&nbsp;&nbsp;&nbsp;Cuestionario creado el <%= @cuestionario.created_at.localtime.strftime("%d/%m/%Y a las: %I:%M  %p") %><br>
+              <span style="margin-left: 12px;"><i class="icon-calendar" style="margin-top: 0px;"></i>Fecha de entrega: <%= @cuestionario.fecha_limite.strftime("%d/%b/%Y")%></span></small></li>            
+         </ul>
+    </div>
+
+
+<!--
 <div class='bs-example form-horizontal'>
   <div class="row">
     <div class="col-lg-10">
@@ -35,5 +72,5 @@
     </div>
    </div>
   </div>
-<% end %>
+<% end %>-->
 

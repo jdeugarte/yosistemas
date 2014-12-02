@@ -78,8 +78,10 @@ Yosistemas::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 Recaptcha.configure do |config|
-  config.public_key  = '6Lc5uOgSAAAAALDvNoF85UGXsHWdSs3qA81fSA0u'
-  config.private_key = '6Lc5uOgSAAAAAOp-AFO_s_fkyFJpAsoOyNmwW_db'
+  #config.public_key  = '6Lc5uOgSAAAAALDvNoF85UGXsHWdSs3qA81fSA0u'
+  #config.private_key = '6Lc5uOgSAAAAAOp-AFO_s_fkyFJpAsoOyNmwW_db'
+  config.public_key  = '6LeTav4SAAAAAG1DSCxx4ycs2-s4C10TsdziAwJ-'
+  config.private_key = '6LeTav4SAAAAAMz7G0ZaXdubair834uF_GfDLPKm'
 end
   config.action_mailer.raise_delivery_errors = true
   # ActionMailer Config

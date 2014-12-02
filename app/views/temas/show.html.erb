@@ -53,6 +53,12 @@
           <%= link_to 'Eliminar', visible_tema_path(@tema),:class => "btn btn-danger", data: { confirm: 'Se eliminara el tema, ¿Está seguro?' } %>
         <%end%>
       <%end%>
+
+      <%if  current_user.rol == "Docente" %>
+                <%if  @tema.admitido == false %>
+                  <a href="/temas/aprove/<%=@tema.id%>" role="button" class="btn">Aprobar tema</a>
+                <%end%>
+              <%end%>
       
       <%if current_user!=nil%>
         <%cont=0%>

@@ -1,4 +1,3 @@
-
 <div class="panel panel-info">
   <div class="panel-heading"><center><h3><b>Lista de Suscritos</b></h3></center></div>
   <div class="panel-body">
@@ -9,9 +8,10 @@
       <h4> <%= image_tag avatar_tam_url(usuario,40) %>&nbsp;&nbsp;<%= usuario.nombre %> &nbsp;<%= usuario.apellido %></h4>
   		</td>
   		<%if RespuestaUsuario.ya_respondio_cuestionario(usuario.id,@cuestionario.id)%>
-      <% if RespuestaUsuario.where(usuario_id: usuario.id, cuestionario_id: @cuestionario.id).first.calificacion !=nil %>
+      <% RespuestaUsuario.where(usuario_id: usuario.id, cuestionario_id: @cuestionario.id).each do |respuesta|%>
+      <% if respuesta.calificacion != nil %>
         <td class="active">
-        <H4> El cuestionario ya fue calificado.</H4>
+        <H4> La pregunta ya fue calificada.</H4>
         </td>
       <% else %>
     		<td class="active">
@@ -20,6 +20,7 @@
         </form>
         </td>
       <% end %>
+      <%end%>
       <%else%>
       <td>
       	<h4>Todavia no respondio cuestionario<h4>

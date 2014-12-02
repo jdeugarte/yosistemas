@@ -125,6 +125,14 @@ before_filter :grupos
   def create
     @tema = Tema.new(tema_params)
     @tema.usuario_id = current_user.id
+
+    if current_user.rol == "Docente"
+      @tema.admitido = true
+    else
+      @tema.admitido = false
+    end
+
+
     if params[:grupos] != nil && @tema.save
       params[:grupos].each do |grupo|
         grupi = Grupo.find(grupo)
@@ -132,15 +140,25 @@ before_filter :grupos
         @tema.grupos_pertenece << grupo
         grupi.save
       end
+
       @tema.save
       add_attached_files(@tema.id)
-      flash[:alert] = 'Tema creado Exitosamente!'
+      
       @suscripcion=SuscripcionTema.new
       @suscripcion.usuario_id=current_user.id
       @suscripcion.tema_id=@tema.id
       @suscripcion.save
-      notificacion_push(params[:grupos], @tema)
-      notificar_por_email(params[:grupos], @tema)
+      
+      if @tema.admitido = true        
+        notificacion_push(params[:grupos], @tema)
+        notificar_por_email(params[:grupos], @tema)
+      end
+
+      if current_user.rol == "Estudiante"            
+        notificar_creacion(params[:grupos], @tema)
+      end
+
+      flash[:alert] = 'Tema creado Exitosamente!'
       redirect_to '/temas/'+@tema.id.to_s
     else
       flash[:alert] = 'El tema no pudo ser creado!'
@@ -244,10 +262,19 @@ before_filter :grupos
     render "show_mine"
   end
 
+   def aprove
+    @tema = Tema.find(params[:id])
+    @tema.admitido = true
+    @tema.save
+    notificacion_push(@tema.grupos_pertenece, @tema)
+    notificar_por_email(@tema.grupos_pertenece, @tema)
+    redirect_to :back
+  end
+
   private
     # No permite parametros de internet
     def tema_params
-      params.require(:tema).permit(:titulo, :cuerpo, :grupo_id)
+      params.require(:tema).permit(:titulo, :cuerpo, :grupo_id, :admitido)
     end
     
     def grupos
@@ -290,6 +317,16 @@ before_filter :grupos
       end
     end
 
+     def notificar_creacion(id_grupos, tema)
+      notificado = Hash.new  
+      notificado[current_user.id] = true
+      id_grupos.each do |grupo|
+        id_grupo = grupo.to_i
+        @grupo = Grupo.find(grupo)
+        @usuario = Usuario.find(@grupo.usuario_id)
+        SendMail.notify_theme_creation(@usuario, tema, @grupo).deliver
+      end  
+    end
     def notificar_por_email(id_grupos, tema)
       notificado = Hash.new
       notificado[current_user.id] = true

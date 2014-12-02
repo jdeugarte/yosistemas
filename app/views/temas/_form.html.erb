@@ -21,11 +21,11 @@
 
          <div style="display:none;">
              <strong><%=@grupo.nombre%></strong> <%= check_box_tag "grupos[]" , @grupo.id , checked = true , :id =>"check" + @grupo.nombre.gsub(' ','_')%><br/>
-             <% if @grupo.id == 1 %>
-              <% @boolForPublic = true %>
-            <% end %>
-            <% if !@boolForPublic %>
-               <strong>Publico</strong> <%= check_box_tag "grupos[]" , 1 , checked = false , :id =>"check" + "Publico"%><br/>
+            <% Grupo.all.each do |grupo| %>
+              <% if grupo.llave == "publico" %>
+               <strong><%=grupo.nombre%></strong> 
+                  <%= check_box_tag  "grupos[]", grupo.id ,checked = false, :id => "check#{grupo.nombre.gsub(' ','_')}" %><br/>
+              <% end %>
             <% end %>
             <% current_user.missuscripciones.each do |grupo| %>
               <% if grupo != @grupo %>

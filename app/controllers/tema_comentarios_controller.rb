@@ -41,8 +41,8 @@ class TemaComentariosController < ApplicationController
            if suscrito.tema_id == id_tema
             if suscrito.usuario_id != current_user.id
                 @usuario = Usuario.find(suscrito.usuario_id)
-                @tema=Tema.find(id_tema)
-                @grupo=Grupo.find(@tema.grupo_id)
+                @tema = Tema.find(id_tema)
+                @grupo = Grupo.find(@tema.grupo_id)
                 @notificacion = Notificacion.new
                 @notificacion.notificado = false
                 @notificacion.suscripcion_tema_id = suscrito.id

@@ -63,17 +63,17 @@ class TareasController < ApplicationController
 	end
 	def new
 		if(params[:id]!="1" && Grupo.find(params[:id]).usuario==current_user)
-		@tarea = Tarea.new
-		@grupos = Array.new
-		if(current_user!=nil)
-		current_user.subscripcions.each do |subs|
-		@grupos.push(subs.grupo)
-		end
-		@grupo = Grupo.find(params[:id])
-		@id = params[:id]
-		end
+			@tarea = Tarea.new
+			@grupos = Array.new
+			if(current_user!=nil)
+				current_user.subscripcions.each do |subs|
+					@grupos.push(subs.grupo)
+				end
+				@grupo = Grupo.find(params[:id])
+				@id = params[:id]
+			end
 		else
-		redirect_to tareas_path
+			redirect_to tareas_path
 		end
 	end
 	def guardar_tarea_a_partir_de_otra

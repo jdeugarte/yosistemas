@@ -72,11 +72,13 @@ Yosistemas::Application.routes.draw do
   get 'grupos/subscripcion_grupo/:id' => 'grupos#subscripcion_grupo', :as=>'suscribirse'
   get "grupos/buscar" => "grupos#buscar", :as=>'buscar_grupo'
 
-  get "grupos/buscar_por_llave" => "grupos#buscar_por_llave", :as=>'buscar_grupo_por_llave'
+  get "/grupos/buscar_por_llave" => "grupos#buscar_por_llave", :as=>'buscar_grupo_por_llave'
+
+  
   
   get 'grupos/mis_grupos' => 'grupos#mis_grupos', :as => 'mis_grupos'
   get 'grupos/suscriptores/:id' => 'grupos#suscriptores', :as => 'suscriptores'
-  get 'gruopos/detalle_usuario/:id' => 'grupos#detalle_usuario', :as => 'detalle_usuario'
+  get 'grupos/detalle_usuario/:id' => 'grupos#detalle_usuario', :as => 'detalle_usuario'
   get "grupos/:id/temas"  => "temas#index", :as=> 'filtrar_temas'
   get "grupos/:id/temas-y-tareas"  => "temas_y_tareas#index", :as=> 'temas_y_tareas'
   get 'grupos/invitacion_grupo/:id' => 'grupos#invitacion_grupo', :as => 'invitacion_grupo'
@@ -85,7 +87,7 @@ Yosistemas::Application.routes.draw do
         
   get 'grupos/deshabilitar_grupo/:id' => 'grupos#deshabilitar_grupo'
   get 'grupos/habilitar_grupo/:id' => 'grupos#habilitar_grupo'
-
+  
   #rutas de tareas
   get 'tareas/new/:id' => 'tareas#new', :as => 'tarea_para_grupo'
   get 'tareas/eliminar/:id' => 'tareas#eliminar'

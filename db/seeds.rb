@@ -6,9 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 publico = Grupo.create(nombre: 'Publico', descripcion: 'todos deben tener ingreso a temas publicos', estado: false, llave: "publico")
-docente = Usuario.create(nombre_usuario: "docente", nombre: "docente", apellido: "seed", contrasenia: "123456", correo: "docente@gmail.com", activa: true, rol: "Docente")
-administrador  = Usuario.create(nombre_usuario: "administrador", nombre: "administrador", apellido: "seed", contrasenia: "123456", correo: "administrador@gmail.com", activa: true, rol: "Administrador")
-estudiante = Usuario.create(nombre_usuario: "estudiante", nombre: "estudiante", apellido: "seed", contrasenia: "123456", correo: "estudiante@gmail.com", activa: true, rol: "Estudiante")
+docente = Usuario.create(nombre_usuario: "docente", nombre: "docente", apellido: "seed", contrasenia: "123456", correo: "docente@gmail.com", activa: true, rol: "Docente",conectado: false)
+administrador  = Usuario.create(nombre_usuario: "administrador", nombre: "administrador", apellido: "seed", contrasenia: "123456", correo: "administrador@gmail.com", activa: true, rol: "Administrador",conectado: false)
+estudiante = Usuario.create(nombre_usuario: "estudiante", nombre: "estudiante", apellido: "seed", contrasenia: "123456", correo: "estudiante@gmail.com", activa: true, rol: "Estudiante", conectado: false)
 url = Url.create(direccion: "yosistemas2014.herokuapp.com")
 
 #evento = Evento.create(nombre: 'Evento 1', detalle: 'Ninguno', lugar: 'Cochabamba', fecha: '10/10/2014', estado: true )

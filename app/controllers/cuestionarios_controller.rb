@@ -1,9 +1,14 @@
 class CuestionariosController < ApplicationController
-	def ver_cuestionarios_usuarios  	
+	def ver_cuestionarios_usuarios
     @cuestionario = Cuestionario.find(params[:id_cuestionario])
+    control = false
   	@suscritos = Array.new
     @mapi = Hash.new
     @cuestionario.grupos.each do |grupo|
+      if current_user.esta_subscrito?(grupo.id) and !control
+          @grupo = grupo
+          control = true
+      end
       Subscripcion.where(grupo_id: grupo.id).each do |sub|
         if @mapi[sub.usuario_id] != true 
           @suscritos << sub
@@ -40,10 +45,15 @@ class CuestionariosController < ApplicationController
   end
 
   def ver_resultados_usuarios #sssss 
+    control = false
       @cuestionario = Cuestionario.find(params[:id_cuestionario])
       @mapi = Hash.new
       @suscritos = Array.new
        @cuestionario.grupos.each do |grupo|
+        if current_user.esta_subscrito?(grupo.id) and !control
+          @grupo = grupo
+          control = true
+      end
       Subscripcion.where(grupo_id: grupo.id).each do |sub|
         if @mapi[sub.usuario_id] != true 
           @suscritos << sub
@@ -68,10 +78,17 @@ class CuestionariosController < ApplicationController
   end
 
   def ver_resumen
+    control = false
     @cuestionario = Cuestionario.find(params[:id_cuestionario])
     @preguntas = Pregunta.where(cuestionario_id: @cuestionario.id)  
     @respuestas_correctas = Array.new
     @respuestas_incorrectas = Array.new
+    @cuestionario.grupos.each do |grupo|
+    if current_user.esta_subscrito?(grupo.id) and !control
+          @grupo = grupo
+          control = true
+      end
+    end
     @preguntas.each do |pregunta|
       respuestas_usuarios_true = RespuestaUsuario.where(pregunta_id: pregunta.id,calificacion: true)
       respuestas_usuarios_false = RespuestaUsuario.where(pregunta_id: pregunta.id,calificacion: false)
@@ -81,7 +98,14 @@ class CuestionariosController < ApplicationController
   end
 
   def cargar_respuestas
+    control = false
     @cuestionario = Cuestionario.find(params[:id_cuestionario])
+    @cuestionario.grupos.each do |grupo|
+      if current_user.esta_subscrito?(grupo.id) and !control
+          @grupo = grupo
+          control = true
+      end
+    end
     @respuestas = RespuestaUsuario.where(:usuario_id=>params[:id_usuario], :cuestionario_id=> params[:id_cuestionario])
   end
 
@@ -111,6 +135,15 @@ class CuestionariosController < ApplicationController
 	end
 
   def calificar
+    control = false
+    res = RespuestaUsuario.find(params[:id_respuestas].first)
+    cuestionario = Cuestionario.find(res.cuestionario_id)
+    cuestionario.grupos.each do |grupo|
+      if current_user.esta_subscrito?(grupo.id) and !control
+          @grupo = grupo
+          control = true
+      end
+    end
     if params[:comentarios] == nil && params[:calificacion] == nil
       redirect_to (:back)
     end
@@ -128,11 +161,12 @@ class CuestionariosController < ApplicationController
   end
 
 	def edit
+    control = false
 		@cuestionario = Cuestionario.find(params[:id])
     @cuestionario.grupos.each do |grupo|
-      if current_user.administra(grupo.id)
+      if current_user.esta_subscrito?(grupo.id) and !control
         @grupo = grupo
-        break
+        control = true
       end
     end
 		

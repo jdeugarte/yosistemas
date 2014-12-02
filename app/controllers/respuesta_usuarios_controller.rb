@@ -1,12 +1,26 @@
 class RespuestaUsuariosController < ApplicationController
 	skip_before_filter :verify_authenticity_token
 	def nuevo
+		control = false
 		@cuestionario = Cuestionario.find(params[:id])
-
+		@cuestionario.grupos.each do |grupo|
+			if current_user.esta_subscrito?(grupo.id) and !control
+	          @grupo = grupo
+	          control = true
+	      	end
+      	end
 	end
-	def crear 
+	def crear
+		control = false 
 		@respuestas = params[:resp]
 		@cuestionario_id = params[:id_cuestionario]
+		@cuestionario = Cuestionario.find(params[:id_cuestionario])
+		@cuestionario.grupos.each do |grupo|
+			if current_user.esta_subscrito?(grupo.id) and !control
+          		@grupo = grupo
+          		control = true
+      		end
+		end
 		@usuario_id = params[:id_usuario]
 		@preguntas_id = params[:id_pregunta]
 		@pregunta_tipo = params[:tipo_pregunta]

@@ -104,6 +104,18 @@ require 'digest/md5'
   		return misgrupos
   	end
 
+
+    def missuscripciones
+      misgrupos = []
+      lista_subscripciones = Subscripcion.where(:usuario_id => self.id)
+      lista_subscripciones.each do |subscripcion|
+        if Grupo.find(subscripcion.grupo.id).estado == true
+          misgrupos.push(Grupo.find(subscripcion.grupo.id))
+        end
+      end
+      return misgrupos
+    end
+
   	def lista_usuarios_misgrupos
   		lista_usuarios = []
   		Usuario.all.each do |usuario|

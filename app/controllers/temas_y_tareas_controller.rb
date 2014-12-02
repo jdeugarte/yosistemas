@@ -2,19 +2,18 @@ class TemasYTareasController < ApplicationController
   skip_before_filter :require_log_in,:only=>[:index]
   def index
     if( params[:id] != nil && Grupo.find(params[:id]).habilitado)
-       @grupo = Grupo.find(params[:id])
+        @grupo = Grupo.find(params[:id])
+        if @grupo.nombre == "Publico"
+          redirect_to (:root)
+        end
+        @temas = @grupo.temas.order("updated_at DESC").page(params[:page]).per(3)
+        @tareas = @grupo.tareas.order("updated_at DESC").page(params[:page]).per(3)
+        @all = (@temas+@tareas).sort_by(&:created_at).reverse
     else
-       @grupo = Grupo.find(1)
-       redirect_to temas_path
-    end
-    if(params[:id]=="1")
-      redirect_to temas_path
-    else
-      @temas = @grupo.temas.order("updated_at DESC").page(params[:page]).per(3)
-      @tareas = @grupo.tareas.order("updated_at DESC").page(params[:page]).per(3)
-      @all = (@temas+@tareas).sort_by(&:created_at).reverse
+      redirect_to(:root)
     end
   end
+
   def ordenar
     lista_unida = Unir_Tareas_y_Temas(params[:id])
     @all = OrdenarLista(params[:opcion],lista_unida)

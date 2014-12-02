@@ -132,6 +132,7 @@ Yosistemas::Application.routes.draw do
   get "eventos/aprove/:id" => "eventos#aprove"
   get "temas/aprove/:id" => "temas#aprove"
   get "tareas/aprove/:id" => "tareas#aprove"
+  get 'grupos/:grupo/eventos' => 'eventos#index'
 
 
   resources :notifications

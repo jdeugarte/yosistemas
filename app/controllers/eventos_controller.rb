@@ -4,19 +4,19 @@ class EventosController < ApplicationController
   before_filter :grupos
   # GET /eventos
   def index
-    @eventos = Array.new
-    current_user.misgrupos.each do |grupo|
-      Grupo.find(grupo).eventos.each do |evento|
-        if evento.admitido == true
-          @eventos << evento  
-        end
+    @eventos = Array.new 
+    if( params[:grupo] != nil && Grupo.find(params[:grupo]).habilitado)
+        @grupo = Grupo.find(params[:grupo])
+      else
+        @grupo = Grupo.find(1)
       end
-    end
-    Grupo.find(1).eventos.each do |evento|
-       @eventos << evento
-    end
-    @eventos = @eventos.uniq
+      @grupo.eventos.each do |evento|
+          if evento.admitido || @grupo.id == 1
+            @eventos<<evento
+          end
+        end
   end
+
 
   # GET /eventos/1
   def show
@@ -32,6 +32,7 @@ class EventosController < ApplicationController
   # GET /eventos/new
   def new
     @evento = Evento.new
+    @boolForPublic = false
     @grupo = Grupo.find(params[:id])
   end
 
@@ -156,14 +157,16 @@ class EventosController < ApplicationController
     end
 
     def notificar_creacion(id_grupos, evento)
-      notificado = Hash.new  
-      notificado[current_user.id] = true
-      id_grupos.each do |grupo|
-        id_grupo = grupo.to_i
-        @grupo = Grupo.find(grupo)
-        @usuario = Usuario.find(@grupo.usuario_id)
-        SendMail.notify_event_creation(@usuario, evento, @grupo).deliver
-      end  
+      if id_grupos.size != 1 && id_grupos[0] = 1
+        notificado = Hash.new  
+        notificado[current_user.id] = true
+        id_grupos.each do |grupo|
+          id_grupo = grupo.to_i
+          @grupo = Grupo.find(grupo)
+          @usuario = @grupo.usuario
+          SendMail.notify_event_creation(@usuario, evento, @grupo).deliver
+        end  
+      end
     end
 
     def notificar_por_email(id_grupos, evento)

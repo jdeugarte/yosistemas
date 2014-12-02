@@ -23,7 +23,7 @@
             <% end %>
             <!--li><a href="/temas/show_mine">Mis Temas</a></li-->
             <%end%>
-            <li><a href="/temas">Ver Temas</a></li>
+            <li><a href="/grupos/<%=@grupo.id%>/temas">Ver Temas</a></li>
           </ul>
         </li>
         <%if !@grupo.nil? and @grupo.nombre!="Publico"%>
@@ -79,7 +79,7 @@
             <li><a href="/eventos/new/<%=@grupo.id%>">Crear Evento</a></li>
             <%end%>
           <% end %>
-            <li><a href="/eventos">Ver Eventos</a></li>
+            <li><a href="/grupos/<%=@grupo.id%>/eventos">Ver Eventos</a></li>
           </ul>
         </li>
         

@@ -52,7 +52,13 @@
           </tr>
         <div style="display:none;">
              <strong><%=@grupo.nombre%></strong> <%= check_box_tag "grupos[]" , @grupo.id , checked = true , :id =>"check" + @grupo.nombre.gsub(' ','_')%><br/>
-            <% current_user.grupos.each do |grupo| %>
+             <% if @grupo.id == 1 %>
+              <% @boolForPublic = true %>
+            <% end %>
+            <% if !@boolForPublic %>
+               <strong>Publico</strong> <%= check_box_tag "grupos[]" , 1 , checked = false , :id =>"check" + "Publico"%><br/>
+            <% end %>
+            <% current_user.missuscripciones.each do |grupo| %>
               <% if grupo != @grupo %>
                   <strong><%=grupo.nombre%></strong> 
                   <%= check_box_tag  "grupos[]", grupo.id ,checked = false, :id => "check#{grupo.nombre.gsub(' ','_')}" %><br/>
@@ -91,7 +97,7 @@
  <script>
   $(function() {
     var gruposDisponibles = [
-    <% current_user.grupos.each do |grupo|%>
+    <% current_user.missuscripciones.each do |grupo|%>
       "<%=grupo.nombre%>",
     <% end %>
     "Publico"
@@ -107,7 +113,7 @@
   function getGrupo()
   {
     var gruposDisponibles = [
-    <% current_user.grupos.each do |grupo|%>
+    <% current_user.missuscripciones.each do |grupo|%>
       "<%=grupo.nombre%>",
     <% end %>
     "Publico"

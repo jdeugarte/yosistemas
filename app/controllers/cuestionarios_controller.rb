@@ -276,7 +276,7 @@ class CuestionariosController < ApplicationController
             if @usuario != nil
               @grupo = Grupo.find(id_grupo)
               notificacion = Notification.create('title'=>cuestionario.titulo, 'description'=>cuestionario.descripcion, 'reference_date'=> cuestionario.fecha_limite,
-              'tipo'=>0, 'de_usuario_id'=>current_user.id, 'para_usuario_id'=> @usuario.id, 'seen'=>false, 'id_item'=> cuestionario.id)
+              'tipo'=>3, 'de_usuario_id'=>current_user.id, 'para_usuario_id'=> @usuario.id, 'seen'=>false, 'id_item'=> cuestionario.id)
               Pusher.url = "http://673a73008280ca569283:555e099ce1a2bfc840b9@api.pusherapp.com/apps/60344"
               Pusher['notifications_channel'].trigger('notification_event', {
               para_usuario: notificacion.para_usuario_id
@@ -288,7 +288,7 @@ class CuestionariosController < ApplicationController
     end
   end
 
-  def notificar_por_email(id_grupo,tarea)
+  def notificar_por_email(id_grupo,cuestionario)
     suscripciones = Subscripcion.all
     suscripciones.each do |suscrito|
       if suscrito.grupo_id == id_grupo

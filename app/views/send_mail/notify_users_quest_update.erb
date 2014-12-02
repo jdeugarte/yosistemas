@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <style type="text/css">     
+      p {font-family: Arial,Helvetica,sans-serif; color: #3e3e3e; font-size: 14px; }
+      h3 {font-family: Arial,Helvetica,sans-serif; color: #3e3e3e; font-size: 18px;}
+    </style>
+  </head>
+  <body>
+  <table border="0"> 
+        <th colspan="15" bgcolor="255E8A" width="12">
+        </th>
+        <th align="left">
+          <h3>Hola, <%= @user.nombre %></h3>
+          <p>
+            El staff de YoSistemas te comunica que 
+            se edito el cuestionario: <%= @cuestionario.titulo%>
+            en el grupo: <%= @grupo.nombre%>.<br>
+            Para revisar este cuestionario, visita la pagina:<br>
+            <a href="<%= @url %>"><%= @url %></a><br><br>
+           <b><i>Staff de YoSistemas</i></b>
+          </p>
+      </th>
+    </table>
+  </body>
+</html>

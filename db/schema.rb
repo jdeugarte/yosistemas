@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141130113858) do
+ActiveRecord::Schema.define(version: 20141202204812) do
 
   create_table "adjunto_respuesta_cuestionarios", force: true do |t|
     t.integer  "respuesta_usuario_id"
@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(version: 20141130113858) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "grupos_pertenecen"
+    t.boolean  "admitido",          default: false
   end
 
   add_index "cuestionarios", ["grupo_id"], name: "index_cuestionarios_on_grupo_id"
@@ -152,11 +153,6 @@ ActiveRecord::Schema.define(version: 20141130113858) do
 
   add_index "eventos", ["grupo_id"], name: "index_eventos_on_grupo_id"
   add_index "eventos", ["usuario_id"], name: "index_eventos_on_usuario_id"
-
-  create_table "eventos_grupos", id: false, force: true do |t|
-    t.integer "grupo_id"
-    t.integer "evento_id"
-  end
 
   create_table "grupos", force: true do |t|
     t.string   "nombre"
@@ -362,6 +358,8 @@ ActiveRecord::Schema.define(version: 20141130113858) do
     t.boolean  "mostrar_correo"
     t.boolean  "conectado",                   default: false
     t.string   "temp_password"
+    t.boolean  "push_quest",                  default: true
+    t.boolean  "mailer_quest",                default: true
   end
 
   add_index "usuarios", ["grupo_id"], name: "index_usuarios_on_grupo_id"

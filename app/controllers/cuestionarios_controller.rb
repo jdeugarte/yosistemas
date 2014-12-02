@@ -193,6 +193,13 @@ class CuestionariosController < ApplicationController
     @grupo.cuestionarios.each do |cuestio|
       @cuestionarios << cuestio
     end
+
+    if @cuestionario.admitido == false
+      @cuestionario.grupos.each do |grupo|
+        notificar_por_email(grupo.id, @cuestionario)
+        notificacion_push(grupo.id, @cuestionario)
+      end
+    end
     
   end
 
@@ -225,7 +232,44 @@ class CuestionariosController < ApplicationController
       redirect_to '/'
     end
 
-  	
+    def notificacion_push(id_grupo,cuestionario)
+    suscripciones = Subscripcion.all
+    suscripciones.each do |suscrito|
+      if suscrito.grupo_id == id_grupo
+        if suscrito.usuario_id != current_user.id
+          @usuario = suscrito.usuario
+          if @usuario.push_quest == true
+            if @usuario != nil
+              @grupo = Grupo.find(id_grupo)
+              notificacion = Notification.create('title'=>cuestionario.titulo, 'description'=>cuestionario.descripcion, 'reference_date'=> cuestionario.fecha_limite,
+              'tipo'=>0, 'de_usuario_id'=>current_user.id, 'para_usuario_id'=> @usuario.id, 'seen'=>false, 'id_item'=> cuestionario.id)
+              Pusher.url = "http://673a73008280ca569283:555e099ce1a2bfc840b9@api.pusherapp.com/apps/60344"
+              Pusher['notifications_channel'].trigger('notification_event', {
+              para_usuario: notificacion.para_usuario_id
+              })
+            end
+          end
+        end
+      end
+    end
+  end
+
+  def notificar_por_email(id_grupo,tarea)
+    suscripciones = Subscripcion.all
+    suscripciones.each do |suscrito|
+      if suscrito.grupo_id == id_grupo
+        if suscrito.usuario_id != current_user.id
+          @usuario = suscrito.usuario
+          if @usuario.mailer_quest == true
+            if @usuario != nil
+              @grupo = Grupo.find(id_grupo)
+              SendMail.notify_users_quest_update(@usuario, cuestionario, @grupo).deliver
+            end
+          end
+        end
+      end
+    end
+  end
 
   private
     def cuestionario_params

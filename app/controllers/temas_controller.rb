@@ -10,7 +10,7 @@ before_filter :grupos
         @grupo = Grupo.find(1)
       end
        @grupo.temas.each do |tema|
-          if tema.admitido || @grupo.id == 1
+          if tema.aprobado?(@grupo.id) || @grupo.llave == "publico"
             @temas << tema
           end
         end
@@ -95,13 +95,13 @@ before_filter :grupos
   # GET /temas/new
   def new
     @tema = Tema.new
-    @boolForPublic = false
     @grupos = Array.new
     if(current_user!=nil)
       current_user.subscripcions.each do |subs|
         @grupos.push(subs.grupo)
       end
       @grupo = Grupo.find(params[:id])
+      @GrupoDefecto = @grupo
       @id = params[:id]
     end
   end
@@ -139,19 +139,15 @@ before_filter :grupos
     @tema = Tema.new(tema_params)
     @tema.usuario_id = current_user.id
 
-    if current_user.rol == "Docente"
-      @tema.admitido = true
-    else
-      @tema.admitido = false
-    end
-
-
     if params[:grupos] != nil && @tema.save
       params[:grupos].each do |grupo|
         grupi = Grupo.find(grupo)
         grupi.temas << @tema
         @tema.grupos_pertenece << grupo
         grupi.save
+        if current_user.rol == "Docente" 
+          @tema.grupos_dirigidos << grupo
+        end
       end
 
       @tema.save
@@ -161,17 +157,13 @@ before_filter :grupos
       @suscripcion.usuario_id=current_user.id
       @suscripcion.tema_id=@tema.id
       @suscripcion.save
-
-      if @grupo.llave = "publico"
-        @tema.admitido = true
-      end
       
-      if @tema.admitido = true        
+      if current_user.rol == "Docente"        
         notificacion_push(params[:grupos], @tema)
         notificar_por_email(params[:grupos], @tema)
       end
 
-      if current_user.rol == "Estudiante" && @grupo.llave != "publico"           
+      if current_user.rol == "Estudiante"           
         notificar_creacion(params[:grupos], @tema)
       end
 
@@ -288,7 +280,10 @@ before_filter :grupos
 
    def aprove
     @tema = Tema.find(params[:id])
-    @tema.admitido = true
+    params[:grupos].each do |grupo|
+     @tema.grupos_dirigidos << grupo
+    end
+
     @tema.save
     notificacion_push(@tema.grupos_pertenece, @tema)
     notificar_por_email(@tema.grupos_pertenece, @tema)
@@ -341,16 +336,35 @@ before_filter :grupos
       end
     end
 
-     def notificar_creacion(id_grupos, tema)
-      notificado = Hash.new  
-      notificado[current_user.id] = true
-      id_grupos.each do |grupo|
-        id_grupo = grupo.to_i
-        @grupo = Grupo.find(grupo)
-        @usuario = Usuario.find(@grupo.usuario_id)
-        SendMail.notify_theme_creation(@usuario, tema, @grupo).deliver
-      end  
-    end
+def notificar_creacion(id_grupos, tema)
+notificado = Hash.new  
+id_grupos.each do |grupo|
+id_grupo = grupo.to_i
+@grupo = Grupo.find(grupo)
+if Grupo.find(id_grupo).llave != "publico"
+  @usuario = Usuario.find(@grupo.usuario_id)
+  if notificado[@usuario.id] == nil
+  notificado[@usuario.id] = true
+  @notificacion = Notification.new
+  @notificacion.title = tema.titulo
+  @notificacion.description = tema.cuerpo
+  @notificacion.reference_date = nil
+  @notificacion.tipo = 5
+  @notificacion.de_usuario_id = current_user.id
+  @notificacion.para_usuario_id = @usuario.id
+  @notificacion.seen = false
+  @notificacion.id_item = tema.id
+  @notificacion.save
+  Pusher.url = "http://673a73008280ca569283:555e099ce1a2bfc840b9@api.pusherapp.com/apps/60344"
+  Pusher['notifications_channel'].trigger('notification_event', {
+  para_usuario: @notificacion.para_usuario_id
+  })
+  SendMail.notify_theme_creation(@usuario, tema, @grupo).deliver
+end
+end 
+end
+end
+
     def notificar_por_email(id_grupos, tema)
       notificado = Hash.new
       notificado[current_user.id] = true

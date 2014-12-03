@@ -22,12 +22,9 @@
 
          <div style="display:none;">
              <strong><%=@grupo.nombre%></strong> <%= check_box_tag "grupos[]" , @grupo.id , checked = true , :id =>"check" + @grupo.nombre.gsub(' ','_')%><br/>
-             <% if @grupo.id == 1 %>
-              <% @boolForPublic = true %>
-             <% end %>
             <% Grupo.all.each do |grupo| %>
               <% if grupo.llave == "publico"%>
-              <% if @boolForPublic && grupo.id != 1 %>
+              <%  if grupo.id != @GrupoDefecto.id %>
                   <strong><%=grupo.nombre%></strong> 
                   <%= check_box_tag  "grupos[]", grupo.id ,checked = false, :id => "check#{grupo.nombre.gsub(' ','_')}" %><br/>
               <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141202204812) do
+ActiveRecord::Schema.define(version: 20141203075709) do
 
   create_table "adjunto_respuesta_cuestionarios", force: true do |t|
     t.integer  "respuesta_usuario_id"
@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(version: 20141202204812) do
     t.datetime "updated_at"
     t.time     "hora"
     t.boolean  "admitido",         default: false
+    t.string   "grupos_dirigidos"
   end
 
   add_index "eventos", ["grupo_id"], name: "index_eventos_on_grupo_id"
@@ -327,6 +328,7 @@ ActiveRecord::Schema.define(version: 20141202204812) do
     t.integer  "visible",          default: 1,          null: false
     t.integer  "grupo_id"
     t.boolean  "admitido",         default: false
+    t.text     "grupos_dirigidos"
   end
 
   add_index "temas", ["grupo_id"], name: "index_temas_on_grupo_id"

@@ -8,19 +8,18 @@
       <h4> <%= image_tag avatar_tam_url(usuario,40) %>&nbsp;&nbsp;<%= usuario.nombre %> &nbsp;<%= usuario.apellido %></h4>
   		</td>
   		<%if RespuestaUsuario.ya_respondio_cuestionario(usuario.id,@cuestionario.id)%>
-      <% respuesta = RespuestaUsuario.where(usuario_id: usuario.id, cuestionario_id: @cuestionario.id).first%>
+      <% RespuestaUsuario.where(usuario_id: usuario.id, cuestionario_id: @cuestionario.id).each do |respuesta| %>
       <% if respuesta.calificacion != nil %>
         <td class="active">
         <H4> La pregunta ya fue calificada.</H4>
         </td>
       <% else %>
     		<td class="active">
-        <form method="get" action="<%= "cargar_respuestas/"+ usuario.id.to_s + "/" + @cuestionario.id.to_s %> " data-method="delete" >
-             <button type="submit" class="btn btn-success">Calificar preguntas de texto</button>
-        </form>
+        <%= link_to "Calificar preguntas de texto", "cargar_respuestas/"+usuario.id.to_s + "/" + @cuestionario.id.to_s, :class => "btn btn-success" %>
         </td>
-      
+        <% break %>
       <%end%>
+      <% end %>
       <%else%>
       <td>
       	<h4>Todavia no respondio cuestionario<h4>

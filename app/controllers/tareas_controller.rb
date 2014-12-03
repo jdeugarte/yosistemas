@@ -124,7 +124,9 @@ class TareasController < ApplicationController
 	
 	def show
 		control = false
-		@tarea = Tarea.find(params[:id])
+		if !Tarea.where(:id => params[:id]).empty?
+		@tarea = Tarea.find(params[:id])	
+		
 		@tarea.grupos.each do |grupo|
 			if current_user.esta_subscrito?(grupo.id) && !control
 				@grupo = grupo
@@ -138,6 +140,11 @@ class TareasController < ApplicationController
 		if(current_user == @tarea.usuario)
 			@tareas_enviadas = ResponderTarea.where(:tarea_id => @tarea.id)
 		end
+		else
+			flash
+			redirect_to '/no_existe'
+		end
+
 	end
 	def edit #id tarea
 		if(Tarea.find(params[:id]).usuario==current_user)
@@ -159,6 +166,7 @@ class TareasController < ApplicationController
 		@id = params[:id]
 		end
 		else
+		flash[:alert] = 'La tarea fue eliminada'
 		redirect_to temas_path
 		end
 	end

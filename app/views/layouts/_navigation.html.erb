@@ -148,7 +148,7 @@
                  <li>
                  <table>
                    <tr>
-                     <th><a href="/cuestionarios/cuestionarios_de_grupo_index/<%= Cuestionario.find(notificacion.id_item).grupo_id %>" role="button" class="btn" data-toggle="modal" ><b><%=usuario.nombre_usuario%></b> ha editado el cuestionario <%=notificacion.title[0,5]+(notificacion.title.length>5 ? "..." : "")%></a></th>
+                     <th><a href="/" role="button" class="btn" data-toggle="modal" ><b><%=usuario.nombre_usuario%></b> ha editado el cuestionario <%=notificacion.title[0,5]+(notificacion.title.length>5 ? "..." : "")%></a></th>
                      <th><span><a href="/notifications/change_seen/<%=notificacion.id%>" role="button" class="btn" data-toggle="modal"><img src="/assets/notA.png" width="20" title="Eliminar notificacion"></a></span></th>
                    </tr>
                  </table></li>

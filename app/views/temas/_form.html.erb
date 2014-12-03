@@ -1,11 +1,12 @@
 <%= form_for @tema, :html => { :class => 'bs-example form-horizontal', :multipart => true} do |f| %>
-<%= f.hidden_field :id,:value => @id%>
-<div class="panel panel-info">
-  <div class="panel-heading"><center><h3><b>Ingrese los datos del tema</b></h3></center></div>
-  <div class="panel-body">
+  <%= f.hidden_field :id,:value => @id%>
+  <div class="panel panel-info">
+    <div class="panel-heading"><center><h3><b>Ingrese los datos del tema</b></h3></center></div>
+    <div class="panel-body">
       <%= f.label :titulo, "Titulo:" %>
-      <%= f.text_field :titulo,:class=>"form-control", :placeholder=>'Titulo', :maxlength => 50 , :title => "El titulo del tema es obligatorio, Por favor rellene este campo" %>
+      <%= f.text_field :titulo,:class=>"form-control", :placeholder=>'Titulo', :maxlength => 50 , :title => "El titulo del tema es obligatorio, Por favor rellene este campo" ,:required => true %>
       <%= f.label :titulo, "Contenido:" %>
+
       <%= f.text_area :cuerpo, :class=>'form-control',:rows=>'6', :placeholder=>'Contenido', :maxlength => 500 %>
 
             <div class="ui-widget">
@@ -41,67 +42,100 @@
         <%= f.label :titulo, "Archivos seleccionados:" %>
         <div class="col-lg input-group">
           <input id="showFiles" class="form-control" type="text" placeholder="Seleccione archivos..." onclick="document.getElementById('tema_archivo').click();" onfocus="this.blur();">
-            <%= f.file_field :archivo , :class=>'form-control',:multiple => true, :style=>"display:none;", :onchange=>"document.getElementById('showFiles').value = (this.files.length>1)?''+this.files.length+' Archivos seleccionados.':this.files[0].name;" %>
+            <%= f.file_field :archivo , :class=>'form-control',:multiple => true, :style=>"display:none;", :onchange=>"barra(this.files[0].size);document.getElementById('showFiles').value = (this.files.length>1)?''+this.files.length+' Archivos seleccionados.':this.files[0].name;" %>
             <span class="input-group-addon" style="background-color: #256188; cursor:pointer;" onclick="document.getElementById('tema_archivo').click();">
             <i class="icon-file icon-white"></i>
             </span>
         </div>
       </div>
+      
+      <div class="progress">
+        <div id = "progress_si" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 1%">
+        <span class="sr-only">40% Complete (success)</span>
+       </div>
+</div>
+
 
   </div>
   <ul class="list-group">
     <li class="list-group-item">
       <center>
       <a href="javascript:window.history.back();" class="btn btn-danger">&laquo; Cancelar</a>
-      <input type="submit" value="Crear tema" class="btn btn-success">
+      <input id="button" type="submit" value="Crear tema" class="btn btn-success">
+
       </center>
     </li>
   </ul>
 </div>
-
-
 <%end%>
 
 
-
- <script>
-  $(function() {
-    var gruposDisponibles = [
-    <% current_user.missuscripciones.each do |grupo|%>
-      "<%=grupo.nombre%>",
-    <% end %>
-    "Publico"
-    ];
-   $( "#grupos" ).autocomplete({
-      source: gruposDisponibles,
-      minLength: 0
-   });
-   });
-
-
-
-  function getGrupo()
+<script type="text/javascript">
+  function barra(tam)
   {
-    var gruposDisponibles = [
-    <% current_user.missuscripciones.each do |grupo|%>
-      "<%=grupo.nombre%>",
-    <% end %>
-    "Publico"
-    ];
-    var grupo = document.getElementById("grupos").value;
-    var grupo_sin = grupo.replace(/\s/g, "_");
-    if ($("#" + grupo_sin).length < 1 && grupo != "" && jQuery.inArray(grupo,gruposDisponibles) != -1)
+    document.getElementById("progress_si").style.width="1%";
+    var relacion = tam/10000;
+    var c,c2;
+    var c = 1;
+    document.getElementById("button").disabled = true;
+    setInterval(function()
     {
-      document.getElementById("gruposDiv").innerHTML+="<div id='"+grupo_sin+"'>"+ grupo +"<a href='#' onclick='quitarOpcion(&quot;"+grupo_sin+"&quot);'><img src='/assets/delete.png' width='20'></a> </div> ";
-       document.getElementById("check" + grupo_sin).checked = true;
-    }
-    return false;
-  };
+       c = c + 1;
 
-  function quitarOpcion(id)
-  {
-    $("#" + id).replaceWith("");
-    document.getElementById("check" + id).checked = false;
-    return false;
-  };
+         document.getElementById("progress_si").style.width=c + "%";
+         if (c == 100)
+         {  
+            alert("Carga completa!");  
+            document.getElementById("button").disabled = false;        
+            relacion=0;
+            clearInterval(relacion);
+         }
+    },relacion);
+  }
+</script>
+
+
+
+
+
+<script>
+$(function() {
+var gruposDisponibles = [
+<% current_user.missuscripciones.each do |grupo|%>
+"<%=grupo.nombre%>",
+<% end %>
+"Publico"
+];
+$( "#grupos" ).autocomplete({
+source: gruposDisponibles,
+minLength: 0
+});
+});
+
+
+
+function getGrupo()
+{
+var gruposDisponibles = [
+<% current_user.missuscripciones.each do |grupo|%>
+"<%=grupo.nombre%>",
+<% end %>
+"Publico"
+];
+var grupo = document.getElementById("grupos").value;
+var grupo_sin = grupo.replace(/\s/g, "_");
+if ($("#" + grupo_sin).length < 1 && grupo != "" && jQuery.inArray(grupo,gruposDisponibles) != -1)
+{
+document.getElementById("gruposDiv").innerHTML+="<div id='"+grupo_sin+"'>"+ grupo +"<a href='#' onclick='quitarOpcion(&quot;"+grupo_sin+"&quot);'><img src='/assets/delete.png' width='20'></a> </div> ";
+document.getElementById("check" + grupo_sin).checked = true;
+}
+return false;
+};
+
+function quitarOpcion(id)
+{
+$("#" + id).replaceWith("");
+document.getElementById("check" + id).checked = false;
+return false;
+};
 </script>

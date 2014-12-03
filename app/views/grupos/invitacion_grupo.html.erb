@@ -8,11 +8,12 @@
   <div class="panel-body">
     <%if current_user != nil%>
       <form method='post' action="/grupos/enviar_invitaciones/<%=@grupo.id.to_s%>">
-        <input type="text" class="form-control" name="correos" required placeholder="Ingrese emails separados por comas"><br>
-        <button type="submit" class="btn btn-primary">Enviar invitaciones</button>
+        <input type="text" class="form-control" name="correos" required placeholder="Ingrese los correos separados por comas"><br>
+        <center><a href="/grupos" class="btn btn-danger">Atras</a>
+        <button type="submit" class="btn btn-primary">Enviar invitaciones</button></center>
       </form>
     <%end%>
   </div>
 </div>
-<a href="/grupos" class="btn btn-danger">Atras</a>
+
 

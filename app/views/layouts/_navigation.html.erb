@@ -105,7 +105,7 @@
               <span class="badge"><%=notificaciones_nuevas.length%></span>
             <%end%>
           </a>
-          <ul class="dropdown-menu" >
+           <ul class="dropdown-menu scrollable-menu" role="menu">
             <%if notificaciones_nuevas.length == 0 %>
               <li><Center>No hay notificaciones :(</Center></li>
             <%else%>
@@ -119,7 +119,7 @@
                     <tr>
                       <th><a href="/tareas/<%=notificacion.id_item%>" role="button" class="btn" data-toggle="modal"><b><%=usuario.nombre_usuario%></b> ha creado la tarea <%=notificacion.title[0,5]+(notificacion.title.length>5 ? "..." : "")%>
                       </a></th>
-                      <th> <span><a href="/notifications/change_seen/<%=notificacion.id%>" role="button" class="btn" data-toggle="modal"><img src="/assets/notA.jpg" width="13" title="Eliminar notificaciones"></a></span></th>
+                      <th align="right"><span><a href="/notifications/change_seen/<%=notificacion.id%>" role="button" class="btn" data-toggle="modal"><img src="/assets/notA.png" width="20" title="Eliminar notificaciones"></a></span></th>
                     </tr>
                   </table>
                   </li>
@@ -130,7 +130,7 @@
                     <tr>
                       <th><a href="/temas/<%=notificacion.id_item%>" role="button" class="btn" data-toggle="modal" ><b><%=usuario.nombre_usuario%></b> ha creado el tema <%=notificacion.title[0,5]+(notificacion.title.length>5 ? "..." : "")%></a></th>
                       <th></th>
-                      <th><span><a href="/notifications/change_seen/<%=notificacion.id%>" role="button" class="btn" data-toggle="modal"><img src="/assets/notA.jpg" width="13" title="Eliminar notificacion"></a></span></th>
+                      <th><span><a href="/notifications/change_seen/<%=notificacion.id%>" role="button" class="btn" data-toggle="modal"><img src="/assets/notA.png" width="20" title="Eliminar notificacion"></a></span></th>
                     </tr>
                   </table>
                   </li>
@@ -140,7 +140,16 @@
                  <table>
                    <tr>
                      <th><a href="/eventos/<%=notificacion.id_item%>" role="button" class="btn" data-toggle="modal" ><b><%=usuario.nombre_usuario%></b> ha creado el evento <%=notificacion.title[0,5]+(notificacion.title.length>5 ? "..." : "")%></a></th>
-                     <th><span><a href="/notifications/change_seen/<%=notificacion.id%>" role="button" class="btn" data-toggle="modal"><img src="/assets/notA.jpg" width="13" title="Eliminar notificacion"></a></span></th>
+                     <th><span><a href="/notifications/change_seen/<%=notificacion.id%>" role="button" class="btn" data-toggle="modal"><img src="/assets/notA.png" width="20" title="Eliminar notificacion"></a></span></th>
+                   </tr>
+                 </table></li>
+                <%end%>
+                <%if notificacion.tipo == 3 %>
+                 <li>
+                 <table>
+                   <tr>
+                     <th><a href="/cuestionarios/cuestionarios_de_grupo_index/<%= Cuestionario.find(notificacion.id_item).grupo_id %>" role="button" class="btn" data-toggle="modal" ><b><%=usuario.nombre_usuario%></b> ha editado el cuestionario <%=notificacion.title[0,5]+(notificacion.title.length>5 ? "..." : "")%></a></th>
+                     <th><span><a href="/notifications/change_seen/<%=notificacion.id%>" role="button" class="btn" data-toggle="modal"><img src="/assets/notA.png" width="20" title="Eliminar notificacion"></a></span></th>
                    </tr>
                  </table></li>
                 <%end%>

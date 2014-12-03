@@ -100,7 +100,7 @@
 
                       <%= link_to "Eliminar cuestionario", borrar_cuestionario_path(cuestionario.id), :data => { :confirm => 'Se eliminara el cuestionario, ¿está seguro?'}, :class => "btn btn-primary btn-xs" %>
 
-                      <%= link_to "Editar Cuestionario", editar_cuestionario_path(cuestionario.id), :class => "btn btn-primary btn-xs" %>  
+                      <%= link_to "Editar Cuestionario", editar_cuestionario_path(cuestionario), :class => "btn btn-primary btn-xs" %>  
 
                     <%= link_to "Calificar Cuestionarios", ver_cuestionarios_usuarios_path(cuestionario.id), :class => "btn btn-primary btn-xs" %>
 

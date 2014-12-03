@@ -49,6 +49,7 @@ Yosistemas::Application.routes.draw do
 
   get "usuarios/obtener_notificacion/:comentario_id/:usuario_id/:tema_id" => "usuarios#obtener_notificacion", :as => "obtener_notificacion"
   
+
   #rutas de temas
   get "temas_y_tareas/buscar/:grupo" => "temas_y_tareas#buscar"
   
@@ -58,7 +59,7 @@ Yosistemas::Application.routes.draw do
   get "tema_comentarios/delete/:id" => "tema_comentarios#delete"
   get "temas/ordertable/:themes/:id/:var" => 'temas#ordertable', :as  => 'ordertable'
   get "temas/ordertablemine/:themes/:var" => 'temas#ordertablemine' , :as => 'ordertablemine'
-  get 'temas/visible/:id' => 'temas#visible', :as => 'visible_tema'
+  get 'temas/visible/:id/:id_grupo' => 'temas#visible', :as => 'visible_tema'
   get 'temas/show_mine' => 'temas#show_mine', :as=>'show_mine'
   get 'temas/search_main' => 'temas#search_main', :as=>'search_main'
   get 'temas/new/:id' => 'temas#new', :as => 'tema_para_grupo'
@@ -135,7 +136,7 @@ Yosistemas::Application.routes.draw do
   get "tareas/aprove/:id" => "tareas#aprove"
   get 'grupos/:grupo/eventos' => 'eventos#index'
 
-
+  
   resources :notifications
 
   resources :usuarios , except: [:destroy] do

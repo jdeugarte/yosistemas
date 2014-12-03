@@ -223,11 +223,12 @@ class CuestionariosController < ApplicationController
 	end
 
   def editar_cuestionario
+    control = false
     @cuestionario = Cuestionario.find(params[:id])
     @cuestionario.grupos.each do |grupo|
-      if current_user.administra(grupo.id)
+      if current_user.administra(grupo.id) and !control
         @grupo = grupo
-        break
+        control = true
       end
     end
      @cuestionarios = Array.new
@@ -246,8 +247,8 @@ class CuestionariosController < ApplicationController
 
 	def delete
 		@cuestionario = Cuestionario.find(params[:id]) 
-    	@cuestionario.destroy
-    	redirect_to '/'
+  	@cuestionario.destroy
+  	redirect_to :back
   	end
 
   	def usar_plantilla

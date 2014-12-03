@@ -18,6 +18,12 @@ class TareasController < ApplicationController
 	def responder_tarea
 		@responder_tarea = ResponderTarea.new
 		@tarea = Tarea.buscar_tarea(params[:id])
+		@tarea.grupos.each do |grupo|
+			if current_user.esta_subscrito?(grupo.id)
+				@grupo = grupo
+				break
+			end
+		end
 		if(!@tarea.nil?)
 		#@grupo = @tarea.grupo
 		#@id=@grupo.id
@@ -239,6 +245,12 @@ class TareasController < ApplicationController
 
 	def editar_comentario
 		@comentario = TareaComentario.find(params[:id_comentario])
+		  @comentario.tarea.grupos.each do |grupo|
+	      if current_user.esta_subscrito?(grupo.id)
+	        @grupo = grupo
+	        break
+	      end
+	    end
 	end
 	private
 	# No permite parametros de internet

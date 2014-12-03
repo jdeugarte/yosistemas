@@ -14,6 +14,7 @@ before_filter :grupos
             @temas << tema
           end
         end
+        @ides=sacarIds(@temas)
   end
 
 
@@ -114,8 +115,6 @@ before_filter :grupos
         break
       end
     end
-
-     @id = @tema.grupo_id
      #notificaciones.each do |notificacion|
       #if ( TemaComentario.find(notificacion.tema_comentario_id).tema_id == @tema.id )
        # notificacion.notificado = true
@@ -126,7 +125,11 @@ before_filter :grupos
     else
       @temas = @grupo.temas.order("updated_at DESC").page(params[:page]).per(5)
       flash[:alert] = 'El Tema fue eliminado'
-      redirect_to :back
+      if Tema.where(:id => params[:id])
+        redirect_to '/no_existe'
+      else
+        redirect_to :back
+      end
     end 
   end
 
@@ -215,14 +218,21 @@ before_filter :grupos
 
   def editar_comentario
     @comentario = TemaComentario.find(params[:id_comentario])
+    @comentario.tema.grupos.each do |grupo|
+      if current_user.esta_subscrito?(grupo.id)
+        @grupo = grupo
+        break
+      end
+    end
   end
 
   def visible
     @tema = Tema.find(params[:id])
+    grupo = params[:id_grupo]
     if(@tema.usuario_id == current_user.id)
       @tema.destroy
     end
-    redirect_to temas_url
+    redirect_to "/grupos/"+grupo+"/temas"
   end
 
   def show_mine

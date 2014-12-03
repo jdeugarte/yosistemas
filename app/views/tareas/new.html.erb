@@ -27,12 +27,12 @@
 	    	<table class="table table-user-information">
 		    	<tr>	         
 		       		<td> Titulo:</td>	        
-	            	<td><%= t.text_field :titulo , :class=>'form-control', :placeholder=>'Titulo', :maxlength => 50 %></td>
+	            	<td><%= t.text_field :titulo , :class=>'form-control', :placeholder=>'Titulo', :maxlength => 50, :required => true  %></td>
 		        </tr>
 		        <tr>
 		        	
 		             <td>Descripcion:</td>
-		             <td>  <%= t.text_area :descripcion, :class=>'form-control',:rows=>'6', :placeholder=>'Descripcion' ,  :maxlength=>500%></td>	
+		             <td>  <%= t.text_area :descripcion, :class=>'form-control',:rows=>'6', :placeholder=>'Descripcion' ,  :maxlength=>500,:required => true %></td>	
 		        </tr>
 		        <tr>	        	
 		            <td>Fecha de entrega:</td>	                  	        	  
@@ -73,16 +73,20 @@
         <%= t.label :titulo, "Archivos seleccionados:" %>
         <div class="col-lg input-group">
           <input id="showFiles" class="form-control" type="text" placeholder="Seleccione archivos..." onclick="document.getElementById('tarea_archivo').click();" onfocus="this.blur();">
-            <%= t.file_field :archivo , :class=>'form-control',:multiple => true, :style=>"display:none;", :onchange=>"document.getElementById('showFiles').value = (this.files.length>1)?''+this.files.length+' Archivos seleccionados.':this.files[0].name;" %>
+            <%= t.file_field :archivo , :class=>'form-control',:multiple => true, :style=>"display:none;", :onchange=>"barra(this.files[0].size);document.getElementById('showFiles').value = (this.files.length>1)?''+this.files.length+' Archivos seleccionados.':this.files[0].name;" %>
             <span class="input-group-addon" style="background-color: #256188; cursor:pointer;" onclick="document.getElementById('tarea_archivo').click();">
             <i class="icon-file icon-white"></i>
             </span>
         </div>
       	</div>
+      	<div class="progress">
+        <div id = "progress_si" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 1%">
+        <span class="sr-only">40% Complete (success)</span>
+       </div></div>
 	    
 	        <ul class="list-group">
 	        	<li class="list-group-item">
-	            <center><a href="javascript:window.history.back();" class="btn btn-danger">&laquo; Cancelar</a> <input type="submit" value="Crear tarea" class="btn btn-success"></center>
+	            <center><a href="javascript:window.history.back();" class="btn btn-danger">&laquo; Cancelar</a> <input id="button" type="submit" value="Crear tarea" class="btn btn-success"></center>
 	        	</li>
 	        </ul>
 
@@ -90,6 +94,30 @@
 	    </div>
 	</div>
 <% end %>
+
+<script type="text/javascript">
+  function barra(tam)
+  {
+    document.getElementById("progress_si").style.width="1%";
+    var relacion = tam/10000;
+    var c,c2;
+    var c = 1;
+    document.getElementById("button").disabled = true;
+    setInterval(function()
+    {
+       c = c + 1;
+         document.getElementById("progress_si").style.width=c + "%";
+         if (c == 100)
+         {  
+            alert("Carga completa!");
+            document.getElementById("button").disabled = false;          
+            relacion=0;
+            clearInterval(relacion);
+         }
+    },relacion);
+  }
+</script>
+
 	<script>
 	  $('.timepicker-default').timepicker();
 	   $(function() {

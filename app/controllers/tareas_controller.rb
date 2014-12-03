@@ -121,14 +121,22 @@ class TareasController < ApplicationController
 		end
 		redirect_to '/grupos/'+@grupo.id.to_s + '/temas-y-tareas'
 	end
+	
 	def show
+		control = false
 		@tarea = Tarea.find(params[:id])
+		@tarea.grupos.each do |grupo|
+			if current_user.esta_subscrito?(grupo.id) && !control
+				@grupo = grupo
+				control = true
+			end
+		end
 		if(@tarea.tarea_base!=nil)
-		@tarea_base = Tarea.find(@tarea.tarea_base)
+			@tarea_base = Tarea.find(@tarea.tarea_base)
 		end
 		@todos_los_comentarios = @tarea.tarea_comentarios.reverse
 		if(current_user == @tarea.usuario)
-		@tareas_enviadas = ResponderTarea.where(:tarea_id => @tarea.id)
+			@tareas_enviadas = ResponderTarea.where(:tarea_id => @tarea.id)
 		end
 	end
 	def edit #id tarea

@@ -162,8 +162,8 @@ Yosistemas::Application.routes.draw do
  root :to => 'temas#index'
 
 
-  # get '/no_existe' => "welcome#no_existe"
-  #get "*missing" => redirect("/no_existe")
+  get '/no_existe' => "welcome#no_existe"
+  get "*missing" => redirect("/no_existe")
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
   # Example of named route that can be invoked with purchase_url(id: product.id)

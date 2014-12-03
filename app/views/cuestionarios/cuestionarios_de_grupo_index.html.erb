@@ -76,49 +76,48 @@
                     </tr>
                   </tbody>
                   </table>
-                
-                <%if cuestionario.usuario_id!= current_user.id && !RespuestaUsuario.ya_respondio_cuestionario(current_user.id,cuestionario.id)%>
-                    <form class="navbar-form navbar-left" method="get" action=<%=nuevo_path(cuestionario.id)%> data-method="delete" >
-                      <button type="submit" class="btn btn-success">Responder Cuestionario</button>
-                    </form>
-                <%end%>
-                    <%if cuestionario.usuario_id!= current_user.id && RespuestaUsuario.ya_respondio_cuestionario(current_user.id,cuestionario.id)%>
-                      <h4>Ya resolvio este cuestionario<h4>
-                      <form class="navbar-form navbar-left" method="get" action=<%=ver_resultado_path(cuestionario.id)%> >  <button type="submit" class="btn btn-primary">Ver Resultado</button>
-                      </form>
-                    <%end%>
-                <% if (cuestionario.usuario_id== current_user.id )%>
-               
-                  </br>
-                  <!-- 
-                  <%if cuestionario.estado == false %>
-                    <form class="navbar-form navbar-left" method="get" action=<%= edit_cuestionario_path(cuestionario)%>>
-                      <button type="submit" class="btn btn-xs btn-primary">Editar Cuestionario</button>
-                    </form>
-                    <% end %>-->
+                <ul class="list-group">
+                <li class="list-group-item">
+                <center>
+                  <%if cuestionario.usuario_id!= current_user.id && !RespuestaUsuario.ya_respondio_cuestionario(current_user.id,cuestionario.id)%>
                     
-                    <form class="navbar-form navbar-left" method="get" action=<%=borrar_cuestionario_path(cuestionario.id)%> data-confirm="Se eliminara el cuestionario, ¿está seguro?" data-method="delete" >
-                      <button type="submit" class="btn btn-xs btn-primary">Eliminar Cuestionario</button>
-                    </form>
-                    <form class="navbar-form navbar-left" method="get" action=<%=editar_cuestionario_path(cuestionario.id)%> data-method="delete" >
-                      <button type="submit" class="btn btn-xs btn-primary">Editar Cuestionario</button>
-                    </form>
-                  <form class="navbar-form navbar-left" method="get" action=<%=ver_cuestionarios_usuarios_path(cuestionario.id)%> data-method="delete" >
-                      <button type="submit" class="btn btn-xs btn-primary">Calificar Cuestionarios</button>
-                  </form>
-                  <form class="navbar-form navbar-left" method="get" action=<%=ver_resultados_usuarios_path(cuestionario.id)%> data-method="delete" >
-                      <button type="submit" class="btn btn-xs btn-primary">Resultados Individuales</button>
-                  </form>
-                  
-                  <form class="navbar-form navbar-left" method="get" action=<%=ver_resumen_path(cuestionario.id)%> data-method="delete" >
-                      <button type="submit" class="btn btn-xs btn-primary">Resumen Resultados</button>
-                  </form>
-                  <%if cuestionario.estado == false %>
-                  <form class="navbar-form navbar-left" method="get" action=<%=publicarlo_path(cuestionario.id)%> data-method="delete" >
-                      <button type="submit" class="btn btn-xs btn-primary">Publicarlo</button>
-                  </form>
-                  <% end %>
-               
+                    <%= link_to "Responder Cuestionario", nuevo_path(cuestionario.id), :class => "btn btn-primary btn-xs" %>  
+
+                  <%end%>
+                      <%if cuestionario.usuario_id!= current_user.id && RespuestaUsuario.ya_respondio_cuestionario(current_user.id,cuestionario.id)%>
+                        <h4>Ya resolvio este cuestionario</h4>
+
+                        <%= link_to "Ver Resultado", ver_resultado_path(cuestionario.id), :class => "btn btn-primary btn-xs" %>
+                      <%end%>
+                  <% if (cuestionario.usuario_id== current_user.id )%>
+                    </br>
+                    <!-- 
+                    <%if cuestionario.estado == false %>
+                      <form class="navbar-form navbar-left" method="get" action=<%= edit_cuestionario_path(cuestionario)%>>
+                        <button type="submit" class="btn btn-xs btn-primary">Editar Cuestionario</button>
+                      </form>
+                      <% end %>-->
+
+                      <%= link_to "Eliminar cuestionario", borrar_cuestionario_path(cuestionario.id), :data => { :confirm => 'Se eliminara el cuestionario, ¿está seguro?'}, :class => "btn btn-primary btn-xs" %>
+
+                      <%= link_to "Editar Cuestionario", editar_cuestionario_path(cuestionario.id), :class => "btn btn-primary btn-xs" %>  
+
+                    <%= link_to "Calificar Cuestionarios", ver_cuestionarios_usuarios_path(cuestionario.id), :class => "btn btn-primary btn-xs" %>
+
+
+                    <%= link_to "Resultados Individuales", ver_resultados_usuarios_path(cuestionario.id), :class => "btn btn-primary btn-xs" %>
+  
+
+                    <%= link_to "Resumen de Resultados", ver_resumen_path(cuestionario.id), :class => "btn btn-primary btn-xs" %>
+
+                    <%if cuestionario.estado == false %>
+
+                    <%= link_to "Publicar Cuestionario", publicarlo_path(cuestionario.id), :class => "btn btn-primary btn-xs" %>
+
+                    <% end %>
+                    </center>
+                    </li>
+                </ul>
                 <%end%>
               </div>
             </div>          

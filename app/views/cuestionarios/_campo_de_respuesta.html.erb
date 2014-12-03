@@ -5,7 +5,7 @@
 </div>
 <div class="panel-body">
   <%= respuestas_form.text_field :texto, label: "Respuesta",:placeholder=>'Respuesta', :maxlength => 500, :size => "45" %>
-	 <%= respuestas_form.check_box :respuesta_correcta, label: "Respuesta esperada", :checked => true %><br>
+	 <%= respuestas_form.check_box :respuesta_correcta, label: "Respuesta esperada", :checked => true %>Respuesta esperada<br>
        <%= respuestas_form.link_to_remove "Eliminar Respuesta", :class=>"btn btn-danger" %>
 </div>
 

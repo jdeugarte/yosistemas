@@ -55,15 +55,18 @@
       <%end%>
 
       <%if  current_user.rol == "Docente" %>
-                
+                  <%jojo=false%>
                   <%= form_tag( {:action => "aprove"}) do %>
                       <% @tema.grupos.each do |grupo| %>
                       <% if current_user.esta_subscrito?(grupo.id) && !@tema.aprobado?(grupo.id) && grupo.llave != "publico"%>
+                        <% jojo = true %>
                         <strong><%=grupo.nombre%></strong> 
-                        <%= check_box_tag  "grupos[]", grupo.id ,checked = false, :id => "check#{grupo.nombre.gsub(' ','_')}" %><br/>
+                        <%= check_box_tag  "grupos[]", grupo.id ,checked = false, :id => "check#{grupo.nombre.gsub(' ','_')}" %>Aprobar<br/>
                       <% end %>
                     <% end %>
-                    <button type="submit">Aprobar para grupos</button>
+                    <%if jojo%>
+                      <button type="submit" class="btn btn-warning">Aprobar para grupos</button><br><br>      
+                    <%end%>
                 <%end%>
               <%end%>
       

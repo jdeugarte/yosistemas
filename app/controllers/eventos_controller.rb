@@ -32,8 +32,8 @@ class EventosController < ApplicationController
   # GET /eventos/new
   def new
     @evento = Evento.new
-    @boolForPublic = false
     @grupo = Grupo.find(params[:id])
+    @GrupoDefecto = @grupo
   end
 
   # GET /eventos/1/edit

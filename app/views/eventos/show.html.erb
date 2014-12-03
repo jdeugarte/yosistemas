@@ -28,26 +28,27 @@
     <li class="list-group-item">
       <!--Botones-->
       <center>
+        <%if  current_user.rol == "Docente" %>
+          <%jojo=false%>
+          <%= form_tag( {:action => "aprove"}) do %>
+              <% @evento.grupos.each do |grupo| %>
+                      <% if current_user.esta_subscrito?(grupo.id) && !@evento.aprobado?(grupo.id) && grupo.llave != "publico"%>
+                        <% jojo = true %>
+                        <strong><%=grupo.nombre%></strong> 
+                        <%= check_box_tag  "grupos[]", grupo.id ,checked = false, :id => "check#{grupo.nombre.gsub(' ','_')}" %>Aprobar<br/>
+                      <% end %>
+                    <% end %>
+                    <%if jojo%>
+                    <button type="submit" class="btn btn-warning">Aprobar para grupos</button><br><br>
+                    <%end%>
+                <%end%>
+        <%end%>
         <%if current_user!=nil && @evento.usuario_id==current_user.id%>
           <%= link_to "Editar", edit_evento_path(@evento), :class =>"btn btn-warning"%>
         <%end%>
         <%if  @evento.usuario_id==current_user.id || current_user.rol== "Docente" %>
           <%= link_to 'Eliminar Evento',@evento, :class => "btn btn-danger", method: :delete, data: { confirm: 'Se eliminara el evento, Está seguro?' } %>
         <%end%>
-          <%if  current_user.rol == "Docente" %>
-                  <%= form_tag( {:action => "aprove"}) do %>
-                      <% @evento.grupos.each do |grupo| %>
-                      <% if current_user.esta_subscrito?(grupo.id) && !@evento.aprobado?(grupo.id) && grupo.llave != "publico"%>
-                        <strong><%=grupo.nombre%></strong> 
-                        <%= check_box_tag  "grupos[]", grupo.id ,checked = false, :id => "check#{grupo.nombre.gsub(' ','_')}" %><br/>
-                      <% end %>
-                    <% end %>
-                    <button type="submit">Aprobar para grupos</button>
-                <%end%>
-              <%end%>
-
-
-
     </center>
     </li>
   </ul>

@@ -8,7 +8,7 @@
       <h4> <%= image_tag avatar_tam_url(usuario,40) %>&nbsp;&nbsp;<%= usuario.nombre %> &nbsp;<%= usuario.apellido %></h4>
   		</td>
   		<%if RespuestaUsuario.ya_respondio_cuestionario(usuario.id,@cuestionario.id)%>
-      <% RespuestaUsuario.where(usuario_id: usuario.id, cuestionario_id: @cuestionario.id).each do |respuesta|%>
+      <% respuesta = RespuestaUsuario.where(usuario_id: usuario.id, cuestionario_id: @cuestionario.id).first%>
       <% if respuesta.calificacion != nil %>
         <td class="active">
         <H4> La pregunta ya fue calificada.</H4>
@@ -19,7 +19,7 @@
              <button type="submit" class="btn btn-success">Calificar preguntas de texto</button>
         </form>
         </td>
-      <% end %>
+      
       <%end%>
       <%else%>
       <td>

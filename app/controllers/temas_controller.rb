@@ -124,8 +124,9 @@ before_filter :grupos
       @comentarios= Kaminari.paginate_array(@tema.tema_comentarios).page(params[:page]).per(10)
     else
       @temas = @grupo.temas.order("updated_at DESC").page(params[:page]).per(5)
-      flash[:alert] = 'El Tema fue eliminado'
+      
       if Tema.where(:id => params[:id])
+        flash[:alert] = 'El Tema fue eliminado'
         redirect_to '/no_existe'
       else
         redirect_to :back

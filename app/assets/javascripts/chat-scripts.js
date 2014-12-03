@@ -1,4 +1,5 @@
 var timer;
+var isMinimized=false;
 function send()
 {
 var para_u=document.getElementById('chat_name').innerHTML;
@@ -14,6 +15,12 @@ document.getElementById('chat_conversacion').scrollTop = 99999999;
 }
 function showChat(nombre_usuario,usuario_id)
 {
+if (isMinimized)
+	blinkMinimizedChat();
+else
+{
+isMinimized = false;
+//dropBlinking();
 document.getElementById('min_chat_container').innerHTML = "no";
 document.getElementById('minimizeChat').style.display = 'none';
 var aux = 'User' + nombre_usuario;
@@ -40,19 +47,27 @@ document.getElementById('chat_conversacion').innerHTML+="<div class='row'><div c
 document.getElementById('chat_conversacion').scrollTop = 99999999;
 });
 }
+	
+}
 function closeChat()
 {
 $("#chat_window").removeClass("in");
 $("#chat_window").hide();
+isMinimized = false;
+dropBlinking();
 }
 function showChatAux()
 {
 var usuario =document.getElementById('chat_name').innerHTML;
 var usuario_id=document.getElementById('id_usuario_envio').value;
+isMinimized = false;
+dropBlinking();
 showChat(usuario,usuario_id);
 }
 function hideChat()
 {
+isMinimized = true;
+dropBlinking();
 var usuario =document.getElementById('chat_name').innerHTML;
 $("#chat_window").hide();
 //document.getElementById('min_chat_container').innerHTML+='<div id="min_chat_container"> <div id="User' + usuario + '"> <a href="#" onclick="showChatAux()" >'+ usuario +'</a> </div> </div>';
@@ -66,13 +81,12 @@ document.getElementById('minimizeChat').style.display = 'none';
 }
 function blinkMinimizedChat()
 {
-timer = setInterval(blink, 10);
-function blink()
-{
-$("#chat_minimized_name").fadeTo(100, 0.1).fadeTo(1000, 1.0);
+	var myElem = document.getElementById("nuevo");
+	if (myElem == null) 	
+	document.getElementById("chat_minimized_name").innerHTML += "<span id='nuevo'>&nbsp;<img src='/assets/nuevo.gif'></span>";
 }
-}
+
 function dropBlinking()
 {
-clearInterval(timer);
+	$("#nuevo").remove
 }

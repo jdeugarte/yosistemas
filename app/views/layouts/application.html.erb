@@ -15,33 +15,7 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
   <!--Chat-->
-  <script type="text/javascript">
-    Pusher.log = function(message) {
-      if (window.console && window.console.log) {
-        window.console.log(message);
-      }
-    };
 
-    var pusher = new Pusher('673a73008280ca569283');
-    var channel = pusher.subscribe('chat_channel');
-    channel.bind('chat_event', function(data) {
-      if(data.para_usuario==document.getElementById('current_user').value)
-      {
-          showChat(data.nombre_usuario,data.de_usuario);
-      }
-    });      
-
-    var channel2 = pusher.subscribe('notificaciones_channel');
-
-    channel2.bind('notificacion_event', function(data) {     
-
-    if(data.para_usuario==document.getElementById('current_user').value)
-    {
-
-       mostrar_notificacion(data.usuario_id,data.comentario_id,data.tema_id);
-    }
-  });     
-  </script>
 </head>
 <body>
   <input type="hidden" id="current_user" value="<%=current_user.nil? ? 0 : current_user.id%>">

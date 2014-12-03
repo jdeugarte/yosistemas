@@ -50,11 +50,11 @@
               </tr>
               <tr>
                 <td>Contraseña:</td>
-                <td><%= usuario.password_field :contrasenia, :maxlength=>25, :placeholder=>'Contraseña' %></td>
+                <td><%= usuario.password_field :contrasenia, :maxlength=>25, :placeholder=>'Contraseña', :required => true %></td>
               </tr>
               <tr>
                 <td>Confirmar Contraseña:</td>
-                <td><%= usuario.password_field :contrasenia_confirmation, :maxlength=>25, :placeholder=>'Confirmar Contraseña' %></td>
+                <td><%= usuario.password_field :contrasenia_confirmation, :maxlength=>25, :placeholder=>'Confirmar Contraseña', :required => true %></td>
               </tr>
               <tr>
                 <td>Seleccionar Rol:</td>

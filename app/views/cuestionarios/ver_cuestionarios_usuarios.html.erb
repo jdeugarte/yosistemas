@@ -8,7 +8,7 @@
       <h4> <%= image_tag avatar_tam_url(usuario,40) %>&nbsp;&nbsp;<%= usuario.nombre %> &nbsp;<%= usuario.apellido %></h4>
       </td>
       <%if RespuestaUsuario.ya_respondio_cuestionario(usuario.id,@cuestionario.id)%>
-      <% respuesta = RespuestaUsuario.where(:usuario_id => usuario.id, :cuestionario_id => @cuestionario.id).first %>
+      <% respuesta = RespuestaUsuario.where(:usuario_id => usuario.id, :cuestionario_id => @cuestionario.id).reverse.first %>
       <% if respuesta.calificacion != nil %>
         <td class="active">
         <H4> La pregunta ya fue calificada.</H4>

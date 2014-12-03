@@ -152,7 +152,7 @@
 </div>
 
 <!-- Modal para mis cuestionarios-->
-<div class="modal fade" id="mis_cuestionarios" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="mis_cuestionarios" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow-y:auto">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -164,7 +164,9 @@
         <% @usuario.cuestionarios.each do |cuestionario| %>
             <strong>CUESTIONARIO <%= aux %></strong><br>
             <strong>Grupo del cuestionario:</strong><br>
-            <%= cuestionario.grupo.nombre %><br>
+            <% cuestionario.grupos.each do |g| %>
+              <%= g.nombre %><br>
+            <% end %>
             <strong>Fecha de cuestionario:</strong><br>
             <%= cuestionario.created_at.to_date %><br><br>
             <% aux = aux + 1 %>

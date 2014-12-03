@@ -50,7 +50,7 @@
       <%if current_user!=nil && @tema.usuario_correo==current_user.correo%>
         <%= link_to "Editar", edit_tema_path(@tema), :method => :post, :class => "btn btn-warning"%>                   
         <%if !@tema.grupos.where(:usuario_id => current_user.id).empty? || @tema.usuario_correo==current_user.correo %>
-          <%= link_to 'Eliminar', visible_tema_path(@tema),:class => "btn btn-danger", data: { confirm: 'Se eliminara el tema, ¿Está seguro?' } %>
+          <%= link_to 'Eliminar', "/temas/visible/"+@tema.id.to_s+"/"+@grupo.id.to_s,:class => "btn btn-danger", data: { confirm: 'Se eliminara el tema, ¿Está seguro?' } %>
         <%end%>
       <%end%>
 

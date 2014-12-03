@@ -35,7 +35,6 @@
 
 <% @temas.each do |tema| %>
 <%= hidden_field :id,:value => tema.grupo_id%>  
-<%if tema.admitido == true%>
 <div class="panel panel-info" style='cursor:pointer' onclick=<%="document.location.href='/"+tema.class.name.downcase+"s/"+tema.id.to_s+"'"%>>  
   <div class="panel-heading"><h3><%= tema.titulo %></h3></div>
   <div class="panel-body">
@@ -47,7 +46,7 @@
                 Usuario <a href="/usuarios/<%=tema.usuario_id%>"><%= tema.usuario.nombre %></a> </small></li>
   </ul>
 </div>
-<%end%><%end%>
+<%end%>
 
 <script type="text/javascript">
    $(".square-color-tema").css("background-color",get_random_color());

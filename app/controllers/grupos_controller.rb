@@ -46,8 +46,9 @@ class GruposController < ApplicationController
     if (current_user == nil || current_user.rol == "Estudiante")
       redirect_to root_path, :flash => { :info => "No tiene privilegios requeridos para crear un grupo" }
     else
-      @grupo = Grupo.new
+      @grupo_nuevo = Grupo.new
     end
+      @grupo = Grupo.find(1)
   end
 
   def show

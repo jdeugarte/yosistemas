@@ -1,11 +1,11 @@
 <!--div class="row"-->
-<%= form_for @grupo, :html => { :class => 'bs-example form-horizontal', :multipart => true} do |f| %>
+<%= form_for@grupo_nuevo, :html => { :class => 'bs-example form-horizontal', :multipart => true} do |f| %>
   <%= f.hidden_field :id,:value => @id%>
-      <% if @grupo.errors.any? %>
+      <% if@grupo_nuevo.errors.any? %>
         <div id ="errorRegistroUsuario" class="alert alert-error">
           <button type="button" class="close" data-dismiss="alert">&times;</button>
           <ul>
-            <% @grupo.errors.full_messages.each do |msg| %>
+            <%@grupo_nuevo.errors.full_messages.each do |msg| %>
               <li><%= msg %></li>
             <% end %>
           </ul>

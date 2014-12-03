@@ -109,9 +109,9 @@ before_filter :grupos
   def show
     if Tema.exists?(:id => params[:id])
     @tema = Tema.find(params[:id])
-    @tema.grupos_pertenece.each do |grupo|
-      if current_user.esta_subscrito?(grupo)
-        @grupo = Grupo.find(grupo)
+    @tema.grupos.each do |grupo|
+      if current_user.esta_subscrito?(grupo.id)
+        @grupo = grupo
         break
       end
     end
@@ -160,13 +160,17 @@ before_filter :grupos
       @suscripcion.usuario_id=current_user.id
       @suscripcion.tema_id=@tema.id
       @suscripcion.save
+
+      if @grupo.llave = "publico"
+        @tema.admitido = true
+      end
       
       if @tema.admitido = true        
         notificacion_push(params[:grupos], @tema)
         notificar_por_email(params[:grupos], @tema)
       end
 
-      if current_user.rol == "Estudiante"            
+      if current_user.rol == "Estudiante" && @grupo.llave != "publico"           
         notificar_creacion(params[:grupos], @tema)
       end
 

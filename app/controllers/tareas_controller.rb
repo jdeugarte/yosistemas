@@ -45,6 +45,14 @@ class TareasController < ApplicationController
 	end
 	def mostrar_respuesta_tarea
 		@respuesta_tarea=ResponderTarea.find(params[:id])
+		@tarea = Tarea.find(@respuesta_tarea.tarea_id)
+		 @tarea.grupos.each do |grupo|
+	      if current_user.esta_subscrito?(grupo.id)
+	        @grupo = grupo
+	        break
+	      end
+	    end
+
 	end
 	def responder_tarea_crear
 		@responder_tarea = ResponderTarea.new(tarea_respuesta_params)

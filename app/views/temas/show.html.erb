@@ -55,8 +55,15 @@
       <%end%>
 
       <%if  current_user.rol == "Docente" %>
-                <%if  @tema.admitido == false %>
-                  <a href="/temas/aprove/<%=@tema.id%>" role="button" class="btn">Aprobar tema</a>
+                
+                  <%= form_tag( {:action => "aprove"}) do %>
+                      <% @tema.grupos.each do |grupo| %>
+                      <% if current_user.esta_subscrito?(grupo.id) && !@tema.aprobado?(grupo.id) && grupo.llave != "publico"%>
+                        <strong><%=grupo.nombre%></strong> 
+                        <%= check_box_tag  "grupos[]", grupo.id ,checked = false, :id => "check#{grupo.nombre.gsub(' ','_')}" %><br/>
+                      <% end %>
+                    <% end %>
+                    <button type="submit">Aprobar para grupos</button>
                 <%end%>
               <%end%>
       

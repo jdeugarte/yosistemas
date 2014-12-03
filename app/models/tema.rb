@@ -1,5 +1,6 @@
 class Tema < ActiveRecord::Base
   serialize :grupos_pertenece, Array
+  serialize :grupos_dirigidos, Array
   has_many :tema_comentarios
   has_many :suscripcion_temas
   has_many :archivo_adjunto_temas
@@ -19,6 +20,14 @@ class Tema < ActiveRecord::Base
     false
   end
 
+  def aprobado?(grupo_id)
+    grupos_dirigidos.each do |grupo|
+      if grupo_id.to_s == grupo
+        return true
+      end
+    end
+    return false
+  end
 
   def self.searchByDescription(keyWords)
     keyWords = keyWords.downcase

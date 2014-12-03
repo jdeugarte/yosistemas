@@ -132,7 +132,7 @@ Yosistemas::Application.routes.draw do
   #eventos
   get 'eventos/new/:id' => 'eventos#new'
   get "eventos/aprove/:id" => "eventos#aprove"
-  get "temas/aprove/:id" => "temas#aprove"
+  post "temas/aprove/:id" => "temas#aprove"
   get "tareas/aprove/:id" => "tareas#aprove"
   get 'grupos/:grupo/eventos' => 'eventos#index'
 

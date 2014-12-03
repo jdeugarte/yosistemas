@@ -27,7 +27,7 @@
 
   <% @all.each do |todo| %>
     <%if todo.instance_of? (Tema)%>
-    <%if todo.admitido == true%>
+    <%if todo.aprobado?(@grupo.id) == true%>
       <div class="panel panel-info" style='cursor:pointer' onclick=<%="document.location.href='/"+todo.class.name.downcase+"s/"+todo.id.to_s+"'"%>>
         <div class="panel-heading" title="Titulo">
           <h3><%= todo.titulo %></h3>

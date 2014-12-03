@@ -27,12 +27,12 @@
 	    	<table class="table table-user-information">
 		    	<tr>	         
 		       		<td> Titulo:</td>	        
-	            	<td><%= t.text_field :titulo , :class=>'form-control', :placeholder=>'Titulo', :maxlength => 50 %></td>
+	            	<td><%= t.text_field :titulo , :class=>'form-control', :placeholder=>'Titulo', :maxlength => 50, :required => true  %></td>
 		        </tr>
 		        <tr>
 		        	
 		             <td>Descripcion:</td>
-		             <td>  <%= t.text_area :descripcion, :class=>'form-control',:rows=>'6', :placeholder=>'Descripcion' ,  :maxlength=>500%></td>	
+		             <td>  <%= t.text_area :descripcion, :class=>'form-control',:rows=>'6', :placeholder=>'Descripcion' ,  :maxlength=>500,:required => true %></td>	
 		        </tr>
 		        <tr>	        	
 		            <td>Fecha de entrega:</td>	                  	        	  

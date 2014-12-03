@@ -1,107 +1,100 @@
 <%= form_for @tema, :html => { :class => 'bs-example form-horizontal', :multipart => true} do |f| %>
-<%= f.hidden_field :id,:value => @id%>
-<div class="panel panel-info">
-  <div class="panel-heading"><center><h3><b>Ingrese los datos del tema</b></h3></center></div>
-  <div class="panel-body">
+  <%= f.hidden_field :id,:value => @id%>
+  <div class="panel panel-info">
+    <div class="panel-heading"><center><h3><b>Ingrese los datos del tema</b></h3></center></div>
+    <div class="panel-body">
       <%= f.label :titulo, "Titulo:" %>
-      <%= f.text_field :titulo,:class=>"form-control", :placeholder=>'Titulo', :maxlength => 50 , :title => "El titulo del tema es obligatorio, Por favor rellene este campo" %>
+      <%= f.text_field :titulo,:class=>"form-control", :placeholder=>'Titulo', :maxlength => 50 , :title => "El titulo del tema es obligatorio, Por favor rellene este campo" ,:required => true %>
       <%= f.label :titulo, "Contenido:" %>
-      <%= f.text_area :cuerpo, :class=>'form-control',:rows=>'6', :placeholder=>'Contenido', :maxlength => 500 %>
-
-            <div class="ui-widget">
-              <label  for="grupos">Grupos: </label>
-              <input id="grupos">
-              <a href="#" onclick="getGrupo();"><img src="/assets/add.png" width="25"></a>
-            </div>
-            <br/>
-            <div id="gruposDiv">
-              <div id="<%=@grupo.nombre.gsub(' ','_')%>"><%=@grupo.nombre%><a href="#" onClick="quitarOpcion('<%=@grupo.nombre.gsub(' ','_')%>');"><img src="/assets/delete.png" width="20"></a> </div>
-            </div>
-
-
-         <div style="display:none;">
-             <strong><%=@grupo.nombre%></strong> <%= check_box_tag "grupos[]" , @grupo.id , checked = true , :id =>"check" + @grupo.nombre.gsub(' ','_')%><br/>
-            <% Grupo.all.each do |grupo| %>
-              <% if grupo.llave == "publico" %>
-               <strong><%=grupo.nombre%></strong> 
-                  <%= check_box_tag  "grupos[]", grupo.id ,checked = false, :id => "check#{grupo.nombre.gsub(' ','_')}" %><br/>
-              <% end %>
-            <% end %>
-            <% current_user.missuscripciones.each do |grupo| %>
-              <% if grupo != @grupo %>
-                  <strong><%=grupo.nombre%></strong> 
-                  <%= check_box_tag  "grupos[]", grupo.id ,checked = false, :id => "check#{grupo.nombre.gsub(' ','_')}" %><br/>
-              <% end %>
-            <% end %>
-          </div>
-
-
-
-      <div class="form-group" style>
-        <%= f.label :titulo, "Archivos seleccionados:" %>
-        <div class="col-lg input-group">
-          <input id="showFiles" class="form-control" type="text" placeholder="Seleccione archivos..." onclick="document.getElementById('tema_archivo').click();" onfocus="this.blur();">
-            <%= f.file_field :archivo , :class=>'form-control',:multiple => true, :style=>"display:none;", :onchange=>"document.getElementById('showFiles').value = (this.files.length>1)?''+this.files.length+' Archivos seleccionados.':this.files[0].name;" %>
-            <span class="input-group-addon" style="background-color: #256188; cursor:pointer;" onclick="document.getElementById('tema_archivo').click();">
-            <i class="icon-file icon-white"></i>
-            </span>
-        </div>
+      <%= f.text_area :cuerpo, :class=>'form-control',:rows=>'6', :placeholder=>'Contenido', :maxlength => 500, :required => true  %>
+      <div class="ui-widget">
+        <label  for="grupos">Grupos: </label>
+          <input id="grupos">
+          <a href="#" onclick="getGrupo();"><img src="/assets/add.png" width="25"></a>
       </div>
+    <br/>
+    <div id="gruposDiv">
+      <div id="<%=@grupo.nombre.gsub(' ','_')%>"><%=@grupo.nombre%><a href="#" onClick="quitarOpcion('<%=@grupo.nombre.gsub(' ','_')%>');"><img src="/assets/delete.png" width="20"></a> </div>
+    </div>
 
+
+    <div style="display:none;">
+      <strong><%=@grupo.nombre%></strong> <%= check_box_tag "grupos[]" , @grupo.id , checked = true , :id =>"check" + @grupo.nombre.gsub(' ','_')%><br/>
+      <% Grupo.all.each do |grupo| %>
+        <% if grupo.llave == "publico" %>
+          <strong><%=grupo.nombre%></strong> 
+          <%= check_box_tag  "grupos[]", grupo.id ,checked = false, :id => "check#{grupo.nombre.gsub(' ','_')}" %><br/>
+        <% end %>
+      <% end %>
+      <% current_user.missuscripciones.each do |grupo| %>
+        <% if grupo != @grupo %>
+          <strong><%=grupo.nombre%></strong> 
+          <%= check_box_tag  "grupos[]", grupo.id ,checked = false, :id => "check#{grupo.nombre.gsub(' ','_')}" %><br/>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="form-group" style>
+      <%= f.label :titulo, "Archivos seleccionados:" %>
+      <div class="col-lg input-group">
+        <input id="showFiles" class="form-control" type="text" placeholder="Seleccione archivos..." onclick="document.getElementById('tema_archivo').click();" onfocus="this.blur();">
+        <%= f.file_field :archivo , :class=>'form-control',:multiple => true, :style=>"display:none;", :onchange=>"document.getElementById('showFiles').value = (this.files.length>1)?''+this.files.length+' Archivos seleccionados.':this.files[0].name;" %>
+        <span class="input-group-addon" style="background-color: #256188; cursor:pointer;" onclick="document.getElementById('tema_archivo').click();">
+          <i class="icon-file icon-white"></i>
+        </span>
+      </div>
+    </div>
   </div>
   <ul class="list-group">
     <li class="list-group-item">
       <center>
-      <a href="javascript:window.history.back();" class="btn btn-danger">&laquo; Cancelar</a>
-      <input type="submit" value="Crear tema" class="btn btn-success">
+        <a href="javascript:window.history.back();" class="btn btn-danger">&laquo; Cancelar</a>
+        <input type="submit" value="Crear tema" class="btn btn-success">
       </center>
     </li>
   </ul>
 </div>
-
-
 <%end%>
 
 
 
- <script>
-  $(function() {
-    var gruposDisponibles = [
-    <% current_user.missuscripciones.each do |grupo|%>
-      "<%=grupo.nombre%>",
-    <% end %>
-    "Publico"
-    ];
-   $( "#grupos" ).autocomplete({
-      source: gruposDisponibles,
-      minLength: 0
-   });
-   });
+<script>
+$(function() {
+var gruposDisponibles = [
+<% current_user.missuscripciones.each do |grupo|%>
+"<%=grupo.nombre%>",
+<% end %>
+"Publico"
+];
+$( "#grupos" ).autocomplete({
+source: gruposDisponibles,
+minLength: 0
+});
+});
 
 
 
-  function getGrupo()
-  {
-    var gruposDisponibles = [
-    <% current_user.missuscripciones.each do |grupo|%>
-      "<%=grupo.nombre%>",
-    <% end %>
-    "Publico"
-    ];
-    var grupo = document.getElementById("grupos").value;
-    var grupo_sin = grupo.replace(/\s/g, "_");
-    if ($("#" + grupo_sin).length < 1 && grupo != "" && jQuery.inArray(grupo,gruposDisponibles) != -1)
-    {
-      document.getElementById("gruposDiv").innerHTML+="<div id='"+grupo_sin+"'>"+ grupo +"<a href='#' onclick='quitarOpcion(&quot;"+grupo_sin+"&quot);'><img src='/assets/delete.png' width='20'></a> </div> ";
-       document.getElementById("check" + grupo_sin).checked = true;
-    }
-    return false;
-  };
+function getGrupo()
+{
+var gruposDisponibles = [
+<% current_user.missuscripciones.each do |grupo|%>
+"<%=grupo.nombre%>",
+<% end %>
+"Publico"
+];
+var grupo = document.getElementById("grupos").value;
+var grupo_sin = grupo.replace(/\s/g, "_");
+if ($("#" + grupo_sin).length < 1 && grupo != "" && jQuery.inArray(grupo,gruposDisponibles) != -1)
+{
+document.getElementById("gruposDiv").innerHTML+="<div id='"+grupo_sin+"'>"+ grupo +"<a href='#' onclick='quitarOpcion(&quot;"+grupo_sin+"&quot);'><img src='/assets/delete.png' width='20'></a> </div> ";
+document.getElementById("check" + grupo_sin).checked = true;
+}
+return false;
+};
 
-  function quitarOpcion(id)
-  {
-    $("#" + id).replaceWith("");
-    document.getElementById("check" + id).checked = false;
-    return false;
-  };
+function quitarOpcion(id)
+{
+$("#" + id).replaceWith("");
+document.getElementById("check" + id).checked = false;
+return false;
+};
 </script>

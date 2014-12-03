@@ -109,4 +109,14 @@ class SendMail < ActionMailer::Base
     @direccion = @direccion + '/usuarios/new'
     mail(to: destinatario, subject: "Invitacion a grupo")
   end
+
+  def notify_users_quest_update(user, cuestionario, grupo)
+    @user = user
+    @cuestionario = cuestionario
+    @grupo = grupo
+    direccion = Url.last.direccion
+    @url  = 'http://'+direccion+'/cuestionarios/cuestionarios_de_grupo_index'+grupo.id.to_s
+    mail(to: @user.correo, subject: 'Cuestionario editado! ')
+  end
+
 end

@@ -95,13 +95,13 @@ before_filter :grupos
   # GET /temas/new
   def new
     @tema = Tema.new
-    @boolForPublic = false
     @grupos = Array.new
     if(current_user!=nil)
       current_user.subscripcions.each do |subs|
         @grupos.push(subs.grupo)
       end
       @grupo = Grupo.find(params[:id])
+      @GrupoDefecto = @grupo
       @id = params[:id]
     end
   end

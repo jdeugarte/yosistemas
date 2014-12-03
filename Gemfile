@@ -60,7 +60,7 @@ gem 'bootstrap_form'
 #habilitar esta gema para habilitar ajaxify
 #gem 'ajaxify_rails'
 
-#gem 'rails_12factor', group: :production
+gem 'rails_12factor', group: :production
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

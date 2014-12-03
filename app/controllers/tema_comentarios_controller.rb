@@ -95,6 +95,13 @@ class TemaComentariosController < ApplicationController
     end
 
     def editar
+        @tema= Tema.find(Tema.find(tema_id))
+        @tema.grupos_pertenece.each do |grupo|
+          if current_user.esta_subscrito?(grupo)
+            @grupo = Grupo.find(grupo)
+            break
+          end
+        end
         comentario = TemaComentario.find(params[:id])
         comentario.update(params[:tema_comentario].permit(:cuerpo))
         eliminar_archivos_adjuntos(params[:elemsParaElim])

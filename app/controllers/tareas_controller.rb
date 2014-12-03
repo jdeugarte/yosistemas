@@ -239,6 +239,12 @@ class TareasController < ApplicationController
 
 	def editar_comentario
 		@comentario = TareaComentario.find(params[:id_comentario])
+		  @comentario.tarea.grupos.each do |grupo|
+	      if current_user.esta_subscrito?(grupo.id)
+	        @grupo = grupo
+	        break
+	      end
+	    end
 	end
 	private
 	# No permite parametros de internet

@@ -1,34 +1,34 @@
 <div class="panel panel-info">
   <div class="panel-heading"><center><h3><b>Lista de Suscritos</b></h3></center></div>
   <div class="panel-body">
-  	<table class="table table-condensed">
-  	<tr>
+    <table class="table table-condensed">
+    <tr>
     <% @usuarios.each do |usuario| %>
         <td class="active">
       <h4> <%= image_tag avatar_tam_url(usuario,40) %>&nbsp;&nbsp;<%= usuario.nombre %> &nbsp;<%= usuario.apellido %></h4>
-  		</td>
-  		<%if RespuestaUsuario.ya_respondio_cuestionario(usuario.id,@cuestionario.id)%>
-      <% respuesta = RespuestaUsuario.where(usuario_id: usuario.id, cuestionario_id: @cuestionario.id).first%>
+      </td>
+      <%if RespuestaUsuario.ya_respondio_cuestionario(usuario.id,@cuestionario.id)%>
+      <% RespuestaUsuario.where(usuario_id: usuario.id, cuestionario_id: @cuestionario.id).each do |respuesta|%>
       <% if respuesta.calificacion != nil %>
         <td class="active">
         <H4> La pregunta ya fue calificada.</H4>
         </td>
       <% else %>
-    		<td class="active">
+        <td class="active">
         <form method="get" action="<%= "cargar_respuestas/"+ usuario.id.to_s + "/" + @cuestionario.id.to_s %> " data-method="delete" >
              <button type="submit" class="btn btn-success">Calificar preguntas de texto</button>
         </form>
         </td>
-      
+      <% end %>
       <%end%>
       <%else%>
       <td>
-      	<h4>Todavia no respondio cuestionario<h4>
+        <h4>Todavia no respondio cuestionario<h4>
       </td>
       <%end%>
         </tr>
     <% end %>
 
-	</table>
+  </table>
   </div>
 </div>

@@ -153,6 +153,17 @@
                    </tr>
                  </table></li>
                 <%end%>
+                <%if notificacion.tipo == 4 %>
+                  <li>
+                  <table>
+                    <tr>
+                      <th><a href="/temas/<%=notificacion.id_item%>" role="button" class="btn" data-toggle="modal" ><b><%=usuario.nombre_usuario%></b> ha comentado el tema <%=notificacion.title[0,5]+(notificacion.title.length>5 ? "..." : "")%></a></th>
+                      <th></th>
+                      <th><span><a href="/notifications/change_seen/<%=notificacion.id%>" role="button" class="btn" data-toggle="modal"><img src="/assets/notA.png" width="20" title="Eliminar notificacion"></a></span></th>
+                    </tr>
+                  </table>
+                  </li>
+                <%end%>
               <%end%>
             <%end %>
           </ul>

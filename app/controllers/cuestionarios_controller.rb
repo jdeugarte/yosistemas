@@ -34,6 +34,13 @@ class CuestionariosController < ApplicationController
 
   def ver_resultado
       @cuestionario = Cuestionario.find(params[:id_cuestionario])
+      control = false
+      @cuestionario.grupos.each do |grupo|
+        if current_user.esta_subscrito?(grupo.id) and !control
+          @grupo = grupo
+          control = true
+        end
+      end
       @usuario = current_user
       @respuestas = Array.new
       @preguntas = Array.new

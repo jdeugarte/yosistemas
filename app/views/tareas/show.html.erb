@@ -13,16 +13,15 @@
           </div>
           <small>Tarea creada el <%= @tarea.created_at.localtime.strftime("%d/%m/%Y a las: %I:%M  %p") %></small>
           <div>
-            <% if @tarea.usuario_id == current_user.id || current_user.rol = "Docente"%>
-            <%if  current_user.rol == "Docente" %>
+            <% if @tarea.usuario_id == current_user.id%>
+              <%if current_user.rol == "Docente" %>
                 <%if  @tarea.admitido == false %>
                   <a href="/tareas/aprove/<%=@tarea.id%>" role="button" class="btn">Aprobar tarea</a>
                 <%end%>
-              <%end%>
-              <%= link_to 'Eliminar', "/tareas/eliminar/"+@tarea.id.to_s, data: { confirm: 'Se eliminara la tarea, ¿Está seguro?' } %>
+                <%= link_to 'Eliminar', "/tareas/eliminar/"+@tarea.id.to_s, data: { confirm: 'Se eliminara la tarea, ¿Está seguro?' } %>
                   &nbsp;&nbsp;&nbsp;&nbsp;
-              <%= link_to 'Editar', "/tareas/edit/"+@tarea.id.to_s %>
-              
+                <%= link_to 'Editar', "/tareas/edit/"+@tarea.id.to_s %>
+              <%end%>              
             <%elsif(!@enviado)%>
                 <%if(!@tarea.tarea_caducada)%><br>
                   <%= link_to 'Responder', "/tareas/responder_tarea/"+@tarea.id.to_s%>

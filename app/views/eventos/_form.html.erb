@@ -52,10 +52,15 @@
           </tr>
         <div style="display:none;">
              <strong><%=@grupo.nombre%></strong> <%= check_box_tag "grupos[]" , @grupo.id , checked = true , :id =>"check" + @grupo.nombre.gsub(' ','_')%><br/>
-           <% Grupo.all.each do |grupo| %>
-              <% if grupo.llave == "publico" %>
-               <strong><%=grupo.nombre%></strong> 
+             <% if @grupo.id == 1 %>
+              <% @boolForPublic = true %>
+             <% end %>
+            <% Grupo.all.each do |grupo| %>
+              <% if grupo.llave == "publico"%>
+              <% if @boolForPublic && grupo.id != 1 %>
+                  <strong><%=grupo.nombre%></strong> 
                   <%= check_box_tag  "grupos[]", grupo.id ,checked = false, :id => "check#{grupo.nombre.gsub(' ','_')}" %><br/>
+              <% end %>
               <% end %>
             <% end %>
             <% current_user.missuscripciones.each do |grupo| %>
@@ -96,12 +101,16 @@
 
  <script>
   $(function() {
-    var gruposDisponibles = [
-    <% current_user.missuscripciones.each do |grupo|%>
+   var gruposDisponibles = [
+<% current_user.missuscripciones.each do |grupo|%>
+  "<%=grupo.nombre%>",
+<% end %>
+<% Grupo.all.each do |grupo| %>
+    <% if grupo.llave == "publico" %>
       "<%=grupo.nombre%>",
     <% end %>
-    "Publico"
-    ];
+<% end %>
+];
    $( "#grupos" ).autocomplete({
       source: gruposDisponibles,
       minLength: 0
@@ -113,11 +122,15 @@
   function getGrupo()
   {
     var gruposDisponibles = [
-    <% current_user.missuscripciones.each do |grupo|%>
-      "<%=grupo.nombre%>",
-    <% end %>
-    "Publico"
-    ];
+  <% current_user.missuscripciones.each do |grupo|%>
+    "<%=grupo.nombre%>",
+  <% end %>
+  <% Grupo.all.each do |grupo| %>
+      <% if grupo.llave == "publico" %>
+        "<%=grupo.nombre%>",
+      <% end %>
+  <% end %>
+  ];
     var grupo = document.getElementById("grupos").value;
     var grupo_sin = grupo.replace(/\s/g, "_");
     if ($("#" + grupo_sin).length < 1 && grupo != "" && jQuery.inArray(grupo,gruposDisponibles) != -1)

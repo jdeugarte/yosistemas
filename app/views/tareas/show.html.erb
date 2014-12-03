@@ -141,8 +141,8 @@
       <br>
       <small><%= comentario.created_at.strftime("%d-%m-%Y %H:%M:%S")%></small></h5>
       <%if current_user!=nil && comentario.usuario.id == current_user.id%>
-        <%= link_to 'Editar', "/tareas/editar_comentario/"+comentario.id.to_s %>
-        <%= link_to 'Eliminar', "/tarea_comentarios/delete/"+comentario.id.to_s, data: { confirm: 'Se eliminara el comentario, ¿está seguro?' } %>
+        <%= link_to 'Editar', "/tareas/editar_comentario/"+comentario.id.to_s ,:class=>"btn btn-xs btn-warning"%>
+        <%= link_to 'Eliminar', "/tarea_comentarios/delete/"+comentario.id.to_s, data: { confirm: 'Se eliminara el comentario, ¿está seguro?' }, :class=>"btn btn-xs btn-danger"  %>
 
       <%end%>
     </div>

@@ -38,26 +38,55 @@ class TemaComentariosController < ApplicationController
         @comentario = comentario
         suscripciones = SuscripcionTema.all
         suscripciones.each do |suscrito|
-           if suscrito.tema_id == id_tema
-            if suscrito.usuario_id != current_user.id
-                @usuario = Usuario.find(suscrito.usuario_id)
-                @tema = Tema.find(id_tema)
-                @grupo = Grupo.find(@tema.grupo_id)
-                @notificacion = Notificacion.new
-                @notificacion.notificado = false
-                @notificacion.suscripcion_tema_id = suscrito.id
-                @notificacion.tema_comentario_id = @comentario.id
-                @notificacion.save
-                SendMail.notify_users_tema(@usuario, @tema, @grupo).deliver
-                Pusher.url = "http://673a73008280ca569283:555e099ce1a2bfc840b9@api.pusherapp.com/apps/60344"
-                Pusher['notificaciones_channel'].trigger('notificacion_event', {
-                  :usuario_id => current_user.id,:comentario_id => @comentario.id,:tema_id => @tema.id, :para_usuario => @usuario.id
-                })
-            end
+            if suscrito.tema_id == id_tema
+                if suscrito.usuario_id != current_user.id
+                    @usuario = Usuario.find(suscrito.usuario_id)
+                    @tema = Tema.find(id_tema)
+
+                    @tema.grupos.each do |grupo|
+
+
+                        @notificacion = Notification.new
+                        @notificacion.title = tema.titulo
+                        
+                        @notificacion.description = tema.cuerpo
+                        @notificacion.reference_date = nil
+                        @notificacion.tipo = 1
+                        @notificacion.de_usuario_id = current_user.id
+                        @notificacion.para_usuario_id = @usuario.id
+                        @notificacion.seen = false
+                        @notificacion.id_item = tema.id
+                        @notificacion.save
+                        Pusher.url = "http://673a73008280ca569283:555e099ce1a2bfc840b9@api.pusherapp.com/apps/60344"
+                        Pusher['notifications_channel'].trigger('notification_event', {
+                        para_usuario: @notificacion.para_usuario_id
+                        })
+
+
+
+
+
+
+
+
+============================================================================================
+
+                        @notificacion = Notification.new
+                        @notificacion.notificado = false
+                        @notificacion.suscripcion_tema_id = suscrito.id
+                        @notificacion.tema_comentario_id = @comentario.id
+                        @notificacion.save
+                        SendMail.notify_users_tema(@usuario, @tema, @grupo).deliver
+                        Pusher.url = "http://673a73008280ca569283:555e099ce1a2bfc840b9@api.pusherapp.com/apps/60344"
+                        Pusher['notificaciones_channel'].trigger('notificacion_event', {
+                          :usuario_id => current_user.id,:comentario_id => @comentario.id,:tema_id => @tema.id, :para_usuario => @usuario.id
+                        })
+                    end   
+                end
             end
         end
     end
-
+    
     def delete
         @comentario = TemaComentario.find(params[:id])
         @tema = @comentario.tema

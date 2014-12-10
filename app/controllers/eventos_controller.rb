@@ -68,20 +68,16 @@ class EventosController < ApplicationController
 
         if current_user.rol == "Estudiante" 
           params[:grupos].each do |grupo_id|
-           if Grupo.find(grupo_id).moderacion
-             grupos_para_notificar_si_moderacion_verdadera << grupo_id
-           else
-             grupos_para_notificar_si_moderacion_falsa << grupo_id
+            if Grupo.find(grupo_id).moderacion
+              grupos_para_notificar_si_moderacion_verdadera << grupo_id
+            else
+              grupos_para_notificar_si_moderacion_falsa << grupo_id
             end        
-          notificar_creacion(grupos_para_notificar_si_moderacion_verdadera, @evento)
-          notificacion_push(grupos_para_notificar_si_moderacion_falsa, @evento)
-          notificar_por_email(grupos_para_notificar_si_moderacion_falsa, @evento)
+            notificar_creacion(grupos_para_notificar_si_moderacion_verdadera, @evento)
+            notificacion_push(grupos_para_notificar_si_moderacion_falsa, @evento)
+            notificar_por_email(grupos_para_notificar_si_moderacion_falsa, @evento)
+          end
         end
-
-
-        end
-
-
         flash[:notice] = "Evento creado Exitosamente! "
         redirect_to '/eventos/' + @evento.id.to_s
       else

@@ -145,7 +145,8 @@ before_filter :grupos
         grupi.temas << @tema
         @tema.grupos_pertenece << grupo
         grupi.save
-if current_user.rol == "Docente" || !Grupo.find(grupo).moderacion          @tema.grupos_dirigidos << grupo
+        if current_user.rol == "Docente" || !Grupo.find(grupo).moderacion 
+          @tema.grupos_dirigidos << grupo
         end
       end
 
@@ -354,29 +355,24 @@ if current_user.rol == "Docente" || !Grupo.find(grupo).moderacion          @tema
       id_grupo = grupo.to_i
       @grupo = Grupo.find(grupo)
       if Grupo.find(id_grupo).llave != "publico"
-        if @grupo.moderacion == true
-          @usuario = Usuario.find(@grupo.usuario_id)
-          if notificado[@usuario.id] == nil
-            notificado[@usuario.id] = true
-            @notificacion = Notification.new
-            @notificacion.title = tema.titulo
-            @notificacion.description = tema.cuerpo
-            @notificacion.reference_date = nil
-            @notificacion.tipo = 5
-            @notificacion.de_usuario_id = current_user.id
-            @notificacion.para_usuario_id = @usuario.id
-            @notificacion.seen = false
-            @notificacion.id_item = tema.id
-            @notificacion.save
-            Pusher.url = "http://673a73008280ca569283:555e099ce1a2bfc840b9@api.pusherapp.com/apps/60344"
-            Pusher['notifications_channel'].trigger('notification_event', {
-            para_usuario: @notificacion.para_usuario_id
-            })
-            SendMail.notify_theme_creation(@usuario, tema, @grupo).deliver
-          end
-        else
-           tema.admitido = true
-           tema.save
+      @usuario = Usuario.find(@grupo.usuario_id)
+        if notificado[@usuario.id] == nil
+          notificado[@usuario.id] = true
+          @notificacion = Notification.new
+          @notificacion.title = tema.titulo
+          @notificacion.description = tema.cuerpo
+          @notificacion.reference_date = nil
+          @notificacion.tipo = 5
+          @notificacion.de_usuario_id = current_user.id
+          @notificacion.para_usuario_id = @usuario.id
+          @notificacion.seen = false
+          @notificacion.id_item = tema.id
+          @notificacion.save
+          Pusher.url = "http://673a73008280ca569283:555e099ce1a2bfc840b9@api.pusherapp.com/apps/60344"
+          Pusher['notifications_channel'].trigger('notification_event', {
+          para_usuario: @notificacion.para_usuario_id
+          })
+          SendMail.notify_theme_creation(@usuario, tema, @grupo).deliver
         end
       end 
     end

@@ -3,32 +3,6 @@
 Bienvenidos al repositorio de Yo Sistemas! La plataforma educativa diseñada para la interacción entre docentes y estudiantes de la
 Universidad Católica Boliviana Cochabamba.
 
-En este archivo están adjuntas todas las credenciales necesarias para que se pueda utilizar el sistema y trabajar con el mismo.
 
-
-* Gmail:
-    - Página: https://mail.google.com/
-    - Usuario: yosistemasucb@gmail.com
-    - Password: tddds2013
-    
-* Youtube:
-    - Página: https://youtube.com/
-    - Usuario: yosistemasucb@gmail.com
-    - Password: tddds2013
-    
-* Dropbox:
-    - Página: https://dropbox.com/
-    - Usuario: yosistemasucb@gmail.com
-    - Password: tddds2013
-    
-* Heroku:
-    - Página: https://www.heroku.com/
-    - Usuario: yosistemasucb@gmail.com
-    - Password: tddds2013
-    
-* Pusher (notificaciones push):
-    - Página: https://app.pusher.com/
-    - Usuario: yosistemasucb@gmail.com
-    - Password: tddds2013
-    
-  
+* Canal de Youtube con videos que explican mas acerca del sistema: 
+    - https://www.youtube.com/channel/UChDPv_2fhoPmsJyjnGb2AMA

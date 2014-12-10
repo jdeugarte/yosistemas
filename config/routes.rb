@@ -52,7 +52,6 @@ Yosistemas::Application.routes.draw do
   #rutas de temas
   get "temas_y_tareas/buscar/:grupo" => "temas_y_tareas#buscar"
   
-
   get "temas/editar_comentario/:id_comentario" => "temas#editar_comentario", :as  => 'editar_tema_comentario'
   post "tema_comentarios/editar/:id" => "tema_comentarios#editar", :as  => 'editar_comentario_tema'
   get "tema_comentarios/delete/:id" => "tema_comentarios#delete"

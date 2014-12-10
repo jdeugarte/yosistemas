@@ -145,8 +145,7 @@ before_filter :grupos
         grupi.temas << @tema
         @tema.grupos_pertenece << grupo
         grupi.save
-        if current_user.rol == "Docente" 
-          @tema.grupos_dirigidos << grupo
+if current_user.rol == "Docente" || !Grupo.find(grupo).moderacion          @tema.grupos_dirigidos << grupo
         end
       end
 
@@ -163,9 +162,22 @@ before_filter :grupos
         notificar_por_email(params[:grupos], @tema)
       end
 
-      if current_user.rol == "Estudiante"           
-        notificar_creacion(params[:grupos], @tema)
-      end
+      grupos_para_notificar_si_moderacion_falsa = Array.new
+      grupos_para_notificar_si_moderacion_verdadera = Array.new
+
+
+      if current_user.rol == "Estudiante" 
+          params[:grupos].each do |grupo_id|
+            if Grupo.find(grupo_id).moderacion
+              grupos_para_notificar_si_moderacion_verdadera << grupo_id
+            else
+              grupos_para_notificar_si_moderacion_falsa << grupo_id
+            end        
+            notificar_creacion(grupos_para_notificar_si_moderacion_verdadera, @tema)
+            notificacion_push(grupos_para_notificar_si_moderacion_falsa, @tema)
+            notificar_por_email(grupos_para_notificar_si_moderacion_falsa, @tema)
+          end
+        end
 
       flash[:alert] = 'Tema creado Exitosamente!'
       redirect_to '/temas/'+@tema.id.to_s

@@ -1,5 +1,5 @@
 <!--div class="row"-->
-<%= form_for@grupo_nuevo, :html => { :class => 'bs-example form-horizontal', :multipart => true} do |f| %>
+<%= form_for @grupo_nuevo, :html => { :class => 'bs-example form-horizontal', :multipart => true} do |f| %>
   <%= f.hidden_field :id,:value => @id%>
       <% if@grupo_nuevo.errors.any? %>
         <div id ="errorRegistroUsuario" class="alert alert-error">
@@ -27,9 +27,15 @@
             <tr>
               <td><b>Estado:</b></td>
               <td><select id="grupo_estado" name="grupo[estado]">
-                            <option value= "true">Privado</option>
+                            <option value = "true">Privado</option>
                             <option value = "false">Publico</option>
                       </select></td>
+            </tr>
+            <tr>
+              <td><b>Moderación:</b></td>
+              <td><select id="grupo_moderacion" name="grupo[moderacion]">
+                <option value = "true">Activada</option>
+                <option value = "false">Desactivada</option></td>
             </tr>
           </tbody>
         </table>

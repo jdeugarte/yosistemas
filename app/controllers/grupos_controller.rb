@@ -71,6 +71,12 @@ class GruposController < ApplicationController
   def create
     @grupo = Grupo.new(grupo_params)
     @grupo.usuario_id = current_user.id
+   # if params[:moderacion] == true
+    #  @grupo.moderacion = true
+    #else
+     # @grupo.moderacion = false
+    #end
+    #@grupo.save
     #la funcion de abajo verifica si se creo un grupo publico, o uno privado para generar la clave
     @grupo.verificar_grupo
       if @grupo.save
@@ -112,7 +118,7 @@ class GruposController < ApplicationController
 
   private
     def grupo_params
-      params.require(:grupo).permit(:nombre, :descripcion, :estado, :llave)
+      params.require(:grupo).permit(:nombre, :descripcion, :estado, :llave, :moderacion)
     end
 
     def grupos

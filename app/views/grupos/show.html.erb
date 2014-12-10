@@ -1,29 +1,39 @@
-<div class="panel panel-info">
-  <div class="panel-heading"><center><h3><b><%= @grupo.nombre%></b></h3></center></div>
-  <div class="panel-body">
-    <center><table class="table table-hover">
-      <tbody>        
-        <tr>
-          <td><center><strong>Descripcion:</strong></center></td>
-          <td><%= @grupo.descripcion %></td>
-        </tr>
-        <tr>
-       		<td><center><strong>Llave:</strong></center</td>
-       		<% if @grupo.llave != "publico" %>
-       			<td><%= @grupo.llave %></td>
-       		<% else %>
-				<td>No hay llave</td>
-			<% end %>  
-      	</tr>
-      </tbody>
-    </table> 
+  <div class="panel panel-info">
+    <div class="panel-heading"><center><h3><b><%= @grupo.nombre%></b></h3></center></div>
+    <div class="panel-body">
+      <center>
+        <table class="table table-hover">
+          <tbody>        
+            <tr>
+              <td><center><strong>Descripcion:</strong></center></td>
+              <td><%= @grupo.descripcion %></td>
+            </tr>
+            <tr>
+              <td><center><strong>Llave:</strong></center></td>
+              <% if @grupo.llave != "publico" %>
+                <td><%= @grupo.llave %></td>
+              <% else %>
+                <td>No hay llave</td>
+              <% end %>  
+            </tr>
+            <tr>
+              <td><center><strong>Moderación:</strong></center></td>
+              <%if @grupo.moderacion == true %>
+                <td>Activada</td>
+              <%else%>
+                <td>Desactivada</td>
+              <%end%>
+            </tr>
+          </tbody>
+        </table> 
+      </center>
+    </div>
+    <center>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <a class="btn btn-primary btn-medium" href="/grupos"> Ver Grupos </a>
+          <a href='<%=invitacion_grupo_path(@grupo)%>' class='btn btn-info'>Invitar Amigos al Grupo</a>
+        </li>
+      </ul>
     </center>
   </div>
-  <center>
-  <ul class="list-group">
-  	<li class="list-group-item">
-    	<a class="btn btn-primary btn-medium" href="/grupos"> Ver Grupos </a>
-      <a href='<%=invitacion_grupo_path(@grupo)%>' class='btn btn-info'>Invitar Amigos al Grupo</a></center>
-	</li>
-  </ul>
-</div>

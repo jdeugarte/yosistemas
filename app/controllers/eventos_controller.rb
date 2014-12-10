@@ -158,34 +158,36 @@ class EventosController < ApplicationController
       end
     end
 
-def notificar_creacion(id_grupos, evento)
-notificado = Hash.new  
-id_grupos.each do |grupo|
-id_grupo = grupo.to_i
-@grupo = Grupo.find(grupo)
-if Grupo.find(id_grupo).llave != "publico"
-  @usuario = Usuario.find(@grupo.usuario_id)
-  if notificado[@usuario.id] == nil
-  notificado[@usuario.id] = true
-   @notificacion = Notification.new
-    @notificacion.title = evento.nombre
-    @notificacion.description = evento.detalle
-    @notificacion.reference_date = evento.fecha
-    @notificacion.tipo = 2
-    @notificacion.de_usuario_id = current_user.id
-    @notificacion.para_usuario_id = @usuario.id
-    @notificacion.seen = false
-    @notificacion.id_item = evento.id
-    @notificacion.save
-  Pusher.url = "http://673a73008280ca569283:555e099ce1a2bfc840b9@api.pusherapp.com/apps/60344"
-  Pusher['notifications_channel'].trigger('notification_event', {
-  para_usuario: @notificacion.para_usuario_id
-  })
-  SendMail.notify_event_creation(@usuario,evento, @grupo).deliver
-end
-end 
-end
-end
+    def notificar_creacion(id_grupos, evento)
+      notificado = Hash.new  
+      id_grupos.each do |grupo|
+        id_grupo = grupo.to_i
+        @grupo = Grupo.find(grupo)
+        if Grupo.find(id_grupo).llave != "publico"
+          @usuario = Usuario.find(@grupo.usuario_id)
+          if @grupo.moderacion == true
+            if notificado[@usuario.id] == nil
+              notificado[@usuario.id] = true
+              @notificacion = Notification.new
+              @notificacion.title = evento.nombre
+              @notificacion.description = evento.detalle
+              @notificacion.reference_date = evento.fecha
+              @notificacion.tipo = 2
+              @notificacion.de_usuario_id = current_user.id
+              @notificacion.para_usuario_id = @usuario.id
+              @notificacion.seen = false
+              @notificacion.id_item = evento.id
+              @notificacion.save
+              Pusher.url = "http://673a73008280ca569283:555e099ce1a2bfc840b9@api.pusherapp.com/apps/60344"
+              Pusher['notifications_channel'].trigger('notification_event', {
+              para_usuario: @notificacion.para_usuario_id
+              })
+              SendMail.notify_event_creation(@usuario,evento, @grupo).deliver
+            end
+          end
+        end 
+      end
+    end
 
     def notificar_por_email(id_grupos, evento)
       notificado = Hash.new  

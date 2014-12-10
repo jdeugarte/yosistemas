@@ -30,8 +30,16 @@
         <%if current_user.id == grupo.usuario_id%>
         <br>
           <strong>Llave:</strong>
-            <span><%= grupo.llave %></span>
+            <span><%= grupo.llave %></span><br>
+              <strong>Moderación:</strong>
+              <%if grupo.moderacion == true %>
+                Activada
+              <%else%>
+                Desactivada
+              <%end%>
+
         <% end %>
+
       </div>
       <ul class="list-group">
         <li class="list-group-item"><small style="color: gray;">Grupo creado el <%= grupo.created_at.localtime.strftime("%d/%m/%Y a las: %I:%M  %p") %><br/>

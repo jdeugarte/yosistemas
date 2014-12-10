@@ -232,7 +232,9 @@ class TareasController < ApplicationController
 
         	if current_user.rol == "Estudiante"            
         		@tarea.grupos.each do |grupo|
-					notificar_creacion(grupo.id, @tarea)
+        			if grupo.moderacion == true	
+						notificar_creacion(grupo.id, @tarea)
+					end
 				end
         	end		
 

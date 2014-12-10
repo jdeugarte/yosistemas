@@ -51,7 +51,7 @@ class EventosController < ApplicationController
           grupi.eventos << @evento
           @evento.grupos_pertenece << grupo
            grupi.save
-            if current_user.rol == "Docente" 
+            if current_user.rol == "Docente" || !Grupo.find(grupo).moderacion
               @evento.grupos_dirigidos << grupo
             end
         end
@@ -62,10 +62,25 @@ class EventosController < ApplicationController
           notificacion_push(params[:grupos], @evento)
           notificar_por_email(params[:grupos], @evento)
         end
-          
-        if current_user.rol == "Estudiante"           
-          notificar_creacion(params[:grupos], @evento)
+
+        grupos_para_notificar_si_moderacion_falsa = Array.new
+        grupos_para_notificar_si_moderacion_verdadera = Array.new
+
+        if current_user.rol == "Estudiante" 
+          params[:grupos].each do |grupo_id|
+           if Grupo.find(grupo_id).moderacion
+             grupos_para_notificar_si_moderacion_verdadera << grupo_id
+           else
+             grupos_para_notificar_si_moderacion_falsa << grupo_id
+            end        
+          notificar_creacion(grupos_para_notificar_si_moderacion_verdadera, @evento)
+          notificacion_push(grupos_para_notificar_si_moderacion_falsa, @evento)
+          notificar_por_email(grupos_para_notificar_si_moderacion_falsa, @evento)
         end
+
+
+        end
+
 
         flash[:notice] = "Evento creado Exitosamente! "
         redirect_to '/eventos/' + @evento.id.to_s
@@ -165,7 +180,6 @@ class EventosController < ApplicationController
         @grupo = Grupo.find(grupo)
         if Grupo.find(id_grupo).llave != "publico"
           @usuario = Usuario.find(@grupo.usuario_id)
-          if @grupo.moderacion == true
             if notificado[@usuario.id] == nil
               notificado[@usuario.id] = true
               @notificacion = Notification.new
@@ -184,7 +198,6 @@ class EventosController < ApplicationController
               })
               SendMail.notify_event_creation(@usuario,evento, @grupo).deliver
             end
-          end
         end 
       end
     end

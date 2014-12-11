@@ -6,3 +6,6 @@ Universidad Católica Boliviana Cochabamba.
 
 * Canal de Youtube con videos que explican mas acerca del sistema: 
     - https://www.youtube.com/channel/UChDPv_2fhoPmsJyjnGb2AMA
+
+* Archivo con varios comandos utiles (cheatsheet git, heroku, rvm, etc):
+    - https://github.com/israelantezana/yosistemas/blob/master/cheatsheet.md

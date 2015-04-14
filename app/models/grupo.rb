@@ -76,4 +76,17 @@ class Grupo < ActiveRecord::Base
         self.llave = "publico"
       end
     end
+
+    def self.buscar(id)
+       if id != nil && Grupo.find(id).habilitado
+        grupo = Grupo.find(id)       
+      else
+        grupo = Grupo.find(1)
+      end
+      grupo
+    end
+
+    def self.publico?
+      self.llave=="publico"
+    end
 end

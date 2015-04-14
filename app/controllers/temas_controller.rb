@@ -4,14 +4,10 @@ skip_before_filter :require_log_in,:only=>[:index,:search,:searchByDescription,:
 before_filter :grupos
   def index
      @temas = Array.new 
-   if params[:id] != nil && Grupo.find(params[:id]).habilitado
-        @grupo = Grupo.find(params[:id])       
-      else
-        @grupo = Grupo.find(1)
-      end
+      @grupo=Grupo.buscar(params[:id])
        @grupo.temas.each do |tema|
-          if tema.aprobado?(@grupo.id) || @grupo.llave == "publico"
-            @temas << tema
+          if tema.aprobado?(@grupo.id) || @grupo.publico?
+            @temas.unshift tema
           end
         end
         @ides=sacarIds(@temas)
